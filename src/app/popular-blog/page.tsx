@@ -38,7 +38,7 @@ export const popular = [
 ]
 export default function PopularBlog({ hide }: { hide: string }) {
   return (
-    <>
+    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
       {hide === 'none' ? (
         ''
       ) : (
@@ -122,6 +122,6 @@ export default function PopularBlog({ hide }: { hide: string }) {
         </Container>
       </Box>
       {hide === 'none' ? '' : <Footer />}
-    </>
+    </Box>
   )
 }

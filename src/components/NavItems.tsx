@@ -5,6 +5,7 @@
 
 import { useRouter } from 'next/navigation'
 import MenuItem from '@mui/material/MenuItem'
+import Link from 'next/link'
 
 function NavItems({ items }: any) {
   const router = useRouter()
@@ -19,6 +20,8 @@ function NavItems({ items }: any) {
           onClick={() => {
             handleMenu(item.route)
           }}
+          component={Link}
+          href={item.route}
           sx={{
             pt: 1,
             px: '3px',

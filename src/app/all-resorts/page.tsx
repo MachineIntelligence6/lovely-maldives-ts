@@ -10,23 +10,24 @@ import OurCollection from '@/components/OurCollection'
 import Footer from '@/components/Footer'
 import ResortsGallery from '@/components/Gallery'
 import BreadCrumb from '@/components/BreadCrumb'
-// import DropdownButton from '../../components/DropdownButton'
+import DropdownButton from '@/components/DropdownButton'
 // icons
 
 export default function page() {
   return (
-    <>
+    <Box sx={{ pt: { xs: '0px', md: '190px' } }}>
       <Header />
       <Container
         sx={{
-          mt: '100px',
+          maxWidth: '100% !important',
+          px: { xs: '24px', md: '120px' },
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
         <BreadCrumb linkName2="Resorts" linkName="Home" path="/resorts" />
-        {/* <DropdownButton /> */}
+        <DropdownButton />
       </Container>
       <Container
         sx={{ maxWidth: '100% !important', mt: { xs: '60px', md: '100px' } }}
@@ -108,6 +109,6 @@ export default function page() {
         </Box>
       </Container>
       <Footer />
-    </>
+    </Box>
   )
 }

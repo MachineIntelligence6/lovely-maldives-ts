@@ -39,7 +39,7 @@ export const latestBlog = [
 ]
 export default function LatestBlog({ hide }: { hide: string }) {
   return (
-    <>
+    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
       {hide === 'none' ? (
         ''
       ) : (
@@ -153,6 +153,6 @@ export default function LatestBlog({ hide }: { hide: string }) {
         </Container>
         {hide === 'none' ? '' : <Footer />}
       </Box>
-    </>
+    </Box>
   )
 }

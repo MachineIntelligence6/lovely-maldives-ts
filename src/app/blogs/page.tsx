@@ -24,7 +24,6 @@ import blog from '../../../public/Images/landingTree.jpg'
 import articleImage from '../../../public/Images/main.jpg'
 import LatestBlog from '../latest-blog/page'
 import PopularBlog from '../popular-blog/page'
-// import PopularBlog from '@/src/app/popularblog/page'
 
 export interface IArticle {
   image: StaticImageData | string
@@ -102,14 +101,14 @@ export default function Page() {
     }
   }, [])
   return (
-    <>
+    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
       <Header />
       <BlogHeader />
       <Container
         sx={{
           maxWidth: '100% !important',
           px: { xs: '24px', md: '120px' },
-          mt: '60px',
+          mt: '20px',
         }}
       >
         <BreadCrumb linkName2="Blogs" linkName="Home" path="/blog-articles" />
@@ -253,6 +252,6 @@ export default function Page() {
         </Box>
       </Container>
       <Footer />
-    </>
+    </Box>
   )
 }

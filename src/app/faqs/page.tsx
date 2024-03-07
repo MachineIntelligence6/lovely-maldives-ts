@@ -3,16 +3,17 @@ import SendIcon from '@mui/icons-material/Send'
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
+import Footer from '@/components/Footer'
+import FaqsAccordion from '@/components/Accordion'
 
 export default function page() {
   return (
-    <>
+    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
       <Header />
       <Container
         sx={{
           maxWidth: '100% !important',
           px: { xs: '24px', md: '120px' },
-          mt: '120px',
           color: 'var(--white)',
         }}
       >
@@ -57,7 +58,7 @@ export default function page() {
             </Typography>
           </Box>
         </Box>
-        {/* <Accordion /> */}
+        <FaqsAccordion />
         <Box
           sx={{
             mt: { xs: '60px', md: '120px' },
@@ -115,7 +116,7 @@ export default function page() {
           </Box>
         </Box>
       </Container>
-      {/* <Footer /> */}
-    </>
+      <Footer />
+    </Box>
   )
 }

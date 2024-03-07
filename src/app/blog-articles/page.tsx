@@ -18,7 +18,7 @@ import blog from '../../../public/Images/landingTree.jpg'
 
 export default function Page() {
   return (
-    <>
+    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
       <Header />
       <BlogHeader />
       <Container
@@ -233,6 +233,6 @@ export default function Page() {
         </Box>
       </Container>
       <Footer />
-    </>
+    </Box>
   )
 }

@@ -31,7 +31,6 @@ function SubNav({ menuItems, isOpen }: any) {
         zIndex: 999,
         opacity: isOpen ? 1 : 0,
         transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
-
         transition: 'opacity 0.4s, transform 0.4s',
         height: { md: 'initial', xs: '100vh' },
         // visibility: { md: 'visible', xs: 'hidden' },
@@ -55,7 +54,7 @@ function Header() {
     { label: 'About Maldives', route: '/' },
     { label: 'Hotels', route: '/resorts' },
     { label: 'About us', route: '/about-us' },
-    { label: 'Blog', route: '/blog' },
+    { label: 'Blog', route: '/blogs' },
     { label: 'New Title', route: '/' },
   ]
 

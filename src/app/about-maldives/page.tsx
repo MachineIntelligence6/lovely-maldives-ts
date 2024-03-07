@@ -24,13 +24,12 @@ import blog from '../../../public/Images/landingTree.jpg'
 
 export default function page() {
   return (
-    <>
+    <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
       <Header />
       <Container
         sx={{
           maxWidth: '100% !important',
           px: { xs: '24px', md: '120px' },
-          mt: { xs: '120px', md: '60px' },
         }}
       >
         <BreadCrumb
@@ -243,6 +242,6 @@ export default function page() {
         </Box>
       </Container>
       <Footer />
-    </>
+    </Box>
   )
 }

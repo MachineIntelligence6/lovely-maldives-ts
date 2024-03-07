@@ -5,20 +5,17 @@ import SendIcon from '@mui/icons-material/Send'
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
-// import BreadCrumb from '@/src/components/BreadCrumb'
-// import ContactForm from '@/src/components/ContactForm'
-// import Header from '@/src/components/Header'
-// import Footer from '@/src/components/Footer'
+import Footer from '@/components/Footer'
+import ContactForm from '@/components/ContactForm'
 
 function page() {
   return (
-    <>
+    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
       <Header />
       <Container
         sx={{
           maxWidth: '100% !important',
           px: { xs: '24px', md: '120px' },
-          mt: { xs: '120px', md: '60px' },
           color: 'var(--white)',
         }}
       >
@@ -85,7 +82,7 @@ function page() {
           email here.
         </Typography>
       </Container>
-      {/* <ContactForm /> */}
+      <ContactForm />
       <Box
         sx={{
           mt: { xs: '60px', md: '120px' },
@@ -138,8 +135,8 @@ function page() {
           />
         </Box>
       </Box>
-      {/* <Footer /> */}
-    </>
+      <Footer />
+    </Box>
   )
 }
 
