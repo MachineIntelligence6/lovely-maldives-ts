@@ -7,13 +7,15 @@ import { Box, useMediaQuery, useTheme } from '@mui/material'
 import Image from 'next/image'
 import OurServices from '@/components/OurServices'
 import Banner from '@/components/Banner'
-// import About from '../components/About'
-// import Explore from '../components/Explore'
-// import OurCollection from '../components/OurCollection'
-// import TopBrands from '../components/TopBrands'
-// import Footer from '../components/Footer'
+import About from '../components/About'
+import Explore from '../components/Explore'
+import OurCollection from '../components/OurCollection'
 
 import Header from '../components/Header'
+
+import TopBrands from '@/components/TopBrands'
+
+import Footer from '@/components/Footer'
 
 export default function Home() {
   const theme = useTheme()
@@ -106,7 +108,7 @@ export default function Home() {
         />
         <OurServices />
       </Box>
-      {/* <About />
+      <About />
       <Explore />
       <OurCollection
         heading="Our Collection"
@@ -116,7 +118,7 @@ export default function Home() {
         bottomradius="0"
       />
       <TopBrands />
-      <Footer /> */}
+      <Footer />
     </>
   )
 }
