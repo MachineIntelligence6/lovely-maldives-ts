@@ -12,7 +12,7 @@ import banner3 from '../../public/Images/exploreImg.jpg'
 export const imgUrl: any = [banner, banner2, banner3]
 
 export default function Banner() {
-  const [bgImage, setBgImage] = useState('')
+  const [bgImage, setBgImage] = useState({ src: '' })
 
   useEffect(() => {
     const randomIndex: number = Math.floor(Math.random() * imgUrl.length)
