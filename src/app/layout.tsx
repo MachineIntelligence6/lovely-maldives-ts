@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import { ReactNode } from 'react'
 
-const inter = Inter({ subsets: ['latin'] })
+import localFont from 'next/font/local'
+import Provider from './provider'
+
+const centuryGothic = localFont({ src: './fonts/century-gothic/gothic.ttf' })
 
 export const metadata: Metadata = {
   title: 'NextJS MUI typescript boilerplate',
@@ -17,7 +19,9 @@ export default function RootLayout({
 }>): ReactNode {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={centuryGothic.className}>
+        <Provider>{children}</Provider>
+      </body>{' '}
     </html>
   )
 }
