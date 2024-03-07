@@ -7,7 +7,7 @@ export default function About() {
     <div>
       <Container
         sx={{
-          px: { xs: '16px !important', md: '120px !important' },
+          px: { xs: '20px !important', md: '120px !important' },
           overflow: 'hidden',
         }}
       >
@@ -62,7 +62,7 @@ export default function About() {
           <Box>
             <Typography
               sx={{
-                mt: { xs: '60px', md: '120px' },
+                mt: { xs: '40px', md: '120px' },
                 fontSize: { xs: '22px', md: '30px' },
                 fontWeight: '400',
                 textAlign: 'center',
@@ -80,7 +80,7 @@ export default function About() {
                 height: { xs: '200px', md: '300px' },
                 borderRadius: '25px',
                 mx: 'auto',
-                mt: '60px',
+                mt: { md: '60px', xs: '40px' },
               }}
             >
               <Box

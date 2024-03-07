@@ -71,7 +71,7 @@ export default function OurCollection({
     ],
   }
   return (
-    <Container sx={{ maxWidth: '100% !important' }}>
+    <Container sx={{ maxWidth: '100% !important', px: '20px !important' }}>
       <Typography
         sx={{
           fontSize: { xs: '22px', md: '30px' },
@@ -163,7 +163,7 @@ export default function OurCollection({
               color: 'white',
               width: 'auto',
               mx: 'auto',
-              mt: { xs: '60px', md: '120px' },
+              mt: { xs: '40px', md: '120px' },
               px: { xs: '40px', md: '80px' },
               py: { xs: 1, md: 2 },
               textAlign: 'center',

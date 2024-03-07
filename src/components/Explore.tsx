@@ -76,7 +76,7 @@ export default function Explore() {
   return (
     <Container
       sx={{
-        px: { xs: '16px !important', md: '120px !important' },
+        px: { xs: '20px !important', md: '120px !important' },
         pt: { xs: '60px', md: '120px' },
       }}
     >
@@ -92,7 +92,7 @@ export default function Explore() {
       <Box
         className="slider-container"
         sx={{
-          mt: '60px',
+          mt: { md: '60px', xs: '40px' },
           width: '100%',
         }}
       >

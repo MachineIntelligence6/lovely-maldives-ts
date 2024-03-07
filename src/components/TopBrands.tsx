@@ -84,7 +84,7 @@ export default function TopBrands() {
     ],
   }
   return (
-    <Container sx={{ px: { xs: '16px !important', md: '120px !important' } }}>
+    <Container sx={{ px: { xs: '20px !important', md: '120px !important' } }}>
       <Typography
         sx={{
           fontSize: { xs: '22px', md: '30px' },
@@ -96,7 +96,12 @@ export default function TopBrands() {
         TOP BRANDS
       </Typography>
 
-      <Box sx={{ width: { md: '100%', lg: '100%' }, mt: '60px' }}>
+      <Box
+        sx={{
+          width: { md: '100%', lg: '100%' },
+          mt: { md: '60px', xs: '40px' },
+        }}
+      >
         <Slider {...settings}>
           {datas.map((data, index) => (
             <Box key={index}>
@@ -150,7 +155,7 @@ export default function TopBrands() {
         </Slider>
         <Box
           sx={{
-            mt: { xs: '60px', md: '120px' },
+            mt: { xs: '40px', md: '120px' },
             width: { xs: '100%', md: '70%' },
             height: { xs: '350px', md: '450px' },
             mx: 'auto',
@@ -222,7 +227,7 @@ export default function TopBrands() {
         </Box>
         <Box
           sx={{
-            mt: { xs: '60px', md: '120px' },
+            mt: { xs: '40px', md: '120px' },
             width: { xs: '90%', md: '55%' },
             height: { xs: '250px', md: '350px' },
             mx: 'auto',
