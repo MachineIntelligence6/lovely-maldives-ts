@@ -35,7 +35,7 @@ function SubNav({ menuItems, isOpen }: any) {
         transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
         transition: 'opacity 0.4s, transform 0.4s',
         height: { md: 'initial', xs: '100vh' },
-        // visibility: { md: "visible", xs: "hidden" },
+        visibility: { md: 'visible', xs: 'hidden' },
         display: 'flex',
         flexDirection: { md: 'row', xs: 'column' },
         overflow: 'hidden',

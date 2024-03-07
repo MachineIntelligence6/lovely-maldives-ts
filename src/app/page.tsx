@@ -33,7 +33,7 @@ export default function Home() {
             mt: { xs: '60px', md: '120px' },
             zIndex: '1',
             color: 'var(--white)',
-            px: { xs: '16px', md: '0px' },
+            px: { xs: '20px', md: '0px' },
           }}
         >
           <Typography

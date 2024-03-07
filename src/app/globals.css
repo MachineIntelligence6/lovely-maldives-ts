@@ -108,9 +108,13 @@ body {
   opacity: 1 !important;
 }
 
+.services-slider .slick-dots {
+  position: unset !important;
+  margin: 0px 0 0 0 !important;
+}
 .slick-dots {
   position: unset !important;
-  margin: 60px 0 0 0 !important;
+  margin: 55px 0 0 0 !important;
 }
 /* EXplore slider */
 @keyframes increaseHeight {

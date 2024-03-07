@@ -73,8 +73,8 @@ function SampleNextArrow(props: any) {
         display: 'block',
         color: 'var(--blue) !important',
         fontSize: '35px !important ',
-        width: '45px !important',
-        height: '45px !important',
+        width: '35px !important',
+        height: '35px !important',
         top: '37% !important',
       }}
       onClick={onClick}
@@ -92,8 +92,8 @@ function SamplePrevArrow(props: any) {
         display: 'block',
         color: 'var(--blue) !important',
         fontSize: ' 35px !important ',
-        width: '45px !important',
-        height: '45px !important',
+        width: '35px !important',
+        height: '35px !important',
         top: '37% !important',
       }}
       onClick={onClick}
@@ -185,8 +185,8 @@ export default function OurServices() {
   return (
     <Container
       sx={{
-        px: { xs: '16px !important', md: '120px !important' },
-        mt: { xs: '180px !important', md: '120px !important' },
+        px: { xs: '20px !important', md: '120px !important' },
+        mt: { xs: '80px !important', md: '120px !important' },
       }}
     >
       <Typography
@@ -216,11 +216,21 @@ export default function OurServices() {
             <Box
               // eslint-disable-next-line react/no-array-index-key
               key={index}
-              sx={{ bgcolor: 'white', width: '100%', px: '6px' }}
+              sx={{
+                bgcolor: 'white',
+                width: '100%',
+                px: '6px',
+                mb: 0,
+              }}
             >
               {lessThanMd ? (
                 <Box
-                  sx={{ height: '600px', textAlign: 'center', width: '100%' }}
+                  sx={{
+                    height: '50vh',
+                    textAlign: 'center',
+                    width: '100%',
+                    position: 'relative',
+                  }}
                 >
                   <Image
                     src={item.image}
@@ -231,13 +241,22 @@ export default function OurServices() {
                       objectFit: 'cover',
                     }}
                   />
-
+                  <Box
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      bgcolor: 'rgba(10,0,0,0.5)',
+                      position: 'absolute',
+                      top: '0',
+                      left: '0',
+                    }}
+                  />
                   <Typography
                     sx={{
                       position: 'relative',
                       color: 'white',
                       bottom: '20%',
-                      fontSize: '30px',
+                      fontSize: '16px',
                       textAlign: 'center',
                       fontWeight: 600,
                       opacity: '0.90',

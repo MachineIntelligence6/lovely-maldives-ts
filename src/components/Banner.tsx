@@ -54,12 +54,16 @@ export default function Banner() {
             textAlign: 'center',
           }}
         >
-          <Typography sx={{ fontSize: { xs: '30px', md: '35px' } }}>
+          <Typography sx={{ fontSize: { xs: '24px', md: '35px' } }}>
             Welcome to Lovely Maldives
           </Typography>
           <Typography
             variant="h1"
-            sx={{ mt: '40px', fontSize: '50px', fontWeight: 600 }}
+            sx={{
+              mt: '40px',
+              fontSize: { md: '50px', xs: '35px' },
+              fontWeight: 600,
+            }}
           >
             Essence of Pure Luxury{' '}
           </Typography>
