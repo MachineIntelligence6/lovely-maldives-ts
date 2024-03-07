@@ -12,9 +12,6 @@ import Button from '@mui/material/Button'
 import NavItems from './NavItems'
 import IconMenu from './IconMenu'
 
-// import IconMenu from './IconMenu'
-// import NavItems from './NavItems'
-
 const profilePic = '/Images/logo-png.png'
 const profilePicCol = '/Images/logo-colored.png'
 
@@ -54,12 +51,12 @@ function Header() {
   const menuItem = [
     { label: 'About Maldives', route: '/' },
     { label: 'Hotels', route: '/resorts' },
-    { label: 'About us', route: '/aboutus' },
+    { label: 'About us', route: '/about-us' },
     { label: 'Blog', route: '/blog' },
     { label: 'New Title', route: '/' },
   ]
 
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(true)
   const [openMenu, setOpenMenu] = useState(false)
 
   const handleScroll = () => {

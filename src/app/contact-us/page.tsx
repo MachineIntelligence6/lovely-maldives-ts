@@ -22,7 +22,7 @@ function page() {
           color: 'var(--white)',
         }}
       >
-        <BreadCrumb linkName2="Contact us" linkName="Home" path="/contactus" />
+        <BreadCrumb linkName2="Contact us" linkName="Home" path="/contact-us" />
         <Typography
           sx={{
             fontSize: { xs: '35px', md: '50px' },

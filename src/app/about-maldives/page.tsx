@@ -18,12 +18,9 @@ import SendIcon from '@mui/icons-material/Send'
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
+import Footer from '@/components/Footer'
 import article from '../../../public/Images/main.jpg'
 import blog from '../../../public/Images/landingTree.jpg'
-// import Navbar from '@/src/components/Nav'
-// import Footer from '@/src/components/Footer'
-// import Header from '@/src/components/Header'
-// import BreadCrumb from '@/src/components/BreadCrumb'
 
 export default function page() {
   return (
@@ -39,7 +36,7 @@ export default function page() {
         <BreadCrumb
           linkName="Home"
           linkName2="About Maldives"
-          path="/aboutmaldives"
+          path="/about-maldives"
         />
         <Typography
           sx={{
@@ -245,7 +242,7 @@ export default function page() {
           </Box>
         </Box>
       </Container>
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }

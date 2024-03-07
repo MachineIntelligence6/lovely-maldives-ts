@@ -12,21 +12,22 @@ import {
   TextField,
   Button,
 } from '@mui/material'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import SendIcon from '@mui/icons-material/Send'
 import Diversity2Icon from '@mui/icons-material/Diversity2'
-// import BlogHeader from '../../components/BlogHeader'
-// import Footer from '../../components/Footer'
+import BlogHeader from '@/components/BlogHeader'
+import Footer from '@/components/Footer'
 
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import blog from '../../../public/Images/landingTree.jpg'
 import articleImage from '../../../public/Images/main.jpg'
-// import LatestBlog from '@/src/app/latestblog/page'
+import LatestBlog from '../latest-blog/page'
+import PopularBlog from '../popular-blog/page'
 // import PopularBlog from '@/src/app/popularblog/page'
 
-interface IArticle {
-  image: string
+export interface IArticle {
+  image: StaticImageData | string
   title: string
   date: string
 }
@@ -103,7 +104,7 @@ export default function Page() {
   return (
     <>
       <Header />
-      {/* <BlogHeader /> */}
+      <BlogHeader />
       <Container
         sx={{
           maxWidth: '100% !important',
@@ -111,9 +112,9 @@ export default function Page() {
           mt: '60px',
         }}
       >
-        <BreadCrumb linkName2="Blogs" linkName="Home" path="/blogarticles" />
-        {/* <LatestBlog hide="none" />
-        <PopularBlog hide="none" /> */}
+        <BreadCrumb linkName2="Blogs" linkName="Home" path="/blog-articles" />
+        <LatestBlog hide="none" />
+        <PopularBlog hide="none" />
         <Box>
           <Typography
             sx={{
@@ -251,7 +252,7 @@ export default function Page() {
           </Box>
         </Box>
       </Container>
-      {/* <Footer hide="none" /> */}
+      <Footer />
     </>
   )
 }

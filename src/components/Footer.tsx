@@ -64,7 +64,7 @@ export default function Footer() {
           </Typography>
 
           <Link
-            href="/aboutmaldives"
+            href="/about-maldives"
             sx={{
               color: 'white',
               textDecoration: 'none',
@@ -76,7 +76,7 @@ export default function Footer() {
             About Maldives
           </Link>
           <Link
-            href="/allresorts"
+            href="/all-resorts"
             sx={{
               color: 'white',
               textDecoration: 'none',
@@ -213,7 +213,7 @@ export default function Footer() {
               sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
             />
             <Link
-              href="/contactus"
+              href="/contact-us"
               sx={{
                 color: 'white',
                 textDecoration: 'none',
