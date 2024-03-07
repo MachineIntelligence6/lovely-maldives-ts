@@ -9,6 +9,7 @@ import { useMediaQuery, AppBar, Toolbar } from '@mui/material'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import { useMenuStore } from '@/providers/menu-store-provider'
 import NavItems from './NavItems'
 import IconMenu from './IconMenu'
 
@@ -32,10 +33,77 @@ function SubNav({ menuItems, isOpen }: any) {
         opacity: isOpen ? 1 : 0,
         transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
         transition: 'opacity 0.4s, transform 0.4s',
-        height: { md: 'initial', xs: '100vh' },
-        visibility: { md: 'visible', xs: 'hidden' },
         display: 'flex',
-        flexDirection: { md: 'row', xs: 'column' },
+        flexDirection: 'row',
+        overflow: 'hidden',
+        mt: { md: '0', xs: '90px' },
+        gap: { md: '18px', xs: '0' },
+        borderTop: '1px solid lightgray',
+      }}
+    >
+      <NavItems items={menuItems} />
+    </Box>
+  )
+}
+/*
+function MobileNav({ menuItems, isOpen }: any) {
+  // const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
+  return (
+    <Box
+      component="nav"
+      sx={{
+        background: 'white',
+        position: 'fixed',
+        top: { xs: '0', md: '91px' },
+        boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
+        py: '20px',
+        width: '100%',
+        px: '100px',
+        zIndex: 999,
+        opacity: isOpen ? 1 : 0,
+        transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
+        transition: 'opacity 0.4s, transform 0.4s',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        mt: { md: '0', xs: '90px' },
+        gap: { md: '18px', xs: '0' },
+        borderTop: '1px solid lightgray',
+      }}
+    >
+      <NavItems items={menuItems} />
+    </Box>
+  )
+}
+*/
+
+// function SubNav() {
+//   return <Box>SubNav</Box>
+// }
+
+function MobileNav({ menuItems }: any) {
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+  const { isOpen, open, close } = useMenuStore((state) => state)
+  return (
+    <Box
+      sx={{
+        height: '100vh',
+        width: '100%',
+        bgcolor: 'red',
+        position: 'fixed',
+        top: '0',
+        zIndex: 999,
+        transform: isOpen ? 'translateY(0%)' : 'translateY(-100%)',
+
+        background: 'white',
+        boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
+        py: '20px',
+        px: '100px',
+        opacity: isOpen ? 1 : 0,
+        transition: 'opacity 0.4s, transform 0.4s',
+        display: 'flex',
+        flexDirection: 'column',
         overflow: 'hidden',
         mt: { md: '0', xs: '90px' },
         gap: { md: '18px', xs: '0' },
@@ -49,6 +117,7 @@ function SubNav({ menuItems, isOpen }: any) {
 
 function Header() {
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
+  const { open, close } = useMenuStore((state) => state)
 
   const menuItem = [
     { label: 'About Maldives', route: '/' },
@@ -67,8 +136,8 @@ function Header() {
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleResize = () => {
-    if (!lessThanMd) {
-      setOpenMenu(!isScrolled)
+    if (lessThanMd) {
+      setOpenMenu(!openMenu)
     }
   }
 
@@ -89,6 +158,9 @@ function Header() {
 
   const openNavMenu = () => {
     setOpenMenu(!openMenu)
+    if (openMenu) {
+      open()
+    } else close()
   }
 
   return (
@@ -179,7 +251,11 @@ function Header() {
           </Box>
         </Toolbar>
       </AppBar>
-      <SubNav menuItems={menuItem} isOpen={openMenu} />
+      {lessThanMd ? (
+        <MobileNav menuItems={menuItem} />
+      ) : (
+        <SubNav menuItems={menuItem} isOpen={openMenu} />
+      )}
     </Box>
   )
 }

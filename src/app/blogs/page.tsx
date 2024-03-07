@@ -12,7 +12,7 @@ import {
   TextField,
   Button,
 } from '@mui/material'
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import SendIcon from '@mui/icons-material/Send'
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import BlogHeader from '@/components/BlogHeader'
@@ -25,13 +25,7 @@ import articleImage from '../../../public/Images/main.jpg'
 import LatestBlog from '../latest-blog/page'
 import PopularBlog from '../popular-blog/page'
 
-export interface IArticle {
-  image: StaticImageData | string
-  title: string
-  date: string
-}
-
-export const articles = [
+export const articles: any[] = [
   {
     image: blog,
     title:
@@ -89,15 +83,16 @@ export const articles = [
 ]
 
 export default function Page() {
-  const [addSlice, setAddSlice] = useState<any>([])
+  const [addSlice, setAddSlice] = useState<any>([] as any)
 
   useEffect(() => {
     const windowWidth = window.innerWidth
 
     if (windowWidth < 768) {
-      setAddSlice(articles.slice(0, 3))
+      const slicedArticles: any[] = articles.slice(0, 3)
+      setAddSlice(slicedArticles as any[])
     } else {
-      setAddSlice(articles)
+      setAddSlice(articles as any[])
     }
   }, [])
   return (
@@ -130,7 +125,7 @@ export default function Page() {
             columns={{ xs: 4, sm: 8, md: 12 }}
             sx={{ mt: { xs: '0', md: '40px' }, overflow: 'hidden' }}
           >
-            {addSlice.map((article: IArticle, index: number) => (
+            {addSlice.map((article: any, index: number) => (
               <Grid
                 item
                 xs={4}

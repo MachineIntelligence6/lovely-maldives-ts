@@ -5,6 +5,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
 import React from 'react'
+import { MenuStoreProvider } from '@/providers/menu-store-provider'
 
 const centuryGothic = '/fonts/century-gothic/gothic.ttf'
 
@@ -37,7 +38,9 @@ export default function Provider({
   return (
     <>
       <CssBaseline />
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <MenuStoreProvider>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      </MenuStoreProvider>
     </>
   )
 }

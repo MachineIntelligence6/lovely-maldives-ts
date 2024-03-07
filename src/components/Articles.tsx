@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-array-index-key */
 import { Container, Box, Typography } from '@mui/material'
 import Image from 'next/image'
-import { IArticle } from '@/app/blogs/page'
 import blog from '../../public/Images/landingTree.jpg'
 import articleImage from '../../public/Images/main.jpg'
 
-export const articles: IArticle[] = [
+export const articles: any[] = [
   {
     image: blog,
     date: '04 Feb 2024',
@@ -36,7 +36,7 @@ export default function Articles() {
           RELATED ARTICLES
         </Typography>
         <hr style={{ marginTop: '40px' }} />
-        {articles.map((article: IArticle, index) => (
+        {articles.map((article: any, index) => (
           <Box key={index} sx={{ borderBottom: '1px solid var(--white)' }}>
             <Box
               sx={{
