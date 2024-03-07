@@ -33,7 +33,7 @@ function SubNav({ menuItems, isOpen }: any) {
         transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
         transition: 'opacity 0.4s, transform 0.4s',
         height: { md: 'initial', xs: '100vh' },
-        // visibility: { md: 'visible', xs: 'hidden' },
+        visibility: { md: 'visible', xs: 'hidden' },
         display: 'flex',
         flexDirection: { md: 'row', xs: 'column' },
         overflow: 'hidden',
@@ -58,27 +58,34 @@ function Header() {
     { label: 'New Title', route: '/' },
   ]
 
-  const [isScrolled, setIsScrolled] = useState(true)
+  const [isScrolled, setIsScrolled] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
 
   const handleScroll = () => {
     const scrollTop = window.scrollY
     setIsScrolled(scrollTop > 0)
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleResize = () => {
+    if (!lessThanMd) {
+      setOpenMenu(!isScrolled)
+    }
+  }
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
     }
-  }, [])
+  }, [isScrolled, lessThanMd, handleResize])
 
   useEffect(() => {
     if (!lessThanMd) {
       setOpenMenu(!isScrolled)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isScrolled])
+  }, [isScrolled, lessThanMd])
 
   const openNavMenu = () => {
     setOpenMenu(!openMenu)
@@ -159,9 +166,6 @@ function Header() {
                   bgcolor: 'var(--brown)',
                   px: 2.4,
                   py: 1.2,
-                  // visibility: isScrolled
-                  // ? { md: "visible", xs: "hidden" }
-                  // : "hidden",
                   visibility: isScrolled ? 'visible' : 'hidden',
                   opacity: isScrolled ? '1' : '0',
                   transition: isScrolled
