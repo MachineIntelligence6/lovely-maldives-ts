@@ -75,6 +75,7 @@ function Header() {
     if (!lessThanMd) {
       setOpenMenu(!isScrolled)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isScrolled])
 
   const openNavMenu = () => {
