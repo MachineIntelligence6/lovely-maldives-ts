@@ -19,6 +19,7 @@ const profilePic = '/Images/logo-png.png'
 const profilePicCol = '/Images/logo-colored.png'
 
 function SubNav({ menuItems, isOpen }: any) {
+  // const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   return (
     <Box
       component="nav"
@@ -33,13 +34,15 @@ function SubNav({ menuItems, isOpen }: any) {
         zIndex: 999,
         opacity: isOpen ? 1 : 0,
         transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
+
         transition: 'opacity 0.4s, transform 0.4s',
         height: { md: 'initial', xs: '100vh' },
-        visibility: { md: 'visible', xs: 'hidden' },
+        // visibility: { md: 'visible', xs: 'hidden' },
         display: 'flex',
         flexDirection: { md: 'row', xs: 'column' },
         overflow: 'hidden',
-        gap: '18px',
+        mt: { md: '0', xs: '90px' },
+        gap: { md: '18px', xs: '0' },
         borderTop: '1px solid lightgray',
       }}
     >
