@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={centuryGothic.className}>
         <Provider>{children}</Provider>
-      </body>{' '}
+      </body>
     </html>
   )
 }

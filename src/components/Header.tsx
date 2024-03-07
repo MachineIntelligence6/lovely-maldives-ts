@@ -1,100 +1,183 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-nested-ternary */
+
 'use client'
 
-import * as React from 'react'
-import { styled, alpha } from '@mui/material/styles'
-import AppBar from '@mui/material/AppBar'
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { useMediaQuery, AppBar, Toolbar } from '@mui/material'
+
 import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import InputBase from '@mui/material/InputBase'
-import MenuIcon from '@mui/icons-material/Menu'
-import SearchIcon from '@mui/icons-material/Search'
-import AccountCircle from '@mui/icons-material/AccountCircle'
 import Button from '@mui/material/Button'
+import NavItems from './NavItems'
+import IconMenu from './IconMenu'
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}))
+// import IconMenu from './IconMenu'
+// import NavItems from './NavItems'
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}))
+const profilePic = '/Images/logo-png.png'
+const profilePicCol = '/Images/logo-colored.png'
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}))
-
-export default function Header(): React.ReactNode {
-  const menuId = 'primary-search-account-menu'
-
+function SubNav({ menuItems, isOpen }: any) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ background: 'white', color: 'black' }}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <Button variant="outlined">ENQUIRE</Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
+    <Box
+      component="nav"
+      sx={{
+        background: 'white',
+        position: 'fixed',
+        top: { xs: '0', md: '91px' },
+        boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
+        py: '20px',
+        width: '100%',
+        px: '100px',
+        zIndex: 999,
+        opacity: isOpen ? 1 : 0,
+        transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
+        transition: 'opacity 0.4s, transform 0.4s',
+        height: { md: 'initial', xs: '100vh' },
+        // visibility: { md: "visible", xs: "hidden" },
+        display: 'flex',
+        flexDirection: { md: 'row', xs: 'column' },
+        overflow: 'hidden',
+        gap: '18px',
+        borderTop: '1px solid lightgray',
+      }}
+    >
+      <NavItems items={menuItems} />
     </Box>
   )
 }
+
+function Header() {
+  const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
+
+  const menuItem = [
+    { label: 'About Maldives', route: '/' },
+    { label: 'Hotels', route: '/resorts' },
+    { label: 'About us', route: '/aboutus' },
+    { label: 'Blog', route: '/blog' },
+    { label: 'New Title', route: '/' },
+  ]
+
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [openMenu, setOpenMenu] = useState(false)
+
+  const handleScroll = () => {
+    const scrollTop = window.scrollY
+    setIsScrolled(scrollTop > 0)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!lessThanMd) {
+      setOpenMenu(!isScrolled)
+    }
+  }, [isScrolled])
+
+  const openNavMenu = () => {
+    setOpenMenu(!openMenu)
+  }
+
+  return (
+    <Box component="header">
+      <AppBar
+        className={isScrolled ? 'scrolled' : ''}
+        sx={{
+          justifyContent: 'center',
+          boxShadow: isScrolled
+            ? openMenu
+              ? 'none'
+              : '0 0 25px rgb(0 0 0 / 10%)'
+            : 'none',
+          width: '100%',
+          background: isScrolled ? 'white' : 'var(--brown)',
+        }}
+      >
+        <Toolbar
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between', // { md: "space-between", xs: "flex-start" },
+            alignItems: 'center',
+            py: '12px',
+          }}
+        >
+          <Box sx={{ visibility: { md: 'visible', xs: 'hidden' } }}>
+            <Button
+              className="menuBtn"
+              disableRipple
+              sx={{
+                height: '25px',
+                mt: '20px',
+              }}
+              title="Menu button"
+              onClick={openNavMenu}
+            >
+              <IconMenu isVisible={openMenu} />
+            </Button>
+          </Box>
+          <Box>
+            <Image
+              src={isScrolled ? profilePicCol : profilePic}
+              alt="Logo"
+              width={100}
+              height={60}
+            />
+          </Box>
+          {/* <Box
+            sx={{
+              visibility: isScrolled
+                ? { md: "visible", xs: "hidden" }
+                : "hidden",
+            }}
+          ></Box> */}
+          <Box>
+            {lessThanMd ? (
+              <Button
+                className="menuBtn"
+                disableRipple
+                sx={{
+                  height: '25px',
+                }}
+                title="Menu button"
+                onClick={openNavMenu}
+              >
+                <IconMenu isVisible={openMenu} />
+              </Button>
+            ) : (
+              <Button
+                className="buttonHover"
+                title="Enquire"
+                sx={{
+                  color: 'white',
+                  bgcolor: 'var(--brown)',
+                  px: 2.4,
+                  py: 1.2,
+                  // visibility: isScrolled
+                  // ? { md: "visible", xs: "hidden" }
+                  // : "hidden",
+                  visibility: isScrolled ? 'visible' : 'hidden',
+                  opacity: isScrolled ? '1' : '0',
+                  transition: isScrolled
+                    ? 'opacity .3s linear'
+                    : 'visibility 0s linear .3s, opacity .3s ease-in-out',
+                }}
+              >
+                ENQUIRE
+              </Button>
+            )}
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <SubNav menuItems={menuItem} isOpen={openMenu} />
+    </Box>
+  )
+}
+
+export default Header
