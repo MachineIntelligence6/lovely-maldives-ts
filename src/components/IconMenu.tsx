@@ -5,14 +5,18 @@ function IconMenu({ isVisible }: any) {
   return (
     <>
       <Box
-        sx={{ width: '40px', height: '2px', background: 'var(--brown)' }}
+        sx={{
+          width: '40px',
+          height: '2px',
+          background: { md: 'var(--brown)', xs: 'white' },
+        }}
         className={`line ${isVisible ? 'line1' : ''}`}
       />
       <Box
         sx={{
           width: '40px',
           height: '2px',
-          background: 'var(--brown)',
+          background: { md: 'var(--brown)', xs: 'white' },
           mt: isVisible ? '0px' : '.6rem',
         }}
         className={`line ${isVisible ? 'line2' : ''}`}
