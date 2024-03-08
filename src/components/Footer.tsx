@@ -312,8 +312,9 @@ export default function Footer() {
         <Box
           sx={{
             display: { xs: 'flex', md: 'none' },
-            justifyContent: 'space-around',
+            justifyContent: 'center',
             mt: '30px',
+            gap: '20px',
           }}
         >
           <FacebookRoundedIcon />

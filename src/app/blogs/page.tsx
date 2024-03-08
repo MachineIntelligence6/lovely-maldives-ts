@@ -98,7 +98,6 @@ export default function Page() {
   return (
     <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
       <Header />
-      <BlogHeader />
       <Container
         sx={{
           maxWidth: '100% !important',
@@ -107,6 +106,7 @@ export default function Page() {
         }}
       >
         <BreadCrumb linkName2="Blogs" linkName="Home" path="/blog-articles" />
+        <BlogHeader />
         <LatestBlog hide="none" />
         <PopularBlog hide="none" />
         <Box>

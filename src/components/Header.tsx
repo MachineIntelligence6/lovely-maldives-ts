@@ -5,7 +5,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useMediaQuery, AppBar, Toolbar } from '@mui/material'
+import { useMediaQuery, AppBar, Toolbar, IconButton } from '@mui/material'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -122,7 +122,7 @@ function Header() {
   const { isOpen, open, close, toggleMenu } = useMenuStore((state) => state)
 
   const menuItem = [
-    { label: 'About Maldives', route: '/' },
+    { label: 'About Maldives', route: '/about-maldives' },
     { label: 'Hotels', route: '/resorts' },
     { label: 'About us', route: '/about-us' },
     { label: 'Blog', route: '/blogs' },
@@ -138,9 +138,9 @@ function Header() {
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleResize = () => {
-    // if (lessThanMd) {
-    //   toggleMenu()
-    // }
+    if (lessThanMd) {
+      close()
+    }
   }
 
   useEffect(() => {
@@ -152,17 +152,19 @@ function Header() {
     }
   }, [isScrolled, lessThanMd, handleResize])
 
-  useEffect(() => {
-    if (!lessThanMd) {
-      toggleMenu()
-    }
-  }, [lessThanMd, toggleMenu])
+  // useEffect(() => {
+  //   if (!lessThanMd) {
+  //     toggleMenu()
+  //   }
+  // }, [lessThanMd, toggleMenu])
 
   useEffect(() => {
     if (isScrolled) {
       close()
     } else if (!lessThanMd) {
       open()
+    } else {
+      close()
     }
   }, [isScrolled, lessThanMd])
 
@@ -191,11 +193,11 @@ function Header() {
           }}
         >
           <Box sx={{ visibility: { md: 'visible', xs: 'hidden' } }}>
-            <Button
+            <IconButton
               className="menuBtn"
               disableRipple
               sx={{
-                height: '25px',
+                height: '50px',
                 mt: '20px',
               }}
               title="Menu button"
@@ -210,7 +212,7 @@ function Header() {
                   background: isScrolled ? 'var(--brown)' : 'white', // : { md: 'var(--brown)', xs: 'white' },
                 }}
               />
-            </Button>
+            </IconButton>
           </Box>
           <Box>
             <Image

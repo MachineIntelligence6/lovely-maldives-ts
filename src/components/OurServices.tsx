@@ -75,7 +75,7 @@ function SampleNextArrow(props: any) {
         fontSize: '35px !important ',
         width: '35px !important',
         height: '35px !important',
-        top: '37% !important',
+        top: '44% !important',
       }}
       onClick={onClick}
     />
@@ -94,7 +94,7 @@ function SamplePrevArrow(props: any) {
         fontSize: ' 35px !important ',
         width: '35px !important',
         height: '35px !important',
-        top: '37% !important',
+        top: '44% !important',
       }}
       onClick={onClick}
     />
@@ -217,7 +217,6 @@ export default function OurServices() {
               // eslint-disable-next-line react/no-array-index-key
               key={index}
               sx={{
-                bgcolor: 'white',
                 width: '100%',
                 px: '6px',
                 mb: 0,

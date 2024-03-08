@@ -274,7 +274,8 @@ export default function TopBrands() {
             <SendIcon
               sx={{
                 position: 'absolute',
-                top: { xs: '70%', md: '65%' },
+                top: { xs: '70%', md: '56%' },
+                cursor: 'pointer',
                 right: '22%',
                 color: 'var(--blue)',
               }}
