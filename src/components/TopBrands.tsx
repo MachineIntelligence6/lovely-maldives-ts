@@ -155,7 +155,7 @@ export default function TopBrands() {
         </Slider>
         <Box
           sx={{
-            mt: { xs: '40px', md: '120px' },
+            mt: { xs: '40px', md: '60px' },
             width: { xs: '100%', md: '70%' },
             height: { xs: '350px', md: '450px' },
             mx: 'auto',
@@ -186,7 +186,7 @@ export default function TopBrands() {
               sx={{
                 pt: { xs: '25%', md: '16%' },
                 color: 'white',
-                fontSize: { md: '45px', xs: '35px' },
+                fontSize: { md: '45px', xs: '30px' },
                 fontWeight: 600,
                 width: '300px',
                 textAlign: 'center',
@@ -227,7 +227,7 @@ export default function TopBrands() {
         </Box>
         <Box
           sx={{
-            mt: { xs: '40px', md: '120px' },
+            mt: { xs: '40px', md: '60px' },
             width: { xs: '90%', md: '55%' },
             height: { xs: '250px', md: '350px' },
             mx: 'auto',
@@ -258,9 +258,8 @@ export default function TopBrands() {
           </Typography>
           <Box>
             <TextField
-              id="outlined-multiline-flexible"
-              label="Enter email adress"
-              multiline
+              // id="outlined-multiline-flexible"
+              placeholder="Enter email adress"
               className="input"
               // maxRows={10}
               sx={{
@@ -269,12 +268,13 @@ export default function TopBrands() {
                 borderRadius: '10px',
                 width: '60%',
                 position: 'relative',
+                '& fieldset': { border: 'none' },
               }}
             />
             <SendIcon
               sx={{
                 position: 'absolute',
-                top: { xs: '70%', md: '65%' },
+                top: { xs: '70%', md: '56%' },
                 right: '22%',
                 color: 'var(--blue)',
               }}

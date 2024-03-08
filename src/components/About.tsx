@@ -62,7 +62,7 @@ export default function About() {
           <Box>
             <Typography
               sx={{
-                mt: { xs: '40px', md: '120px' },
+                mt: { xs: '40px', md: '60px' },
                 fontSize: { xs: '22px', md: '30px' },
                 fontWeight: '400',
                 textAlign: 'center',

@@ -110,7 +110,7 @@ body {
 
 .services-slider .slick-dots {
   position: unset !important;
-  margin: 0px 0 0 0 !important;
+  margin: 45px 0 0 0 !important;
 }
 .slick-dots {
   position: unset !important;
@@ -255,6 +255,10 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   }
 }
 @media screen and (max-width: 768px) {
+  .services-slider .slick-dots {
+    position: unset !important;
+    margin: 0px 0 0 0 !important;
+  }
   .searchIcon {
     display: block;
   }
@@ -314,7 +318,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
 
 .rightPalm {
   position: absolute;
-  top: 300px;
+  top: 115%;
   right: 0;
   z-index: 99;
 }

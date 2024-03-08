@@ -75,7 +75,7 @@ export default function Home() {
               href="/"
               className="readmore"
               style={{
-                paddingTop: '5px',
+                // paddingTop: '5px',
                 textDecoration: 'none',
                 color: 'var(--white)',
               }}
@@ -83,7 +83,7 @@ export default function Home() {
               Read More{' '}
             </Link>
             <KeyboardArrowRightIcon
-              sx={{ fontSize: { xs: '24px', md: '30px' } }}
+              sx={{ fontSize: { xs: '24px', md: '35px' } }}
             />
           </Box>
         </Box>

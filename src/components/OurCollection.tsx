@@ -39,7 +39,7 @@ export default function OurCollection({
     autoplay: true,
     autoplaySpeed: 4000,
     centerMode: true,
-    centerPadding: '60px',
+    centerPadding: '120px',
     responsive: [
       {
         breakpoint: 1024,
@@ -71,7 +71,12 @@ export default function OurCollection({
     ],
   }
   return (
-    <Container sx={{ maxWidth: '100% !important', px: '20px !important' }}>
+    <Container
+      sx={{
+        maxWidth: '100% !important',
+        px: { xs: '20px !important', md: '0 !important' },
+      }}
+    >
       <Typography
         sx={{
           fontSize: { xs: '22px', md: '30px' },
@@ -163,7 +168,7 @@ export default function OurCollection({
               color: 'white',
               width: 'auto',
               mx: 'auto',
-              mt: { xs: '40px', md: '120px' },
+              mt: { xs: '40px', md: '60px' },
               px: { xs: '40px', md: '80px' },
               py: { xs: 1, md: 2 },
               textAlign: 'center',
