@@ -55,9 +55,10 @@ export default function Footer() {
         >
           <Typography
             sx={{
-              fontSize: '24px',
+              fontSize: '20px',
               fontWeight: '600',
               display: { xs: 'none', md: 'block' },
+              mb: '28px',
             }}
           >
             Links
@@ -126,7 +127,7 @@ export default function Footer() {
         </Box>
 
         <Box sx={{ mt: { xs: '30px', md: '0px' } }}>
-          <Typography sx={{ fontSize: '24px', fontWeight: '600' }}>
+          <Typography sx={{ fontSize: '20px', fontWeight: '600', mb: '28px' }}>
             Get in touch
           </Typography>
           <Box
@@ -229,9 +230,10 @@ export default function Footer() {
         <Box sx={{ mt: { xs: '30px', md: '0px' } }}>
           <Typography
             sx={{
-              fontSize: '24px',
+              fontSize: '20px',
               fontWeight: '600',
               display: { xs: 'none', md: 'block' },
+              mb: '28px',
             }}
           >
             Social Media
