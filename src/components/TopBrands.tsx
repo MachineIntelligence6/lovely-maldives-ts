@@ -228,7 +228,7 @@ export default function TopBrands() {
         <Box
           sx={{
             mt: { xs: '40px', md: '60px' },
-            width: { xs: '90%', md: '55%' },
+            width: { xs: '100%', md: '55%' },
             height: { xs: '250px', md: '350px' },
             mx: 'auto',
             borderRadius: '25px',

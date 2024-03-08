@@ -33,13 +33,13 @@ export default function OurCollection({
     dots: true,
     infinite: true,
     speed: 200,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 4000,
     centerMode: true,
-    centerPadding: '120px',
+    centerPadding: '150px',
     responsive: [
       {
         breakpoint: 1024,
@@ -48,7 +48,7 @@ export default function OurCollection({
           slidesToScroll: 1,
           infinite: true,
           dots: true,
-          centerPadding: '90px',
+          centerPadding: '100px',
         },
       },
       {
@@ -56,7 +56,7 @@ export default function OurCollection({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '0px',
+          centerPadding: '90px',
           initialSlide: 1,
         },
       },
@@ -65,7 +65,7 @@ export default function OurCollection({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '0px',
+          centerPadding: '60px',
         },
       },
     ],
@@ -74,7 +74,7 @@ export default function OurCollection({
     <Container
       sx={{
         maxWidth: '100% !important',
-        px: { xs: '20px !important', md: '0 !important' },
+        px: { xs: '0px !important', md: '0 !important' },
       }}
     >
       <Typography
@@ -109,7 +109,7 @@ export default function OurCollection({
               />
               <Box
                 sx={{
-                  width: { xs: '100%', md: '85%' },
+                  width: { xs: '90%', md: '85%' },
                   height: '100%',
                   bgcolor: 'rgba(150,127,93,0.3)',
                   position: 'absolute',
@@ -122,7 +122,7 @@ export default function OurCollection({
               <Box
                 className="collectionText"
                 sx={{
-                  width: { xs: '100%', md: '85%' },
+                  width: { xs: '90%', md: '85%' },
                   height: '40%',
                   display: 'flex',
                   flexDirection: 'column',
@@ -146,7 +146,7 @@ export default function OurCollection({
                   }}
                 >
                   <Typography sx={{ px: 4, fontSize: '20px' }}>
-                    One n Only Reethi Rah{' '}
+                    One and Only Reethi Rah{' '}
                   </Typography>
                   <BoltIcon sx={{ display: `${iconShow}` }} />
                 </Box>
