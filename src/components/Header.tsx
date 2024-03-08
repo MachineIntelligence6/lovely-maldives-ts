@@ -16,8 +16,10 @@ import IconMenu from './IconMenu'
 const profilePic = '/Images/logo-png.png'
 const profilePicCol = '/Images/logo-colored.png'
 
-function SubNav({ menuItems, isOpen }: any) {
+function SubNav({ menuItems }: any) {
   // const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
+  const { isOpen } = useMenuStore((state) => state)
+
   return (
     <Box
       component="nav"
@@ -117,7 +119,7 @@ function MobileNav({ menuItems }: any) {
 
 function Header() {
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
-  const { isOpen, toggleMenu } = useMenuStore((state) => state)
+  const { isOpen, open, close, toggleMenu } = useMenuStore((state) => state)
 
   const menuItem = [
     { label: 'About Maldives', route: '/' },
@@ -136,9 +138,9 @@ function Header() {
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleResize = () => {
-    if (lessThanMd) {
-      toggleMenu()
-    }
+    // if (lessThanMd) {
+    //   toggleMenu()
+    // }
   }
 
   useEffect(() => {
@@ -154,15 +156,15 @@ function Header() {
     if (!lessThanMd) {
       toggleMenu()
     }
-  }, [lessThanMd])
+  }, [lessThanMd, toggleMenu])
 
-  // const toggleMenu = () => {
-  //   if(isOpen){
-  //     open()
-  //   }else{
-  //     close()
-  //   }
-  // }
+  useEffect(() => {
+    if (isScrolled) {
+      close()
+    } else if (!lessThanMd) {
+      open()
+    }
+  }, [isScrolled, lessThanMd])
 
   return (
     <Box component="header">
@@ -255,7 +257,7 @@ function Header() {
       {lessThanMd ? (
         <MobileNav menuItems={menuItem} />
       ) : (
-        <SubNav menuItems={menuItem} isOpen={isOpen} />
+        <SubNav menuItems={menuItem} />
       )}
     </Box>
   )
