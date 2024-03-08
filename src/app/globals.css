@@ -25,7 +25,10 @@
   display: inline-block;
   /* width: 100%; */
   height: 3px;
-  transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 .line1 {
   transform: rotate(45deg);

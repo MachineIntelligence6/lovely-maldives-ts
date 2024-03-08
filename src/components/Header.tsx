@@ -201,7 +201,15 @@ function Header() {
               title="Menu button"
               onClick={toggleMenu}
             >
-              <IconMenu isVisible={isOpen} />
+              <IconMenu
+                isVisible={isOpen}
+                sx={{
+                  visibility: isScrolled
+                    ? { md: 'visible', xs: 'hidden' }
+                    : 'hidden',
+                  background: isScrolled ? 'var(--brown)' : 'white', // : { md: 'var(--brown)', xs: 'white' },
+                }}
+              />
             </Button>
           </Box>
           <Box>
@@ -230,7 +238,12 @@ function Header() {
                 title="Menu button"
                 onClick={toggleMenu}
               >
-                <IconMenu isVisible={isOpen} />
+                <IconMenu
+                  isVisible={isOpen}
+                  sx={{
+                    background: isScrolled ? 'var(--brown)' : 'white', // : { md: 'var(--brown)', xs: 'white' },
+                  }}
+                />
               </Button>
             ) : (
               <Button
