@@ -318,14 +318,14 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
 
 .rightPalm {
   position: absolute;
-  top: 300px;
+  top: 134%;
   right: 0;
   z-index: 99;
 }
-/* 
-@media screen and (max-width: 480px) {
+
+/* @media screen and (max-width: 480px) {
   .rightPalm {
-    top: 200px;
+    top: 400px;
   }
 } */
 

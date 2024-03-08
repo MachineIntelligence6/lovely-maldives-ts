@@ -100,8 +100,8 @@ export default function Home() {
         <Image
           src="/Images/palm.png"
           alt="sidetree"
-          width={lessThanMd ? 250 : 350}
-          height={lessThanMd ? 250 : 350}
+          width={lessThanMd ? 200 : 350}
+          height={lessThanMd ? 200 : 350}
           className="rightPalm"
         />
         <OurServices />
