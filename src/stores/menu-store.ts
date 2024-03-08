@@ -7,6 +7,7 @@ export type MenuState = {
 export type MenuActions = {
   open: () => void
   close: () => void
+  toggleMenu: () => void
 }
 
 export type MenuStore = MenuState & MenuActions
@@ -20,6 +21,8 @@ export const createMenuStore = (initState: MenuState = defaultInitState) => {
     ...initState,
     open: () => set(() => ({ isOpen: true })),
     close: () => set(() => ({ isOpen: false })),
+    toggleMenu: () => set((state) => ({ isOpen: !state.isOpen })),
+
     // increase: () => set((state) => ({ count: state.count + 1 })),
   }))
 }

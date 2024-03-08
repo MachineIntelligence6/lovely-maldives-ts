@@ -36,7 +36,7 @@ function SubNav({ menuItems, isOpen }: any) {
         display: 'flex',
         flexDirection: 'row',
         overflow: 'hidden',
-        mt: { md: '0', xs: '90px' },
+        mt: { md: '0', xs: '85px' },
         gap: { md: '18px', xs: '0' },
         borderTop: '1px solid lightgray',
       }}
@@ -117,7 +117,7 @@ function MobileNav({ menuItems }: any) {
 
 function Header() {
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
-  const { open, close } = useMenuStore((state) => state)
+  const { isOpen, toggleMenu } = useMenuStore((state) => state)
 
   const menuItem = [
     { label: 'About Maldives', route: '/' },
@@ -128,16 +128,16 @@ function Header() {
   ]
 
   const [isScrolled, setIsScrolled] = useState(false)
-  const [openMenu, setOpenMenu] = useState(false)
 
   const handleScroll = () => {
     const scrollTop = window.scrollY
+    // const resizeWindow = window.innerWidth
     setIsScrolled(scrollTop > 0)
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleResize = () => {
     if (lessThanMd) {
-      setOpenMenu(!openMenu)
+      toggleMenu()
     }
   }
 
@@ -152,16 +152,17 @@ function Header() {
 
   useEffect(() => {
     if (!lessThanMd) {
-      setOpenMenu(!isScrolled)
+      toggleMenu()
     }
-  }, [isScrolled, lessThanMd])
+  }, [lessThanMd])
 
-  const openNavMenu = () => {
-    setOpenMenu(!openMenu)
-    if (openMenu) {
-      open()
-    } else close()
-  }
+  // const toggleMenu = () => {
+  //   if(isOpen){
+  //     open()
+  //   }else{
+  //     close()
+  //   }
+  // }
 
   return (
     <Box component="header">
@@ -170,7 +171,7 @@ function Header() {
         sx={{
           justifyContent: 'center',
           boxShadow: isScrolled
-            ? openMenu
+            ? isOpen
               ? 'none'
               : '0 0 25px rgb(0 0 0 / 10%)'
             : 'none',
@@ -196,9 +197,9 @@ function Header() {
                 mt: '20px',
               }}
               title="Menu button"
-              onClick={openNavMenu}
+              onClick={toggleMenu}
             >
-              <IconMenu isVisible={openMenu} />
+              <IconMenu isVisible={isOpen} />
             </Button>
           </Box>
           <Box>
@@ -225,9 +226,9 @@ function Header() {
                   height: '25px',
                 }}
                 title="Menu button"
-                onClick={openNavMenu}
+                onClick={toggleMenu}
               >
-                <IconMenu isVisible={openMenu} />
+                <IconMenu isVisible={isOpen} />
               </Button>
             ) : (
               <Button
@@ -254,7 +255,7 @@ function Header() {
       {lessThanMd ? (
         <MobileNav menuItems={menuItem} />
       ) : (
-        <SubNav menuItems={menuItem} isOpen={openMenu} />
+        <SubNav menuItems={menuItem} isOpen={isOpen} />
       )}
     </Box>
   )
