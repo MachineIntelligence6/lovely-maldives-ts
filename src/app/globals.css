@@ -112,13 +112,14 @@ body {
   opacity: 1 !important;
 }
 
-.services-slider .slick-dots {
-  position: unset !important;
-  margin: 0px 0 0 0 !important;
-}
 .slick-dots {
   position: unset !important;
-  margin: 55px 0 0 0 !important;
+  margin: 25px 0 0 0 !important;
+}
+.slick-dots li button:before {
+  font-size: 18px !important;
+  color: var(--brown) !important;
+  opacity: 1 !important;
 }
 /* EXplore slider */
 @keyframes increaseHeight {
@@ -316,12 +317,12 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   }
 }
 
-.rightPalm {
+/* .rightPalm {
   position: absolute;
-  top: 134%;
+  top: 140%;
   right: 0;
   z-index: 99;
-}
+} */
 
 /* @media screen and (max-width: 480px) {
   .rightPalm {
@@ -362,4 +363,60 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
 .burger-menu.active .bar.btmBar {
   transform: translateY(3px) rotate(-45deg);
   top: 0;
+}
+.plus {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 2px solid black;
+  overflow: hidden;
+}
+
+.plus::before,
+.plus::after {
+  content: '';
+  position: absolute;
+  background-color: black;
+}
+
+.plus::before {
+  width: 100px;
+  height: 2px;
+  top: calc(50% - 1px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.plus::after {
+  width: 2px;
+  height: 100px;
+  top: 50%;
+  left: calc(50% - 1px);
+  transform: translateY(-50%);
+}
+
+.text {
+  position: absolute;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.top-left {
+  top: 10px;
+  left: 10px;
+}
+
+.top-right {
+  top: 10px;
+  right: 10px;
+}
+
+.bottom-left {
+  bottom: 10px;
+  left: 10px;
+}
+
+.bottom-right {
+  bottom: 10px;
+  right: 10px;
 }

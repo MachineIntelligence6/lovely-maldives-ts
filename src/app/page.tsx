@@ -99,10 +99,16 @@ export default function Home() {
         /> */}
         <Image
           src="/Images/palm.png"
-          alt="sidetree"
-          width={lessThanMd ? 200 : 350}
-          height={lessThanMd ? 200 : 350}
+          alt="Palm tree"
+          width={lessThanMd ? 180 : 350}
+          height={lessThanMd ? 180 : 350}
           className="rightPalm"
+          style={{
+            position: 'absolute',
+            top: lessThanMd ? '138%' : '132%',
+            right: 0,
+            zIndex: 99,
+          }}
         />
         <OurServices />
       </Box>

@@ -21,7 +21,7 @@ export default function Banner() {
 
   const bgStyle = {
     // eslint-disable-next-line max-len
-    backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10), rgba(150, 127, 93, 0.65)), url('${bgImage.src}')`,
+    backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10), rgba(150, 127, 93, 0.55)), url('${bgImage.src}')`,
     backgroundSize: 'cover',
     backgroundPosition: '100%',
     width: '100%',

@@ -186,7 +186,7 @@ export default function OurServices() {
     <Container
       sx={{
         px: { xs: '20px !important', md: '120px !important' },
-        mt: { xs: '80px !important', md: '120px !important' },
+        mt: { xs: '120px !important', md: '120px !important' },
       }}
     >
       <Typography
@@ -229,6 +229,7 @@ export default function OurServices() {
                     textAlign: 'center',
                     width: '100%',
                     position: 'relative',
+                    overflow: 'hidden',
                   }}
                 >
                   <Image
@@ -238,27 +239,31 @@ export default function OurServices() {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
+                      filter: 'brightness(0.7)',
                     }}
                   />
                   <Box
                     sx={{
                       width: '100%',
                       height: '100%',
-                      bgcolor: 'rgba(10,0,0,0.5)',
+                      backgroundColor: 'rgba(0, 0, 0, 0.5)',
                       position: 'absolute',
-                      top: '0',
-                      left: '0',
+                      top: 0,
+                      left: 0,
+                      zIndex: 1,
                     }}
                   />
                   <Typography
                     sx={{
-                      position: 'relative',
+                      position: 'absolute',
                       color: 'white',
                       bottom: '20%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
                       fontSize: '16px',
-                      textAlign: 'center',
                       fontWeight: 600,
-                      opacity: '0.90',
+                      opacity: 0.9,
+                      zIndex: 2,
                     }}
                   >
                     {item.title}

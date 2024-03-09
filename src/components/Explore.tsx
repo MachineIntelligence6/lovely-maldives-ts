@@ -8,11 +8,11 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
+import { SampleNextArrow, SamplePrevArrow } from './OurServices'
 import exploreImg1 from '../../public/Images/exploreImg.jpg'
 import exploreImg3 from '../../public/Images/explorImg2.jpg'
 import exploreImg2 from '../../public/Images/exploreImg3.jpg'
 import exploreImg4 from '../../public/Images/explorImg5.jpg'
-import { SampleNextArrow, SamplePrevArrow } from './OurServices'
 
 export const datas = [
   {
@@ -137,7 +137,6 @@ export default function Explore() {
                   mx: 'auto',
                   width: '98%',
                   height: '400px',
-                  // borderRadius: '10px',
                   position: 'relative',
                   textAlign: 'center',
                   overflow: 'hidden',

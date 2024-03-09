@@ -5,7 +5,17 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useMediaQuery, AppBar, Toolbar, IconButton } from '@mui/material'
+import {
+  useMediaQuery,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+} from '@mui/material'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import InstagramIcon from '@mui/icons-material/Instagram'
+import XIcon from '@mui/icons-material/X'
+import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -17,7 +27,6 @@ const profilePic = '/Images/logo-png.png'
 const profilePicCol = '/Images/logo-colored.png'
 
 function SubNav({ menuItems }: any) {
-  // const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const { isOpen } = useMenuStore((state) => state)
 
   return (
@@ -47,61 +56,21 @@ function SubNav({ menuItems }: any) {
     </Box>
   )
 }
-/*
-function MobileNav({ menuItems, isOpen }: any) {
-  // const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
-  return (
-    <Box
-      component="nav"
-      sx={{
-        background: 'white',
-        position: 'fixed',
-        top: { xs: '0', md: '91px' },
-        boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
-        py: '20px',
-        width: '100%',
-        px: '100px',
-        zIndex: 999,
-        opacity: isOpen ? 1 : 0,
-        transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
-        transition: 'opacity 0.4s, transform 0.4s',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        mt: { md: '0', xs: '90px' },
-        gap: { md: '18px', xs: '0' },
-        borderTop: '1px solid lightgray',
-      }}
-    >
-      <NavItems items={menuItems} />
-    </Box>
-  )
-}
-*/
-
-// function SubNav() {
-//   return <Box>SubNav</Box>
-// }
 
 function MobileNav({ menuItems }: any) {
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const { isOpen, open, close } = useMenuStore((state) => state)
+  const { isOpen } = useMenuStore((state) => state)
   return (
     <Box
       sx={{
         height: '100vh',
         width: '100%',
-        bgcolor: 'red',
         position: 'fixed',
         top: '0',
         zIndex: 999,
         transform: isOpen ? 'translateY(0%)' : 'translateY(-100%)',
-
-        background: 'white',
+        background: 'var(--brown)',
         boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
         py: '20px',
-        px: '100px',
         opacity: isOpen ? 1 : 0,
         transition: 'opacity 0.4s, transform 0.4s',
         display: 'flex',
@@ -110,9 +79,43 @@ function MobileNav({ menuItems }: any) {
         mt: { md: '0', xs: '90px' },
         gap: { md: '18px', xs: '0' },
         borderTop: '1px solid lightgray',
+        textAlign: 'center',
+        color: 'white',
       }}
     >
       <NavItems items={menuItems} />
+      <Box
+        sx={{
+          mt: '20px',
+          borderTop: '1px solid #fff',
+          borderBottom: '1px solid #fff',
+        }}
+      >
+        <Typography sx={{ mt: '20px' }}>Get in touch</Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            py: '20px',
+          }}
+        >
+          <Button sx={{ color: '#fff' }}>Email</Button>
+          <Button sx={{ color: '#fff' }}>Contact Number</Button>
+        </Box>
+        <Box
+          sx={{
+            display: { xs: 'flex', md: 'none' },
+            justifyContent: 'center',
+            my: '30px',
+            gap: '20px',
+          }}
+        >
+          <FacebookRoundedIcon />
+          <XIcon />
+          <InstagramIcon />
+          <WhatsAppIcon />
+        </Box>
+      </Box>
     </Box>
   )
 }
@@ -133,8 +136,14 @@ function Header() {
 
   const handleScroll = () => {
     const scrollTop = window.scrollY
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto'
     // const resizeWindow = window.innerWidth
     setIsScrolled(scrollTop > 0)
+  }
+  if (isOpen && lessThanMd) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = 'auto'
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleResize = () => {
@@ -151,12 +160,6 @@ function Header() {
       window.removeEventListener('resize', handleResize)
     }
   }, [isScrolled, lessThanMd, handleResize])
-
-  // useEffect(() => {
-  //   if (!lessThanMd) {
-  //     toggleMenu()
-  //   }
-  // }, [lessThanMd, toggleMenu])
 
   useEffect(() => {
     if (isScrolled) {
@@ -181,6 +184,7 @@ function Header() {
             : 'none',
           width: '100%',
           background: isScrolled ? 'white' : 'var(--brown)',
+          transition: 'all ease .5s',
         }}
       >
         <Toolbar

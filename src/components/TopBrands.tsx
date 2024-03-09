@@ -3,7 +3,13 @@
 
 'use client'
 
-import { Box, Typography, TextField, Container } from '@mui/material'
+import {
+  Box,
+  Typography,
+  TextField,
+  Container,
+  IconButton,
+} from '@mui/material'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -235,6 +241,9 @@ export default function TopBrands() {
             position: 'relative',
             bgcolor: 'var(--blue)',
             textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
           <Image
@@ -256,7 +265,44 @@ export default function TopBrands() {
           >
             Subscribe to get the latest news and offers by Lovely Maldives
           </Typography>
-          <Box>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              mt: '20px',
+              width: { xs: '90%', md: '60%' },
+            }}
+          >
+            <TextField
+              id="outlined-multiline-flexible"
+              label="Enter email address"
+              multiline
+              className="input"
+              sx={{
+                borderRadius: '10px',
+                background: 'white',
+                width: '100%',
+              }}
+            />
+            <IconButton
+              aria-label="subscribe"
+              sx={{
+                position: 'absolute',
+                right: { xs: '20px', md: '22%' },
+                // transform: 'translateY(-50%)',
+                // bgcolor: 'primary.main',
+                color: 'primary.main',
+                borderRadius: '0 10px 10px 0',
+                '&:hover': {
+                  color: 'primary.dark',
+                  background: 'none',
+                },
+              }}
+            >
+              <SendIcon />
+            </IconButton>
+          </Box>
+          {/* <Box>
             <TextField
               id="outlined-multiline-flexible"
               label="Enter email adress"
@@ -264,7 +310,7 @@ export default function TopBrands() {
               className="input"
               // maxRows={10}
               sx={{
-                bgcolor: 'white',
+                // bgcolor: 'white',
                 mt: '20px',
                 borderRadius: '10px',
                 width: '60%',
@@ -273,14 +319,11 @@ export default function TopBrands() {
             />
             <SendIcon
               sx={{
-                position: 'absolute',
-                top: { xs: '70%', md: '56%' },
                 cursor: 'pointer',
-                right: '22%',
-                color: 'var(--blue)',
+                // color: 'var(--blue)',
               }}
             />
-          </Box>
+          </Box> */}
         </Box>
       </Box>
     </Container>
