@@ -136,14 +136,18 @@ function Header() {
 
   const handleScroll = () => {
     const scrollTop = window.scrollY
-    document.body.style.overflow = isOpen ? 'hidden' : 'auto'
+    if (typeof window !== 'undefined') {
+      document.body.style.overflow = isOpen ? 'hidden' : 'auto'
+    }
     // const resizeWindow = window.innerWidth
     setIsScrolled(scrollTop > 0)
   }
-  if (isOpen && lessThanMd) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = 'auto'
+  if (typeof window !== 'undefined') {
+    if (isOpen && lessThanMd) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleResize = () => {
