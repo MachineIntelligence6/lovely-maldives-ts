@@ -63,7 +63,7 @@ export const data = [
     image: exploreImg3,
   },
 ]
-function SampleNextArrow(props: any) {
+export function SampleNextArrow(props: any) {
   const { className, style, onClick } = props
   return (
     <ArrowForwardIosIcon
@@ -82,7 +82,7 @@ function SampleNextArrow(props: any) {
   )
 }
 
-function SamplePrevArrow(props: any) {
+export function SamplePrevArrow(props: any) {
   const { className, style, onClick } = props
   return (
     <ArrowBackIosNewIcon

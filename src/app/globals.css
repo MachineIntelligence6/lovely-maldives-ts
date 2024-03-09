@@ -250,9 +250,9 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#967F5D', endColorstr='#967f5d',GradientType=0 ); /* IE6-9 */
 }
 @media screen and (min-width: 900px) and (max-width: 1024px) {
-  .exploreImges {
+  /* .exploreImges {
     width: 250px;
-  }
+  } */
   .sideTree {
     /* height:55% ; */
     right: -20%;
