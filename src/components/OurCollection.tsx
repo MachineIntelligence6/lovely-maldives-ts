@@ -78,6 +78,7 @@ export default function OurCollection({
           color: 'var(--white)',
           textAlign: 'center',
           mt: { xs: '60px', md: '120px' },
+          textTransform: 'uppercase',
         }}
       >
         {heading}

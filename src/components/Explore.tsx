@@ -110,6 +110,7 @@ export default function Explore() {
           fontSize: { xs: '22px', md: '30px' },
           color: 'var(--brown)',
           textAlign: 'center',
+          textTransform: 'uppercase',
         }}
       >
         Explore A World Of Wonders

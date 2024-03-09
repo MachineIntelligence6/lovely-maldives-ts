@@ -136,17 +136,18 @@ function Header() {
 
   const handleScroll = () => {
     const scrollTop = window.scrollY
-    if (typeof window !== 'undefined') {
-      document.body.style.overflow = isOpen ? 'hidden' : 'auto'
-    }
-    // const resizeWindow = window.innerWidth
     setIsScrolled(scrollTop > 0)
   }
   if (typeof window !== 'undefined') {
+    const { body } = document
+    const scrollBarWidth = window.innerWidth - body.clientWidth
+
     if (isOpen && lessThanMd) {
-      document.body.style.overflow = 'hidden'
+      body.style.paddingRight = `${scrollBarWidth}px`
+      body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = 'auto'
+      body.style.paddingRight = '0'
+      body.style.overflow = 'initial'
     }
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -180,7 +181,6 @@ function Header() {
       <AppBar
         className={isScrolled ? 'scrolled' : ''}
         sx={{
-          justifyContent: 'center',
           boxShadow: isScrolled
             ? isOpen
               ? 'none'
@@ -200,7 +200,7 @@ function Header() {
             py: '12px',
           }}
         >
-          <Box sx={{ visibility: { md: 'visible', xs: 'hidden' } }}>
+          <Box sx={{ display: { md: 'block', xs: 'none' } }}>
             <IconButton
               className="menuBtn"
               disableRipple

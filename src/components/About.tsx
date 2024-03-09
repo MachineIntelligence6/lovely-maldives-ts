@@ -67,6 +67,7 @@ export default function About() {
                 fontSize: { xs: '22px', md: '30px' },
                 fontWeight: '400',
                 textAlign: 'center',
+                textTransform: 'uppercase',
                 color: 'var(--brown)',
               }}
             >
@@ -124,7 +125,8 @@ export default function About() {
               >
                 <Typography
                   sx={{
-                    pl: '20px',
+                    pr: '20px',
+                    textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '18%', md: '20%' },
                     width: '50%',
@@ -135,6 +137,7 @@ export default function About() {
                 <Typography
                   sx={{
                     pl: '20px',
+                    textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '18%', md: '20%' },
                     width: '50%',
@@ -144,7 +147,8 @@ export default function About() {
                 </Typography>
                 <Typography
                   sx={{
-                    pl: '20px',
+                    pr: '20px',
+                    textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '16%', md: '18%' },
                     width: '50%',
@@ -155,6 +159,7 @@ export default function About() {
                 <Typography
                   sx={{
                     pl: '20px',
+                    textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '16%', md: '18%' },
                     width: '50%',
