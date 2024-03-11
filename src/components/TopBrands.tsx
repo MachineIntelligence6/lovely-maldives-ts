@@ -88,7 +88,7 @@ export default function TopBrands() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          // centerPadding: '20px',
+          centerPadding: '90px',
           centerMode: true,
         },
       },
@@ -113,59 +113,57 @@ export default function TopBrands() {
           mt: { md: '60px', xs: '40px' },
         }}
       >
-        <Box sx={{ px: { xs: '20px' } }}>
-          <Slider {...settings}>
-            {datas.map((data, index) => (
-              <Box key={index}>
-                <Box
-                  className="brandSlider"
+        <Slider {...settings}>
+          {datas.map((data, index) => (
+            <Box key={index}>
+              <Box
+                className="brandSlider"
+                sx={{
+                  width: { xs: '93%', md: '85%' },
+                  height: { xs: '250px', md: '220px' },
+                  background: 'var(--brown)',
+                  color: 'white',
+                  textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'space-around',
+                  pb: 2,
+                }}
+              >
+                <Typography
                   sx={{
-                    width: { xs: '93%', md: '85%' },
-                    height: { xs: '150px', md: '220px' },
-                    background: 'var(--brown)',
-                    color: 'white',
+                    pt: '50px',
+                    fontSize: '18px',
+                    fontWeight: 600,
+                    width: { xs: '100px', md: '150px' },
                     textAlign: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'space-around',
-                    pb: 2,
                   }}
                 >
-                  <Typography
-                    sx={{
-                      pt: '50px',
-                      fontSize: '18px',
-                      fontWeight: 600,
-                      width: { xs: '100px', md: '150px' },
-                      textAlign: 'center',
-                    }}
-                  >
-                    {data.title}
+                  {data.title}
+                </Typography>
+                <Box
+                  sx={{
+                    fontSize: '12px',
+                    fontWeight: 200,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mt: '20px',
+                  }}
+                >
+                  <Typography sx={{ fontSize: '18px', fontWeight: 200 }}>
+                    {data.starNum}
                   </Typography>
-                  <Box
-                    sx={{
-                      fontSize: '12px',
-                      fontWeight: 200,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      mt: '20px',
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '18px', fontWeight: 200 }}>
-                      {data.starNum}
-                    </Typography>
-                    <StarRateIcon sx={{ fontSize: '18px' }} />
-                    <Typography sx={{ fontSize: '12px', fontWeight: 200 }}>
-                      {data.description}
-                    </Typography>
-                  </Box>
+                  <StarRateIcon sx={{ fontSize: '18px' }} />
+                  <Typography sx={{ fontSize: '12px', fontWeight: 200 }}>
+                    {data.description}
+                  </Typography>
                 </Box>
               </Box>
-            ))}
-          </Slider>
-        </Box>
+            </Box>
+          ))}
+        </Slider>
         <Box
           sx={{
             mt: { xs: '40px', md: '60px' },

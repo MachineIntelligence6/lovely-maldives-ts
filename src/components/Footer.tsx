@@ -337,6 +337,7 @@ export default function Footer() {
             display: { xs: 'block', md: 'flex' },
             alignItems: 'center',
             borderBottom: { xs: '1px solid white', md: 'none' },
+            pb: { xs: 2.5, md: 0 },
           }}
         >
           <StyledImage

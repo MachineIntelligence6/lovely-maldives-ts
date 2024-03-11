@@ -1,7 +1,8 @@
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import { Box, Container } from '@mui/material'
 import Typography from '@mui/material/Typography'
-// import Image from 'next/image'
+import Image from 'next/image'
+import sparkle from '../../public/Images/Quarters.svg'
 
 export default function About() {
   return (
@@ -87,7 +88,7 @@ export default function About() {
               sx={{
                 py: '50px',
                 position: 'relative',
-                width: { xs: '300px', md: '500px' },
+                width: { xs: '300px', md: '700px' },
                 height: { xs: '300px', md: '400px' },
                 mx: 'auto',
                 mt: { md: '60px', xs: '40px' },
@@ -95,29 +96,47 @@ export default function About() {
             >
               <Box
                 sx={{
-                  borderRadius: '100% 100%',
-                  bgcolor: 'white',
-                  width: '7px',
+                  width: { xs: '100%', md: '700px' },
+                  height: { xs: '100%', md: '400px' },
                   position: 'absolute',
-                  top: '15%',
-                  bottom: '15%',
-                  left: '50%',
-                  boxShadow: '2px 5px 5px 1px rgba(0, 0, 0, 0.2)',
+                  top: 0,
+                  mx: 'auto',
                 }}
-              />
-              <Box
-                sx={{
-                  borderRadius: '100% 100%',
-                  bgcolor: 'white',
-                  width: '100%',
-                  height: '7px',
-                  position: 'absolute',
-                  top: '50%',
-                  right: '15%',
-                  left: '0%',
-                  boxShadow: '2px 5px 5px 1px rgba(0, 0, 0, 0.2)',
-                }}
-              />
+              >
+                <Image
+                  src={sparkle}
+                  alt="sparkle"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    backgroundPosition: 'fixed',
+                  }}
+                />
+                {/* <svg
+                  id="Layer_1"
+                  data-name="Layer 1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 100 1080 950"
+                >
+                  <polygon
+                    className="cls-1"
+                    points="544 540 540 818.72 536 540 544 540 544 540"
+                  />
+                  <polygon
+                    className="cls-1"
+                    points="536 540 540 261.28 544 540 536 540 536 540"
+                  />
+                  <polygon
+                    className="cls-1"
+                    points="540 544 261.28 540 540 536 540 544 540 544"
+                  />
+                  <polygon
+                    className="cls-1"
+                    points="540 536 818.72 540 540 544 540 536 540 536"
+                  />
+                </svg> */}
+              </Box>
+
               <Box
                 sx={{
                   display: 'flex',
@@ -125,11 +144,12 @@ export default function About() {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   color: 'white',
+                  textAlign: 'center',
                 }}
               >
                 <Typography
                   sx={{
-                    pr: '55px',
+                    // pr: '55px',
                     // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '18%', md: '20%' },
@@ -141,7 +161,7 @@ export default function About() {
                 <Typography
                   sx={{
                     pl: '55px',
-                    textAlign: 'right',
+                    textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '18%', md: '20%' },
                     width: '50%',
@@ -151,10 +171,10 @@ export default function About() {
                 </Typography>
                 <Typography
                   sx={{
-                    pr: '55px',
+                    // pr: '55px',
                     // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '16%', md: '18%' },
+                    pt: { xs: '16%', md: '10%' },
                     width: '50%',
                   }}
                 >
@@ -163,9 +183,9 @@ export default function About() {
                 <Typography
                   sx={{
                     pl: '55px',
-                    textAlign: 'right',
+                    textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '16%', md: '18%' },
+                    pt: { xs: '16%', md: '10%' },
                     width: '50%',
                   }}
                 >

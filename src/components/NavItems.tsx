@@ -20,7 +20,7 @@ function NavItems({ items }: any) {
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
         alignItems: 'center',
-        gap: { xs: '10px', md: '20px' },
+        gap: { xs: '20px', md: '20px' },
       }}
     >
       {items.map((item: any, index: number) => (

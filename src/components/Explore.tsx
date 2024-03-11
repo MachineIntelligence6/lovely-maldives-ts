@@ -101,7 +101,7 @@ export default function Explore() {
   return (
     <Container
       sx={{
-        px: { xs: '20px !important', md: '120px !important' },
+        px: { xs: '0px !important', md: '120px !important' },
         pt: { xs: '60px', md: '120px' },
       }}
     >
@@ -168,7 +168,7 @@ export default function Explore() {
                       left: 0,
                       width: '100%',
                       height: '100%',
-                      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                      backgroundColor: 'rgba(150, 127, 93, 0.5)',
                       zIndex: 1,
                     }}
                   />

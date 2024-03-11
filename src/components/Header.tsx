@@ -75,6 +75,7 @@ function MobileNav({ menuItems }: any) {
         transition: 'opacity 0.4s, transform 0.4s',
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'space-around',
         overflow: 'hidden',
         mt: { md: '0', xs: '90px' },
         gap: { md: '18px', xs: '0' },
@@ -206,7 +207,7 @@ function Header() {
               disableRipple
               sx={{
                 height: '50px',
-                mt: '20px',
+                mt: '35px',
                 px: '20px',
               }}
               title="Menu button"

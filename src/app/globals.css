@@ -281,6 +281,20 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   .readmore {
     font-size: 18px;
   }
+  .slick-prev {
+    left: -7px !important;
+  }
+  .slick-next {
+    right: -4px !important;
+  }
+  svg {
+    width: 700px;
+    height: 700px;
+  }
+  .cls-1 {
+    fill: '#fff';
+    width: '500px';
+  }
   .exploreSlider {
     left: 25%;
   }

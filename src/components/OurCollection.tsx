@@ -39,7 +39,7 @@ export default function OurCollection({
     autoplay: true,
     autoplaySpeed: 4000,
     centerMode: true,
-    centerPadding: '120px',
+    centerPadding: '250px',
     responsive: [
       {
         breakpoint: 1024,
@@ -107,7 +107,7 @@ export default function OurCollection({
                 sx={{
                   width: { xs: '100%', md: '95%' },
                   height: '100%',
-                  bgcolor: 'rgba(150,127,93,0.3)',
+                  bgcolor: 'rgba(150, 127, 93,0.5)',
                   position: 'absolute',
                   top: '0',
                   left: '0',
