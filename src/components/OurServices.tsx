@@ -108,7 +108,6 @@ export function SamplePrevArrow(props: any) {
         width: '35px !important',
         height: '35px !important',
         top: '41% !important',
-        left: { xs: '10px', md: '0px' },
       }}
       onClick={onClick}
     />

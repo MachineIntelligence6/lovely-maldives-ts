@@ -282,10 +282,15 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     font-size: 18px;
   }
   .slick-prev {
-    left: -7px !important;
+    left: -4px !important;
+    overflow: hidden;
+  }
+  .slick-slider {
+    overflow: hidden;
   }
   .slick-next {
     right: -4px !important;
+    overflow: 'hidden';
   }
   svg {
     width: 700px;
