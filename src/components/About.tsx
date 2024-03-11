@@ -88,7 +88,7 @@ export default function About() {
               sx={{
                 py: '50px',
                 position: 'relative',
-                width: { xs: '300px', md: '700px' },
+                width: { xs: '300px', md: '500px' },
                 height: { xs: '300px', md: '400px' },
                 mx: 'auto',
                 mt: { md: '60px', xs: '40px' },
@@ -96,7 +96,7 @@ export default function About() {
             >
               <Box
                 sx={{
-                  width: { xs: '100%', md: '700px' },
+                  width: { xs: '100%', md: '500px' },
                   height: { xs: '100%', md: '400px' },
                   position: 'absolute',
                   top: 0,
