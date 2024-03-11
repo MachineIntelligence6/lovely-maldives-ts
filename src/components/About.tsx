@@ -2,7 +2,7 @@ import Diversity2Icon from '@mui/icons-material/Diversity2'
 import { Box, Container } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
-import sparkle from '../../public/Images/Quarters.svg'
+import sparkle from '../../public/Images/Quarters2.svg'
 
 export default function About() {
   return (
@@ -97,10 +97,12 @@ export default function About() {
               <Box
                 sx={{
                   width: { xs: '100%', md: '500px' },
-                  height: { xs: '100%', md: '400px' },
+                  height: { xs: '100%', md: '300px' },
                   position: 'absolute',
-                  top: 0,
+                  top: '50%',
+                  left: '50%',
                   mx: 'auto',
+                  transform: 'translate(-50% ,-50%)',
                 }}
               >
                 <Image

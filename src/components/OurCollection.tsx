@@ -105,7 +105,7 @@ export default function OurCollection({
               />
               <Box
                 sx={{
-                  width: { xs: '100%', md: '95%' },
+                  width: { xs: '100%', md: '88%' },
                   height: '100%',
                   bgcolor: 'rgba(150, 127, 93,0.5)',
                   position: 'absolute',
@@ -118,7 +118,7 @@ export default function OurCollection({
               <Box
                 className="collectionText"
                 sx={{
-                  width: { xs: '100%', md: '95%' },
+                  width: { xs: '100%', md: '88%' },
                   height: '40%',
                   display: 'flex',
                   flexDirection: 'column',
