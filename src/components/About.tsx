@@ -78,14 +78,15 @@ export default function About() {
             sx={{
               width: '100%',
               background: 'var(--brown)',
-              borderRadius: '25px',
+              borderRadius: { xs: '0', md: '25px' },
+              mx: 'auto',
             }}
           >
             <Box
               sx={{
                 py: '50px',
                 position: 'relative',
-                width: { xs: '300px', md: '400px' },
+                width: { xs: '300px', md: '500px' },
                 height: { xs: '300px', md: '400px' },
                 mx: 'auto',
                 mt: { md: '60px', xs: '40px' },
@@ -95,7 +96,7 @@ export default function About() {
                 sx={{
                   borderRadius: '100% 100%',
                   bgcolor: 'white',
-                  width: '5px',
+                  width: '7px',
                   position: 'absolute',
                   top: '15%',
                   bottom: '15%',
@@ -107,7 +108,7 @@ export default function About() {
                   borderRadius: '100% 100%',
                   bgcolor: 'white',
                   width: '100%',
-                  height: '5px',
+                  height: '7px',
                   position: 'absolute',
                   top: '50%',
                   right: '15%',
@@ -125,7 +126,7 @@ export default function About() {
               >
                 <Typography
                   sx={{
-                    pr: '20px',
+                    pr: '55px',
                     textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '18%', md: '20%' },
@@ -136,7 +137,7 @@ export default function About() {
                 </Typography>
                 <Typography
                   sx={{
-                    pl: '20px',
+                    pl: '55px',
                     textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '18%', md: '20%' },
@@ -147,7 +148,7 @@ export default function About() {
                 </Typography>
                 <Typography
                   sx={{
-                    pr: '20px',
+                    pr: '55px',
                     textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '16%', md: '18%' },
@@ -158,7 +159,7 @@ export default function About() {
                 </Typography>
                 <Typography
                   sx={{
-                    pl: '20px',
+                    pl: '55px',
                     textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '16%', md: '18%' },

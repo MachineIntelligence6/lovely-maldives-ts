@@ -56,7 +56,7 @@ export default function OurCollection({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '90px',
+          centerPadding: '0px',
           initialSlide: 1,
         },
       },
@@ -65,7 +65,7 @@ export default function OurCollection({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '60px',
+          centerPadding: '0px',
         },
       },
     ],
@@ -105,7 +105,7 @@ export default function OurCollection({
               />
               <Box
                 sx={{
-                  width: { xs: '90%', md: '85%' },
+                  width: { xs: '100%', md: '95%' },
                   height: '100%',
                   bgcolor: 'rgba(150,127,93,0.3)',
                   position: 'absolute',
@@ -118,7 +118,7 @@ export default function OurCollection({
               <Box
                 className="collectionText"
                 sx={{
-                  width: { xs: '90%', md: '85%' },
+                  width: { xs: '100%', md: '95%' },
                   height: '40%',
                   display: 'flex',
                   flexDirection: 'column',

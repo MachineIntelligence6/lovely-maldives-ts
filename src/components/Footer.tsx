@@ -348,9 +348,7 @@ export default function Footer() {
               display: { xs: 'none', md: 'block' },
             }}
           />
-          <Typography
-            sx={{ px: { md: '50px' }, textAlign: 'center', mx: '30px' }}
-          >
+          <Typography sx={{ px: { md: '50px' }, textAlign: 'center' }}>
             {' '}
             &copy; 2024 Lovely Maldives. All rights reserved.
           </Typography>

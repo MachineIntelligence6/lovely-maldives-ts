@@ -62,6 +62,7 @@ export default function TopBrands() {
     slidesToShow: 5,
     slidesToScroll: 1,
     arrows: false,
+
     responsive: [
       {
         breakpoint: 1024,
@@ -78,13 +79,17 @@ export default function TopBrands() {
           slidesToShow: 3,
           slidesToScroll: 1,
           initialSlide: 1,
+          centerPadding: '90px',
+          centerMode: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
+          // centerPadding: '20px',
+          centerMode: true,
         },
       },
     ],
@@ -160,85 +165,87 @@ export default function TopBrands() {
               </Box>
             ))}
           </Slider>
-          <Box
-            sx={{
-              mt: { xs: '40px', md: '60px' },
-              width: { xs: '100%', md: '70%' },
-              height: { xs: '350px', md: '450px' },
-              mx: 'auto',
-              borderRadius: { xs: '10px', md: '70px' },
-              position: 'relative',
-              textAlign: 'center',
-            }}
-          >
-            <Image
-              src={journeyImg}
-              alt="journey"
-              className="imgRadius"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-
-            <Box
-              sx={{
-                width: '100%',
-                height: { xs: '350px', md: '450px' },
-                borderRadius: { xs: '10px', md: '70px' },
-                bgcolor: 'rgba(150,127,93,0.5)',
-                position: 'absolute',
-                top: '0',
-                left: '0',
-              }}
-            >
-              <Typography
-                sx={{
-                  pt: { xs: '25%', md: '16%' },
-                  color: 'white',
-                  fontSize: { md: '45px', xs: '35px' },
-                  fontWeight: 600,
-                  width: '300px',
-                  textAlign: 'center',
-                  mx: 'auto',
-                }}
-              >
-                Let’s Plan Your Journey
-              </Typography>
-              <Typography
-                sx={{
-                  pt: '5%',
-                  color: 'white',
-                  fontSize: { xs: '22px', md: '30px' },
-                  fontWeight: 600,
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                Say Hi on
-                <Link
-                  href="/"
-                  style={{
-                    textDecoration: 'none',
-                    color: 'white',
-                    paddingBottom: '5px',
-                    borderBottom: '1px solid white',
-                    marginLeft: '10px',
-                  }}
-                >
-                  {' '}
-                  WhatsApp{' '}
-                </Link>
-                <KeyboardArrowRightIcon sx={{ fontSize: '45px' }} />
-              </Typography>
-            </Box>
-          </Box>
         </Box>
         <Box
           sx={{
             mt: { xs: '40px', md: '60px' },
-            width: { xs: '100%', md: '55%' },
-            height: { xs: '250px', md: '350px' },
+            width: { xs: '100%', md: '70%' },
+            height: { xs: '350px', md: '450px' },
             mx: 'auto',
+            borderRadius: { xs: '10px', md: '70px' },
+            position: 'relative',
+            textAlign: 'center',
+          }}
+        >
+          <Image
+            src={journeyImg}
+            alt="journey"
+            className="imgRadius"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+
+          <Box
+            sx={{
+              width: '100%',
+              height: { xs: '350px', md: '450px' },
+              borderRadius: { xs: '0px', md: '70px' },
+              bgcolor: 'rgba(150,127,93,0.5)',
+              position: 'absolute',
+              top: '0',
+              left: '0',
+            }}
+          >
+            <Typography
+              sx={{
+                pt: { xs: '25%', md: '16%' },
+                color: 'white',
+                fontSize: { md: '45px', xs: '35px' },
+                fontWeight: 600,
+                width: '300px',
+                textAlign: 'center',
+                mx: 'auto',
+              }}
+            >
+              Let’s Plan Your Journey
+            </Typography>
+            <Typography
+              sx={{
+                pt: '5%',
+                color: 'white',
+                fontSize: { xs: '22px', md: '30px' },
+                fontWeight: 600,
+                justifyContent: 'center',
+                textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              Say Hi on
+              <Link
+                href="/"
+                style={{
+                  textDecoration: 'none',
+                  color: 'white',
+                  paddingBottom: '5px',
+                  borderBottom: '1px solid white',
+                  marginLeft: '10px',
+                }}
+              >
+                {' '}
+                WhatsApp{' '}
+              </Link>
+              <KeyboardArrowRightIcon sx={{ fontSize: '45px' }} />
+            </Typography>
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            mt: { xs: '40px', md: '60px' },
+            width: { xs: '100%', md: '55%' },
+            // height: { xs: '250px', md: '350px' },
+            mx: 'auto',
+            py: '50px',
             borderRadius: { xs: '0', md: '25px' },
             position: 'relative',
             bgcolor: 'var(--blue)',
@@ -253,7 +260,7 @@ export default function TopBrands() {
             height={31}
             width={40}
             alt="Logo subscribe mailing"
-            style={{ marginTop: '8%' }}
+            // style={{ marginTop: '8%' }}
           />
           <Typography
             sx={{

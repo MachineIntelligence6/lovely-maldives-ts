@@ -157,7 +157,7 @@ body {
 
 } */
 .collectionImg {
-  width: 85%;
+  width: 95%;
 }
 .buttonHover:hover {
   background-color: var(--blue) !important ;
@@ -171,6 +171,7 @@ body {
 }
 .imgRadius {
   border-radius: 70px;
+  background-attachment: unset;
 }
 
 label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
@@ -289,10 +290,11 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     right: -35%;
   }
   .imgRadius {
-    border-radius: 10px;
+    border-radius: 0px;
+    background-attachment: fixed;
   }
   .collectionImg {
-    width: 90%;
+    width: 100%;
   }
   .blogImg {
     width: 100%;
