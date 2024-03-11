@@ -33,13 +33,13 @@ export default function OurCollection({
     dots: true,
     infinite: true,
     speed: 200,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 4000,
     centerMode: true,
-    centerPadding: '60px',
+    centerPadding: '120px',
     responsive: [
       {
         breakpoint: 1024,
@@ -48,7 +48,7 @@ export default function OurCollection({
           slidesToScroll: 1,
           infinite: true,
           dots: true,
-          centerPadding: '90px',
+          centerPadding: '100px',
         },
       },
       {
@@ -56,7 +56,7 @@ export default function OurCollection({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '0px',
+          centerPadding: '90px',
           initialSlide: 1,
         },
       },
@@ -65,13 +65,13 @@ export default function OurCollection({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '0px',
+          centerPadding: '60px',
         },
       },
     ],
   }
   return (
-    <Container sx={{ maxWidth: '100% !important', px: '20px !important' }}>
+    <Container sx={{ maxWidth: '100% !important', px: '0px !important' }}>
       <Typography
         sx={{
           fontSize: { xs: '22px', md: '30px' },
@@ -105,7 +105,7 @@ export default function OurCollection({
               />
               <Box
                 sx={{
-                  width: { xs: '100%', md: '85%' },
+                  width: { xs: '90%', md: '85%' },
                   height: '100%',
                   bgcolor: 'rgba(150,127,93,0.3)',
                   position: 'absolute',
@@ -118,7 +118,7 @@ export default function OurCollection({
               <Box
                 className="collectionText"
                 sx={{
-                  width: { xs: '100%', md: '85%' },
+                  width: { xs: '90%', md: '85%' },
                   height: '40%',
                   display: 'flex',
                   flexDirection: 'column',
@@ -164,7 +164,7 @@ export default function OurCollection({
               color: 'white',
               width: 'auto',
               mx: 'auto',
-              mt: { xs: '40px', md: '120px' },
+              mt: { xs: '40px', md: '60px' },
               px: { xs: '40px', md: '80px' },
               py: { xs: 1, md: 2 },
               textAlign: 'center',

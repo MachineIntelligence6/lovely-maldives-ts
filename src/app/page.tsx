@@ -81,7 +81,7 @@ export default function Home() {
               Read More{' '}
             </Link>
             <KeyboardArrowRightIcon
-              sx={{ fontSize: { xs: '24px', md: '30px' } }}
+              sx={{ fontSize: { xs: '24px', md: '30px' }, mt: '7px' }}
             />
           </Box>
         </Box>

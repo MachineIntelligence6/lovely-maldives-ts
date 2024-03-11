@@ -90,7 +90,7 @@ export default function TopBrands() {
     ],
   }
   return (
-    <Container sx={{ px: { xs: '20px !important', md: '120px !important' } }}>
+    <Container sx={{ px: { xs: '0px !important', md: '120px !important' } }}>
       <Typography
         sx={{
           fontSize: { xs: '22px', md: '30px' },
@@ -108,136 +108,138 @@ export default function TopBrands() {
           mt: { md: '60px', xs: '40px' },
         }}
       >
-        <Slider {...settings}>
-          {datas.map((data, index) => (
-            <Box key={index}>
-              <Box
-                className="brandSlider"
-                sx={{
-                  width: { xs: '93%', md: '85%' },
-                  height: { xs: '150px', md: '220px' },
-                  background: 'var(--brown)',
-                  color: 'white',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'space-around',
-                  pb: 2,
-                }}
-              >
-                <Typography
-                  sx={{
-                    pt: '50px',
-                    fontSize: '18px',
-                    fontWeight: 600,
-                    width: { xs: '100px', md: '150px' },
-                    textAlign: 'center',
-                  }}
-                >
-                  {data.title}
-                </Typography>
+        <Box sx={{ px: { xs: '20px' } }}>
+          <Slider {...settings}>
+            {datas.map((data, index) => (
+              <Box key={index}>
                 <Box
+                  className="brandSlider"
                   sx={{
-                    fontSize: '12px',
-                    fontWeight: 200,
+                    width: { xs: '93%', md: '85%' },
+                    height: { xs: '150px', md: '220px' },
+                    background: 'var(--brown)',
+                    color: 'white',
+                    textAlign: 'center',
                     display: 'flex',
+                    flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    mt: '20px',
+                    justifyContent: 'space-around',
+                    pb: 2,
                   }}
                 >
-                  <Typography sx={{ fontSize: '18px', fontWeight: 200 }}>
-                    {data.starNum}
+                  <Typography
+                    sx={{
+                      pt: '50px',
+                      fontSize: '18px',
+                      fontWeight: 600,
+                      width: { xs: '100px', md: '150px' },
+                      textAlign: 'center',
+                    }}
+                  >
+                    {data.title}
                   </Typography>
-                  <StarRateIcon sx={{ fontSize: '18px' }} />
-                  <Typography sx={{ fontSize: '12px', fontWeight: 200 }}>
-                    {data.description}
-                  </Typography>
+                  <Box
+                    sx={{
+                      fontSize: '12px',
+                      fontWeight: 200,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      mt: '20px',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '18px', fontWeight: 200 }}>
+                      {data.starNum}
+                    </Typography>
+                    <StarRateIcon sx={{ fontSize: '18px' }} />
+                    <Typography sx={{ fontSize: '12px', fontWeight: 200 }}>
+                      {data.description}
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          ))}
-        </Slider>
-        <Box
-          sx={{
-            mt: { xs: '40px', md: '120px' },
-            width: { xs: '100%', md: '70%' },
-            height: { xs: '350px', md: '450px' },
-            mx: 'auto',
-            borderRadius: { xs: '10px', md: '70px' },
-            position: 'relative',
-            textAlign: 'center',
-          }}
-        >
-          <Image
-            src={journeyImg}
-            alt="journey"
-            className="imgRadius"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-
+            ))}
+          </Slider>
           <Box
             sx={{
-              width: '100%',
+              mt: { xs: '40px', md: '60px' },
+              width: { xs: '100%', md: '70%' },
               height: { xs: '350px', md: '450px' },
+              mx: 'auto',
               borderRadius: { xs: '10px', md: '70px' },
-              bgcolor: 'rgba(150,127,93,0.5)',
-              position: 'absolute',
-              top: '0',
-              left: '0',
+              position: 'relative',
+              textAlign: 'center',
             }}
           >
-            <Typography
+            <Image
+              src={journeyImg}
+              alt="journey"
+              className="imgRadius"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+
+            <Box
               sx={{
-                pt: { xs: '25%', md: '16%' },
-                color: 'white',
-                fontSize: { md: '45px', xs: '35px' },
-                fontWeight: 600,
-                width: '300px',
-                textAlign: 'center',
-                mx: 'auto',
+                width: '100%',
+                height: { xs: '350px', md: '450px' },
+                borderRadius: { xs: '10px', md: '70px' },
+                bgcolor: 'rgba(150,127,93,0.5)',
+                position: 'absolute',
+                top: '0',
+                left: '0',
               }}
             >
-              Let’s Plan Your Journey
-            </Typography>
-            <Typography
-              sx={{
-                pt: '5%',
-                color: 'white',
-                fontSize: { xs: '22px', md: '30px' },
-                fontWeight: 600,
-                justifyContent: 'center',
-                textAlign: 'center',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              Say Hi on
-              <Link
-                href="/"
-                style={{
-                  textDecoration: 'none',
+              <Typography
+                sx={{
+                  pt: { xs: '25%', md: '16%' },
                   color: 'white',
-                  paddingBottom: '5px',
-                  borderBottom: '1px solid white',
-                  marginLeft: '10px',
+                  fontSize: { md: '45px', xs: '35px' },
+                  fontWeight: 600,
+                  width: '300px',
+                  textAlign: 'center',
+                  mx: 'auto',
                 }}
               >
-                {' '}
-                WhatsApp{' '}
-              </Link>
-              <KeyboardArrowRightIcon sx={{ fontSize: '45px' }} />
-            </Typography>
+                Let’s Plan Your Journey
+              </Typography>
+              <Typography
+                sx={{
+                  pt: '5%',
+                  color: 'white',
+                  fontSize: { xs: '22px', md: '30px' },
+                  fontWeight: 600,
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                Say Hi on
+                <Link
+                  href="/"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'white',
+                    paddingBottom: '5px',
+                    borderBottom: '1px solid white',
+                    marginLeft: '10px',
+                  }}
+                >
+                  {' '}
+                  WhatsApp{' '}
+                </Link>
+                <KeyboardArrowRightIcon sx={{ fontSize: '45px' }} />
+              </Typography>
+            </Box>
           </Box>
         </Box>
         <Box
           sx={{
-            mt: { xs: '40px', md: '120px' },
-            width: { xs: '90%', md: '55%' },
+            mt: { xs: '40px', md: '60px' },
+            width: { xs: '100%', md: '55%' },
             height: { xs: '250px', md: '350px' },
             mx: 'auto',
-            borderRadius: '25px',
+            borderRadius: { xs: '0', md: '25px' },
             position: 'relative',
             bgcolor: 'var(--blue)',
             textAlign: 'center',
@@ -275,7 +277,7 @@ export default function TopBrands() {
           >
             <TextField
               id="outlined-multiline-flexible"
-              label="Enter email address"
+              placeholder="Enter email address"
               multiline
               className="input"
               sx={{

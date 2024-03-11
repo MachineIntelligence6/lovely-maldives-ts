@@ -207,6 +207,7 @@ function Header() {
               sx={{
                 height: '50px',
                 mt: '20px',
+                px: '20px',
               }}
               title="Menu button"
               onClick={toggleMenu}

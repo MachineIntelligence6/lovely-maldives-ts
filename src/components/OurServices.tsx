@@ -33,12 +33,12 @@ import exploreImg4 from '../../public/Images/explorImg5.jpg'
 
 export const data = [
   {
-    title: 'TRAVEL COUNSELING',
+    title: 'TRAVEL COUNSELING ',
     icon: <WifiIcon sx={{ fontSize: '40px' }} />,
     image: exploreImg1,
   },
   {
-    title: 'VIP AIRPORT CONCIERGE SERVICE',
+    title: 'VIP YOUR CITY',
     icon: <NoteAltIcon sx={{ fontSize: '40px' }} />,
     image: exploreImg3,
   },
@@ -53,7 +53,7 @@ export const data = [
     image: exploreImg4,
   },
   {
-    title: 'TRAVEL COUNSELING',
+    title: 'VIP AIRPORT CONCIERGE SERVICE',
     icon: <LaptopMacIcon sx={{ fontSize: '40px' }} />,
     image: exploreImg1,
   },
@@ -75,7 +75,7 @@ export function SampleNextArrow(props: any) {
         fontSize: '35px !important ',
         width: '35px !important',
         height: '35px !important',
-        top: '44% !important',
+        top: '41% !important',
       }}
       onClick={onClick}
     />
@@ -94,7 +94,7 @@ export function SamplePrevArrow(props: any) {
         fontSize: ' 35px !important ',
         width: '35px !important',
         height: '35px !important',
-        top: '44% !important',
+        top: '41% !important',
       }}
       onClick={onClick}
     />
@@ -294,12 +294,13 @@ export default function OurServices() {
                       justifyContent: 'center',
                       alignItems: 'center',
                       height: '100%',
+                      py: '45px',
                     }}
                   >
                     <Typography>{item.icon}</Typography>
                     <Typography
                       sx={{
-                        mt: '10px',
+                        mt: '20px',
                         fontSize: '16px',
                         textAlign: 'center',
                         width: '100px',

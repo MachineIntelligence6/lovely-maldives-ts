@@ -25,13 +25,13 @@ export default function Footer() {
         px: { xs: '24px', md: '120px' },
         bgcolor: 'var(--brown)',
         color: 'white',
-        mt: '60px',
+        mt: { xs: '0px', md: '60px' },
       }}
     >
       <Box
         sx={{
           display: { xs: 'block', md: 'flex' },
-          justifyContent: 'space-between',
+          justifyContent: 'space-around',
           textAlign: { xs: 'center', md: 'left' },
           pt: '60px',
         }}
@@ -326,7 +326,7 @@ export default function Footer() {
       <Box
         sx={{
           display: { xs: 'block', md: 'flex' },
-          justifyContent: 'space-between',
+          justifyContent: 'space-around',
           alignItems: 'center',
           mt: { xs: '30px', md: '60px' },
           pb: 2,

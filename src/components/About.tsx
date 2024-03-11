@@ -63,7 +63,7 @@ export default function About() {
           <Box>
             <Typography
               sx={{
-                mt: { xs: '40px', md: '120px' },
+                mt: { xs: '40px', md: '60px' },
                 fontSize: { xs: '22px', md: '30px' },
                 fontWeight: '400',
                 textAlign: 'center',
@@ -106,12 +106,12 @@ export default function About() {
                 sx={{
                   borderRadius: '100% 100%',
                   bgcolor: 'white',
-                  width: '70%',
+                  width: '100%',
                   height: '5px',
                   position: 'absolute',
                   top: '50%',
                   right: '15%',
-                  left: '15%',
+                  left: '0%',
                 }}
               />
               <Box
