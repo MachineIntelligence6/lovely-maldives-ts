@@ -86,7 +86,7 @@ export default function TopBrands() {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
           // centerPadding: '20px',
           centerMode: true,
@@ -279,7 +279,7 @@ export default function TopBrands() {
               display: 'flex',
               alignItems: 'center',
               mt: '20px',
-              width: { xs: '90%', md: '60%' },
+              width: { xs: '70%', md: '60%' },
             }}
           >
             <TextField
@@ -297,7 +297,7 @@ export default function TopBrands() {
               aria-label="subscribe"
               sx={{
                 position: 'absolute',
-                right: { xs: '20px', md: '22%' },
+                right: { xs: '70px', md: '22%' },
                 // transform: 'translateY(-50%)',
                 // bgcolor: 'primary.main',
                 color: 'primary.main',

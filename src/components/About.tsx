@@ -8,7 +8,7 @@ export default function About() {
     <div>
       <Container
         sx={{
-          px: { xs: '20px !important', md: '120px !important' },
+          px: { xs: '0px !important', md: '120px !important' },
           overflow: 'hidden',
         }}
       >
@@ -52,6 +52,7 @@ export default function About() {
                 fontWeight: '200',
                 mt: { xs: '30px', md: '60px' },
                 textAlign: 'justify',
+                px: { xs: '20px', md: '0' },
               }}
             >
               Lovely Maldives, a distinguished travel agency from the Maldives
@@ -101,6 +102,7 @@ export default function About() {
                   top: '15%',
                   bottom: '15%',
                   left: '50%',
+                  boxShadow: '2px 5px 5px 1px rgba(0, 0, 0, 0.2)',
                 }}
               />
               <Box
@@ -113,6 +115,7 @@ export default function About() {
                   top: '50%',
                   right: '15%',
                   left: '0%',
+                  boxShadow: '2px 5px 5px 1px rgba(0, 0, 0, 0.2)',
                 }}
               />
               <Box
@@ -127,7 +130,7 @@ export default function About() {
                 <Typography
                   sx={{
                     pr: '55px',
-                    textAlign: 'right',
+                    // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '18%', md: '20%' },
                     width: '50%',
@@ -138,7 +141,7 @@ export default function About() {
                 <Typography
                   sx={{
                     pl: '55px',
-                    textAlign: 'left',
+                    textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '18%', md: '20%' },
                     width: '50%',
@@ -149,7 +152,7 @@ export default function About() {
                 <Typography
                   sx={{
                     pr: '55px',
-                    textAlign: 'right',
+                    // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '16%', md: '18%' },
                     width: '50%',
@@ -160,7 +163,7 @@ export default function About() {
                 <Typography
                   sx={{
                     pl: '55px',
-                    textAlign: 'left',
+                    textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '16%', md: '18%' },
                     width: '50%',

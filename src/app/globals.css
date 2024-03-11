@@ -246,6 +246,10 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   ); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#967F5D', endColorstr='#967f5d',GradientType=0 ); /* IE6-9 */
 }
+
+.css-13nykb7-MuiInputBase-root-MuiOutlinedInput-root {
+  padding: 10px !important;
+}
 @media screen and (min-width: 900px) and (max-width: 1024px) {
   /* .exploreImges {
     width: 250px;
