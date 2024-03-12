@@ -1,8 +1,8 @@
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import { Box, Container } from '@mui/material'
 import Typography from '@mui/material/Typography'
-// import Image from 'next/image'
-// import sparkle from '../../public/Images/Quarters-3.svg'
+import Image from 'next/image'
+import sparkle from '../../public/Images/Quarters-3.svg'
 
 export default function About() {
   return (
@@ -105,7 +105,7 @@ export default function About() {
                   transform: 'translate(-50% ,-50%)',
                 }}
               >
-                {/* <Image
+                <Image
                   src={sparkle}
                   alt="sparkle"
                   style={{
@@ -113,15 +113,15 @@ export default function About() {
                     height: '100%',
                     backgroundPosition: 'fixed',
                   }}
-                /> */}
-                <svg
+                />
+                {/* <svg
                   id="Layer_1"
                   data-name="Layer 1"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 1080 1080"
                   fill="white"
-                  width="500px"
-                  height="300px"
+                  width="100%"
+                  height="100%"
                 >
                   <polygon
                     className="cls-1"
@@ -139,7 +139,7 @@ export default function About() {
                     className="cls-1"
                     points="540 532.25 1080 540 540 547.75 540 532.25 540 532.25"
                   />
-                </svg>
+                </svg> */}
               </Box>
 
               <Box
