@@ -156,6 +156,7 @@ body {
     background-color:var(--darkBrown);
 
 } */
+
 .collectionImg {
   width: 88%;
 }
@@ -334,6 +335,11 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   }
   .latestImg {
     width: 100%;
+  }
+
+  .svgSparkle {
+    width: 100%;
+    height: 100%;
   }
 }
 

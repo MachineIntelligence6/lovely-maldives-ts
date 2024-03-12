@@ -1,8 +1,8 @@
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import { Box, Container } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import Image from 'next/image'
-import sparkle from '../../public/Images/Quarters-3.svg'
+// import Image from 'next/image'
+// import sparkle from '../../public/Images/Quarters-w.svg'
 
 export default function About() {
   return (
@@ -89,23 +89,23 @@ export default function About() {
                 py: '50px',
                 position: 'relative',
                 width: { xs: '300px', md: '500px' },
-                height: { xs: '300px', md: '400px' },
+                height: { xs: '400px', md: '500px' },
                 mx: 'auto',
                 mt: { md: '60px', xs: '40px' },
               }}
             >
               <Box
                 sx={{
-                  width: { xs: '100%', md: '500px' },
-                  height: { xs: '80%', md: '300px' },
+                  width: { xs: '300px', md: '500px' },
+                  height: { xs: '300px', md: '300px' },
                   position: 'absolute',
-                  top: '50%',
-                  left: '50%',
+                  top: { xs: '50%', md: '35%' },
+                  left: { xs: '50%', md: '50%' },
                   mx: 'auto',
                   transform: 'translate(-50% ,-50%)',
                 }}
               >
-                <Image
+                {/* <Image
                   src={sparkle}
                   alt="sparkle"
                   style={{
@@ -113,33 +113,41 @@ export default function About() {
                     height: '100%',
                     backgroundPosition: 'fixed',
                   }}
-                />
-                {/* <svg
+                /> */}
+                <svg
+                  version="1.1"
                   id="Layer_1"
-                  data-name="Layer 1"
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 1080 1080"
+                  // xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 1183.9 1080"
+                  // style="enable-background:new 0 0 1183.9 1080;"
+                  xmlSpace="preserve"
                   fill="white"
-                  width="100%"
-                  height="100%"
+                  className="svgSparkle"
                 >
-                  <polygon
-                    className="cls-1"
-                    points="547.75 540 540 1080 532.25 540 547.75 540 547.75 540"
-                  />
-                  <polygon
-                    className="cls-1"
-                    points="532.25 540 540 0 547.75 540 532.25 540 532.25 540"
-                  />
-                  <polygon
-                    className="cls-1"
-                    points="540 547.75 0 540 540 532.25 540 547.75 540 547.75"
-                  />
-                  <polygon
-                    className="cls-1"
-                    points="540 532.25 1080 540 540 547.75 540 532.25 540 532.25"
-                  />
-                </svg> */}
+                  <g>
+                    <polygon
+                      className="st0"
+                      points="599.7,540 591.9,1080 584.2,540 599.7,540 	"
+                    />
+                    <polygon
+                      className="st0"
+                      points="584.2,540 591.9,0 599.7,540 584.2,540 	"
+                    />
+                    <g>
+                      <polygon
+                        className="st0"
+                        points="591.9,547.8 0,540 591.9,532.2 591.9,547.8 		"
+                      />
+                      <polygon
+                        className="st0"
+                        points="591.9,532.2 1183.9,540 591.9,547.8 591.9,532.2 		"
+                      />
+                    </g>
+                  </g>
+                </svg>
               </Box>
 
               <Box
@@ -157,7 +165,7 @@ export default function About() {
                     // pr: '55px',
                     // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '18%', md: '15%' },
+                    pt: { xs: '28%', md: '25%' },
                     width: '50%',
                   }}
                 >
@@ -168,7 +176,7 @@ export default function About() {
                     pl: { md: '55px', xs: '40px' },
                     textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '18%', md: '15%' },
+                    pt: { xs: '28%', md: '25%' },
                     width: '50%',
                   }}
                 >
@@ -179,7 +187,7 @@ export default function About() {
                     // pr: '55px',
                     // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '16%', md: '15%' },
+                    pt: { xs: '26%', md: '15%' },
                     width: '50%',
                   }}
                 >
@@ -190,7 +198,7 @@ export default function About() {
                     pl: { md: '55px', xs: '40px' },
                     textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '16%', md: '15%' },
+                    pt: { xs: '26%', md: '15%' },
                     width: '50%',
                   }}
                 >
