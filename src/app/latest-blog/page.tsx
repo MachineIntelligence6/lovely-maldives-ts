@@ -39,7 +39,7 @@ export const latestBlog = [
 ]
 export default function LatestBlog({ hide }: { hide: string }) {
   return (
-    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
+    <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
       {hide === 'none' ? (
         ''
       ) : (
@@ -52,7 +52,7 @@ export default function LatestBlog({ hide }: { hide: string }) {
         <Typography
           sx={{
             fontSize: '35px',
-            textAlign: 'center',
+            // textAlign: 'center',
             color: 'var(--white)',
             mt: '60px',
           }}
@@ -61,7 +61,7 @@ export default function LatestBlog({ hide }: { hide: string }) {
         </Typography>
         <Box
           sx={{
-            width: { xs: '100%', md: '700px' },
+            width: { xs: '100%', md: '100%' },
             height: '350px',
             bgcolor: 'var(--brown)',
             position: { xs: 'relative', md: 'unset' },
@@ -118,9 +118,9 @@ export default function LatestBlog({ hide }: { hide: string }) {
                 item
                 xs={4}
                 sm={4}
-                md={4}
+                md={6}
                 key={index}
-                sx={{ borderRadius: '20px', mt: '40px' }}
+                sx={{ borderRadius: '20px', mt: '40px', gap: '20px' }}
               >
                 <Image
                   src={latest.img}
@@ -134,7 +134,7 @@ export default function LatestBlog({ hide }: { hide: string }) {
                 />
                 <Box
                   sx={{
-                    width: { xs: '100%', md: '300px' },
+                    width: { xs: '100%', md: '100%' },
                     mt: '20px',
                     color: 'var(--white)',
                   }}

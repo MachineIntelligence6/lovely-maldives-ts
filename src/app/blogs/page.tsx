@@ -127,7 +127,7 @@ export default function Page() {
         sx={{
           maxWidth: '100% !important',
           px: { xs: '24px', md: '120px' },
-          mt: '20px',
+          mt: '120px',
         }}
       >
         <BreadCrumb linkName2="Blogs" linkName="Home" path="/blog-articles" />

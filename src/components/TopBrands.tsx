@@ -88,7 +88,7 @@ export default function TopBrands() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '90px',
+          centerPadding: '115px',
           centerMode: true,
         },
       },

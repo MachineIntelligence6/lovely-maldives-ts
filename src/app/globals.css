@@ -190,7 +190,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     width:155px */
 }
 .blogImg {
-  width: 350px;
+  width: 70%;
   border-radius: 20px 0 0 20px;
 }
 .articleBlog {
@@ -203,7 +203,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   width: 200px;
 }
 .latestImg {
-  width: 300px;
+  width: 100%;
 }
 .exploreImges::after {
   content: '';
