@@ -138,24 +138,9 @@ body {
   /* animation: increaseHeight 0.5s forwards; */
 }
 
-/* Our collection */
-
-/* .collectionText{
-    width: 85%;
-    height:40%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    position:absolute;
-    color:white;
-    bottom:0%;
-    left:0;
-    font-size: 12px;
-    font-weight:200;
-    z-index:99;
-    background-color:var(--darkBrown);
-
-} */
+.css-11s0zwy-MuiGrid-root > .MuiGrid-item {
+  padding-top: 0 !important;
+}
 
 .collectionImg {
   width: 88%;

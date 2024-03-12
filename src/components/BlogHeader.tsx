@@ -12,8 +12,8 @@ export default function BlogHeader() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-around',
-            width: { xs: '768px', md: '100%' },
-            overflowX: { xs: 'auto', md: 'hidden' },
+            width: '1920px',
+            overflowX: 'auto',
           }}
         >
           <Link
@@ -33,6 +33,33 @@ export default function BlogHeader() {
             href="/popular-blog"
           >
             Popular Blog
+          </Link>
+          <Link sx={{ color: 'white', py: 2, textDecoration: 'none' }} href="/">
+            Blog Title
+          </Link>
+          <Link sx={{ color: 'white', py: 2, textDecoration: 'none' }} href="/">
+            Fade
+          </Link>
+          <Link sx={{ color: 'white', py: 2, textDecoration: 'none' }} href="/">
+            Pre-Opening
+          </Link>
+          <Link sx={{ color: 'white', py: 2, textDecoration: 'none' }} href="/">
+            Blog Title
+          </Link>
+          <Link sx={{ color: 'white', py: 2, textDecoration: 'none' }} href="/">
+            Fade
+          </Link>
+          <Link sx={{ color: 'white', py: 2, textDecoration: 'none' }} href="/">
+            Pre-Opening
+          </Link>
+          <Link sx={{ color: 'white', py: 2, textDecoration: 'none' }} href="/">
+            Blog Title
+          </Link>
+          <Link sx={{ color: 'white', py: 2, textDecoration: 'none' }} href="/">
+            Fade
+          </Link>
+          <Link sx={{ color: 'white', py: 2, textDecoration: 'none' }} href="/">
+            Pre-Opening
           </Link>
           <Link sx={{ color: 'white', py: 2, textDecoration: 'none' }} href="/">
             Blog Title

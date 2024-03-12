@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { Box, Container, Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import Image from 'next/image'
 import blog from '../../../public/Images/landingTree.jpg'
 import article from '../../../public/Images/main.jpg'
@@ -43,7 +43,7 @@ export const latestBlog = [
 ]
 export default function LatestBlog({ hide }: { hide: string }) {
   return (
-    <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
+    <Box sx={{ pt: { md: '0px', xs: '0px' }, px: 0 }}>
       {hide === 'none' ? (
         ''
       ) : (
@@ -92,7 +92,7 @@ export default function LatestBlog({ hide }: { hide: string }) {
               left: '0',
               width: '100%',
               height: '400px',
-              borderRadius: '20px',
+              borderRadius: '20px 20px 20px 20px',
             }}
           />
           <Box
@@ -117,73 +117,18 @@ export default function LatestBlog({ hide }: { hide: string }) {
             </Typography>
           </Box>
         </Box>
-        <Container>
-          <Grid
-            container
-            columns={{ xs: 4, sm: 8, md: 12 }}
-            spacing={5}
-            sx={{ mt: { xs: '0', md: '40px' }, overflow: 'hidden' }}
-          >
-            {latestBlog.map((latest, index) => {
-              if (latest.isoverlay) {
-                return (
-                  <Grid
-                    item
-                    xs={4}
-                    sm={4}
-                    md={6}
-                    key={index}
-                    sx={{
-                      borderRadius: '20px',
-                      mt: '40px',
-                      position: 'relative',
-                    }}
-                  >
-                    <Image
-                      src={latest.img}
-                      alt="blog"
-                      className="latestImg"
-                      style={{
-                        borderRadius: '20px',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        width: '100%',
-                        height: '92%',
-                        backgroundColor: 'rgba(150, 127, 93, 0.5)',
-                        position: 'absolute',
-                        top: '7.5%',
-                        zIndex: 1,
-                        borderRadius: '20px !important',
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        width: { xs: '100%', md: '550px' },
-                        mt: '20px',
-                        color: 'white',
-                        position: 'absolute',
-                        top: '59%',
-                        left: '10%',
-                        zIndex: 99,
-                      }}
-                    >
-                      <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                        {latest.title}
-                      </Typography>
-                      <Typography sx={{ fontSize: '24px', mt: '20px' }}>
-                        {latest.discription}
-                      </Typography>
-                      <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                        {latest.date}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                )
-              }
+
+        <Grid
+          container
+          columns={{ xs: 4, sm: 8, md: 12 }}
+          spacing={5}
+          sx={{
+            mt: { xs: '0', md: '40px' },
+            overFlow: 'hidden',
+          }}
+        >
+          {latestBlog.map((latest, index) => {
+            if (latest.isoverlay) {
               return (
                 <Grid
                   item
@@ -191,24 +136,43 @@ export default function LatestBlog({ hide }: { hide: string }) {
                   sm={4}
                   md={6}
                   key={index}
-                  sx={{ borderRadius: '20px', mt: '40px', bgcolor: 'white' }}
+                  sx={{
+                    borderRadius: '20px',
+                    mt: '60px',
+                    position: 'relative',
+                  }}
                 >
                   <Image
                     src={latest.img}
                     alt="blog"
-                    className="latestImg"
+                    // className="latestImg"
                     style={{
-                      borderRadius: '20px 20px 0 0px',
-                      height: '300px',
+                      width: '100%',
+                      borderRadius: '20px',
+                      height: '100%',
                       objectFit: 'cover',
                     }}
                   />
                   <Box
                     sx={{
-                      width: { xs: '100%', md: '100%' },
+                      width: '94%',
+                      height: '100%',
+                      backgroundColor: 'rgba(150, 127, 93, 0.5)',
+                      position: 'absolute',
+                      top: '0',
+                      zIndex: 1,
+                      borderRadius: '20px !important',
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: { xs: '100%', md: '550px' },
                       mt: '20px',
-                      color: 'var(--white)',
-                      pb: '20px',
+                      color: 'white',
+                      position: 'absolute',
+                      top: '59%',
+                      left: '10%',
+                      zIndex: 99,
                     }}
                   >
                     <Typography sx={{ fontSize: '16px', mt: '20px' }}>
@@ -223,9 +187,49 @@ export default function LatestBlog({ hide }: { hide: string }) {
                   </Box>
                 </Grid>
               )
-            })}
-          </Grid>
-        </Container>
+            }
+            return (
+              <Grid
+                item
+                xs={4}
+                sm={4}
+                md={6}
+                key={index}
+                sx={{ borderRadius: '20px', bgcolor: 'white', mt: '60px' }}
+              >
+                <Image
+                  src={latest.img}
+                  alt="blog"
+                  // className="latestImg"
+                  style={{
+                    width: '100%',
+                    borderRadius: '20px 20px 0 0px',
+                    height: '300px',
+                    objectFit: 'cover',
+                  }}
+                />
+                <Box
+                  sx={{
+                    width: { xs: '100%', md: '100%' },
+                    mt: '20px',
+                    color: 'var(--white)',
+                    pb: '20px',
+                  }}
+                >
+                  <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                    {latest.title}
+                  </Typography>
+                  <Typography sx={{ fontSize: '24px', mt: '20px' }}>
+                    {latest.discription}
+                  </Typography>
+                  <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                    {latest.date}
+                  </Typography>
+                </Box>
+              </Grid>
+            )
+          })}
+        </Grid>
         {hide === 'none' ? '' : <Footer />}
       </Box>
     </Box>
