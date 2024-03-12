@@ -105,7 +105,7 @@ export default function Home() {
           className="rightPalm"
           style={{
             position: 'absolute',
-            top: lessThanMd ? '138%' : '132%',
+            top: lessThanMd ? '139%' : '132%',
             right: 0,
             zIndex: 99,
           }}

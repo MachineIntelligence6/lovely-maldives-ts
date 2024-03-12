@@ -157,12 +157,12 @@ export default function About() {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   color: 'white',
-                  textAlign: 'center',
+                  // textAlign: 'center',
                 }}
               >
                 <Typography
                   sx={{
-                    // pr: '55px',
+                    pl: '25px',
                     // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '28%', md: '25%' },
@@ -184,7 +184,7 @@ export default function About() {
                 </Typography>
                 <Typography
                   sx={{
-                    // pr: '55px',
+                    pl: '25px',
                     // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
                     pt: { xs: '26%', md: '15%' },

@@ -84,7 +84,7 @@ export function SampleNextArrow(props: any) {
       sx={{
         ...style,
         display: 'block',
-        color: 'var(--blue) !important',
+        color: { xs: 'white !important', md: 'var(--blue) !important' },
         fontSize: '35px !important ',
         width: '35px !important',
         height: '35px !important',
@@ -103,7 +103,7 @@ export function SamplePrevArrow(props: any) {
       sx={{
         ...style,
         display: 'block',
-        color: 'var(--blue) !important',
+        color: { xs: 'white !important', md: 'var(--blue) !important' },
         fontSize: ' 35px !important ',
         width: '35px !important',
         height: '35px !important',
