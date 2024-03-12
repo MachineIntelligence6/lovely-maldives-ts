@@ -136,7 +136,7 @@ export default function TopBrands() {
                     pt: '50px',
                     fontSize: '18px',
                     fontWeight: 600,
-                    width: { xs: '100px', md: '150px' },
+                    width: { xs: '150px', md: '150px' },
                     textAlign: 'center',
                   }}
                 >

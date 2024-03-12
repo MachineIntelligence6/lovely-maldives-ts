@@ -1,8 +1,8 @@
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import { Box, Container } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import Image from 'next/image'
-import sparkle from '../../public/Images/Quarters2.svg'
+// import Image from 'next/image'
+// import sparkle from '../../public/Images/Quarters-3.svg'
 
 export default function About() {
   return (
@@ -97,7 +97,7 @@ export default function About() {
               <Box
                 sx={{
                   width: { xs: '100%', md: '500px' },
-                  height: { xs: '100%', md: '300px' },
+                  height: { xs: '80%', md: '300px' },
                   position: 'absolute',
                   top: '50%',
                   left: '50%',
@@ -105,7 +105,7 @@ export default function About() {
                   transform: 'translate(-50% ,-50%)',
                 }}
               >
-                <Image
+                {/* <Image
                   src={sparkle}
                   alt="sparkle"
                   style={{
@@ -113,30 +113,33 @@ export default function About() {
                     height: '100%',
                     backgroundPosition: 'fixed',
                   }}
-                />
-                {/* <svg
+                /> */}
+                <svg
                   id="Layer_1"
                   data-name="Layer 1"
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 100 1080 950"
+                  viewBox="0 0 1080 1080"
+                  fill="white"
+                  width="500px"
+                  height="300px"
                 >
                   <polygon
                     className="cls-1"
-                    points="544 540 540 818.72 536 540 544 540 544 540"
+                    points="547.75 540 540 1080 532.25 540 547.75 540 547.75 540"
                   />
                   <polygon
                     className="cls-1"
-                    points="536 540 540 261.28 544 540 536 540 536 540"
+                    points="532.25 540 540 0 547.75 540 532.25 540 532.25 540"
                   />
                   <polygon
                     className="cls-1"
-                    points="540 544 261.28 540 540 536 540 544 540 544"
+                    points="540 547.75 0 540 540 532.25 540 547.75 540 547.75"
                   />
                   <polygon
                     className="cls-1"
-                    points="540 536 818.72 540 540 544 540 536 540 536"
+                    points="540 532.25 1080 540 540 547.75 540 532.25 540 532.25"
                   />
-                </svg> */}
+                </svg>
               </Box>
 
               <Box
@@ -154,7 +157,7 @@ export default function About() {
                     // pr: '55px',
                     // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '18%', md: '20%' },
+                    pt: { xs: '18%', md: '15%' },
                     width: '50%',
                   }}
                 >
@@ -162,10 +165,10 @@ export default function About() {
                 </Typography>
                 <Typography
                   sx={{
-                    pl: '55px',
+                    pl: { md: '55px', xs: '40px' },
                     textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '18%', md: '20%' },
+                    pt: { xs: '18%', md: '15%' },
                     width: '50%',
                   }}
                 >
@@ -176,7 +179,7 @@ export default function About() {
                     // pr: '55px',
                     // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '16%', md: '10%' },
+                    pt: { xs: '16%', md: '15%' },
                     width: '50%',
                   }}
                 >
@@ -184,10 +187,10 @@ export default function About() {
                 </Typography>
                 <Typography
                   sx={{
-                    pl: '55px',
+                    pl: { md: '55px', xs: '40px' },
                     textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '16%', md: '10%' },
+                    pt: { xs: '16%', md: '15%' },
                     width: '50%',
                   }}
                 >
