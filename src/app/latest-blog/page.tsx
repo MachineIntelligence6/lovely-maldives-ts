@@ -108,9 +108,9 @@ export default function LatestBlog({ hide }: { hide: string }) {
               sx={{
                 fontSize: '24px',
                 color: 'white',
-                // textAlign: 'center',
-                width: '250px',
-                ml: '50px',
+                textAlign: { xs: 'center', md: 'left' },
+                width: { xs: '350px', md: '250px' },
+                ml: { xs: '0', md: '50px' },
               }}
             >
               Seyta Opens Dhunthari Resort& Spa Long in the Maldives
@@ -140,6 +140,7 @@ export default function LatestBlog({ hide }: { hide: string }) {
                     borderRadius: '20px',
                     mt: '60px',
                     position: 'relative',
+                    height: { xs: '582px', md: 'auto' },
                   }}
                 >
                   <Image
@@ -155,7 +156,7 @@ export default function LatestBlog({ hide }: { hide: string }) {
                   />
                   <Box
                     sx={{
-                      width: '94%',
+                      width: { xs: '90.5%', md: '94%' },
                       height: '100%',
                       backgroundColor: 'rgba(150, 127, 93, 0.5)',
                       position: 'absolute',
@@ -166,7 +167,7 @@ export default function LatestBlog({ hide }: { hide: string }) {
                   />
                   <Box
                     sx={{
-                      width: { xs: '100%', md: '550px' },
+                      width: { xs: '90%', md: '550px' },
                       mt: '20px',
                       color: 'white',
                       position: 'absolute',

@@ -12,11 +12,11 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import { useMenuStore } from '@/providers/menu-store-provider'
+import MailBox from '@/components/MailBox'
 import blog from '../../../public/Images/landingTree.jpg'
 import articleImage from '../../../public/Images/main.jpg'
 import LatestBlog from '../latest-blog/page'
 import PopularBlog from '../popular-blog/page'
-import MailBox from '@/components/MailBox'
 
 export const articles: any[] = [
   {
@@ -95,7 +95,7 @@ export default function Page() {
       <Box
         sx={{
           background: 'black',
-          position: {xs:"unset",md:'fixed'},
+          position: { xs: 'unset', md: 'fixed' },
           top: { xs: '0', md: '160px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
           // py: '20px',
@@ -119,7 +119,7 @@ export default function Page() {
         sx={{
           maxWidth: '100% !important',
           px: { xs: '24px', md: '120px' },
-          mt: '120px',
+          // mt: '120px',
         }}
       >
         <BreadCrumb linkName2="Blogs" linkName="Home" path="/blog-articles" />
@@ -164,7 +164,7 @@ export default function Page() {
                 />
                 <Box
                   sx={{
-                    width: { xs: '100%', md: '91.5%' },
+                    width: { xs: '91%', md: '91.5%' },
                     height: '35%',
                     display: 'flex',
                     flexDirection: 'column',
@@ -207,8 +207,8 @@ export default function Page() {
             </Button>
           </Box>
         </Box>
-        <MailBox />
       </Container>
+      <MailBox />
       <Footer />
     </Box>
   )

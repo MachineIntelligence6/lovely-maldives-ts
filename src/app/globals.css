@@ -141,7 +141,9 @@ body {
 .css-11s0zwy-MuiGrid-root > .MuiGrid-item {
   padding-top: 0 !important;
 }
-
+.css-t4gpeb-MuiContainer-root {
+  padding: 0 !important;
+}
 .collectionImg {
   width: 88%;
 }
