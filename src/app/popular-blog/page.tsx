@@ -38,7 +38,7 @@ export const popular = [
 ]
 export default function PopularBlog({ hide }: { hide: string }) {
   return (
-    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
+    <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
       {hide === 'none' ? (
         ''
       ) : (
@@ -65,8 +65,9 @@ export default function PopularBlog({ hide }: { hide: string }) {
           <Grid
             container
             columns={{ xs: 4, sm: 8, md: 12 }}
+            spacing={5}
             sx={{
-              mt: { xs: '0', md: '40px' },
+              mt: { xs: '0', md: '20px' },
               overflow: 'hidden',
               display: { xs: 'none', md: 'flex' },
             }}
@@ -76,15 +77,16 @@ export default function PopularBlog({ hide }: { hide: string }) {
                 item
                 xs={4}
                 sm={4}
-                md={6}
+                md={4}
                 key={index}
-                sx={{ position: 'relative', mt: '60px', borderRadius: '30px' }}
+                sx={{ position: 'relative', borderRadius: '30px' }}
               >
                 <Image
                   src={item.image}
                   alt="blog"
-                  className="collectionImg"
+                  // className="collectionImg"
                   style={{
+                    width: '100%',
                     height: '350px',
                     objectFit: 'cover',
                     borderRadius: '30px',
@@ -92,15 +94,15 @@ export default function PopularBlog({ hide }: { hide: string }) {
                 />
                 <Box
                   sx={{
-                    width: { xs: '100%', md: '85%' },
-                    height: '50%',
+                    width: { xs: '100%', md: '91.5%' },
+                    height: '35%',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     position: 'absolute',
                     color: 'white',
                     bottom: '0%',
-                    left: '0',
+                    left: '9%',
                     fontSize: '12px',
                     fontWeight: '200',
                     zIndex: '99',

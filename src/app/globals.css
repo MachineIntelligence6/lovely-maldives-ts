@@ -52,7 +52,7 @@
 
 body {
   font-family: 'Century Gothic', sans-serif;
-  background-color: #fbfbfd;
+  background-color: #fbfbfd !important;
 }
 /* .rotateTop{
     transform:rotate(45deg);

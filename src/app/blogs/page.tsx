@@ -104,14 +104,14 @@ export default function Page() {
         sx={{
           background: 'black',
           position: 'fixed',
-          top: { xs: '0', md: '165px' },
+          top: { xs: '0', md: '160px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
-          py: '20px',
+          // py: '20px',
           width: '100%',
           // px: '100px',
           zIndex: 999,
           // opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'translateY(160)' : 'translateY(-60%)',
+          transform: isOpen ? 'translateY(160)' : 'translateY(-90%)',
           transition: 'opacity 0.4s, transform 0.4s',
           display: 'block',
           flexDirection: 'row',
@@ -147,6 +147,7 @@ export default function Page() {
           <Grid
             container
             columns={{ xs: 4, sm: 8, md: 12 }}
+            spacing={5}
             sx={{ mt: { xs: '0', md: '40px' }, overflow: 'hidden' }}
           >
             {addSlice.map((article: any, index: number) => (
@@ -156,13 +157,14 @@ export default function Page() {
                 sm={4}
                 md={4}
                 key={index}
-                sx={{ position: 'relative', mt: '60px', borderRadius: '30px' }}
+                sx={{ position: 'relative', borderRadius: '30px' }}
               >
                 <Image
                   src={article.image}
                   alt="article"
-                  className="collectionImg"
+                  // className="collectionImg"
                   style={{
+                    width: '100%',
                     height: '350px',
                     objectFit: 'cover',
                     borderRadius: '30px',
@@ -170,7 +172,7 @@ export default function Page() {
                 />
                 <Box
                   sx={{
-                    width: { xs: '100%', md: '85%' },
+                    width: { xs: '100%', md: '91.5%' },
                     height: '50%',
                     display: 'flex',
                     flexDirection: 'column',
@@ -178,7 +180,7 @@ export default function Page() {
                     position: 'absolute',
                     color: 'white',
                     bottom: '0%',
-                    left: '0',
+                    left: '9%',
                     fontSize: '12px',
                     fontWeight: '200',
                     zIndex: '99',
