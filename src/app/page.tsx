@@ -81,7 +81,10 @@ export default function Home() {
               Read More{' '}
             </Link>
             <KeyboardArrowRightIcon
-              sx={{ fontSize: { xs: '24px', md: '30px' }, mt: '7px' }}
+              sx={{
+                fontSize: { xs: '24px', md: '30px' },
+                mt: { xs: '6px', md: '7px' },
+              }}
             />
           </Box>
         </Box>
@@ -105,7 +108,7 @@ export default function Home() {
           className="rightPalm"
           style={{
             position: 'absolute',
-            top: lessThanMd ? '138%' : '132%',
+            top: lessThanMd ? '141%' : '132%',
             right: 0,
             zIndex: 99,
           }}

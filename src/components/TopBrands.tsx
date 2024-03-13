@@ -3,13 +3,7 @@
 
 'use client'
 
-import {
-  Box,
-  Typography,
-  TextField,
-  Container,
-  IconButton,
-} from '@mui/material'
+import { Box, Typography, Container } from '@mui/material'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -18,8 +12,9 @@ import Image from 'next/image'
 // import Diversity2Icon from '@mui/icons-material/Diversity2'
 import Link from 'next/link'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
-import SendIcon from '@mui/icons-material/Send'
+
 import journeyImg from '../../public/Images/explorImg3.jpg'
+import MailBox from './MailBox'
 
 export const datas = [
   {
@@ -88,7 +83,7 @@ export default function TopBrands() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '90px',
+          centerPadding: '115px',
           centerMode: true,
         },
       },
@@ -136,7 +131,7 @@ export default function TopBrands() {
                     pt: '50px',
                     fontSize: '18px',
                     fontWeight: 600,
-                    width: { xs: '100px', md: '150px' },
+                    width: { xs: '150px', md: '150px' },
                     textAlign: 'center',
                   }}
                 >
@@ -236,102 +231,7 @@ export default function TopBrands() {
             </Typography>
           </Box>
         </Box>
-
-        <Box
-          sx={{
-            mt: { xs: '40px', md: '60px' },
-            width: { xs: '100%', md: '55%' },
-            // height: { xs: '250px', md: '350px' },
-            mx: 'auto',
-            py: '50px',
-            borderRadius: { xs: '0', md: '25px' },
-            position: 'relative',
-            bgcolor: 'var(--blue)',
-            textAlign: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Image
-            src="/Images/lovely-maldives-logo-white.png"
-            height={31}
-            width={40}
-            alt="Logo subscribe mailing"
-            // style={{ marginTop: '8%' }}
-          />
-          <Typography
-            sx={{
-              color: 'white',
-              fontSize: { xs: '16px', md: '20px' },
-              fontWeight: 200,
-              textAlign: 'center',
-              mt: '20px',
-              px: 4,
-            }}
-          >
-            Subscribe to get the latest news and offers by Lovely Maldives
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              mt: '20px',
-              width: { xs: '70%', md: '60%' },
-            }}
-          >
-            <TextField
-              id="outlined-multiline-flexible"
-              placeholder="Enter email address"
-              multiline
-              className="input"
-              sx={{
-                borderRadius: '10px',
-                background: 'white',
-                width: '100%',
-              }}
-            />
-            <IconButton
-              aria-label="subscribe"
-              sx={{
-                position: 'absolute',
-                right: { xs: '70px', md: '22%' },
-                // transform: 'translateY(-50%)',
-                // bgcolor: 'primary.main',
-                color: 'primary.main',
-                borderRadius: '0 10px 10px 0',
-                '&:hover': {
-                  color: 'primary.dark',
-                  background: 'none',
-                },
-              }}
-            >
-              <SendIcon />
-            </IconButton>
-          </Box>
-          {/* <Box>
-            <TextField
-              id="outlined-multiline-flexible"
-              label="Enter email adress"
-              multiline
-              className="input"
-              // maxRows={10}
-              sx={{
-                // bgcolor: 'white',
-                mt: '20px',
-                borderRadius: '10px',
-                width: '60%',
-                position: 'relative',
-              }}
-            />
-            <SendIcon
-              sx={{
-                cursor: 'pointer',
-                // color: 'var(--blue)',
-              }}
-            />
-          </Box> */}
-        </Box>
+        <MailBox />
       </Box>
     </Container>
   )

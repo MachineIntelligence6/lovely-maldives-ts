@@ -52,7 +52,7 @@
 
 body {
   font-family: 'Century Gothic', sans-serif;
-  background-color: #fbfbfd;
+  background-color: #fbfbfd !important;
 }
 /* .rotateTop{
     transform:rotate(45deg);
@@ -138,24 +138,12 @@ body {
   /* animation: increaseHeight 0.5s forwards; */
 }
 
-/* Our collection */
-
-/* .collectionText{
-    width: 85%;
-    height:40%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    position:absolute;
-    color:white;
-    bottom:0%;
-    left:0;
-    font-size: 12px;
-    font-weight:200;
-    z-index:99;
-    background-color:var(--darkBrown);
-
-} */
+.css-11s0zwy-MuiGrid-root > .MuiGrid-item {
+  padding-top: 0 !important;
+}
+.css-t4gpeb-MuiContainer-root {
+  padding: 0 !important;
+}
 .collectionImg {
   width: 88%;
 }
@@ -189,7 +177,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     width:155px */
 }
 .blogImg {
-  width: 350px;
+  width: 70%;
   border-radius: 20px 0 0 20px;
 }
 .articleBlog {
@@ -202,7 +190,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   width: 200px;
 }
 .latestImg {
-  width: 300px;
+  width: 100%;
 }
 .exploreImges::after {
   content: '';
@@ -334,6 +322,11 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   }
   .latestImg {
     width: 100%;
+  }
+
+  .svgSparkle {
+    width: 100%;
+    height: 100%;
   }
 }
 
