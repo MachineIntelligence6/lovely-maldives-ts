@@ -92,23 +92,24 @@ export default function TopFiveLuxuryResorts({
       </Typography>
 
       <Box
-        sx={{ width: '100%', height: '100%', mt: { xs: '30px', md: '60px' } }}
+        sx={{
+          width: '100%',
+          height: '100%',
+          mt: { xs: '30px', md: '60px' },
+        }}
         className="slider-container"
       >
         <Slider {...settings}>
           {datas.map((data, index) => (
             <Box
-              sx={{
-                position: 'relative',
-                borderRadius: `${radius}`,
-              }}
+              sx={{ position: 'relative', borderRadius: `${radius}` }}
               key={index}
             >
               <Image
                 src={collectionImg}
-                alt="collection"
-                className="collectionImg"
+                alt="Resort item"
                 style={{
+                  width: '96%',
                   height: '300px',
                   objectFit: 'cover',
                   borderRadius: `${radius}`,
@@ -116,20 +117,7 @@ export default function TopFiveLuxuryResorts({
               />
               <Box
                 sx={{
-                  width: '100%',
-                  height: '100%',
-                  //   bgcolor: 'rgba(150, 127, 93,0.5)',
-                  position: 'absolute',
-                  top: '0',
-                  left: '0',
-                  borderRadius: `${radius}`,
-                }}
-                className="zoomImg"
-              />
-              <Box
-                className="collectionText"
-                sx={{
-                  width: { xs: '100%', md: '88%' },
+                  width: '96%',
                   height: '40%',
                   display: 'flex',
                   flexDirection: 'column',

@@ -147,9 +147,6 @@ body {
 .collectionImg {
   width: 88%;
 }
-.buttonHover:hover {
-  background-color: var(--blue) !important ;
-}
 .menuBtn:hover {
   background-color: transparent !important;
 }
