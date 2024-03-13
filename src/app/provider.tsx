@@ -26,6 +26,26 @@ const theme = createTheme({
         }
       `,
     },
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          color: 'var(--brown)',
+          '&.Mui-checked': {
+            color: 'var(--brown)',
+          },
+        },
+      },
+    },
+    MuiSlider: {
+      styleOverrides: {
+        root: {
+          color: 'var(--brown)',
+          '& .MuiSlider-thumb': {
+            borderRadius: '2px',
+          },
+        },
+      },
+    },
   },
 })
 interface IProviderProps {

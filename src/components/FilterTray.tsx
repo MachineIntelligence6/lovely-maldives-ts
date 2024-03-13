@@ -6,7 +6,7 @@ import {
   Box,
   Drawer,
   IconButton,
-  Checkbox,
+  Checkbox as MuiCheckbox,
   Radio,
   RadioGroup,
   Slider,
@@ -15,10 +15,32 @@ import {
   FormLabel,
   FormControl,
   Button,
+  CheckboxProps,
 } from '@mui/material'
+import { styled } from '@mui/material/styles'
+
+const Checkbox = styled(MuiCheckbox)<CheckboxProps>(() => ({
+  color: 'var(--brown)',
+  '&.Mui-checked': {
+    color: 'var(--brown)',
+  },
+}))
+
+// const Radio = styled(MuiRadio)<RadioProps>(() => ({
+//   color: 'var(--brown)',
+//   '&.Mui-checked': {
+//     color: 'var(--brown)',
+//   },
+// }))
 
 export default function FilterTray() {
   const [open, setOpen] = React.useState(false)
+
+  const [value, setValue] = React.useState<number[]>([20, 37])
+
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    setValue(newValue as number[])
+  }
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen)
@@ -139,7 +161,13 @@ export default function FilterTray() {
               </RadioGroup>
             </FormGroup>
           </FormControl>
-          <Slider defaultValue={10} aria-label="Distance slider" />
+          <Slider
+            getAriaLabel={() => 'Distance slider'}
+            value={value}
+            onChange={handleChange}
+            valueLabelDisplay="auto"
+            getAriaValueText={(distanceValue: number) => `${distanceValue}KM`}
+          />
 
           <FormControl sx={{ ml: '10px' }}>
             <FormLabel id="traveler-rating-radio-label">
