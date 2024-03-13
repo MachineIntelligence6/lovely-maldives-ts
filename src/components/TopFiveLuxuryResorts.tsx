@@ -80,10 +80,12 @@ export default function TopFiveLuxuryResorts({
   return (
     <Container sx={{ maxWidth: '100% !important', px: '0px !important' }}>
       <Typography
+        variant="h2"
         sx={{
-          fontSize: { xs: '22px', md: '30px' },
           color: 'var(--white)',
           textAlign: 'center',
+          fontSize: { xs: '22px', md: '30px' },
+          fontWeight: 400,
           mt: { xs: '60px', md: '120px' },
           textTransform: 'uppercase',
         }}

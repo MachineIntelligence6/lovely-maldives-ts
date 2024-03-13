@@ -14,6 +14,7 @@ import {
   FormControlLabel,
   FormLabel,
   FormControl,
+  Button,
 } from '@mui/material'
 
 export default function FilterTray() {
@@ -33,7 +34,7 @@ export default function FilterTray() {
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         <Box
           sx={{
-            width: '400px',
+            width: { xs: '100vw', md: '400px' },
             px: '40px',
             py: '20px',
             display: 'flex',
@@ -154,6 +155,26 @@ export default function FilterTray() {
                 <FormControlLabel value="3+" control={<Radio />} label="3+" />
               </RadioGroup>
             </FormGroup>
+          </FormControl>
+          <FormControl sx={{ textAlign: 'center' }}>
+            <Button
+              className="buttonHover"
+              sx={{
+                bgcolor: 'var(--brown)',
+                color: 'white',
+                width: 'auto',
+                px: '80px',
+                py: { xs: 1, md: 2 },
+                textAlign: 'center',
+                fontSize: '24px',
+                '&:hover': {
+                  backgroundColor: 'var(--blue) !important',
+                },
+              }}
+              title="Apply Filters"
+            >
+              Apply Filters
+            </Button>
           </FormControl>
         </Box>
       </Drawer>

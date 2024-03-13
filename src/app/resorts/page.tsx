@@ -38,8 +38,10 @@ export default function page() {
         <Typography
           variant="h2"
           sx={{
-            fontSize: { xs: '22px', md: '30px' },
+            color: 'var(--white)',
             textAlign: 'center',
+            fontSize: { xs: '22px', md: '30px' },
+            fontWeight: 400,
           }}
         >
           ALL RESORTS
@@ -75,7 +77,7 @@ export default function page() {
           bottomradius="0 0 30px  30px"
         />
 
-        <Box sx={{ mt: { xs: '60px', md: '120px' } }}>
+        <Box sx={{ my: { xs: '60px', md: '120px' } }}>
           <Typography
             variant="h2"
             sx={{
@@ -162,7 +164,6 @@ export default function page() {
               bgcolor: 'var(--brown)',
               color: 'white',
               width: 'auto',
-              mt: { xs: '60px', md: '120px' },
               px: '80px',
               py: { xs: 1, md: 2 },
               textAlign: 'center',
