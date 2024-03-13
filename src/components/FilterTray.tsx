@@ -177,20 +177,42 @@ export default function FilterTray() {
               </RadioGroup>
             </FormGroup>
           </FormControl>
-          <FormControl sx={{ textAlign: 'center' }}>
+          <FormControl
+            sx={{
+              textAlign: 'center',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              flexGrow: 2,
+              gap: 2,
+            }}
+          >
             <Button
-              className="buttonHover"
+              sx={{
+                bgcolor: 'var(--blue)',
+                color: 'white',
+                textAlign: 'center',
+                fontSize: '18px',
+                '&:hover': {
+                  backgroundColor: 'var(--brown) !important',
+                },
+                flexGrow: 1,
+              }}
+              onClick={toggleDrawer(false)}
+              title="Apply Filters"
+            >
+              Reset
+            </Button>
+            <Button
               sx={{
                 bgcolor: 'var(--brown)',
                 color: 'white',
-                width: 'auto',
-                px: '80px',
-                py: { xs: 1, md: 2 },
                 textAlign: 'center',
-                fontSize: '24px',
+                fontSize: '18px',
                 '&:hover': {
                   backgroundColor: 'var(--blue) !important',
                 },
+                flexGrow: 1,
               }}
               onClick={toggleDrawer(false)}
               title="Apply Filters"

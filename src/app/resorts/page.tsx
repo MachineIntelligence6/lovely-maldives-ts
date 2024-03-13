@@ -38,6 +38,7 @@ export default function page() {
         <Typography
           variant="h2"
           sx={{
+            mt: { xs: '30px', md: '40px' },
             color: 'var(--white)',
             textAlign: 'center',
             fontSize: { xs: '22px', md: '30px' },
