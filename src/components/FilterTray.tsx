@@ -26,13 +26,6 @@ const Checkbox = styled(MuiCheckbox)<CheckboxProps>(() => ({
   },
 }))
 
-// const Radio = styled(MuiRadio)<RadioProps>(() => ({
-//   color: 'var(--brown)',
-//   '&.Mui-checked': {
-//     color: 'var(--brown)',
-//   },
-// }))
-
 export default function FilterTray() {
   const [open, setOpen] = React.useState(false)
 
@@ -199,6 +192,7 @@ export default function FilterTray() {
                   backgroundColor: 'var(--blue) !important',
                 },
               }}
+              onClick={toggleDrawer(false)}
               title="Apply Filters"
             >
               Apply Filters
