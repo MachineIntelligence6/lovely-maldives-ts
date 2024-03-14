@@ -26,7 +26,7 @@ export default function page() {
           justifyContent: 'space-between',
         }}
       >
-        <BreadCrumb linkName2="Resorts" linkName="Home" path="/resorts" />
+        <BreadCrumb />
         <DropdownButton />
       </Container>
       <Container

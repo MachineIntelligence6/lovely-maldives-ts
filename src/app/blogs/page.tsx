@@ -122,7 +122,7 @@ export default function Page() {
           // mt: '120px',
         }}
       >
-        <BreadCrumb linkName2="Blogs" linkName="Home" path="/blog-articles" />
+        <BreadCrumb />
         <LatestBlog hide="none" />
         <PopularBlog hide="none" />
         <Box>

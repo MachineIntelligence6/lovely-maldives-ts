@@ -1,47 +1,63 @@
+'use client'
+
 import Breadcrumbs from '@mui/material/Breadcrumbs'
-import Link from '@mui/material/Link'
+import { Link as MuiLink } from '@mui/material'
 import Stack from '@mui/material/Stack'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import Diversity2Icon from '@mui/icons-material/Diversity2'
+import { usePathname } from 'next/navigation'
+import { ReactNode } from 'react'
+import Link from 'next/link'
 
-interface IBreadCrumbProps {
-  linkName: string
-  linkName2: string
+interface RouteSegment {
+  label: string | ReactNode
   path: string
 }
-export default function BreadCrumb({
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  linkName = '',
-  linkName2,
-  path,
-}: IBreadCrumbProps) {
-  const breadcrumbs = [
-    <Link
-      underline="hover"
-      key="1"
-      color="var(--white)"
-      href="/"
-      sx={{ fontSize: '20px' }}
-    >
-      <Diversity2Icon sx={{ fontSize: '35px', color: 'var(--brown)' }} />
-    </Link>,
-    <Link
-      underline="hover"
-      key="2"
-      color="var(--white)"
-      href={path}
-      sx={{ fontSize: '20px' }}
-    >
-      {linkName2}
-    </Link>,
-  ]
+
+function generateRouteSegments(path: string): RouteSegment[] {
+  const segments = path.split('/').filter((segment) => segment !== '')
+  const routeSegments: RouteSegment[] = []
+
+  routeSegments.push({
+    label: <Diversity2Icon sx={{ fontSize: '35px', color: 'var(--brown)' }} />,
+    path: '/',
+  })
+
+  let currentPath = '/'
+  segments.forEach((segment) => {
+    currentPath += `${segment}/`
+    const formattedLabel = segment
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
+    routeSegments.push({ label: formattedLabel, path: currentPath })
+  })
+
+  return routeSegments
+}
+
+export default function BreadCrumb() {
+  const pathname = usePathname()
+  const routeSegments = generateRouteSegments(pathname)
+
   return (
     <Stack spacing={2}>
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="large" />}
         aria-label="breadcrumb"
       >
-        {breadcrumbs}
+        {routeSegments.map((link) => (
+          <MuiLink
+            component={Link}
+            underline="hover"
+            color="var(--white)"
+            href={link.path}
+            sx={{ fontSize: '20px' }}
+            key={link.path}
+          >
+            {link.label}
+          </MuiLink>
+        ))}
       </Breadcrumbs>
     </Stack>
   )

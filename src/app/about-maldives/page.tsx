@@ -32,11 +32,7 @@ export default function page() {
           px: { xs: '24px', md: '120px' },
         }}
       >
-        <BreadCrumb
-          linkName="Home"
-          linkName2="About Maldives"
-          path="/about-maldives"
-        />
+        <BreadCrumb />
         <Typography
           sx={{
             fontSize: { xs: '35px', md: '50px' },

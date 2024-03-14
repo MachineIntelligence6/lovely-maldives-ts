@@ -12,6 +12,7 @@ import TopFiveLuxuryResorts from '@/components/TopFiveLuxuryResorts'
 
 import FilterTray from '@/components/FilterTray'
 import SocialSharer from '@/components/SocialSharer'
+import { resorts } from '@/data'
 import collectionImg from '../../../public/Images/collectionImg.jpg'
 
 export default function page() {
@@ -27,7 +28,7 @@ export default function page() {
           justifyContent: 'space-between',
         }}
       >
-        <BreadCrumb linkName2="Resorts" linkName="Home" path="/resorts" />
+        <BreadCrumb />
         <FilterTray />
       </Container>
       <Container
@@ -137,49 +138,41 @@ export default function page() {
             spacing={{ xs: 2, md: 4 }}
             sx={{ mt: { xs: '30px', md: '40px' } }}
           >
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                key={item}
-                component={Link}
-                href={`/resorts/${item}`}
-              >
+            {resorts.map((item) => (
+              <Grid item xs={12} sm={6} md={6} lg={4} key={item.id}>
                 <Box
-                  sx={{
-                    position: 'relative',
-                  }}
-                  key={item}
+                  component={Link}
+                  href={`/resorts/${item.slug}`}
+                  sx={{ textDecoration: 'none' }}
                 >
                   <Box
                     component={Image}
                     src={collectionImg}
-                    alt="Resort item"
+                    alt={item.name}
                     sx={{
-                      width: '100%',
-                      height: { xs: '300px', md: '400px' },
+                      width: { xs: '100%', md: '96%' },
+                      height: { xs: '250px', md: '300px' },
                       objectFit: 'cover',
-                      borderRadius: { xs: '0px', md: '20px' },
+                      borderRadius: {
+                        xs: '0px',
+                        md: `20px 20px 0px 0px`,
+                      },
                     }}
                   />
                   <Box
                     sx={{
-                      width: '100%',
-                      height: { xs: '40%', md: '30%' },
+                      width: { xs: '100%', md: '96%' },
                       display: 'flex',
                       flexDirection: 'column',
-                      position: 'absolute',
-                      gap: 1,
                       color: 'white',
-                      bottom: '0%',
-                      left: '0',
                       fontSize: '12px',
                       fontWeight: '200',
                       zIndex: '99',
+                      gap: 1,
+                      py: '24px',
                       bgcolor: 'var(--darkBrown)',
-                      borderRadius: { xs: '0px', md: '0 0 20px  20px' },
+                      borderRadius: { xs: '0px', md: '0px 0px 20px 20px' },
+                      mt: '-10px',
                     }}
                   >
                     <Box
@@ -187,11 +180,12 @@ export default function page() {
                         display: 'flex',
                         alignItems: 'center',
                         height: 'auto',
-                        mt: '24px',
                       }}
                     >
                       <Typography sx={{ px: 4, fontSize: '20px' }}>
-                        One n Only Reethi Rah{' '}
+                        {item.name.length > 20
+                          ? `${item.name.substring(0, 20)}...`
+                          : item.name}
                       </Typography>
                       <BoltIcon sx={{ display: `flex` }} />
                     </Box>

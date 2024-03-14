@@ -28,7 +28,7 @@ export default function page() {
           justifyContent: 'space-between',
         }}
       >
-        <BreadCrumb linkName2="Resorts" linkName="Home" path="/resorts" />
+        <BreadCrumb />
         <DropdownButton />
       </Container>
       <Container
@@ -37,7 +37,6 @@ export default function page() {
           px: { xs: '24px', md: '120px' },
         }}
       >
-        {/* <BreadCrumb linkName2="Resorts" linkName="Home" path="/resorts" /> */}
         <Image
           src={logo}
           alt="logo"
