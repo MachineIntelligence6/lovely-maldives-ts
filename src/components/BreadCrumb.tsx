@@ -19,7 +19,7 @@ function generateRouteSegments(path: string): RouteSegment[] {
   const routeSegments: RouteSegment[] = []
 
   routeSegments.push({
-    label: <Diversity2Icon sx={{ fontSize: '35px', color: 'var(--brown)' }} />,
+    label: <Diversity2Icon sx={{ fontSize: '30px', color: 'var(--brown)' }} />,
     path: '/',
   })
 
@@ -41,10 +41,15 @@ export default function BreadCrumb() {
   const routeSegments = generateRouteSegments(pathname)
 
   return (
-    <Stack spacing={2}>
+    <Stack>
       <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="large" />}
+        separator={<NavigateNextIcon sx={{ marginX: 0 }} />}
         aria-label="breadcrumb"
+        sx={{
+          '& .MuiBreadcrumbs-separator': {
+            marginX: { xs: '0px', md: '10px' },
+          },
+        }}
       >
         {routeSegments.map((link) => (
           <MuiLink
@@ -52,7 +57,7 @@ export default function BreadCrumb() {
             underline="hover"
             color="var(--white)"
             href={link.path}
-            sx={{ fontSize: '20px' }}
+            sx={{ fontSize: { xs: '14px', md: '20px' } }}
             key={link.path}
           >
             {link.label}
