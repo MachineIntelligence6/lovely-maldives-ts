@@ -259,7 +259,6 @@ function Header() {
               </Button>
             ) : (
               <Button
-                className="buttonHover"
                 title="Enquire"
                 sx={{
                   color: 'white',
@@ -271,6 +270,9 @@ function Header() {
                   transition: isScrolled
                     ? 'opacity .3s linear'
                     : 'visibility 0s linear .3s, opacity .3s ease-in-out',
+                  '&:hover': {
+                    backgroundColor: 'var(--blue) !important',
+                  },
                 }}
               >
                 ENQUIRE

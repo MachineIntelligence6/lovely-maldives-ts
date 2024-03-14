@@ -14,17 +14,17 @@ export default function SocialSharer() {
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
-        width: '300px',
+        width: '200px',
         mx: 'auto',
         color: 'black',
-        mt: '60px',
+        // mt: '60px',
       }}
     >
       <Typography>Share:</Typography>
-      <FacebookRoundedIcon />
-      <TwitterIcon />
-      <EmailIcon />
-      <WhatsAppIcon />
+      <FacebookRoundedIcon sx={{ fontSize: '18px' }} />
+      <TwitterIcon sx={{ fontSize: '18px' }} />
+      <EmailIcon sx={{ fontSize: '18px' }} />
+      <WhatsAppIcon sx={{ fontSize: '18px' }} />
     </Box>
   )
 }

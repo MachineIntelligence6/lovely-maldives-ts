@@ -122,7 +122,6 @@ export default function Gallery() {
       </Grid>
       <Box sx={{ textAlign: 'center', display: { xs: 'none', md: 'block' } }}>
         <Button
-          className="buttonHover"
           sx={{
             bgcolor: 'var(--brown)',
             color: 'white',
@@ -132,6 +131,9 @@ export default function Gallery() {
             py: { xs: 1, md: 2 },
             textAlign: 'center',
             fontSize: '24px',
+            '&:hover': {
+              backgroundColor: 'var(--blue) !important',
+            },
           }}
           title="All hotels"
         >
@@ -140,7 +142,6 @@ export default function Gallery() {
       </Box>
       <Box sx={{ textAlign: 'center', display: { xs: 'block', md: 'none' } }}>
         <Button
-          className="buttonHover"
           sx={{
             bgcolor: 'var(--brown)',
             color: 'white',
@@ -150,6 +151,9 @@ export default function Gallery() {
             py: { xs: 1, md: 2 },
             textAlign: 'center',
             fontSize: '24px',
+            '&:hover': {
+              backgroundColor: 'var(--blue) !important',
+            },
           }}
           title="Load more"
         >

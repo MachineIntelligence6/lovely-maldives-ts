@@ -43,7 +43,7 @@ export default function FilterTray() {
     <Box>
       <IconButton onClick={toggleDrawer(true)}>
         <TuneRoundedIcon
-          sx={{ fontSize: { xs: '25px', md: '45px' }, color: 'var(--white)' }}
+          sx={{ fontSize: { xs: '25px', md: '45px' }, color: 'var(--brown)' }}
         />
       </IconButton>
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">

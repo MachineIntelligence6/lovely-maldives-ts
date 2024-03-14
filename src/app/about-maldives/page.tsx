@@ -175,8 +175,14 @@ export default function page() {
         </Box>
         <Box sx={{ textAlign: 'center', mt: '60px' }}>
           <Button
-            className="buttonHover"
-            sx={{ bgcolor: 'var(--brown)', px: '30px', py: 2 }}
+            sx={{
+              bgcolor: 'var(--brown)',
+              px: '30px',
+              py: 2,
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
+            }}
             title="Back to home"
           >
             <Link href="/" sx={{ color: 'white', textDecoration: 'none' }}>

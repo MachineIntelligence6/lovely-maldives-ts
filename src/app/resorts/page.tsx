@@ -11,6 +11,7 @@ import Footer from '@/components/Footer'
 import TopFiveLuxuryResorts from '@/components/TopFiveLuxuryResorts'
 
 import FilterTray from '@/components/FilterTray'
+import SocialSharer from '@/components/SocialSharer'
 import collectionImg from '../../../public/Images/collectionImg.jpg'
 
 export default function page() {
@@ -47,10 +48,14 @@ export default function page() {
         >
           ALL RESORTS
         </Typography>
+        <Box sx={{ my: { xs: '20px', md: '30px' } }}>
+          <SocialSharer />
+        </Box>
         <Box
           sx={{
             maxWidth: '1000px',
             margin: '0 auto',
+            display: { xs: 'block', md: 'none' },
           }}
         >
           <Typography
@@ -58,27 +63,63 @@ export default function page() {
               fontSize: { xs: '18px', md: '22px' },
               fontWeight: '200',
               mt: { xs: '14px', md: '16px' },
-              textAlign: 'center',
               px: { xs: '20px', md: '0' },
             }}
           >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem quos
-            quae tempore consequatur. Commodi labore corrupti harum omnis
-            consequatur deserunt debitis ipsam excepturi quod repellendus nobis
-            tempore, laudantium reprehenderit fuga laborum sed officia libero
-            sunt assumenda? Reprehenderit cumque necessitatibus vel maiores
-            dignissimos! Consectetur voluptatibus quae sapiente.
+            There are over 150+ resorts in the Maldives. Here at Lovely
+            Maldives, we are curating one of the nest resorts in the Maldives.
           </Typography>
         </Box>
-        <TopFiveLuxuryResorts
-          heading="TOP FIVE LUXURY RESORTS          "
-          button="none"
-          iconShow="flex"
-          radius="30px"
-          bottomradius="0 0 30px  30px"
-        />
-
-        <Box sx={{ my: { xs: '60px', md: '120px' } }}>
+        <Box
+          sx={{
+            maxWidth: '1000px',
+            margin: '0 auto',
+            display: { xs: 'none', md: 'block' },
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: { xs: '18px', md: '22px' },
+              fontWeight: '200',
+              mt: { xs: '14px', md: '16px' },
+              px: { xs: '20px', md: '0' },
+            }}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: '18px', md: '22px' },
+              fontWeight: '200',
+              mt: { xs: '14px', md: '22px' },
+              px: { xs: '20px', md: '0' },
+            }}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est Century Gothic
+          </Typography>
+        </Box>
+        <Box>
+          <TopFiveLuxuryResorts
+            heading="TOP FIVE LUXURY RESORTS"
+            button="none"
+            iconShow="flex"
+            radius="20px"
+            bottomradius="0 0 20px  20px"
+          />
+        </Box>
+        <Box sx={{ my: { xs: '40px', md: '80px' } }}>
           <Typography
             variant="h2"
             sx={{
@@ -104,24 +145,25 @@ export default function page() {
                   }}
                   key={item}
                 >
-                  <Image
+                  <Box
+                    component={Image}
                     src={collectionImg}
                     alt="Resort item"
-                    style={{
+                    sx={{
                       width: '100%',
-                      height: '300px',
+                      height: { xs: '300px', md: '400px' },
                       objectFit: 'cover',
-                      borderRadius: '30px',
+                      borderRadius: '20px',
                     }}
                   />
                   <Box
                     sx={{
                       width: '100%',
-                      height: '40%',
+                      height: { xs: '40%', md: '30%' },
                       display: 'flex',
                       flexDirection: 'column',
-                      justifyContent: 'space-around',
                       position: 'absolute',
+                      gap: 1,
                       color: 'white',
                       bottom: '0%',
                       left: '0',
@@ -129,7 +171,7 @@ export default function page() {
                       fontWeight: '200',
                       zIndex: '99',
                       bgcolor: 'var(--darkBrown)',
-                      borderRadius: '0 0 30px  30px',
+                      borderRadius: '0 0 20px  20px',
                     }}
                   >
                     <Box
@@ -137,6 +179,7 @@ export default function page() {
                         display: 'flex',
                         alignItems: 'center',
                         height: 'auto',
+                        mt: '24px',
                       }}
                     >
                       <Typography sx={{ px: 4, fontSize: '20px' }}>
@@ -158,17 +201,15 @@ export default function page() {
         </Box>
         <Box sx={{ textAlign: 'center', display: { xs: 'none', md: 'block' } }}>
           <Button
-            className="buttonHover"
             component={Link}
             href="/all-resorts"
             sx={{
               bgcolor: 'var(--brown)',
               color: 'white',
-              width: 'auto',
-              px: '80px',
-              py: { xs: 1, md: 2 },
+              px: { xs: '12px', md: '16px' },
+              py: { xs: '6px', md: '8px' },
               textAlign: 'center',
-              fontSize: '24px',
+              fontSize: '18px',
               '&:hover': {
                 backgroundColor: 'var(--blue) !important',
               },

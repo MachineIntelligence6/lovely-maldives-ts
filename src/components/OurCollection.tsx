@@ -158,7 +158,6 @@ export default function OurCollection({
         </Slider>
         <Box sx={{ textAlign: 'center' }}>
           <Button
-            className="buttonHover"
             sx={{
               bgcolor: 'var(--brown)',
               color: 'white',
@@ -170,6 +169,9 @@ export default function OurCollection({
               textAlign: 'center',
               fontSize: '18px',
               display: `${button}`,
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
             }}
           >
             All Hotels

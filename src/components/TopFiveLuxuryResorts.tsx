@@ -31,7 +31,7 @@ export default function TopFiveLuxuryResorts({
 }: ITopFiveLuxuryResortsProps) {
   const settings = {
     // className: 'center',
-    centerPadding: '60px',
+    // centerPadding: '60px',
     dots: true,
     infinite: true,
     speed: 200,
@@ -40,7 +40,7 @@ export default function TopFiveLuxuryResorts({
     arrows: false,
     autoplay: true,
     autoplaySpeed: 4000,
-    centerMode: true,
+    centerMode: false,
     responsive: [
       {
         breakpoint: 600,
@@ -107,12 +107,13 @@ export default function TopFiveLuxuryResorts({
               sx={{ position: 'relative', borderRadius: `${radius}` }}
               key={index}
             >
-              <Image
+              <Box
+                component={Image}
                 src={collectionImg}
                 alt="Resort item"
-                style={{
+                sx={{
                   width: '96%',
-                  height: '300px',
+                  height: { xs: '300px', md: '400px' },
                   objectFit: 'cover',
                   borderRadius: `${radius}`,
                 }}
@@ -120,10 +121,10 @@ export default function TopFiveLuxuryResorts({
               <Box
                 sx={{
                   width: '96%',
-                  height: '40%',
+                  height: { xs: '40%', md: '30%' },
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'space-around',
+                  // justifyContent: 'space-around',
                   position: 'absolute',
                   color: 'white',
                   bottom: '0%',
@@ -131,12 +132,14 @@ export default function TopFiveLuxuryResorts({
                   fontSize: '12px',
                   fontWeight: '200',
                   zIndex: '99',
+                  gap: 1,
                   bgcolor: 'var(--darkBrown)',
                   borderRadius: `${bottomradius}`,
                 }}
               >
                 <Box
                   sx={{
+                    mt: '24px',
                     display: 'flex',
                     alignItems: 'center',
                     height: 'auto',
@@ -159,7 +162,6 @@ export default function TopFiveLuxuryResorts({
         </Slider>
         <Box sx={{ textAlign: 'center' }}>
           <Button
-            className="buttonHover"
             sx={{
               bgcolor: 'var(--brown)',
               color: 'white',
@@ -171,6 +173,9 @@ export default function TopFiveLuxuryResorts({
               textAlign: 'center',
               fontSize: '18px',
               display: `${button}`,
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
             }}
           >
             All Hotels
