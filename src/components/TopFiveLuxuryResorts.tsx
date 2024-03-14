@@ -112,15 +112,15 @@ export default function TopFiveLuxuryResorts({
                 src={collectionImg}
                 alt="Resort item"
                 sx={{
-                  width: '96%',
+                  width: { xs: '100%', md: '96%' },
                   height: { xs: '300px', md: '400px' },
                   objectFit: 'cover',
-                  borderRadius: `${radius}`,
+                  borderRadius: { xs: '0px', md: `${radius}` },
                 }}
               />
               <Box
                 sx={{
-                  width: '96%',
+                  width: { xs: '100%', md: '96%' },
                   height: { xs: '40%', md: '30%' },
                   display: 'flex',
                   flexDirection: 'column',
@@ -134,7 +134,7 @@ export default function TopFiveLuxuryResorts({
                   zIndex: '99',
                   gap: 1,
                   bgcolor: 'var(--darkBrown)',
-                  borderRadius: `${bottomradius}`,
+                  borderRadius: { xs: '0px', md: `${bottomradius}` },
                 }}
               >
                 <Box

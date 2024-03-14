@@ -33,7 +33,7 @@ export default function page() {
       <Container
         sx={{
           maxWidth: '100% !important',
-          px: { xs: '24px', md: '120px' },
+          px: { xs: '0px', md: '120px' },
         }}
       >
         <Typography
@@ -153,7 +153,7 @@ export default function page() {
                       width: '100%',
                       height: { xs: '300px', md: '400px' },
                       objectFit: 'cover',
-                      borderRadius: '20px',
+                      borderRadius: { xs: '0px', md: '20px' },
                     }}
                   />
                   <Box
@@ -171,7 +171,7 @@ export default function page() {
                       fontWeight: '200',
                       zIndex: '99',
                       bgcolor: 'var(--darkBrown)',
-                      borderRadius: '0 0 20px  20px',
+                      borderRadius: { xs: '0px', md: '0 0 20px  20px' },
                     }}
                   >
                     <Box
