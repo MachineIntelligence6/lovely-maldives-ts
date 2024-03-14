@@ -138,7 +138,15 @@ export default function page() {
             sx={{ mt: { xs: '30px', md: '40px' } }}
           >
             {[1, 2, 3, 4, 5, 6].map((item) => (
-              <Grid item xs={12} sm={6} md={4} key={item}>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                key={item}
+                component={Link}
+                href={`/resorts/${item}`}
+              >
                 <Box
                   sx={{
                     position: 'relative',

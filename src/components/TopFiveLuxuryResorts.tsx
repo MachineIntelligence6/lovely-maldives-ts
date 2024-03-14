@@ -54,7 +54,7 @@ export default function TopFiveLuxuryResorts({
       {
         breakpoint: 1000,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 1,
           centerMode: false,
@@ -104,7 +104,11 @@ export default function TopFiveLuxuryResorts({
         <Slider {...settings}>
           {datas.map((data, index) => (
             <Box
-              sx={{ position: 'relative', borderRadius: `${radius}` }}
+              sx={{
+                position: 'relative',
+                borderRadius: `${radius}`,
+                margin: '0 auto',
+              }}
               key={index}
             >
               <Box
@@ -113,33 +117,39 @@ export default function TopFiveLuxuryResorts({
                 alt="Resort item"
                 sx={{
                   width: { xs: '100%', md: '96%' },
-                  height: { xs: '300px', md: '400px' },
+                  height: { xs: '250px', md: '300px' },
                   objectFit: 'cover',
-                  borderRadius: { xs: '0px', md: `${radius}` },
+                  borderRadius: {
+                    xs: '0px',
+                    md: `${radius} ${radius} 0px 0px`,
+                  },
+                  margin: '0 auto',
                 }}
               />
               <Box
                 sx={{
                   width: { xs: '100%', md: '96%' },
-                  height: { xs: '40%', md: '30%' },
+                  // height: { xs: '40%', md: '30%' },
                   display: 'flex',
                   flexDirection: 'column',
                   // justifyContent: 'space-around',
-                  position: 'absolute',
+                  // position: 'absolute',
                   color: 'white',
-                  bottom: '0%',
-                  left: '0',
+                  // bottom: '0',
+                  // left: '0',
                   fontSize: '12px',
                   fontWeight: '200',
                   zIndex: '99',
                   gap: 1,
+                  py: '24px',
                   bgcolor: 'var(--darkBrown)',
                   borderRadius: { xs: '0px', md: `${bottomradius}` },
+                  margin: '0 auto',
                 }}
               >
                 <Box
                   sx={{
-                    mt: '24px',
+                    // mt: '24px',
                     display: 'flex',
                     alignItems: 'center',
                     height: 'auto',
