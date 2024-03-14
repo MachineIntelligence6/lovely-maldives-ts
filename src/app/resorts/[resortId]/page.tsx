@@ -145,7 +145,7 @@ export default function Resort() {
                     ))}
                   </Slider>
                 </Box>
-                <Box sx={{ px: { xs: '24px', md: '120px' } }}>
+                <Box sx={{ px: { xs: '24px', md: '0px' } }}>
                   <Rating
                     name="size-medium"
                     defaultValue={2}
@@ -188,7 +188,7 @@ export default function Resort() {
                 sx={{
                   background: 'transparent',
                   textAlign: 'center',
-                  px: { xs: '24px', md: '120px' },
+                  px: { xs: '24px', md: '0px' },
                 }}
               >
                 {!readMore && (
@@ -208,7 +208,7 @@ export default function Resort() {
                     sx={{
                       background: 'transparent',
                       pt: 6,
-                      px: { xs: '24px', md: '120px' },
+                      px: { xs: '24px', md: '0px' },
                     }}
                   >
                     <Typography
@@ -382,7 +382,7 @@ export default function Resort() {
                         ))}
                       </Slider>
                     </Box>
-                    <Box sx={{ px: { xs: '24px', md: '120px' } }}>
+                    <Box sx={{ px: { xs: '24px', md: '0px' } }}>
                       <Rating
                         name="size-medium"
                         defaultValue={2}
