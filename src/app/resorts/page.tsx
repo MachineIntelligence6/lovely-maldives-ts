@@ -24,9 +24,11 @@ export default function ResortsPage() {
     Resort[],
     Dispatch<SetStateAction<Resort[]>>,
   ] = useState<Resort[]>([...resorts])
+  const [isFullyLoaded, setIsFullyLoaded] = useState(false)
 
   const loadMore = () => {
     setResortsData([...resortsData, ...resorts])
+    setIsFullyLoaded(true)
   }
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
@@ -225,7 +227,13 @@ export default function ResortsPage() {
             ))}
           </Grid>
         </Box>
-        <Box sx={{ textAlign: 'center', display: { xs: 'none', md: 'block' } }}>
+        <Box
+          sx={{
+            textAlign: 'center',
+            mb: { xs: 6, md: 2 },
+            display: isFullyLoaded ? 'none' : 'block',
+          }}
+        >
           <Button
             sx={{
               bgcolor: 'var(--brown)',
@@ -239,9 +247,33 @@ export default function ResortsPage() {
               },
             }}
             onClick={loadMore}
-            title="All hotels"
+            title="Load more resorts"
           >
-            All Hotels
+            Load More
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            textAlign: 'center',
+            mb: { xs: 6, md: 2 },
+            display: isFullyLoaded ? 'block' : 'none',
+          }}
+        >
+          <Button
+            title="Enquire"
+            sx={{
+              color: 'white',
+              bgcolor: 'var(--brown)',
+              px: 3,
+              py: 1.5,
+              fontSize: '1.2rem !important',
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
+              textTransform: 'uppercase',
+            }}
+          >
+            SEND ENQUIRE
           </Button>
         </Box>
       </Container>
