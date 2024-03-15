@@ -256,7 +256,7 @@ export default function ResortsPage() {
           sx={{
             textAlign: 'center',
             mb: { xs: 6, md: 2 },
-            display: isFullyLoaded ? 'block' : 'none',
+            display: isFullyLoaded ? { xs: 'block', md: 'none' } : 'none',
           }}
         >
           <Button
