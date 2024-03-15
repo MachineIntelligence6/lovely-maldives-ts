@@ -22,6 +22,7 @@ import Button from '@mui/material/Button'
 import { useMenuStore } from '@/providers/menu-store-provider'
 import NavItems from './NavItems'
 import IconMenu from './IconMenu'
+import Link from 'next/link'
 
 const profilePic = '/Images/logo-png.png'
 const profilePicCol = '/Images/logo-colored.png'
@@ -225,12 +226,14 @@ function Header() {
             </IconButton>
           </Box>
           <Box>
-            <Image
-              src={isScrolled ? profilePicCol : profilePic}
-              alt="Logo"
-              width={100}
-              height={60}
-            />
+            <Link href="/">
+              <Image
+                src={isScrolled ? profilePicCol : profilePic}
+                alt="Logo"
+                width={100}
+                height={60}
+              />
+            </Link>
           </Box>
           {/* <Box
             sx={{

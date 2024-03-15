@@ -10,13 +10,12 @@ import BlogHeader from '@/components/BlogHeader'
 import Footer from '@/components/Footer'
 
 import Header from '@/components/Header'
-import BreadCrumb from '@/components/BreadCrumb'
 import { useMenuStore } from '@/providers/menu-store-provider'
 import MailBox from '@/components/MailBox'
+import LatestBlogs from '@/components/LatestBlogs'
+import PopularBlogs from '@/components/PopularBlogs'
 import blog from '../../../public/Images/landingTree.jpg'
 import articleImage from '../../../public/Images/main.jpg'
-import LatestBlog from '../latest-blog/page'
-import PopularBlog from '../popular-blog/page'
 
 export const articles: any[] = [
   {
@@ -96,14 +95,14 @@ export default function Page() {
         sx={{
           background: 'black',
           position: { xs: 'unset', md: 'fixed' },
-          top: { xs: '0', md: '160px' },
+          top: { xs: '0', md: '172px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
           // py: '20px',
           width: '100%',
           // px: '100px',
           zIndex: 999,
           // opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'translateY(160)' : 'translateY(-90%)',
+          transform: isOpen ? 'translateY(0px)' : 'translateY(-120px)',
           transition: 'opacity 0.4s, transform 0.4s',
           display: 'block',
           flexDirection: 'row',
@@ -122,9 +121,9 @@ export default function Page() {
           // mt: '120px',
         }}
       >
-        <BreadCrumb />
-        <LatestBlog hide="none" />
-        <PopularBlog hide="none" />
+        {/* <BreadCrumb /> */}
+        <LatestBlogs />
+        <PopularBlogs />
         <Box>
           <Typography
             sx={{

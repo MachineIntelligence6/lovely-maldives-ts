@@ -126,18 +126,18 @@ body {
   }
 }
 
-.slick-center-mode .slick-center {
+.explore-slider .slick-center-mode .slick-center {
   transition: all 0.2s ease;
   height: 450px !important;
   animation: increaseHeight 0.5s forwards;
 }
-.slick-center-mode .slick-center div:first-child,
-.slick-center img {
+
+.explore-slider .slick-center-mode .slick-center div:first-child,
+.explore-slider .slick-center img {
   height: 450px;
   transition: all 0.2s ease;
   /* animation: increaseHeight 0.5s forwards; */
 }
-
 .css-11s0zwy-MuiGrid-root > .MuiGrid-item {
   padding-top: 0 !important;
 }

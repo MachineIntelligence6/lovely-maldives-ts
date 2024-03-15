@@ -31,7 +31,7 @@ export default function OurCollection({
 }: IOurCollectionProps) {
   const settings = {
     // className: 'center',
-    // centerPadding: '60px',
+    centerPadding: '60px',
     dots: true,
     infinite: true,
     speed: 200,
@@ -40,7 +40,7 @@ export default function OurCollection({
     arrows: false,
     autoplay: true,
     autoplaySpeed: 4000,
-    centerMode: false,
+    centerMode: true,
     responsive: [
       {
         breakpoint: 600,
