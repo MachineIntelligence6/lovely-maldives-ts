@@ -15,7 +15,7 @@ import SocialSharer from '@/components/SocialSharer'
 import { resorts } from '@/data'
 import collectionImg from '../../../public/Images/collectionImg.jpg'
 
-export default function page() {
+export default function ResortsPage() {
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
       <Header />

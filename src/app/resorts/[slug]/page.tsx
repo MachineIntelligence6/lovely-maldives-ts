@@ -25,8 +25,8 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import OurCollection from '@/components/OurCollection'
 import FilterTray from '@/components/FilterTray'
-import bannerImg from '../../../../public/Images/collectionImg.jpg'
 import SocialSharer from '@/components/SocialSharer'
+import bannerImg from '../../../../public/Images/collectionImg.jpg'
 
 export default function Resort() {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
