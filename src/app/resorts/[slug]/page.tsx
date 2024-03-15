@@ -57,6 +57,11 @@ export default function Resort() {
   const sliderMain1Ref = useRef<Slider>()
   const sliderMain2Ref = useRef<Slider>()
 
+  const [sliderMain3Nav, setSliderMain3Nav] = useState<Slider>()
+  const [sliderMain4Nav, setSliderMain4Nav] = useState<Slider>()
+  const sliderMain3Ref = useRef<Slider>()
+  const sliderMain4Ref = useRef<Slider>()
+
   const showExtraContent = () => {
     setReadMore(!readMore)
   }
@@ -64,6 +69,9 @@ export default function Resort() {
   useEffect(() => {
     setSliderMain1Nav(sliderMain1Ref.current)
     setSliderMain2Nav(sliderMain2Ref.current)
+
+    setSliderMain3Nav(sliderMain3Ref.current)
+    setSliderMain4Nav(sliderMain4Ref.current)
   }, [])
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
@@ -116,6 +124,7 @@ export default function Resort() {
                     mt: 3,
                     overflow: 'hidden',
                   }}
+                  className="slider-container-1"
                 >
                   <Slider
                     asNavFor={sliderMain2Nav}
@@ -127,7 +136,7 @@ export default function Resort() {
                     {...mainSlider1}
                   >
                     {amenities.map((val) => (
-                      <Box key={val}>
+                      <Box key={val} className="main-slider-1">
                         <Image
                           src={bannerImg}
                           alt="Picture of the author"
@@ -141,12 +150,19 @@ export default function Resort() {
                     ref={(slider) => {
                       if (slider) {
                         sliderMain2Ref.current = slider
+                        setSliderMain2Nav(slider)
                       }
                     }}
+                    focusOnSelect
+                    swipeToSlide
                     {...thumbnailSlider1}
                   >
                     {amenities.map((val) => (
-                      <Box sx={{ p: 1, display: 'block' }} key={val}>
+                      <Box
+                        sx={{ p: 1, display: 'block' }}
+                        key={val}
+                        className="sub-slider-1"
+                      >
                         <Image
                           src={bannerImg}
                           alt="Picture of the author"
@@ -371,22 +387,24 @@ export default function Resort() {
                         gap: '10px',
                         pb: '10px',
                         mt: 3,
+                        overflow: 'hidden',
                       }}
-                      className="slider-container"
+                      className="slider-container-2"
                     >
                       <Slider
-                        asNavFor={sliderMain2Nav}
+                        asNavFor={sliderMain4Nav}
                         ref={(slider) => {
                           if (slider) {
-                            sliderMain1Ref.current = slider
+                            sliderMain3Ref.current = slider
+                            setSliderMain3Nav(slider)
                           }
                         }}
-                        focusOnSelect
-                        swipeToSlide
-                        {...mainSlider1}
+                        {...mainSlider1} // You might want to adjust this configuration if it's specific to slider 2
                       >
-                        {amenities.map((val) => (
-                          <Box key={val}>
+                        {amenities.map((val, index) => (
+                          <Box key={index} className="main-slider-2">
+                            {' '}
+                            {/* Changed key to use index */}
                             <Image
                               src={bannerImg}
                               alt="Picture of the author"
@@ -396,16 +414,21 @@ export default function Resort() {
                         ))}
                       </Slider>
                       <Slider
-                        asNavFor={sliderMain1Nav}
+                        asNavFor={sliderMain3Nav}
                         ref={(slider) => {
                           if (slider) {
-                            sliderMain2Ref.current = slider
+                            sliderMain4Ref.current = slider
+                            setSliderMain4Nav(slider)
                           }
                         }}
                         {...thumbnailSlider1}
                       >
-                        {amenities.map((val) => (
-                          <Box sx={{ p: 1, display: 'block' }} key={val}>
+                        {amenities.map((val, index) => (
+                          <Box
+                            sx={{ p: 1, display: 'block' }}
+                            key={index}
+                            className="sub-slider-2"
+                          >
                             <Image
                               src={bannerImg}
                               alt="Picture of the author"
