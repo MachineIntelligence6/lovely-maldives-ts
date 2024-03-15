@@ -26,6 +26,7 @@ import Footer from '@/components/Footer'
 import OurCollection from '@/components/OurCollection'
 import FilterTray from '@/components/FilterTray'
 import bannerImg from '../../../../public/Images/collectionImg.jpg'
+import SocialSharer from '@/components/SocialSharer'
 
 export default function Resort() {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
@@ -85,9 +86,23 @@ export default function Resort() {
           px: { xs: '0px', md: '120px' },
         }}
       >
-        <Container
+        <Box
           sx={{ minWidth: '100% !important', px: { xs: '0px', md: '120px' } }}
         >
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: { xs: 'center', md: 'start' },
+              mt: '2rem',
+            }}
+          >
+            <Image
+              src="/Images/logo-colored.png"
+              alt="Resort Logo"
+              width={100}
+              height={60}
+            />
+          </Box>
           <Grid container justifyContent="center">
             <Grid item xs={12}>
               <Paper elevation={0} sx={{ background: 'transparent' }}>
@@ -146,17 +161,11 @@ export default function Resort() {
                   </Slider>
                 </Box>
                 <Box sx={{ px: { xs: '24px', md: '0px' } }}>
-                  <Rating
-                    name="size-medium"
-                    defaultValue={2}
-                    sx={{ display: 'flex', mt: 4 }}
-                  />
                   <Typography
                     variant="h2"
                     sx={{
                       m: 0,
-                      mb: 2,
-                      mt: 2,
+                      mt: 4,
                       fontSize: { xs: '22px', md: '30px' },
                       color: 'var(--white)',
                       textTransform: 'uppercase',
@@ -164,6 +173,12 @@ export default function Resort() {
                   >
                     One n Only Reethi Rah
                   </Typography>
+                  <Rating
+                    name="size-medium"
+                    defaultValue={2.4}
+                    precision={0.5}
+                    sx={{ display: 'flex', m: 0, mb: 2, mt: 2 }}
+                  />
                   <Typography paragraph sx={{ fontSize: '1.125rem' }}>
                     Qui reprehenderit reprehenderit elit sunt commodo
                     adipisicing labore. Non nulla dolor in minim nulla proident
@@ -193,11 +208,20 @@ export default function Resort() {
               >
                 {!readMore && (
                   <Button
-                    sx={{ mt: 5 }}
-                    variant="contained"
+                    sx={{
+                      mt: 5,
+                      color: 'var(--brown)',
+                      backgroundColor: 'transparent',
+                      fontWeight: 600,
+                      ':hover': {
+                        backgroundColor: 'transparent',
+                      },
+                      fontSize: '1.4rem',
+                    }}
+                    variant="text"
                     onClick={showExtraContent}
                   >
-                    Read More
+                    More
                   </Button>
                 )}
               </Paper>
@@ -326,6 +350,19 @@ export default function Resort() {
                     elevation={0}
                     sx={{ background: 'transparent', mt: 5 }}
                   >
+                    <Typography
+                      variant="h2"
+                      sx={{
+                        m: 0,
+                        mb: 2,
+                        mt: 5,
+                        fontSize: { xs: '22px', md: '30px' },
+                        color: 'var(--white)',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      2- Presidential Room
+                    </Typography>
                     <Box
                       sx={{
                         background: '#000',
@@ -418,38 +455,39 @@ export default function Resort() {
                         excepteur ipsum proident nisi laborum do officia enim.
                       </Typography>
                     </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        mt: 4,
+                        mb: 4,
+                      }}
+                    >
+                      <Button
+                        title="Enquire"
+                        sx={{
+                          color: 'white',
+                          bgcolor: 'var(--brown)',
+                          px: 3,
+                          py: 1.5,
+                          fontSize: '1.2rem !important',
+                          '&:hover': {
+                            backgroundColor: 'var(--blue) !important',
+                          },
+                        }}
+                      >
+                        ENQUIRE
+                      </Button>
+                    </Box>
+                    <Box>
+                      <SocialSharer />
+                    </Box>
                   </Paper>
                 </>
               )}
             </Grid>
           </Grid>
-        </Container>
-
-        <Container>
-          <Grid container spacing={2} justifyContent="center">
-            <Grid item xs={8}>
-              <Paper
-                elevation={0}
-                sx={{ background: 'transparent', textAlign: 'center', mb: 3 }}
-              >
-                <Typography
-                  className="text-img"
-                  variant="h4"
-                  sx={{
-                    fontSize: '1.25rem',
-                    mb: 2,
-                    color: 'var(--brown)',
-                    fontWeight: '600',
-                    opacity: '0.9',
-                    textTransform: 'capitalize',
-                  }}
-                >
-                  Discover Maldives
-                </Typography>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
+        </Box>
         <Box sx={{ mb: '40px' }}>
           <OurCollection
             heading="OTHER RECOMMENDATIONS"

@@ -33,8 +33,8 @@ const theme = createTheme({
           style: {
             backgroundColor: 'var(--brown)',
             color: 'white',
-            px: { xs: '12px', md: '16px' },
-            py: { xs: '6px', md: '8px' },
+            // px: { xs: '12px', md: '16px' },
+            // py: { xs: '6px', md: '8px' },
             // textAlign: 'center',
             // fontSize: '18px',
             '&:hover': {

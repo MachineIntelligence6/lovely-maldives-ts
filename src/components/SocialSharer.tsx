@@ -21,10 +21,38 @@ export default function SocialSharer() {
       }}
     >
       <Typography>Share:</Typography>
-      <FacebookRoundedIcon sx={{ fontSize: '18px' }} />
-      <TwitterIcon sx={{ fontSize: '18px' }} />
-      <EmailIcon sx={{ fontSize: '18px' }} />
-      <WhatsAppIcon sx={{ fontSize: '18px' }} />
+      <FacebookRoundedIcon
+        sx={{
+          fontSize: '18px',
+          ':hover': {
+            cursor: 'pointer',
+          },
+        }}
+      />
+      <TwitterIcon
+        sx={{
+          fontSize: '18px',
+          ':hover': {
+            cursor: 'pointer',
+          },
+        }}
+      />
+      <EmailIcon
+        sx={{
+          fontSize: '18px',
+          ':hover': {
+            cursor: 'pointer',
+          },
+        }}
+      />
+      <WhatsAppIcon
+        sx={{
+          fontSize: '18px',
+          ':hover': {
+            cursor: 'pointer',
+          },
+        }}
+      />
     </Box>
   )
 }
