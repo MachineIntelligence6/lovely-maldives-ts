@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable max-len */
 
-interface Resort {
+export interface Resort {
   id: number
   name: string
   location: string

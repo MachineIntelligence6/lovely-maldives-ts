@@ -1,10 +1,14 @@
 /* eslint-disable react/no-array-index-key */
 
+'use client'
+
 import { Container, Box, Typography, Grid, Button } from '@mui/material'
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import BoltIcon from '@mui/icons-material/Bolt'
 import Link from 'next/link'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { motion } from 'framer-motion'
 import BreadCrumb from '@/components/BreadCrumb'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -12,10 +16,18 @@ import TopFiveLuxuryResorts from '@/components/TopFiveLuxuryResorts'
 
 import FilterTray from '@/components/FilterTray'
 import SocialSharer from '@/components/SocialSharer'
-import { resorts } from '@/data'
+import { Resort, resorts } from '@/data'
 import collectionImg from '../../../public/Images/collectionImg.jpg'
 
 export default function ResortsPage() {
+  const [resortsData, setResortsData]: [
+    Resort[],
+    Dispatch<SetStateAction<Resort[]>>,
+  ] = useState<Resort[]>([...resorts])
+
+  const loadMore = () => {
+    setResortsData([...resortsData, ...resorts])
+  }
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
       <Header />
@@ -138,62 +150,74 @@ export default function ResortsPage() {
             spacing={{ xs: 2, md: 4 }}
             sx={{ mt: { xs: '30px', md: '40px' } }}
           >
-            {resorts.map((item) => (
+            {resortsData.map((item) => (
               <Grid item xs={12} sm={6} md={6} lg={4} key={item.id}>
                 <Box
-                  component={Link}
-                  href={`/resorts/${item.slug}`}
-                  sx={{ textDecoration: 'none' }}
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  style={{ width: '100%' }}
                 >
                   <Box
-                    component={Image}
-                    src={collectionImg}
-                    alt={item.name}
-                    sx={{
-                      width: { xs: '100%', md: '96%' },
-                      height: { xs: '250px', md: '300px' },
-                      objectFit: 'cover',
-                      borderRadius: {
-                        xs: '0px',
-                        md: `20px 20px 0px 0px`,
-                      },
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: { xs: '100%', md: '96%' },
-                      display: 'flex',
-                      flexDirection: 'column',
-                      color: 'white',
-                      fontSize: '12px',
-                      fontWeight: '200',
-                      zIndex: '99',
-                      gap: 1,
-                      py: '24px',
-                      bgcolor: 'var(--darkBrown)',
-                      borderRadius: { xs: '0px', md: '0px 0px 20px 20px' },
-                      mt: '-10px',
-                    }}
+                    component={Link}
+                    href={`/resorts/${item.slug}`}
+                    sx={{ textDecoration: 'none', position: 'relative' }}
                   >
                     <Box
+                      component={Image}
+                      src={collectionImg}
+                      alt={item.name}
                       sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        height: 'auto',
+                        width: '100%',
+                        height: { xs: '250px', md: '300px' },
+                        objectFit: 'cover',
+                        borderRadius: {
+                          xs: '0px',
+                          md: `20px 20px 0px 0px`,
+                        },
                       }}
+                    />
+                    <Box
+                      component={motion.div}
+                      sx={{
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        color: 'white',
+                        fontSize: '12px',
+                        fontWeight: '200',
+                        zIndex: '99',
+                        gap: 1,
+                        py: '24px',
+                        bgcolor: 'var(--darkBrown)',
+                        borderRadius: { xs: '0px', md: '0px 0px 20px 20px' },
+                        mt: '-10px',
+                      }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                      <Typography sx={{ px: 4, fontSize: '20px' }}>
-                        {item.name.length > 20
-                          ? `${item.name.substring(0, 20)}...`
-                          : item.name}
-                      </Typography>
-                      <BoltIcon sx={{ display: `flex` }} />
-                    </Box>
-                    <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          height: 'auto',
+                        }}
+                      >
+                        <Typography sx={{ px: 4, fontSize: '20px' }}>
+                          {item.name.length > 20
+                            ? `${item.name.substring(0, 20)}...`
+                            : item.name}
+                        </Typography>
+                        <BoltIcon sx={{ display: `flex` }} />
+                      </Box>
+                      <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
@@ -203,8 +227,6 @@ export default function ResortsPage() {
         </Box>
         <Box sx={{ textAlign: 'center', display: { xs: 'none', md: 'block' } }}>
           <Button
-            component={Link}
-            href="/all-resorts"
             sx={{
               bgcolor: 'var(--brown)',
               color: 'white',
@@ -216,6 +238,7 @@ export default function ResortsPage() {
                 backgroundColor: 'var(--blue) !important',
               },
             }}
+            onClick={loadMore}
             title="All hotels"
           >
             All Hotels
