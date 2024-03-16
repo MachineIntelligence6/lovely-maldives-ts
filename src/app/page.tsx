@@ -76,6 +76,7 @@ export default function Home() {
                 paddingTop: '5px',
                 textDecoration: 'none',
                 color: 'var(--white)',
+                fontWeight: 'bold',
               }}
             >
               Read More{' '}
@@ -83,7 +84,8 @@ export default function Home() {
             <KeyboardArrowRightIcon
               sx={{
                 fontSize: { xs: '24px', md: '30px' },
-                mt: { xs: '6px', md: '7px' },
+                fontWeight: 'bold',
+                mt: '4px',
               }}
             />
           </Box>

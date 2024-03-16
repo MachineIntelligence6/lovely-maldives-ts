@@ -97,9 +97,7 @@ export default function Page() {
           position: { xs: 'unset', md: 'fixed' },
           top: { xs: '0', md: '172px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
-          // py: '20px',
           width: '100%',
-          // px: '100px',
           zIndex: 999,
           // opacity: isOpen ? 1 : 0,
           transform: isOpen ? 'translateY(0px)' : 'translateY(-120px)',
@@ -107,7 +105,7 @@ export default function Page() {
           display: 'block',
           flexDirection: 'row',
           overflow: 'hidden',
-          mt: { md: '0', xs: '135px' },
+          mt: { md: '0', xs: '115px' },
           gap: { md: '18px', xs: '0' },
           borderTop: '1px solid lightgray',
         }}
@@ -116,12 +114,14 @@ export default function Page() {
       </Box>
       <Container
         sx={{
-          maxWidth: '80% !important',
-          px: { xs: '24px', md: '120px' },
-          // mt: '120px',
+          maxWidth: '80%',
+          px: 0,
+          margin: 'auto',
+          '@media only screen and (min-width: 1441px)': {
+            maxWidth: '1030px !important',
+          },
         }}
       >
-        {/* <BreadCrumb /> */}
         <LatestBlogs />
         <PopularBlogs />
         <Box>

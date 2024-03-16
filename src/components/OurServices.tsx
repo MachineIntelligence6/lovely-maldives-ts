@@ -217,7 +217,7 @@ export default function OurServices() {
         sx={{
           color: 'var(--brown)',
           textAlign: 'center',
-          mt: { xs: '30px', md: '60px' },
+          mt: { xs: '15px', md: '30px' },
           fontSize: { xs: '20px', md: '26px' },
         }}
       >

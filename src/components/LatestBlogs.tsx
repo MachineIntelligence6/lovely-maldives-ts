@@ -47,15 +47,16 @@ export default function LatestBlogs() {
             fontSize: '35px',
             // textAlign: 'center',
             color: 'var(--white)',
-            mt: '60px',
+            mt: { xs: 0, md: '100px' },
+            textTransform: 'uppercase',
           }}
         >
-          LATEST
+          Latest News
         </Typography>
         <Box
           sx={{
             width: { xs: '100%', md: '100%' },
-            height: '400px',
+            height: { xs: '389px', md: '550px' },
             bgcolor: 'var(--brown)',
             position: { xs: 'relative', md: 'unset' },
             borderRadius: '20px',
@@ -63,14 +64,19 @@ export default function LatestBlogs() {
             alignItems: 'center',
             justifyContent: 'center',
             mx: 'auto',
-            mt: '60px',
+            mt: '24px',
           }}
         >
-          <Image
+          <Box
+            component={Image}
             src={blog}
             alt="blog"
-            className="blogImg"
-            style={{ height: '400px', objectFit: 'cover' }}
+            sx={{
+              height: '100%',
+              objectFit: 'cover',
+              width: '100%',
+              borderRadius: { xs: '20px', md: '20px 0px 0px 20px' },
+            }}
           />
           <Box
             sx={{
@@ -80,7 +86,7 @@ export default function LatestBlogs() {
               top: '0',
               left: '0',
               width: '100%',
-              height: '400px',
+              height: '100%',
               borderRadius: '20px 20px 20px 20px',
             }}
           />
@@ -90,7 +96,7 @@ export default function LatestBlogs() {
               top: '60%',
               color: 'white',
               borderRadius: '0 10px 10px 0',
-              width: { xs: '100%', md: '30%' },
+              width: { xs: '100%', md: '40%' },
             }}
           >
             <Typography
@@ -98,7 +104,7 @@ export default function LatestBlogs() {
                 fontSize: '24px',
                 color: 'white',
                 textAlign: { xs: 'center', md: 'left' },
-                width: { xs: '350px', md: '250px' },
+                width: '350px',
                 ml: { xs: '0', md: '50px' },
               }}
             >

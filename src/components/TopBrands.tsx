@@ -13,8 +13,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 
-import journeyImg from '../../public/Images/explorImg3.jpg'
 import MailBox from './MailBox'
+import journeyImg from '../../public/Images/explorImg3.jpg'
 
 export const datas = [
   {
@@ -122,36 +122,44 @@ export default function TopBrands() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  pb: 2,
+                  justifyContent: 'center',
+                  // pb: 2,
                 }}
               >
-                <Typography
+                <Box
                   sx={{
-                    pt: '40px',
-                    fontSize: '26px',
-                    fontWeight: 500,
-                    width: { xs: '150px', md: '150px' },
-                    textAlign: 'center',
+                    pt: { xs: '50%', md: '40%' },
+                    height: '50%',
                   }}
                 >
-                  {data.title}
-                </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: '26px',
+                      fontWeight: 500,
+                      textAlign: 'center',
+                    }}
+                  >
+                    {data.title}
+                  </Typography>
+                </Box>
                 <Box
                   sx={{
                     fontSize: '12px',
                     fontWeight: 200,
                     display: 'flex',
-                    alignItems: 'center',
+                    alignItems: 'flex-end',
                     justifyContent: 'center',
-                    mt: '20px',
+                    height: '50%',
+                    pb: 1,
                   }}
                 >
                   <Typography sx={{ fontSize: '18px', fontWeight: 200 }}>
                     {data.starNum}
                   </Typography>
-                  <StarRateIcon sx={{ fontSize: '18px' }} />
-                  <Typography sx={{ fontSize: '12px', fontWeight: 200 }}>
+                  <StarRateIcon sx={{ fontSize: '18px', mb: '5px' }} />
+                  <Typography
+                    sx={{ fontSize: '12px', fontWeight: 200, mb: '4px' }}
+                  >
                     {data.description}
                   </Typography>
                 </Box>

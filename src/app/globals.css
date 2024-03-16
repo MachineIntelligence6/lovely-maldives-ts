@@ -173,10 +173,10 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   /* height:190px;
     width:155px */
 }
-.blogImg {
+/* .blogImg {
   width: 70%;
   border-radius: 20px 0 0 20px;
-}
+} */
 .articleBlog {
   width: 700px;
 }
@@ -304,10 +304,10 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   .collectionImg {
     width: 100%;
   }
-  .blogImg {
+  /* .blogImg {
     width: 100%;
     border-radius: 20px;
-  }
+  } */
   .articleBlog {
     width: 100%;
   }
