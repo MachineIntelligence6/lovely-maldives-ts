@@ -100,19 +100,22 @@ export default function Home() {
             objectFit: "cover",
           }}
         /> */}
-        <Image
-          src="/Images/palm.png"
-          alt="Palm tree"
-          width={lessThanMd ? 180 : 350}
-          height={lessThanMd ? 180 : 350}
-          className="rightPalm"
-          style={{
-            position: 'absolute',
-            top: lessThanMd ? '141%' : '132%',
-            right: 0,
-            zIndex: 99,
-          }}
-        />
+        <Box sx={{ position: 'relative' }}>
+          <Image
+            src="/Images/palm.png"
+            alt="Palm tree"
+            width={lessThanMd ? 150 : 350}
+            height={lessThanMd ? 150 : 350}
+            className="rightPalm"
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              zIndex: 99,
+              transform: 'translateY(-30%)',
+            }}
+          />
+        </Box>
         <OurServices />
       </Box>
       <About />
