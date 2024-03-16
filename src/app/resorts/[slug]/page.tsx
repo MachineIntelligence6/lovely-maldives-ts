@@ -119,8 +119,6 @@ export default function Resort() {
                     background: '#000',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '10px',
-                    pb: '10px',
                     mt: 3,
                     overflow: 'hidden',
                   }}
@@ -159,15 +157,17 @@ export default function Resort() {
                   >
                     {amenities.map((val) => (
                       <Box
-                        sx={{ p: 1, display: 'block' }}
+                        sx={{ p: 0, px: '4px', display: 'block' }}
                         key={val}
                         className="sub-slider-1"
                       >
-                        <Image
+                        <Box
+                          component={Image}
                           src={bannerImg}
                           alt="Picture of the author"
-                          style={{
-                            width: 'calc(100% - 16px)',
+                          sx={{
+                            // width: 'calc(100% - 10px)',
+                            width: '100%',
                             height: 'auto',
                             display: 'block',
                           }}
@@ -183,7 +183,7 @@ export default function Resort() {
                       m: 0,
                       mt: 4,
                       fontSize: { xs: '22px', md: '30px' },
-                      color: 'var(--white)',
+                      // color: 'var(--white)',
                       textTransform: 'uppercase',
                     }}
                   >
@@ -373,7 +373,7 @@ export default function Resort() {
                         mb: 2,
                         mt: 5,
                         fontSize: { xs: '22px', md: '30px' },
-                        color: 'var(--white)',
+                        // color: 'var(--white)',
                         textTransform: 'uppercase',
                       }}
                     >
@@ -384,8 +384,8 @@ export default function Resort() {
                         background: '#000',
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: '10px',
-                        pb: '10px',
+                        // gap: '10px',
+                        // pb: '10px',
                         mt: 3,
                         overflow: 'hidden',
                       }}
@@ -425,7 +425,7 @@ export default function Resort() {
                       >
                         {amenities.map((val, index) => (
                           <Box
-                            sx={{ p: 1, display: 'block' }}
+                            sx={{ p: 0, px: '4px', display: 'block' }}
                             key={index}
                             className="sub-slider-2"
                           >
@@ -433,7 +433,7 @@ export default function Resort() {
                               src={bannerImg}
                               alt="Picture of the author"
                               style={{
-                                width: 'calc(100% - 16px)',
+                                width: '100%',
                                 height: 'auto',
                                 display: 'block',
                               }}
@@ -452,7 +452,8 @@ export default function Resort() {
                         variant="h2"
                         sx={{
                           fontSize: { xs: '22px', md: '30px' },
-                          color: 'var(--white)',
+                          // color: 'var(--white)',
+                          fontWeight: 600,
                           textTransform: 'uppercase',
                           m: 0,
                           mt: 2,

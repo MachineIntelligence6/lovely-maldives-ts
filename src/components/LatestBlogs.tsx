@@ -12,6 +12,7 @@ export const latestBlog = [
       'Seyta Opens Dhunthari Resort & Spain the beautiful islands of the Maldives',
     date: 'February 12, 2024',
     isoverlay: false,
+    isQuickRead: true,
   },
   {
     img: article,
@@ -20,6 +21,7 @@ export const latestBlog = [
       'Seyta Opens Dhunthari Resort & Spain the beautiful islands of the Maldives',
     date: 'February 12, 2024',
     isoverlay: true,
+    isQuickRead: true,
   },
   {
     img: blog,
@@ -28,6 +30,7 @@ export const latestBlog = [
       'Seyta Opens Dhunthari Resort & Spain the beautiful islands of the Maldives',
     date: 'February 12, 2024',
     isoverlay: false,
+    isQuickRead: true,
   },
   {
     img: article,
@@ -36,8 +39,70 @@ export const latestBlog = [
       'Seyta Opens Dhunthari Resort & Spain the beautiful islands of the Maldives',
     date: 'February 12, 2024',
     isoverlay: false,
+    isQuickRead: true,
   },
 ]
+
+// function OverlayImageBlogCard() {
+//   return (
+//     <Grid
+//       item
+//       xs={4}
+//       sm={4}
+//       md={6}
+//       sx={{
+//         borderRadius: '20px',
+//         mt: '60px',
+//         position: 'relative',
+//         height: { xs: '582px', md: 'auto' },
+//       }}
+//     >
+//       <Image
+//         src={latest.img}
+//         alt="blog"
+//         // className="latestImg"
+//         style={{
+//           width: '100%',
+//           borderRadius: '20px',
+//           height: '100%',
+//           objectFit: 'cover',
+//         }}
+//       />
+//       <Box
+//         sx={{
+//           width: { xs: '90.5%', md: '94%' },
+//           height: '100%',
+//           backgroundColor: 'rgba(150, 127, 93, 0.5)',
+//           position: 'absolute',
+//           top: '0',
+//           zIndex: 1,
+//           borderRadius: '20px !important',
+//         }}
+//       />
+//       <Box
+//         sx={{
+//           width: { xs: '90%', md: '550px' },
+//           mt: '20px',
+//           color: 'white',
+//           position: 'absolute',
+//           top: '59%',
+//           left: '10%',
+//           zIndex: 99,
+//         }}
+//       >
+//         <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+//           {latest.title}
+//         </Typography>
+//         <Typography sx={{ fontSize: '24px', mt: '20px' }}>
+//           {latest.discription}
+//         </Typography>
+//         <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+//           {latest.date}
+//         </Typography>
+//       </Box>
+//     </Grid>
+//   )
+// }
 export default function LatestBlogs() {
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' }, px: 0 }}>
@@ -122,109 +187,46 @@ export default function LatestBlogs() {
             overFlow: 'hidden',
           }}
         >
-          {latestBlog.map((latest, index) => {
-            if (latest.isoverlay) {
-              return (
-                <Grid
-                  item
-                  xs={4}
-                  sm={4}
-                  md={6}
-                  key={index}
-                  sx={{
-                    borderRadius: '20px',
-                    mt: '60px',
-                    position: 'relative',
-                    height: { xs: '582px', md: 'auto' },
-                  }}
-                >
-                  <Image
-                    src={latest.img}
-                    alt="blog"
-                    // className="latestImg"
-                    style={{
-                      width: '100%',
-                      borderRadius: '20px',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: { xs: '90.5%', md: '94%' },
-                      height: '100%',
-                      backgroundColor: 'rgba(150, 127, 93, 0.5)',
-                      position: 'absolute',
-                      top: '0',
-                      zIndex: 1,
-                      borderRadius: '20px !important',
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: { xs: '90%', md: '550px' },
-                      mt: '20px',
-                      color: 'white',
-                      position: 'absolute',
-                      top: '59%',
-                      left: '10%',
-                      zIndex: 99,
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                      {latest.title}
-                    </Typography>
-                    <Typography sx={{ fontSize: '24px', mt: '20px' }}>
-                      {latest.discription}
-                    </Typography>
-                    <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                      {latest.date}
-                    </Typography>
-                  </Box>
-                </Grid>
-              )
-            }
-            return (
-              <Grid
-                item
-                xs={4}
-                sm={4}
-                md={6}
-                key={index}
-                sx={{ borderRadius: '20px', bgcolor: 'white', mt: '60px' }}
+          {latestBlog.map((latest, index) => (
+            <Grid
+              item
+              xs={4}
+              sm={4}
+              md={6}
+              key={index}
+              sx={{ borderRadius: '20px', bgcolor: 'white', mt: '60px' }}
+            >
+              <Image
+                src={latest.img}
+                alt="blog"
+                // className="latestImg"
+                style={{
+                  width: '100%',
+                  borderRadius: '20px 20px 0 0px',
+                  height: '300px',
+                  objectFit: 'cover',
+                }}
+              />
+              <Box
+                sx={{
+                  width: { xs: '100%', md: '100%' },
+                  mt: '20px',
+                  color: 'var(--white)',
+                  pb: '20px',
+                }}
               >
-                <Image
-                  src={latest.img}
-                  alt="blog"
-                  // className="latestImg"
-                  style={{
-                    width: '100%',
-                    borderRadius: '20px 20px 0 0px',
-                    height: '300px',
-                    objectFit: 'cover',
-                  }}
-                />
-                <Box
-                  sx={{
-                    width: { xs: '100%', md: '100%' },
-                    mt: '20px',
-                    color: 'var(--white)',
-                    pb: '20px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                    {latest.title}
-                  </Typography>
-                  <Typography sx={{ fontSize: '24px', mt: '20px' }}>
-                    {latest.discription}
-                  </Typography>
-                  <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                    {latest.date}
-                  </Typography>
-                </Box>
-              </Grid>
-            )
-          })}
+                <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                  {latest.title}
+                </Typography>
+                <Typography sx={{ fontSize: '24px', mt: '20px' }}>
+                  {latest.discription}
+                </Typography>
+                <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                  {latest.date}
+                </Typography>
+              </Box>
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Box>
