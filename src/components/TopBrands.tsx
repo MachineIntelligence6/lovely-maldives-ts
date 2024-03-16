@@ -54,7 +54,7 @@ export default function TopBrands() {
     infinite: true,
     autoplay: true,
     autoplaySpeed: 4000,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false,
 
@@ -71,19 +71,19 @@ export default function TopBrands() {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 1,
-          centerPadding: '90px',
+          centerPadding: '80px',
           centerMode: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
-          centerPadding: '115px',
+          centerPadding: '80px',
           centerMode: true,
         },
       },
@@ -108,29 +108,29 @@ export default function TopBrands() {
           mt: { md: '60px', xs: '40px' },
         }}
       >
-        <Slider {...settings}>
+        <Box component={Slider} {...settings}>
           {datas.map((data, index) => (
             <Box key={index}>
               <Box
                 className="brandSlider"
                 sx={{
-                  width: { xs: '93%', md: '85%' },
-                  height: { xs: '250px', md: '220px' },
+                  width: { xs: '96%', md: '85%' },
+                  height: { xs: '180px', md: '220px' },
                   background: 'var(--brown)',
                   color: 'white',
                   textAlign: 'center',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  justifyContent: 'space-around',
+                  justifyContent: 'space-between',
                   pb: 2,
                 }}
               >
                 <Typography
                   sx={{
-                    pt: '50px',
-                    fontSize: '18px',
-                    fontWeight: 600,
+                    pt: '40px',
+                    fontSize: '26px',
+                    fontWeight: 500,
                     width: { xs: '150px', md: '150px' },
                     textAlign: 'center',
                   }}
@@ -158,7 +158,7 @@ export default function TopBrands() {
               </Box>
             </Box>
           ))}
-        </Slider>
+        </Box>
         <Box
           sx={{
             mt: { xs: '40px', md: '60px' },

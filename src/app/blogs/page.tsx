@@ -116,7 +116,7 @@ export default function Page() {
       </Box>
       <Container
         sx={{
-          maxWidth: '100% !important',
+          maxWidth: '80% !important',
           px: { xs: '24px', md: '120px' },
           // mt: '120px',
         }}
@@ -192,15 +192,18 @@ export default function Page() {
           </Grid>
           <Box sx={{ textAlign: 'center' }}>
             <Button
-              className="buttonHover"
               sx={{
-                bgcolor: 'var(--brown)',
-                color: 'white',
                 px: '50px',
                 py: 2,
                 mt: '60px',
+                backgroundColor: 'var(--brown)',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: 'var(--blue) !important',
+                },
               }}
               title="More articles"
+              color="primary"
             >
               MORE ARTICLES
             </Button>
