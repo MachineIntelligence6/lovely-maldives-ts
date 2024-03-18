@@ -72,6 +72,7 @@ export default function FaqsAccordion() {
                   color: 'var(--brown)',
                   fontSize: '35px',
                   bgcolor: { xs: '#E5E4E2', md: 'white' },
+                  borderRadius: { xs: '100%', md: 'none' },
                 }}
               />
             }
@@ -120,6 +121,7 @@ export default function FaqsAccordion() {
                   color: 'var(--brown)',
                   fontSize: '35px',
                   bgcolor: { xs: '#E5E4E2', md: 'white' },
+                  borderRadius: { xs: '100%', md: 'none' },
                 }}
               />
             }
@@ -168,6 +170,7 @@ export default function FaqsAccordion() {
                   color: 'var(--brown)',
                   fontSize: '35px',
                   bgcolor: { xs: '#E5E4E2', md: 'white' },
+                  borderRadius: { xs: '100%', md: 'none' },
                 }}
               />
             }
