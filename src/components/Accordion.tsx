@@ -45,7 +45,9 @@ export const general = [
 export default function FaqsAccordion() {
   return (
     <Box sx={{ mt: '60px' }}>
-      <Typography sx={{ fontWeight: 600, fontSize: '20px', mb: 3 }}>
+      <Typography
+        sx={{ fontWeight: 600, fontSize: '20px', mb: 3, color: 'black' }}
+      >
         Visa and Arrival
       </Typography>
       {visa.map((faq, index) => (
@@ -75,10 +77,20 @@ export default function FaqsAccordion() {
           >
             {faq.que}
           </AccordionSummary>
-          <AccordionDetails>{faq.ans}</AccordionDetails>
+          <AccordionDetails sx={{ px: '0 !important' }}>
+            {faq.ans}
+          </AccordionDetails>
         </Accordion>
       ))}
-      <Typography sx={{ fontWeight: 600, fontSize: '20px', mb: 3, mt: '40px' }}>
+      <Typography
+        sx={{
+          fontWeight: 600,
+          fontSize: '20px',
+          mb: 3,
+          color: 'black',
+          mt: '40px',
+        }}
+      >
         Legal Questions
       </Typography>
       {legal.map((faq, index) => (
@@ -111,10 +123,20 @@ export default function FaqsAccordion() {
           >
             {faq.que}
           </AccordionSummary>
-          <AccordionDetails>{faq.ans}</AccordionDetails>
+          <AccordionDetails sx={{ px: '0 !important' }}>
+            {faq.ans}
+          </AccordionDetails>
         </Accordion>
       ))}
-      <Typography sx={{ fontWeight: 600, fontSize: '20px', mb: 3, mt: '40px' }}>
+      <Typography
+        sx={{
+          fontWeight: 600,
+          fontSize: '20px',
+          mb: 3,
+          color: 'black',
+          mt: '40px',
+        }}
+      >
         General Questions
       </Typography>
       {general.map((faq, index) => (
@@ -144,7 +166,9 @@ export default function FaqsAccordion() {
           >
             {faq.que}
           </AccordionSummary>
-          <AccordionDetails>{faq.ans}</AccordionDetails>
+          <AccordionDetails sx={{ px: '0 !important' }}>
+            {faq.ans}
+          </AccordionDetails>
         </Accordion>
       ))}
     </Box>

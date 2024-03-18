@@ -1,6 +1,6 @@
-import { Container, Box, Typography, TextField } from '@mui/material'
-import SendIcon from '@mui/icons-material/Send'
-import Diversity2Icon from '@mui/icons-material/Diversity2'
+import { Container, Box, Typography } from '@mui/material'
+// import SendIcon from '@mui/icons-material/Send'
+// import Diversity2Icon from '@mui/icons-material/Diversity2'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
@@ -37,6 +37,7 @@ export default function page() {
             sx={{
               width: { xs: 'auto', md: '75%' },
               bgcolor: '#E5E4E2',
+              color: 'black',
               py: 3,
               px: 2,
               borderRadius: '20px',
@@ -53,7 +54,7 @@ export default function page() {
             <Typography sx={{ fontWeight: 600, mt: 2 }}>
               General Questions
             </Typography>
-            <Typography sx={{ fontWeight: 600, mt: 2 }}>
+            <Typography sx={{ fontWeight: 600, mt: 2, mb: 4 }}>
               More Category Add from Beknd
             </Typography>
           </Box>
