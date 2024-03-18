@@ -5,10 +5,11 @@ import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
 import FaqsAccordion from '@/components/Accordion'
+import MailBox from '@/components/MailBox'
 
 export default function page() {
   return (
-    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
+    <Box sx={{ pt: { md: '180px', xs: '100px' } }}>
       <Header />
       <Container
         sx={{
@@ -35,8 +36,7 @@ export default function page() {
           <Box
             sx={{
               width: { xs: 'auto', md: '75%' },
-              bgcolor: 'var(--brown)',
-              color: 'white',
+              bgcolor: '#E5E4E2',
               py: 3,
               px: 2,
               borderRadius: '20px',
@@ -59,7 +59,7 @@ export default function page() {
           </Box>
         </Box>
         <FaqsAccordion />
-        <Box
+        {/* <Box
           sx={{
             mt: { xs: '60px', md: '120px' },
             width: { xs: '90%', md: '55%' },
@@ -114,8 +114,11 @@ export default function page() {
               }}
             />
           </Box>
-        </Box>
+        </Box> */}
       </Container>
+      <Box sx={{ width: { xs: 'auto', md: '63%' }, mx: 'auto' }}>
+        <MailBox />
+      </Box>
       <Footer />
     </Box>
   )
