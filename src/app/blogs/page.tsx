@@ -306,8 +306,8 @@ export default function Page() {
             </Button>
           </Box>
         </Box>
+        <MailBox />
       </Container>
-      <MailBox />
       <Footer />
     </Box>
   )

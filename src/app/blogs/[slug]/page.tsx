@@ -17,6 +17,7 @@ import BlogHeader from '@/components/BlogHeader'
 import { useMenuStore } from '@/providers/menu-store-provider'
 import articleImage from '../../../../public/Images/main.jpg'
 import { articles } from '../page'
+import MailBox from '@/components/MailBox'
 
 export default function SingleBlogPage() {
   const isOpen = useMenuStore((state) => state.isOpen)
@@ -399,6 +400,7 @@ export default function SingleBlogPage() {
             </Box>
           </Box>
         </Container>
+        <MailBox />
       </Container>
       <Footer />
     </Box>
