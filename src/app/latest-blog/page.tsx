@@ -57,7 +57,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 export default function LatestBlog({ hide }: { hide: string }) {
-export default function LatestBlog() {
+  // export default function LatestBlog() {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   const [addSlice, setAddSlice] = useState<any>([] as any)
   const { isOpen } = useMenuStore((state) => state)

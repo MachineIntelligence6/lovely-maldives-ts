@@ -8,13 +8,13 @@ export default function BlogHeader() {
   const constraintsRef = useRef(null)
 
   return (
-    <Box sx={{ mt: { xs: '100px', md: '0' } }}>
+    // <Box sx={{ mt: { xs: '100px', md: '0' } }}>
+    <Box
+      className="blogScroll"
+      sx={{ color: 'white', width: '100%', overflowX: 'auto' }}
+    >
       <Box
-        className="blogScroll"
-        sx={{ color: 'white', width: '100%', overflowX: 'auto' }}
-      >
-        <Box
-          // className="blogScroll"
+        // className="blogScroll"
         sx={{
           color: 'white',
           width: '100%',
