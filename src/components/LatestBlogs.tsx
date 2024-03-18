@@ -1,45 +1,50 @@
 /* eslint-disable react/no-array-index-key */
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 import blog from '../../public/Images/landingTree.jpg'
 import article from '../../public/Images/main.jpg'
+import Link from 'next/link'
 
 export const latestBlog = [
   {
     img: blog,
     title: 'Luxury Resorts',
-    discription:
+    description:
       'Seyta Opens Dhunthari Resort & Spain the beautiful islands of the Maldives',
     date: 'February 12, 2024',
     isoverlay: false,
     isQuickRead: true,
+    slug: 'luxury-resorts-1',
   },
   {
     img: article,
     title: 'Luxury Resorts',
-    discription:
+    description:
       'Seyta Opens Dhunthari Resort & Spain the beautiful islands of the Maldives',
     date: 'February 12, 2024',
     isoverlay: true,
     isQuickRead: true,
+    slug: 'luxury-resorts-2',
   },
   {
     img: blog,
     title: 'Luxury Resorts',
-    discription:
+    description:
       'Seyta Opens Dhunthari Resort & Spain the beautiful islands of the Maldives',
     date: 'February 12, 2024',
     isoverlay: false,
     isQuickRead: true,
+    slug: 'luxury-resorts-3',
   },
   {
     img: article,
     title: 'Luxury Resorts',
-    discription:
+    description:
       'Seyta Opens Dhunthari Resort & Spain the beautiful islands of the Maldives',
     date: 'February 12, 2024',
     isoverlay: false,
     isQuickRead: true,
+    slug: 'luxury-resorts-4',
   },
 ]
 
@@ -94,7 +99,7 @@ export const latestBlog = [
 //           {latest.title}
 //         </Typography>
 //         <Typography sx={{ fontSize: '24px', mt: '20px' }}>
-//           {latest.discription}
+//           {latest.description}
 //         </Typography>
 //         <Typography sx={{ fontSize: '16px', mt: '20px' }}>
 //           {latest.date}
@@ -177,29 +182,31 @@ export default function LatestBlogs() {
             </Typography>
           </Box>
         </Box>
-
-        <Grid
-          container
-          columns={{ xs: 4, sm: 8, md: 12 }}
-          spacing={5}
+        <Box
           sx={{
-            mt: { xs: '0', md: '40px' },
-            overFlow: 'hidden',
+            display: 'flex',
+            flexWrap: 'wrap',
+            mt: { xs: '30px', md: '40px' },
+            gap: { xs: '10px', md: '20px' },
           }}
         >
           {latestBlog.map((latest, index) => (
-            <Grid
-              item
-              xs={4}
-              sm={4}
-              md={6}
+            <Box
               key={index}
-              sx={{ borderRadius: '20px', bgcolor: 'white', mt: '60px' }}
+              component={Link}
+              href={`/blogs/${latest.slug}`}
+              sx={{
+                width: { xs: 'calc(100%)', md: 'calc(50% - 20px)' },
+                borderRadius: '20px',
+                bgcolor: 'white',
+                boxSizing: 'border-box',
+                boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
+                textDecoration: 'none',
+              }}
             >
               <Image
                 src={latest.img}
                 alt="blog"
-                // className="latestImg"
                 style={{
                   width: '100%',
                   borderRadius: '20px 20px 0 0px',
@@ -209,25 +216,25 @@ export default function LatestBlogs() {
               />
               <Box
                 sx={{
-                  width: { xs: '100%', md: '100%' },
                   mt: '20px',
                   color: 'var(--white)',
                   pb: '20px',
+                  px: { xs: '20px', md: '20px' },
                 }}
               >
                 <Typography sx={{ fontSize: '16px', mt: '20px' }}>
                   {latest.title}
                 </Typography>
                 <Typography sx={{ fontSize: '24px', mt: '20px' }}>
-                  {latest.discription}
+                  {latest.description}
                 </Typography>
                 <Typography sx={{ fontSize: '16px', mt: '20px' }}>
                   {latest.date}
                 </Typography>
               </Box>
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </Box>
     </Box>
   )

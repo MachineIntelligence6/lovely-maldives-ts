@@ -4,8 +4,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Container, Box, Typography, Grid, Button } from '@mui/material'
+import { Container, Box, Typography, Button } from '@mui/material'
 import Image from 'next/image'
+import Link from 'next/link'
 import BlogHeader from '@/components/BlogHeader'
 import Footer from '@/components/Footer'
 
@@ -23,60 +24,69 @@ export const articles: any[] = [
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort',
   },
   {
     image: articleImage,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-1',
   },
   {
     image: blog,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-2',
   },
   {
     image: blog,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-3',
   },
   {
     image: articleImage,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-4',
   },
   {
     image: blog,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-5',
   },
   {
     image: blog,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-6',
   },
   {
     image: articleImage,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-7',
   },
   {
     image: blog,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-8',
   },
 ]
 
 export default function Page() {
   const [addSlice, setAddSlice] = useState<any>([] as any)
-  const { isOpen } = useMenuStore((state) => state)
+  const isOpen = useMenuStore((state) => state.isOpen)
 
   useEffect(() => {
     const windowWidth = window.innerWidth
@@ -135,61 +145,57 @@ export default function Page() {
           >
             ALL ARTICLES
           </Typography>
-          <Grid
-            container
-            columns={{ xs: 4, sm: 8, md: 12 }}
-            spacing={5}
-            sx={{ mt: { xs: '0', md: '40px' }, overflow: 'hidden' }}
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              mt: { xs: '30px', md: '40px' },
+              gap: { xs: '10px', md: '20px' },
+            }}
           >
-            {addSlice.map((article: any, index: number) => (
-              <Grid
-                item
-                xs={4}
-                sm={4}
-                md={4}
+            {addSlice.map((blogItem: any, index: number) => (
+              <Box
                 key={index}
-                sx={{ position: 'relative', borderRadius: '30px' }}
+                component={Link}
+                href={`blogs/${blogItem.slug}`}
+                sx={{
+                  width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
+                  borderRadius: '20px',
+                  bgcolor: 'white',
+                  boxSizing: 'border-box',
+                  boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
+                  textDecoration: 'none',
+                }}
               >
                 <Image
-                  src={article.image}
-                  alt="article"
-                  // className="collectionImg"
+                  src={blogItem.image}
+                  alt="blog"
                   style={{
                     width: '100%',
-                    height: '350px',
+                    borderRadius: '20px 20px 0 0px',
+                    height: '200px',
                     objectFit: 'cover',
-                    borderRadius: '30px',
                   }}
                 />
                 <Box
                   sx={{
-                    width: { xs: '91%', md: '91.5%' },
-                    height: '35%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    position: 'absolute',
-                    color: 'white',
-                    bottom: '0%',
-                    left: '9%',
-                    fontSize: '12px',
-                    fontWeight: '200',
-                    zIndex: '99',
-                    bgcolor: 'var(--brown)',
-                    borderRadius: '0 0 30px  30px',
                     mt: '20px',
+                    color: 'var(--white)',
+                    pb: '20px',
+                    px: { xs: '20px', md: '20px' },
                   }}
                 >
-                  <Typography sx={{ px: 4, fontSize: '14px' }}>
-                    {article.date}
+                  <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                    {blogItem.title}
                   </Typography>
-                  <Typography sx={{ px: 4, fontSize: '20px', mt: '20px' }}>
-                    {article.title}
+
+                  <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                    {blogItem.date}
                   </Typography>
                 </Box>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
           <Box sx={{ textAlign: 'center' }}>
             <Button
               sx={{
@@ -206,6 +212,97 @@ export default function Page() {
               color="primary"
             >
               MORE ARTICLES
+            </Button>
+          </Box>
+        </Box>
+        <Box>
+          <Typography
+            sx={{
+              fontSize: '35px',
+              textAlign: 'center',
+              color: 'var(--white)',
+              mt: '60px',
+            }}
+          >
+            More from Newsroom
+          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              mt: { xs: '30px', md: '40px' },
+            }}
+          >
+            {addSlice.map((blogItem: any, index: number) => (
+              <Box
+                key={index}
+                sx={{
+                  width: { xs: '100%', md: '50%' },
+                  borderBottom: '1px solid lightgray',
+                  px: '0px',
+                }}
+              >
+                <Box
+                  component={Link}
+                  href={`blogs/${blogItem.slug}`}
+                  sx={{
+                    textDecoration: 'none',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: '264px',
+                      borderRadius: '20px',
+                      height: { xs: '90px', md: '132px' },
+                      objectFit: 'cover',
+                      backgroundPosition: '100%',
+                      backgroundSize: 'cover',
+                      backgroundImage: `url(${blogItem.image.src})`,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      mt: '20px',
+                      color: 'var(--white)',
+                      pb: '20px',
+                      px: { xs: '20px', md: '20px' },
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{ fontSize: '16px', mt: '20px', fontWeight: 600 }}
+                      >
+                        {blogItem.title}
+                      </Typography>
+
+                      <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                        {blogItem.date}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+          <Box sx={{ textAlign: 'center' }}>
+            <Button
+              sx={{
+                px: '50px',
+                py: 2,
+                mt: '60px',
+                backgroundColor: 'var(--brown)',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: 'var(--blue) !important',
+                },
+              }}
+              title="View Archive"
+              color="primary"
+            >
+              VIEW ARCHIVE
             </Button>
           </Box>
         </Box>

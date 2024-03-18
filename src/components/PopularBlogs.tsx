@@ -2,35 +2,40 @@
 
 'use client'
 
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 import BlogSlider from '@/components/BlogSlider'
 import blog from '../../public/Images/landingTree.jpg'
+import Link from 'next/link'
 
-export const popular = [
+export const popularBlogs = [
   {
     image: blog,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort',
   },
   {
     image: blog,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-1',
   },
   {
     image: blog,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-2',
   },
   {
     image: blog,
     title:
       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
     date: '04 Feb 2024',
+    slug: 'seyta-opens-dhunthari-resort-3',
   },
 ]
 export default function PopularBlogs() {
@@ -50,65 +55,59 @@ export default function PopularBlogs() {
         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
           <BlogSlider />
         </Box>
-        <Grid
-          container
-          columns={{ xs: 4, sm: 8, md: 12 }}
-          spacing={5}
+        <Box
           sx={{
-            mt: { xs: '0', md: '20px' },
-            overflow: 'hidden',
-            display: { xs: 'none', md: 'flex' },
+            display: 'flex',
+            flexWrap: 'wrap',
+            mt: { xs: '30px', md: '40px' },
+            gap: { xs: '10px', md: '20px' },
           }}
         >
-          {popular.map((item, index) => (
-            <Grid
-              item
-              xs={4}
-              sm={4}
-              md={4}
+          {popularBlogs.map((popularBlog, index) => (
+            <Box
               key={index}
-              sx={{ position: 'relative', borderRadius: '30px' }}
+              component={Link}
+              href={`/blogs/${popularBlog.slug}`}
+              sx={{
+                width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
+                borderRadius: '20px',
+                bgcolor: 'white',
+                boxSizing: 'border-box',
+                boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
+                textDecoration: 'none',
+              }}
             >
               <Image
-                src={item.image}
+                src={popularBlog.image}
                 alt="blog"
-                // className="collectionImg"
                 style={{
                   width: '100%',
-                  height: '350px',
+                  borderRadius: '20px 20px 0 0px',
+                  height: '200px',
                   objectFit: 'cover',
-                  borderRadius: '30px',
                 }}
               />
               <Box
                 sx={{
-                  width: { xs: '100%', md: '91.5%' },
-                  height: '35%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  position: 'absolute',
-                  color: 'white',
-                  bottom: '0%',
-                  left: '9%',
-                  fontSize: '12px',
-                  fontWeight: '200',
-                  zIndex: '99',
-                  bgcolor: 'var(--blue)',
-                  borderRadius: '0 0 30px  30px',
                   mt: '20px',
+                  color: 'var(--white)',
+                  pb: '20px',
+                  px: { xs: '20px', md: '20px' },
                 }}
               >
-                <Typography sx={{ px: 4, fontSize: '14px' }}>
-                  {item.date}
+                <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                  {popularBlog.title}
                 </Typography>
-                <Typography sx={{ px: 4, fontSize: '20px', mt: '20px' }}>
-                  {item.title}
+                {/* <Typography sx={{ fontSize: '24px', mt: '20px' }}>
+                  {popularBlog.description}
+                </Typography> */}
+                <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                  {popularBlog.date}
                 </Typography>
               </Box>
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </Box>
     </Box>
   )

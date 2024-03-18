@@ -1,0 +1,396 @@
+/* eslint-disable react/jsx-no-undef */
+/* eslint-disable react/no-array-index-key */
+
+'use client'
+
+import { MailOutline, WhatsApp } from '@mui/icons-material'
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined'
+import XIcon from '@mui/icons-material/X'
+import LinkIcon from '@mui/icons-material/Link'
+import { Grid, IconButton, Paper, Typography } from '@mui/material'
+import { Box, Container } from '@mui/system'
+import Link from 'next/link'
+import Image from 'next/image'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
+import BlogHeader from '@/components/BlogHeader'
+import { useMenuStore } from '@/providers/menu-store-provider'
+import articleImage from '../../../../public/Images/main.jpg'
+import { articles } from '../page'
+
+export default function SingleBlogPage() {
+  const isOpen = useMenuStore((state) => state.isOpen)
+
+  return (
+    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
+      <Header />
+      <Box
+        sx={{
+          background: 'black',
+          position: { xs: 'unset', md: 'fixed' },
+          top: { xs: '0', md: '172px' },
+          boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
+          width: '100%',
+          zIndex: 999,
+          // opacity: isOpen ? 1 : 0,
+          transform: isOpen ? 'translateY(0px)' : 'translateY(-120px)',
+          transition: 'opacity 0.4s, transform 0.4s',
+          display: 'block',
+          flexDirection: 'row',
+          overflow: 'hidden',
+          mt: { md: '0', xs: '115px' },
+          gap: { md: '18px', xs: '0' },
+          borderTop: '1px solid lightgray',
+        }}
+      >
+        <BlogHeader />
+      </Box>
+      <Container
+        sx={{
+          maxWidth: '80%',
+          px: 0,
+          mt: { xs: 0, md: '100px' },
+          margin: 'auto',
+          '@media only screen and (min-width: 1441px)': {
+            maxWidth: '1030px !important',
+          },
+        }}
+      >
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: '2.25rem',
+                m: 0,
+                mb: 4,
+                color: '#666',
+                fontWeight: '700',
+                textTransform: 'capitalize',
+              }}
+            >
+              Seyta Opens Dhunthari Resort & Spa Long Heading Capacity here.
+            </Typography>
+            <Paper
+              elevation={0}
+              sx={{
+                background: 'transparent',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                gap: '10px',
+                mb: 4,
+              }}
+            >
+              <Typography sx={{ mb: '5px' }}>Share Article</Typography>
+              <IconButton
+                sx={{
+                  color: '#000',
+                  transition: 'ease opacity .3s',
+                  opacity: 0.8,
+                  ':hover': {
+                    background: 'none',
+                    opacity: 1,
+                  },
+                }}
+              >
+                <XIcon />
+              </IconButton>
+              <IconButton
+                sx={{
+                  color: '#000',
+                  transition: 'ease opacity .3s',
+                  opacity: 0.8,
+                  ':hover': {
+                    background: 'none',
+                    opacity: 1,
+                  },
+                }}
+              >
+                <WhatsApp />
+              </IconButton>
+              <IconButton
+                sx={{
+                  color: '#000',
+                  transition: 'ease opacity .3s',
+                  opacity: 0.8,
+                  ':hover': {
+                    background: 'none',
+                    opacity: 1,
+                  },
+                }}
+              >
+                <MailOutline />
+              </IconButton>
+              <IconButton
+                sx={{
+                  color: '#000',
+                  transition: 'ease opacity .3s',
+                  opacity: 0.8,
+                  ':hover': {
+                    background: 'none',
+                    opacity: 1,
+                  },
+                }}
+              >
+                <FacebookOutlinedIcon />
+              </IconButton>
+              <IconButton
+                sx={{
+                  color: '#000',
+                  transition: 'ease opacity .3s',
+                  opacity: 0.8,
+                  ':hover': {
+                    background: 'none',
+                    opacity: 1,
+                  },
+                }}
+              >
+                <LinkIcon />
+              </IconButton>
+            </Paper>
+            <Image
+              src={articleImage}
+              alt="Picture of the author"
+              style={{
+                maxHeight: '400px',
+                width: '100%',
+                maxWidth: '100%',
+                margin: '0 auto',
+                display: 'block',
+                borderRadius: '20px',
+                objectFit: 'cover',
+              }}
+            />
+            <Typography
+              paragraph
+              sx={{
+                fontSize: '1.125rem',
+                mt: 2,
+                textAlign: 'center',
+                mb: 5,
+                color: '#666',
+                fontWeight: '400',
+                fontStyle: 'italic',
+                textTransform: 'capitalize',
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            </Typography>
+            <Typography
+              paragraph
+              sx={{
+                fontSize: '1rem',
+                mt: 2,
+                mb: 5,
+                color: '#666',
+                fontWeight: '400',
+                fontStyle: 'italic',
+                textTransform: 'capitalize',
+              }}
+            >
+              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+              nostrud proident voluptate veniam. Officia consectetur aliquip
+              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
+              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
+              cupidatat aute est ea mollit.
+            </Typography>
+            <Typography
+              paragraph
+              sx={{
+                fontSize: '1rem',
+                mt: 2,
+                mb: 5,
+                color: '#666',
+                fontWeight: '400',
+                fontStyle: 'italic',
+                textTransform: 'capitalize',
+              }}
+            >
+              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+              nostrud proident voluptate veniam. Officia consectetur aliquip
+              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
+              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
+              cupidatat aute est ea mollit.
+            </Typography>
+            <Typography
+              paragraph
+              sx={{
+                fontSize: '1rem',
+                mt: 2,
+                mb: 5,
+                color: '#666',
+                fontWeight: '400',
+                fontStyle: 'italic',
+                textTransform: 'capitalize',
+              }}
+            >
+              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+              nostrud proident voluptate veniam. Officia consectetur aliquip
+              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
+              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
+              cupidatat aute est ea mollit.
+            </Typography>
+            <Typography
+              paragraph
+              sx={{
+                fontSize: '1rem',
+                mt: 2,
+                mb: 5,
+                color: '#666',
+                fontWeight: '400',
+                fontStyle: 'italic',
+                textTransform: 'capitalize',
+              }}
+            >
+              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+              nostrud proident voluptate veniam. Officia consectetur aliquip
+              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
+              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
+              cupidatat aute est ea mollit.
+            </Typography>
+
+            <Image
+              src={articleImage}
+              alt="Picture of the author"
+              style={{
+                maxHeight: '400px',
+                maxWidth: '100%',
+                margin: '0 auto',
+                display: 'block',
+                borderRadius: '20px',
+                objectFit: 'cover',
+              }}
+            />
+            <Typography
+              paragraph
+              sx={{
+                fontSize: '1.125rem',
+                mt: 2,
+                textAlign: 'center',
+                mb: 5,
+                color: '#666',
+                fontWeight: '400',
+                fontStyle: 'italic',
+                textTransform: 'capitalize',
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            </Typography>
+            <Typography
+              paragraph
+              sx={{
+                fontSize: '1rem',
+                mt: 2,
+                mb: 5,
+                color: '#666',
+                fontWeight: '400',
+                fontStyle: 'italic',
+                textTransform: 'capitalize',
+              }}
+            >
+              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+              nostrud proident voluptate veniam. Officia consectetur aliquip
+              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
+              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
+              cupidatat aute est ea mollit.
+            </Typography>
+            <Typography
+              paragraph
+              sx={{
+                fontSize: '1rem',
+                mt: 2,
+                mb: 5,
+                color: '#666',
+                fontWeight: '400',
+                fontStyle: 'italic',
+                textTransform: 'capitalize',
+              }}
+            >
+              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+              nostrud proident voluptate veniam. Officia consectetur aliquip
+              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
+              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
+              cupidatat aute est ea mollit.
+            </Typography>
+          </Grid>
+        </Grid>
+        <Container>
+          <Box>
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: '2rem',
+                mb: 4,
+                color: '#666',
+                fontWeight: 600,
+                textTransform: 'capitalize',
+                textAlign: 'center',
+              }}
+            >
+              Related Blogs
+            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                mt: { xs: '30px', md: '40px' },
+                gap: { xs: '10px', md: '20px' },
+              }}
+            >
+              {articles.slice(0, 3).map((blogItem: any, index: number) => (
+                <Box
+                  key={index}
+                  component={Link}
+                  href={`blogs/${blogItem.slug}`}
+                  sx={{
+                    width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
+                    borderRadius: '20px',
+                    bgcolor: 'white',
+                    boxSizing: 'border-box',
+                    boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <Image
+                    src={blogItem.image}
+                    alt="blog"
+                    style={{
+                      width: '100%',
+                      borderRadius: '20px 20px 0 0px',
+                      height: '200px',
+                      objectFit: 'cover',
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      mt: '20px',
+                      color: 'var(--white)',
+                      pb: '20px',
+                      px: { xs: '20px', md: '20px' },
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                      {blogItem.title}
+                    </Typography>
+
+                    <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                      {blogItem.date}
+                    </Typography>
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Container>
+      </Container>
+      <Footer />
+    </Box>
+  )
+}
