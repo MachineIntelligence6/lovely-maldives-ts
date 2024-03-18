@@ -10,17 +10,17 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import SendIcon from '@mui/icons-material/Send'
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import BlogHeader from '@/components/BlogHeader'
+import Articles from '@/components/Articles'
 import article from '../../../public/Images/main.jpg'
 import blog from '../../../public/Images/landingTree.jpg'
-// import Footer from '../../components/Footer'
-// import BlogHeader from '../../components/BlogHeader'
-// import Articles from '@/src/components/Articles'
 
 export default function Page() {
   return (
-    <>
+    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
       <Header />
-      {/* <BlogHeader /> */}
+      <BlogHeader />
       <Container
         sx={{
           maxWidth: '100% !important',
@@ -174,7 +174,7 @@ export default function Page() {
           <EmailIcon />
           <WhatsAppIcon />
         </Box>
-        {/* <Articles /> */}
+        <Articles />
         <Box
           sx={{
             mt: { xs: '60px', md: '120px' },
@@ -232,7 +232,7 @@ export default function Page() {
           </Box>
         </Box>
       </Container>
-      {/* <Footer /> */}
-    </>
+      <Footer />
+    </Box>
   )
 }

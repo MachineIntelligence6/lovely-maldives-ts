@@ -30,6 +30,8 @@ export default function OurCollection({
   bottomradius,
 }: IOurCollectionProps) {
   const settings = {
+    // className: 'center',
+    centerPadding: '60px',
     dots: true,
     infinite: true,
     speed: 200,
@@ -39,107 +41,120 @@ export default function OurCollection({
     autoplay: true,
     autoplaySpeed: 4000,
     centerMode: true,
-    centerPadding: '150px',
     responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-          centerPadding: '100px',
-        },
-      },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '90px',
           initialSlide: 1,
+          centerMode: false,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 1000,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '60px',
+          initialSlide: 1,
+          centerMode: false,
         },
       },
+      {
+        breakpoint: 1150,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          centerMode: false,
+        },
+      },
+      //   {
+      //     breakpoint: 1300,
+      //     settings: {
+      //       slidesToShow: 3,
+      //     },
+      //   },
     ],
   }
   return (
-    <Container
-      sx={{
-        maxWidth: '100% !important',
-        px: { xs: '0px !important', md: '0 !important' },
-      }}
-    >
+    <Container sx={{ maxWidth: '100% !important', px: '0px !important' }}>
       <Typography
+        variant="h2"
         sx={{
-          fontSize: { xs: '22px', md: '30px' },
           color: 'var(--white)',
           textAlign: 'center',
+          fontSize: { xs: '22px', md: '30px' },
+          fontWeight: 400,
           mt: { xs: '60px', md: '120px' },
+          textTransform: 'uppercase',
         }}
       >
         {heading}
       </Typography>
 
       <Box
-        sx={{ width: '100%', height: '100%', mt: { xs: '30px', md: '60px' } }}
+        sx={{
+          width: '100%',
+          height: '100%',
+          mt: { xs: '30px', md: '60px' },
+        }}
+        className="slider-container"
       >
         <Slider {...settings}>
           {datas.map((data, index) => (
             <Box
-              sx={{ position: 'relative', borderRadius: `${radius}` }}
+              sx={{
+                position: 'relative',
+                borderRadius: `${radius}`,
+                margin: '0 auto',
+              }}
               key={index}
             >
-              <Image
+              <Box
+                component={Image}
                 src={collectionImg}
-                alt="collection"
-                className="collectionImg"
-                style={{
-                  height: '300px',
+                alt="Resort item"
+                sx={{
+                  width: { xs: '100%', md: '96%' },
+                  height: { xs: '250px', md: '300px' },
                   objectFit: 'cover',
-                  borderRadius: `${radius}`,
+                  borderRadius: {
+                    xs: '0px',
+                    md: `${radius} ${radius} 0px 0px`,
+                  },
+                  margin: '0 auto',
                 }}
               />
               <Box
                 sx={{
-                  width: { xs: '90%', md: '85%' },
-                  height: '100%',
-                  bgcolor: 'rgba(150,127,93,0.3)',
+                  width: { xs: '100%', md: '96%' },
+                  height: { xs: '250px', md: '300px' },
+                  bgcolor: 'rgba(150,127,93,0.5)',
                   position: 'absolute',
                   top: '0',
-                  left: '0',
-                  borderRadius: `${radius}`,
+                  left: { xs: 0, md: '10px' },
                 }}
-                className="zoomImg"
               />
               <Box
-                className="collectionText"
                 sx={{
-                  width: { xs: '90%', md: '85%' },
-                  height: '40%',
+                  width: { xs: '100%', md: '96%' },
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'space-around',
-                  position: 'absolute',
                   color: 'white',
-                  bottom: '0%',
-                  left: '0',
                   fontSize: '12px',
                   fontWeight: '200',
                   zIndex: '99',
+                  gap: 1,
+                  py: '24px',
                   bgcolor: 'var(--darkBrown)',
-                  borderRadius: `${bottomradius}`,
+                  borderRadius: { xs: '0px', md: `${bottomradius}` },
+                  margin: '0 auto',
                 }}
               >
                 <Box
                   sx={{
+                    // mt: '24px',
                     display: 'flex',
                     alignItems: 'center',
                     height: 'auto',
@@ -162,7 +177,6 @@ export default function OurCollection({
         </Slider>
         <Box sx={{ textAlign: 'center' }}>
           <Button
-            className="buttonHover"
             sx={{
               bgcolor: 'var(--brown)',
               color: 'white',
@@ -174,6 +188,9 @@ export default function OurCollection({
               textAlign: 'center',
               fontSize: '18px',
               display: `${button}`,
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
             }}
           >
             All Hotels

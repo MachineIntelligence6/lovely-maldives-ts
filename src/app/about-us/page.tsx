@@ -1,5 +1,5 @@
-function page() {
+function AboutUsPage() {
   return <div>About us</div>
 }
 
-export default page
+export default AboutUsPage

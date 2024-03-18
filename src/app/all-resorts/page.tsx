@@ -6,27 +6,28 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import EmailIcon from '@mui/icons-material/Email'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import Header from '@/components/Header'
-import BreadCrumb from '../../components/BreadCrumb'
-// import OurCollection from '../../components/OurCollection'
-// import ResortsGallery from '../../components/Gallery'
-// import Footer from '../../components/Footer'
-// import DropdownButton from '../../components/DropdownButton'
+import OurCollection from '@/components/OurCollection'
+import Footer from '@/components/Footer'
+import ResortsGallery from '@/components/Gallery'
+import BreadCrumb from '@/components/BreadCrumb'
+import DropdownButton from '@/components/DropdownButton'
 // icons
 
 export default function page() {
   return (
-    <>
+    <Box sx={{ pt: { xs: '0px', md: '190px' } }}>
       <Header />
       <Container
         sx={{
-          mt: '100px',
+          maxWidth: '100% !important',
+          px: { xs: '24px', md: '120px' },
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
-        <BreadCrumb linkName2="Resorts" linkName="Home" path="/resorts" />
-        {/* <DropdownButton /> */}
+        <BreadCrumb />
+        <DropdownButton />
       </Container>
       <Container
         sx={{ maxWidth: '100% !important', mt: { xs: '60px', md: '100px' } }}
@@ -96,16 +97,18 @@ export default function page() {
             </Typography>
           </Box>
         </Box>
-        {/* <OurCollection
+        <OurCollection
           heading="TOP FIVE LUXURY RESORTS"
           button="none"
           iconShow="flex"
           radius="30px"
           bottomradius="0 0 30px  30px"
-        /> */}
-        <Box>{/* <ResortsGallery /> */}</Box>
+        />
+        <Box>
+          <ResortsGallery />
+        </Box>
       </Container>
-      {/* <Footer /> */}
-    </>
+      <Footer />
+    </Box>
   )
 }

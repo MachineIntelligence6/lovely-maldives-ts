@@ -2,7 +2,7 @@
   --brown: #967f5d;
   --white: #666666;
   --blue: #5d7496;
-  --darkBrown: #60584c;
+  --darkBrown: #60584c; /* #444444; */
 
   /* --fontMon:"Montserrat", sans-serif; */
 }
@@ -18,6 +18,15 @@
     font-family: 'Montserrat';
     src: url('../../public/fonts/Montserrat/static/Montserrat-Regular.ttf');
 } */
+.blogScroll::-webkit-scrollbar {
+  height: 5px;
+}
+.blogScroll::-webkit-scrollbar-track {
+  background: black;
+}
+.blogScroll::-webkit-scrollbar-thumb {
+  background: rgb(59, 55, 55);
+}
 
 .line {
   position: absolute;
@@ -25,7 +34,10 @@
   display: inline-block;
   /* width: 100%; */
   height: 3px;
-  transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 .line1 {
   transform: rotate(45deg);
@@ -44,11 +56,12 @@
 }
 .readmore {
   font-size: 20px;
+  border-bottom: 2px solid transparent;
 }
 
 body {
   font-family: 'Century Gothic', sans-serif;
-  background-color: #fbfbfd;
+  background-color: #fbfbfd !important;
 }
 /* .rotateTop{
     transform:rotate(45deg);
@@ -103,18 +116,18 @@ body {
   opacity: 1 !important;
 }
 .slick-dots li button:before {
-  font-size: 12px !important;
+  font-size: 8px !important;
   color: var(--brown) !important;
   opacity: 1 !important;
 }
 
 .services-slider .slick-dots {
   position: unset !important;
-  margin: 45px 0 0 0 !important;
+  margin: 0px 0 0 0 !important;
 }
 .slick-dots {
   position: unset !important;
-  margin: 55px 0 0 0 !important;
+  margin: 25px 0 0 0 !important;
 }
 /* EXplore slider */
 @keyframes increaseHeight {
@@ -126,41 +139,26 @@ body {
   }
 }
 
-.slick-center-mode .slick-center {
+.explore-slider .slick-center-mode .slick-center {
   transition: all 0.2s ease;
   height: 450px !important;
   animation: increaseHeight 0.5s forwards;
 }
-.slick-center-mode .slick-center div:first-child,
-.slick-center img {
+
+.explore-slider .slick-center-mode .slick-center div:first-child,
+.explore-slider .slick-center img {
   height: 450px;
   transition: all 0.2s ease;
   /* animation: increaseHeight 0.5s forwards; */
 }
-
-/* Our collection */
-
-/* .collectionText{
-    width: 85%;
-    height:40%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    position:absolute;
-    color:white;
-    bottom:0%;
-    left:0;
-    font-size: 12px;
-    font-weight:200;
-    z-index:99;
-    background-color:var(--darkBrown);
-
-} */
-.collectionImg {
-  width: 85%;
+.css-11s0zwy-MuiGrid-root > .MuiGrid-item {
+  padding-top: 0 !important;
 }
-.buttonHover:hover {
-  background-color: var(--blue) !important ;
+.css-t4gpeb-MuiContainer-root {
+  padding: 0 !important;
+}
+.collectionImg {
+  width: 88%;
 }
 .menuBtn:hover {
   background-color: transparent !important;
@@ -171,6 +169,7 @@ body {
 }
 .imgRadius {
   border-radius: 70px;
+  background-attachment: unset;
 }
 
 label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
@@ -187,10 +186,10 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   /* height:190px;
     width:155px */
 }
-.blogImg {
-  width: 350px;
+/* .blogImg {
+  width: 70%;
   border-radius: 20px 0 0 20px;
-}
+} */
 .articleBlog {
   width: 700px;
 }
@@ -201,7 +200,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   width: 200px;
 }
 .latestImg {
-  width: 300px;
+  width: 100%;
 }
 .exploreImges::after {
   content: '';
@@ -214,41 +213,45 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   background: -moz-linear-gradient(
     top,
     rgba(150, 127, 93, 0.1) 0%,
-    rgba(150, 127, 93, 0.65) 100%
+    rgba(150, 127, 93, 0.35) 100%
   ); /* FF3.6+ */
   background: -webkit-gradient(
     linear,
     left top,
     left bottom,
-    color-stop(0%, rgba(150, 127, 93, 0.65)),
+    color-stop(0%, rgba(150, 127, 93, 0.35)),
     color-stop(100%, rgba(150, 127, 93, 0.1))
   ); /* Chrome,Safari4+ */
   background: -webkit-linear-gradient(
     top,
     rgba(150, 127, 93, 0.1) 0%,
-    rgba(150, 127, 93, 0.65) 100%
+    rgba(150, 127, 93, 0.35) 100%
   ); /* Chrome10+,Safari5.1+ */
   background: -o-linear-gradient(
     top,
     rgba(150, 127, 93, 0.1) 0%,
-    rgba(150, 127, 93, 0.65) 100%
+    rgba(150, 127, 93, 0.35) 100%
   ); /* Opera 11.10+ */
   background: -ms-linear-gradient(
     top,
     rgba(150, 127, 93, 0.1) 0%,
-    rgba(150, 127, 93, 0.65) 100%
+    rgba(150, 127, 93, 0.35) 100%
   ); /* IE10+ */
   background: linear-gradient(
     to bottom,
     rgba(150, 127, 93, 0.1) 0%,
-    rgba(150, 127, 93, 0.65) 100%
+    rgba(150, 127, 93, 0.35) 100%
   ); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#967F5D', endColorstr='#967f5d',GradientType=0 ); /* IE6-9 */
 }
+
+.css-13nykb7-MuiInputBase-root-MuiOutlinedInput-root {
+  padding: 16px !important;
+}
 @media screen and (min-width: 900px) and (max-width: 1024px) {
-  .exploreImges {
+  /* .exploreImges {
     width: 250px;
-  }
+  } */
   .sideTree {
     /* height:55% ; */
     right: -20%;
@@ -280,6 +283,25 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   .readmore {
     font-size: 18px;
   }
+  .slick-prev {
+    left: -4px !important;
+    overflow: hidden;
+  }
+  .slick-slider {
+    overflow: hidden;
+  }
+  .slick-next {
+    right: -4px !important;
+    overflow: 'hidden';
+  }
+  svg {
+    width: 700px;
+    height: 700px;
+  }
+  .cls-1 {
+    fill: '#fff';
+    width: '500px';
+  }
   .exploreSlider {
     left: 25%;
   }
@@ -293,15 +315,16 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     right: -35%;
   }
   .imgRadius {
-    border-radius: 10px;
+    border-radius: 0px;
+    background-attachment: fixed;
   }
   .collectionImg {
     width: 90%;
   }
-  .blogImg {
+  /* .blogImg {
     width: 100%;
     border-radius: 20px;
-  }
+  } */
   .articleBlog {
     width: 100%;
   }
@@ -314,18 +337,23 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   .latestImg {
     width: 100%;
   }
+
+  .svgSparkle {
+    width: 100%;
+    height: 100%;
+  }
 }
 
-.rightPalm {
+/* .rightPalm {
   position: absolute;
-  top: 115%;
+  top: 300px;
   right: 0;
   z-index: 99;
-}
-/* 
-@media screen and (max-width: 480px) {
+} */
+
+/* @media screen and (max-width: 480px) {
   .rightPalm {
-    top: 200px;
+    top: 400px;
   }
 } */
 

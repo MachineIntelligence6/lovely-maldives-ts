@@ -18,29 +18,21 @@ import SendIcon from '@mui/icons-material/Send'
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
+import Footer from '@/components/Footer'
 import article from '../../../public/Images/main.jpg'
 import blog from '../../../public/Images/landingTree.jpg'
-// import Navbar from '@/src/components/Nav'
-// import Footer from '@/src/components/Footer'
-// import Header from '@/src/components/Header'
-// import BreadCrumb from '@/src/components/BreadCrumb'
 
 export default function page() {
   return (
-    <>
+    <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
       <Header />
       <Container
         sx={{
           maxWidth: '100% !important',
           px: { xs: '24px', md: '120px' },
-          mt: { xs: '120px', md: '60px' },
         }}
       >
-        <BreadCrumb
-          linkName="Home"
-          linkName2="About Maldives"
-          path="/aboutmaldives"
-        />
+        <BreadCrumb />
         <Typography
           sx={{
             fontSize: { xs: '35px', md: '50px' },
@@ -179,8 +171,14 @@ export default function page() {
         </Box>
         <Box sx={{ textAlign: 'center', mt: '60px' }}>
           <Button
-            className="buttonHover"
-            sx={{ bgcolor: 'var(--brown)', px: '30px', py: 2 }}
+            sx={{
+              bgcolor: 'var(--brown)',
+              px: '30px',
+              py: 2,
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
+            }}
             title="Back to home"
           >
             <Link href="/" sx={{ color: 'white', textDecoration: 'none' }}>
@@ -245,7 +243,7 @@ export default function page() {
           </Box>
         </Box>
       </Container>
-      {/* <Footer /> */}
-    </>
+      <Footer />
+    </Box>
   )
 }

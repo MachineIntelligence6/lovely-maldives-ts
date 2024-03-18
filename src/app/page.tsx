@@ -7,15 +7,13 @@ import { Box, useMediaQuery, useTheme } from '@mui/material'
 import Image from 'next/image'
 import OurServices from '@/components/OurServices'
 import Banner from '@/components/Banner'
+import TopBrands from '@/components/TopBrands'
+import Footer from '@/components/Footer'
 import About from '../components/About'
 import Explore from '../components/Explore'
 import OurCollection from '../components/OurCollection'
 
 import Header from '../components/Header'
-
-import TopBrands from '@/components/TopBrands'
-
-import Footer from '@/components/Footer'
 
 export default function Home() {
   const theme = useTheme()
@@ -78,12 +76,13 @@ export default function Home() {
                 // paddingTop: '5px',
                 textDecoration: 'none',
                 color: 'var(--white)',
+                fontWeight: 'bold',
               }}
             >
               Read More{' '}
             </Link>
             <KeyboardArrowRightIcon
-              sx={{ fontSize: { xs: '24px', md: '35px' } }}
+              sx={{ fontSize: { xs: '24px', md: '30px' } }}
             />
           </Box>
         </Box>
@@ -99,13 +98,22 @@ export default function Home() {
             objectFit: "cover",
           }}
         /> */}
-        <Image
-          src="/Images/palm.png"
-          alt="sidetree"
-          width={lessThanMd ? 250 : 350}
-          height={lessThanMd ? 250 : 350}
-          className="rightPalm"
-        />
+        <Box sx={{ position: 'relative' }}>
+          <Image
+            src="/Images/palm.png"
+            alt="Palm tree"
+            width={lessThanMd ? 150 : 350}
+            height={lessThanMd ? 150 : 350}
+            className="rightPalm"
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              zIndex: 99,
+              transform: 'translateY(-30%)',
+            }}
+          />
+        </Box>
         <OurServices />
       </Box>
       <About />

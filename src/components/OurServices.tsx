@@ -30,40 +30,53 @@ import exploreImg1 from '../../public/Images/exploreImg.jpg'
 import exploreImg3 from '../../public/Images/explorImg2.jpg'
 import exploreImg2 from '../../public/Images/exploreImg3.jpg'
 import exploreImg4 from '../../public/Images/explorImg5.jpg'
+// import SparkleImg from './SparkleImg'
 
 export const data = [
   {
-    title: 'TRAVEL COUNSELING',
+    title: 'TRAVEL COUNSELING ',
     icon: <WifiIcon sx={{ fontSize: '40px' }} />,
+    description:
+      'We do all types of travel related services to all our customers.',
     image: exploreImg1,
   },
   {
-    title: 'VIP AIRPORT CONCIERGE SERVICE',
+    title: 'VIP YOUR CITY',
     icon: <NoteAltIcon sx={{ fontSize: '40px' }} />,
+    description:
+      'We do all types of travel related services to all our customers.',
     image: exploreImg3,
   },
   {
     title: 'HOTEL BOOKING',
     icon: <EditNoteIcon sx={{ fontSize: '40px' }} />,
+    description:
+      'We do all types of travel related services to all our customers.',
     image: exploreImg2,
   },
   {
     title: 'VIP YOUR CITY',
     icon: <WifiPasswordIcon sx={{ fontSize: '40px' }} />,
+    description:
+      'We do all types of travel related services to all our customers.',
     image: exploreImg4,
   },
   {
-    title: 'TRAVEL COUNSELING',
+    title: 'VIP AIRPORT CONCIERGE SERVICE',
     icon: <LaptopMacIcon sx={{ fontSize: '40px' }} />,
+    description:
+      'We do all types of travel related services to all our customers.',
     image: exploreImg1,
   },
   {
     title: 'HOTEL BOOKING',
     icon: <PhonelinkRingIcon sx={{ fontSize: '40px' }} />,
+    description:
+      'We do all types of travel related services to all our customers.',
     image: exploreImg3,
   },
 ]
-function SampleNextArrow(props: any) {
+export function SampleNextArrow(props: any) {
   const { className, style, onClick } = props
   return (
     <ArrowForwardIosIcon
@@ -71,18 +84,18 @@ function SampleNextArrow(props: any) {
       sx={{
         ...style,
         display: 'block',
-        color: 'var(--blue) !important',
+        color: { xs: 'white !important', md: 'var(--blue) !important' },
         fontSize: '35px !important ',
         width: '35px !important',
         height: '35px !important',
-        top: '40% !important',
+        top: '37% !important',
       }}
       onClick={onClick}
     />
   )
 }
 
-function SamplePrevArrow(props: any) {
+export function SamplePrevArrow(props: any) {
   const { className, style, onClick } = props
   return (
     <ArrowBackIosNewIcon
@@ -90,11 +103,11 @@ function SamplePrevArrow(props: any) {
       sx={{
         ...style,
         display: 'block',
-        color: 'var(--blue) !important',
+        color: { xs: 'white !important', md: 'var(--blue) !important' },
         fontSize: ' 35px !important ',
         width: '35px !important',
         height: '35px !important',
-        top: '40% !important',
+        top: '37% !important',
       }}
       onClick={onClick}
     />
@@ -185,8 +198,8 @@ export default function OurServices() {
   return (
     <Container
       sx={{
-        px: { xs: '20px !important', md: '120px !important' },
-        mt: { xs: '80px !important', md: '120px !important' },
+        px: { xs: '0px !important', md: '120px !important' },
+        mt: { xs: '120px !important', md: '120px !important' },
       }}
     >
       <Typography
@@ -204,7 +217,7 @@ export default function OurServices() {
         sx={{
           color: 'var(--brown)',
           textAlign: 'center',
-          mt: { xs: '30px', md: '60px' },
+          mt: { xs: '15px', md: '30px' },
           fontSize: { xs: '20px', md: '26px' },
         }}
       >
@@ -217,7 +230,6 @@ export default function OurServices() {
               // eslint-disable-next-line react/no-array-index-key
               key={index}
               sx={{
-                bgcolor: 'white',
                 width: '100%',
                 px: '6px',
                 mb: 0,
@@ -230,6 +242,7 @@ export default function OurServices() {
                     textAlign: 'center',
                     width: '100%',
                     position: 'relative',
+                    overflow: 'hidden',
                   }}
                 >
                   <Image
@@ -239,30 +252,49 @@ export default function OurServices() {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
+                      filter: 'brightness(0.7)',
                     }}
                   />
                   <Box
                     sx={{
                       width: '100%',
                       height: '100%',
-                      bgcolor: 'rgba(10,0,0,0.5)',
+                      backgroundColor: 'rgba(150, 127, 93, 0.5)',
                       position: 'absolute',
-                      top: '0',
-                      left: '0',
+                      top: 0,
+                      left: 0,
+                      zIndex: 1,
                     }}
                   />
                   <Typography
                     sx={{
-                      position: 'relative',
+                      position: 'absolute',
                       color: 'white',
-                      bottom: '20%',
+                      top: '10%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
                       fontSize: '16px',
-                      textAlign: 'center',
                       fontWeight: 600,
-                      opacity: '0.90',
+                      opacity: 0.9,
+                      zIndex: 2,
                     }}
                   >
                     {item.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      position: 'absolute',
+                      color: 'white',
+                      bottom: '10%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      opacity: 0.9,
+                      zIndex: 2,
+                    }}
+                  >
+                    {item.description}
                   </Typography>
                 </Box>
               ) : (
@@ -290,12 +322,13 @@ export default function OurServices() {
                       justifyContent: 'center',
                       alignItems: 'center',
                       height: '100%',
+                      py: '45px',
                     }}
                   >
                     <Typography>{item.icon}</Typography>
                     <Typography
                       sx={{
-                        mt: '10px',
+                        mt: '20px',
                         fontSize: '16px',
                         textAlign: 'center',
                         width: '100px',
@@ -310,6 +343,7 @@ export default function OurServices() {
           ))}
         </Slider>
       </Box>
+      {/* <SparkleImg /> */}
     </Container>
   )
 }

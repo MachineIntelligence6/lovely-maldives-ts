@@ -1,42 +1,62 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, useMediaQuery } from '@mui/material'
 import Header from './Header'
 
 import banner from '../../public/Images/banner.jpg'
 import banner2 from '../../public/Images/exploreImg4.jpg'
 import banner3 from '../../public/Images/exploreImg.jpg'
+import mobilebanner from '../../public/Images/exploreImg2.jpg'
+import mobilebanner2 from '../../public/Images/explorImg2.jpg'
+import mobilebanner3 from '../../public/Images/explorImg5.jpg'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const imgUrl: any = [banner, banner2, banner3]
+export const mobileImgUrl: any = [mobilebanner, mobilebanner2, mobilebanner3]
 
 export default function Banner() {
-  const [bgImage, setBgImage] = useState({ src: '' })
+  const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
+  const [bgImgStyle, setBgImgStyle] = useState({})
 
   useEffect(() => {
-    const randomIndex: number = Math.floor(Math.random() * imgUrl.length)
-    setBgImage(imgUrl[randomIndex])
-  }, [])
+    const randomIndexdev: number = Math.floor(Math.random() * imgUrl.length)
+    const randomIndexmob: number = Math.floor(
+      Math.random() * mobileImgUrl.length
+    )
 
-  const bgStyle = {
-    // eslint-disable-next-line max-len
-    backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10), rgba(150, 127, 93, 0.65)), url('${bgImage.src}')`,
-    backgroundSize: 'cover',
-    backgroundPosition: '100%',
-    width: '100%',
-    height: '100vh',
-    backgroundRepeat: 'no-repeat',
-    position: 'relative',
-  }
+    if (lessThanMd) {
+      setBgImgStyle({
+        backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
+         rgba(150, 127, 93, 0.20)), url('${mobileImgUrl[randomIndexmob].src}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: '100%',
+        width: '100%',
+        height: '100vh',
+        backgroundRepeat: 'no-repeat',
+        position: 'relative',
+      })
+    } else {
+      setBgImgStyle({
+        backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
+         rgba(150, 127, 93, 0.20)), url('${imgUrl[randomIndexdev].src}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: '100%',
+        width: '100%',
+        height: '100vh',
+        backgroundRepeat: 'no-repeat',
+        position: 'relative',
+      })
+    }
+  }, [lessThanMd])
 
   return (
-    <Box sx={{ ...bgStyle }}>
+    <Box sx={{ ...bgImgStyle }}>
       <Box
         sx={{
           width: '100%',
           height: '100%',
-          bgcolor: 'rgba(0,0,0,0.5)',
+          bgcolor: 'rgba(150, 127, 93,0.5)',
           position: 'absolute',
           top: '0',
           left: '0',

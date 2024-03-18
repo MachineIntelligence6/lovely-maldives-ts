@@ -8,6 +8,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
+import { SampleNextArrow, SamplePrevArrow } from './OurServices'
 import exploreImg1 from '../../public/Images/exploreImg.jpg'
 import exploreImg3 from '../../public/Images/explorImg2.jpg'
 import exploreImg2 from '../../public/Images/exploreImg3.jpg'
@@ -43,31 +44,55 @@ export default function Explore() {
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: false,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
+          centerPadding: '0px',
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
+          centerMode: true,
+          initialSlide: 1,
+          arrows: true,
         },
       },
       {
-        breakpoint: 768,
+        breakpoint: 960,
         settings: {
-          centerMode: false,
-          slidesToShow: 2,
+          centerMode: true,
+          centerPadding: '60px',
+          slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 1,
+          arrows: true,
+          autoplay: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          centerMode: true,
+          centerPadding: '60px',
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          arrows: true,
           autoplay: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
+          centerMode: true,
+          centerPadding: '60px',
           slidesToShow: 1,
           slidesToScroll: 1,
+          initialSlide: 1,
+          arrows: true,
           autoplay: true,
         },
       },
@@ -76,7 +101,7 @@ export default function Explore() {
   return (
     <Container
       sx={{
-        px: { xs: '20px !important', md: '120px !important' },
+        px: { xs: '0px !important', md: '120px !important' },
         pt: { xs: '60px', md: '120px' },
       }}
     >
@@ -85,12 +110,13 @@ export default function Explore() {
           fontSize: { xs: '22px', md: '30px' },
           color: 'var(--brown)',
           textAlign: 'center',
+          textTransform: 'uppercase',
         }}
       >
         Explore A World Of Wonders
       </Typography>
       <Box
-        className="slider-container"
+        className="slider-container explore-slider"
         sx={{
           mt: { md: '60px', xs: '40px' },
           width: '100%',
@@ -107,62 +133,62 @@ export default function Explore() {
             >
               <Paper
                 elevation={3}
-                className="exploreImges"
                 sx={{
                   color: 'white',
                   mx: 'auto',
-                  width: {
-                    xs: '98%',
-                    sm: '93%',
-                    md: '295px',
-                    lg: '302px',
-                    xl: '305px',
-                  },
+                  width: '98%',
                   height: '400px',
-                  borderRadius: '10px',
                   position: 'relative',
+                  textAlign: 'center',
+                  overflow: 'hidden',
                 }}
               >
-                <Image
-                  src={data.image}
-                  alt="exploreImg"
-                  style={{
+                <Box
+                  sx={{
+                    position: 'relative',
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover',
-                  }}
-                />
-                <Box
-                  className="exploreImges"
-                  sx={{
-                    width: {
-                      xs: '100%',
-                      md: '295px',
-                      lg: '302px',
-                      xl: '305px',
-                    },
-                    height: '100%',
-                    bgcolor: 'rgba(40,20,0,0.5)',
-                    position: 'absolute',
-                    top: '0',
-                    left: '0',
-                  }}
-                />
-                <Typography
-                  sx={{
-                    width: '150px',
-                    position: 'absolute',
-                    color: 'white',
-                    top: '20%',
-                    left: { xs: '25%', md: '22%' },
-                    fontSize: '30px',
-                    textAlign: 'center',
-                    fontWeight: 600,
-                    opacity: '0.75',
+                    overflow: 'hidden', // Ensure the overlay doesn't overflow
                   }}
                 >
-                  {data.title}
-                </Typography>
+                  <Box
+                    component={Image}
+                    src={data.image}
+                    alt="exploreImg"
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      zIndex: 1,
+                      backgroundImage:
+                        'linear-gradient(to bottom, rgba(150, 127, 93, 0.70), rgba(150, 127, 93, 0.20))',
+                      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.80)',
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      position: 'absolute',
+                      color: 'white',
+                      top: '20%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      fontSize: '20px',
+                      fontWeight: 600,
+                      zIndex: 2,
+                    }}
+                  >
+                    {data.title}
+                  </Typography>
+                </Box>
               </Paper>
             </Box>
           ))}
