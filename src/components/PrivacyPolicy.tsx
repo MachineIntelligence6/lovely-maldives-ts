@@ -5,10 +5,10 @@ export const privacyPolicyData = [
       'We may collect and process the following personal information from you:',
     content: (
       <>
-        <span style={{ fontWeight: 'bold' }}>
+        <span style={{ fontWeight: 'bold', fontFamily: 'Century Gothic' }}>
           Information you provide to us:{' '}
         </span>
-        <span>
+        <span style={{ fontFamily: 'Century Gothic' }}>
           {' '}
           We collect personal information when you voluntarily provide us with
           such information in the course of using our website or Services. For
@@ -24,7 +24,7 @@ export const privacyPolicyData = [
           {' '}
           Information we collect when you do business with us:{' '}
         </span>{' '}
-        <span>
+        <span style={{ fontFamily: 'Century Gothic' }}>
           We may process your personal information when you do business with us
           – for example, as a customer or prospective customer, or as a vendor,
           supplier, consultant or other third party. For example, we may hold
@@ -36,7 +36,7 @@ export const privacyPolicyData = [
         <span style={{ fontWeight: 'bold' }}>
           Personal information where we act as a data processor:
         </span>
-        <span>
+        <span style={{ fontFamily: 'Century Gothic' }}>
           We also process personal information on behalf of our customers in the
           context of supporting our products and services. Where a customer
           subscribes to our Services for their website, game or app, they will
@@ -57,23 +57,27 @@ export const privacyPolicyData = [
       'The personal information we collect from you may be used in one of the following ways:',
     content: (
       <>
-        <li>To deal with your inquiries and requests </li>
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
+          To deal with your inquiries and requests{' '}
+        </li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           To create and administer records about any online account that you
           register with us{' '}
         </li>
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           To provide you with information and access to resources that you have
           requested from us To provide you with technical support (your
           information helps us to better respond to your individual needs){' '}
         </li>
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           To improve our website (we continually strive to improve our website
           offerings based on the information and feedback we receive from you),
           including to improve the navigation and content of our sites{' '}
         </li>
-        <li>For website and system administration and security </li>
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
+          For website and system administration and security{' '}
+        </li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           {' '}
           For general business purposes, including to improve customer service
           (your information helps us to more effectively respond to your
@@ -82,17 +86,20 @@ export const privacyPolicyData = [
           users, to protect against wrongdoing, to enforce our Terms of Service,
           and to generally manage our business{' '}
         </li>
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           {' '}
           To process transactions and to provide Services to our customers and
           end-users{' '}
         </li>{' '}
-        <li> For recruitment purposes, where you apply for a job with us </li>
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
+          {' '}
+          For recruitment purposes, where you apply for a job with us{' '}
+        </li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           {' '}
           To administer a contest, promotion, survey, or other site features{' '}
         </li>{' '}
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           To send periodic emails. The email address you provide for order
           processing, will only be used to send you information and updates
           pertaining to your order. Where it is in accordance with your
@@ -148,10 +155,13 @@ export const privacyPolicyData = [
     ),
     content: (
       <>
-        <li>Microsoft Internet</li>
-        <li> Explorer Mozilla Firefox </li>
-        <li> Google Chrome </li>
-        <li> Apple Safari</li>
+        <li style={{ fontFamily: 'Century Gothic' }}>Microsoft Internet</li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
+          {' '}
+          Explorer Mozilla Firefox{' '}
+        </li>
+        <li style={{ fontFamily: 'Century Gothic' }}> Google Chrome </li>
+        <li style={{ fontFamily: 'Century Gothic' }}> Apple Safari</li>
         <p>
           {' '}
           However, if you choose to disable cookies, you may be unable to access
@@ -168,7 +178,7 @@ export const privacyPolicyData = [
       'We will only share your information with third parties in certain circumstances:',
     content: (
       <>
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           We engage certain trusted third parties to perform functions and
           provide services to us, including cloud hosting services, off-site
           backups, email service providers, and customer support providers. We
@@ -176,12 +186,12 @@ export const privacyPolicyData = [
           extent necessary to perform these functions, in accordance with the
           purposes set out in this Privacy Policy and applicable laws.{' '}
         </li>
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           In the event of a corporate sale, merger, reorganization, dissolution
           or similar event, your personal information may be sold, disposed of,
           transferred or otherwise disclosed as part of that transaction.
         </li>
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           We may also disclose information about you to third parties where we
           believe it necessary or appropriate under law, for example: (1) to
           protect or defend our rights, interests or property or that of third
@@ -193,7 +203,7 @@ export const privacyPolicyData = [
           to protect the vital interests of our users, customers and other third
           parties.
         </li>
-        <li>
+        <li style={{ fontFamily: 'Century Gothic' }}>
           We may use and share aggregated non-personal information with third
           parties for marketing, advertising and analytics purposes.
         </li>

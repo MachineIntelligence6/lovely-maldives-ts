@@ -49,7 +49,15 @@ export default function PrivacyPolicyPage() {
           {/* <Markdown>{privacy}</Markdown> */}
           {privacyPolicyData.map((data) => {
             return (
-              <Accordion sx={{ mt: '15px', py: '10px', px: '0 !important' }}>
+              <Accordion
+                sx={{
+                  mt: '15px',
+                  py: '10px',
+                  px: '0 !important',
+                  boxShadow: 'none',
+                  border: '1px solid rgb(223, 223, 223)',
+                }}
+              >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1-content"

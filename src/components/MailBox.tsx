@@ -29,6 +29,7 @@ export default function MailBox() {
       />
       <Typography
         sx={{
+          width: { xs: 'auto', md: '500px' },
           color: 'white',
           fontSize: { xs: '16px', md: '20px' },
           fontWeight: 200,
