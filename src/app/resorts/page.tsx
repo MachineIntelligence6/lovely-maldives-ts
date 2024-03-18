@@ -2,279 +2,282 @@
 
 'use client'
 
-import { Container, Box, Typography, Link, Button } from '@mui/material'
+import { Container, Box, Typography, Grid, Button } from '@mui/material'
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
-import DirectionsSubwayFilledOutlinedIcon from '@mui/icons-material/DirectionsSubwayFilledOutlined'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import EventNoteIcon from '@mui/icons-material/EventNote'
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium'
-import TranslateIcon from '@mui/icons-material/Translate'
-import WifiIcon from '@mui/icons-material/Wifi'
-import BedOutlinedIcon from '@mui/icons-material/BedOutlined'
-import LightOutlinedIcon from '@mui/icons-material/LightOutlined'
-import LightIcon from '@mui/icons-material/Light'
-import NoteAltIcon from '@mui/icons-material/NoteAlt'
-import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import EmailIcon from '@mui/icons-material/Email'
-import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import BoltIcon from '@mui/icons-material/Bolt'
+import Link from 'next/link'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { motion } from 'framer-motion'
 import BreadCrumb from '@/components/BreadCrumb'
 import Header from '@/components/Header'
-import IndividualSlider from '@/components/IndividualSlider'
-import logo from '../../../public/Images/logo.png'
-import Footer from '../../components/Footer'
-import OurCollection from '../../components/OurCollection'
+import Footer from '@/components/Footer'
+import TopFiveLuxuryResorts from '@/components/TopFiveLuxuryResorts'
 
-export const data = [
-  {
-    title: '30km from airport (20 minutes to reach the hotel)',
-    icon: <DirectionsSubwayFilledOutlinedIcon />,
-  },
-  {
-    title: 'Seaplane transfer and Speedboat transfer available',
-    icon: <LocationOnIcon />,
-  },
-  {
-    title:
-      'Check-in time is 12:00pm and Check-out time is 14:00hours. (Early check-in Available)',
-    icon: <EventNoteIcon />,
-  },
-  {
-    title: 'Resort has English speaking and French Speaking staff.',
-    icon: <TranslateIcon />,
-  },
-  {
-    title:
-      'Won best resort awards in South-East Asia 6 times, best Customer Care awards 3 times.',
-    icon: <WorkspacePremiumIcon />,
-  },
-]
-export const services = [
-  {
-    title: 'Internet Access:',
-    detail: 'Complementary Wifi ',
-    icon: <WifiIcon />,
-  },
-  {
-    title: 'Activities Available:',
-    detail: 'Billiards room, TT hall, candle light dinner, shing trip',
-    icon: <NoteAltIcon />,
-  },
-  {
-    title: 'Services at Room:',
-    detail: 'Room Service, Hair Dryer, Iron, Steamer, Hot water, Bathtub',
-    icon: <BedOutlinedIcon />,
-  },
-  {
-    title: 'Dining Options',
-    detail: 'Room Service, Hair Dryer, Iron, Steamer, Hot water, Bathtub',
-    icon: <LightOutlinedIcon />,
-  },
-  {
-    title: 'Other Services',
-    detail: 'Spa, Souvenir Shop, Honeymoon Celebration',
-    icon: <LightIcon />,
-  },
-]
+import FilterTray from '@/components/FilterTray'
+import SocialSharer from '@/components/SocialSharer'
+import { Resort, resorts } from '@/data'
+import collectionImg from '../../../public/Images/collectionImg.jpg'
 
-export default function page() {
+export default function ResortsPage() {
+  const [resortsData, setResortsData]: [
+    Resort[],
+    Dispatch<SetStateAction<Resort[]>>,
+  ] = useState<Resort[]>([...resorts])
+  const [isFullyLoaded, setIsFullyLoaded] = useState(false)
+
+  const loadMore = () => {
+    setResortsData([...resortsData, ...resorts])
+    setIsFullyLoaded(true)
+  }
   return (
-    <>
+    <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
       <Header />
-      <Container sx={{ color: 'var(--white)', mt: '60px' }}>
-        <BreadCrumb
-          linkName2="One and Only Reethi Rah"
-          linkName="Resorts"
-          path="/resorts"
-        />
-        <Image
-          src={logo}
-          alt="logo"
-          style={{ width: '200px', height: '200px' }}
-        />
-        <IndividualSlider />
-        <Box
+      <Container
+        sx={{
+          maxWidth: '100% !important',
+          px: { xs: '24px', md: '120px' },
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <BreadCrumb />
+        <FilterTray />
+      </Container>
+      <Container
+        sx={{
+          maxWidth: '100% !important',
+          px: { xs: '0px', md: '120px' },
+        }}
+      >
+        <Typography
+          variant="h2"
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            height: 'auto',
-            mt: '40px',
+            mt: { xs: '30px', md: '40px' },
             color: 'var(--white)',
-          }}
-        >
-          <Typography sx={{ fontSize: '24px' }}>
-            One n Only Reethi Rah{' '}
-          </Typography>
-        </Box>
-        <Box
-          sx={{ textAlign: 'left', fontSize: '10px', color: 'var(--brown)' }}
-        >
-          <StarRateIcon />
-          <StarRateIcon />
-          <StarRateIcon />
-          <StarRateIcon />
-        </Box>
-        <Typography
-          sx={{ fontSize: '20px', display: { xs: 'none', ms: 'block' } }}
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: '20px',
-            mt: '20px',
-            display: { xs: 'none', ms: 'block' },
-          }}
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Typography>
-        <Box
-          sx={{
-            width: '100%',
             textAlign: 'center',
-            mt: '20px',
-            display: { xs: 'none', ms: 'block' },
+            fontSize: { xs: '22px', md: '30px' },
+            fontWeight: 400,
           }}
         >
-          <Link
+          ALL RESORTS
+        </Typography>
+        <Box sx={{ my: { xs: '20px', md: '30px' } }}>
+          <SocialSharer />
+        </Box>
+        <Box
+          sx={{
+            maxWidth: '1000px',
+            margin: '0 auto',
+            display: { xs: 'block', md: 'none' },
+          }}
+        >
+          <Typography
             sx={{
-              width: '100%',
-              textDecoration: 'none',
-              color: 'Var(--brown)',
-              mx: 'auto',
-              fontSize: '24px',
+              fontSize: { xs: '18px', md: '22px' },
+              fontWeight: '200',
+              mt: { xs: '14px', md: '16px' },
+              px: { xs: '20px', md: '0' },
             }}
-            href="/#"
           >
-            MORE
-          </Link>
-        </Box>
-        <Box sx={{ width: { xs: '100%', md: '500px' }, mx: 'auto' }}>
-          <Typography
-            sx={{ fontSize: '20px', fontWeight: 600, my: '40px', mx: '40px' }}
-          >
-            QUICK FACTS:
+            There are over 150+ resorts in the Maldives. Here at Lovely
+            Maldives, we are curating one of the nest resorts in the Maldives.
           </Typography>
-
-          {data.map((iconDetail, index) => (
-            <Box
-              key={index}
-              sx={{ display: 'flex', alignItems: 'center', mt: '15px' }}
-            >
-              {iconDetail.icon}
-              <Typography sx={{ width: '200px', mx: 2 }}>
-                {iconDetail.title}
-              </Typography>
-            </Box>
-          ))}
-          <hr style={{ marginTop: '20px' }} />
         </Box>
-        <Box sx={{ width: { xs: '100%', md: '500px' }, mx: 'auto' }}>
-          <Typography
-            sx={{ fontSize: '20px', fontWeight: 600, my: '40px', mx: '40px' }}
-          >
-            HOTEL AMINETIES:{' '}
-          </Typography>
-
-          {services.map((iconDetail, index) => (
-            <Box
-              key={index}
-              sx={{ display: 'flex', alignItems: 'center', mt: '15px' }}
-            >
-              {iconDetail.icon}
-              <Box>
-                <Typography
-                  sx={{
-                    width: '200px',
-                    mx: 2,
-                    fontSize: '18px',
-                    fontWeight: 600,
-                  }}
-                >
-                  {iconDetail.title}
-                </Typography>
-                <Typography sx={{ width: '200px', mx: 2, mt: 1 }}>
-                  {iconDetail.detail}
-                </Typography>
-              </Box>
-            </Box>
-          ))}
-        </Box>
-        <Typography
+        <Box
           sx={{
-            fontSize: '20px',
-            fontWeight: 600,
-            my: '40px',
-            textAlign: 'center',
+            maxWidth: '1000px',
+            margin: '0 auto',
+            display: { xs: 'none', md: 'block' },
           }}
         >
-          2- Presidential Room (Second Image’s title)
-        </Typography>
-        <IndividualSlider />
-        <Typography
-          sx={{ fontSize: '20px', mt: '20px', px: { xs: '16px', md: '120px' } }}
+          <Typography
+            sx={{
+              fontSize: { xs: '18px', md: '22px' },
+              fontWeight: '200',
+              mt: { xs: '14px', md: '16px' },
+              px: { xs: '20px', md: '0' },
+            }}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: '18px', md: '22px' },
+              fontWeight: '200',
+              mt: { xs: '14px', md: '22px' },
+              px: { xs: '20px', md: '0' },
+            }}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est Century Gothic
+          </Typography>
+        </Box>
+        <Box>
+          <TopFiveLuxuryResorts
+            heading="TOP FIVE LUXURY RESORTS"
+            button="none"
+            iconShow="flex"
+            radius="20px"
+            bottomradius="0 0 20px  20px"
+          />
+        </Box>
+        <Box sx={{ my: { xs: '40px', md: '80px' } }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: { xs: '22px', md: '30px' },
+              color: 'var(--white)',
+              textAlign: 'center',
+              mt: { xs: '60px', md: '120px' },
+              textTransform: 'uppercase',
+            }}
+          >
+            OTHER LOVELY RESORTS
+          </Typography>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 4 }}
+            sx={{ mt: { xs: '30px', md: '40px' } }}
+          >
+            {resortsData.map((item) => (
+              <Grid item xs={12} sm={6} md={6} lg={4} key={item.id}>
+                <Box
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  style={{ width: '100%' }}
+                >
+                  <Box
+                    component={Link}
+                    href={`/resorts/${item.slug}`}
+                    sx={{ textDecoration: 'none', position: 'relative' }}
+                  >
+                    <Box
+                      component={Image}
+                      src={collectionImg}
+                      alt={item.name}
+                      sx={{
+                        width: '100%',
+                        height: { xs: '250px', md: '300px' },
+                        objectFit: 'cover',
+                        borderRadius: {
+                          xs: '0px',
+                          md: `20px 20px 0px 0px`,
+                        },
+                      }}
+                    />
+                    <Box
+                      component={motion.div}
+                      sx={{
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        color: 'white',
+                        fontSize: '12px',
+                        fontWeight: '200',
+                        zIndex: '99',
+                        gap: 1,
+                        py: '24px',
+                        bgcolor: 'var(--darkBrown)',
+                        borderRadius: { xs: '0px', md: '0px 0px 20px 20px' },
+                        mt: '-10px',
+                      }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          height: 'auto',
+                        }}
+                      >
+                        <Typography sx={{ px: 4, fontSize: '20px' }}>
+                          {item.name.length > 20
+                            ? `${item.name.substring(0, 20)}...`
+                            : item.name}
+                        </Typography>
+                        <BoltIcon sx={{ display: `flex` }} />
+                      </Box>
+                      <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+        <Box
+          sx={{
+            textAlign: 'center',
+            mb: { xs: 6, md: 2 },
+            display: isFullyLoaded ? 'none' : 'block',
+          }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Typography>
-        <Box sx={{ textAlign: 'center' }}>
           <Button
-            className="menuBtn"
             sx={{
               bgcolor: 'var(--brown)',
               color: 'white',
-              px: '50px',
-              mt: '40px',
+              px: { xs: '12px', md: '16px' },
+              py: { xs: '6px', md: '8px' },
+              textAlign: 'center',
+              fontSize: '18px',
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
             }}
-            title="Enquire"
+            onClick={loadMore}
+            title="Load more resorts"
           >
-            ENQUIRE
+            Load More
           </Button>
         </Box>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            width: '300px',
-            mx: 'auto',
-            color: 'black',
-            mt: '60px',
+            textAlign: 'center',
+            mb: { xs: 6, md: 2 },
+            display: isFullyLoaded ? { xs: 'block', md: 'none' } : 'none',
           }}
         >
-          <Typography>Share:</Typography>
-          <FacebookRoundedIcon />
-          <TwitterIcon />
-          <EmailIcon />
-          <WhatsAppIcon />
+          <Button
+            title="Enquire"
+            sx={{
+              color: 'white',
+              bgcolor: 'var(--brown)',
+              px: 3,
+              py: 1.5,
+              fontSize: '1.2rem !important',
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
+              textTransform: 'uppercase',
+            }}
+          >
+            SEND ENQUIRE
+          </Button>
         </Box>
-        <OurCollection
-          heading="OTHER RECOMMENDATIONS"
-          button="none"
-          iconShow="flex"
-          radius="30px"
-          bottomradius="0 0 30px  30px"
-        />
       </Container>
       <Footer />
-    </>
+    </Box>
   )
 }

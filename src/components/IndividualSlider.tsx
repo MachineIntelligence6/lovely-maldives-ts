@@ -1,5 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+'use client'
+
 import { useState } from 'react'
 import { Box, Container, Paper } from '@mui/material'
 import Slider from 'react-slick'

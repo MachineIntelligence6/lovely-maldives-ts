@@ -15,23 +15,23 @@ import collectionImg from '../../public/Images/collectionImg.jpg'
 
 export const datas = [{}, {}, {}, {}, {}]
 
-interface IOurCollectionProps {
+interface ITopFiveLuxuryResortsProps {
   heading: string
   button: string
   iconShow: string
   radius: string
   bottomradius: string
 }
-export default function OurCollection({
+export default function TopFiveLuxuryResorts({
   heading,
   button,
   iconShow,
   radius,
   bottomradius,
-}: IOurCollectionProps) {
+}: ITopFiveLuxuryResortsProps) {
   const settings = {
     // className: 'center',
-    centerPadding: '60px',
+    // centerPadding: '60px',
     dots: true,
     infinite: true,
     speed: 200,
@@ -40,7 +40,7 @@ export default function OurCollection({
     arrows: false,
     autoplay: true,
     autoplaySpeed: 4000,
-    centerMode: true,
+    centerMode: false,
     responsive: [
       {
         breakpoint: 600,
@@ -124,16 +124,6 @@ export default function OurCollection({
                     md: `${radius} ${radius} 0px 0px`,
                   },
                   margin: '0 auto',
-                }}
-              />
-              <Box
-                sx={{
-                  width: { xs: '100%', md: '96%' },
-                  height: { xs: '250px', md: '300px' },
-                  bgcolor: 'rgba(150,127,93,0.5)',
-                  position: 'absolute',
-                  top: '0',
-                  left: { xs: 0, md: '10px' },
                 }}
               />
               <Box

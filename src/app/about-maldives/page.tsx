@@ -32,11 +32,7 @@ export default function page() {
           px: { xs: '24px', md: '120px' },
         }}
       >
-        <BreadCrumb
-          linkName="Home"
-          linkName2="About Maldives"
-          path="/about-maldives"
-        />
+        <BreadCrumb />
         <Typography
           sx={{
             fontSize: { xs: '35px', md: '50px' },
@@ -175,8 +171,14 @@ export default function page() {
         </Box>
         <Box sx={{ textAlign: 'center', mt: '60px' }}>
           <Button
-            className="buttonHover"
-            sx={{ bgcolor: 'var(--brown)', px: '30px', py: 2 }}
+            sx={{
+              bgcolor: 'var(--brown)',
+              px: '30px',
+              py: 2,
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
+            }}
             title="Back to home"
           >
             <Link href="/" sx={{ color: 'white', textDecoration: 'none' }}>

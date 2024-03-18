@@ -5,10 +5,7 @@
 import { Box, Grid, Typography } from '@mui/material'
 import Image from 'next/image'
 import BlogSlider from '@/components/BlogSlider'
-import blog from '../../../public/Images/landingTree.jpg'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import BlogHeader from '../../components/BlogHeader'
+import blog from '../../public/Images/landingTree.jpg'
 
 export const popular = [
   {
@@ -36,11 +33,9 @@ export const popular = [
     date: '04 Feb 2024',
   },
 ]
-export default function PopularBlogPage() {
+export default function PopularBlogs() {
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
-      <Header />
-      <BlogHeader />
       <Box>
         <Typography
           sx={{
@@ -115,7 +110,6 @@ export default function PopularBlogPage() {
           ))}
         </Grid>
       </Box>
-      <Footer />
     </Box>
   )
 }

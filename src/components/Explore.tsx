@@ -116,7 +116,7 @@ export default function Explore() {
         Explore A World Of Wonders
       </Typography>
       <Box
-        className="slider-container"
+        className="slider-container explore-slider"
         sx={{
           mt: { md: '60px', xs: '40px' },
           width: '100%',
@@ -148,6 +148,7 @@ export default function Explore() {
                     position: 'relative',
                     width: '100%',
                     height: '100%',
+                    overflow: 'hidden', // Ensure the overlay doesn't overflow
                   }}
                 >
                   <Box
@@ -158,7 +159,6 @@ export default function Explore() {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      filter: 'brightness(0.7)',
                     }}
                   />
                   <Box
@@ -168,8 +168,10 @@ export default function Explore() {
                       left: 0,
                       width: '100%',
                       height: '100%',
-                      backgroundColor: 'rgba(150, 127, 93, 0.5)',
                       zIndex: 1,
+                      backgroundImage:
+                        'linear-gradient(to bottom, rgba(150, 127, 93, 0.70), rgba(150, 127, 93, 0.20))',
+                      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.80)',
                     }}
                   />
                   <Typography

@@ -28,7 +28,7 @@ export default function Banner() {
     if (lessThanMd) {
       setBgImgStyle({
         backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
-         rgba(150, 127, 93, 0.55)), url('${mobileImgUrl[randomIndexmob].src}')`,
+         rgba(150, 127, 93, 0.20)), url('${mobileImgUrl[randomIndexmob].src}')`,
         backgroundSize: 'cover',
         backgroundPosition: '100%',
         width: '100%',
@@ -39,7 +39,7 @@ export default function Banner() {
     } else {
       setBgImgStyle({
         backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
-         rgba(150, 127, 93, 0.55)), url('${imgUrl[randomIndexdev].src}')`,
+         rgba(150, 127, 93, 0.20)), url('${imgUrl[randomIndexdev].src}')`,
         backgroundSize: 'cover',
         backgroundPosition: '100%',
         width: '100%',

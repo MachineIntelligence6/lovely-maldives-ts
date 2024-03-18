@@ -17,7 +17,7 @@ export default function page() {
           color: 'var(--white)',
         }}
       >
-        <BreadCrumb linkName="Home" linkName2="FAQs" path="/faqs" />
+        <BreadCrumb />
         <Box sx={{ mt: '60px' }}>
           <Typography>
             Our Frequently Asked Questions (FAQ) is tailor-made to assist

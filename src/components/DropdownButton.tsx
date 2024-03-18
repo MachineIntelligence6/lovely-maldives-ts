@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+'use client'
+
 import React from 'react'
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded'
 import ClickAwayListener from '@mui/material/ClickAwayListener'

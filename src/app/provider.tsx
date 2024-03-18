@@ -26,6 +26,44 @@ const theme = createTheme({
         }
       `,
     },
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: 'contained', color: 'primary' },
+          style: {
+            backgroundColor: 'var(--brown)',
+            color: 'white',
+            // px: { xs: '12px', md: '16px' },
+            // py: { xs: '6px', md: '8px' },
+            // textAlign: 'center',
+            // fontSize: '18px',
+            '&:hover': {
+              backgroundColor: 'var(--blue) !important',
+            },
+          },
+        },
+      ],
+    },
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          color: 'var(--brown)',
+          '&.Mui-checked': {
+            color: 'var(--brown)',
+          },
+        },
+      },
+    },
+    MuiSlider: {
+      styleOverrides: {
+        root: {
+          color: 'var(--brown)',
+          '& .MuiSlider-thumb': {
+            borderRadius: '2px',
+          },
+        },
+      },
+    },
   },
 })
 interface IProviderProps {

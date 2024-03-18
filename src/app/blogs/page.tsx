@@ -10,13 +10,12 @@ import BlogHeader from '@/components/BlogHeader'
 import Footer from '@/components/Footer'
 
 import Header from '@/components/Header'
-import BreadCrumb from '@/components/BreadCrumb'
 import { useMenuStore } from '@/providers/menu-store-provider'
 import MailBox from '@/components/MailBox'
+import LatestBlogs from '@/components/LatestBlogs'
+import PopularBlogs from '@/components/PopularBlogs'
 import blog from '../../../public/Images/landingTree.jpg'
 import articleImage from '../../../public/Images/main.jpg'
-import LatestBlog from '../latest-blog/page'
-import PopularBlog from '../popular-blog/page'
 
 export const articles: any[] = [
   {
@@ -96,19 +95,17 @@ export default function Page() {
         sx={{
           background: 'black',
           position: { xs: 'unset', md: 'fixed' },
-          top: { xs: '0', md: '160px' },
+          top: { xs: '0', md: '172px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
-          // py: '20px',
           width: '100%',
-          // px: '100px',
           zIndex: 999,
           // opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'translateY(160)' : 'translateY(-90%)',
+          transform: isOpen ? 'translateY(0px)' : 'translateY(-120px)',
           transition: 'opacity 0.4s, transform 0.4s',
           display: 'block',
           flexDirection: 'row',
           overflow: 'hidden',
-          mt: { md: '0', xs: '135px' },
+          mt: { md: '0', xs: '115px' },
           gap: { md: '18px', xs: '0' },
           borderTop: '1px solid lightgray',
         }}
@@ -117,14 +114,16 @@ export default function Page() {
       </Box>
       <Container
         sx={{
-          maxWidth: '100% !important',
-          px: { xs: '24px', md: '120px' },
-          // mt: '120px',
+          maxWidth: '80%',
+          px: 0,
+          margin: 'auto',
+          '@media only screen and (min-width: 1441px)': {
+            maxWidth: '1030px !important',
+          },
         }}
       >
-        <BreadCrumb linkName2="Blogs" linkName="Home" path="/blog-articles" />
-        <LatestBlog hide="none" />
-        <PopularBlog hide="none" />
+        <LatestBlogs />
+        <PopularBlogs />
         <Box>
           <Typography
             sx={{
@@ -193,15 +192,18 @@ export default function Page() {
           </Grid>
           <Box sx={{ textAlign: 'center' }}>
             <Button
-              className="buttonHover"
               sx={{
-                bgcolor: 'var(--brown)',
-                color: 'white',
                 px: '50px',
                 py: 2,
                 mt: '60px',
+                backgroundColor: 'var(--brown)',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: 'var(--blue) !important',
+                },
               }}
               title="More articles"
+              color="primary"
             >
               MORE ARTICLES
             </Button>

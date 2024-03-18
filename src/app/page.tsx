@@ -76,6 +76,7 @@ export default function Home() {
                 paddingTop: '5px',
                 textDecoration: 'none',
                 color: 'var(--white)',
+                fontWeight: 'bold',
               }}
             >
               Read More{' '}
@@ -83,7 +84,8 @@ export default function Home() {
             <KeyboardArrowRightIcon
               sx={{
                 fontSize: { xs: '24px', md: '30px' },
-                mt: { xs: '6px', md: '7px' },
+                fontWeight: 'bold',
+                mt: '4px',
               }}
             />
           </Box>
@@ -100,19 +102,22 @@ export default function Home() {
             objectFit: "cover",
           }}
         /> */}
-        <Image
-          src="/Images/palm.png"
-          alt="Palm tree"
-          width={lessThanMd ? 180 : 350}
-          height={lessThanMd ? 180 : 350}
-          className="rightPalm"
-          style={{
-            position: 'absolute',
-            top: lessThanMd ? '141%' : '132%',
-            right: 0,
-            zIndex: 99,
-          }}
-        />
+        <Box sx={{ position: 'relative' }}>
+          <Image
+            src="/Images/palm.png"
+            alt="Palm tree"
+            width={lessThanMd ? 150 : 350}
+            height={lessThanMd ? 150 : 350}
+            className="rightPalm"
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              zIndex: 99,
+              transform: 'translateY(-30%)',
+            }}
+          />
+        </Box>
         <OurServices />
       </Box>
       <About />

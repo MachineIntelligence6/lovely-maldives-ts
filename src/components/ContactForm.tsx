@@ -54,7 +54,6 @@ export default function ContactForm() {
         />
 
         <Button
-          className="buttonHover"
           sx={{
             bgcolor: 'var(--brown)',
             color: 'white',

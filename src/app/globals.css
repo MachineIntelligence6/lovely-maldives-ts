@@ -2,7 +2,7 @@
   --brown: #967f5d;
   --white: #666666;
   --blue: #5d7496;
-  --darkBrown: #60584c;
+  --darkBrown: #60584c; /* #444444; */
 
   /* --fontMon:"Montserrat", sans-serif; */
 }
@@ -135,18 +135,18 @@ body {
   }
 }
 
-.slick-center-mode .slick-center {
+.explore-slider .slick-center-mode .slick-center {
   transition: all 0.2s ease;
   height: 450px !important;
   animation: increaseHeight 0.5s forwards;
 }
-.slick-center-mode .slick-center div:first-child,
-.slick-center img {
+
+.explore-slider .slick-center-mode .slick-center div:first-child,
+.explore-slider .slick-center img {
   height: 450px;
   transition: all 0.2s ease;
   /* animation: increaseHeight 0.5s forwards; */
 }
-
 .css-11s0zwy-MuiGrid-root > .MuiGrid-item {
   padding-top: 0 !important;
 }
@@ -155,9 +155,6 @@ body {
 }
 .collectionImg {
   width: 88%;
-}
-.buttonHover:hover {
-  background-color: var(--blue) !important ;
 }
 .menuBtn:hover {
   background-color: transparent !important;
@@ -185,10 +182,10 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   /* height:190px;
     width:155px */
 }
-.blogImg {
+/* .blogImg {
   width: 70%;
   border-radius: 20px 0 0 20px;
-}
+} */
 .articleBlog {
   width: 700px;
 }
@@ -316,10 +313,10 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   .collectionImg {
     width: 100%;
   }
-  .blogImg {
+  /* .blogImg {
     width: 100%;
     border-radius: 20px;
-  }
+  } */
   .articleBlog {
     width: 100%;
   }

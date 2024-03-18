@@ -13,8 +13,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 
-import journeyImg from '../../public/Images/explorImg3.jpg'
 import MailBox from './MailBox'
+import journeyImg from '../../public/Images/explorImg3.jpg'
 
 export const datas = [
   {
@@ -54,7 +54,7 @@ export default function TopBrands() {
     infinite: true,
     autoplay: true,
     autoplaySpeed: 4000,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false,
 
@@ -71,19 +71,19 @@ export default function TopBrands() {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 1,
-          centerPadding: '90px',
+          centerPadding: '80px',
           centerMode: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
-          centerPadding: '115px',
+          centerPadding: '80px',
           centerMode: true,
         },
       },
@@ -108,57 +108,65 @@ export default function TopBrands() {
           mt: { md: '60px', xs: '40px' },
         }}
       >
-        <Slider {...settings}>
+        <Box component={Slider} {...settings}>
           {datas.map((data, index) => (
             <Box key={index}>
               <Box
                 className="brandSlider"
                 sx={{
-                  width: { xs: '93%', md: '85%' },
-                  height: { xs: '250px', md: '220px' },
+                  width: { xs: '96%', md: '85%' },
+                  height: { xs: '180px', md: '220px' },
                   background: 'var(--brown)',
                   color: 'white',
                   textAlign: 'center',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  justifyContent: 'space-around',
-                  pb: 2,
+                  justifyContent: 'center',
+                  // pb: 2,
                 }}
               >
-                <Typography
+                <Box
                   sx={{
-                    pt: '50px',
-                    fontSize: '18px',
-                    fontWeight: 600,
-                    width: { xs: '150px', md: '150px' },
-                    textAlign: 'center',
+                    pt: { xs: '50%', md: '40%' },
+                    height: '50%',
                   }}
                 >
-                  {data.title}
-                </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: '26px',
+                      fontWeight: 500,
+                      textAlign: 'center',
+                    }}
+                  >
+                    {data.title}
+                  </Typography>
+                </Box>
                 <Box
                   sx={{
                     fontSize: '12px',
                     fontWeight: 200,
                     display: 'flex',
-                    alignItems: 'center',
+                    alignItems: 'flex-end',
                     justifyContent: 'center',
-                    mt: '20px',
+                    height: '50%',
+                    pb: 1,
                   }}
                 >
                   <Typography sx={{ fontSize: '18px', fontWeight: 200 }}>
                     {data.starNum}
                   </Typography>
-                  <StarRateIcon sx={{ fontSize: '18px' }} />
-                  <Typography sx={{ fontSize: '12px', fontWeight: 200 }}>
+                  <StarRateIcon sx={{ fontSize: '18px', mb: '5px' }} />
+                  <Typography
+                    sx={{ fontSize: '12px', fontWeight: 200, mb: '4px' }}
+                  >
                     {data.description}
                   </Typography>
                 </Box>
               </Box>
             </Box>
           ))}
-        </Slider>
+        </Box>
         <Box
           sx={{
             mt: { xs: '40px', md: '60px' },

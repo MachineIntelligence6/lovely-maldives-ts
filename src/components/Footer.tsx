@@ -1,8 +1,7 @@
 'use client'
 
-import { Box, Container, Link, Typography } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 
-// import Diversity2Icon from '@mui/icons-material/Diversity2'
 import EmailIcon from '@mui/icons-material/Email'
 import CallIcon from '@mui/icons-material/Call'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
@@ -12,6 +11,7 @@ import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 import ContactsRoundedIcon from '@mui/icons-material/ContactsRounded'
 import Image from 'next/image'
 import { styled } from '@mui/system'
+import Link from 'next/link'
 
 const StyledImage = styled(Image)({
   padding: 1,
@@ -64,7 +64,8 @@ export default function Footer() {
             Links
           </Typography>
 
-          <Link
+          <Box
+            component={Link}
             href="/about-maldives"
             sx={{
               color: 'white',
@@ -75,9 +76,10 @@ export default function Footer() {
             }}
           >
             About Maldives
-          </Link>
-          <Link
-            href="/all-resorts"
+          </Box>
+          <Box
+            component={Link}
+            href="resorts"
             sx={{
               color: 'white',
               textDecoration: 'none',
@@ -87,8 +89,9 @@ export default function Footer() {
             }}
           >
             Hotels
-          </Link>
-          <Link
+          </Box>
+          <Box
+            component={Link}
             href="/"
             sx={{
               color: 'white',
@@ -99,8 +102,9 @@ export default function Footer() {
             }}
           >
             About
-          </Link>
-          <Link
+          </Box>
+          <Box
+            component={Link}
             href="/blogs"
             sx={{
               color: 'white',
@@ -111,8 +115,9 @@ export default function Footer() {
             }}
           >
             Blog
-          </Link>
-          <Link
+          </Box>
+          <Box
+            component={Link}
             href="/faqs"
             sx={{
               color: 'white',
@@ -123,7 +128,7 @@ export default function Footer() {
             }}
           >
             FAQs
-          </Link>
+          </Box>
         </Box>
 
         <Box sx={{ mt: { xs: '30px', md: '0px' } }}>
@@ -141,7 +146,8 @@ export default function Footer() {
             <EmailIcon
               sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
             />
-            <Link
+            <Box
+              component={Link}
               href="/"
               sx={{
                 color: 'white',
@@ -152,7 +158,7 @@ export default function Footer() {
               }}
             >
               Email
-            </Link>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -165,7 +171,8 @@ export default function Footer() {
             <CallIcon
               sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
             />
-            <Link
+            <Box
+              component={Link}
               href="/"
               sx={{
                 color: 'white',
@@ -176,7 +183,7 @@ export default function Footer() {
               }}
             >
               Contact Number
-            </Link>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -189,7 +196,8 @@ export default function Footer() {
             <WhatsAppIcon
               sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
             />
-            <Link
+            <Box
+              component={Link}
               href="/"
               sx={{
                 color: 'white',
@@ -200,7 +208,7 @@ export default function Footer() {
               }}
             >
               Whatsapp
-            </Link>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -213,7 +221,8 @@ export default function Footer() {
             <ContactsRoundedIcon
               sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
             />
-            <Link
+            <Box
+              component={Link}
               href="/contact-us"
               sx={{
                 color: 'white',
@@ -224,7 +233,7 @@ export default function Footer() {
               }}
             >
               Contact us
-            </Link>
+            </Box>
           </Box>
         </Box>
         <Box sx={{ mt: { xs: '30px', md: '0px' } }}>
@@ -247,7 +256,8 @@ export default function Footer() {
             }}
           >
             <FacebookRoundedIcon style={{ fontSize: '20px' }} />
-            <Link
+            <Box
+              component={Link}
               href="/"
               sx={{
                 color: 'white',
@@ -258,7 +268,7 @@ export default function Footer() {
               }}
             >
               Messenger
-            </Link>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -271,7 +281,8 @@ export default function Footer() {
             <XIcon
               sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
             />
-            <Link
+            <Box
+              component={Link}
               href="/"
               sx={{
                 color: 'white',
@@ -282,7 +293,7 @@ export default function Footer() {
               }}
             >
               Twitter
-            </Link>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -295,7 +306,8 @@ export default function Footer() {
             <InstagramIcon
               sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
             />
-            <Link
+            <Box
+              component={Link}
               href="/"
               sx={{
                 color: 'white',
@@ -306,7 +318,7 @@ export default function Footer() {
               }}
             >
               Instagram
-            </Link>
+            </Box>
           </Box>
         </Box>
         <Box
@@ -354,9 +366,31 @@ export default function Footer() {
             &copy; 2024 Lovely Maldives. All rights reserved.
           </Typography>
         </Box>
-        <Typography sx={{ textAlign: 'center', mt: { xs: '16px', md: '0' } }}>
-          Privacy Policy | Terms of use
-        </Typography>
+        <Box sx={{ display: 'flex' }}>
+          <Box
+            component={Link}
+            href="/terms-of-use"
+            sx={{
+              textAlign: 'center',
+              textDecoration: 'none',
+              mt: { xs: '16px', md: '0', color: 'white' },
+            }}
+          >
+            Terms of use
+          </Box>
+          <Typography>|</Typography>
+          <Box
+            component={Link}
+            href="/privacy-policy"
+            sx={{
+              textAlign: 'center',
+              textDecoration: 'none',
+              mt: { xs: '16px', md: '0', color: 'white' },
+            }}
+          >
+            Privacy Policy
+          </Box>
+        </Box>
       </Box>
     </Container>
   )

@@ -1,8 +1,13 @@
 /* eslint-disable react/no-array-index-key */
+
+'use client'
+
 import { Box, Grid, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { useMenuStore } from '@/providers/menu-store-provider'
 import blog from '../../../public/Images/landingTree.jpg'
 import article from '../../../public/Images/main.jpg'
 import Footer from '../../components/Footer'
@@ -52,16 +57,47 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 export default function LatestBlog({ hide }: { hide: string }) {
+export default function LatestBlog() {
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+  const [addSlice, setAddSlice] = useState<any>([] as any)
+  const { isOpen } = useMenuStore((state) => state)
+
+  useEffect(() => {
+    const windowWidth = window.innerWidth
+
+    if (windowWidth < 768) {
+      const slicedArticles: any[] = latestBlog.slice(0, 3)
+      setAddSlice(slicedArticles as any[])
+    } else {
+      setAddSlice(latestBlog as any[])
+    }
+  }, [])
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' }, px: 0 }}>
-      {hide === 'none' ? (
-        ''
-      ) : (
-        <>
-          <Header />
-          <BlogHeader />
-        </>
-      )}
+      <Header />
+      <Box
+        sx={{
+          background: 'black',
+          position: { xs: 'unset', md: 'fixed' },
+          top: { xs: '0', md: '172px' },
+          boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
+          // py: '20px',
+          width: '100%',
+          // px: '100px',
+          zIndex: 999,
+          // opacity: isOpen ? 1 : 0,
+          transform: isOpen ? 'translateY(0px)' : 'translateY(-120px)',
+          transition: 'opacity 0.4s, transform 0.4s',
+          display: 'block',
+          flexDirection: 'row',
+          overflow: 'hidden',
+          mt: { md: '0', xs: '135px' },
+          gap: { md: '18px', xs: '0' },
+          borderTop: '1px solid lightgray',
+        }}
+      >
+        <BlogHeader />
+      </Box>
       <Box>
         <Typography
           sx={{
@@ -251,6 +287,7 @@ export default function LatestBlog({ hide }: { hide: string }) {
           </Grid>
         </Box>
         {hide === 'none' ? '' : <Footer />}
+        <Footer />
       </Box>
     </Box>
   )
