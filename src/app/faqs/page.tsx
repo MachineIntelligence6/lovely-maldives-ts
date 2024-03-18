@@ -1,8 +1,10 @@
-import { Container, Box, Typography, TextField } from '@mui/material'
-import SendIcon from '@mui/icons-material/Send'
-import Diversity2Icon from '@mui/icons-material/Diversity2'
+import { Container, Box, Typography } from '@mui/material'
+
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
+import Accordion from '@/components/Accordion'
+import Footer from '@/components/Footer'
+import MailBox from '@/components/MailBox'
 
 export default function page() {
   return (
@@ -57,65 +59,12 @@ export default function page() {
             </Typography>
           </Box>
         </Box>
-        {/* <Accordion /> */}
-        <Box
-          sx={{
-            mt: { xs: '60px', md: '120px' },
-            width: { xs: '90%', md: '55%' },
-            height: { xs: '250px', md: '350px' },
-            mx: 'auto',
-            borderRadius: '25px',
-            position: 'relative',
-            bgcolor: 'var(--blue)',
-            textAlign: 'center',
-          }}
-        >
-          <Diversity2Icon
-            sx={{
-              color: 'white',
-              mt: { xs: '7%', md: '10%' },
-              fontSize: '45px',
-            }}
-          />
-          <Typography
-            sx={{
-              color: 'white',
-              fontSize: { xs: '16px', md: '24px' },
-              fontWeight: 200,
-              textAlign: 'center',
-              mt: '20px',
-              px: 4,
-            }}
-          >
-            Subscribe to get the latest news and offers by Lovely Maldives
-          </Typography>
-          <Box>
-            <TextField
-              id="outlined-multiline-flexible"
-              label="Enter email adress"
-              multiline
-              className="input"
-              // maxRows={10}
-              sx={{
-                bgcolor: 'white',
-                mt: '20px',
-                borderRadius: '10px',
-                width: '60%',
-                position: 'relative',
-              }}
-            />
-            <SendIcon
-              sx={{
-                position: 'absolute',
-                top: { xs: '70%', md: '71%' },
-                right: '22%',
-                color: 'var(--blue)',
-              }}
-            />
-          </Box>
-        </Box>
+        <Accordion />
       </Container>
-      {/* <Footer /> */}
+      <Box sx={{ width: { xs: 'auto', md: '63%' }, mx: 'auto' }}>
+        <MailBox />
+      </Box>
+      <Footer />
     </>
   )
 }
