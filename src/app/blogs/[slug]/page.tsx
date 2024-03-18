@@ -47,8 +47,8 @@ export default function SingleBlogPage() {
       </Box>
       <Container
         sx={{
-          maxWidth: '80%',
-          px: 0,
+          // maxWidth: '80%',
+          px: { xs: '0px', md: '120px' },
           mt: { xs: 0, md: '100px' },
           margin: 'auto',
           '@media only screen and (min-width: 1441px)': {
@@ -61,12 +61,13 @@ export default function SingleBlogPage() {
             <Typography
               variant="h2"
               sx={{
-                fontSize: '2.25rem',
+                fontSize: { xs: '1.5rem', md: '2rem' },
                 m: 0,
                 mb: 4,
                 color: '#666',
                 fontWeight: '700',
                 textTransform: 'capitalize',
+                px: { xs: '30px', md: '0px' },
               }}
             >
               Seyta Opens Dhunthari Resort & Spa Long Heading Capacity here.
@@ -78,11 +79,12 @@ export default function SingleBlogPage() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                gap: '10px',
+                gap: { xs: '2px', md: '4px' },
                 mb: 4,
+                px: { xs: '30px', md: '0px' },
               }}
             >
-              <Typography sx={{ mb: '5px' }}>Share Article</Typography>
+              <Typography sx={{ mb: '2px' }}>Share Article</Typography>
               <IconButton
                 sx={{
                   color: '#000',
@@ -94,7 +96,7 @@ export default function SingleBlogPage() {
                   },
                 }}
               >
-                <XIcon />
+                <XIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
               </IconButton>
               <IconButton
                 sx={{
@@ -107,7 +109,7 @@ export default function SingleBlogPage() {
                   },
                 }}
               >
-                <WhatsApp />
+                <WhatsApp sx={{ fontSize: { xs: '16px', md: '22px' } }} />
               </IconButton>
               <IconButton
                 sx={{
@@ -120,7 +122,7 @@ export default function SingleBlogPage() {
                   },
                 }}
               >
-                <MailOutline />
+                <MailOutline sx={{ fontSize: { xs: '16px', md: '22px' } }} />
               </IconButton>
               <IconButton
                 sx={{
@@ -133,7 +135,9 @@ export default function SingleBlogPage() {
                   },
                 }}
               >
-                <FacebookOutlinedIcon />
+                <FacebookOutlinedIcon
+                  sx={{ fontSize: { xs: '16px', md: '22px' } }}
+                />
               </IconButton>
               <IconButton
                 sx={{
@@ -146,179 +150,185 @@ export default function SingleBlogPage() {
                   },
                 }}
               >
-                <LinkIcon />
+                <LinkIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
               </IconButton>
             </Paper>
-            <Image
+            <Box
+              component={Image}
               src={articleImage}
               alt="Picture of the author"
-              style={{
-                maxHeight: '400px',
+              sx={{
+                maxHeight: '500px',
+                height: { xs: '300px', md: '500px' },
                 width: '100%',
                 maxWidth: '100%',
                 margin: '0 auto',
                 display: 'block',
-                borderRadius: '20px',
+                borderRadius: { xs: '0px', md: '20px' },
                 objectFit: 'cover',
               }}
             />
-            <Typography
-              paragraph
-              sx={{
-                fontSize: '1.125rem',
-                mt: 2,
-                textAlign: 'center',
-                mb: 5,
-                color: '#666',
-                fontWeight: '400',
-                fontStyle: 'italic',
-                textTransform: 'capitalize',
-              }}
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            </Typography>
-            <Typography
-              paragraph
-              sx={{
-                fontSize: '1rem',
-                mt: 2,
-                mb: 5,
-                color: '#666',
-                fontWeight: '400',
-                fontStyle: 'italic',
-                textTransform: 'capitalize',
-              }}
-            >
-              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
-              nostrud proident voluptate veniam. Officia consectetur aliquip
-              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
-              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
-              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
-              cupidatat aute est ea mollit.
-            </Typography>
-            <Typography
-              paragraph
-              sx={{
-                fontSize: '1rem',
-                mt: 2,
-                mb: 5,
-                color: '#666',
-                fontWeight: '400',
-                fontStyle: 'italic',
-                textTransform: 'capitalize',
-              }}
-            >
-              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
-              nostrud proident voluptate veniam. Officia consectetur aliquip
-              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
-              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
-              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
-              cupidatat aute est ea mollit.
-            </Typography>
-            <Typography
-              paragraph
-              sx={{
-                fontSize: '1rem',
-                mt: 2,
-                mb: 5,
-                color: '#666',
-                fontWeight: '400',
-                fontStyle: 'italic',
-                textTransform: 'capitalize',
-              }}
-            >
-              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
-              nostrud proident voluptate veniam. Officia consectetur aliquip
-              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
-              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
-              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
-              cupidatat aute est ea mollit.
-            </Typography>
-            <Typography
-              paragraph
-              sx={{
-                fontSize: '1rem',
-                mt: 2,
-                mb: 5,
-                color: '#666',
-                fontWeight: '400',
-                fontStyle: 'italic',
-                textTransform: 'capitalize',
-              }}
-            >
-              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
-              nostrud proident voluptate veniam. Officia consectetur aliquip
-              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
-              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
-              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
-              cupidatat aute est ea mollit.
-            </Typography>
-
-            <Image
+            <Box sx={{ px: { xs: '30px', md: '0px' } }}>
+              <Typography
+                paragraph
+                sx={{
+                  fontSize: '1.125rem',
+                  mt: 2,
+                  textAlign: 'center',
+                  mb: 5,
+                  color: '#666',
+                  fontWeight: '400',
+                  fontStyle: 'italic',
+                  textTransform: 'capitalize',
+                }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+              </Typography>
+              <Typography
+                paragraph
+                sx={{
+                  fontSize: '1rem',
+                  mt: 2,
+                  mb: 5,
+                  color: '#666',
+                  fontWeight: '400',
+                  fontStyle: 'italic',
+                  textTransform: 'capitalize',
+                }}
+              >
+                Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+                nostrud proident voluptate veniam. Officia consectetur aliquip
+                nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+                culpa consequat mollit. Est voluptate tempor irure voluptate
+                nisi. Aliqua nostrud dolor commodo laboris in sint ex culpa
+                velit cupidatat aute est ea mollit.
+              </Typography>
+              <Typography
+                paragraph
+                sx={{
+                  fontSize: '1rem',
+                  mt: 2,
+                  mb: 5,
+                  color: '#666',
+                  fontWeight: '400',
+                  fontStyle: 'italic',
+                  textTransform: 'capitalize',
+                }}
+              >
+                Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+                nostrud proident voluptate veniam. Officia consectetur aliquip
+                nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+                culpa consequat mollit. Est voluptate tempor irure voluptate
+                nisi. Aliqua nostrud dolor commodo laboris in sint ex culpa
+                velit cupidatat aute est ea mollit.
+              </Typography>
+              <Typography
+                paragraph
+                sx={{
+                  fontSize: '1rem',
+                  mt: 2,
+                  mb: 5,
+                  color: '#666',
+                  fontWeight: '400',
+                  fontStyle: 'italic',
+                  textTransform: 'capitalize',
+                }}
+              >
+                Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+                nostrud proident voluptate veniam. Officia consectetur aliquip
+                nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+                culpa consequat mollit. Est voluptate tempor irure voluptate
+                nisi. Aliqua nostrud dolor commodo laboris in sint ex culpa
+                velit cupidatat aute est ea mollit.
+              </Typography>
+              <Typography
+                paragraph
+                sx={{
+                  fontSize: '1rem',
+                  mt: 2,
+                  mb: 5,
+                  color: '#666',
+                  fontWeight: '400',
+                  fontStyle: 'italic',
+                  textTransform: 'capitalize',
+                }}
+              >
+                Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+                nostrud proident voluptate veniam. Officia consectetur aliquip
+                nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+                culpa consequat mollit. Est voluptate tempor irure voluptate
+                nisi. Aliqua nostrud dolor commodo laboris in sint ex culpa
+                velit cupidatat aute est ea mollit.
+              </Typography>
+            </Box>
+            <Box
+              component={Image}
               src={articleImage}
               alt="Picture of the author"
-              style={{
-                maxHeight: '400px',
-                maxWidth: '100%',
+              sx={{
+                maxHeight: '350px',
+                maxWidth: { xs: '100%', md: '70%' },
                 margin: '0 auto',
                 display: 'block',
-                borderRadius: '20px',
+                borderRadius: { xs: '0px', md: '20px' },
                 objectFit: 'cover',
               }}
             />
-            <Typography
-              paragraph
-              sx={{
-                fontSize: '1.125rem',
-                mt: 2,
-                textAlign: 'center',
-                mb: 5,
-                color: '#666',
-                fontWeight: '400',
-                fontStyle: 'italic',
-                textTransform: 'capitalize',
-              }}
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            </Typography>
-            <Typography
-              paragraph
-              sx={{
-                fontSize: '1rem',
-                mt: 2,
-                mb: 5,
-                color: '#666',
-                fontWeight: '400',
-                fontStyle: 'italic',
-                textTransform: 'capitalize',
-              }}
-            >
-              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
-              nostrud proident voluptate veniam. Officia consectetur aliquip
-              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
-              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
-              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
-              cupidatat aute est ea mollit.
-            </Typography>
-            <Typography
-              paragraph
-              sx={{
-                fontSize: '1rem',
-                mt: 2,
-                mb: 5,
-                color: '#666',
-                fontWeight: '400',
-                fontStyle: 'italic',
-                textTransform: 'capitalize',
-              }}
-            >
-              Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
-              nostrud proident voluptate veniam. Officia consectetur aliquip
-              nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
-              culpa consequat mollit. Est voluptate tempor irure voluptate nisi.
-              Aliqua nostrud dolor commodo laboris in sint ex culpa velit
-              cupidatat aute est ea mollit.
-            </Typography>
+            <Box sx={{ px: { xs: '30px', md: '0px' } }}>
+              <Typography
+                paragraph
+                sx={{
+                  fontSize: '1.125rem',
+                  mt: 2,
+                  textAlign: 'center',
+                  mb: 5,
+                  color: '#666',
+                  fontWeight: '400',
+                  fontStyle: 'italic',
+                  textTransform: 'capitalize',
+                }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+              </Typography>
+              <Typography
+                paragraph
+                sx={{
+                  fontSize: '1rem',
+                  mt: 2,
+                  mb: 5,
+                  color: '#666',
+                  fontWeight: '400',
+                  fontStyle: 'italic',
+                  textTransform: 'capitalize',
+                }}
+              >
+                Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+                nostrud proident voluptate veniam. Officia consectetur aliquip
+                nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+                culpa consequat mollit. Est voluptate tempor irure voluptate
+                nisi. Aliqua nostrud dolor commodo laboris in sint ex culpa
+                velit cupidatat aute est ea mollit.
+              </Typography>
+              <Typography
+                paragraph
+                sx={{
+                  fontSize: '1rem',
+                  mt: 2,
+                  mb: 5,
+                  color: '#666',
+                  fontWeight: '400',
+                  fontStyle: 'italic',
+                  textTransform: 'capitalize',
+                }}
+              >
+                Consectetur voluptate aute duis enim culpa. Nostrud esse nulla
+                nostrud proident voluptate veniam. Officia consectetur aliquip
+                nostrud ipsum eiusmod aliquip. Mollit ut consectetur adipisicing
+                culpa consequat mollit. Est voluptate tempor irure voluptate
+                nisi. Aliqua nostrud dolor commodo laboris in sint ex culpa
+                velit cupidatat aute est ea mollit.
+              </Typography>
+            </Box>
           </Grid>
         </Grid>
         <Container>
