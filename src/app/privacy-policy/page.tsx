@@ -26,6 +26,7 @@ export default function PrivacyPolicyPage() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          mt: { xs: '120px', md: '60px' },
         }}
       >
         <BreadCrumb />
