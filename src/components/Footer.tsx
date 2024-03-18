@@ -378,7 +378,7 @@ export default function Footer() {
           >
             Terms of use
           </Box>
-          <Typography>|</Typography>
+          <Typography sx={{ mt: { xs: '16px', md: '0' } }}>|</Typography>
           <Box
             component={Link}
             href="/privacy-policy"
