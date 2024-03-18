@@ -20,7 +20,7 @@ export default function page() {
       >
         <BreadCrumb />
         <Box sx={{ mt: '60px' }}>
-          <Typography>
+          <Typography sx={{ fontSize: '22px' }}>
             Our Frequently Asked Questions (FAQ) is tailor-made to assist
             tourists visiting to the Maldives and will be covering a wide range
             of questions by tourists regarding the tourist Visa, rules and
