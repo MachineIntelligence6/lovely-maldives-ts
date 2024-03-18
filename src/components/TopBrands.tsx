@@ -239,7 +239,7 @@ export default function TopBrands() {
             </Typography>
           </Box>
         </Box>
-        <Box
+        {/* <Box
           sx={{
             mt: { xs: '40px', md: '120px' },
             width: { xs: '90%', md: '55%' },
@@ -294,8 +294,9 @@ export default function TopBrands() {
               }}
             />
           </Box>
-        </Box>
+        </Box> */}
       </Box>
+      <MailBox />
     </Container>
   )
 }

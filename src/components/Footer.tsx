@@ -25,7 +25,7 @@ export default function Footer() {
         px: { xs: '24px', md: '120px' },
         bgcolor: 'var(--brown)',
         color: 'white',
-        mt: '60px',
+        mt: { xs: '0', md: '60px' },
       }}
     >
       <Box

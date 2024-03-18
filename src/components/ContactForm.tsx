@@ -2,10 +2,21 @@ import { Container, Box, Typography, TextField, Button } from '@mui/material'
 
 export default function ContactForm() {
   return (
-    <Container sx={{ color: 'var(--white)', mt: '60px' }}>
-      <Box sx={{ width: '700px', maxWidth: '100%', mx: 'auto', mt: '60px' }}>
+    <Container
+      sx={{
+        maxWidth: '80%',
+        px: 0,
+        margin: 'auto',
+        '@media only screen and (min-width: 1441px)': {
+          maxWidth: '1030px !important',
+        },
+        color: 'var(--white)',
+        mt: '60px',
+      }}
+    >
+      <Box sx={{ maxWidth: '100%', mx: 'auto', mt: '60px' }}>
         <Typography
-          sx={{ fontSize: { xs: '35px', md: '50px' }, fontWeight: 400 }}
+          sx={{ fontSize: { xs: '24px', md: '30px' }, fontWeight: 400 }}
         >
           Send an Email
         </Typography>
@@ -19,15 +30,15 @@ export default function ContactForm() {
           }}
         >
           <Box sx={{ width: '100%', maxWidth: '100%' }}>
-            <Typography sx={{ fontSize: '24px' }}>Name</Typography>
+            <Typography sx={{ fontSize: '20px' }}>Name</Typography>
             <TextField
               id="outlined-basic"
               variant="outlined"
               sx={{ width: '100%', maxWidth: '100%' }}
             />
           </Box>
-          <Box sx={{ width: '100%', maxWidth: '100%' }}>
-            <Typography sx={{ fontSize: '24px' }}>Email Address</Typography>
+          <Box sx={{ width: '100%', maxWidth: '100%', mt: { xs: 5, md: 0 } }}>
+            <Typography sx={{ fontSize: '20px' }}>Email Address</Typography>
             <TextField
               id="outlined-basic"
               variant="outlined"
@@ -36,7 +47,7 @@ export default function ContactForm() {
           </Box>
         </Box>
 
-        <Typography sx={{ fontSize: '24px', mt: '40px' }}>
+        <Typography sx={{ fontSize: '20px', mt: '40px' }}>
           Contact Number
         </Typography>
         <TextField
@@ -44,7 +55,7 @@ export default function ContactForm() {
           variant="outlined"
           sx={{ width: '100%', maxWidth: '100%' }}
         />
-        <Typography sx={{ fontSize: '24px', mt: '40px' }}>Message</Typography>
+        <Typography sx={{ fontSize: '20px', mt: '40px' }}>Message</Typography>
         <TextField
           id="outlined-basic"
           variant="outlined"
@@ -66,7 +77,7 @@ export default function ContactForm() {
           SEND
         </Button>
       </Box>
-      <Typography sx={{ textAlign: 'center', fontSize: '24px', mt: '40px' }}>
+      <Typography sx={{ textAlign: 'center', fontSize: '20px', mt: '40px' }}>
         Protected by Recaptcha
       </Typography>
     </Container>

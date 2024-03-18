@@ -1,28 +1,31 @@
 'use client'
 
-import { Container, Box, Typography, TextField } from '@mui/material'
-import SendIcon from '@mui/icons-material/Send'
-import Diversity2Icon from '@mui/icons-material/Diversity2'
+import { Container, Box, Typography } from '@mui/material'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
+import MailBox from '@/components/MailBox'
 
 function page() {
   return (
-    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
+    <Box sx={{ mt: { md: '180px', xs: '100px' } }}>
       <Header />
       <Container
         sx={{
-          maxWidth: '100% !important',
-          px: { xs: '24px', md: '120px' },
+          maxWidth: '80%',
+          px: 0,
+          margin: 'auto',
+          '@media only screen and (min-width: 1441px)': {
+            maxWidth: '1030px !important',
+          },
           color: 'var(--white)',
         }}
       >
         <BreadCrumb />
         <Typography
           sx={{
-            fontSize: { xs: '35px', md: '50px' },
+            fontSize: { xs: '35px', md: '35px' },
             textAlign: 'center',
             mt: '60px',
           }}
@@ -83,57 +86,8 @@ function page() {
         </Typography>
       </Container>
       <ContactForm />
-      <Box
-        sx={{
-          mt: { xs: '60px', md: '120px' },
-          width: { xs: '90%', md: '55%' },
-          height: { xs: '250px', md: '350px' },
-          mx: 'auto',
-          borderRadius: '25px',
-          position: 'relative',
-          bgcolor: 'var(--blue)',
-          textAlign: 'center',
-        }}
-      >
-        <Diversity2Icon
-          sx={{ color: 'white', mt: { xs: '7%', md: '10%' }, fontSize: '45px' }}
-        />
-        <Typography
-          sx={{
-            color: 'white',
-            fontSize: { xs: '16px', md: '24px' },
-            fontWeight: 200,
-            textAlign: 'center',
-            mt: '20px',
-            px: 4,
-          }}
-        >
-          Subscribe to get the latest news and offers by Lovely Maldives
-        </Typography>
-        <Box>
-          <TextField
-            id="outlined-multiline-flexible"
-            label="Enter email adress"
-            multiline
-            className="input"
-            // maxRows={10}
-            sx={{
-              bgcolor: 'white',
-              mt: '20px',
-              borderRadius: '10px',
-              width: '60%',
-              position: 'relative',
-            }}
-          />
-          <SendIcon
-            sx={{
-              position: 'absolute',
-              top: { xs: '72%', md: '65%' },
-              right: '22%',
-              color: 'var(--blue)',
-            }}
-          />
-        </Box>
+      <Box sx={{ width: { xs: 'auto', md: '63%' }, mx: 'auto' }}>
+        <MailBox />
       </Box>
       <Footer />
     </Box>
