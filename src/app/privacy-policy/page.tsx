@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import BreadCrumb from '@/components/BreadCrumb'
-import DropdownButton from '@/components/DropdownButton'
+// import DropdownButton from '@/components/DropdownButton'
 // import Markdown from '@/components/Markdown'
 // import privacy from '@/md/privacy.md'
 // import Typography from '@mui/material/Typography';
@@ -30,11 +30,11 @@ export default function PrivacyPolicyPage() {
         }}
       >
         <BreadCrumb />
-        <DropdownButton />
+        {/* <DropdownButton /> */}
       </Container>
       <Container
         sx={{
-          mt: { xs: '60px', md: '100px' },
+          mt: { xs: '60px', md: '60px' },
           maxWidth: '80%',
           px: '0 !important',
           margin: 'auto',
@@ -57,6 +57,7 @@ export default function PrivacyPolicyPage() {
                   px: '0 !important',
                   boxShadow: 'none',
                   border: '1px solid rgb(223, 223, 223)',
+                  bgcolor: 'white',
                 }}
               >
                 <AccordionSummary
