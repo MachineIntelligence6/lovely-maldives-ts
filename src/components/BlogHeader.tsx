@@ -5,8 +5,12 @@ import { Box, Link } from '@mui/material'
 export default function BlogHeader() {
   return (
     <Box sx={{ mt: { xs: '100px', md: '0' } }}>
-      <Box sx={{ color: 'white', width: '100%', overflowX: 'auto' }}>
+      <Box
+        className="blogScroll"
+        sx={{ color: 'white', width: '100%', overflowX: 'auto' }}
+      >
         <Box
+          // className="blogScroll"
           sx={{
             bgcolor: 'black',
             display: 'flex',

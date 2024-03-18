@@ -1,5 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { Box, Grid, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import Paper from '@mui/material/Paper'
 import Image from 'next/image'
 import blog from '../../../public/Images/landingTree.jpg'
 import article from '../../../public/Images/main.jpg'
@@ -41,6 +43,14 @@ export const latestBlog = [
     isoverlay: false,
   },
 ]
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  // padding: theme.spacing(1),
+  // textAlign: 'center',
+  color: theme.palette.text.secondary,
+}))
 export default function LatestBlog({ hide }: { hide: string }) {
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' }, px: 0 }}>
@@ -117,120 +127,129 @@ export default function LatestBlog({ hide }: { hide: string }) {
             </Typography>
           </Box>
         </Box>
-
-        <Grid
-          container
-          columns={{ xs: 4, sm: 8, md: 12 }}
-          spacing={5}
-          sx={{
-            mt: { xs: '0', md: '40px' },
-            overFlow: 'hidden',
-          }}
-        >
-          {latestBlog.map((latest, index) => {
-            if (latest.isoverlay) {
+        <Box sx={{ width: '100%' }}>
+          <Grid
+            container
+            columns={{ xs: 4, sm: 8, md: 12 }}
+            columnSpacing={{ xs: 1, sm: 2, md: 5 }}
+            sx={{
+              mt: { xs: '0', md: '40px' },
+              overFlow: 'hidden',
+            }}
+          >
+            {latestBlog.map((latest, index) => {
+              if (latest.isoverlay) {
+                return (
+                  <Grid
+                    xs={4}
+                    sm={4}
+                    md={6}
+                    key={index}
+                    sx={{
+                      borderRadius: '20px',
+                      mt: '60px',
+                      // position: 'relative',
+                      height: { xs: '582px', md: 'auto' },
+                    }}
+                  >
+                    <Item
+                      sx={{
+                        borderRadius: '20px',
+                        position: 'relative',
+                        height: '100%',
+                      }}
+                    >
+                      <Image
+                        src={latest.img}
+                        alt="blog"
+                        // className="latestImg"
+                        style={{
+                          width: '100%',
+                          borderRadius: '20px',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                      />
+                      <Box
+                        sx={{
+                          width: { xs: '90.5%', md: '100%' },
+                          height: '100%',
+                          backgroundColor: 'rgba(150, 127, 93, 0.5)',
+                          position: 'absolute',
+                          top: '0',
+                          zIndex: 1,
+                          borderRadius: '20px',
+                        }}
+                      />
+                      <Box
+                        sx={{
+                          width: { xs: '90%', md: '100%' },
+                          mt: '20px',
+                          color: 'white',
+                          position: 'absolute',
+                          top: '50%',
+                          // left: '10%',
+                          zIndex: 99,
+                        }}
+                      >
+                        <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                          {latest.title}
+                        </Typography>
+                        <Typography sx={{ fontSize: '24px', mt: '20px' }}>
+                          {latest.discription}
+                        </Typography>
+                        <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                          {latest.date}
+                        </Typography>
+                      </Box>
+                    </Item>
+                  </Grid>
+                )
+              }
               return (
                 <Grid
-                  item
                   xs={4}
                   sm={4}
                   md={6}
                   key={index}
-                  sx={{
-                    borderRadius: '20px',
-                    mt: '60px',
-                    position: 'relative',
-                    height: { xs: '582px', md: 'auto' },
-                  }}
+                  sx={{ borderRadius: '20px', bgcolor: 'white', mt: '60px' }}
                 >
-                  <Image
-                    src={latest.img}
-                    alt="blog"
-                    // className="latestImg"
-                    style={{
-                      width: '100%',
-                      borderRadius: '20px',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: { xs: '90.5%', md: '94%' },
-                      height: '100%',
-                      backgroundColor: 'rgba(150, 127, 93, 0.5)',
-                      position: 'absolute',
-                      top: '0',
-                      zIndex: 1,
-                      borderRadius: '20px !important',
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: { xs: '90%', md: '550px' },
-                      mt: '20px',
-                      color: 'white',
-                      position: 'absolute',
-                      top: '59%',
-                      left: '10%',
-                      zIndex: 99,
-                    }}
-                  >
-                    <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                      {latest.title}
-                    </Typography>
-                    <Typography sx={{ fontSize: '24px', mt: '20px' }}>
-                      {latest.discription}
-                    </Typography>
-                    <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                      {latest.date}
-                    </Typography>
-                  </Box>
+                  <Item sx={{ borderRadius: '20px' }}>
+                    <Image
+                      src={latest.img}
+                      alt="blog"
+                      // className="latestImg"
+                      style={{
+                        width: '100%',
+                        borderRadius: '20px 20px 0 0px',
+                        height: '300px',
+                        objectFit: 'cover',
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        width: { xs: '100%', md: '100%' },
+                        mt: '20px',
+                        color: 'var(--white)',
+                        pb: '20px',
+                      }}
+                    >
+                      <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                        {latest.title}
+                      </Typography>
+                      <Typography sx={{ fontSize: '24px', mt: '20px' }}>
+                        {latest.discription}
+                      </Typography>
+                      <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                        {latest.date}
+                      </Typography>
+                    </Box>
+                  </Item>
                 </Grid>
               )
-            }
-            return (
-              <Grid
-                item
-                xs={4}
-                sm={4}
-                md={6}
-                key={index}
-                sx={{ borderRadius: '20px', bgcolor: 'white', mt: '60px' }}
-              >
-                <Image
-                  src={latest.img}
-                  alt="blog"
-                  // className="latestImg"
-                  style={{
-                    width: '100%',
-                    borderRadius: '20px 20px 0 0px',
-                    height: '300px',
-                    objectFit: 'cover',
-                  }}
-                />
-                <Box
-                  sx={{
-                    width: { xs: '100%', md: '100%' },
-                    mt: '20px',
-                    color: 'var(--white)',
-                    pb: '20px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                    {latest.title}
-                  </Typography>
-                  <Typography sx={{ fontSize: '24px', mt: '20px' }}>
-                    {latest.discription}
-                  </Typography>
-                  <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                    {latest.date}
-                  </Typography>
-                </Box>
-              </Grid>
-            )
-          })}
-        </Grid>
+            })}
+          </Grid>
+        </Box>
         {hide === 'none' ? '' : <Footer />}
       </Box>
     </Box>

@@ -18,6 +18,15 @@
     font-family: 'Montserrat';
     src: url('../../public/fonts/Montserrat/static/Montserrat-Regular.ttf');
 } */
+.blogScroll::-webkit-scrollbar {
+  height: 5px;
+}
+.blogScroll::-webkit-scrollbar-track {
+  background: black;
+}
+.blogScroll::-webkit-scrollbar-thumb {
+  background: rgb(59, 55, 55);
+}
 
 .line {
   position: absolute;
