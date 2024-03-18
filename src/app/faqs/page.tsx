@@ -1,14 +1,15 @@
-import { Container, Box, Typography, TextField } from '@mui/material'
-import SendIcon from '@mui/icons-material/Send'
-import Diversity2Icon from '@mui/icons-material/Diversity2'
+import { Container, Box, Typography } from '@mui/material'
+// import SendIcon from '@mui/icons-material/Send'
+// import Diversity2Icon from '@mui/icons-material/Diversity2'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
 import FaqsAccordion from '@/components/Accordion'
+import MailBox from '@/components/MailBox'
 
 export default function page() {
   return (
-    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
+    <Box sx={{ pt: { md: '180px', xs: '100px' } }}>
       <Header />
       <Container
         sx={{
@@ -19,7 +20,7 @@ export default function page() {
       >
         <BreadCrumb />
         <Box sx={{ mt: '60px' }}>
-          <Typography>
+          <Typography sx={{ fontSize: '22px' }}>
             Our Frequently Asked Questions (FAQ) is tailor-made to assist
             tourists visiting to the Maldives and will be covering a wide range
             of questions by tourists regarding the tourist Visa, rules and
@@ -35,8 +36,8 @@ export default function page() {
           <Box
             sx={{
               width: { xs: 'auto', md: '75%' },
-              bgcolor: 'var(--brown)',
-              color: 'white',
+              bgcolor: '#E5E4E2',
+              color: 'black',
               py: 3,
               px: 2,
               borderRadius: '20px',
@@ -53,13 +54,13 @@ export default function page() {
             <Typography sx={{ fontWeight: 600, mt: 2 }}>
               General Questions
             </Typography>
-            <Typography sx={{ fontWeight: 600, mt: 2 }}>
+            <Typography sx={{ fontWeight: 600, mt: 2, mb: 4 }}>
               More Category Add from Beknd
             </Typography>
           </Box>
         </Box>
         <FaqsAccordion />
-        <Box
+        {/* <Box
           sx={{
             mt: { xs: '60px', md: '120px' },
             width: { xs: '90%', md: '55%' },
@@ -114,8 +115,11 @@ export default function page() {
               }}
             />
           </Box>
-        </Box>
+        </Box> */}
       </Container>
+      <Box sx={{ width: { xs: 'auto', md: '63%' }, mx: 'auto' }}>
+        <MailBox />
+      </Box>
       <Footer />
     </Box>
   )

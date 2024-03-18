@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import {
-  Container,
+  Box,
   Typography,
   Accordion,
   AccordionSummary,
@@ -44,17 +44,36 @@ export const general = [
 ]
 export default function FaqsAccordion() {
   return (
-    <Container sx={{ mt: '60px' }}>
-      <Typography sx={{ fontWeight: 600, fontSize: '24px', mb: 3 }}>
+    <Box sx={{ mt: '60px' }}>
+      <Typography
+        sx={{ fontWeight: 600, fontSize: '20px', mb: 3, color: 'black' }}
+      >
         Visa and Arrival
       </Typography>
       {visa.map((faq, index) => (
-        <Accordion key={index}>
+        <Accordion
+          key={index}
+          sx={{
+            py: 1,
+            boxShadow: 'none',
+            borderBottom: '1px solid rgb(223, 223, 223)',
+            borderTop: 'none',
+          }}
+        >
           <AccordionSummary
-            sx={{ fontWeight: 600 }}
+            sx={{
+              fontWeight: 600,
+              px: '0 !important',
+              fontFamily: 'Century Gothic',
+            }}
             expandIcon={
               <ExpandMoreIcon
-                sx={{ color: 'var(--brown)', fontSize: '35px' }}
+                sx={{
+                  color: 'var(--brown)',
+                  fontSize: '35px',
+                  bgcolor: { xs: '#E5E4E2', md: 'white' },
+                  borderRadius: { xs: '100%', md: 'none' },
+                }}
               />
             }
             aria-controls="panel1-content"
@@ -62,19 +81,48 @@ export default function FaqsAccordion() {
           >
             {faq.que}
           </AccordionSummary>
-          <AccordionDetails>{faq.ans}</AccordionDetails>
+          <AccordionDetails
+            sx={{ fontFamily: 'Century Gothic', px: '0 !important' }}
+          >
+            {faq.ans}
+          </AccordionDetails>
         </Accordion>
       ))}
-      <Typography sx={{ fontWeight: 600, fontSize: '24px', mb: 3, mt: '40px' }}>
+      <Typography
+        sx={{
+          fontWeight: 600,
+          fontSize: '20px',
+          mb: 3,
+          color: 'black',
+          mt: '40px',
+        }}
+      >
         Legal Questions
       </Typography>
       {legal.map((faq, index) => (
-        <Accordion key={index}>
+        <Accordion
+          key={index}
+          sx={{
+            py: 1,
+            boxShadow: 'none',
+            borderBottom: '1px solid rgb(223, 223, 223)',
+            borderTop: 'none',
+          }}
+        >
           <AccordionSummary
-            sx={{ fontWeight: 600 }}
+            sx={{
+              fontWeight: 600,
+              px: '0 !important',
+              fontFamily: 'Century Gothic',
+            }}
             expandIcon={
               <ExpandMoreIcon
-                sx={{ color: 'var(--brown)', fontSize: '35px' }}
+                sx={{
+                  color: 'var(--brown)',
+                  fontSize: '35px',
+                  bgcolor: { xs: '#E5E4E2', md: 'white' },
+                  borderRadius: { xs: '100%', md: 'none' },
+                }}
               />
             }
             aria-controls="panel1-content"
@@ -82,19 +130,48 @@ export default function FaqsAccordion() {
           >
             {faq.que}
           </AccordionSummary>
-          <AccordionDetails>{faq.ans}</AccordionDetails>
+          <AccordionDetails
+            sx={{ fontFamily: 'Century Gothic', px: '0 !important' }}
+          >
+            {faq.ans}
+          </AccordionDetails>
         </Accordion>
       ))}
-      <Typography sx={{ fontWeight: 600, fontSize: '24px', mb: 3, mt: '40px' }}>
+      <Typography
+        sx={{
+          fontWeight: 600,
+          fontSize: '20px',
+          mb: 3,
+          color: 'black',
+          mt: '40px',
+        }}
+      >
         General Questions
       </Typography>
       {general.map((faq, index) => (
-        <Accordion key={index}>
+        <Accordion
+          key={index}
+          sx={{
+            py: 1,
+            boxShadow: 'none',
+            borderBottom: '1px solid rgb(223, 223, 223)',
+            borderTop: 'none',
+          }}
+        >
           <AccordionSummary
-            sx={{ fontWeight: 600 }}
+            sx={{
+              fontWeight: 600,
+              px: '0 !important',
+              fontFamily: 'Century Gothic',
+            }}
             expandIcon={
               <ExpandMoreIcon
-                sx={{ color: 'var(--brown)', fontSize: '35px' }}
+                sx={{
+                  color: 'var(--brown)',
+                  fontSize: '35px',
+                  bgcolor: { xs: '#E5E4E2', md: 'white' },
+                  borderRadius: { xs: '100%', md: 'none' },
+                }}
               />
             }
             aria-controls="panel1-content"
@@ -102,9 +179,13 @@ export default function FaqsAccordion() {
           >
             {faq.que}
           </AccordionSummary>
-          <AccordionDetails>{faq.ans}</AccordionDetails>
+          <AccordionDetails
+            sx={{ fontFamily: 'Century Gothic', px: '0 !important' }}
+          >
+            {faq.ans}
+          </AccordionDetails>
         </Accordion>
       ))}
-    </Container>
+    </Box>
   )
 }
