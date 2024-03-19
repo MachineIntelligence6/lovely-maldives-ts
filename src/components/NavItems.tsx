@@ -15,7 +15,6 @@ function NavItems({ items }: any) {
   }
   return (
     <Box
-      component="ul"
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
@@ -29,6 +28,8 @@ function NavItems({ items }: any) {
           onClick={() => {
             handleMenu(item.route)
           }}
+          role="link"
+          aria-labelledby={item.label}
           component={Link}
           href={item.route}
           sx={{

@@ -1,35 +1,45 @@
-'use client'
-
 import Link from 'next/link'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import Typography from '@mui/material/Typography'
-import { Box, useMediaQuery, useTheme } from '@mui/material'
-import Image from 'next/image'
-import OurServices from '@/components/OurServices'
-import Banner from '@/components/Banner'
-import TopBrands from '@/components/TopBrands'
-import Footer from '@/components/Footer'
-import About from '../components/About'
-import Explore from '../components/Explore'
-import OurCollection from '../components/OurCollection'
 
-import Header from '../components/Header'
+import Box from '@mui/system/Box'
+// import OurServices from '@/components/OurServices'
+// import Banner from '@/components/Banner'
+// import TopBrands from '@/components/TopBrands'
+import dynamic from 'next/dynamic'
+import Footer from '@/components/Footer'
+// import About from '@/components/About'
+// import Explore from '@/components/Explore'
+// import OurCollection from '@/components/OurCollection'
+
+import Header from '@/components/Header'
+// import SidePalmTree from '@/components/SidePalmTree'
+
+const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
+const OurCollection = dynamic(() => import('@/components/OurCollection'))
+const Explore = dynamic(() => import('@/components/Explore'))
+const About = dynamic(() => import('@/components/About'))
+const TopBrands = dynamic(() => import('@/components/TopBrands'))
+const Banner = dynamic(() => import('@/components/Banner'))
+const OurServices = dynamic(() => import('@/components/OurServices'))
 
 export default function Home() {
-  const theme = useTheme()
-  const lessThanMd = useMediaQuery(theme.breakpoints.down('md'))
-
   return (
     <>
       <Header />
       <Banner />
-      <Box sx={{ paddingTop: '10px' }}>
+      <Box
+        sx={{
+          paddingTop: '10px',
+          width: '100%',
+        }}
+      >
         <Box
           sx={{
             position: 'relative',
             mx: 'auto',
             mt: { xs: '60px', md: '120px' },
-            zIndex: '1',
+            zIndex: 1,
             color: 'var(--white)',
             px: { xs: '20px', md: '0px' },
           }}
@@ -79,7 +89,7 @@ export default function Home() {
                 fontWeight: 'bold',
               }}
             >
-              Read More{' '}
+              Read More
             </Link>
             <KeyboardArrowRightIcon
               sx={{
@@ -102,22 +112,7 @@ export default function Home() {
             objectFit: "cover",
           }}
         /> */}
-        <Box sx={{ position: 'relative' }}>
-          <Image
-            src="/Images/palm.png"
-            alt="Palm tree"
-            width={lessThanMd ? 150 : 350}
-            height={lessThanMd ? 150 : 350}
-            className="rightPalm"
-            style={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              zIndex: 99,
-              transform: 'translateY(-30%)',
-            }}
-          />
-        </Box>
+        <SidePalmTree />
         <OurServices />
       </Box>
       <About />

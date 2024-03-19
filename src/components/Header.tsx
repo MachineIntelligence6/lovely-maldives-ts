@@ -19,16 +19,17 @@ import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import Link from 'next/link'
+import { Close, DragHandle } from '@mui/icons-material'
 import { useMenuStore } from '@/providers/menu-store-provider'
 import NavItems from './NavItems'
-import IconMenu from './IconMenu'
-import Link from 'next/link'
+// import IconMenu from './IconMenu'
 
 const profilePic = '/Images/logo-png.png'
 const profilePicCol = '/Images/logo-colored.png'
 
 function SubNav({ menuItems }: any) {
-  const { isOpen } = useMenuStore((state) => state)
+  const isOpen = useMenuStore((state) => state.isOpen)
 
   return (
     <Box
@@ -59,7 +60,7 @@ function SubNav({ menuItems }: any) {
 }
 
 function MobileNav({ menuItems }: any) {
-  const { isOpen } = useMenuStore((state) => state)
+  const isOpen = useMenuStore((state) => state.isOpen)
   return (
     <Box
       sx={{
@@ -124,14 +125,16 @@ function MobileNav({ menuItems }: any) {
 
 function Header() {
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
-  const { isOpen, open, close, toggleMenu } = useMenuStore((state) => state)
+  const isOpen = useMenuStore((state) => state.isOpen)
+  const open = useMenuStore((state) => state.open)
+  const close = useMenuStore((state) => state.close)
+  const toggleMenu = useMenuStore((state) => state.toggleMenu)
 
   const menuItem = [
     { label: 'About Maldives', route: '/about-maldives' },
     { label: 'Hotels', route: '/resorts' },
     { label: 'About us', route: '/about-us' },
     { label: 'Blog', route: '/blogs' },
-    { label: 'New Title', route: '/' },
   ]
 
   const [isScrolled, setIsScrolled] = useState(false)
@@ -202,27 +205,38 @@ function Header() {
             py: '12px',
           }}
         >
-          <Box sx={{ display: { md: 'block', xs: 'none' } }}>
+          <Box sx={{ visibility: { md: 'visible', xs: 'hidden' } }}>
             <IconButton
               className="menuBtn"
               disableRipple
               sx={{
-                height: '50px',
-                mt: '35px',
-                px: '20px',
+                height: '100%',
+                width: '100%',
+                // mt: '35px',
+                // px: '20px',
+                visibility: isScrolled
+                  ? { md: 'visible', xs: 'hidden' }
+                  : 'hidden',
               }}
               title="Menu button"
               onClick={toggleMenu}
             >
-              <IconMenu
-                isVisible={isOpen}
-                sx={{
-                  visibility: isScrolled
-                    ? { md: 'visible', xs: 'hidden' }
-                    : 'hidden',
-                  background: isScrolled ? 'var(--brown)' : 'white', // : { md: 'var(--brown)', xs: 'white' },
-                }}
-              />
+              {isOpen ? (
+                <Close
+                  sx={{
+                    color: isScrolled ? 'var(--brown)' : 'white',
+                    fontSize: '46px',
+                  }}
+                />
+              ) : (
+                <DragHandle
+                  sx={{
+                    color: isScrolled ? 'var(--brown)' : 'white',
+                    fontSize: '46px',
+                  }}
+                />
+              )}
+              {/* <IconMenu isVisible={isOpen} /> */}
             </IconButton>
           </Box>
           <Box>
@@ -230,7 +244,7 @@ function Header() {
               <Image
                 src={isScrolled ? profilePicCol : profilePic}
                 alt="Logo"
-                width={100}
+                width={95.6}
                 height={60}
               />
             </Link>
@@ -253,12 +267,21 @@ function Header() {
                 title="Menu button"
                 onClick={toggleMenu}
               >
-                <IconMenu
-                  isVisible={isOpen}
-                  sx={{
-                    background: isScrolled ? 'var(--brown)' : 'white', // : { md: 'var(--brown)', xs: 'white' },
-                  }}
-                />
+                {isOpen ? (
+                  <Close
+                    sx={{
+                      color: isScrolled ? 'var(--brown)' : 'white',
+                      fontSize: '46px',
+                    }}
+                  />
+                ) : (
+                  <DragHandle
+                    sx={{
+                      color: isScrolled ? 'var(--brown)' : 'white',
+                      fontSize: '46px',
+                    }}
+                  />
+                )}
               </Button>
             ) : (
               <Button

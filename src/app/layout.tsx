@@ -15,8 +15,7 @@ export const metadata: Metadata = {
     'Lovely Maldives, a distinguished travel agency from the Maldives strives to redene Luxury travel experiences in the Maldives.',
 }
 
-// eslint-disable-next-line no-console
-dbConnection().catch((err) => console.log(err))
+dbConnection().catch(() => {})
 
 export default function RootLayout({
   children,

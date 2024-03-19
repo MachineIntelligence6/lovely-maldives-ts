@@ -7,13 +7,13 @@ import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import EmailIcon from '@mui/icons-material/Email'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import { useState } from 'react'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
+import MailBox from '@/components/MailBox'
 import article from '../../../public/Images/main.jpg'
 import blog from '../../../public/Images/landingTree.jpg'
-import MailBox from '@/components/MailBox'
-import { useState } from 'react'
 
 export default function Page() {
   const [readMore, setReadMore] = useState(false)
