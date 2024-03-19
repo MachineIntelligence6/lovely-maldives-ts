@@ -77,7 +77,7 @@ export default function ContactForm() {
           SEND
         </Button>
       </Box>
-      <Typography sx={{ textAlign: 'center', fontSize: '20px', mt: '40px' }}>
+      <Typography sx={{ fontSize: '20px', mt: '40px' }}>
         Protected by Recaptcha
       </Typography>
     </Container>

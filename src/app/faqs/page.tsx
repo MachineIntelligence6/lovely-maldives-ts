@@ -1,6 +1,4 @@
 import { Container, Box, Typography } from '@mui/material'
-// import SendIcon from '@mui/icons-material/Send'
-// import Diversity2Icon from '@mui/icons-material/Diversity2'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
@@ -20,18 +18,33 @@ export default function page() {
       >
         <BreadCrumb />
         <Box sx={{ mt: '60px' }}>
-          <Typography sx={{ fontSize: '22px' }}>
+          <Typography
+            sx={{
+              display: { xs: 'block', md: 'none' },
+              fontSize: '24px',
+              fontWeight: '600px',
+              color: 'var(--white)',
+              textAlign: 'center',
+            }}
+          >
+            FREQUENTLY ASKED QUESTIONS
+          </Typography>
+          <Typography sx={{ fontSize: '22px', mt: { xs: '40px', md: '0' } }}>
+            Our Frequently Asked Questions (FAQ) is tailor-made to assist
+            tourists visiting to the Maldives and will be covering a wide range
+            of questions by tourists regarding the tourist Visa, rules and
+            regulations and several other areas.
+          </Typography>
+          <Typography
+            sx={{ display: { xs: 'none', md: 'block' }, fontSize: '22px' }}
+          >
             Our Frequently Asked Questions (FAQ) is tailor-made to assist
             tourists visiting to the Maldives and will be covering a wide range
             of questions by tourists regarding the tourist Visa, rules and
             regulations and several other areas. Our Frequently Asked Questions
             (FAQ) is tailor-made to assist tourists visiting to the Maldives and
             will be covering a wide range of questions by tourists regarding the
-            tourist Visa, rules and regulations and several other areas. Our
-            Frequently Asked Questions (FAQ) is tailor-made to assist tourists
-            visiting to the Maldives and will be covering a wide range of
-            questions by tourists regarding the tourist Visa, rules and
-            regulations and several other areas.
+            tourist Visa, rules and regulations and several other areas.
           </Typography>
           <Box
             sx={{
