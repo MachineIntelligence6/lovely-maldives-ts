@@ -200,7 +200,7 @@ export default function TopBrands() {
               sx={{
                 pt: { xs: '25%', md: '16%' },
                 color: 'white',
-                fontSize: { md: '45px', xs: '35px' },
+                fontSize: { md: '45px', xs: '30px' },
                 fontWeight: 600,
                 width: '300px',
                 textAlign: 'center',
@@ -239,8 +239,64 @@ export default function TopBrands() {
             </Typography>
           </Box>
         </Box>
-        <MailBox />
+        {/* <Box
+          sx={{
+            mt: { xs: '40px', md: '120px' },
+            width: { xs: '90%', md: '55%' },
+            height: { xs: '250px', md: '350px' },
+            mx: 'auto',
+            borderRadius: '25px',
+            position: 'relative',
+            bgcolor: 'var(--blue)',
+            textAlign: 'center',
+          }}
+        >
+          <Image
+            src="/Images/lovely-maldives-logo-white.png"
+            height={31}
+            width={40}
+            alt="Logo subscribe mailing"
+            style={{ marginTop: '8%' }}
+          />
+          <Typography
+            sx={{
+              color: 'white',
+              fontSize: { xs: '16px', md: '20px' },
+              fontWeight: 200,
+              textAlign: 'center',
+              mt: '20px',
+              px: 4,
+            }}
+          >
+            Subscribe to get the latest news and offers by Lovely Maldives
+          </Typography>
+          <Box>
+            <TextField
+              id="outlined-multiline-flexible"
+              label="Enter email adress"
+              multiline
+              className="input"
+              // maxRows={10}
+              sx={{
+                bgcolor: 'white',
+                mt: '20px',
+                borderRadius: '10px',
+                width: '60%',
+                position: 'relative',
+              }}
+            />
+            <SendIcon
+              sx={{
+                position: 'absolute',
+                top: { xs: '70%', md: '65%' },
+                right: '22%',
+                color: 'var(--blue)',
+              }}
+            />
+          </Box>
+        </Box> */}
       </Box>
+      <MailBox />
     </Container>
   )
 }

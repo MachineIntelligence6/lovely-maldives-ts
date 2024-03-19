@@ -88,7 +88,7 @@ export function SampleNextArrow(props: any) {
         fontSize: '35px !important ',
         width: '35px !important',
         height: '35px !important',
-        top: '41% !important',
+        top: '37% !important',
       }}
       onClick={onClick}
     />
@@ -107,7 +107,7 @@ export function SamplePrevArrow(props: any) {
         fontSize: ' 35px !important ',
         width: '35px !important',
         height: '35px !important',
-        top: '41% !important',
+        top: '37% !important',
       }}
       onClick={onClick}
     />

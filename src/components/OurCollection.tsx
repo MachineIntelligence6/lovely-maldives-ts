@@ -35,7 +35,7 @@ export default function OurCollection({
     dots: true,
     infinite: true,
     speed: 200,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
@@ -161,7 +161,7 @@ export default function OurCollection({
                   }}
                 >
                   <Typography sx={{ px: 4, fontSize: '20px' }}>
-                    One n Only Reethi Rah{' '}
+                    One and Only Reethi Rah{' '}
                   </Typography>
                   <BoltIcon sx={{ display: `${iconShow}` }} />
                 </Box>

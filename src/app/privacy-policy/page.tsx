@@ -57,7 +57,11 @@ export default function PrivacyPolicyPage() {
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
-                  <Typography sx={{ px: 1 }}>{data.heading}</Typography>
+                  <Typography
+                    sx={{ px: 1, fontWeight: '600', color: 'var(--white)' }}
+                  >
+                    {data.heading}
+                  </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography sx={{ px: 1 }}>{data.title}</Typography>
