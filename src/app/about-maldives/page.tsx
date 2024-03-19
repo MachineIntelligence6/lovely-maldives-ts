@@ -1,41 +1,43 @@
 'use client'
 
-import {
-  Container,
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Link,
-} from '@mui/material'
+import { Container, Box, Typography, Button, Link, Paper } from '@mui/material'
 import Image from 'next/image'
 
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import EmailIcon from '@mui/icons-material/Email'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
-import SendIcon from '@mui/icons-material/Send'
-import Diversity2Icon from '@mui/icons-material/Diversity2'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
 import article from '../../../public/Images/main.jpg'
 import blog from '../../../public/Images/landingTree.jpg'
+import MailBox from '@/components/MailBox'
+import { useState } from 'react'
 
-export default function page() {
+export default function Page() {
+  const [readMore, setReadMore] = useState(false)
+
+  const showExtraContent = () => {
+    setReadMore(!readMore)
+  }
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
       <Header />
       <Container
         sx={{
-          maxWidth: '100% !important',
-          px: { xs: '24px', md: '120px' },
+          maxWidth: '80%',
+          px: 0,
+          margin: 'auto',
+          '@media only screen and (min-width: 1441px)': {
+            maxWidth: '1030px !important',
+          },
         }}
       >
         <BreadCrumb />
         <Typography
           sx={{
-            fontSize: { xs: '35px', md: '50px' },
+            fontSize: { xs: '24px', md: '35px' },
             color: 'var(--white)',
             textAlign: 'center',
             mt: '60px',
@@ -55,85 +57,20 @@ export default function page() {
             }}
           />
           <Typography
-            sx={{ pt: '40px', color: 'var(--white)', fontSize: '20px' }}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-          </Typography>
-        </Box>
-        <Box sx={{ mt: '60px', color: 'var(--white)' }}>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Typography>
-          <Typography sx={{ mt: '20px', display: { xs: 'none', md: 'block' } }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Typography>
-          <Typography sx={{ mt: '40px' }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Typography>
-          <Typography sx={{ mt: '20px', display: { xs: 'none', md: 'block' } }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Typography>
-        </Box>
-        <Box sx={{ width: '100%', textAlign: 'center', mt: '60px' }}>
-          <Image
-            src={article}
-            alt="blog"
-            className="articleImg"
-            style={{
-              height: '300px',
-              objectFit: 'cover',
-              borderRadius: '20px',
+            sx={{
+              pt: '40px',
+              color: 'var(--white)',
+              fontSize: '20px',
+              width: { xs: 'auto', md: '400px' },
+              mx: 'auto',
+              textAlign: 'left',
             }}
-          />
-          <Typography
-            sx={{ mt: '40px', color: 'var(--white)', fontSize: '20px' }}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </Typography>
         </Box>
         <Box sx={{ mt: '60px', color: 'var(--white)' }}>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Typography>
-          <Typography sx={{ mt: '40px', fontWeight: 600 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur
-          </Typography>
-          <Typography sx={{ mt: '40px', display: { xs: 'none', md: 'block' } }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -152,6 +89,124 @@ export default function page() {
             culpa qui officia deserunt mollit anim id est laborum.
           </Typography>
         </Box>
+        <Paper
+          elevation={0}
+          sx={{
+            background: 'transparent',
+            textAlign: 'center',
+            px: { xs: '24px', md: '0px' },
+          }}
+        >
+          {!readMore && (
+            <Button
+              sx={{
+                mt: 5,
+                color: 'var(--brown)',
+                backgroundColor: 'transparent',
+                fontWeight: 600,
+                ':hover': {
+                  backgroundColor: 'transparent',
+                },
+                fontSize: '1.4rem',
+              }}
+              variant="text"
+              onClick={showExtraContent}
+            >
+              More
+            </Button>
+          )}
+        </Paper>
+        {readMore && (
+          <>
+            <Box sx={{ mt: '60px', color: 'var(--white)' }}>
+              <Typography sx={{ mt: '40px' }}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </Typography>
+              <Typography
+                sx={{ mt: '20px', display: { xs: 'none', md: 'block' } }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </Typography>
+            </Box>
+            <Box sx={{ width: '100%', textAlign: 'center', mt: '60px' }}>
+              <Image
+                src={article}
+                alt="blog"
+                className="articleImg"
+                style={{
+                  height: '300px',
+                  objectFit: 'cover',
+                  borderRadius: '20px',
+                }}
+              />
+              <Typography
+                sx={{
+                  mt: '40px',
+                  color: 'var(--white)',
+                  fontSize: '20px',
+                  width: { xs: 'auto', md: '400px' },
+                  mx: 'auto',
+                  textAlign: 'left',
+                }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              </Typography>
+            </Box>
+            <Box sx={{ mt: '60px', color: 'var(--white)' }}>
+              <Typography>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </Typography>
+              <Typography sx={{ mt: '40px', fontWeight: 600 }}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur
+              </Typography>
+              <Typography
+                sx={{ mt: '40px', display: { xs: 'none', md: 'block' } }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </Typography>
+              <Typography
+                sx={{ mt: '20px', display: { xs: 'none', md: 'block' } }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </Typography>
+            </Box>
+          </>
+        )}
         <Box
           sx={{
             display: 'flex',
@@ -186,63 +241,10 @@ export default function page() {
             </Link>
           </Button>
         </Box>
-        <Box
-          sx={{
-            mt: { xs: '60px', md: '120px' },
-            width: { xs: '90%', md: '55%' },
-            height: { xs: '250px', md: '350px' },
-            mx: 'auto',
-            borderRadius: '25px',
-            position: 'relative',
-            bgcolor: 'var(--blue)',
-            textAlign: 'center',
-          }}
-        >
-          <Diversity2Icon
-            sx={{
-              color: 'white',
-              mt: { xs: '7%', md: '10%' },
-              fontSize: '45px',
-            }}
-          />
-          <Typography
-            sx={{
-              color: 'white',
-              fontSize: { xs: '16px', md: '24px' },
-              fontWeight: 200,
-              textAlign: 'center',
-              mt: '20px',
-              px: 4,
-            }}
-          >
-            Subscribe to get the latest news and offers by Lovely Maldives
-          </Typography>
-          <Box>
-            <TextField
-              id="outlined-multiline-flexible"
-              label="Enter email adress"
-              multiline
-              className="input"
-              // maxRows={10}
-              sx={{
-                bgcolor: 'white',
-                mt: '20px',
-                borderRadius: '10px',
-                width: '60%',
-                position: 'relative',
-              }}
-            />
-            <SendIcon
-              sx={{
-                position: 'absolute',
-                top: { xs: '70%', md: '71%' },
-                right: '22%',
-                color: 'var(--blue)',
-              }}
-            />
-          </Box>
-        </Box>
       </Container>
+      <Box sx={{ width: { xs: 'auto', md: '63%' }, mx: 'auto' }}>
+        <MailBox />
+      </Box>
       <Footer />
     </Box>
   )
