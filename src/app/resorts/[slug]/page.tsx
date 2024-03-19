@@ -23,10 +23,11 @@ import { ModeOfTravel } from '@mui/icons-material'
 import BreadCrumb from '@/components/BreadCrumb'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import OurCollection from '@/components/OurCollection'
+// import OurCollection from '@/components/OurCollection'
 import FilterTray from '@/components/FilterTray'
 import SocialSharer from '@/components/SocialSharer'
 import bannerImg from '../../../../public/Images/collectionImg.jpg'
+import SlugSlider from '@/components/SlugSlider'
 
 export default function Resort() {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
@@ -111,6 +112,7 @@ export default function Resort() {
               height={60}
             />
           </Box>
+
           <Grid container justifyContent="center">
             <Grid item xs={12}>
               <Paper elevation={0} sx={{ background: 'transparent' }}>
@@ -513,12 +515,12 @@ export default function Resort() {
           </Grid>
         </Box>
         <Box sx={{ mb: '40px' }}>
-          <OurCollection
+          <SlugSlider
             heading="OTHER RECOMMENDATIONS"
             button="none"
             iconShow="flex"
             radius="20px"
-            bottomradius="0 0 20px  20px"
+            bottomradius="0 0 20px 20px"
           />
         </Box>
       </Container>
