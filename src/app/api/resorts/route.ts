@@ -1,4 +1,4 @@
-import { Resort } from '@/app/models/resort'
+import { Resort } from '@/app/api/resorts/resort'
 
 export async function GET() {
   return Response.json({ data: 'Resorts API' })
