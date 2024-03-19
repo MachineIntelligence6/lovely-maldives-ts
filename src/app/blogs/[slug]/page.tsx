@@ -15,9 +15,9 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import BlogHeader from '@/components/BlogHeader'
 import { useMenuStore } from '@/providers/menu-store-provider'
+import MailBox from '@/components/MailBox'
 import articleImage from '../../../../public/Images/main.jpg'
 import { articles } from '../page'
-import MailBox from '@/components/MailBox'
 
 export default function SingleBlogPage() {
   const isOpen = useMenuStore((state) => state.isOpen)
@@ -49,7 +49,7 @@ export default function SingleBlogPage() {
       <Container
         sx={{
           // maxWidth: '80%',
-          px: { xs: '0px', md: '120px' },
+          // px: { xs: '0px', md: '120px' },
           mt: { xs: 0, md: '100px' },
           margin: 'auto',
           '@media only screen and (min-width: 1441px)': {

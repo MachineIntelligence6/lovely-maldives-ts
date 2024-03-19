@@ -3,6 +3,7 @@ import './globals.css'
 import { ReactNode } from 'react'
 
 import localFont from 'next/font/local'
+import { dbConnection } from '@/config/db'
 import Provider from './provider'
 
 const centuryGothic = localFont({ src: './fonts/century-gothic/gothic.ttf' })
@@ -13,6 +14,9 @@ export const metadata: Metadata = {
     // eslint-disable-next-line max-len
     'Lovely Maldives, a distinguished travel agency from the Maldives strives to redene Luxury travel experiences in the Maldives.',
 }
+
+// eslint-disable-next-line no-console
+dbConnection().catch((err) => console.log(err))
 
 export default function RootLayout({
   children,

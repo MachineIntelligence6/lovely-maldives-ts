@@ -124,7 +124,7 @@ export default function Page() {
       </Box>
       <Container
         sx={{
-          maxWidth: '80%',
+          // maxWidth: '80%',
           px: 0,
           margin: 'auto',
           '@media only screen and (min-width: 1441px)': {
