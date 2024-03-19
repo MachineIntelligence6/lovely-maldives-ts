@@ -366,7 +366,13 @@ export default function Footer() {
             &copy; 2024 Lovely Maldives. All rights reserved.
           </Typography>
         </Box>
-        <Box sx={{ display: 'flex' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <Box
             component={Link}
             href="/terms-of-use"
@@ -378,7 +384,7 @@ export default function Footer() {
           >
             Terms of use
           </Box>
-          <Typography>|</Typography>
+          <Typography sx={{ mt: { xs: '16px', md: '0' } }}>|</Typography>
           <Box
             component={Link}
             href="/privacy-policy"
