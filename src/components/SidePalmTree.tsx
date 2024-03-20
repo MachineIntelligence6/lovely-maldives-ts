@@ -20,7 +20,7 @@ export default function SidePalmTree() {
           top: 0,
           right: 0,
           zIndex: 99,
-          transform: 'translateY(-30%)',
+          transform: { xs: 'translateY(-47%)', md: 'translateY(-30%)' },
         }}
       />
     </Box>
