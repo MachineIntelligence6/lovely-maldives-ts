@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
+import Link from 'next/link'
 import blog from '../../public/Images/landingTree.jpg'
 import article from '../../public/Images/main.jpg'
-import Link from 'next/link'
 
 export const latestBlog = [
   {
@@ -146,7 +146,7 @@ export default function LatestBlogs() {
               height: '100%',
               objectFit: 'cover',
               width: '100%',
-              borderRadius: { xs: '20px', md: '20px 0px 0px 20px' },
+              borderRadius: { xs: '0', md: '20px 0px 0px 20px' },
             }}
           />
           <Box
@@ -157,7 +157,7 @@ export default function LatestBlogs() {
               position: 'absolute',
               top: '0',
               // left: { xs: '0', md: '240.5px' },
-              borderRadius: '20px',
+              borderRadius: { xs: '0', md: '20px' },
             }}
           />
           {/* <Box
@@ -178,7 +178,7 @@ export default function LatestBlogs() {
               top: '60%',
               color: 'white',
               borderRadius: '0 10px 10px 0',
-              width: { xs: '100%', md: '40%' },
+              width: { xs: '100%', md: '80%' },
             }}
           >
             <Typography
@@ -186,7 +186,6 @@ export default function LatestBlogs() {
                 fontSize: '24px',
                 color: 'white',
                 textAlign: { xs: 'center', md: 'left' },
-                width: '350px',
                 ml: { xs: '0', md: '50px' },
               }}
             >
@@ -217,12 +216,13 @@ export default function LatestBlogs() {
                 position: 'relative',
               }}
             >
-              <Image
+              <Box
+                component={Image}
                 src={latest.img}
                 alt="blog"
-                style={{
+                sx={{
                   width: '100%',
-                  borderRadius: '20px 20px 0 0px',
+                  borderRadius: { xs: '0', md: '20px 20px 0 0px' },
                   height: '300px',
                   objectFit: 'cover',
                 }}

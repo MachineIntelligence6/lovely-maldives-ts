@@ -24,18 +24,8 @@ import SubNav from './SubNav'
 
 const profilePic = '/Images/logo-png.png'
 const profilePicCol = '/Images/logo-colored.png'
-
-// const debounce = <T extends any[]>(
-//   // eslint-disable-next-line no-unused-vars
-//   func: (...args: T) => void,
-//   delay: number
-// ) => {
-//   let timeoutId: ReturnType<typeof setTimeout> | undefined
-//   return function (this: null | undefined, ...args: T) {
-//     clearTimeout(timeoutId)
-//     timeoutId = setTimeout(() => func.apply(this, args), delay)
-//   }
-// }
+// import profilePic from '../../public/Images/lovely-maldives-logo.svg'
+// import profilePicCol from '../../public/Images/lovely-maldives-typeface.svg'
 
 function Header() {
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))

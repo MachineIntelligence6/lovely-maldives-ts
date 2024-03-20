@@ -82,24 +82,26 @@ export default function Banner() {
             flexDirection: 'column',
             justifyContent: 'flex-end',
             alignItems: 'center',
-            height: { xs: '85%', md: '70%' },
+            height: { xs: '100%', md: '100%' },
             color: 'white',
             textAlign: 'center',
           }}
         >
-          <Typography sx={{ fontSize: { xs: '24px', md: '35px' } }}>
-            Welcome to Lovely Maldives
-          </Typography>
-          <Typography
-            variant="h1"
-            sx={{
-              mt: '40px',
-              fontSize: { md: '50px', xs: '35px' },
-              fontWeight: 600,
-            }}
-          >
-            Essence of Pure Luxury{' '}
-          </Typography>
+          <Box sx={{ pb: { xs: '10%', md: '6%' }, px: '10px' }}>
+            <Typography sx={{ fontSize: { xs: '24px', md: '35px' } }}>
+              Welcome to Lovely Maldives
+            </Typography>
+            <Typography
+              variant="h1"
+              sx={{
+                mt: '6px',
+                fontSize: { md: '50px', xs: '35px' },
+                fontWeight: 600,
+              }}
+            >
+              Essence of Pure Luxury{' '}
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </Box>
