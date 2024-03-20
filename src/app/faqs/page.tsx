@@ -17,11 +17,11 @@ export default function page() {
         }}
       >
         <BreadCrumb />
-        <Box sx={{ mt: '60px' }}>
+        <Box sx={{ mt: { xs: '40px', md: '60px' } }}>
           <Typography
             sx={{
               display: { xs: 'block', md: 'none' },
-              fontSize: '24px',
+              fontSize: '20px',
               fontWeight: '600px',
               color: 'var(--white)',
               textAlign: 'center',
@@ -29,7 +29,12 @@ export default function page() {
           >
             FREQUENTLY ASKED QUESTIONS
           </Typography>
-          <Typography sx={{ fontSize: '22px', mt: { xs: '40px', md: '0' } }}>
+          <Typography
+            sx={{
+              fontSize: { xs: '20', md: '22px' },
+              mt: { xs: '40px', md: '0' },
+            }}
+          >
             Our Frequently Asked Questions (FAQ) is tailor-made to assist
             tourists visiting to the Maldives and will be covering a wide range
             of questions by tourists regarding the tourist Visa, rules and
@@ -54,7 +59,7 @@ export default function page() {
               py: 3,
               px: 2,
               borderRadius: '20px',
-              mt: '60px',
+              mt: { xs: '40px', md: '60px' },
             }}
           >
             <Typography sx={{ fontWeight: 600, mt: 2 }}>Categories:</Typography>
