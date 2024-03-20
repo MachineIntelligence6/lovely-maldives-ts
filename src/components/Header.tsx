@@ -72,7 +72,7 @@ function MobileNav({ menuItems }: any) {
         transform: isOpen ? 'translateY(0%)' : 'translateY(-100%)',
         background: 'var(--brown)',
         boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
-        py: '20px',
+        pb: '20px',
         opacity: isOpen ? 1 : 0,
         transition: 'opacity 0.4s, transform 0.4s',
         display: 'flex',
@@ -89,7 +89,7 @@ function MobileNav({ menuItems }: any) {
       <NavItems items={menuItems} />
       <Box
         sx={{
-          mt: '20px',
+          // mt: '20px',
           borderTop: '1px solid #fff',
           borderBottom: '1px solid #fff',
         }}
@@ -109,7 +109,7 @@ function MobileNav({ menuItems }: any) {
           sx={{
             display: { xs: 'flex', md: 'none' },
             justifyContent: 'center',
-            my: '30px',
+            mb: '50px',
             gap: '20px',
           }}
         >

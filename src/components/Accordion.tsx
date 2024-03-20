@@ -44,7 +44,7 @@ export const general = [
 ]
 export default function FaqsAccordion() {
   return (
-    <Box sx={{ mt: '60px' }}>
+    <Box sx={{ mt: { xs: '40px', md: '60px' } }}>
       <Typography
         sx={{ fontWeight: 600, fontSize: '20px', mb: 3, color: 'black' }}
       >
