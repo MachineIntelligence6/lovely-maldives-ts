@@ -55,7 +55,7 @@ export default function ResortsGallery() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                style={{ width: '100%' }}
+                sx={{ width: '100%', position: 'relative' }}
               >
                 <Box
                   component={Link}
@@ -70,6 +70,20 @@ export default function ResortsGallery() {
                       width: '100%',
                       height: { xs: '250px', md: '300px' },
                       objectFit: 'cover',
+                      borderRadius: {
+                        xs: '0px',
+                        md: `20px 20px 0px 0px`,
+                      },
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: { xs: '100%', md: '100%' },
+                      height: { xs: '250px', md: '300px' },
+                      bgcolor: 'rgba(150,127,93,0.5)',
+                      position: 'absolute',
+                      bottom: '110px',
+                      left: { xs: 0, md: '0px' },
                       borderRadius: {
                         xs: '0px',
                         md: `20px 20px 0px 0px`,
