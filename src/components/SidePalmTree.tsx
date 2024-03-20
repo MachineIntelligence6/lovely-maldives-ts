@@ -10,7 +10,7 @@ export default function SidePalmTree() {
   return (
     <Box sx={{ position: 'relative' }}>
       <Image
-        src="/Images/palm.png"
+        src="/Images/palm_Minimal.png"
         alt="Palm tree"
         width={lessThanMd ? 153.5 : 341.2}
         height={lessThanMd ? 204.6 : 454.6}
