@@ -65,10 +65,21 @@ export default function BlogSlider() {
                 style={{
                   height: '350px',
                   objectFit: 'cover',
-                  borderRadius: '30px',
+                  borderRadius: '20px',
                 }}
               />
-              {/* <Box sx={{width:{xs:'100%',md:"85%"},height:"100%",bgcolor:"rgba(150,127,93,0.3)",position:'absolute',top:'0',left:'0'}} ></Box> */}
+              <Box
+                className="collectionImg"
+                sx={{
+                  width: '100%',
+                  height: '350px',
+                  bgcolor: 'rgba(150,127,93,0.5)',
+                  position: 'absolute',
+                  top: '0',
+                  // left: { xs: '0', md: '240.5px' },
+                  borderRadius: '20px',
+                }}
+              />
               <Box
                 sx={{
                   width: { xs: '100%', md: '85%' },
@@ -84,7 +95,7 @@ export default function BlogSlider() {
                   fontWeight: '200',
                   zIndex: '99',
                   bgcolor: 'var(--blue)',
-                  borderRadius: '0 0 30px  30px',
+                  borderRadius: '0 0 20px  20px',
                   mt: '20px',
                 }}
               >

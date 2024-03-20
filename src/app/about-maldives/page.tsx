@@ -45,7 +45,14 @@ export default function Page() {
         >
           ABOUT MALDIVES
         </Typography>
-        <Box sx={{ width: '100%', textAlign: 'center', mt: '60px' }}>
+        <Box
+          sx={{
+            width: '100%',
+            textAlign: 'center',
+            mt: '60px',
+            position: 'relative',
+          }}
+        >
           <Image
             src={blog}
             alt="blog"
@@ -53,6 +60,18 @@ export default function Page() {
             style={{
               height: '400px',
               objectFit: 'cover',
+              borderRadius: '20px',
+            }}
+          />
+          <Box
+            className="articleBlog"
+            sx={{
+              // width: '100%',
+              height: '400px',
+              bgcolor: 'rgba(150,127,93,0.5)',
+              position: 'absolute',
+              top: '0',
+              left: { xs: '0', md: '140.5px' },
               borderRadius: '20px',
             }}
           />
@@ -140,7 +159,14 @@ export default function Page() {
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </Typography>
             </Box>
-            <Box sx={{ width: '100%', textAlign: 'center', mt: '60px' }}>
+            <Box
+              sx={{
+                width: '100%',
+                textAlign: 'center',
+                mt: '60px',
+                position: 'relative',
+              }}
+            >
               <Image
                 src={article}
                 alt="blog"
@@ -148,6 +174,18 @@ export default function Page() {
                 style={{
                   height: '300px',
                   objectFit: 'cover',
+                  borderRadius: '20px',
+                }}
+              />
+              <Box
+                className="articleImg"
+                sx={{
+                  // width: '100%',
+                  height: '300px',
+                  bgcolor: 'rgba(150,127,93,0.5)',
+                  position: 'absolute',
+                  top: '0',
+                  left: { xs: '0', md: '240.5px' },
                   borderRadius: '20px',
                 }}
               />
