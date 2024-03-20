@@ -28,7 +28,7 @@ export const datas = [
     description: '',
   },
   {
-    title: 'Lovely Store',
+    title: 'Lovely Resort',
     starNum: 6,
     description: 'ultra luxury',
   },
@@ -43,7 +43,7 @@ export const datas = [
     description: '',
   },
   {
-    title: 'Lovely Store',
+    title: 'Lovely Resort',
     starNum: 7,
     description: 'ultra luxury',
   },
@@ -114,8 +114,8 @@ export default function TopBrands() {
               <Box
                 className="brandSlider"
                 sx={{
-                  width: { xs: '96%', md: '85%' },
-                  height: { xs: '280px', md: '220px' },
+                  width: { xs: '96%', md: '70%' },
+                  height: { xs: '280px', md: '210px' },
                   background: 'var(--brown)',
                   color: 'white',
                   textAlign: 'center',
@@ -134,9 +134,11 @@ export default function TopBrands() {
                 >
                   <Typography
                     sx={{
+                      width: '100px',
                       fontSize: '26px',
                       fontWeight: 500,
                       textAlign: 'center',
+                      fontWeight: 600,
                     }}
                   >
                     {data.title}

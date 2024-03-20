@@ -81,7 +81,7 @@ export default function Page() {
               color: 'var(--white)',
               fontSize: '20px',
               width: { xs: 'auto', md: '400px' },
-              mx: 'auto',
+              ml: { xs: 'auto', md: '150px' },
               textAlign: 'left',
             }}
           >
@@ -195,7 +195,7 @@ export default function Page() {
                   color: 'var(--white)',
                   fontSize: '20px',
                   width: { xs: 'auto', md: '400px' },
-                  mx: 'auto',
+                  ml: { xs: 'auto', md: '260px' },
                   textAlign: 'left',
                 }}
               >
