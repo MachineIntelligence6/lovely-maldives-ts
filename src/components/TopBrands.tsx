@@ -81,9 +81,9 @@ export default function TopBrands() {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '80px',
+          centerPadding: '90px',
           centerMode: true,
         },
       },
@@ -115,7 +115,7 @@ export default function TopBrands() {
                 className="brandSlider"
                 sx={{
                   width: { xs: '96%', md: '85%' },
-                  height: { xs: '180px', md: '220px' },
+                  height: { xs: '280px', md: '220px' },
                   background: 'var(--brown)',
                   color: 'white',
                   textAlign: 'center',

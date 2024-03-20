@@ -30,17 +30,16 @@ export default function OurCollection({
   bottomradius,
 }: IOurCollectionProps) {
   const settings = {
-    // className: 'center',
-    centerPadding: '60px',
     dots: true,
     infinite: true,
     speed: 200,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 4000,
     centerMode: true,
+    centerPadding: '200px',
     responsive: [
       {
         breakpoint: 600,
@@ -116,7 +115,7 @@ export default function OurCollection({
                 src={collectionImg}
                 alt="Resort item"
                 sx={{
-                  width: { xs: '100%', md: '96%' },
+                  width: { xs: '100%', md: '92%' },
                   height: { xs: '250px', md: '300px' },
                   objectFit: 'cover',
                   borderRadius: {
@@ -128,17 +127,17 @@ export default function OurCollection({
               />
               <Box
                 sx={{
-                  width: { xs: '100%', md: '96%' },
+                  width: { xs: '100%', md: '92%' },
                   height: { xs: '250px', md: '300px' },
                   bgcolor: 'rgba(150,127,93,0.5)',
                   position: 'absolute',
                   top: '0',
-                  left: { xs: 0, md: '10px' },
+                  left: { xs: 0, md: '22px' },
                 }}
               />
               <Box
                 sx={{
-                  width: { xs: '100%', md: '96%' },
+                  width: { xs: '100%', md: '92%' },
                   display: 'flex',
                   flexDirection: 'column',
                   color: 'white',
