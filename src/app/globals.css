@@ -383,3 +383,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   transform: translateY(3px) rotate(-45deg);
   top: 0;
 }
+
+.overflow-hidden {
+  overflow-y: hidden;
+}

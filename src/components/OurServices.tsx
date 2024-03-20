@@ -3,14 +3,12 @@
 
 'use client'
 
-import {
-  Box,
-  Typography,
-  Container,
-  Paper,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
+import useMediaQuery from '@mui/material/useMediaQuery'
+
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -23,14 +21,11 @@ import PhonelinkRingIcon from '@mui/icons-material/PhonelinkRing'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 
-// import 'react-multi-carousel/lib/styles.css'
-
 import Image from 'next/image'
 import exploreImg1 from '../../public/Images/exploreImg.jpg'
 import exploreImg3 from '../../public/Images/explorImg2.jpg'
 import exploreImg2 from '../../public/Images/exploreImg3.jpg'
 import exploreImg4 from '../../public/Images/explorImg5.jpg'
-// import SparkleImg from './SparkleImg'
 
 export const data = [
   {
@@ -115,28 +110,7 @@ export function SamplePrevArrow(props: any) {
 }
 
 export default function OurServices() {
-  const theme = useTheme()
-  const lessThanMd = useMediaQuery(theme.breakpoints.down('md'))
-
-  // const responsive = {
-  //   superLargeDesktop: {
-  //     // the naming can be any, depends on you.
-  //     breakpoint: { max: 4000, min: 3000 },
-  //     items: 5,
-  //   },
-  //   desktop: {
-  //     breakpoint: { max: 3000, min: 1024 },
-  //     items: 3,
-  //   },
-  //   tablet: {
-  //     breakpoint: { max: 1024, min: 464 },
-  //     items: 2,
-  //   },
-  //   mobile: {
-  //     breakpoint: { max: 464, min: 0 },
-  //     items: 1,
-  //   },
-  // }
+  const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
 
   const settings = {
     className: 'services-slider',

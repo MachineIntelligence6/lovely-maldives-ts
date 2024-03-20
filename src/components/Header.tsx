@@ -3,125 +3,38 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
-import {
-  useMediaQuery,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-} from '@mui/material'
-import WhatsAppIcon from '@mui/icons-material/WhatsApp'
-import InstagramIcon from '@mui/icons-material/Instagram'
-import XIcon from '@mui/icons-material/X'
-import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Link from 'next/link'
-import { Close, DragHandle } from '@mui/icons-material'
+import Close from '@mui/icons-material/Close'
+import DragHandle from '@mui/icons-material/DragHandle'
+
+import useMediaQuery from '@mui/system/useMediaQuery'
+import { useMotionValueEvent, useScroll } from 'framer-motion'
 import { useMenuStore } from '@/providers/menu-store-provider'
-import NavItems from './NavItems'
-// import IconMenu from './IconMenu'
+import MobileNav from './MobileNav'
+import SubNav from './SubNav'
 
 const profilePic = '/Images/logo-png.png'
 const profilePicCol = '/Images/logo-colored.png'
 
-function SubNav({ menuItems }: any) {
-  const isOpen = useMenuStore((state) => state.isOpen)
-
-  return (
-    <Box
-      component="nav"
-      sx={{
-        background: 'white',
-        position: 'fixed',
-        top: { xs: '0', md: '91px' },
-        boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
-        py: '20px',
-        width: '100%',
-        px: '100px',
-        zIndex: 999,
-        opacity: isOpen ? 1 : 0,
-        transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
-        transition: 'opacity 0.4s, transform 0.4s',
-        display: 'flex',
-        flexDirection: 'row',
-        overflow: 'hidden',
-        mt: { md: '0', xs: '85px' },
-        gap: { md: '18px', xs: '0' },
-        borderTop: '1px solid lightgray',
-      }}
-    >
-      <NavItems items={menuItems} />
-    </Box>
-  )
-}
-
-function MobileNav({ menuItems }: any) {
-  const isOpen = useMenuStore((state) => state.isOpen)
-  return (
-    <Box
-      sx={{
-        height: '100vh',
-        width: '100%',
-        position: 'fixed',
-        top: '0',
-        zIndex: 999,
-        transform: isOpen ? 'translateY(0%)' : 'translateY(-100%)',
-        background: 'var(--brown)',
-        boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
-        pb: '20px',
-        opacity: isOpen ? 1 : 0,
-        transition: 'opacity 0.4s, transform 0.4s',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        mt: { md: '0', xs: '90px' },
-        gap: { md: '18px', xs: '0' },
-        borderTop: '1px solid lightgray',
-        textAlign: 'center',
-        color: 'white',
-      }}
-    >
-      <NavItems items={menuItems} />
-      <Box
-        sx={{
-          // mt: '20px',
-          borderTop: '1px solid #fff',
-          borderBottom: '1px solid #fff',
-        }}
-      >
-        <Typography sx={{ mt: '20px' }}>Get in touch</Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            py: '20px',
-          }}
-        >
-          <Button sx={{ color: '#fff' }}>Email</Button>
-          <Button sx={{ color: '#fff' }}>Contact Number</Button>
-        </Box>
-        <Box
-          sx={{
-            display: { xs: 'flex', md: 'none' },
-            justifyContent: 'center',
-            mb: '50px',
-            gap: '20px',
-          }}
-        >
-          <FacebookRoundedIcon />
-          <XIcon />
-          <InstagramIcon />
-          <WhatsAppIcon />
-        </Box>
-      </Box>
-    </Box>
-  )
-}
+// const debounce = <T extends any[]>(
+//   // eslint-disable-next-line no-unused-vars
+//   func: (...args: T) => void,
+//   delay: number
+// ) => {
+//   let timeoutId: ReturnType<typeof setTimeout> | undefined
+//   return function (this: null | undefined, ...args: T) {
+//     clearTimeout(timeoutId)
+//     timeoutId = setTimeout(() => func.apply(this, args), delay)
+//   }
+// }
 
 function Header() {
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
@@ -129,6 +42,7 @@ function Header() {
   const open = useMenuStore((state) => state.open)
   const close = useMenuStore((state) => state.close)
   const toggleMenu = useMenuStore((state) => state.toggleMenu)
+  const { scrollY } = useScroll()
 
   const menuItem = [
     { label: 'About Maldives', route: '/about-maldives' },
@@ -137,41 +51,26 @@ function Header() {
     { label: 'Blog', route: '/blogs' },
   ]
 
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = React.useState(false)
 
-  const handleScroll = () => {
-    const scrollTop = window.scrollY
-    setIsScrolled(scrollTop > 0)
-  }
-  if (typeof window !== 'undefined') {
-    const { body } = document
-    const scrollBarWidth = window.innerWidth - body.clientWidth
-
-    if (isOpen && lessThanMd) {
-      body.style.paddingRight = `${scrollBarWidth}px`
-      body.style.overflow = 'hidden'
-    } else {
-      body.style.paddingRight = '0'
-      body.style.overflow = 'initial'
-    }
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    setIsScrolled(latest > 0)
+  })
   const handleResize = () => {
     if (lessThanMd) {
       close()
     }
   }
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+  React.useEffect(() => {
     window.addEventListener('resize', handleResize)
+
     return () => {
-      window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleResize)
     }
-  }, [isScrolled, lessThanMd, handleResize])
+  }, [lessThanMd])
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isScrolled) {
       close()
     } else if (!lessThanMd) {
@@ -180,6 +79,18 @@ function Header() {
       close()
     }
   }, [isScrolled, lessThanMd])
+
+  // Add CSS classes instead of manipulating inline styles
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const { body } = document
+      if (isOpen && lessThanMd) {
+        body.classList.add('overflow-hidden')
+      } else {
+        body.classList.remove('overflow-hidden')
+      }
+    }
+  }, [isOpen, lessThanMd])
 
   return (
     <Box component="header">
@@ -200,7 +111,7 @@ function Header() {
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between', // { md: "space-between", xs: "flex-start" },
+            justifyContent: 'space-between',
             alignItems: 'center',
             py: '12px',
           }}
@@ -212,8 +123,6 @@ function Header() {
               sx={{
                 height: '100%',
                 width: '100%',
-                // mt: '35px',
-                // px: '20px',
                 visibility: isScrolled
                   ? { md: 'visible', xs: 'hidden' }
                   : 'hidden',
@@ -236,7 +145,6 @@ function Header() {
                   }}
                 />
               )}
-              {/* <IconMenu isVisible={isOpen} /> */}
             </IconButton>
           </Box>
           <Box>
@@ -249,13 +157,6 @@ function Header() {
               />
             </Link>
           </Box>
-          {/* <Box
-            sx={{
-              visibility: isScrolled
-                ? { md: "visible", xs: "hidden" }
-                : "hidden",
-            }}
-          ></Box> */}
           <Box>
             {lessThanMd ? (
               <Button

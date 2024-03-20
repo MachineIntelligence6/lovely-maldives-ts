@@ -1,15 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Box, Typography, useMediaQuery } from '@mui/material'
+import React from 'react'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import useMediaQuery from '@mui/material/useMediaQuery'
+
 import Header from './Header'
 
 import banner from '../../public/Images/banner.jpg'
 import banner2 from '../../public/Images/exploreImg4.jpg'
 import banner3 from '../../public/Images/exploreImg.jpg'
-// import mobilebanner from '../../public/Images/exploreImg2.jpg'
-// import mobilebanner2 from '../../public/Images/explorImg2.jpg'
-// import mobilebanner3 from '../../public/Images/explorImg5.jpg'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const imgUrl: any = [banner, banner2, banner3]
@@ -21,7 +21,7 @@ export const mobileImgUrl: any = [
 
 export default function Banner() {
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
-  const [bgImgStyle, setBgImgStyle] = useState({
+  const [bgImgStyle, setBgImgStyle] = React.useState({
     backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
      rgba(150, 127, 93, 0.20)), url('${banner}')`,
     backgroundSize: 'cover',
@@ -32,7 +32,7 @@ export default function Banner() {
     position: 'relative',
   })
 
-  useEffect(() => {
+  React.useEffect(() => {
     const randomIndexdev: number = Math.floor(Math.random() * imgUrl.length)
     const randomIndexmob: number = Math.floor(
       Math.random() * mobileImgUrl.length
