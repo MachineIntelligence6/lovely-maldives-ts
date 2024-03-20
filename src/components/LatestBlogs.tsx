@@ -128,13 +128,14 @@ export default function LatestBlogs() {
             width: { xs: '100%', md: '100%' },
             height: { xs: '389px', md: '550px' },
             bgcolor: 'var(--brown)',
-            position: { xs: 'relative', md: 'unset' },
+            // position: { xs: 'relative', md: 'unset' },
             borderRadius: '20px',
             display: { xs: 'block', md: 'flex' },
             alignItems: 'center',
             justifyContent: 'center',
             mx: 'auto',
             mt: '24px',
+            position: 'relative',
           }}
         >
           <Box
@@ -150,6 +151,17 @@ export default function LatestBlogs() {
           />
           <Box
             sx={{
+              width: '100%',
+              height: '100%',
+              bgcolor: 'rgba(150,127,93,0.5)',
+              position: 'absolute',
+              top: '0',
+              // left: { xs: '0', md: '240.5px' },
+              borderRadius: '20px',
+            }}
+          />
+          {/* <Box
+            sx={{
               display: { xs: 'block', md: 'none' },
               bgcolor: 'rgba(0,0,0,0.5)',
               position: 'absolute',
@@ -159,7 +171,7 @@ export default function LatestBlogs() {
               height: '100%',
               borderRadius: '20px 20px 20px 20px',
             }}
-          />
+          /> */}
           <Box
             sx={{
               position: { xs: 'absolute', md: 'unset' },
@@ -202,6 +214,7 @@ export default function LatestBlogs() {
                 boxSizing: 'border-box',
                 boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
                 textDecoration: 'none',
+                position: 'relative',
               }}
             >
               <Image
@@ -212,6 +225,17 @@ export default function LatestBlogs() {
                   borderRadius: '20px 20px 0 0px',
                   height: '300px',
                   objectFit: 'cover',
+                }}
+              />
+              <Box
+                sx={{
+                  width: '100%',
+                  height: '300px',
+                  bgcolor: 'rgba(150,127,93,0.5)',
+                  position: 'absolute',
+                  top: '0',
+                  // left: { xs: '0', md: '240.5px' },
+                  borderRadius: '20px 20px 0 0',
                 }}
               />
               <Box

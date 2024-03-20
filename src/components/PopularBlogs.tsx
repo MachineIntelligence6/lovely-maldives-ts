@@ -75,6 +75,7 @@ export default function PopularBlogs() {
                 boxSizing: 'border-box',
                 boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
                 textDecoration: 'none',
+                position: 'relative',
               }}
             >
               <Image
@@ -85,6 +86,17 @@ export default function PopularBlogs() {
                   borderRadius: '20px 20px 0 0px',
                   height: '200px',
                   objectFit: 'cover',
+                }}
+              />
+              <Box
+                sx={{
+                  width: '100%',
+                  height: '200px',
+                  bgcolor: 'rgba(150,127,93,0.5)',
+                  position: 'absolute',
+                  top: '0',
+                  // left: { xs: '0', md: '240.5px' },
+                  borderRadius: '20px 20px 0 0',
                 }}
               />
               <Box
