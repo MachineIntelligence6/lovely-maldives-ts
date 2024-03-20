@@ -7,17 +7,30 @@ import Header from './Header'
 import banner from '../../public/Images/banner.jpg'
 import banner2 from '../../public/Images/exploreImg4.jpg'
 import banner3 from '../../public/Images/exploreImg.jpg'
-import mobilebanner from '../../public/Images/exploreImg2.jpg'
-import mobilebanner2 from '../../public/Images/explorImg2.jpg'
-import mobilebanner3 from '../../public/Images/explorImg5.jpg'
+// import mobilebanner from '../../public/Images/exploreImg2.jpg'
+// import mobilebanner2 from '../../public/Images/explorImg2.jpg'
+// import mobilebanner3 from '../../public/Images/explorImg5.jpg'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const imgUrl: any = [banner, banner2, banner3]
-export const mobileImgUrl: any = [mobilebanner, mobilebanner2, mobilebanner3]
+export const mobileImgUrl: any = [
+  'Images/exploreImg2.jpg',
+  'Images/explorImg2.jpg',
+  'Images/explorImg5.jpg',
+]
 
 export default function Banner() {
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
-  const [bgImgStyle, setBgImgStyle] = useState({})
+  const [bgImgStyle, setBgImgStyle] = useState({
+    backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
+     rgba(150, 127, 93, 0.20)), url('${banner}')`,
+    backgroundSize: 'cover',
+    backgroundPosition: '100%',
+    width: '100%',
+    height: '100vh',
+    backgroundRepeat: 'no-repeat',
+    position: 'relative',
+  })
 
   useEffect(() => {
     const randomIndexdev: number = Math.floor(Math.random() * imgUrl.length)
@@ -28,7 +41,7 @@ export default function Banner() {
     if (lessThanMd) {
       setBgImgStyle({
         backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
-         rgba(150, 127, 93, 0.20)), url('${mobileImgUrl[randomIndexmob].src}')`,
+         rgba(150, 127, 93, 0.20)), url('${mobileImgUrl[randomIndexmob]}')`,
         backgroundSize: 'cover',
         backgroundPosition: '100%',
         width: '100%',
@@ -51,7 +64,7 @@ export default function Banner() {
   }, [lessThanMd])
 
   return (
-    <Box sx={{ ...bgImgStyle }}>
+    <Box sx={{ backgroundColor: 'lightgray', ...bgImgStyle }}>
       <Box
         sx={{
           width: '100%',

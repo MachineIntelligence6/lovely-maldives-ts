@@ -26,8 +26,8 @@ import Footer from '@/components/Footer'
 // import OurCollection from '@/components/OurCollection'
 import FilterTray from '@/components/FilterTray'
 import SocialSharer from '@/components/SocialSharer'
-import bannerImg from '../../../../public/Images/collectionImg.jpg'
 import SlugSlider from '@/components/SlugSlider'
+import bannerImg from '../../../../public/Images/collectionImg.jpg'
 
 export default function Resort() {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
@@ -374,6 +374,7 @@ export default function Resort() {
                         m: 0,
                         mb: 2,
                         mt: 5,
+                        px: { xs: '24px', md: '0px' },
                         fontSize: { xs: '22px', md: '30px' },
                         // color: 'var(--white)',
                         textTransform: 'uppercase',
