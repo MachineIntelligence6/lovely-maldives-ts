@@ -136,11 +136,25 @@ export default function Resort() {
                     {...mainSlider1}
                   >
                     {amenities.map((val) => (
-                      <Box key={val} className="main-slider-1">
+                      <Box
+                        key={val}
+                        className="main-slider-1"
+                        sx={{ position: 'relative' }}
+                      >
                         <Image
                           src={bannerImg}
                           alt="Picture of the author"
                           style={{ width: '100%', height: 'auto' }}
+                        />
+                        <Box
+                          sx={{
+                            width: '100%',
+                            height: '100%',
+                            bgcolor: 'rgba(150,127,93,0.5)',
+                            position: 'absolute',
+                            top: '0',
+                            left: '0',
+                          }}
                         />
                       </Box>
                     ))}
@@ -159,7 +173,12 @@ export default function Resort() {
                   >
                     {amenities.map((val) => (
                       <Box
-                        sx={{ p: 0, px: '4px', display: 'block' }}
+                        sx={{
+                          p: 0,
+                          px: '4px',
+                          display: 'block',
+                          position: 'relative',
+                        }}
                         key={val}
                         className="sub-slider-1"
                       >
@@ -172,6 +191,16 @@ export default function Resort() {
                             width: '100%',
                             height: 'auto',
                             display: 'block',
+                          }}
+                        />
+                        <Box
+                          sx={{
+                            width: { xs: '90.5%', md: '96.5%' },
+                            height: '100%',
+                            bgcolor: 'rgba(150,127,93,0.5)',
+                            position: 'absolute',
+                            top: '0',
+                            left: '4px',
                           }}
                         />
                       </Box>
@@ -405,13 +434,27 @@ export default function Resort() {
                         {...mainSlider1} // You might want to adjust this configuration if it's specific to slider 2
                       >
                         {amenities.map((val, index) => (
-                          <Box key={index} className="main-slider-2">
+                          <Box
+                            key={index}
+                            className="main-slider-2"
+                            sx={{ position: 'relative' }}
+                          >
                             {' '}
                             {/* Changed key to use index */}
                             <Image
                               src={bannerImg}
                               alt="Picture of the author"
                               style={{ width: '100%', height: 'auto' }}
+                            />
+                            <Box
+                              sx={{
+                                width: '100%',
+                                height: '100%',
+                                bgcolor: 'rgba(150,127,93,0.5)',
+                                position: 'absolute',
+                                top: '0',
+                                left: '0',
+                              }}
                             />
                           </Box>
                         ))}
@@ -428,7 +471,12 @@ export default function Resort() {
                       >
                         {amenities.map((val, index) => (
                           <Box
-                            sx={{ p: 0, px: '4px', display: 'block' }}
+                            sx={{
+                              p: 0,
+                              px: '4px',
+                              display: 'block',
+                              position: 'relative',
+                            }}
                             key={index}
                             className="sub-slider-2"
                           >
@@ -439,6 +487,16 @@ export default function Resort() {
                                 width: '100%',
                                 height: 'auto',
                                 display: 'block',
+                              }}
+                            />
+                            <Box
+                              sx={{
+                                width: { xs: '90.5%', md: '96.5%' },
+                                height: '100%',
+                                bgcolor: 'rgba(150,127,93,0.5)',
+                                position: 'absolute',
+                                top: '0',
+                                left: '4px',
                               }}
                             />
                           </Box>

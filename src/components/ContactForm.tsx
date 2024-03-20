@@ -71,6 +71,9 @@ export default function ContactForm() {
             px: '50px',
             mt: '40px',
             py: 2,
+            '&:hover': {
+              backgroundColor: 'var(--blue) !important',
+            },
           }}
           title="Send"
         >

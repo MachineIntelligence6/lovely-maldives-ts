@@ -129,6 +129,20 @@ export default function TopFiveLuxuryResorts({
               <Box
                 sx={{
                   width: { xs: '100%', md: '96%' },
+                  height: { xs: '250px', md: '300px' },
+                  bgcolor: 'rgba(150,127,93,0.5)',
+                  position: 'absolute',
+                  top: '0',
+                  left: { xs: 0, md: '8px' },
+                  borderRadius: {
+                    xs: '0px',
+                    md: `${radius} ${radius} 0px 0px`,
+                  },
+                }}
+              />
+              <Box
+                sx={{
+                  width: { xs: '100%', md: '96%' },
                   display: 'flex',
                   flexDirection: 'column',
                   color: 'white',
