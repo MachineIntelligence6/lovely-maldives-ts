@@ -95,6 +95,7 @@ function Header() {
   return (
     <Box component="header">
       <AppBar
+        component="nav"
         className={isScrolled ? 'scrolled' : ''}
         sx={{
           boxShadow: isScrolled

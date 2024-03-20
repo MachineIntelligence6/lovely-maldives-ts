@@ -26,7 +26,7 @@ export default function SubNav({ menuItems }: any) {
         overflow: 'hidden',
         mt: { md: '0', xs: '85px' },
         gap: { md: '18px', xs: '0' },
-        borderTop: '1px solid lightgray',
+        borderTop: '1.5px solid lightgray',
       }}
     >
       <NavItems items={menuItems} />
