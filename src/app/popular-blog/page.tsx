@@ -2,119 +2,54 @@
 
 'use client'
 
-import { Box, Grid, Typography } from '@mui/material'
-import Image from 'next/image'
-import BlogSlider from '@/components/BlogSlider'
-import blog from '../../../public/Images/landingTree.jpg'
+import { Box, Container } from '@mui/material'
+import { useMenuStore } from '@/providers/menu-store-provider'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import BlogHeader from '../../components/BlogHeader'
+import PopularBlogs from '@/components/PopularBlogs'
 
-export const popular = [
-  {
-    image: blog,
-    title:
-      'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
-    date: '04 Feb 2024',
-  },
-  {
-    image: blog,
-    title:
-      'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
-    date: '04 Feb 2024',
-  },
-  {
-    image: blog,
-    title:
-      'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
-    date: '04 Feb 2024',
-  },
-  {
-    image: blog,
-    title:
-      'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
-    date: '04 Feb 2024',
-  },
-]
 export default function PopularBlogPage() {
+  const { isOpen } = useMenuStore((state) => state)
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
       <Header />
-      <BlogHeader />
-      <Box>
-        <Typography
-          sx={{
-            fontSize: '35px',
-            textAlign: 'center',
-            color: 'var(--white)',
-            mt: '60px',
-          }}
-        >
-          POPULAR
-        </Typography>
-        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-          <BlogSlider />
-        </Box>
-        <Grid
-          container
-          columns={{ xs: 4, sm: 8, md: 12 }}
-          spacing={5}
-          sx={{
-            mt: { xs: '0', md: '20px' },
-            overflow: 'hidden',
-            display: { xs: 'none', md: 'flex' },
-          }}
-        >
-          {popular.map((item, index) => (
-            <Grid
-              item
-              xs={4}
-              sm={4}
-              md={4}
-              key={index}
-              sx={{ position: 'relative', borderRadius: '30px' }}
-            >
-              <Image
-                src={item.image}
-                alt="blog"
-                // className="collectionImg"
-                style={{
-                  width: '100%',
-                  height: '350px',
-                  objectFit: 'cover',
-                  borderRadius: '30px',
-                }}
-              />
-              <Box
-                sx={{
-                  width: { xs: '100%', md: '91.5%' },
-                  height: '35%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  position: 'absolute',
-                  color: 'white',
-                  bottom: '0%',
-                  left: '9%',
-                  fontSize: '12px',
-                  fontWeight: '200',
-                  zIndex: '99',
-                  bgcolor: 'var(--blue)',
-                  borderRadius: '0 0 30px  30px',
-                  mt: '20px',
-                }}
-              >
-                <Typography sx={{ px: 4, fontSize: '14px' }}>
-                  {item.date}
-                </Typography>
-                <Typography sx={{ px: 4, fontSize: '20px', mt: '20px' }}>
-                  {item.title}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
+      <Box
+        sx={{
+          background: 'black',
+          position: { xs: 'unset', md: 'fixed' },
+          top: { xs: '0', md: '172px' },
+          boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
+          // py: '20px',
+          width: '100%',
+          // px: '100px',
+          zIndex: 999,
+          // opacity: isOpen ? 1 : 0,
+          transform: isOpen ? 'translateY(0px)' : 'translateY(-140px)',
+          transition: 'opacity 0.4s, transform 0.4s',
+          display: 'block',
+          flexDirection: 'row',
+          overflow: 'hidden',
+          mt: { md: '0', xs: '135px' },
+          gap: { md: '18px', xs: '0' },
+          borderTop: '1px solid lightgray',
+        }}
+      >
+        <BlogHeader />
       </Box>
+      <Container
+        sx={{
+          // maxWidth: '80%',
+          px: 0,
+          margin: 'auto',
+          mt: '280px',
+          '@media only screen and (min-width: 1441px)': {
+            maxWidth: '1030px !important',
+          },
+        }}
+      >
+        <PopularBlogs />
+      </Container>
       <Footer />
     </Box>
   )

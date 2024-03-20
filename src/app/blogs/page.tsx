@@ -110,7 +110,7 @@ export default function Page() {
           width: '100%',
           zIndex: 999,
           // opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'translateY(0px)' : 'translateY(-120px)',
+          transform: isOpen ? 'translateY(0px)' : 'translateY(-140px)',
           transition: 'opacity 0.4s, transform 0.4s',
           display: 'block',
           flexDirection: 'row',

@@ -154,21 +154,34 @@ export default function SingleBlogPage() {
                 <LinkIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
               </IconButton>
             </Paper>
-            <Box
-              component={Image}
-              src={articleImage}
-              alt="Picture of the author"
-              sx={{
-                maxHeight: '500px',
-                height: { xs: '300px', md: '500px' },
-                width: '100%',
-                maxWidth: '100%',
-                margin: '0 auto',
-                display: 'block',
-                borderRadius: { xs: '0px', md: '20px' },
-                objectFit: 'cover',
-              }}
-            />
+            <Box sx={{ position: 'relative' }}>
+              <Box
+                component={Image}
+                src={articleImage}
+                alt="Picture of the author"
+                sx={{
+                  maxHeight: '500px',
+                  height: { xs: '300px', md: '500px' },
+                  width: '100%',
+                  maxWidth: '100%',
+                  margin: '0 auto',
+                  display: 'block',
+                  borderRadius: { xs: '0px', md: '20px' },
+                  objectFit: 'cover',
+                }}
+              />
+              <Box
+                sx={{
+                  width: '100%',
+                  height: { xs: '300px', md: '500px' },
+                  bgcolor: 'rgba(150,127,93,0.5)',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  borderRadius: { xs: 0, md: '20px' },
+                }}
+              />
+            </Box>
             <Box sx={{ px: { xs: '30px', md: '0px' } }}>
               <Typography
                 paragraph
@@ -262,19 +275,32 @@ export default function SingleBlogPage() {
                 velit cupidatat aute est ea mollit.
               </Typography>
             </Box>
-            <Box
-              component={Image}
-              src={articleImage}
-              alt="Picture of the author"
-              sx={{
-                maxHeight: '350px',
-                maxWidth: { xs: '100%', md: '70%' },
-                margin: '0 auto',
-                display: 'block',
-                borderRadius: { xs: '0px', md: '20px' },
-                objectFit: 'cover',
-              }}
-            />
+            <Box sx={{ position: 'relative' }}>
+              <Box
+                component={Image}
+                src={articleImage}
+                alt="Picture of the author"
+                sx={{
+                  maxHeight: '350px',
+                  maxWidth: { xs: '100%', md: '70%' },
+                  margin: '0 auto',
+                  display: 'block',
+                  borderRadius: { xs: '0px', md: '20px' },
+                  objectFit: 'cover',
+                }}
+              />
+              <Box
+                sx={{
+                  width: { xs: '100%', md: '70%' },
+                  height: '350px',
+                  bgcolor: 'rgba(150,127,93,0.5)',
+                  position: 'absolute',
+                  top: 0,
+                  left: { sx: '0', md: '147.5px' },
+                  borderRadius: { xs: 0, md: '20px' },
+                }}
+              />
+            </Box>
             <Box sx={{ px: { xs: '30px', md: '0px' } }}>
               <Typography
                 paragraph
@@ -367,6 +393,7 @@ export default function SingleBlogPage() {
                     boxSizing: 'border-box',
                     boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
                     textDecoration: 'none',
+                    position: 'relative',
                   }}
                 >
                   <Image
@@ -377,6 +404,17 @@ export default function SingleBlogPage() {
                       borderRadius: '20px 20px 0 0px',
                       height: '200px',
                       objectFit: 'cover',
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: { xs: '100%', md: '100%' },
+                      height: '200px',
+                      bgcolor: 'rgba(150,127,93,0.5)',
+                      position: 'absolute',
+                      top: 0,
+                      left: '0',
+                      borderRadius: '20px 20px 0 0',
                     }}
                   />
                   <Box
@@ -400,8 +438,10 @@ export default function SingleBlogPage() {
             </Box>
           </Box>
         </Container>
-        <MailBox />
       </Container>
+      <Box sx={{ width: { xs: 'auto', md: '63%' }, mx: 'auto' }}>
+        <MailBox />
+      </Box>
       <Footer />
     </Box>
   )

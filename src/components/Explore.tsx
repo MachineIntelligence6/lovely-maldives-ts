@@ -3,7 +3,11 @@
 
 'use client'
 
-import { Box, Typography, Container, Paper } from '@mui/material'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
+
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -148,7 +152,7 @@ export default function Explore() {
                     position: 'relative',
                     width: '100%',
                     height: '100%',
-                    overflow: 'hidden', // Ensure the overlay doesn't overflow
+                    overflow: 'hidden',
                   }}
                 >
                   <Box
@@ -170,6 +174,7 @@ export default function Explore() {
                       height: '100%',
                       zIndex: 1,
                       backgroundImage:
+                        // eslint-disable-next-line max-len
                         'linear-gradient(to bottom, rgba(150, 127, 93, 0.70), rgba(150, 127, 93, 0.20))',
                       boxShadow: '0 2px 4px rgba(0, 0, 0, 0.80)',
                     }}
