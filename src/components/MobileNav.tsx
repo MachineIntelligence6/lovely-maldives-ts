@@ -41,9 +41,16 @@ export default function MobileNav({ menuItems }: any) {
       <NavItems items={menuItems} />
       <Box
         sx={{
-          mt: '5rem',
-          borderTop: '1px solid #fff',
-          borderBottom: '1px solid #fff',
+          width: '60%',
+          pt: 6,
+          borderBottom: '1.8px solid #fff',
+          margin: '0 auto',
+        }}
+      />
+
+      <Box
+        sx={{
+          mt: '1rem',
         }}
       >
         <Typography
@@ -94,6 +101,14 @@ export default function MobileNav({ menuItems }: any) {
           <WhatsAppIcon sx={{ color: 'lightgreen' }} />
         </Box>
       </Box>
+      <Box
+        sx={{
+          width: '60%',
+          pt: 1,
+          borderBottom: '1.8px solid #fff',
+          margin: '0 auto',
+        }}
+      />
     </Box>
   )
 }
