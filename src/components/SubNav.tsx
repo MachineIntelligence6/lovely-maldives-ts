@@ -14,7 +14,7 @@ export default function SubNav({ menuItems }: any) {
         position: 'fixed',
         top: { xs: '0', md: '90px' },
         boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
-        py: '20px',
+        py: '10px',
         width: '100%',
         px: '100px',
         zIndex: 999,
