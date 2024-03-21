@@ -152,12 +152,12 @@ export default function LatestBlogs() {
           />
           <Box
             sx={{
-              width: '100%',
+              width: { xs: '100%', md: '60%' },
               height: '100%',
               bgcolor: 'rgba(150,127,93,0.5)',
               position: 'absolute',
-              top: '0',
-              // left: { xs: '0', md: '240.5px' },
+              top: 0,
+              left: 0,
               borderRadius: { xs: 0, md: '20px' },
             }}
           />
