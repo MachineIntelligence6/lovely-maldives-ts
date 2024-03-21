@@ -362,7 +362,7 @@ export default function SingleBlogPage() {
             </Box>
             <Box
               sx={{
-                px: '20px',
+                px: { xs: 0, md: '20px' },
                 margin: '0 auto',
                 maxWidth: { xs: '100%', md: '70%' },
               }}
