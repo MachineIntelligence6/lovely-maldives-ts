@@ -18,7 +18,7 @@ export default function PopularBlogPage() {
         sx={{
           background: 'black',
           position: { xs: 'unset', md: 'fixed' },
-          top: { xs: '0', md: '172px' },
+          top: { xs: '0', md: '168px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
           // py: '20px',
           width: '100%',

@@ -350,7 +350,11 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     top: 400px;
   }
 } */
-
+@media screen and (min-width: 1600px) {
+  .rightPalm {
+    transform: translateX(120%);
+  }
+}
 .burger-menu {
   min-width: max-content;
   height: 2rem;
