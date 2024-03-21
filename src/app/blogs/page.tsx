@@ -105,7 +105,7 @@ export default function Page() {
         sx={{
           background: 'black',
           position: { xs: 'unset', md: 'fixed' },
-          top: { xs: '0', md: '172px' },
+          top: { xs: '0', md: '168px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
           width: '100%',
           zIndex: 999,
@@ -160,20 +160,21 @@ export default function Page() {
                 href={`blogs/${blogItem.slug}`}
                 sx={{
                   width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
-                  borderRadius: '20px',
-                  bgcolor: 'white',
+                  borderRadius: { xs: 0, md: '20px' },
+                  bgcolor: 'var(--brown)',
                   boxSizing: 'border-box',
                   boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
                   textDecoration: 'none',
                   position: 'relative',
                 }}
               >
-                <Image
+                <Box
+                  component={Image}
                   src={blogItem.image}
                   alt="blog"
-                  style={{
+                  sx={{
                     width: '100%',
-                    borderRadius: '20px 20px 0 0px',
+                    borderRadius: { xs: 0, md: '20px 20px 0 0px' },
                     height: '200px',
                     objectFit: 'cover',
                   }}
@@ -186,15 +187,17 @@ export default function Page() {
                     position: 'absolute',
                     top: '0',
                     // left: { xs: '0', md: '240.5px' },
-                    borderRadius: '20px 20px 0 0',
+                    borderRadius: { xs: 0, md: '20px 20px 0 0' },
                   }}
                 />
                 <Box
                   sx={{
-                    mt: '20px',
-                    color: 'var(--white)',
+                    // mt: '20px',
+                    color: 'white',
+                    bgcolor: 'var(--brown)',
                     pb: '20px',
                     px: { xs: '20px', md: '20px' },
+                    borderRadius: '0 0 20px 20px ',
                   }}
                 >
                   <Typography sx={{ fontSize: '16px', mt: '20px' }}>

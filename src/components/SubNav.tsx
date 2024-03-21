@@ -27,6 +27,10 @@ export default function SubNav({ menuItems }: any) {
         mt: { md: '0', xs: '85px' },
         gap: { md: '18px', xs: '0' },
         borderTop: '1.5px solid lightgray',
+        '@media only screen and (min-width: 1600px)': {
+          borderTop: '1.5px solid lightgray',
+          top: '91px',
+        },
       }}
     >
       <NavItems items={menuItems} />

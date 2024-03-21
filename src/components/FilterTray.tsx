@@ -18,6 +18,7 @@ import {
   CheckboxProps,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import { Close } from '@mui/icons-material'
 
 const Checkbox = styled(MuiCheckbox)<CheckboxProps>(() => ({
   color: 'var(--brown)',
@@ -61,6 +62,11 @@ export default function FilterTray() {
             gap: 4,
           }}
         >
+          <Box>
+            <IconButton onClick={toggleDrawer(false)}>
+              <Close />
+            </IconButton>
+          </Box>
           <FormControl>
             <FormLabel>Property Types</FormLabel>
             <FormGroup sx={{ ml: '10px' }}>

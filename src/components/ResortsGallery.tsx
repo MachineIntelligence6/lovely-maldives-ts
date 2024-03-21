@@ -113,11 +113,13 @@ export default function ResortsGallery() {
                     <Box
                       sx={{
                         display: 'flex',
+                        justifyContent: 'space-between',
                         alignItems: 'center',
                         height: 'auto',
+                        px: 4,
                       }}
                     >
-                      <Typography sx={{ px: 4, fontSize: '20px' }}>
+                      <Typography sx={{ fontSize: '20px' }}>
                         {item.name.length > 20
                           ? `${item.name.substring(0, 20)}...`
                           : item.name}

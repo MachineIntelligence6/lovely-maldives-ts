@@ -261,11 +261,12 @@ export default function OurServices() {
                       color: 'white',
                       bottom: '10%',
                       left: '50%',
-                      transform: 'translateX(-50%)',
-                      fontSize: '12px',
-                      fontWeight: 600,
+                      transform: 'translateX(-30%)',
+                      fontSize: '16px',
+                      // fontWeight: 600,
                       opacity: 0.9,
                       zIndex: 2,
+                      textAlign: 'justify',
                     }}
                   >
                     {item.description}

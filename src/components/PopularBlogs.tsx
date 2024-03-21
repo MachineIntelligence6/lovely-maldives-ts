@@ -71,7 +71,7 @@ export default function PopularBlogs() {
               sx={{
                 width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
                 borderRadius: { xs: '0', md: '20px' },
-                bgcolor: 'white',
+                bgcolor: 'var(--brown)',
                 boxSizing: 'border-box',
                 boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
                 textDecoration: 'none',
@@ -84,7 +84,7 @@ export default function PopularBlogs() {
                 alt="blog"
                 sx={{
                   width: '100%',
-                  borderRadius: { xs: '0', md: '20px 20px 0 0px' },
+                  borderRadius: { xs: '0px', md: '20px 20px 0 0px' },
                   height: '200px',
                   objectFit: 'cover',
                 }}
@@ -102,10 +102,12 @@ export default function PopularBlogs() {
               />
               <Box
                 sx={{
-                  mt: '20px',
-                  color: 'var(--white)',
+                  // mt: '20px',
+                  color: 'white',
+                  bgcolor: 'var(--brown)',
                   pb: '20px',
                   px: { xs: '20px', md: '20px' },
+                  borderRadius: '0 0 20px 20px',
                 }}
               >
                 <Typography sx={{ fontSize: '16px', mt: '20px' }}>

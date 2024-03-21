@@ -133,6 +133,9 @@ export default function OurCollection({
                   position: 'absolute',
                   top: '0',
                   left: { xs: 0, md: '22px' },
+                  '@media only screen and (min-width: 1600px)': {
+                    left: '30px',
+                  },
                 }}
               />
               <Box
