@@ -48,69 +48,9 @@ export const latestBlog = [
   },
 ]
 
-// function OverlayImageBlogCard() {
-//   return (
-//     <Grid
-//       item
-//       xs={4}
-//       sm={4}
-//       md={6}
-//       sx={{
-//         borderRadius: '20px',
-//         mt: '60px',
-//         position: 'relative',
-//         height: { xs: '582px', md: 'auto' },
-//       }}
-//     >
-//       <Image
-//         src={latest.img}
-//         alt="blog"
-//         // className="latestImg"
-//         style={{
-//           width: '100%',
-//           borderRadius: '20px',
-//           height: '100%',
-//           objectFit: 'cover',
-//         }}
-//       />
-//       <Box
-//         sx={{
-//           width: { xs: '90.5%', md: '94%' },
-//           height: '100%',
-//           backgroundColor: 'rgba(150, 127, 93, 0.5)',
-//           position: 'absolute',
-//           top: '0',
-//           zIndex: 1,
-//           borderRadius: '20px !important',
-//         }}
-//       />
-//       <Box
-//         sx={{
-//           width: { xs: '90%', md: '550px' },
-//           mt: '20px',
-//           color: 'white',
-//           position: 'absolute',
-//           top: '59%',
-//           left: '10%',
-//           zIndex: 99,
-//         }}
-//       >
-//         <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-//           {latest.title}
-//         </Typography>
-//         <Typography sx={{ fontSize: '24px', mt: '20px' }}>
-//           {latest.description}
-//         </Typography>
-//         <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-//           {latest.date}
-//         </Typography>
-//       </Box>
-//     </Grid>
-//   )
-// }
 export default function LatestBlogs() {
   return (
-    <Box sx={{ pt: { md: '0px', xs: '0px' }, px: 0 }}>
+    <Box sx={{ pt: { md: '0px', xs: '0px' }, px: 2.5 }}>
       <Box>
         <Typography
           sx={{
@@ -130,7 +70,7 @@ export default function LatestBlogs() {
             height: { xs: '350px', md: '450px' },
             bgcolor: 'var(--brown)',
             // position: { xs: 'relative', md: 'unset' },
-            borderRadius: { xs: 0, md: '20px' },
+            borderRadius: '20px',
             display: { xs: 'block', md: 'flex' },
             alignItems: 'center',
             justifyContent: 'center',
@@ -147,7 +87,10 @@ export default function LatestBlogs() {
               height: '100%',
               objectFit: 'cover',
               width: '100%',
-              borderRadius: { xs: '0', md: '20px 0px 0px 20px' },
+              borderRadius: {
+                xs: '20px 20px 20px 20px',
+                md: '20px 0px 0px 20px',
+              },
             }}
           />
           <Box
@@ -159,6 +102,7 @@ export default function LatestBlogs() {
               top: 0,
               left: 0,
               borderRadius: { xs: 0, md: '20px' },
+              // left: { xs: '0', md: '240.5px' },
             }}
           />
           {/* <Box
@@ -179,7 +123,7 @@ export default function LatestBlogs() {
               top: '60%',
               color: 'white',
               borderRadius: { xs: 0, md: '0 10px 10px 0' },
-              width: { xs: '100%', md: '80%' },
+              width: { xs: '100%', md: '70%' },
             }}
           >
             <Typography
@@ -188,6 +132,8 @@ export default function LatestBlogs() {
                 color: 'white',
                 textAlign: { xs: 'center', md: 'left' },
                 ml: { xs: '0', md: '50px' },
+                fontWeight: 600,
+                // zIndex: 999,
               }}
             >
               Seyta Opens Dhunthari Resort& Spa Long in the Maldives
@@ -223,7 +169,7 @@ export default function LatestBlogs() {
                 alt="blog"
                 sx={{
                   width: '100%',
-                  borderRadius: { xs: 0, md: '20px 20px 0 0px' },
+                  borderRadius: '20px 20px 0 0px',
                   height: '300px',
                   objectFit: 'cover',
                 }}
@@ -236,7 +182,7 @@ export default function LatestBlogs() {
                   position: 'absolute',
                   top: '0',
                   // left: { xs: '0', md: '240.5px' },
-                  borderRadius: { xs: 0, md: '20px 20px 0 0' },
+                  borderRadius: '20px 20px 0 0',
                 }}
               />
               <Box
@@ -246,7 +192,7 @@ export default function LatestBlogs() {
                   color: 'white',
                   pb: '20px',
                   px: { xs: '20px', md: '20px' },
-                  borderRadius: { xs: 0, md: '0  0 20px 20px ' },
+                  borderRadius: '0  0 20px 20px ',
                 }}
               >
                 <Typography
@@ -255,12 +201,16 @@ export default function LatestBlogs() {
                   {latest.title}
                 </Typography>
                 <Typography
-                  sx={{ fontSize: { xs: '20px', md: '24px' }, mt: '20px' }}
+                  sx={{
+                    fontSize: { xs: '20px', md: '24px' },
+                    fontWeight: 600,
+                    mt: '10px',
+                  }}
                 >
                   {latest.description}
                 </Typography>
                 <Typography
-                  sx={{ fontSize: { xs: '14px', md: '16px' }, mt: '20px' }}
+                  sx={{ fontSize: { xs: '16px', md: '16px' }, mt: '10px' }}
                 >
                   {latest.date}
                 </Typography>

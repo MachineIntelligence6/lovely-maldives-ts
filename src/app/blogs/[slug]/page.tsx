@@ -19,6 +19,90 @@ import MailBox from '@/components/MailBox'
 import articleImage from '../../../../public/Images/main.jpg'
 import { articles } from '../page'
 
+function ArticleSharer() {
+  return (
+    <Paper
+      elevation={0}
+      sx={{
+        background: 'transparent',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        gap: { xs: '2px', md: '4px' },
+        mb: 4,
+        px: { xs: '30px', md: '0px' },
+      }}
+    >
+      <Typography sx={{ mb: '2px' }}>Share Article</Typography>
+      <IconButton
+        sx={{
+          color: '#000',
+          transition: 'ease opacity .3s',
+          opacity: 0.8,
+          ':hover': {
+            background: 'none',
+            opacity: 1,
+          },
+        }}
+      >
+        <XIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+      </IconButton>
+      <IconButton
+        sx={{
+          color: '#000',
+          transition: 'ease opacity .3s',
+          opacity: 0.8,
+          ':hover': {
+            background: 'none',
+            opacity: 1,
+          },
+        }}
+      >
+        <WhatsApp sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+      </IconButton>
+      <IconButton
+        sx={{
+          color: '#000',
+          transition: 'ease opacity .3s',
+          opacity: 0.8,
+          ':hover': {
+            background: 'none',
+            opacity: 1,
+          },
+        }}
+      >
+        <MailOutline sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+      </IconButton>
+      <IconButton
+        sx={{
+          color: '#000',
+          transition: 'ease opacity .3s',
+          opacity: 0.8,
+          ':hover': {
+            background: 'none',
+            opacity: 1,
+          },
+        }}
+      >
+        <FacebookOutlinedIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+      </IconButton>
+      <IconButton
+        sx={{
+          color: '#000',
+          transition: 'ease opacity .3s',
+          opacity: 0.8,
+          ':hover': {
+            background: 'none',
+            opacity: 1,
+          },
+        }}
+      >
+        <LinkIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+      </IconButton>
+    </Paper>
+  )
+}
+
 export default function SingleBlogPage() {
   const isOpen = useMenuStore((state) => state.isOpen)
 
@@ -29,12 +113,12 @@ export default function SingleBlogPage() {
         sx={{
           background: 'black',
           position: { xs: 'unset', md: 'fixed' },
-          top: { xs: '0', md: '172px' },
+          top: { xs: '0', md: '168px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
           width: '100%',
           zIndex: 999,
           // opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'translateY(0px)' : 'translateY(-120px)',
+          transform: isOpen ? 'translateY(0px)' : 'translateY(-140px)',
           transition: 'opacity 0.4s, transform 0.4s',
           display: 'block',
           flexDirection: 'row',
@@ -73,87 +157,7 @@ export default function SingleBlogPage() {
             >
               Seyta Opens Dhunthari Resort & Spa Long Heading Capacity here.
             </Typography>
-            <Paper
-              elevation={0}
-              sx={{
-                background: 'transparent',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-                gap: { xs: '2px', md: '4px' },
-                mb: 4,
-                px: { xs: '30px', md: '0px' },
-              }}
-            >
-              <Typography sx={{ mb: '2px' }}>Share Article</Typography>
-              <IconButton
-                sx={{
-                  color: '#000',
-                  transition: 'ease opacity .3s',
-                  opacity: 0.8,
-                  ':hover': {
-                    background: 'none',
-                    opacity: 1,
-                  },
-                }}
-              >
-                <XIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
-              </IconButton>
-              <IconButton
-                sx={{
-                  color: '#000',
-                  transition: 'ease opacity .3s',
-                  opacity: 0.8,
-                  ':hover': {
-                    background: 'none',
-                    opacity: 1,
-                  },
-                }}
-              >
-                <WhatsApp sx={{ fontSize: { xs: '16px', md: '22px' } }} />
-              </IconButton>
-              <IconButton
-                sx={{
-                  color: '#000',
-                  transition: 'ease opacity .3s',
-                  opacity: 0.8,
-                  ':hover': {
-                    background: 'none',
-                    opacity: 1,
-                  },
-                }}
-              >
-                <MailOutline sx={{ fontSize: { xs: '16px', md: '22px' } }} />
-              </IconButton>
-              <IconButton
-                sx={{
-                  color: '#000',
-                  transition: 'ease opacity .3s',
-                  opacity: 0.8,
-                  ':hover': {
-                    background: 'none',
-                    opacity: 1,
-                  },
-                }}
-              >
-                <FacebookOutlinedIcon
-                  sx={{ fontSize: { xs: '16px', md: '22px' } }}
-                />
-              </IconButton>
-              <IconButton
-                sx={{
-                  color: '#000',
-                  transition: 'ease opacity .3s',
-                  opacity: 0.8,
-                  ':hover': {
-                    background: 'none',
-                    opacity: 1,
-                  },
-                }}
-              >
-                <LinkIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
-              </IconButton>
-            </Paper>
+            <ArticleSharer />
             <Box sx={{ position: 'relative' }}>
               <Box
                 component={Image}
@@ -356,9 +360,22 @@ export default function SingleBlogPage() {
                 velit cupidatat aute est ea mollit.
               </Typography>
             </Box>
+            <Box
+              sx={{
+                px: '20px',
+                margin: '0 auto',
+                maxWidth: { xs: '100%', md: '70%' },
+              }}
+            >
+              <ArticleSharer />
+            </Box>
           </Grid>
         </Grid>
-        <Container>
+        <Container
+          sx={{
+            mt: '60px',
+          }}
+        >
           <Box>
             <Typography
               variant="h2"
@@ -366,12 +383,12 @@ export default function SingleBlogPage() {
                 fontSize: '2rem',
                 mb: 4,
                 color: '#666',
-                fontWeight: 600,
-                textTransform: 'capitalize',
+                fontWeight: 500,
+                textTransform: 'uppercase',
                 textAlign: 'center',
               }}
             >
-              Related Blogs
+              RELATED ARTICLES
             </Typography>
             <Box
               sx={{

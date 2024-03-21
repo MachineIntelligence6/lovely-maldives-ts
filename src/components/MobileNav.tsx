@@ -29,11 +29,11 @@ export default function MobileNav({ menuItems }: any) {
         transition: 'opacity 0.4s, transform 0.4s',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-around',
+        // justifyContent: 'space-around',
         overflow: 'hidden',
         mt: { md: '0', xs: '90px' },
         gap: { md: '18px', xs: '0' },
-        borderTop: '1px solid lightgray',
+        // borderTop: '1px solid lightgray',
         textAlign: 'center',
         color: 'white',
       }}
@@ -41,12 +41,19 @@ export default function MobileNav({ menuItems }: any) {
       <NavItems items={menuItems} />
       <Box
         sx={{
-          // mt: '20px',
+          mt: '5rem',
           borderTop: '1px solid #fff',
           borderBottom: '1px solid #fff',
         }}
       >
-        <Typography sx={{ mt: '20px' }}>Get in touch</Typography>
+        <Typography
+          sx={{
+            mt: '20px',
+            fontSize: '1.2rem',
+          }}
+        >
+          Get in touch
+        </Typography>
         <Box
           sx={{
             display: 'flex',
@@ -54,21 +61,37 @@ export default function MobileNav({ menuItems }: any) {
             py: '20px',
           }}
         >
-          <Button sx={{ color: '#fff' }}>Email</Button>
-          <Button sx={{ color: '#fff' }}>Contact Number</Button>
+          <Button
+            sx={{
+              color: '#fff',
+              fontSize: '1.2rem',
+            }}
+          >
+            Email
+          </Button>
+          <Button
+            role="link"
+            href="tel:+960-769-4545"
+            sx={{
+              color: '#fff',
+              fontSize: '1.2rem',
+            }}
+          >
+            +960-769-4545
+          </Button>
         </Box>
         <Box
           sx={{
             display: { xs: 'flex', md: 'none' },
             justifyContent: 'center',
-            mb: '50px',
+            mb: '20px',
             gap: '20px',
           }}
         >
           <FacebookRoundedIcon />
           <XIcon />
           <InstagramIcon />
-          <WhatsAppIcon />
+          <WhatsAppIcon sx={{ color: 'lightgreen' }} />
         </Box>
       </Box>
     </Box>

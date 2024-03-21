@@ -289,7 +289,6 @@ export default function Resort() {
                         mb: 2,
                         mt: 5,
                         fontSize: { xs: '22px', md: '30px' },
-                        color: 'var(--white)',
                         textTransform: 'uppercase',
                       }}
                     >
@@ -311,7 +310,7 @@ export default function Resort() {
                             </ListItemIcon>
                             <ListItemText
                               primary={
-                                <Typography sx={{ fontWeight: '500' }}>
+                                <Typography sx={{ fontWeight: 600 }}>
                                   30km from airport
                                 </Typography>
                               }
@@ -349,7 +348,6 @@ export default function Resort() {
                         mb: 2,
                         mt: 5,
                         fontSize: { xs: '22px', md: '30px' },
-                        color: 'var(--white)',
                         textTransform: 'uppercase',
                       }}
                     >
@@ -371,7 +369,7 @@ export default function Resort() {
                             </ListItemIcon>
                             <ListItemText
                               primary={
-                                <Typography sx={{ fontWeight: '500' }}>
+                                <Typography sx={{ fontWeight: 600 }}>
                                   30km from airport
                                 </Typography>
                               }

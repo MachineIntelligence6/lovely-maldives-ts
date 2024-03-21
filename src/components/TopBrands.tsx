@@ -114,8 +114,8 @@ export default function TopBrands() {
               <Box
                 className="brandSlider"
                 sx={{
-                  width: { xs: '96%', md: '70%' },
-                  height: { xs: '280px', md: '210px' },
+                  width: { xs: '93%', md: '70%' },
+                  height: { xs: '250px', md: '210px' },
                   background: 'var(--brown)',
                   color: 'white',
                   textAlign: 'center',
@@ -151,7 +151,7 @@ export default function TopBrands() {
                     alignItems: 'flex-end',
                     justifyContent: 'center',
                     height: '50%',
-                    pb: 1,
+                    pb: 2,
                   }}
                 >
                   <Typography sx={{ fontSize: '18px', fontWeight: 200 }}>
