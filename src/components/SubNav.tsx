@@ -29,7 +29,7 @@ export default function SubNav({ menuItems }: any) {
         borderTop: '1.5px solid lightgray',
         '@media only screen and (min-width: 1600px)': {
           borderTop: '1.5px solid lightgray',
-          top:'91px',
+          top: '91px',
         },
       }}
     >
