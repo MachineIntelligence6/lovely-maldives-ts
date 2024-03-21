@@ -9,27 +9,19 @@ export default function SidePalmTree() {
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
-    <Box
-      sx={{
-        position: 'absolute',
-        right: '0',
-        top: '27%',
-        width: '40%',
-        overflow: 'hidden',
-      }}
-    >
+    <Box sx={{ position: 'relative' }}>
       <Image
         src={sidePalm}
         alt="Palm tree"
-        width={lessThanMd ? 203.3 : 305}
-        height={lessThanMd ? 189.1 : 283.6}
+        width={lessThanMd ? 140 : 305}
+        height={lessThanMd ? 130.4 : 283.6}
         className="rightPalm"
         style={{
-          // position: 'absolute',
-          // top: 0,
-          // right: 0,
+          position: 'absolute',
+          top: 0,
+          right: 0,
           zIndex: 99,
-          // transform: 'translateX(100% , 30%)',
+          transform: 'translateY(-30%)',
         }}
       />
     </Box>

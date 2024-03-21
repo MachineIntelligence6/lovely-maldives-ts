@@ -242,9 +242,9 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   ); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#967F5D', endColorstr='#967f5d',GradientType=0 ); /* IE6-9 */
 }
-.rightPalm {
+/* .rightPalm {
   transform: translateX(100%);
-}
+} */
 .css-13nykb7-MuiInputBase-root-MuiOutlinedInput-root {
   padding: 16px !important;
 }
@@ -340,9 +340,9 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     width: 100%;
     height: 100%;
   }
-  .rightPalm {
+  /* .rightPalm {
     transform: translateX(15%);
-  }
+  } */
 }
 
 /* @media screen and (max-width: 480px) {
@@ -350,11 +350,11 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     top: 400px;
   }
 } */
-@media screen and (min-width: 1600px) {
+/* @media screen and (min-width: 1600px) {
   .rightPalm {
     transform: translateX(150%);
   }
-}
+} */
 .burger-menu {
   min-width: max-content;
   height: 2rem;
