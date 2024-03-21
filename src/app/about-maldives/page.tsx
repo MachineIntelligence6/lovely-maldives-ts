@@ -26,9 +26,9 @@ export default function Page() {
       <Header />
       <Container
         sx={{
-          maxWidth: '80%',
+          maxWidth: { xs: '90%', md: '80%' },
           px: 0,
-          margin: 'auto',
+          mx: { xs: '20px', md: 'auto' },
           '@media only screen and (min-width: 1441px)': {
             maxWidth: '1030px !important',
           },
@@ -58,7 +58,7 @@ export default function Page() {
             alt="blog"
             className="articleBlog"
             style={{
-              height: '400px',
+              // height: '400px',
               objectFit: 'cover',
               borderRadius: '20px',
             }}
@@ -67,7 +67,7 @@ export default function Page() {
             className="articleBlog"
             sx={{
               // width: '100%',
-              height: '400px',
+              // height: '400px',
               bgcolor: 'rgba(150,127,93,0.5)',
               position: 'absolute',
               top: '0',
@@ -80,7 +80,7 @@ export default function Page() {
               pt: '40px',
               color: 'var(--white)',
               fontSize: '20px',
-              width: { xs: 'auto', md: '400px' },
+              width: { xs: '100%', md: '400px' },
               ml: { xs: 'auto', md: '150px' },
               textAlign: 'left',
             }}
@@ -88,7 +88,7 @@ export default function Page() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </Typography>
         </Box>
-        <Box sx={{ mt: '60px', color: 'var(--white)' }}>
+        <Box sx={{ mt: { xs: '40px', md: '60px' }, color: 'var(--white)' }}>
           <Typography>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -172,7 +172,7 @@ export default function Page() {
                 alt="blog"
                 className="articleImg"
                 style={{
-                  height: '300px',
+                  // height: '300px',
                   objectFit: 'cover',
                   borderRadius: '20px',
                 }}
@@ -181,7 +181,7 @@ export default function Page() {
                 className="articleImg"
                 sx={{
                   // width: '100%',
-                  height: '300px',
+                  // height: '300px',
                   bgcolor: 'rgba(150,127,93,0.5)',
                   position: 'absolute',
                   top: '0',
@@ -194,7 +194,7 @@ export default function Page() {
                   mt: '40px',
                   color: 'var(--white)',
                   fontSize: '20px',
-                  width: { xs: 'auto', md: '400px' },
+                  width: { xs: '100%', md: '400px' },
                   ml: { xs: 'auto', md: '260px' },
                   textAlign: 'left',
                 }}
@@ -202,7 +202,7 @@ export default function Page() {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit
               </Typography>
             </Box>
-            <Box sx={{ mt: '60px', color: 'var(--white)' }}>
+            <Box sx={{ mt: { xs: '40px', md: '60px' }, color: 'var(--white)' }}>
               <Typography>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

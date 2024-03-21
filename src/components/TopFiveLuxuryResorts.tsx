@@ -157,11 +157,13 @@ export default function TopFiveLuxuryResorts({
                   sx={{
                     // mt: '24px',
                     display: 'flex',
+                    justifyContent: 'space-between',
                     alignItems: 'center',
                     height: 'auto',
+                    px: 4,
                   }}
                 >
-                  <Typography sx={{ px: 4, fontSize: '20px' }}>
+                  <Typography sx={{ fontSize: '20px' }}>
                     One n Only Reethi Rah{' '}
                   </Typography>
                   <BoltIcon sx={{ display: `${iconShow}` }} />

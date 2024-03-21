@@ -22,6 +22,7 @@ export default function Home() {
       <Banner />
       <Box
         sx={{
+          position: 'relative',
           paddingTop: '10px',
           width: '100%',
         }}
