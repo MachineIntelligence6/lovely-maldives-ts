@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-props-no-spreading */
-import { Box, Typography, Container } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -51,67 +51,69 @@ export default function BlogSlider() {
     ],
   }
   return (
-    <Container sx={{ maxWidth: '100% !important' }}>
-      <Box
-        sx={{ width: '100%', height: '100%', mt: { xs: '30px', md: '60px' } }}
-      >
-        <Slider {...settings}>
-          {popular.map((data, index) => (
-            <Box sx={{ position: 'relative' }} key={index}>
-              <Box
-                component={Image}
-                src={blog}
-                alt="blog"
-                className="collectionImg"
-                sx={{
-                  height: '350px',
-                  objectFit: 'cover',
-                  borderRadius: { xs: '0px', md: '20px' },
-                }}
-              />
-              <Box
-                className="collectionImg"
-                sx={{
-                  width: '100%',
-                  height: '350px',
-                  bgcolor: 'rgba(150,127,93,0.5)',
-                  position: 'absolute',
-                  top: '0',
-                  // left: { xs: '0', md: '240.5px' },
-                  borderRadius: { xs: '0px', md: '20px' },
-                }}
-              />
-              <Box
-                sx={{
-                  width: { xs: '100%', md: '85%' },
-                  height: '40%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-evenly',
-                  position: 'absolute',
-                  color: 'white',
-                  bottom: '0%',
-                  left: '0',
-                  fontSize: '12px',
-                  fontWeight: '200',
-                  zIndex: '99',
-                  bgcolor: 'var(--blue)',
-                  borderRadius: { xs: '0px', md: '0 0 20px  20px' },
-                  mt: '20px',
-                }}
-              >
-                <Typography sx={{ px: 2, fontSize: '14px' }}>
-                  04 Feb 2024
-                </Typography>
-                <Typography sx={{ px: 2, fontSize: '20px' }}>
-                  Seyta Opens Dhunthari Resort & Spa in the beautiful islands of
-                  the Maldives.
-                </Typography>
-              </Box>
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%',
+        mt: { xs: '30px', md: '60px' },
+      }}
+    >
+      <Slider {...settings}>
+        {popular.map((data, index) => (
+          <Box sx={{ position: 'relative' }} key={index}>
+            <Box
+              component={Image}
+              src={blog}
+              alt="blog"
+              className="collectionImg"
+              sx={{
+                height: '350px',
+                objectFit: 'cover',
+                borderRadius: { xs: '0px', md: '20px' },
+              }}
+            />
+            <Box
+              className="collectionImg"
+              sx={{
+                width: '100%',
+                height: '350px',
+                bgcolor: 'rgba(150,127,93,0.5)',
+                position: 'absolute',
+                top: '0',
+                // left: { xs: '0', md: '240.5px' },
+                borderRadius: { xs: '0px', md: '20px' },
+              }}
+            />
+            <Box
+              sx={{
+                width: { xs: '100%', md: '85%' },
+                height: '40%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-evenly',
+                position: 'absolute',
+                color: 'white',
+                bottom: '0%',
+                left: '0',
+                fontSize: '12px',
+                fontWeight: '200',
+                zIndex: '99',
+                bgcolor: 'var(--blue)',
+                borderRadius: { xs: '0px', md: '0 0 20px  20px' },
+                mt: '20px',
+              }}
+            >
+              <Typography sx={{ px: 2, fontSize: '14px' }}>
+                04 Feb 2024
+              </Typography>
+              <Typography sx={{ px: 2, fontSize: '20px' }}>
+                Seyta Opens Dhunthari Resort & Spa in the beautiful islands of
+                the Maldives.
+              </Typography>
             </Box>
-          ))}
-        </Slider>
-      </Box>
-    </Container>
+          </Box>
+        ))}
+      </Slider>
+    </Box>
   )
 }

@@ -110,13 +110,13 @@ export default function PopularBlogs() {
                   borderRadius: '0 0 20px 20px',
                 }}
               >
-                <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                <Typography sx={{ fontSize: '20px', mt: '20px' }}>
                   {popularBlog.title}
                 </Typography>
                 {/* <Typography sx={{ fontSize: '24px', mt: '20px' }}>
                   {popularBlog.description}
                 </Typography> */}
-                <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                <Typography sx={{ fontSize: '14px', mt: '20px' }}>
                   {popularBlog.date}
                 </Typography>
               </Box>
