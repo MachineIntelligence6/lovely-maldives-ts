@@ -55,7 +55,7 @@ export default function BlogSlider() {
       sx={{
         width: '100%',
         height: '100%',
-        mt: { xs: '30px', md: '60px' } ,
+        mt: { xs: '30px', md: '60px' },
       }}
     >
       <Slider {...settings}>
