@@ -136,7 +136,6 @@ export default function TopBrands() {
                     sx={{
                       width: '100px',
                       fontSize: '26px',
-                      fontWeight: 500,
                       textAlign: 'center',
                       fontWeight: 600,
                     }}

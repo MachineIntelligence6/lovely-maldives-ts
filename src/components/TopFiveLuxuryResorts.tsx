@@ -131,6 +131,9 @@ export default function TopFiveLuxuryResorts({
                   position: 'absolute',
                   top: '0',
                   left: { xs: 0, md: '8px' },
+                  '@media only screen and (min-width: 1600px)': {
+                    left: '11px',
+                  },
                   borderRadius: {
                     xs: '0px',
                     md: `${radius} ${radius} 0px 0px`,
