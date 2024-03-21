@@ -61,6 +61,7 @@ export default function PopularBlogs() {
             flexWrap: 'wrap',
             mt: { xs: '30px', md: '40px' },
             gap: { xs: '10px', md: '20px' },
+            px: 2.5 ,
           }}
         >
           {popularBlogs.map((popularBlog, index) => (
@@ -70,7 +71,7 @@ export default function PopularBlogs() {
               href={`/blogs/${popularBlog.slug}`}
               sx={{
                 width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
-                borderRadius: { xs: '0', md: '20px' },
+                borderRadius: '20px',
                 bgcolor: 'var(--brown)',
                 boxSizing: 'border-box',
                 boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
@@ -84,7 +85,7 @@ export default function PopularBlogs() {
                 alt="blog"
                 sx={{
                   width: '100%',
-                  borderRadius: { xs: '0px', md: '20px 20px 0 0px' },
+                  borderRadius: '20px 20px 0 0px',
                   height: '200px',
                   objectFit: 'cover',
                 }}
