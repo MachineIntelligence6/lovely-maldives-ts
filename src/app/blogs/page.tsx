@@ -160,7 +160,7 @@ export default function Page() {
                 href={`blogs/${blogItem.slug}`}
                 sx={{
                   width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
-                  borderRadius: '20px',
+                  borderRadius: { xs: 0, md: '20px' },
                   bgcolor: 'var(--brown)',
                   boxSizing: 'border-box',
                   boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
@@ -168,12 +168,13 @@ export default function Page() {
                   position: 'relative',
                 }}
               >
-                <Image
+                <Box
+                  component={Image}
                   src={blogItem.image}
                   alt="blog"
-                  style={{
+                  sx={{
                     width: '100%',
-                    borderRadius: '20px 20px 0 0px',
+                    borderRadius: { xs: 0, md: '20px 20px 0 0px' },
                     height: '200px',
                     objectFit: 'cover',
                   }}
@@ -186,7 +187,7 @@ export default function Page() {
                     position: 'absolute',
                     top: '0',
                     // left: { xs: '0', md: '240.5px' },
-                    borderRadius: '20px 20px 0 0',
+                    borderRadius: { xs: 0, md: '20px 20px 0 0' },
                   }}
                 />
                 <Box

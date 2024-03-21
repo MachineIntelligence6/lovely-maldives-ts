@@ -84,7 +84,7 @@ export default function PopularBlogs() {
                 alt="blog"
                 sx={{
                   width: '100%',
-                  borderRadius: { xs: '0', md: '20px 20px 0 0px' },
+                  borderRadius: { xs: '0px', md: '20px 20px 0 0px' },
                   height: '200px',
                   objectFit: 'cover',
                 }}

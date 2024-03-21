@@ -22,10 +22,10 @@ import { useMenuStore } from '@/providers/menu-store-provider'
 import MobileNav from './MobileNav'
 import SubNav from './SubNav'
 
-const profilePic = '/Images/logo-png.png'
-const profilePicCol = '/Images/logo-colored.png'
-// import profilePic from '../../public/Images/lovely-maldives-logo.svg'
-// import profilePicCol from '../../public/Images/lovely-maldives-typeface.svg'
+// const profilePic = '/Images/logo.svg'
+// const profilePicCol = '/Images/logo-colored.svg'
+import profilePic from '../../public/Images/logo.svg'
+import profilePicCol from '../../public/Images/logo-colored.svg'
 
 function Header() {
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
@@ -141,7 +141,8 @@ function Header() {
           </Box>
           <Box>
             <Link href="/">
-              <Image
+              <Box
+                component={Image}
                 src={isScrolled ? profilePicCol : profilePic}
                 alt="Logo"
                 width={95.6}

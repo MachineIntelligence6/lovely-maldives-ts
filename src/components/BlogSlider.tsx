@@ -58,14 +58,15 @@ export default function BlogSlider() {
         <Slider {...settings}>
           {popular.map((data, index) => (
             <Box sx={{ position: 'relative' }} key={index}>
-              <Image
+              <Box
+                component={Image}
                 src={blog}
                 alt="blog"
                 className="collectionImg"
-                style={{
+                sx={{
                   height: '350px',
                   objectFit: 'cover',
-                  borderRadius: '20px',
+                  borderRadius: { xs: '0px', md: '20px' },
                 }}
               />
               <Box
@@ -77,16 +78,16 @@ export default function BlogSlider() {
                   position: 'absolute',
                   top: '0',
                   // left: { xs: '0', md: '240.5px' },
-                  borderRadius: '20px',
+                  borderRadius: { xs: '0px', md: '20px' },
                 }}
               />
               <Box
                 sx={{
                   width: { xs: '100%', md: '85%' },
-                  height: '50%',
+                  height: '40%',
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'center',
+                  justifyContent: 'space-evenly',
                   position: 'absolute',
                   color: 'white',
                   bottom: '0%',
@@ -95,14 +96,14 @@ export default function BlogSlider() {
                   fontWeight: '200',
                   zIndex: '99',
                   bgcolor: 'var(--blue)',
-                  borderRadius: '0 0 20px  20px',
+                  borderRadius: { xs: '0px', md: '0 0 20px  20px' },
                   mt: '20px',
                 }}
               >
-                <Typography sx={{ px: 4, fontSize: '14px' }}>
+                <Typography sx={{ px: 2, fontSize: '14px' }}>
                   04 Feb 2024
                 </Typography>
-                <Typography sx={{ px: 4, fontSize: '20px', mt: '20px' }}>
+                <Typography sx={{ px: 2, fontSize: '20px' }}>
                   Seyta Opens Dhunthari Resort & Spa in the beautiful islands of
                   the Maldives.
                 </Typography>
