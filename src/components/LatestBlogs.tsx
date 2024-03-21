@@ -152,12 +152,12 @@ export default function LatestBlogs() {
           />
           <Box
             sx={{
-              width: '100%',
+              width: { xs: '100%', md: '60%' },
               height: '100%',
               bgcolor: 'rgba(150,127,93,0.5)',
               position: 'absolute',
-              top: '0',
-              // left: { xs: '0', md: '240.5px' },
+              top: 0,
+              left: 0,
               borderRadius: { xs: 0, md: '20px' },
             }}
           />
@@ -249,13 +249,19 @@ export default function LatestBlogs() {
                   borderRadius: { xs: 0, md: '0  0 20px 20px ' },
                 }}
               >
-                <Typography sx={{ fontSize: '16px', pt: '20px' }}>
+                <Typography
+                  sx={{ fontSize: { xs: '14px', md: '16px' }, pt: '20px' }}
+                >
                   {latest.title}
                 </Typography>
-                <Typography sx={{ fontSize: '24px', mt: '20px' }}>
+                <Typography
+                  sx={{ fontSize: { xs: '20px', md: '24px' }, mt: '20px' }}
+                >
                   {latest.description}
                 </Typography>
-                <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                <Typography
+                  sx={{ fontSize: { xs: '14px', md: '16px' }, mt: '20px' }}
+                >
                   {latest.date}
                 </Typography>
               </Box>

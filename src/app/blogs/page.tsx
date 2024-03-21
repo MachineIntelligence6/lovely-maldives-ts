@@ -200,7 +200,7 @@ export default function Page() {
                     borderRadius: '0 0 20px 20px ',
                   }}
                 >
-                  <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                  <Typography sx={{ fontSize: '20px', mt: '20px' }}>
                     {blogItem.title}
                   </Typography>
 
@@ -281,7 +281,7 @@ export default function Page() {
                   />
                   <Box
                     sx={{
-                      width: { xs: '104px', md: '140px' },
+                      width: { xs: '108px', md: '140px' },
                       height: { xs: '90px', md: '132px' },
                       bgcolor: 'rgba(150,127,93,0.5)',
                       position: 'absolute',
