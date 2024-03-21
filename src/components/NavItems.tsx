@@ -19,7 +19,8 @@ function NavItems({ items }: any) {
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
         alignItems: 'center',
-        gap: { xs: '20px', md: '20px' },
+        mt: '1rem',
+        gap: { xs: 0, md: '20px' },
       }}
     >
       {items.map((item: any, index: number) => (
@@ -35,10 +36,10 @@ function NavItems({ items }: any) {
           sx={{
             pt: 1,
             px: '3px',
-            pb: '3px',
+            // pb: '3px',
             textTransform: 'capitalize',
             position: 'relative',
-            fontSize: '1.2rem',
+            fontSize: '1.4rem',
             fontWeight: { xs: '600', md: 'regular' },
             '&:after': {
               content: "''",
