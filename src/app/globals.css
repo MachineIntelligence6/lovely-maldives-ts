@@ -136,16 +136,16 @@ body {
 }
 
 .explore-slider .slick-center-mode .slick-center {
-  transition: all 0.2s ease;
+  transition: all 0.8s ease;
   height: 450px !important;
-  animation: increaseHeight 0.5s forwards;
+  animation: increaseHeight 0.8s forwards;
 }
 
 .explore-slider .slick-center-mode .slick-center div:first-child,
 .explore-slider .slick-center img {
   height: 450px;
-  transition: all 0.2s ease;
-  /* animation: increaseHeight 0.5s forwards; */
+  transition: all 0.8s ease;
+  /* animation: increaseHeight 1s forwards; */
 }
 .css-11s0zwy-MuiGrid-root > .MuiGrid-item {
   padding-top: 0 !important;
@@ -381,4 +381,8 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
 .burger-menu.active .bar.btmBar {
   transform: translateY(3px) rotate(-45deg);
   top: 0;
+}
+
+.overflow-hidden {
+  overflow-y: hidden;
 }

@@ -8,7 +8,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import Header from '@/components/Header'
 import OurCollection from '@/components/OurCollection'
 import Footer from '@/components/Footer'
-import ResortsGallery from '@/components/Gallery'
+import ResortsGallery from '@/components/ResortsGallery'
 import BreadCrumb from '@/components/BreadCrumb'
 import DropdownButton from '@/components/DropdownButton'
 // icons

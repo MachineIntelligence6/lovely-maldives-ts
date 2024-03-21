@@ -153,14 +153,14 @@ export default function OurCollection({
                   sx={{
                     // mt: '24px',
                     display: 'flex',
-                    alignItems: 'center',
+                    alignItems: 'start',
                     height: 'auto',
                   }}
                 >
                   <Typography sx={{ px: 4, fontSize: '20px' }}>
                     One and Only Reethi Rah{' '}
                   </Typography>
-                  <BoltIcon sx={{ display: `${iconShow}` }} />
+                  <BoltIcon sx={{ display: `${iconShow}`, mt: '2px' }} />
                 </Box>
                 <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
                   <StarRateIcon />

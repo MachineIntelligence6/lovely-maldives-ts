@@ -4,9 +4,9 @@
 
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
+import Link from 'next/link'
 import BlogSlider from '@/components/BlogSlider'
 import blog from '../../public/Images/landingTree.jpg'
-import Link from 'next/link'
 
 export const popularBlogs = [
   {
@@ -70,7 +70,7 @@ export default function PopularBlogs() {
               href={`/blogs/${popularBlog.slug}`}
               sx={{
                 width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
-                borderRadius: '20px',
+                borderRadius: { xs: '0', md: '20px' },
                 bgcolor: 'white',
                 boxSizing: 'border-box',
                 boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
@@ -78,12 +78,13 @@ export default function PopularBlogs() {
                 position: 'relative',
               }}
             >
-              <Image
+              <Box
+                component={Image}
                 src={popularBlog.image}
                 alt="blog"
-                style={{
+                sx={{
                   width: '100%',
-                  borderRadius: '20px 20px 0 0px',
+                  borderRadius: { xs: '0', md: '20px 20px 0 0px' },
                   height: '200px',
                   objectFit: 'cover',
                 }}

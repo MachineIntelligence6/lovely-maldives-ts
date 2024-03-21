@@ -3,18 +3,10 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import Typography from '@mui/material/Typography'
 
 import Box from '@mui/system/Box'
-// import OurServices from '@/components/OurServices'
-// import Banner from '@/components/Banner'
-// import TopBrands from '@/components/TopBrands'
 import dynamic from 'next/dynamic'
-import Footer from '@/components/Footer'
-// import About from '@/components/About'
-// import Explore from '@/components/Explore'
-// import OurCollection from '@/components/OurCollection'
-
 import Header from '@/components/Header'
-// import SidePalmTree from '@/components/SidePalmTree'
 
+const Footer = dynamic(() => import('@/components/Footer'))
 const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
 const OurCollection = dynamic(() => import('@/components/OurCollection'))
 const Explore = dynamic(() => import('@/components/Explore'))
@@ -100,18 +92,6 @@ export default function Home() {
             />
           </Box>
         </Box>
-        {/* <Image
-          src={sidetree}
-          alt="sidetree"
-          className="sideTree"
-          style={{
-            position: "absolute",
-            width: "auto",
-            top: "30%",
-            zIndex: "-1",
-            objectFit: "cover",
-          }}
-        /> */}
         <SidePalmTree />
         <OurServices />
       </Box>

@@ -3,7 +3,11 @@
 
 'use client'
 
-import { Box, Typography, Button, Container } from '@mui/material'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import Container from '@mui/material/Container'
+
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -69,12 +73,6 @@ export default function TopFiveLuxuryResorts({
           centerMode: false,
         },
       },
-      //   {
-      //     breakpoint: 1300,
-      //     settings: {
-      //       slidesToShow: 3,
-      //     },
-      //   },
     ],
   }
   return (
@@ -99,7 +97,6 @@ export default function TopFiveLuxuryResorts({
           height: '100%',
           mt: { xs: '30px', md: '60px' },
         }}
-        className="slider-container"
       >
         <Slider {...settings}>
           {datas.map((data, index) => (

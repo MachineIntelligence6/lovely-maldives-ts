@@ -1,6 +1,8 @@
 'use client'
 
-import { Box, Container, Typography } from '@mui/material'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
+import Typography from '@mui/material/Typography'
 
 import EmailIcon from '@mui/icons-material/Email'
 import CallIcon from '@mui/icons-material/Call'
@@ -10,7 +12,7 @@ import XIcon from '@mui/icons-material/X'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 import ContactsRoundedIcon from '@mui/icons-material/ContactsRounded'
 import Image from 'next/image'
-import { styled } from '@mui/system'
+import styled from '@mui/system/styled'
 import Link from 'next/link'
 
 const StyledImage = styled(Image)({

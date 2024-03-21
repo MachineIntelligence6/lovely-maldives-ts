@@ -41,7 +41,11 @@ export default function FilterTray() {
 
   return (
     <Box>
-      <IconButton onClick={toggleDrawer(true)}>
+      <IconButton
+        onClick={toggleDrawer(true)}
+        id="resort-filter"
+        aria-label="Resort Filter"
+      >
         <TuneRoundedIcon
           sx={{ fontSize: { xs: '25px', md: '45px' }, color: 'var(--brown)' }}
         />

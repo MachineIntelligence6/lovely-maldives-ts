@@ -57,6 +57,8 @@ export default function BreadCrumb() {
             underline="hover"
             color="var(--white)"
             href={link.path}
+            role="link"
+            aria-label={typeof link.label === 'string' ? link.label : 'Home'}
             sx={{ fontSize: { xs: '14px', md: '20px' } }}
             key={link.path}
           >
