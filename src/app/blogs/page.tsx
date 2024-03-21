@@ -151,6 +151,7 @@ export default function Page() {
               flexWrap: 'wrap',
               mt: { xs: '30px', md: '40px' },
               gap: { xs: '10px', md: '20px' },
+              px: 2.5,
             }}
           >
             {addSlice.map((blogItem: any, index: number) => (
@@ -160,7 +161,7 @@ export default function Page() {
                 href={`blogs/${blogItem.slug}`}
                 sx={{
                   width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
-                  borderRadius: { xs: 0, md: '20px' },
+                  borderRadius: '20px',
                   bgcolor: 'var(--brown)',
                   boxSizing: 'border-box',
                   boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
@@ -174,7 +175,7 @@ export default function Page() {
                   alt="blog"
                   sx={{
                     width: '100%',
-                    borderRadius: { xs: 0, md: '20px 20px 0 0px' },
+                    borderRadius: '20px 20px 0 0px',
                     height: '200px',
                     objectFit: 'cover',
                   }}
@@ -187,7 +188,7 @@ export default function Page() {
                     position: 'absolute',
                     top: '0',
                     // left: { xs: '0', md: '240.5px' },
-                    borderRadius: { xs: 0, md: '20px 20px 0 0' },
+                    borderRadius: '20px 20px 0 0',
                   }}
                 />
                 <Box
@@ -246,6 +247,7 @@ export default function Page() {
               display: 'flex',
               flexWrap: 'wrap',
               mt: { xs: '30px', md: '40px' },
+              px: { xs: 2.5, md: 0 },
             }}
           >
             {addSlice.map((blogItem: any, index: number) => (
@@ -281,11 +283,11 @@ export default function Page() {
                   />
                   <Box
                     sx={{
-                      width: { xs: '108px', md: '140px' },
+                      width: { xs: '97px', md: '140px' },
                       height: { xs: '90px', md: '132px' },
                       bgcolor: 'rgba(150,127,93,0.5)',
                       position: 'absolute',
-                      top: { xs: '43px', md: '10px' },
+                      top: { xs: '54px', md: '10px' },
                       left: 0,
                       borderRadius: '20px',
                     }}

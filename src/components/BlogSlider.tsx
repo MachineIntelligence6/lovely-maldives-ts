@@ -45,7 +45,7 @@ export default function BlogSlider() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '0px',
+          centerPadding: '60px',
         },
       },
     ],
@@ -55,7 +55,7 @@ export default function BlogSlider() {
       sx={{
         width: '100%',
         height: '100%',
-        mt: { xs: '30px', md: '60px' },
+        mt: { xs: '30px', md: '60px' } ,
       }}
     >
       <Slider {...settings}>
@@ -69,7 +69,7 @@ export default function BlogSlider() {
               sx={{
                 height: '350px',
                 objectFit: 'cover',
-                borderRadius: { xs: '0px', md: '20px' },
+                borderRadius: '20px',
               }}
             />
             <Box
@@ -81,13 +81,13 @@ export default function BlogSlider() {
                 position: 'absolute',
                 top: '0',
                 // left: { xs: '0', md: '240.5px' },
-                borderRadius: { xs: '0px', md: '20px' },
+                borderRadius: '20px',
               }}
             />
             <Box
               sx={{
-                width: { xs: '100%', md: '85%' },
-                height: '40%',
+                width: { xs: '95%', md: '85%' },
+                height: { xs: '45%', md: '40%' },
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-evenly',
@@ -99,14 +99,14 @@ export default function BlogSlider() {
                 fontWeight: '200',
                 zIndex: '99',
                 bgcolor: 'var(--blue)',
-                borderRadius: { xs: '0px', md: '0 0 20px  20px' },
+                borderRadius: '0 0 20px  20px',
                 mt: '20px',
               }}
             >
               <Typography sx={{ px: 2, fontSize: '14px' }}>
                 04 Feb 2024
               </Typography>
-              <Typography sx={{ px: 2, fontSize: '20px' }}>
+              <Typography sx={{ px: 2, fontSize: { xs: '16px', md: '20px' } }}>
                 Seyta Opens Dhunthari Resort & Spa in the beautiful islands of
                 the Maldives.
               </Typography>
