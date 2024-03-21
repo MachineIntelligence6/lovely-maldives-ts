@@ -153,16 +153,18 @@ export default function OurCollection({
                   sx={{
                     // mt: '24px',
                     display: 'flex',
+                    justifyContent: 'space-between',
                     alignItems: 'start',
                     height: 'auto',
+                    px: 3,
                   }}
                 >
-                  <Typography sx={{ px: 4, fontSize: '20px' }}>
+                  <Typography sx={{ fontSize: '20px' }}>
                     One and Only Reethi Rah{' '}
                   </Typography>
                   <BoltIcon sx={{ display: `${iconShow}`, mt: '2px' }} />
                 </Box>
-                <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
+                <Box sx={{ textAlign: 'left', fontSize: '10px', px: 3 }}>
                   <StarRateIcon />
                   <StarRateIcon />
                   <StarRateIcon />

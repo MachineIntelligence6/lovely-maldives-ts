@@ -210,7 +210,7 @@ export default function LatestBlogs() {
               sx={{
                 width: { xs: 'calc(100%)', md: 'calc(50% - 20px)' },
                 borderRadius: '20px',
-                bgcolor: 'white',
+                bgcolor: 'var(--brown)',
                 boxSizing: 'border-box',
                 boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
                 textDecoration: 'none',
@@ -241,13 +241,15 @@ export default function LatestBlogs() {
               />
               <Box
                 sx={{
-                  mt: '20px',
-                  color: 'var(--white)',
+                  // mt: '20px',
+                  bgcolor: 'var(--brown)',
+                  color: 'white',
                   pb: '20px',
                   px: { xs: '20px', md: '20px' },
+                  borderRadius: '0  0 20px 20px ',
                 }}
               >
-                <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                <Typography sx={{ fontSize: '16px', pt: '20px' }}>
                   {latest.title}
                 </Typography>
                 <Typography sx={{ fontSize: '24px', mt: '20px' }}>
