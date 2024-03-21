@@ -130,7 +130,7 @@ export default function LatestBlogs() {
             height: { xs: '350px', md: '450px' },
             bgcolor: 'var(--brown)',
             // position: { xs: 'relative', md: 'unset' },
-            borderRadius: '20px',
+            borderRadius: { xs: 0, md: '20px' },
             display: { xs: 'block', md: 'flex' },
             alignItems: 'center',
             justifyContent: 'center',
@@ -158,7 +158,7 @@ export default function LatestBlogs() {
               position: 'absolute',
               top: '0',
               // left: { xs: '0', md: '240.5px' },
-              borderRadius: { xs: '0', md: '20px' },
+              borderRadius: { xs: 0, md: '20px' },
             }}
           />
           {/* <Box
@@ -178,7 +178,7 @@ export default function LatestBlogs() {
               position: { xs: 'absolute', md: 'unset' },
               top: '60%',
               color: 'white',
-              borderRadius: '0 10px 10px 0',
+              borderRadius: { xs: 0, md: '0 10px 10px 0' },
               width: { xs: '100%', md: '80%' },
             }}
           >
@@ -223,7 +223,7 @@ export default function LatestBlogs() {
                 alt="blog"
                 sx={{
                   width: '100%',
-                  borderRadius: { xs: '0px', md: '20px 20px 0 0px' },
+                  borderRadius: { xs: 0, md: '20px 20px 0 0px' },
                   height: '300px',
                   objectFit: 'cover',
                 }}
@@ -236,7 +236,7 @@ export default function LatestBlogs() {
                   position: 'absolute',
                   top: '0',
                   // left: { xs: '0', md: '240.5px' },
-                  borderRadius: { xs: '0px', md: '20px 20px 0 0' },
+                  borderRadius: { xs: 0, md: '20px 20px 0 0' },
                 }}
               />
               <Box
@@ -246,7 +246,7 @@ export default function LatestBlogs() {
                   color: 'white',
                   pb: '20px',
                   px: { xs: '20px', md: '20px' },
-                  borderRadius: '0  0 20px 20px ',
+                  borderRadius: { xs: 0, md: '0  0 20px 20px ' },
                 }}
               >
                 <Typography sx={{ fontSize: '16px', pt: '20px' }}>
