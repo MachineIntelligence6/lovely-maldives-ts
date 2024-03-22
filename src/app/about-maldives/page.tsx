@@ -54,7 +54,7 @@ export default function Page() {
             textAlign: 'center',
             mt: '60px',
             position: 'relative',
-            mx: 'auto'
+            mx: 'auto',
           }}
         >
           <Image
