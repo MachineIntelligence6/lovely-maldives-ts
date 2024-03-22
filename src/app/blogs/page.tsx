@@ -108,7 +108,7 @@ export default function Page() {
           top: { xs: '0', md: '168px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
           width: '100%',
-          zIndex: 999,
+          zIndex: 996,
           // opacity: isOpen ? 1 : 0,
           transform: isOpen ? 'translateY(0px)' : 'translateY(-140px)',
           transition: 'opacity 0.4s, transform 0.4s',
@@ -160,7 +160,7 @@ export default function Page() {
                 component={Link}
                 href={`blogs/${blogItem.slug}`}
                 sx={{
-                  width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
+                  width: { xs: 'calc(100%)', md: 'calc(33.3% - 14px)' },
                   borderRadius: '20px',
                   bgcolor: 'var(--brown)',
                   boxSizing: 'border-box',
@@ -267,31 +267,33 @@ export default function Page() {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    position: 'relative',
+                    // position: 'relative',
                   }}
                 >
-                  <Box
-                    sx={{
-                      width: '264px',
-                      borderRadius: '20px',
-                      height: { xs: '90px', md: '132px' },
-                      objectFit: 'cover',
-                      backgroundPosition: '100%',
-                      backgroundSize: 'cover',
-                      backgroundImage: `url(${blogItem.image.src})`,
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: { xs: '97px', md: '140px' },
-                      height: { xs: '90px', md: '132px' },
-                      bgcolor: 'rgba(150,127,93,0.5)',
-                      position: 'absolute',
-                      top: { xs: '54px', md: '10px' },
-                      left: 0,
-                      borderRadius: '20px',
-                    }}
-                  />
+                  <Box sx={{ position: 'relative', width: '265px' }}>
+                    <Box
+                      sx={{
+                        width: '100%',
+                        borderRadius: '20px',
+                        height: { xs: '90px', md: '132px' },
+                        objectFit: 'cover',
+                        backgroundPosition: '100%',
+                        backgroundSize: 'cover',
+                        backgroundImage: `url(${blogItem.image.src})`,
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: { xs: '90px', md: '132px' },
+                        bgcolor: 'rgba(150,127,93,0.5)',
+                        position: 'absolute',
+                        top: { xs: '0', md: '0px' },
+                        left: 0,
+                        borderRadius: '20px',
+                      }}
+                    />
+                  </Box>
                   <Box
                     sx={{
                       mt: '20px',

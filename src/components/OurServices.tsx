@@ -266,7 +266,7 @@ export default function OurServices() {
                       // fontWeight: 600,
                       opacity: 0.9,
                       zIndex: 2,
-                      textAlign: 'justify',
+                      textAlign: 'left',
                     }}
                   >
                     {item.description}

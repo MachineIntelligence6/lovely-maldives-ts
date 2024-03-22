@@ -24,6 +24,9 @@ export default function Page() {
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
       <Header />
+      <Container sx={{ maxWidth: { xs: '90%', md: '90%' } }}>
+        <BreadCrumb />
+      </Container>
       <Container
         sx={{
           maxWidth: { xs: '90%', md: '80%' },
@@ -34,7 +37,6 @@ export default function Page() {
           },
         }}
       >
-        <BreadCrumb />
         <Typography
           sx={{
             fontSize: { xs: '24px', md: '35px' },
@@ -46,11 +48,13 @@ export default function Page() {
           ABOUT MALDIVES
         </Typography>
         <Box
+          className="articleBlog"
           sx={{
-            width: '100%',
+            // width: '100%',
             textAlign: 'center',
             mt: '60px',
             position: 'relative',
+            mx: 'auto',
           }}
         >
           <Image
@@ -58,6 +62,7 @@ export default function Page() {
             alt="blog"
             className="articleBlog"
             style={{
+              width: '100%',
               // height: '400px',
               objectFit: 'cover',
               borderRadius: '20px',
@@ -66,28 +71,29 @@ export default function Page() {
           <Box
             className="articleBlog"
             sx={{
-              // width: '100%',
+              width: '100%',
               // height: '400px',
               bgcolor: 'rgba(150,127,93,0.5)',
               position: 'absolute',
               top: '0',
-              left: { xs: '0', md: '140.5px' },
+              left: 0,
               borderRadius: '20px',
             }}
           />
-          <Typography
-            sx={{
-              pt: '40px',
-              color: 'var(--white)',
-              fontSize: '20px',
-              width: { xs: '100%', md: '400px' },
-              ml: { xs: 'auto', md: '150px' },
-              textAlign: 'left',
-            }}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-          </Typography>
         </Box>
+        <Typography
+          sx={{
+            pt: '40px',
+            color: 'var(--white)',
+            fontSize: '20px',
+            width: { xs: '100%', md: '450px' },
+            ml: { xs: 'auto', md: '150px' },
+            // mx: 'auto',
+            textAlign: 'left',
+          }}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </Typography>
         <Box sx={{ mt: { xs: '40px', md: '60px' }, color: 'var(--white)' }}>
           <Typography>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -160,11 +166,13 @@ export default function Page() {
               </Typography>
             </Box>
             <Box
+              className="articleImg"
               sx={{
                 width: '100%',
                 textAlign: 'center',
                 mt: '60px',
                 position: 'relative',
+                mx: 'auto',
               }}
             >
               <Image
@@ -172,6 +180,7 @@ export default function Page() {
                 alt="blog"
                 className="articleImg"
                 style={{
+                  width: '100%',
                   // height: '300px',
                   objectFit: 'cover',
                   borderRadius: '20px',
@@ -180,28 +189,29 @@ export default function Page() {
               <Box
                 className="articleImg"
                 sx={{
-                  // width: '100%',
+                  width: '100%',
                   // height: '300px',
                   bgcolor: 'rgba(150,127,93,0.5)',
                   position: 'absolute',
                   top: '0',
-                  left: { xs: '0', md: '240.5px' },
+                  left: 0,
                   borderRadius: '20px',
                 }}
               />
-              <Typography
-                sx={{
-                  mt: '40px',
-                  color: 'var(--white)',
-                  fontSize: '20px',
-                  width: { xs: '100%', md: '400px' },
-                  ml: { xs: 'auto', md: '260px' },
-                  textAlign: 'left',
-                }}
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-              </Typography>
             </Box>
+            <Typography
+              sx={{
+                mt: '40px',
+                color: 'var(--white)',
+                fontSize: '20px',
+                width: { xs: '100%', md: '450px' },
+                // ml: { xs: 'auto', md: '260px' },
+                mx: 'auto',
+                textAlign: 'left',
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            </Typography>
             <Box sx={{ mt: { xs: '40px', md: '60px' }, color: 'var(--white)' }}>
               <Typography>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

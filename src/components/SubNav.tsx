@@ -17,7 +17,7 @@ export default function SubNav({ menuItems }: any) {
         py: '10px',
         width: '100%',
         px: '100px',
-        zIndex: 999,
+        zIndex: 997,
         opacity: isOpen ? 1 : 0,
         transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
         transition: 'opacity 0.4s, transform 0.4s',

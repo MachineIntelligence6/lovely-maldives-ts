@@ -13,8 +13,8 @@ export default function SidePalmTree() {
       <Image
         src={sidePalm}
         alt="Palm tree"
-        width={lessThanMd ? 140 : 305}
-        height={lessThanMd ? 130.4 : 283.6}
+        width={lessThanMd ? 130.7 : 305}
+        height={lessThanMd ? 121.6 : 283.6}
         className="rightPalm"
         style={{
           position: 'absolute',

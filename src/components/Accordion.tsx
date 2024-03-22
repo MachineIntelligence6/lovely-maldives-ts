@@ -58,13 +58,15 @@ export default function FaqsAccordion() {
             boxShadow: 'none',
             borderBottom: '1px solid rgb(223, 223, 223)',
             borderTop: 'none',
+            // mx: 4,
           }}
         >
           <AccordionSummary
             sx={{
               fontWeight: 600,
-              px: '0 !important',
+              // px: '0 !important',
               fontFamily: 'Century Gothic',
+              px: { xs: 2, md: 4 },
             }}
             expandIcon={
               <ExpandMoreIcon
@@ -73,6 +75,7 @@ export default function FaqsAccordion() {
                   fontSize: '35px',
                   bgcolor: { xs: '#E5E4E2', md: 'white' },
                   borderRadius: { xs: '100%', md: 'none' },
+                  // px: 4,
                 }}
               />
             }
@@ -82,7 +85,7 @@ export default function FaqsAccordion() {
             {faq.que}
           </AccordionSummary>
           <AccordionDetails
-            sx={{ fontFamily: 'Century Gothic', px: '0 !important' }}
+            sx={{ fontFamily: 'Century Gothic', px: { xs: 2, md: 4 } }}
           >
             {faq.ans}
           </AccordionDetails>
@@ -107,12 +110,13 @@ export default function FaqsAccordion() {
             boxShadow: 'none',
             borderBottom: '1px solid rgb(223, 223, 223)',
             borderTop: 'none',
+            // mx: 4,
           }}
         >
           <AccordionSummary
             sx={{
               fontWeight: 600,
-              px: '0 !important',
+              px: { xs: 2, md: 4 },
               fontFamily: 'Century Gothic',
             }}
             expandIcon={
@@ -131,7 +135,7 @@ export default function FaqsAccordion() {
             {faq.que}
           </AccordionSummary>
           <AccordionDetails
-            sx={{ fontFamily: 'Century Gothic', px: '0 !important' }}
+            sx={{ fontFamily: 'Century Gothic', px: { xs: 2, md: 4 } }}
           >
             {faq.ans}
           </AccordionDetails>
@@ -156,12 +160,13 @@ export default function FaqsAccordion() {
             boxShadow: 'none',
             borderBottom: '1px solid rgb(223, 223, 223)',
             borderTop: 'none',
+            // mx: 4,
           }}
         >
           <AccordionSummary
             sx={{
               fontWeight: 600,
-              px: '0 !important',
+              px: { xs: 2, md: 4 },
               fontFamily: 'Century Gothic',
             }}
             expandIcon={
@@ -180,7 +185,7 @@ export default function FaqsAccordion() {
             {faq.que}
           </AccordionSummary>
           <AccordionDetails
-            sx={{ fontFamily: 'Century Gothic', px: '0 !important' }}
+            sx={{ fontFamily: 'Century Gothic', px: { xs: 2, md: 4 } }}
           >
             {faq.ans}
           </AccordionDetails>
