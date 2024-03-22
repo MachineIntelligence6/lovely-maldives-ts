@@ -101,7 +101,7 @@ export default function LatestBlogs() {
               position: 'absolute',
               top: 0,
               left: 0,
-              borderRadius: { xs: 0, md: '20px' },
+              borderRadius: '20px',
               // left: { xs: '0', md: '240.5px' },
             }}
           />
@@ -154,7 +154,7 @@ export default function LatestBlogs() {
               component={Link}
               href={`/blogs/${latest.slug}`}
               sx={{
-                width: { xs: 'calc(100%)', md: 'calc(50% - 20px)' },
+                width: { xs: 'calc(100%)', md: 'calc(50% - 10px)' },
                 borderRadius: '20px',
                 bgcolor: 'var(--brown)',
                 boxSizing: 'border-box',

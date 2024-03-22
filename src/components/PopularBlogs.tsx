@@ -70,7 +70,7 @@ export default function PopularBlogs() {
               component={Link}
               href={`/blogs/${popularBlog.slug}`}
               sx={{
-                width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
+                width: { xs: 'calc(100%)', md: 'calc(33.3% - 14px)' },
                 borderRadius: '20px',
                 bgcolor: 'var(--brown)',
                 boxSizing: 'border-box',
