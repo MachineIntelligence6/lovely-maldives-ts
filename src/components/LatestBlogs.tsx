@@ -101,7 +101,7 @@ export default function LatestBlogs() {
               position: 'absolute',
               top: 0,
               left: 0,
-              borderRadius: { xs: 0, md: '20px' },
+              borderRadius: '20px',
               // left: { xs: '0', md: '240.5px' },
             }}
           />

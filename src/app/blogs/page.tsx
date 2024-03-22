@@ -283,11 +283,11 @@ export default function Page() {
                   />
                   <Box
                     sx={{
-                      width: { xs: '97px', md: '140px' },
+                      width: { xs: '106px', md: '140px' },
                       height: { xs: '90px', md: '132px' },
                       bgcolor: 'rgba(150,127,93,0.5)',
                       position: 'absolute',
-                      top: { xs: '54px', md: '10px' },
+                      top: { xs: '43px', md: '10px' },
                       left: 0,
                       borderRadius: '20px',
                     }}

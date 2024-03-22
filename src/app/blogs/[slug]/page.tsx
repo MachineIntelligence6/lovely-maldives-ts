@@ -33,7 +33,7 @@ function ArticleSharer() {
         px: { xs: '30px', md: '0px' },
       }}
     >
-      <Typography sx={{ mb: '2px' }}>Share Article</Typography>
+      <Typography sx={{ mb: '2px', fontWeight: 600 }}>Share Article</Typography>
       <IconButton
         sx={{
           color: '#000',
@@ -45,7 +45,7 @@ function ArticleSharer() {
           },
         }}
       >
-        <XIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+        <XIcon sx={{ fontSize: { xs: '16px', md: '24px' } }} />
       </IconButton>
       <IconButton
         sx={{
@@ -58,7 +58,7 @@ function ArticleSharer() {
           },
         }}
       >
-        <WhatsApp sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+        <WhatsApp sx={{ fontSize: { xs: '16px', md: '24px' } }} />
       </IconButton>
       <IconButton
         sx={{
@@ -71,7 +71,7 @@ function ArticleSharer() {
           },
         }}
       >
-        <MailOutline sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+        <MailOutline sx={{ fontSize: { xs: '16px', md: '24px' } }} />
       </IconButton>
       <IconButton
         sx={{
@@ -84,7 +84,7 @@ function ArticleSharer() {
           },
         }}
       >
-        <FacebookOutlinedIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+        <FacebookOutlinedIcon sx={{ fontSize: { xs: '16px', md: '24px' } }} />
       </IconButton>
       <IconButton
         sx={{
@@ -97,7 +97,7 @@ function ArticleSharer() {
           },
         }}
       >
-        <LinkIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+        <LinkIcon sx={{ fontSize: { xs: '16px', md: '24px' } }} />
       </IconButton>
     </Paper>
   )

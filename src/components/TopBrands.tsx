@@ -52,7 +52,7 @@ export default function TopBrands() {
   const settings = {
     dots: true,
     infinite: true,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 4000,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -83,7 +83,7 @@ export default function TopBrands() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerPadding: '90px',
+          centerPadding: '95px',
           centerMode: true,
         },
       },
@@ -103,6 +103,7 @@ export default function TopBrands() {
       </Typography>
 
       <Box
+        className='topBrandSlider'
         sx={{
           width: { md: '100%', lg: '100%' },
           mt: { md: '60px', xs: '40px' },
