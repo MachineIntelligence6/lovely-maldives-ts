@@ -101,6 +101,7 @@ function Header() {
               : 'white'
             : 'var(--brown)',
           transition: 'all ease .5s',
+          zIndex: 998,
         }}
       >
         <Toolbar
@@ -147,13 +148,7 @@ function Header() {
             <Link href="/">
               <Box
                 component={Image}
-                src={
-                  isScrolled
-                    ? isOpen && lessThanMd
-                      ? profilePic
-                      : profilePicCol
-                    : profilePic
-                }
+                src={isScrolled ? profilePicCol : profilePic}
                 alt="Logo"
                 width={95.6}
                 height={60}

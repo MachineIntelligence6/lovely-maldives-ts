@@ -8,11 +8,17 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import XIcon from '@mui/icons-material/X'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 
+import Image from 'next/image'
+import { IconButton } from '@mui/material'
+import { Close } from '@mui/icons-material'
 import { useMenuStore } from '@/providers/menu-store-provider'
 import NavItems from './NavItems'
+import logoMobile from '../../public/Images/lovely-maldives-logo-white.png'
 
 export default function MobileNav({ menuItems }: any) {
   const isOpen = useMenuStore((state) => state.isOpen)
+  const close = useMenuStore((state) => state.close)
+
   return (
     <Box
       sx={{
@@ -21,7 +27,7 @@ export default function MobileNav({ menuItems }: any) {
         position: 'fixed',
         top: '0',
         zIndex: 999,
-        transform: isOpen ? 'translateY(0%)' : 'translateY(-100%)',
+        transform: isOpen ? 'translateY(0%)' : 'translateY(-110%)',
         background: 'var(--brown)',
         boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
         pb: '20px',
@@ -31,13 +37,41 @@ export default function MobileNav({ menuItems }: any) {
         flexDirection: 'column',
         // justifyContent: 'space-around',
         overflow: 'hidden',
-        mt: { md: '0', xs: '90px' },
+        // mt: { md: '0', xs: '86px' },
         gap: { md: '18px', xs: '0' },
         // borderTop: '1px solid lightgray',
         textAlign: 'center',
         color: 'white',
       }}
     >
+      <Box
+        sx={{
+          display: 'flex',
+          alignSelf: 'center',
+          mt: 2,
+        }}
+        component={Image}
+        src={logoMobile}
+        alt="Logo"
+        width={66.9}
+        height={50.1}
+      />
+      <IconButton
+        onClick={close}
+        sx={{
+          color: 'white',
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+        }}
+      >
+        <Close
+          sx={{
+            fontSize: '46px',
+          }}
+        />
+      </IconButton>
+
       <NavItems items={menuItems} />
       <Box
         sx={{
