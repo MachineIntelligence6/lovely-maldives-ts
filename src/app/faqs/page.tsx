@@ -9,14 +9,20 @@ export default function page() {
   return (
     <Box sx={{ pt: { md: '180px', xs: '100px' } }}>
       <Header />
+      <Container sx={{ maxWidth: { xs: '90%', md: '90%' } }}>
+        <BreadCrumb />
+      </Container>
       <Container
         sx={{
-          maxWidth: '100% !important',
-          px: { xs: '24px', md: '120px' },
+          maxWidth: '80%',
+          px: 0,
+          margin: 'auto',
+          '@media only screen and (min-width: 1441px)': {
+            maxWidth: '1030px !important',
+          },
           color: 'var(--white)',
         }}
       >
-        <BreadCrumb />
         <Box sx={{ mt: { xs: '40px', md: '60px' } }}>
           <Typography
             sx={{
@@ -63,16 +69,16 @@ export default function page() {
             }}
           >
             <Typography sx={{ fontWeight: 600, mt: 2 }}>Categories:</Typography>
-            <Typography sx={{ fontWeight: 600, mt: 2 }}>
+            <Typography sx={{ mt: 2 }}>
               Visa and Arrival
             </Typography>
-            <Typography sx={{ fontWeight: 600, mt: 2 }}>
+            <Typography sx={{ mt: 2 }}>
               Legal Queries
             </Typography>
-            <Typography sx={{ fontWeight: 600, mt: 2 }}>
+            <Typography sx={{ mt: 2 }}>
               General Questions
             </Typography>
-            <Typography sx={{ fontWeight: 600, mt: 2, mb: 4 }}>
+            <Typography sx={{ mt: 2, mb: 4 }}>
               More Category Add from Beknd
             </Typography>
           </Box>

@@ -343,7 +343,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   .topBrandSlider .slick-slide{
     width: 187px !important;
   }
-  .topBrandSlider .slick-slider .slick-track, .slick-slider .slick-list {
+  .topBrandSlider .slick-list {
     max-height: 250px !important;
   }
   /* .rightPalm {

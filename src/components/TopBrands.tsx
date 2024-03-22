@@ -103,7 +103,7 @@ export default function TopBrands() {
       </Typography>
 
       <Box
-        className='topBrandSlider'
+        className="topBrandSlider"
         sx={{
           width: { md: '100%', lg: '100%' },
           mt: { md: '60px', xs: '40px' },
