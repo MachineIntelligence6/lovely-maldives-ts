@@ -191,6 +191,7 @@ export default function OurCollection({
                 backgroundColor: 'var(--blue) !important',
               },
             }}
+            aria-label="All hotels"
           >
             All Hotels
           </Button>

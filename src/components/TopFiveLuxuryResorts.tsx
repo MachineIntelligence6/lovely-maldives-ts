@@ -198,6 +198,7 @@ export default function TopFiveLuxuryResorts({
                 backgroundColor: 'var(--blue) !important',
               },
             }}
+            aria-label="All hotels"
           >
             All Hotels
           </Button>

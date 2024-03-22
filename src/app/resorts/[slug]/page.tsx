@@ -267,6 +267,7 @@ export default function Resort() {
                     }}
                     variant="text"
                     onClick={showExtraContent}
+                    aria-label="More"
                   >
                     More
                   </Button>
@@ -571,6 +572,7 @@ export default function Resort() {
                             backgroundColor: 'var(--blue) !important',
                           },
                         }}
+                        aria-label="Enquire"
                       >
                         ENQUIRE
                       </Button>

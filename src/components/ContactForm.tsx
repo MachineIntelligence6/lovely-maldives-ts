@@ -75,7 +75,8 @@ export default function ContactForm() {
               backgroundColor: 'var(--blue) !important',
             },
           }}
-          title="Send"
+          aria-label="Send message"
+          title="Send message"
         >
           SEND
         </Button>

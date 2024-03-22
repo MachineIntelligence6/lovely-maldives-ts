@@ -160,6 +160,7 @@ export default function ResortsGallery() {
           }}
           onClick={loadMore}
           title="Load more resorts"
+          aria-label="Load more resorts"
         >
           Load More
         </Button>
@@ -172,7 +173,6 @@ export default function ResortsGallery() {
         }}
       >
         <Button
-          title="Enquire"
           sx={{
             color: 'white',
             bgcolor: 'var(--brown)',
@@ -184,6 +184,8 @@ export default function ResortsGallery() {
             },
             textTransform: 'uppercase',
           }}
+          title="Enquire"
+          aria-label="Enquire"
         >
           SEND ENQUIRE
         </Button>

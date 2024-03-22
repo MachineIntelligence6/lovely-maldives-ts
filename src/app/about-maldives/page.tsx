@@ -134,6 +134,7 @@ export default function Page() {
                 },
                 fontSize: '1.4rem',
               }}
+              aria-label="More"
               variant="text"
               onClick={showExtraContent}
             >
@@ -282,6 +283,7 @@ export default function Page() {
                 backgroundColor: 'var(--blue) !important',
               },
             }}
+            aria-label="Back to home"
             title="Back to home"
           >
             <Link href="/" sx={{ color: 'white', textDecoration: 'none' }}>

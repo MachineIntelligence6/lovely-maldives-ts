@@ -226,6 +226,7 @@ export default function Page() {
               }}
               title="More articles"
               color="primary"
+              aria-label="More articles"
             >
               MORE ARTICLES
             </Button>
@@ -331,6 +332,7 @@ export default function Page() {
                 },
               }}
               title="View Archive"
+              aria-label="View Archive"
               color="primary"
             >
               VIEW ARCHIVE

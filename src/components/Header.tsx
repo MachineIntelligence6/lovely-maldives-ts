@@ -164,6 +164,7 @@ function Header() {
                   height: '25px',
                 }}
                 title="Menu button"
+                aria-label="Menu button"
                 onClick={toggleMenu}
               >
                 {isOpen ? (
@@ -199,6 +200,7 @@ function Header() {
                     backgroundColor: 'var(--blue) !important',
                   },
                 }}
+                aria-label="Enquire"
               >
                 ENQUIRE
               </Button>
