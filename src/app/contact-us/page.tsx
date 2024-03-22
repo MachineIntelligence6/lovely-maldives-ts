@@ -11,6 +11,9 @@ function page() {
   return (
     <Box sx={{ mt: { md: '180px', xs: '100px' } }}>
       <Header />
+      <Container sx={{ maxWidth: { xs: '90%', md: '90%' } }}>
+        <BreadCrumb />
+      </Container>
       <Container
         sx={{
           maxWidth: '80%',
@@ -22,7 +25,6 @@ function page() {
           color: 'var(--white)',
         }}
       >
-        <BreadCrumb />
         <Typography
           sx={{
             fontSize: { xs: '35px', md: '35px' },

@@ -33,7 +33,7 @@ function ArticleSharer() {
         px: { xs: '30px', md: '0px' },
       }}
     >
-      <Typography sx={{ mb: '2px' }}>Share Article</Typography>
+      <Typography sx={{ mb: '2px', fontWeight: 600 }}>Share Article</Typography>
       <IconButton
         sx={{
           color: '#000',
@@ -45,7 +45,7 @@ function ArticleSharer() {
           },
         }}
       >
-        <XIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+        <XIcon sx={{ fontSize: { xs: '16px', md: '24px' } }} />
       </IconButton>
       <IconButton
         sx={{
@@ -58,7 +58,7 @@ function ArticleSharer() {
           },
         }}
       >
-        <WhatsApp sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+        <WhatsApp sx={{ fontSize: { xs: '16px', md: '24px' } }} />
       </IconButton>
       <IconButton
         sx={{
@@ -71,7 +71,7 @@ function ArticleSharer() {
           },
         }}
       >
-        <MailOutline sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+        <MailOutline sx={{ fontSize: { xs: '16px', md: '24px' } }} />
       </IconButton>
       <IconButton
         sx={{
@@ -84,7 +84,7 @@ function ArticleSharer() {
           },
         }}
       >
-        <FacebookOutlinedIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+        <FacebookOutlinedIcon sx={{ fontSize: { xs: '16px', md: '24px' } }} />
       </IconButton>
       <IconButton
         sx={{
@@ -97,7 +97,7 @@ function ArticleSharer() {
           },
         }}
       >
-        <LinkIcon sx={{ fontSize: { xs: '16px', md: '22px' } }} />
+        <LinkIcon sx={{ fontSize: { xs: '16px', md: '24px' } }} />
       </IconButton>
     </Paper>
   )
@@ -170,7 +170,7 @@ export default function SingleBlogPage() {
                   maxWidth: '100%',
                   margin: '0 auto',
                   display: 'block',
-                  borderRadius: { xs: '0px', md: '20px' },
+                  borderRadius: { xs: '20px', md: '20px' },
                   objectFit: 'cover',
                 }}
               />
@@ -182,7 +182,7 @@ export default function SingleBlogPage() {
                   position: 'absolute',
                   top: 0,
                   left: 0,
-                  borderRadius: { xs: 0, md: '20px' },
+                  borderRadius: { xs: '20px', md: '20px' },
                 }}
               />
             </Box>
@@ -279,29 +279,36 @@ export default function SingleBlogPage() {
                 velit cupidatat aute est ea mollit.
               </Typography>
             </Box>
-            <Box sx={{ position: 'relative' }}>
+            <Box
+              sx={{
+                position: 'relative',
+                maxHeight: { xs: '250px', md: '350px' },
+                maxWidth: { xs: '100%', md: '70%' },
+                mx: 'auto',
+              }}
+            >
               <Box
                 component={Image}
                 src={articleImage}
                 alt="Picture of the author"
                 sx={{
-                  maxHeight: '350px',
-                  maxWidth: { xs: '100%', md: '70%' },
+                  maxHeight: { xs: '250px', md: '350px' },
+                  maxWidth: '100%',
                   margin: '0 auto',
                   display: 'block',
-                  borderRadius: { xs: '0px', md: '20px' },
+                  borderRadius: { xs: '20px', md: '20px' },
                   objectFit: 'cover',
                 }}
               />
               <Box
                 sx={{
-                  width: { xs: '100%', md: '70%' },
-                  height: '350px',
+                  width: '100%',
+                  height: { xs: '250px', md: '350px' },
                   bgcolor: 'rgba(150,127,93,0.5)',
                   position: 'absolute',
                   top: 0,
-                  left: { sx: '0', md: '147.5px' },
-                  borderRadius: { xs: 0, md: '20px' },
+                  left: 0,
+                  borderRadius: '20px',
                 }}
               />
             </Box>

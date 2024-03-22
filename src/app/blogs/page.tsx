@@ -267,31 +267,33 @@ export default function Page() {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    position: 'relative',
+                    // position: 'relative',
                   }}
                 >
-                  <Box
-                    sx={{
-                      width: '264px',
-                      borderRadius: '20px',
-                      height: { xs: '90px', md: '132px' },
-                      objectFit: 'cover',
-                      backgroundPosition: '100%',
-                      backgroundSize: 'cover',
-                      backgroundImage: `url(${blogItem.image.src})`,
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: { xs: '97px', md: '140px' },
-                      height: { xs: '90px', md: '132px' },
-                      bgcolor: 'rgba(150,127,93,0.5)',
-                      position: 'absolute',
-                      top: { xs: '54px', md: '10px' },
-                      left: 0,
-                      borderRadius: '20px',
-                    }}
-                  />
+                  <Box sx={{ position: 'relative', width: '265px' }}>
+                    <Box
+                      sx={{
+                        width: '100%',
+                        borderRadius: '20px',
+                        height: { xs: '90px', md: '132px' },
+                        objectFit: 'cover',
+                        backgroundPosition: '100%',
+                        backgroundSize: 'cover',
+                        backgroundImage: `url(${blogItem.image.src})`,
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: { xs: '90px', md: '132px' },
+                        bgcolor: 'rgba(150,127,93,0.5)',
+                        position: 'absolute',
+                        top: { xs: '0', md: '0px' },
+                        left: 0,
+                        borderRadius: '20px',
+                      }}
+                    />
+                  </Box>
                   <Box
                     sx={{
                       mt: '20px',
