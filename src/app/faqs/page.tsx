@@ -69,15 +69,9 @@ export default function page() {
             }}
           >
             <Typography sx={{ fontWeight: 600, mt: 2 }}>Categories:</Typography>
-            <Typography sx={{ mt: 2 }}>
-              Visa and Arrival
-            </Typography>
-            <Typography sx={{ mt: 2 }}>
-              Legal Queries
-            </Typography>
-            <Typography sx={{ mt: 2 }}>
-              General Questions
-            </Typography>
+            <Typography sx={{ mt: 2 }}>Visa and Arrival</Typography>
+            <Typography sx={{ mt: 2 }}>Legal Queries</Typography>
+            <Typography sx={{ mt: 2 }}>General Questions</Typography>
             <Typography sx={{ mt: 2, mb: 4 }}>
               More Category Add from Beknd
             </Typography>
