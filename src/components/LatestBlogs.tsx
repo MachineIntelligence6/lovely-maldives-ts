@@ -154,7 +154,7 @@ export default function LatestBlogs() {
               component={Link}
               href={`/blogs/${latest.slug}`}
               sx={{
-                width: { xs: 'calc(100%)', md: 'calc(50% - 20px)' },
+                width: { xs: 'calc(100%)', md: 'calc(50% - 10px)' },
                 borderRadius: '20px',
                 bgcolor: 'var(--brown)',
                 boxSizing: 'border-box',

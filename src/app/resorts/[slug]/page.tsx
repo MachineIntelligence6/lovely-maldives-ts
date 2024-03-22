@@ -310,7 +310,7 @@ export default function Resort() {
                             </ListItemIcon>
                             <ListItemText
                               primary={
-                                <Typography sx={{ fontWeight: 600 }}>
+                                <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
                                   30km from airport
                                 </Typography>
                               }
@@ -320,6 +320,7 @@ export default function Resort() {
                                   sx={{
                                     fontSize: '0.875rem',
                                     color: '#666',
+                                    mb: '2px',
                                   }}
                                 >
                                   (20 minutes to reach the hotel)
@@ -329,6 +330,7 @@ export default function Resort() {
                                   sx={{
                                     fontSize: '0.875rem',
                                     color: '#666',
+                                    mb: '2px',
                                   }}
                                 >
                                   (20 minutes to reach the hotel)
@@ -369,21 +371,32 @@ export default function Resort() {
                             </ListItemIcon>
                             <ListItemText
                               primary={
-                                <Typography sx={{ fontWeight: 600 }}>
+                                <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
                                   30km from airport
                                 </Typography>
                               }
-                              secondary={
+                              secondary={[
                                 <Typography
                                   paragraph
                                   sx={{
                                     fontSize: '0.875rem',
                                     color: '#666',
+                                    mb: '2px',
                                   }}
                                 >
                                   (20 minutes to reach the hotel)
-                                </Typography>
-                              }
+                                </Typography>,
+                                <Typography
+                                  paragraph
+                                  sx={{
+                                    fontSize: '0.875rem',
+                                    color: '#666',
+                                    mb: '2px',
+                                  }}
+                                >
+                                  (20 minutes to reach the hotel)
+                                </Typography>,
+                              ]}
                             />
                           </ListItem>
                         </Grid>

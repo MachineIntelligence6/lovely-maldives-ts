@@ -108,7 +108,7 @@ export default function Page() {
           top: { xs: '0', md: '168px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
           width: '100%',
-          zIndex: 999,
+          zIndex: 996,
           // opacity: isOpen ? 1 : 0,
           transform: isOpen ? 'translateY(0px)' : 'translateY(-140px)',
           transition: 'opacity 0.4s, transform 0.4s',
@@ -160,7 +160,7 @@ export default function Page() {
                 component={Link}
                 href={`blogs/${blogItem.slug}`}
                 sx={{
-                  width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
+                  width: { xs: 'calc(100%)', md: 'calc(33.3% - 14px)' },
                   borderRadius: '20px',
                   bgcolor: 'var(--brown)',
                   boxSizing: 'border-box',
