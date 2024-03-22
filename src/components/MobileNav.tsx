@@ -107,6 +107,7 @@ export default function MobileNav({ menuItems }: any) {
               color: '#fff',
               fontSize: '1.2rem',
             }}
+            aria-label="Email"
           >
             Email
           </Button>
@@ -117,6 +118,7 @@ export default function MobileNav({ menuItems }: any) {
               color: '#fff',
               fontSize: '1.2rem',
             }}
+            aria-label="Phone number"
           >
             +960-769-4545
           </Button>

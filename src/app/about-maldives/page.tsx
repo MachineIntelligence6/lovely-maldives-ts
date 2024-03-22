@@ -69,10 +69,10 @@ export default function Page() {
             }}
           />
           <Box
-            className="articleBlog"
+            // className="articleBlog"
             sx={{
               width: '100%',
-              // height: '400px',
+              height: { xs: '200px', md: '400px' },
               bgcolor: 'rgba(150,127,93,0.5)',
               position: 'absolute',
               top: '0',
@@ -85,8 +85,8 @@ export default function Page() {
           sx={{
             pt: '40px',
             color: 'var(--white)',
-            fontSize: '20px',
-            width: { xs: '100%', md: '450px' },
+            fontSize: { xs: '14px', md: '20px' },
+            width: { xs: '80%', md: '450px' },
             ml: { xs: 'auto', md: '150px' },
             // mx: 'auto',
             textAlign: 'left',
@@ -134,6 +134,7 @@ export default function Page() {
                 },
                 fontSize: '1.4rem',
               }}
+              aria-label="More"
               variant="text"
               onClick={showExtraContent}
             >
@@ -187,10 +188,10 @@ export default function Page() {
                 }}
               />
               <Box
-                className="articleImg"
+                // className="articleImg"
                 sx={{
                   width: '100%',
-                  // height: '300px',
+                  height: { xs: '200px', md: '300px' },
                   bgcolor: 'rgba(150,127,93,0.5)',
                   position: 'absolute',
                   top: '0',
@@ -203,8 +204,8 @@ export default function Page() {
               sx={{
                 mt: '40px',
                 color: 'var(--white)',
-                fontSize: '20px',
-                width: { xs: '100%', md: '450px' },
+                fontSize: { xs: '14px', md: '20px' },
+                width: { xs: '70%', md: '450px' },
                 // ml: { xs: 'auto', md: '260px' },
                 mx: 'auto',
                 textAlign: 'left',
@@ -282,6 +283,7 @@ export default function Page() {
                 backgroundColor: 'var(--blue) !important',
               },
             }}
+            aria-label="Back to home"
             title="Back to home"
           >
             <Link href="/" sx={{ color: 'white', textDecoration: 'none' }}>

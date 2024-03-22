@@ -210,6 +210,7 @@ export default function FilterTray() {
               }}
               onClick={toggleDrawer(false)}
               title="Apply Filters"
+              aria-label="Apply Filters"
             >
               Reset
             </Button>
@@ -226,6 +227,7 @@ export default function FilterTray() {
               }}
               onClick={toggleDrawer(false)}
               title="Apply Filters"
+              aria-label="Apply Filters"
             >
               Apply Filters
             </Button>

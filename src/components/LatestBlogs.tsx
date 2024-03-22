@@ -128,6 +128,16 @@ export default function LatestBlogs() {
           >
             <Typography
               sx={{
+                fontSize: { xs: '14px', md: '16px' },
+                pt: '20px',
+                color: 'white',
+                ml: { xs: '0', md: '50px' },
+              }}
+            >
+              Luxury Resorts
+            </Typography>
+            <Typography
+              sx={{
                 fontSize: '24px',
                 color: 'white',
                 textAlign: { xs: 'center', md: 'left' },
@@ -137,6 +147,16 @@ export default function LatestBlogs() {
               }}
             >
               Seyta Opens Dhunthari Resort& Spa Long in the Maldives
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: '16px', md: '16px' },
+                mt: '10px',
+                color: 'white',
+                ml: { xs: '0', md: '50px' },
+              }}
+            >
+              February 12, 2024
             </Typography>
           </Box>
         </Box>

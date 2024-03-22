@@ -39,7 +39,7 @@ function NavItems({ items }: any) {
             // pb: '3px',
             textTransform: 'capitalize',
             position: 'relative',
-            fontSize: '1.4rem',
+            fontSize: { xs: '1.4rem', md: '1.2rem' },
             fontWeight: { xs: '600', md: 'regular' },
             '&:after': {
               content: "''",
