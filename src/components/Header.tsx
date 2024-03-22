@@ -95,7 +95,11 @@ function Header() {
               : '0 0 25px rgb(0 0 0 / 10%)'
             : 'none',
           width: '100%',
-          background: isScrolled ? 'white' : 'var(--brown)',
+          background: isScrolled
+            ? isOpen && lessThanMd
+              ? 'var(--brown)'
+              : 'white'
+            : 'var(--brown)',
           transition: 'all ease .5s',
         }}
       >
@@ -143,7 +147,13 @@ function Header() {
             <Link href="/">
               <Box
                 component={Image}
-                src={isScrolled ? profilePicCol : profilePic}
+                src={
+                  isScrolled
+                    ? isOpen && lessThanMd
+                      ? profilePic
+                      : profilePicCol
+                    : profilePic
+                }
                 alt="Logo"
                 width={95.6}
                 height={60}
@@ -164,7 +174,7 @@ function Header() {
                 {isOpen ? (
                   <Close
                     sx={{
-                      color: isScrolled ? 'var(--brown)' : 'white',
+                      color: 'white',
                       fontSize: '46px',
                     }}
                   />
