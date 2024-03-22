@@ -17,20 +17,20 @@ export default function PopularBlogPage() {
       <Box
         sx={{
           background: 'black',
-          position: { xs: 'unset', md: 'fixed' },
+          position: { xs: 'fixed', md: 'fixed' },
           top: { xs: '0', md: '168px' },
           boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
           // py: '20px',
           width: '100%',
           // px: '100px',
-          zIndex: 999,
+          zIndex: 995,
           // opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'translateY(0px)' : 'translateY(-140px)',
+          transform: isOpen ? 'translateY(0px)' : 'translateY(-78px)',
           transition: 'opacity 0.4s, transform 0.4s',
           display: 'block',
           flexDirection: 'row',
           overflow: 'hidden',
-          mt: { md: '0', xs: '135px' },
+          mt: { md: '0', xs: '168px' },
           gap: { md: '18px', xs: '0' },
           borderTop: '1px solid lightgray',
         }}
@@ -42,7 +42,7 @@ export default function PopularBlogPage() {
           // maxWidth: '80%',
           px: 0,
           margin: 'auto',
-          mt: '280px',
+          mt: { xs: '180px', md: '280px' },
           '@media only screen and (min-width: 1441px)': {
             maxWidth: '1030px !important',
           },
