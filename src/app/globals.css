@@ -322,11 +322,11 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     border-radius: 20px;
   } */
   .articleBlog {
-    width: 100%;
+    width: 80%;
     height: 200px;
   }
   .articleImg {
-    width: 100%;
+    width: 70%;
     height: 200px;
   }
   .article {
