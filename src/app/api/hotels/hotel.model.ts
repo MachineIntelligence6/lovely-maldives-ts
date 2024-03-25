@@ -6,7 +6,20 @@ interface IHotel {
   location: string
   country: string
   city: string
-  image: string
+  slug: string
+  images?: {
+    src: string
+    name: string
+    alt: string
+    belongsTo: {
+      type: {
+        type: string
+        enum: ['Hotel', 'Resort', 'Blog', 'Destination']
+        default: 'Blog'
+      }
+      id: Schema.Types.ObjectId
+    }
+  }
   pricePerNight: number
   currency: string
   availableRooms: number
@@ -18,7 +31,9 @@ interface IHotel {
     comment: string
     createdAt: Date
   }[]
-  bookings?: Schema.Types.ObjectId[]
+  contactEmail: string
+  contactPhone: string
+  // bookings?: Schema.Types.ObjectId[]
   createdAt?: Date
   updatedAt?: Date
 }
@@ -29,7 +44,20 @@ const hotelSchema = new Schema<IHotel>({
   location: { type: String, required: true },
   country: { type: String, required: true },
   city: { type: String, required: true },
-  image: { type: String, required: true },
+  slug: String,
+  images: [
+    {
+      src: { type: String },
+      name: { type: String },
+      alt: { type: String },
+      belongsTo: {
+        type: String,
+        default: 'Hotel',
+      },
+      id: Schema.Types.ObjectId,
+      createdAt: { type: Date, default: Date.now },
+    },
+  ],
   pricePerNight: { type: Number, required: true },
   currency: { type: String, required: true },
   availableRooms: { type: Number, required: true },
@@ -43,7 +71,9 @@ const hotelSchema = new Schema<IHotel>({
       createdAt: { type: Date, default: Date.now },
     },
   ],
-  bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking' }],
+  // bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking' }],
+  contactEmail: String,
+  contactPhone: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 })

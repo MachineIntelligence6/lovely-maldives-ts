@@ -3,40 +3,16 @@
 'use client'
 
 import { Box, Container } from '@mui/material'
-import { useMenuStore } from '@/providers/menu-store-provider'
+import PopularBlogs from '@/components/PopularBlogs'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import BlogHeader from '../../components/BlogHeader'
-import PopularBlogs from '@/components/PopularBlogs'
 
 export default function PopularBlogPage() {
-  const { isOpen } = useMenuStore((state) => state)
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
       <Header />
-      <Box
-        sx={{
-          background: 'black',
-          position: { xs: 'fixed', md: 'fixed' },
-          top: { xs: '0', md: '168px' },
-          boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
-          // py: '20px',
-          width: '100%',
-          // px: '100px',
-          zIndex: 995,
-          // opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'translateY(0px)' : 'translateY(-78px)',
-          transition: 'opacity 0.4s, transform 0.4s',
-          display: 'block',
-          flexDirection: 'row',
-          overflow: 'hidden',
-          mt: { md: '0', xs: '168px' },
-          gap: { md: '18px', xs: '0' },
-          borderTop: '1px solid lightgray',
-        }}
-      >
-        <BlogHeader />
-      </Box>
+      <BlogHeader />
       <Container
         sx={{
           // maxWidth: '80%',

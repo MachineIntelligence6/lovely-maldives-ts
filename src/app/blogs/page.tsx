@@ -11,7 +11,6 @@ import BlogHeader from '@/components/BlogHeader'
 import Footer from '@/components/Footer'
 
 import Header from '@/components/Header'
-import { useMenuStore } from '@/providers/menu-store-provider'
 import MailBox from '@/components/MailBox'
 import LatestBlogs from '@/components/LatestBlogs'
 import PopularBlogs from '@/components/PopularBlogs'
@@ -86,7 +85,6 @@ export const articles: any[] = [
 
 export default function Page() {
   const [addSlice, setAddSlice] = useState<any>([] as any)
-  const isOpen = useMenuStore((state) => state.isOpen)
 
   useEffect(() => {
     const windowWidth = window.innerWidth
@@ -101,27 +99,7 @@ export default function Page() {
   return (
     <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
       <Header />
-      <Box
-        sx={{
-          background: 'black',
-          position: { xs: 'fixed', md: 'fixed' },
-          top: { xs: '0', md: '168px' },
-          boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
-          width: '100%',
-          zIndex: 995,
-          // opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'translateY(0px)' : 'translateY(-78px)',
-          transition: 'opacity 0.4s, transform 0.4s',
-          display: 'block',
-          flexDirection: 'row',
-          overflow: 'hidden',
-          mt: { md: '0', xs: '168px' },
-          gap: { md: '18px', xs: '0' },
-          borderTop: '1px solid lightgray',
-        }}
-      >
-        <BlogHeader />
-      </Box>
+      <BlogHeader />
       <Container
         sx={{
           // maxWidth: '80%',

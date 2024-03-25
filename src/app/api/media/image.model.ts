@@ -12,6 +12,8 @@ interface IImage {
     }
     id: Schema.Types.ObjectId
   }
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 const imageSchema = new Schema<IImage>({
@@ -22,6 +24,8 @@ const imageSchema = new Schema<IImage>({
     type: { type: String, required: true },
     id: { type: Schema.Types.ObjectId, required: true },
   },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 })
 
 export const ImageModel = model('Image', imageSchema)
