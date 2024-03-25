@@ -85,9 +85,9 @@ export default function Page() {
           sx={{
             pt: '40px',
             color: 'var(--white)',
-            fontSize: { xs: '14px', md: '20px' },
+            fontSize: { xs: '12px', md: '20px' },
             width: { xs: '80%', md: '450px' },
-            ml: { xs: 'auto', md: '150px' },
+            ml: { xs: '40px', md: '150px' },
             // mx: 'auto',
             textAlign: 'left',
           }}
@@ -191,7 +191,7 @@ export default function Page() {
                 // className="articleImg"
                 sx={{
                   width: '100%',
-                  height: { xs: '200px', md: '300px' },
+                  height: { xs: '150px', md: '300px' },
                   bgcolor: 'rgba(150,127,93,0.5)',
                   position: 'absolute',
                   top: '0',
@@ -204,10 +204,11 @@ export default function Page() {
               sx={{
                 mt: '40px',
                 color: 'var(--white)',
-                fontSize: { xs: '14px', md: '20px' },
-                width: { xs: '70%', md: '450px' },
+                fontSize: { xs: '12px', md: '20px' },
+                width: { xs: '71%', md: '450px' },
                 // ml: { xs: 'auto', md: '260px' },
-                mx: 'auto',
+                mx: { md: 'auto' },
+                ml: { xs: '50px', md: 'auto' },
                 textAlign: 'left',
               }}
             >
