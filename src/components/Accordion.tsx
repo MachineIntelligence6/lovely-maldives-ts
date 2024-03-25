@@ -72,7 +72,7 @@ export default function FaqsAccordion() {
               <ExpandMoreIcon
                 sx={{
                   color: 'var(--brown)',
-                  fontSize: '35px',
+                  fontSize: { xs: '25px', md: '35px' },
                   bgcolor: { xs: '#E5E4E2', md: 'white' },
                   borderRadius: { xs: '100%', md: 'none' },
                   // px: 4,
@@ -123,7 +123,7 @@ export default function FaqsAccordion() {
               <ExpandMoreIcon
                 sx={{
                   color: 'var(--brown)',
-                  fontSize: '35px',
+                  fontSize: { xs: '25px', md: '35px' },
                   bgcolor: { xs: '#E5E4E2', md: 'white' },
                   borderRadius: { xs: '100%', md: 'none' },
                 }}
@@ -173,7 +173,7 @@ export default function FaqsAccordion() {
               <ExpandMoreIcon
                 sx={{
                   color: 'var(--brown)',
-                  fontSize: '35px',
+                  fontSize: { xs: '25px', md: '35px' },
                   bgcolor: { xs: '#E5E4E2', md: 'white' },
                   borderRadius: { xs: '100%', md: 'none' },
                 }}
