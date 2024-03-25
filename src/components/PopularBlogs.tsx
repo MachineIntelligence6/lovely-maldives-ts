@@ -61,6 +61,7 @@ export default function PopularBlogs() {
             flexWrap: 'wrap',
             mt: { xs: '30px', md: '40px' },
             gap: { xs: '10px', md: '20px' },
+            mb: { xs: '30px', md: '0' },
             px: 2.5,
           }}
         >
