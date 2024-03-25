@@ -66,7 +66,7 @@ export default function ContactForm() {
           id="outlined-basic"
           variant="outlined"
           multiline
-          rows={10}
+          rows={5}
           sx={{ width: '100%', maxWidth: '100%' }}
         />
 

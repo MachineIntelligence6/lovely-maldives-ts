@@ -14,7 +14,7 @@ function AboutUsPage() {
     setReadMore(!readMore)
   }
   return (
-    <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
+    <Box sx={{ pt: { xs: '100px', md: '140px' } }}>
       <Header />
       <About />
       <Container
