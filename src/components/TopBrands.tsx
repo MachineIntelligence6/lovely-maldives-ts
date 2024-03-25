@@ -81,6 +81,7 @@ export default function TopBrands() {
       {
         breakpoint: 480,
         settings: {
+          className: 'center',
           slidesToShow: 1,
           slidesToScroll: 1,
           centerPadding: '95px',

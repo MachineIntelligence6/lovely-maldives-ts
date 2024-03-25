@@ -166,6 +166,7 @@ export default function LatestBlogs() {
             flexWrap: 'wrap',
             mt: { xs: '30px', md: '40px' },
             gap: { xs: '10px', md: '20px' },
+            mb: { xs: '30px', md: '0' },
           }}
         >
           {latestBlog.map((latest, index) => (
