@@ -224,7 +224,7 @@ export default function TopBrands() {
                 justifyContent: 'center',
                 textAlign: 'center',
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'flex-start',
               }}
             >
               Say Hi on
