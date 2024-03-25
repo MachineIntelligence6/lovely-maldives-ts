@@ -57,7 +57,6 @@ export default function TopBrands() {
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false,
-
     responsive: [
       {
         breakpoint: 1024,
@@ -113,12 +112,12 @@ export default function TopBrands() {
           {datas.map((data, index) => (
             <Box
               key={index}
-              sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+              // sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap:'90px' }}
             >
               <Box
                 className="brandSlider"
                 sx={{
-                  width: { xs: '93%', md: '70%' },
+                  width: { xs: '93%', md: 'calc(70% + 8px)' },
                   height: { xs: '250px', md: '210px' },
                   background: 'var(--brown)',
                   color: 'white',
@@ -128,7 +127,7 @@ export default function TopBrands() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   alignSelf: 'center',
-                  mx: { xs: 'auto', md: '0' },
+                  mx: { xs: 'auto', md: '30px' },
                   // pb: 2,
                 }}
               >
