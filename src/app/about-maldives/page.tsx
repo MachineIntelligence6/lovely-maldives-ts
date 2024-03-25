@@ -52,7 +52,7 @@ export default function Page() {
           sx={{
             // width: '100%',
             textAlign: 'center',
-            mt: '60px',
+            mt: { xs: '40px', md: '60px' },
             position: 'relative',
             mx: 'auto',
           }}
@@ -83,7 +83,7 @@ export default function Page() {
         </Box>
         <Typography
           sx={{
-            pt: '40px',
+            pt: '30px',
             color: 'var(--white)',
             fontSize: { xs: '12px', md: '20px' },
             width: { xs: '80%', md: '450px' },
@@ -94,7 +94,7 @@ export default function Page() {
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
         </Typography>
-        <Box sx={{ mt: { xs: '40px', md: '60px' }, color: 'var(--white)' }}>
+        <Box sx={{ mt: { xs: '30px', md: '60px' }, color: 'var(--white)' }}>
           <Typography>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -144,8 +144,8 @@ export default function Page() {
         </Paper>
         {readMore && (
           <>
-            <Box sx={{ mt: '60px', color: 'var(--white)' }}>
-              <Typography sx={{ mt: '40px' }}>
+            <Box sx={{ mt: { xs: '30px', md: '60px' }, color: 'var(--white)' }}>
+              <Typography sx={{ mt: '30px' }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -171,7 +171,7 @@ export default function Page() {
               sx={{
                 width: '100%',
                 textAlign: 'center',
-                mt: '60px',
+                mt: { xs: '30px', md: '60px' },
                 position: 'relative',
                 mx: 'auto',
               }}
@@ -202,7 +202,7 @@ export default function Page() {
             </Box>
             <Typography
               sx={{
-                mt: '40px',
+                mt: { xs: '30px', md: '40px' },
                 color: 'var(--white)',
                 fontSize: { xs: '12px', md: '20px' },
                 width: { xs: '71%', md: '450px' },
@@ -214,7 +214,7 @@ export default function Page() {
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit
             </Typography>
-            <Box sx={{ mt: { xs: '40px', md: '60px' }, color: 'var(--white)' }}>
+            <Box sx={{ mt: { xs: '30px', md: '60px' }, color: 'var(--white)' }}>
               <Typography>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -224,7 +224,9 @@ export default function Page() {
                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </Typography>
-              <Typography sx={{ mt: '40px', fontWeight: 600 }}>
+              <Typography
+                sx={{ mt: { xs: '30px', md: '40px' }, fontWeight: 600 }}
+              >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -233,7 +235,10 @@ export default function Page() {
                 nulla pariatur
               </Typography>
               <Typography
-                sx={{ mt: '40px', display: { xs: 'none', md: 'block' } }}
+                sx={{
+                  mt: { xs: '30px', md: '40px' },
+                  display: { xs: 'none', md: 'block' },
+                }}
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
