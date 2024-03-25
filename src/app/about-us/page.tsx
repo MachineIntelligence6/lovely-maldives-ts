@@ -62,7 +62,11 @@ function AboutUsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            sx={{ width: '100%', position: 'relative', mb: { xs: '30px', md: '0' } }}
+            sx={{
+              width: '100%',
+              position: 'relative',
+              mb: { xs: '30px', md: '0' },
+            }}
           >
             <Box sx={{ mt: { xs: '30px', md: '60px' }, color: 'var(--white)' }}>
               <Typography sx={{ mt: '30px' }}>
