@@ -5,7 +5,13 @@ interface User {
   name: string
   email: string
   password: string
-  role: string
+  role: {
+    type: {
+      type: string
+      enum: ['SupperAdmin', 'Admin', 'Editor', 'User']
+      default: 'User'
+    }
+  }
   avatar?: string
   contactNumber?: string
   address?: string
@@ -15,9 +21,9 @@ interface User {
     twitter?: string
   }
   lastLogin?: Date
-  bookings?: Schema.Types.ObjectId[]
+  // bookings?: Schema.Types.ObjectId[]
   reviews?: Schema.Types.ObjectId[]
-  paymentMethods?: { type: string; cardNumber: string; expiryDate: string }[]
+  // paymentMethods?: { type: string; cardNumber: string; expiryDate: string }[]
   preferences?: Record<string, any>
   notifications?: Schema.Types.ObjectId[]
   createdAt?: Date
@@ -28,7 +34,11 @@ const UserSchema = new Schema<User>({
   name: { type: String, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  role: { type: String, required: true },
+  role: {
+    type: String,
+    default: 'User',
+    required: true,
+  },
   avatar: { type: String },
   contactNumber: { type: String },
   address: { type: String },
@@ -38,15 +48,15 @@ const UserSchema = new Schema<User>({
     twitter: { type: String },
   },
   lastLogin: { type: Date },
-  bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking' }],
+  // bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking' }],
   reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
-  paymentMethods: [
-    {
-      type: { type: String },
-      cardNumber: { type: String },
-      expiryDate: { type: String },
-    },
-  ],
+  // paymentMethods: [
+  //   {
+  //     type: { type: String },
+  //     cardNumber: { type: String },
+  //     expiryDate: { type: String },
+  //   },
+  // ],
   preferences: { type: Schema.Types.Mixed },
   notifications: [{ type: Schema.Types.ObjectId, ref: 'Notification' }],
   createdAt: { type: Date, default: Date.now },
