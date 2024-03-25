@@ -20,6 +20,7 @@ import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import Slider from 'react-slick'
 import { ModeOfTravel } from '@mui/icons-material'
+import { motion } from 'framer-motion'
 import BreadCrumb from '@/components/BreadCrumb'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -274,7 +275,13 @@ export default function Resort() {
                 )}
               </Paper>
               {readMore && (
-                <>
+                <Box
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  sx={{ width: '100%', position: 'relative' }}
+                >
                   <Paper
                     elevation={0}
                     sx={{
@@ -581,7 +588,7 @@ export default function Resort() {
                       <SocialSharer />
                     </Box>
                   </Paper>
-                </>
+                </Box>
               )}
             </Grid>
           </Grid>
