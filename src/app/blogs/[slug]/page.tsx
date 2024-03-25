@@ -190,9 +190,9 @@ export default function SingleBlogPage() {
               <Typography
                 paragraph
                 sx={{
-                  fontSize: '1.125rem',
+                  fontSize: { xs: '12px', md: '1.125rem' },
                   mt: 2,
-                  textAlign: 'center',
+                  textAlign: 'left',
                   mb: 5,
                   color: '#666',
                   fontWeight: '400',
@@ -316,9 +316,9 @@ export default function SingleBlogPage() {
               <Typography
                 paragraph
                 sx={{
-                  fontSize: '1.125rem',
+                  fontSize: { xs: '12px', md: '1.125rem' },
                   mt: 2,
-                  textAlign: 'center',
+                  textAlign: 'left',
                   mb: 5,
                   color: '#666',
                   fontWeight: '400',
