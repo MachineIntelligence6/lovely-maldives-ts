@@ -120,7 +120,7 @@ export default function LatestBlogs() {
           <Box
             sx={{
               position: { xs: 'absolute', md: 'unset' },
-              top: '60%',
+              top: '45%',
               color: 'white',
               borderRadius: { xs: 0, md: '0 10px 10px 0' },
               width: { xs: '100%', md: '70%' },
@@ -131,7 +131,7 @@ export default function LatestBlogs() {
                 fontSize: { xs: '14px', md: '16px' },
                 pt: '20px',
                 color: 'white',
-                ml: { xs: '0', md: '50px' },
+                ml: { xs: '15px', md: '50px' },
               }}
             >
               Luxury Resorts
@@ -140,8 +140,8 @@ export default function LatestBlogs() {
               sx={{
                 fontSize: '24px',
                 color: 'white',
-                textAlign: { xs: 'center', md: 'left' },
-                ml: { xs: '0', md: '50px' },
+                textAlign: { xs: 'left', md: 'left' },
+                ml: { xs: '15px', md: '50px' },
                 fontWeight: 600,
                 // zIndex: 999,
               }}
@@ -153,7 +153,7 @@ export default function LatestBlogs() {
                 fontSize: { xs: '16px', md: '16px' },
                 mt: '10px',
                 color: 'white',
-                ml: { xs: '0', md: '50px' },
+                ml: { xs: '15px', md: '50px' },
               }}
             >
               February 12, 2024
