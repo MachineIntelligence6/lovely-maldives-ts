@@ -74,14 +74,13 @@ export default function TopBrands() {
           slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 1,
-          centerPadding: '80px',
-          centerMode: true,
+          // centerPadding: '80px',
+          // centerMode: true,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          className: 'center',
           slidesToShow: 1,
           slidesToScroll: 1,
           centerPadding: '95px',
@@ -112,7 +111,10 @@ export default function TopBrands() {
       >
         <Box component={Slider} {...settings}>
           {datas.map((data, index) => (
-            <Box key={index}>
+            <Box
+              key={index}
+              sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+            >
               <Box
                 className="brandSlider"
                 sx={{
@@ -125,6 +127,8 @@ export default function TopBrands() {
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  alignSelf: 'center',
+                  mx: { xs: 'auto', md: '0' },
                   // pb: 2,
                 }}
               >

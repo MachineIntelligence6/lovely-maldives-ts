@@ -107,6 +107,20 @@ export default function Footer() {
           </Box>
           <Box
             component={Link}
+            href="/contact-us"
+            sx={{
+              color: 'white',
+              textDecoration: 'none',
+              display: { xs: 'block', md: 'none' },
+              // px: '10px',
+              mt: '10px',
+              fontSize: '16px',
+            }}
+          >
+            Contact us
+          </Box>
+          <Box
+            component={Link}
             href="/blogs"
             sx={{
               color: 'white',

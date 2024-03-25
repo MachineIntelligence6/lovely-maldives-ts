@@ -8,6 +8,7 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import EmailIcon from '@mui/icons-material/Email'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
@@ -143,7 +144,13 @@ export default function Page() {
           )}
         </Paper>
         {readMore && (
-          <>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            sx={{ width: '100%', position: 'relative' }}
+          >
             <Box sx={{ mt: { xs: '30px', md: '60px' }, color: 'var(--white)' }}>
               <Typography sx={{ mt: '30px' }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -260,7 +267,7 @@ export default function Page() {
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </Typography>
             </Box>
-          </>
+          </Box>
         )}
         <Box
           sx={{
