@@ -27,7 +27,7 @@ function page() {
       >
         <Typography
           sx={{
-            fontSize: { xs: '35px', md: '35px' },
+            fontSize: { xs: '24px', md: '35px' },
             textAlign: 'center',
             mt: '60px',
           }}
@@ -36,7 +36,7 @@ function page() {
         </Typography>
         <Typography
           sx={{
-            fontSize: '20px',
+            fontSize: { xs: '16px', md: '20px' },
             textAlign: 'center',
             mt: '60px',
             display: { xs: 'none', md: 'block' },
@@ -50,39 +50,57 @@ function page() {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est Century Gothic.
         </Typography>
-        <Typography sx={{ fontSize: '20px', textAlign: 'center', mt: '40px' }}>
+        <Typography
+          sx={{
+            fontSize: { xs: '16px', md: '20px' },
+            textAlign: 'center',
+            mt: '40px',
+          }}
+        >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
           asperiores quas autem. Repellat est nam tempora adipisci ab. Error,
           nam?
         </Typography>
         <Typography
           sx={{
-            fontSize: '20px',
+            fontSize: { xs: '16px', md: '20px' },
             fontWeight: 600,
             textAlign: 'center',
-            mt: '20px',
+            mt: { xs: '16px', md: '20px' },
           }}
         >
           Call (+9607694545)
         </Typography>
-        <Typography sx={{ fontSize: '20px', textAlign: 'center', mt: '40px' }}>
+        <Typography
+          sx={{
+            fontSize: { xs: '16px', md: '20px' },
+            textAlign: 'center',
+            mt: '40px',
+          }}
+        >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
           asperiores quas autem. Repellat est nam tempora adipisci ab. Error,
           nam?
         </Typography>
         <Typography
           sx={{
-            fontSize: '20px',
+            fontSize: { xs: '16px', md: '20px' },
             fontWeight: 600,
             textAlign: 'center',
             width: '300px',
             mx: 'auto',
-            mt: '20px',
+            mt: { xs: '16px', md: '20px' },
           }}
         >
           Address Name, Road, 20021, Sample, City Name, Hulhumale’ Maldives
         </Typography>
-        <Typography sx={{ fontSize: '20px', textAlign: 'center', mt: '40px' }}>
+        <Typography
+          sx={{
+            fontSize: { xs: '16px', md: '20px' },
+            textAlign: 'center',
+            mt: '40px',
+          }}
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit Send us an
           email here.
         </Typography>
