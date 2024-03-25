@@ -117,7 +117,7 @@ export default function TopBrands() {
               <Box
                 className="brandSlider"
                 sx={{
-                  width: { xs: '93%', md: 'calc(70% + 8px)' },
+                  width: { xs: '93%', md: 'calc(65% + 9px)' },
                   height: { xs: '250px', md: '210px' },
                   background: 'var(--brown)',
                   color: 'white',
