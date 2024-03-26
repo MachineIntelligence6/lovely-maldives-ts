@@ -2,8 +2,22 @@ import Google from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 import type { NextAuthConfig } from 'next-auth'
+import { TypeORMAdapter } from '@auth/typeorm-adapter'
+import { UserEntity } from '@/app/api/users/user.entity'
+import { AccountEntity } from '@/app/api/auth/account.entity'
+import { SessionEntity } from '@/app/api/auth/session.entity'
+import { VerificationTokenEntity } from '@/app/api/auth/verification-tokens.entity'
+import { connection } from './db'
 
 export default {
+  adapter: TypeORMAdapter(connection, {
+    entities: {
+      UserEntity,
+      SessionEntity,
+      AccountEntity,
+      VerificationTokenEntity,
+    },
+  }),
   providers: [
     Google,
     CredentialsProvider({
@@ -32,11 +46,11 @@ export default {
       },
     }),
   ],
-  pages: {
-    signIn: '/auth/signin',
-    signOut: '/auth/signout',
-    error: '/auth/error', // Error code passed in query string as ?error=
-    verifyRequest: '/auth/verify-email', // (used for check email message)
-    newUser: '/auth/new-user', // New users will be directed here on first sign in (leave the property out if not of interest)
-  },
+  // pages: {
+  //   signIn: '/auth/signin',
+  //   signOut: '/auth/signout',
+  //   error: '/auth/error', // Error code passed in query string as ?error=
+  //   verifyRequest: '/auth/verify-email', // (used for check email message)
+  //   newUser: '/auth/new-user', // New users will be directed here on first sign in (leave the property out if not of interest)
+  // },
 } satisfies NextAuthConfig

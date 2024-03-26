@@ -1,7 +1,17 @@
-import mongoose from 'mongoose'
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
+import { AccountEntity } from '@/app/api/auth/account.entity'
+import { SessionEntity } from '@/app/api/auth/session.entity'
+import { VerificationTokenEntity } from '@/app/api/auth/verification-tokens.entity'
+import { UserEntity } from '@/app/api/users/user.entity'
 
-export async function dbConnection() {
-  await mongoose.connect(process.env.MONGODB_URI)
-
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+export const connection: any = {
+  type: 'mysql',
+  host: 'localhost',
+  port: 3306,
+  username: 'root',
+  password: '',
+  database: 'db_md',
+  namingStrategy: new SnakeNamingStrategy(),
+  synchronize: true,
+  entities: [UserEntity, SessionEntity, AccountEntity, VerificationTokenEntity],
 }

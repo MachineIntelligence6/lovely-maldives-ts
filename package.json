@@ -11,6 +11,7 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md}\" --config ./.prettierrc.json"
   },
   "dependencies": {
+    "@auth/typeorm-adapter": "^1.6.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.12",
@@ -31,8 +32,11 @@
     "react": "^18",
     "react-dom": "^18",
     "react-slick": "^0.30.2",
+    "reflect-metadata": "^0.2.1",
     "sharp": "^0.33.2",
     "slick-carousel": "^1.8.1",
+    "typeorm": "^0.3.20",
+    "typeorm-naming-strategies": "^4.1.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
