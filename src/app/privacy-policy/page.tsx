@@ -1,4 +1,4 @@
-// 'use client'
+'use client'
 
 import { Box, Container, Typography } from '@mui/material'
 import Accordion from '@mui/material/Accordion'
@@ -8,7 +8,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import BreadCrumb from '@/components/BreadCrumb'
-
 import { privacyPolicyData } from '@/components/PrivacyPolicy'
 import MailBox from '@/components/MailBox'
 
@@ -40,9 +39,11 @@ export default function PrivacyPolicyPage() {
         }}
       >
         <Box sx={{ mt: 7, mb: 12 }}>
-          {privacyPolicyData.map((data) => {
+          {privacyPolicyData.map((data, index) => {
             return (
               <Accordion
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
                 sx={{
                   mt: '15px',
                   py: '10px',
@@ -60,8 +61,7 @@ export default function PrivacyPolicyPage() {
                   <Typography sx={{ px: 1 }}>{data.heading}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography sx={{ px: 1 }}>{data.title}</Typography>
-                  <Typography sx={{ px: 1 }}>{data.content}</Typography>
+                  <Box sx={{ px: 1 }}>{data.content}</Box>
                 </AccordionDetails>
               </Accordion>
             )

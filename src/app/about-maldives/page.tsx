@@ -25,7 +25,7 @@ export default function Page() {
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
       <Header />
-      <Container sx={{ maxWidth: { xs: '90%', md: '90%' } }}>
+      <Container sx={{ maxWidth: { xs: '100%', md: '90%' } }}>
         <BreadCrumb />
       </Container>
       <Container
@@ -87,7 +87,7 @@ export default function Page() {
             pt: '30px',
             color: 'var(--white)',
             fontSize: { xs: '12px', md: '20px' },
-            width: { xs: '80%', md: '450px' },
+            width: { xs: '79%', md: '450px' },
             ml: { xs: '40px', md: '150px' },
             // mx: 'auto',
             textAlign: 'left',

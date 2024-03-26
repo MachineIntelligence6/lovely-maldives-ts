@@ -11,14 +11,14 @@ function page() {
   return (
     <Box sx={{ mt: { md: '180px', xs: '100px' } }}>
       <Header />
-      <Container sx={{ maxWidth: { xs: '90%', md: '90%' } }}>
+      <Container sx={{ maxWidth: { xs: '100%', md: '90%' } }}>
         <BreadCrumb />
       </Container>
       <Container
         sx={{
-          maxWidth: '80%',
-          px: 0,
-          margin: 'auto',
+          maxWidth: { xs: '100%', md: '80%' },
+          px: { xs: '20px', md: '0' },
+          margin: { xs: '0', md: 'auto' },
           '@media only screen and (min-width: 1441px)': {
             maxWidth: '1030px !important',
           },

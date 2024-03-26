@@ -58,6 +58,7 @@ export default function MobileNav({ menuItems }: any) {
       />
       <IconButton
         onClick={close}
+        aria-label="Menu Button"
         sx={{
           color: 'white',
           position: 'absolute',

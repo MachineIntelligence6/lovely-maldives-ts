@@ -110,9 +110,10 @@ export default function SingleBlogPage() {
               <Typography
                 paragraph
                 sx={{
+                  width: { xs: '90%', md: 'auto' },
                   fontSize: { xs: '12px', md: '1.125rem' },
                   mt: 2,
-                  textAlign: 'left',
+                  textAlign: { xs: 'left', md: 'center' },
                   mb: 5,
                   color: '#666',
                   fontWeight: '400',
@@ -236,10 +237,12 @@ export default function SingleBlogPage() {
               <Typography
                 paragraph
                 sx={{
+                  width: { xs: '90%', md: '45%' },
                   fontSize: { xs: '12px', md: '1.125rem' },
                   mt: 2,
                   textAlign: 'left',
                   mb: 5,
+                  ml: { xs: 0, md: '175px' },
                   color: '#666',
                   fontWeight: '400',
                   fontStyle: 'italic',
