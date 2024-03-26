@@ -4,9 +4,9 @@ export default function ContactForm() {
   return (
     <Container
       sx={{
-        maxWidth: '80%',
-        px: 0,
-        margin: 'auto',
+        maxWidth: { xs: '100%', md: '80%' },
+        px: { xs: '20px', md: '0' },
+        margin: { xs: '0', md: 'auto' },
         '@media only screen and (min-width: 1441px)': {
           maxWidth: '1030px !important',
         },
