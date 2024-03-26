@@ -398,9 +398,9 @@ export default function Footer() {
               mt: { xs: '16px', md: '0', color: 'white' },
             }}
           >
-            Terms of use
+            Terms of use{' '}
           </Box>
-          <Typography sx={{ mt: { xs: '16px', md: '0' } }}>|</Typography>
+          <Typography sx={{ mt: { xs: '16px', md: '0' }, fontSize:'20px' }}>|</Typography>
           <Box
             component={Link}
             href="/privacy-policy"
@@ -410,6 +410,7 @@ export default function Footer() {
               mt: { xs: '16px', md: '0', color: 'white' },
             }}
           >
+            {' '}
             Privacy Policy
           </Box>
         </Box>
