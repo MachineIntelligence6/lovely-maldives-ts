@@ -134,7 +134,7 @@ export default function Footer() {
           </Box>
           <Box
             component={Link}
-            href="/faqs"
+            href="/frequently-asked-questions"
             sx={{
               color: 'white',
               textDecoration: 'none',

@@ -1,3 +1,5 @@
+'use client'
+
 import { Container, Box, Typography, TextField, Button } from '@mui/material'
 
 export default function ContactForm() {
@@ -53,6 +55,7 @@ export default function ContactForm() {
             </Typography>
             <TextField
               id="email"
+              type="email"
               variant="outlined"
               sx={{ width: '100%', maxWidth: '100%' }}
             />
@@ -67,6 +70,7 @@ export default function ContactForm() {
           Contact Number
         </Typography>
         <TextField
+          type="number"
           id="number"
           variant="outlined"
           sx={{ width: '100%', maxWidth: '100%' }}
