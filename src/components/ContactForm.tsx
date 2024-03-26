@@ -30,40 +30,56 @@ export default function ContactForm() {
           }}
         >
           <Box sx={{ width: '100%', maxWidth: '100%' }}>
-            <Typography sx={{ fontSize: { xs: '16px', md: '20px' } }}>
+            <Typography
+              component="label"
+              htmlFor="name"
+              sx={{ fontSize: { xs: '16px', md: '20px' } }}
+            >
               Name
             </Typography>
             <TextField
-              id="outlined-basic"
+              id="name"
               variant="outlined"
               sx={{ width: '100%', maxWidth: '100%' }}
             />
           </Box>
           <Box sx={{ width: '100%', maxWidth: '100%', mt: { xs: 5, md: 0 } }}>
-            <Typography sx={{ fontSize: { xs: '16px', md: '20px' } }}>
+            <Typography
+              component="label"
+              htmlFor="email"
+              sx={{ fontSize: { xs: '16px', md: '20px' } }}
+            >
               Email Address
             </Typography>
             <TextField
-              id="outlined-basic"
+              id="email"
               variant="outlined"
               sx={{ width: '100%', maxWidth: '100%' }}
             />
           </Box>
         </Box>
 
-        <Typography sx={{ fontSize: { xs: '16px', md: '20px' }, mt: '40px' }}>
+        <Typography
+          component="label"
+          htmlFor="number"
+          sx={{ fontSize: { xs: '16px', md: '20px' }, mt: '40px' }}
+        >
           Contact Number
         </Typography>
         <TextField
-          id="outlined-basic"
+          id="number"
           variant="outlined"
           sx={{ width: '100%', maxWidth: '100%' }}
         />
-        <Typography sx={{ fontSize: { xs: '16px', md: '20px' }, mt: '40px' }}>
+        <Typography
+          component="label"
+          htmlFor="message"
+          sx={{ fontSize: { xs: '16px', md: '20px' }, mt: '40px' }}
+        >
           Message
         </Typography>
         <TextField
-          id="outlined-basic"
+          id="message"
           variant="outlined"
           multiline
           rows={5}
