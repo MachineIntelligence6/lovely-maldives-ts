@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 
 import Box from '@mui/system/Box'
 import dynamic from 'next/dynamic'
+import { Metadata } from 'next'
 import Header from '@/components/Header'
 
 const Footer = dynamic(() => import('@/components/Footer'))
@@ -14,6 +15,13 @@ const About = dynamic(() => import('@/components/About'))
 const TopBrands = dynamic(() => import('@/components/TopBrands'))
 const Banner = dynamic(() => import('@/components/Banner'))
 const OurServices = dynamic(() => import('@/components/OurServices'))
+
+export const metadata: Metadata = {
+  title: 'Home | Lovely Maldives',
+  description:
+    // eslint-disable-next-line max-len
+    'Lovely Maldives, a distinguished travel agency from the Maldives strives to redene Luxury travel experiences in the Maldives.',
+}
 
 export default function Home() {
   return (

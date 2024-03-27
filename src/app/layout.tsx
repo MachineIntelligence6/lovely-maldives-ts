@@ -11,7 +11,10 @@ import Provider from './provider'
 const centuryGothic = localFont({ src: './fonts/century-gothic/gothic.ttf' })
 
 export const metadata: Metadata = {
-  title: 'Lovely Maldives | Home',
+  title: {
+    template: '%s | Lovely Maldives',
+    default: 'Lovely Maldives',
+  },
   description:
     // eslint-disable-next-line max-len
     'Lovely Maldives, a distinguished travel agency from the Maldives strives to redene Luxury travel experiences in the Maldives.',
