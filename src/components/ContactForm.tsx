@@ -49,7 +49,9 @@ export default function ContactForm() {
             <Typography
               component="label"
               htmlFor="email"
-              sx={{ fontSize: { xs: '16px', md: '20px' } }}
+              sx={{
+                fontSize: { xs: '16px', md: '20px' },
+              }}
             >
               Email Address
             </Typography>
@@ -61,35 +63,37 @@ export default function ContactForm() {
             />
           </Box>
         </Box>
-
-        <Typography
-          component="label"
-          htmlFor="number"
-          sx={{ fontSize: { xs: '16px', md: '20px' }, mt: '40px' }}
-        >
-          Contact Number
-        </Typography>
-        <TextField
-          type="number"
-          id="number"
-          variant="outlined"
-          sx={{ width: '100%', maxWidth: '100%' }}
-        />
-        <Typography
-          component="label"
-          htmlFor="message"
-          sx={{ fontSize: { xs: '16px', md: '20px' }, mt: '40px' }}
-        >
-          Message
-        </Typography>
-        <TextField
-          id="message"
-          variant="outlined"
-          multiline
-          rows={5}
-          sx={{ width: '100%', maxWidth: '100%' }}
-        />
-
+        <Box sx={{ mt: '30px' }}>
+          <Typography
+            component="label"
+            htmlFor="number"
+            sx={{ fontSize: { xs: '16px', md: '20px' } }}
+          >
+            Contact Number
+          </Typography>
+          <TextField
+            type="number"
+            id="number"
+            variant="outlined"
+            sx={{ width: '100%', maxWidth: '100%' }}
+          />
+        </Box>
+        <Box sx={{ mt: '30px' }}>
+          <Typography
+            component="label"
+            htmlFor="message"
+            sx={{ fontSize: { xs: '16px', md: '20px' } }}
+          >
+            Message
+          </Typography>
+          <TextField
+            id="message"
+            variant="outlined"
+            multiline
+            rows={5}
+            sx={{ width: '100%', maxWidth: '100%' }}
+          />
+        </Box>
         <Button
           sx={{
             bgcolor: 'var(--brown)',
