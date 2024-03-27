@@ -1,10 +1,14 @@
+'use client'
+
 export const privacyPolicyData = [
   {
     heading: 'What information do we collect?',
-    title:
-      'We may collect and process the following personal information from you:',
     content: (
       <>
+        <p>
+          We may collect and process the following personal information from
+          you:
+        </p>
         <span style={{ fontWeight: 'bold', fontFamily: 'Century Gothic' }}>
           Information you provide to us:{' '}
         </span>
@@ -53,66 +57,69 @@ export const privacyPolicyData = [
   },
   {
     heading: 'What do we use your information for?',
-    title:
-      'The personal information we collect from you may be used in one of the following ways:',
     content: (
       <>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          To deal with your inquiries and requests{' '}
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          To create and administer records about any online account that you
-          register with us{' '}
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          To provide you with information and access to resources that you have
-          requested from us To provide you with technical support (your
-          information helps us to better respond to your individual needs){' '}
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          To improve our website (we continually strive to improve our website
-          offerings based on the information and feedback we receive from you),
-          including to improve the navigation and content of our sites{' '}
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          For website and system administration and security{' '}
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          {' '}
-          For general business purposes, including to improve customer service
-          (your information helps us to more effectively respond to your
-          customer service requests and support needs), to help us improve the
-          content and functionality of our Services, to better understand our
-          users, to protect against wrongdoing, to enforce our Terms of Service,
-          and to generally manage our business{' '}
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          {' '}
-          To process transactions and to provide Services to our customers and
-          end-users{' '}
-        </li>{' '}
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          {' '}
-          For recruitment purposes, where you apply for a job with us{' '}
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          {' '}
-          To administer a contest, promotion, survey, or other site features{' '}
-        </li>{' '}
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          To send periodic emails. The email address you provide for order
-          processing, will only be used to send you information and updates
-          pertaining to your order. Where it is in accordance with your
-          marketing preferences, we will send occasional marketing emails about
-          our products and services, which you can unsubscribe from at any time
-          using the link provided in the message.
-        </li>
+        <p>
+          The personal information we collect from you may be used in one of the
+          following ways:
+        </p>
+        <ul>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            To deal with your inquiries and requests{' '}
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            To create and administer records about any online account that you
+            register with us{' '}
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            To provide you with information and access to resources that you
+            have requested from us To provide you with technical support (your
+            information helps us to better respond to your individual needs){' '}
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            To improve our website (we continually strive to improve our website
+            offerings based on the information and feedback we receive from
+            you), including to improve the navigation and content of our sites{' '}
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            For website and system administration and security{' '}
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            {' '}
+            For general business purposes, including to improve customer service
+            (your information helps us to more effectively respond to your
+            customer service requests and support needs), to help us improve the
+            content and functionality of our Services, to better understand our
+            users, to protect against wrongdoing, to enforce our Terms of
+            Service, and to generally manage our business{' '}
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            {' '}
+            To process transactions and to provide Services to our customers and
+            end-users{' '}
+          </li>{' '}
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            {' '}
+            For recruitment purposes, where you apply for a job with us{' '}
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            {' '}
+            To administer a contest, promotion, survey, or other site features{' '}
+          </li>{' '}
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            To send periodic emails. The email address you provide for order
+            processing, will only be used to send you information and updates
+            pertaining to your order. Where it is in accordance with your
+            marketing preferences, we will send occasional marketing emails
+            about our products and services, which you can unsubscribe from at
+            any time using the link provided in the message.
+          </li>
+        </ul>
       </>
     ),
   },
   {
     heading: 'How do we protect your information?',
-    title: '',
     content: (
       <p>
         We implement a variety of security measures to maintain the safety of
@@ -130,7 +137,7 @@ export const privacyPolicyData = [
   },
   {
     heading: 'Do we use cookies?',
-    title: (
+    content: (
       <>
         <p>
           Yes. Cookies are small files that a site or its service provider
@@ -151,17 +158,15 @@ export const privacyPolicyData = [
           find information on popular browsers and how to adjust your cookie
           preferences at the following websites:{' '}
         </p>
-      </>
-    ),
-    content: (
-      <>
-        <li style={{ fontFamily: 'Century Gothic' }}>Microsoft Internet</li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          {' '}
-          Explorer Mozilla Firefox{' '}
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}> Google Chrome </li>
-        <li style={{ fontFamily: 'Century Gothic' }}> Apple Safari</li>
+        <ul>
+          <li style={{ fontFamily: 'Century Gothic' }}>Microsoft Internet</li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            {' '}
+            Explorer Mozilla Firefox{' '}
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}> Google Chrome </li>
+          <li style={{ fontFamily: 'Century Gothic' }}> Apple Safari</li>
+        </ul>
         <p>
           {' '}
           However, if you choose to disable cookies, you may be unable to access
@@ -174,39 +179,44 @@ export const privacyPolicyData = [
   },
   {
     heading: 'Do we disclose any information to outside parties?',
-    title:
-      'We will only share your information with third parties in certain circumstances:',
     content: (
       <>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          We engage certain trusted third parties to perform functions and
-          provide services to us, including cloud hosting services, off-site
-          backups, email service providers, and customer support providers. We
-          will only share your personal information with third parties to the
-          extent necessary to perform these functions, in accordance with the
-          purposes set out in this Privacy Policy and applicable laws.{' '}
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          In the event of a corporate sale, merger, reorganization, dissolution
-          or similar event, your personal information may be sold, disposed of,
-          transferred or otherwise disclosed as part of that transaction.
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          We may also disclose information about you to third parties where we
-          believe it necessary or appropriate under law, for example: (1) to
-          protect or defend our rights, interests or property or that of third
-          parties; (2) to comply with legal process, judicial orders or
-          subpoenas; (3) to respond to requests from public or government
-          authorities, including for national security and law enforcement
-          purposes; (4) to prevent or investigate possible wrongdoing in
-          connection with the Services or to enforce our Terms of Service; (5)
-          to protect the vital interests of our users, customers and other third
-          parties.
-        </li>
-        <li style={{ fontFamily: 'Century Gothic' }}>
-          We may use and share aggregated non-personal information with third
-          parties for marketing, advertising and analytics purposes.
-        </li>
+        <p>
+          We will only share your information with third parties in certain
+          circumstances:
+        </p>
+        <ul>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            We engage certain trusted third parties to perform functions and
+            provide services to us, including cloud hosting services, off-site
+            backups, email service providers, and customer support providers. We
+            will only share your personal information with third parties to the
+            extent necessary to perform these functions, in accordance with the
+            purposes set out in this Privacy Policy and applicable laws.{' '}
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            In the event of a corporate sale, merger, reorganization,
+            dissolution or similar event, your personal information may be sold,
+            disposed of, transferred or otherwise disclosed as part of that
+            transaction.
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            We may also disclose information about you to third parties where we
+            believe it necessary or appropriate under law, for example: (1) to
+            protect or defend our rights, interests or property or that of third
+            parties; (2) to comply with legal process, judicial orders or
+            subpoenas; (3) to respond to requests from public or government
+            authorities, including for national security and law enforcement
+            purposes; (4) to prevent or investigate possible wrongdoing in
+            connection with the Services or to enforce our Terms of Service; (5)
+            to protect the vital interests of our users, customers and other
+            third parties.
+          </li>
+          <li style={{ fontFamily: 'Century Gothic' }}>
+            We may use and share aggregated non-personal information with third
+            parties for marketing, advertising and analytics purposes.
+          </li>
+        </ul>
         <p>
           {' '}
           We do not sell or trade your personal information to third parties.
@@ -216,7 +226,6 @@ export const privacyPolicyData = [
   },
   {
     heading: 'Third Party Links',
-    title: '',
     content: (
       <p>
         Occasionally, at our discretion, we may include or offer third party
@@ -233,7 +242,6 @@ export const privacyPolicyData = [
   },
   {
     heading: 'International Transfers',
-    title: '',
     content: (
       <p>
         If you are visiting our website or using our Services from outside the
@@ -248,17 +256,15 @@ export const privacyPolicyData = [
   },
   {
     heading: ' Your Rights',
-    title: (
-      <p>
-        If you are from the EU, you may have the right to access a copy of the
-        personal information we hold about you, or to request the correction,
-        amendment or deletion of such information where it is inaccurate or
-        processed in violation of the Privacy Shield Principles. To make such a
-        request, please contact us at the contact details at the left.
-      </p>
-    ),
     content: (
       <>
+        <p>
+          If you are from the EU, you may have the right to access a copy of the
+          personal information we hold about you, or to request the correction,
+          amendment or deletion of such information where it is inaccurate or
+          processed in violation of the Privacy Shield Principles. To make such
+          a request, please contact us at the contact details at the left.
+        </p>
         <p>
           We will consider and respond to your request in accordance with the
           Privacy Shield Principles and applicable laws.
@@ -283,21 +289,21 @@ export const privacyPolicyData = [
   },
   {
     heading: 'Data Retention',
-    title: (
-      <p>
-        We may retain your personal information as long as you continue to use
-        the Services, have an account with us or for as long as is necessary to
-        fulfil the purposes outlined in the policy. You can ask to close your
-        account by contacting us at the details below and we will delete your
-        personal information on request.
-      </p>
-    ),
     content: (
-      <p>
-        We may however retain personal information for an additional period as
-        is permitted or required under applicable laws, for legal, tax or
-        regulatory reasons, or for legitimate and lawful business purposes.
-      </p>
+      <>
+        <p>
+          We may retain your personal information as long as you continue to use
+          the Services, have an account with us or for as long as is necessary
+          to fulfil the purposes outlined in the policy. You can ask to close
+          your account by contacting us at the details below and we will delete
+          your personal information on request.
+        </p>
+        <p>
+          We may however retain personal information for an additional period as
+          is permitted or required under applicable laws, for legal, tax or
+          regulatory reasons, or for legitimate and lawful business purposes.
+        </p>
+      </>
     ),
   },
   {

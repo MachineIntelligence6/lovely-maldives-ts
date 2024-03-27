@@ -287,7 +287,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     overflow: hidden;
   }
   .slick-next {
-    right: 3px !important;
+    right: -2px !important;
     overflow: 'hidden';
   }
   svg {
