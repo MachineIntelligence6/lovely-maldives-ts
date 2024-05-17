@@ -1,23 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   --brown: #967f5d;
+  --brown-light: #ecdec7;
   --white: #666666;
   --blue: #5d7496;
   --darkBrown: #60584c; /* #444444; */
-
+  --black: #333;
+  --red: #d03939;
   /* --fontMon:"Montserrat", sans-serif; */
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
   padding: 0;
   margin: 0;
   font-family: 'Gothic', sans-serif;
 }
-/* @font-face {
-    font-family: 'Montserrat';
-    src: url('../../public/fonts/Montserrat/static/Montserrat-Regular.ttf');
-} */
+
+.admin-main-layout * {
+  font-family: 'Public Sans' !important;
+}
+
 .blogScroll::-webkit-scrollbar {
   height: 5px;
 }
