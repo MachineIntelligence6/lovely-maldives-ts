@@ -23,11 +23,16 @@
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint", "react-hooks"],
-
   "rules": {
+    // disable react/no-array-index-key
+    "react/no-array-index-key": "off",
+    "lines-around-directive": ["error", { "before": "always", "after": "always" }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-console": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-use-before-define": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
     "import/extensions": [
       "error",
