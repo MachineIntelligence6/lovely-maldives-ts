@@ -1,7 +1,7 @@
+import { Box } from '@mui/system'
 import BreedCrumb from '@/admin-components/breedcrumb'
 import Sidebar from '@/admin-components/sidebar'
 import TopBar from '@/admin-components/topbar'
-import { Box } from '@mui/system'
 
 export default function DashboardLayout({ children }: any) {
   return (

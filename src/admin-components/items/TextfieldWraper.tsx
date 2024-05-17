@@ -1,4 +1,5 @@
 'use client'
+
 import styled from '@emotion/styled'
 import { Box, InputLabel, TextField } from '@mui/material'
 import React from 'react'
@@ -10,20 +11,21 @@ const CustomLabel = styled(InputLabel)(({ theme }) => ({
   color: '#4B465C',
 }))
 
-const TextFieldWraper = (props: any) => {
+function TextFieldWraper(props: any) {
+  const { type, value, name, onChange, label, placeholder } = props
   return (
     <Box sx={{ mb: '15px', width: '100%' }}>
       <CustomLabel id="demo-simple-select-label" sx={{ mb: '7px' }}>
-        {props?.label}
+        {label}
       </CustomLabel>
       <TextField
         id="outlined-basic"
-        placeholder={props?.placeholder}
+        placeholder={placeholder}
         variant="outlined"
-        type={props?.type}
-        value={props.value}
-        name={props.name}
-        onChange={props.onChange}
+        type={type}
+        value={value}
+        name={name}
+        onChange={onChange}
         InputLabelProps={{
           shrink: true,
         }}

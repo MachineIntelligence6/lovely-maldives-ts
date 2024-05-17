@@ -1,4 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
+
 'use client'
+
 import React, { Fragment, useEffect, useState } from 'react'
 import {
   Box,
@@ -12,9 +16,9 @@ import styled from '@emotion/styled'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import { usePathname, useRouter } from 'next/navigation'
+import Logo from './Logo'
 import SectionTitle from '../common/SectionTitle'
 import menuItems from '../navigation-menus'
-import Logo from './Logo'
 // import { toggleHamburger } from "@/redux/slices/hamburger";
 
 const SidebarMainBox = styled(Box)(({ theme }) => ({
@@ -31,7 +35,7 @@ const SidebarMainBox = styled(Box)(({ theme }) => ({
   transition: 'all .3s ease-in-out',
 }))
 
-const Sidebar = () => {
+function Sidebar() {
   // const theme = useTheme()
   // const dispatch = useDispatch();
   const [openMenus, setOpenMenus] = useState({
@@ -45,21 +49,19 @@ const Sidebar = () => {
 
   useEffect(() => {
     let activeInd = 0
-    let activeSubIndexes = [] as any
+    const activeSubIndexes = [] as any
     menuItems?.map((menuItem: any, index: number) => {
       if (menuItem?.path) {
         if (pathname?.split('/')?.[2] === menuItem?.path?.split('/')?.[1]) {
           activeInd = index
         }
-      } else {
-        if (menuItem?.children?.length > 0) {
-          menuItem.children.map((child: any, childIndex: number) => {
-            if (pathname?.split('/')?.[2] === child?.path?.split('/')?.[1]) {
-              activeInd = index
-              activeSubIndexes.push(index + '.' + childIndex)
-            }
-          })
-        }
+      } else if (menuItem?.children?.length > 0) {
+        menuItem.children.map((child: any, childIndex: number) => {
+          if (pathname?.split('/')?.[2] === child?.path?.split('/')?.[1]) {
+            activeInd = index
+            activeSubIndexes.push(`${index}.${childIndex}`)
+          }
+        })
       }
     })
 
@@ -67,7 +69,7 @@ const Sidebar = () => {
       setOpenMenus({
         ...openMenus,
         mainActive: activeInd as any,
-        subMenus: [...openMenus?.subMenus, ...activeSubIndexes] as any,
+        subMenus: [...(openMenus?.subMenus ?? []), ...activeSubIndexes] as any,
       })
     }
   }, [pathname])
@@ -79,18 +81,16 @@ const Sidebar = () => {
       } else {
         setOpenMenus({ ...openMenus, mainActive: index as any })
       }
+    } else if (openMenus.subMenus.includes(index as never)) {
+      setOpenMenus({
+        ...openMenus,
+        subMenus: openMenus?.subMenus?.filter((item) => item !== index),
+      })
     } else {
-      if (openMenus.subMenus.includes(index as never)) {
-        setOpenMenus({
-          ...openMenus,
-          subMenus: openMenus?.subMenus?.filter((item) => item !== index),
-        })
-      } else {
-        setOpenMenus({
-          ...openMenus,
-          subMenus: [...openMenus.subMenus, index] as any,
-        })
-      }
+      setOpenMenus({
+        ...openMenus,
+        subMenus: [...openMenus.subMenus, index] as any,
+      })
     }
   }
 
@@ -111,9 +111,9 @@ const Sidebar = () => {
               button
               onClick={() => {
                 if (submenu?.children?.length > 0) {
-                  handleMenuClick('sub', (parentIndex + '.' + subIndex) as any)
+                  handleMenuClick('sub', `${parentIndex}.${subIndex}` as any)
                 } else {
-                  handleMenuClick('sub', (parentIndex + '.' + subIndex) as any)
+                  handleMenuClick('sub', `${parentIndex}.${subIndex}` as any)
                   router.push(`/${submenu?.path}`, { scroll: false })
                 }
               }}
@@ -148,7 +148,7 @@ const Sidebar = () => {
               />
               {submenu.children &&
                 (openMenus?.subMenus?.includes(
-                  (parentIndex + '.' + subIndex) as never
+                  `${parentIndex}.${subIndex}` as never
                 ) ? (
                   <ExpandMore sx={{ color: '#696969' }} />
                 ) : (
@@ -158,7 +158,7 @@ const Sidebar = () => {
             {submenu.children && (
               <Collapse
                 in={openMenus?.subMenus?.includes(
-                  (parentIndex + '.' + subIndex) as never
+                  `${parentIndex}.${subIndex}` as never
                 )}
                 timeout="auto"
                 unmountOnExit
@@ -167,7 +167,7 @@ const Sidebar = () => {
                   {renderSubMenuItems(
                     submenu.children,
                     depth + 1,
-                    (parentIndex + '.' + subIndex) as any
+                    `${parentIndex}.${subIndex}` as any
                   )}
                 </List>
               </Collapse>
@@ -178,8 +178,8 @@ const Sidebar = () => {
     ))
   }
 
-  const renderMenuItems = (menuItems: any) => {
-    return menuItems?.map((menuItem: any, index: number) => (
+  const renderMenuItems = (newMenuItems: any) => {
+    return newMenuItems?.map((menuItem: any, index: number) => (
       <Fragment key={index}>
         {menuItem?.sectionTitle ? (
           <SectionTitle title={menuItem?.sectionTitle} />
@@ -286,7 +286,7 @@ const Sidebar = () => {
             bgcolor: 'rgba(0,0,0,0.3)',
             zIndex: 999,
           }}
-        ></Box>
+        />
       )}
       <SidebarMainBox
         sx={{

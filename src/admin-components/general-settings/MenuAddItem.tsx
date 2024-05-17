@@ -1,12 +1,14 @@
 'use client'
+
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
-import TextFieldWraper from '../items/TextfieldWraper'
 import { useState } from 'react'
+import TextFieldWraper from '../items/TextfieldWraper'
 
-const MenuAddItem = (props: any) => {
+function MenuAddItem(props: any) {
+  const { handleDelete, handleChange, index } = props
   const [active, setActive] = useState(false)
 
   const handleActive = () => {
@@ -44,7 +46,7 @@ const MenuAddItem = (props: any) => {
         </Stack>
         <DeleteIcon
           sx={{ fontSize: '18px', color: 'var(--red)', cursor: 'pointer' }}
-          onClick={() => props.handleDelete(props.index)}
+          onClick={() => handleDelete(index)}
         />
       </Stack>
       <Stack
@@ -62,14 +64,14 @@ const MenuAddItem = (props: any) => {
           placeholder="Enter Menu Name."
           value={props?.menu?.title}
           name="title"
-          onChange={(e: any) => props.handleChange(props.index, 'title', e)}
+          onChange={(e: any) => handleChange(index, 'title', e)}
         />
         <TextFieldWraper
           label="Menu Link"
           placeholder="Enter Menu Link."
           value={props?.menu?.link}
           name="link"
-          onChange={(e: any) => props.handleChange(props.index, 'link', e)}
+          onChange={(e: any) => handleChange(index, 'link', e)}
         />
       </Stack>
     </Box>

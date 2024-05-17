@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, Avatar, Box, Stack, Toolbar } from '@mui/material'
 import ProfileDropdown from './ProfileDropdown'
 
-const TopBar = () => {
+function TopBar() {
   return (
     <Box sx={{ width: '100%', float: 'right', height: '62px' }}>
       <AppBar

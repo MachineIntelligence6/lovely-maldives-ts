@@ -1,4 +1,5 @@
 'use client'
+
 import {
   Avatar,
   IconButton,
@@ -12,7 +13,7 @@ import React from 'react'
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
-const ProfileDropdown = () => {
+function ProfileDropdown() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null

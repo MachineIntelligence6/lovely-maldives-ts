@@ -1,9 +1,10 @@
 import React from 'react'
-import { CustomCard } from '../styled/CustomCard'
 import Typography from '@mui/material/Typography'
 import { Box, Stack } from '@mui/system'
+import { CustomCard } from '../styled/CustomCard'
 
-const TotalCardItem = (props: any) => {
+function TotalCardItem(props: any) {
+  const { title, total } = props
   return (
     <CustomCard sx={{ height: '100px', px: { lg: '2rem' } }}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -27,7 +28,7 @@ const TotalCardItem = (props: any) => {
             color="var(--black)"
             sx={{ fontSize: '15px', mt: 1 }}
           >
-            {props.title}
+            {title}
           </Typography>
         </Box>
         <Typography
@@ -35,7 +36,7 @@ const TotalCardItem = (props: any) => {
           color="var(--black)"
           sx={{ fontSize: '30px', fontWeight: 600 }}
         >
-          {props.total}
+          {total}
         </Typography>
       </Stack>
     </CustomCard>

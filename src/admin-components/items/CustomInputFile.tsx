@@ -1,25 +1,26 @@
 'use client'
+
 import { Box } from '@mui/system'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-const LogoInputFile = () => {
+function LogoInputFile() {
   const [file, setFile] = useState('')
   const [previewUrl, setPreviewUrl] = React.useState('')
 
   const hanldeChange = (e: any) => {
-    const file = e.target.files[0]
-    setFile(file)
+    const value = e.target.files[0]
+    setFile(value)
     const fileReader = new FileReader()
     fileReader.onload = () => {
       setPreviewUrl(fileReader.result as string)
     }
-    fileReader.readAsDataURL(file)
+    fileReader.readAsDataURL(value)
   }
   return (
     <Box>
-      <label>
-        <input type="file" hidden onChange={hanldeChange} />
+      <label htmlFor="fileInput">
+        <input id="fileInput" type="file" hidden onChange={hanldeChange} />
         <Box
           sx={{
             position: 'relative',

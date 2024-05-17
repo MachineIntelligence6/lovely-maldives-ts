@@ -1,4 +1,5 @@
 'use client'
+
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import {
@@ -129,7 +130,7 @@ const renderTabPanels = (value: any, theme: any, options: any, colors: any) => {
   })
 }
 
-const EarningReportCard = () => {
+function EarningReportCard() {
   const [value, setValue] = useState('Hotel Bookings')
   const [anchorEl, setAnchorEl] = useState(null)
   const [selectedOption, setSelectedOption] = useState('')
@@ -215,9 +216,9 @@ const EarningReportCard = () => {
       ],
       labels: {
         style: {
-          colors: '#4B465C', //theme.palette.text.disabled,
+          colors: '#4B465C', // theme.palette.text.disabled,
           fontFamily: 'Public Sans',
-          fontSize: '14px', //theme.typography.body2.fontSize
+          fontSize: '14px', // theme.typography.body2.fontSize
         },
       },
     },
@@ -229,9 +230,9 @@ const EarningReportCard = () => {
         formatter: (val: any) => `${val}k`,
         offsetX: -15,
         style: {
-          colors: '#4B465C', //theme.palette.text.disabled,
+          colors: '#4B465C', // theme.palette.text.disabled,
           //   fontFamily:  '', //theme.typography.fontFamily,
-          fontSize: '13px', //theme.typography.body2.fontSize
+          fontSize: '13px', // theme.typography.body2.fontSize
         },
       },
     },

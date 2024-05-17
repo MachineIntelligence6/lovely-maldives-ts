@@ -36,7 +36,7 @@ const rows = [
   },
 ]
 
-const LatestHotlBooking = (props: any) => {
+function LatestHotlBooking(props: any) {
   return (
     <CustomCard sx={{ p: '24px' }}>
       <CardContent sx={{ pb: 0, mb: '24px' }}>

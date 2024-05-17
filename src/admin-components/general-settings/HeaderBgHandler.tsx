@@ -1,9 +1,10 @@
 'use client'
+
 import { Box, Stack } from '@mui/system'
 import React, { useState } from 'react'
 import { CustomLabel } from '../styled/CustomLabels'
 
-const HeaderBgHandler = () => {
+function HeaderBgHandler() {
   const [selectedColor, setSelectedColor] = useState('#967f5d') // Default black color
 
   const handleColorChange = (e: any) => {

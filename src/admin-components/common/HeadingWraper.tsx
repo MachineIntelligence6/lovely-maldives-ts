@@ -2,7 +2,7 @@ import { Button, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import React from 'react'
 
-const HeadingWraper = (props: any) => {
+function HeadingWraper(props: any) {
   return (
     <Stack
       direction="row"

@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 
-const SectionTitle = ({ title }: any) => {
+function SectionTitle({ title }: any) {
   return (
     <Box sx={{ width: '100%', height: '40px', pt: '10px', pl: '16px' }}>
       <Typography

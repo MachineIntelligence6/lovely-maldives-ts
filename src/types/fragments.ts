@@ -1,1 +1,1 @@
-export type Fragment = any;
+export type Fragment = any

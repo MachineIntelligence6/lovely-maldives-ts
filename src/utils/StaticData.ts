@@ -1,3 +1,1 @@
-export const colorOptions = [
-    
-]
+export const colorOptions = []

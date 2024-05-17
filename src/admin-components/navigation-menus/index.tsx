@@ -1,4 +1,7 @@
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications'
+import AutoStoriesIcon from '@mui/icons-material/AutoStories'
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
+import HelpCenterIcon from '@mui/icons-material/HelpCenter'
 import GridViewIcon from '@mui/icons-material/GridView'
 
 const menuItems = [
@@ -30,7 +33,7 @@ const menuItems = [
   },
   {
     title: 'Pages',
-    icon: <SettingsApplicationsIcon sx={{ fontSize: '20px' }} />,
+    icon: <AutoStoriesIcon sx={{ fontSize: '20px' }} />,
     children: [
       {
         title: 'About Maldives',
@@ -52,7 +55,7 @@ const menuItems = [
   },
   {
     title: 'User Management',
-    icon: <SettingsApplicationsIcon sx={{ fontSize: '20px' }} />,
+    icon: <ManageAccountsIcon sx={{ fontSize: '20px' }} />,
     children: [
       {
         title: 'User Roles',
@@ -70,7 +73,7 @@ const menuItems = [
   },
   {
     title: 'Help & Support',
-    icon: <SettingsApplicationsIcon sx={{ fontSize: '20px' }} />,
+    icon: <HelpCenterIcon sx={{ fontSize: '20px' }} />,
     path: 'admin/help',
   },
 ]

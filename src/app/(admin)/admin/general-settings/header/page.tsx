@@ -1,15 +1,16 @@
 'use client'
+
 import React, { useState } from 'react'
+import { Box, Button, Stack, Typography } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
 import HeadingWraper from '@/admin-components/common/HeadingWraper'
 import HeaderBgHandler from '@/admin-components/general-settings/HeaderBgHandler'
 import MenuAddItem from '@/admin-components/general-settings/MenuAddItem'
 import LogoInputFile from '@/admin-components/items/CustomInputFile'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import { CustomLabel } from '@/admin-components/styled/CustomLabels'
-import { Box, Button, Stack, Typography } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
 
-const HeaderSettings = () => {
+function HeaderSettings() {
   const [menus, setMenus] = useState([
     {
       title: 'Home',

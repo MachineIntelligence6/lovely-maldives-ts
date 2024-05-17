@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client'
+
 import { Breadcrumbs, Link, Typography } from '@mui/material'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-const BreedCrumb = () => {
+function BreedCrumb() {
   const pathname = usePathname()
   const [links, setLinks] = useState({ title: '', paths: [] as any })
   const paths = pathname?.split('/')
@@ -11,7 +14,8 @@ const BreedCrumb = () => {
 
   useEffect(() => {
     const result = paths?.filter(
-      (path: any, index: number) => index !== 0 && index !== 1 && index !== paths?.length - 1
+      (path: any, index: number) =>
+        index !== 0 && index !== 1 && index !== paths.length - 1
     )
     setLinks({
       title: paths?.[paths.length - 1],
