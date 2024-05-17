@@ -11,7 +11,7 @@ const BreedCrumb = () => {
 
   useEffect(() => {
     const result = paths?.filter(
-      (path, index) => index !== 0 && index !== 1 && index !== paths?.length - 1
+      (path: any, index: number) => index !== 0 && index !== 1 && index !== paths?.length - 1
     )
     setLinks({
       title: paths?.[paths.length - 1],
