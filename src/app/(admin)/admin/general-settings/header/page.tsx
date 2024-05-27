@@ -50,7 +50,7 @@ function HeaderSettings() {
         <Stack
           direction="row"
           alignItems="start"
-          gap={{ xs: '1rem', md: '2rem' }}
+          gap={{ xs: '1rem', md: '3rem', lg: '4rem' }}
         >
           <LogoInputFile />
           <Box>

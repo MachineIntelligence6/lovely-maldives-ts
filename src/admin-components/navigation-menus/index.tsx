@@ -26,6 +26,10 @@ const menuItems = [
         path: 'admin/general-settings/footer',
       },
       {
+        title: 'Subscribe Letter',
+        path: 'admin/general-settings/subscribe-letter',
+      },
+      {
         title: 'Theme Configuration',
         path: 'admin/general-settings/theme-configuration',
       },
@@ -35,6 +39,10 @@ const menuItems = [
     title: 'Pages',
     icon: <AutoStoriesIcon sx={{ fontSize: '20px' }} />,
     children: [
+      {
+        title: 'Home',
+        path: 'admin/pages/home',
+      },
       {
         title: 'About Maldives',
         path: 'admin/pages/about-maldives',

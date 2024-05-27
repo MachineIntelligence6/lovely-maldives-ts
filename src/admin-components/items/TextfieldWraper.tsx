@@ -15,7 +15,10 @@ function TextFieldWraper(props: any) {
   const { type, value, name, onChange, label, placeholder } = props
   return (
     <Box sx={{ mb: '15px', width: '100%' }}>
-      <CustomLabel id="demo-simple-select-label" sx={{ mb: '7px' }}>
+      <CustomLabel
+        id="demo-simple-select-label"
+        sx={{ mb: '7px', fontFamily: 'Public Sans' }}
+      >
         {label}
       </CustomLabel>
       <TextField
@@ -32,6 +35,7 @@ function TextFieldWraper(props: any) {
         InputProps={{
           sx: {
             height: '38px !important',
+            fontFamily: 'Public Sans',
           },
         }}
         sx={{
