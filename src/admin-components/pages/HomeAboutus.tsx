@@ -79,8 +79,15 @@ const HomeAboutus = () => {
             onClick={handleShowModal}
           >
             <Stack direction="row" alignItems="center" gap="10px">
-              <AddIcon sx={{ color: 'white', fontSize: '20px' }} />
-              <Typography variant="body1" color="white">
+              <AddIcon sx={{ color: 'white', fontSize: '18px' }} />
+              <Typography
+                variant="body1"
+                color="white"
+                sx={{
+                  textTransform: 'capitalize',
+                  fontSize: '14px',
+                }}
+              >
                 Add Option
               </Typography>
             </Stack>

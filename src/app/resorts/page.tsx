@@ -15,6 +15,8 @@ const TopFiveLuxuryResorts = dynamic(
 const ResortsGallery = dynamic(() => import('@/components/ResortsGallery'))
 const Footer = dynamic(() => import('@/components/Footer'))
 
+export const datas = [{}, {}, {}, {}, {}]
+
 export default function ResortsPage() {
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
@@ -118,6 +120,8 @@ export default function ResortsPage() {
             iconShow="flex"
             radius="20px"
             bottomradius="0 0 20px  20px"
+            resorts={datas}
+            isAdminSide={false}
           />
         </Box>
         <ResortsGallery />

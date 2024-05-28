@@ -3,6 +3,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import HelpCenterIcon from '@mui/icons-material/HelpCenter'
 import GridViewIcon from '@mui/icons-material/GridView'
+import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark'
 
 const menuItems = [
   {
@@ -48,8 +49,8 @@ const menuItems = [
         path: 'admin/pages/about-maldives',
       },
       {
-        title: 'Hotels',
-        path: 'admin/pages/hotels',
+        title: 'Resorts',
+        path: 'admin/pages/resorts',
       },
       {
         title: 'About Us',
@@ -58,6 +59,20 @@ const menuItems = [
       {
         title: 'Blogs',
         path: 'admin/pages/blogs',
+      },
+    ],
+  },
+  {
+    title: 'Components',
+    icon: <BrandingWatermarkIcon sx={{ fontSize: '20px' }} />,
+    children: [
+      {
+        title: 'Add Hotels',
+        path: 'admin/components/add-hotels',
+      },
+      {
+        title: 'Add Blogs',
+        path: 'admin/components/add-blogs',
       },
     ],
   },
