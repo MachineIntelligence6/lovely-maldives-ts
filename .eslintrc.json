@@ -28,7 +28,10 @@
     "prettier/prettier": "off",
     // disable react/no-array-index-key
     "react/no-array-index-key": "off",
-    "lines-around-directive": ["error", { "before": "always", "after": "always" }],
+    "lines-around-directive": [
+      "error",
+      { "before": "always", "after": "always" }
+    ],
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "no-console": "off",
@@ -49,7 +52,7 @@
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    // "import/prefer-default-export": "off",
+    "import/prefer-default-export": "off",
     "react/prop-types": "off",
     // "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "@typescript-eslint/explicit-function-return-type": "off",
