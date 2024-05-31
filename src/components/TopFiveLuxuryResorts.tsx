@@ -37,6 +37,7 @@ export default function TopFiveLuxuryResorts(props: any) {
     isAdminSide,
     title,
     handleChange,
+    handleShowModal,
   } = props
 
   const settings = {
@@ -100,12 +101,13 @@ export default function TopFiveLuxuryResorts(props: any) {
                 mt: 1,
                 textTransform: 'capitalize',
               }}
-              // onClick={handleShowModal}
+              onClick={handleShowModal}
+              disabled={resorts?.length >= 5}
             >
               <Stack direction="row" alignItems="center" gap="10px">
                 <AddIcon sx={{ color: 'var(--brown)', fontSize: '22px' }} />
                 <Typography variant="body1" color="var(--brown)">
-                  Add Section
+                  Add Hotel
                 </Typography>
               </Stack>
             </Button>
@@ -203,7 +205,7 @@ export default function TopFiveLuxuryResorts(props: any) {
                   }}
                 >
                   <Typography sx={{ fontSize: '20px' }}>
-                    One n Only Reethi Rah{' '}
+                    {data?.title ? data?.title : 'One n Only Reethi Rah'}{' '}
                   </Typography>
                   <BoltIcon sx={{ display: `${iconShow}` }} />
                 </Box>

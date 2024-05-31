@@ -71,8 +71,8 @@ const menuItems = [
         path: 'admin/components/add-hotels',
       },
       {
-        title: 'Add Blogs',
-        path: 'admin/components/add-blogs',
+        title: 'Resorts Filters',
+        path: 'admin/components/resorts-filters',
       },
     ],
   },

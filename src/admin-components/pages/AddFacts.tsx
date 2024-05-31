@@ -11,9 +11,9 @@ import {
   Typography,
 } from '@mui/material'
 import React, { useState } from 'react'
+import { ModeOfTravel } from '@mui/icons-material'
 import AddIcon from '@mui/icons-material/Add'
 import FactsModel from './modals/FactsModel'
-import { ModeOfTravel } from '@mui/icons-material'
 
 const AddFacts = (props: any) => {
   const { handleAddFacts, facts } = props
@@ -45,51 +45,42 @@ const AddFacts = (props: any) => {
         </Stack>
       </Button>
 
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 1,
-          width: '100%',
-        }}
-      >
-        <Grid container spacing={2} sx={{ width: '100%', mt: 2 }}>
-          {facts?.length > 0 &&
-            facts?.map((fact: any, index: number) => (
-              <Grid key={index} item xs={12} sm={6}>
-                <ListItem
-                  sx={{
-                    p: 0,
-                    display: 'flex',
-                    alignItems: 'start',
-                  }}
-                >
-                  <ListItemIcon sx={{ minWidth: '30px', mt: 1.2 }}>
-                    <ModeOfTravel />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={
-                      <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
-                        {fact?.title}
+      <Grid container spacing={2} sx={{ width: '100%', mt: 2 }}>
+        {facts?.length > 0 &&
+          facts?.map((fact: any, index: number) => (
+            <Grid key={index} item xs={12} sm={6}>
+              <ListItem
+                sx={{
+                  p: 0,
+                  display: 'flex',
+                  alignItems: 'start',
+                }}
+              >
+                <ListItemIcon sx={{ minWidth: '30px', mt: 1.2 }}>
+                  <ModeOfTravel />
+                </ListItemIcon>
+                <ListItemText
+                  primary={
+                    <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
+                      {fact?.title}
+                    </Typography>
+                  }
+                  secondary={fact?.subTags?.map(
+                    (subTag: string, ind: number) => (
+                      <Typography
+                        key={ind}
+                        variant="body2"
+                        color="var(--brown)"
+                      >
+                        {subTag}
                       </Typography>
-                    }
-                    secondary={fact?.subTags?.map(
-                      (subTag: string, ind: number) => (
-                        <Typography
-                          key={ind}
-                          variant="body2"
-                          color="var(--brown)"
-                        >
-                          {subTag}
-                        </Typography>
-                      )
-                    )}
-                  />
-                </ListItem>
-              </Grid>
-            ))}
-        </Grid>
-      </Box>
+                    )
+                  )}
+                />
+              </ListItem>
+            </Grid>
+          ))}
+      </Grid>
     </Box>
   )
 }

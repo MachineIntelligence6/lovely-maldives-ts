@@ -6,9 +6,12 @@
 import { Box, Button, Stack, Typography } from '@mui/material'
 import dynamic from 'next/dynamic'
 import AddIcon from '@mui/icons-material/Add'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TopFiveLuxuryResorts from '@/components/TopFiveLuxuryResorts'
+import { hotels } from '@/utils/StaticData'
 import AddSectionType from './modals/AddSectionType'
+import SelectHotel from './modals/SelectHotel'
+import ResortsGallery from './ResortsGallery'
 
 const ReactQuillEditor = dynamic(
   () => import('@/admin-components/common/ReactQuillEditor'),
@@ -23,12 +26,27 @@ const typeOptions = [
 
 const ResortSections = () => {
   const [showModal, setShowModal] = useState(false)
+  const [showHotelModal, setShowHotelModal] = useState(false)
   const [sections, setSections] = useState([] as any)
+  const [options, setOptions] = useState([])
 
   const handleShowModal = () => setShowModal(!showModal)
+  const handleShowHotelModal = () => setShowHotelModal(!showHotelModal)
 
   const handleAddType = (type: string) => {
     setSections([...sections, { type }])
+  }
+
+  const handleAddHotel = (index: number, id: string) => {
+    const updatedSections = sections.map((sec: any, ind: number) => {
+      if (ind === index) {
+        const ids = sec.ids ? [...sec.ids, id] : [id]
+        const filteredData = hotels.filter((item) => ids.includes(item.id))
+        return { ...sec, hotels: filteredData, ids }
+      }
+      return sec
+    })
+    setSections(updatedSections)
   }
 
   const handleRemoveSection = (index: number) => {
@@ -39,7 +57,6 @@ const ResortSections = () => {
 
   const handleChange = (e: any, index: number) => {
     const { value } = e.target
-    console.log('value is ', value)
     const updatedSections = sections.map((sec: any, ind: number) => {
       if (ind === index) {
         return { ...sec, title: value }
@@ -48,6 +65,16 @@ const ResortSections = () => {
     })
     setSections(updatedSections)
   }
+
+  useEffect(() => {
+    const ops = [] as any
+    hotels?.map((hotel: any) =>
+      ops.push({ label: hotel.title, value: hotel.id })
+    )
+    setOptions(ops)
+  }, [])
+
+  console.log('sections ', sections)
 
   return (
     <Box>
@@ -96,6 +123,12 @@ const ResortSections = () => {
                 key={index}
                 sx={{ mt: 3, pb: 5, borderBottom: '1px solid var(--black)' }}
               >
+                <SelectHotel
+                  open={showHotelModal}
+                  handleShowModal={handleShowHotelModal}
+                  handleAddHotel={(id: any) => handleAddHotel(index, id)}
+                  options={options}
+                />
                 <Stack
                   direction="row"
                   alignItems="center"
@@ -117,6 +150,14 @@ const ResortSections = () => {
                     Remove
                   </Button>
                 </Stack>
+                <Box>
+                  <ResortsGallery
+                    hotels={section?.hotels}
+                    handleChange={(e: any) => handleChange(e, index)}
+                    title={section?.title}
+                    handleShowModal={handleShowHotelModal}
+                  />
+                </Box>
               </Box>
             )
           }
@@ -125,6 +166,12 @@ const ResortSections = () => {
               key={index}
               sx={{ mt: 3, pb: 5, borderBottom: '1px solid var(--black)' }}
             >
+              <SelectHotel
+                open={showHotelModal}
+                handleShowModal={handleShowHotelModal}
+                handleAddHotel={(id: any) => handleAddHotel(index, id)}
+                options={options}
+              />
               <Stack
                 direction="row"
                 alignItems="center"
@@ -148,15 +195,16 @@ const ResortSections = () => {
               </Stack>
               <Box>
                 <TopFiveLuxuryResorts
-                  heading="TOP FIVE LUXURY RESORTS"
+                  heading={section?.title}
                   button="none"
                   iconShow="flex"
                   radius="20px"
                   bottomradius="0 0 20px  20px"
-                  resorts={section?.resorts}
+                  resorts={section?.hotels}
                   isAdminSide={true}
                   handleChange={(e: any) => handleChange(e, index)}
                   title={section?.title}
+                  handleShowModal={handleShowHotelModal}
                 />
               </Box>
             </Box>
