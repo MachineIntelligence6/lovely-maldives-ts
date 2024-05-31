@@ -32,7 +32,7 @@ const ResortSections = () => {
   }
 
   const handleRemoveSection = (index: number) => {
-    const sure = window.confirm('Are you sure you want to remove')
+    const sure = window.confirm('Are you sure you want to remove?')
     if (!sure) return
     setSections(sections.filter((_: any, i: number) => i !== index))
   }

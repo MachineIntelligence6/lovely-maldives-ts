@@ -5,10 +5,14 @@
 import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import AddIcon from '@mui/icons-material/Add'
-import { Box, Button, Stack, Typography } from '@mui/material'
+import { Box, Button, Rating, Stack, Typography } from '@mui/material'
 import HeadingWraper from '@/admin-components/common/HeadingWraper'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import AddSectionType from '@/admin-components/pages/modals/AddSectionType'
+import AddBtnsWraper from '@/admin-components/common/AddBtnsWraper'
+import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
+import ImagesUploader from '@/admin-components/common/ImagesUploader'
+import AddFacts from '@/admin-components/pages/AddFacts'
 
 const ReactQuillEditor = dynamic(
   () => import('@/admin-components/common/ReactQuillEditor'),
@@ -16,11 +20,11 @@ const ReactQuillEditor = dynamic(
 )
 
 const typeOptions = [
-    {label: "Title", type: "title"},
-    {label: "Ratings", type: "rating"},
-    {label: "Description", type: "description"},
-    {label: "Slider Images", type: "slider_images"},
-    {label: "Facts", type: "facts"},
+  { label: 'Title', value: 'title' },
+  { label: 'Ratings', value: 'ratings' },
+  { label: 'Description', value: 'description' },
+  { label: 'Slider Images', value: 'gallery_slider' },
+  { label: 'Facts', value: 'facts' },
 ]
 
 const AddHotels = () => {
@@ -29,27 +33,103 @@ const AddHotels = () => {
 
   const handleShowModal = () => setShowModal(!showModal)
 
+  // ADD SECTION TYPE (e.g. TEXT, TITLE, etc)
   const handleAddType = (type: string) => {
-    setSections([...sections, { type }])
+    console.log('type is ', type)
+    if (type === 'ratings') {
+      setSections([...sections, { type, ratings: '1' }])
+    } else {
+      setSections([...sections, { type }])
+    }
   }
 
+  // REMOVE SECTION
   const handleRemoveSection = (index: number) => {
-    const sure = window.confirm('Are you sure you want to remove')
+    const sure = window.confirm('Are you sure you want to remove?')
     if (!sure) return
     setSections(sections.filter((_: any, i: number) => i !== index))
   }
 
-  const handleChange = (e: any, index: number) => {
-    const { value } = e.target
-    console.log('value is ', value)
+  // const handleChange = (e: any, index: number) => {
+  //   const { value } = e.target
+  //   console.log('value is ', value)
+  //   const updatedSections = sections.map((sec: any, ind: number) => {
+  //     if (ind === index) {
+  //       return { ...sec, title: value }
+  //     }
+  //     return sec
+  //   })
+  //   setSections(updatedSections)
+  // }
+
+  // ADD RATINGS IN HOTEL
+  const handleRatingChange = (e: any, index: number) => {
     const updatedSections = sections.map((sec: any, ind: number) => {
       if (ind === index) {
-        return { ...sec, title: value }
+        return { ...sec, ratings: e.target.value }
       }
       return sec
     })
     setSections(updatedSections)
   }
+
+  // ADD TITLE TO HOTEL
+  const handleChangeTitle = (e: any, index: number) => {
+    const updatedSections = sections.map((sec: any, ind: number) => {
+      if (ind === index) {
+        return { ...sec, title: e.target.value }
+      }
+      return sec
+    })
+    setSections(updatedSections)
+  }
+
+  // ADD GALLERY SLIDER IMAGES IN HOTEL
+  const handleChangeFiles = (e: any, label: number) => {
+    const file = e.target.files[0]
+    const updatedSections = sections.map((sec: any, ind: number) => {
+      if (ind === label) {
+        return {
+          ...sec,
+          images: sec.images ? [...sec.images, file] : [file],
+        }
+      }
+      return sec
+    })
+    setSections(updatedSections)
+  }
+
+  // DELETE A FILE
+  const handleDeleteFile = (index: number, subIndex: number) => {
+    const updatedSections = sections.map((sec: any, ind: number) => {
+      if (ind === index) {
+        return {
+          ...sec,
+          images: sec.images.filter((_: any, i: number) => i !== subIndex),
+        }
+      }
+      return sec
+    })
+    setSections(updatedSections)
+  }
+
+  // ADD FACTS IN HOTEL
+  const handleAddFacts = (fact: any, index: number) => {
+    console.log('fact ', fact)
+    const updatedSections = sections.map((sec: any, ind: number) => {
+      if (ind === index) {
+        return {
+          ...sec,
+          facts: sec.facts ? [...sec.facts, fact] : [fact],
+        }
+      }
+      return sec
+    })
+    setSections(updatedSections)
+  }
+
+  console.log('sections ', sections)
+
   return (
     <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
       <HeadingWraper title="Add Hotels" />
@@ -63,7 +143,7 @@ const AddHotels = () => {
         <Box>
           <Box sx={{ my: 2 }}>
             {sections.map((section: any, index: number) => {
-              if (section?.type === 'text') {
+              if (section?.type === 'title') {
                 return (
                   <Box
                     key={index}
@@ -73,32 +153,48 @@ const AddHotels = () => {
                       borderBottom: '1px solid var(--black)',
                     }}
                   >
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      justifyContent="space-between"
-                      sx={{ mb: 1 }}
-                    >
-                      <Typography
-                        variant="h3"
-                        color="var(--black)"
-                        sx={{ fontSize: '22px', mb: 2, fontWeight: 'bold' }}
-                      >
-                        Add Text
-                      </Typography>
-                      <Button
-                        variant="outlined"
-                        color="error"
-                        onClick={() => handleRemoveSection(index)}
-                      >
-                        Remove
-                      </Button>
-                    </Stack>
-                    <ReactQuillEditor height={400} />
+                    <AddBtnsWraper
+                      handleRemoveSection={handleRemoveSection}
+                      index={index}
+                      title="Add Title"
+                    />
+                    <TextFieldWraper
+                      label="Title"
+                      placeholder="Enter title."
+                      value={section?.title}
+                      name="title"
+                      onChange={(e: any) => handleChangeTitle(e, index)}
+                    />
                   </Box>
                 )
               }
-              if (section?.type === 'images_gallery') {
+              if (section?.type === 'ratings') {
+                return (
+                  <Box
+                    key={index}
+                    sx={{
+                      mt: 3,
+                      pb: 8,
+                      borderBottom: '1px solid var(--black)',
+                    }}
+                  >
+                    <AddBtnsWraper
+                      handleRemoveSection={handleRemoveSection}
+                      index={index}
+                      title="Add Ratings"
+                    />
+                    <Rating
+                      name="size-medium"
+                      defaultValue={1}
+                      precision={0.5}
+                      value={section?.rating}
+                      sx={{ display: 'flex', m: 0, mb: 2, mt: 2 }}
+                      onChange={(e: any) => handleRatingChange(e, index)}
+                    />
+                  </Box>
+                )
+              }
+              if (section?.type === 'gallery_slider') {
                 return (
                   <Box
                     key={index}
@@ -108,56 +204,56 @@ const AddHotels = () => {
                       borderBottom: '1px solid var(--black)',
                     }}
                   >
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      justifyContent="space-between"
-                      sx={{ mb: 1 }}
-                    >
-                      <Typography
-                        variant="h3"
-                        color="var(--black)"
-                        sx={{ fontSize: '22px', mb: 2, fontWeight: 'bold' }}
-                      >
-                        Images Gallery
-                      </Typography>
-                      <Button
-                        variant="outlined"
-                        color="error"
-                        onClick={() => handleRemoveSection(index)}
-                      >
-                        Remove
-                      </Button>
-                    </Stack>
+                    <AddBtnsWraper
+                      handleRemoveSection={handleRemoveSection}
+                      index={index}
+                      title="Images Gallery"
+                    />
+
+                    <ImagesUploader
+                      files={section?.images}
+                      label={index}
+                      handleChange={handleChangeFiles}
+                      handleDeleteFile={handleDeleteFile}
+                    />
+                  </Box>
+                )
+              }
+              if (section?.type === 'facts') {
+                return (
+                  <Box
+                    key={index}
+                    sx={{
+                      mt: 3,
+                      pb: 5,
+                      borderBottom: '1px solid var(--black)',
+                    }}
+                  >
+                    <AddBtnsWraper
+                      handleRemoveSection={handleRemoveSection}
+                      index={index}
+                      title="Add Facts"
+                    />
+                    <AddFacts
+                      handleAddFacts={(facts: any) =>
+                        handleAddFacts(facts, index)
+                      }
+                      facts={section?.facts}
+                    />
                   </Box>
                 )
               }
               return (
                 <Box
                   key={index}
-                  sx={{ mt: 3, pb: 5, borderBottom: '1px solid var(--black)' }}
+                  sx={{ mt: 3, pb: 8, borderBottom: '1px solid var(--black)' }}
                 >
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    sx={{ mb: 1 }}
-                  >
-                    <Typography
-                      variant="h3"
-                      color="var(--black)"
-                      sx={{ fontSize: '22px', mb: 2, fontWeight: 'bold' }}
-                    >
-                      Images Slider
-                    </Typography>
-                    <Button
-                      variant="outlined"
-                      color="error"
-                      onClick={() => handleRemoveSection(index)}
-                    >
-                      Remove
-                    </Button>
-                  </Stack>
+                  <AddBtnsWraper
+                    handleRemoveSection={handleRemoveSection}
+                    index={index}
+                    title="Add Description"
+                  />
+                  <ReactQuillEditor height="400px" />
                 </Box>
               )
             })}

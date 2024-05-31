@@ -15,10 +15,8 @@ const HomeBgUploader = () => {
   const handleChange = (e: any, label: string) => {
     const file = e.target.files[0]
     if (label === 'Desktop') {
-      console.log('Desktpops')
       setFiles([...files, file])
     } else {
-      console.log('mobile ')
       setMobileFiles([...mobileFiles, file])
     }
   }

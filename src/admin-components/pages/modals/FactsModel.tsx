@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+'use client'
+
 import styled from '@emotion/styled'
+import React, { ChangeEvent, useState } from 'react'
 import {
   Box,
   Typography,
@@ -8,7 +10,16 @@ import {
   Stack,
   InputLabel,
 } from '@mui/material'
+import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import CustomSelect from '@/admin-components/items/CustomSelect'
+import TagsField from '@/admin-components/items/TagsField'
+
+const CustomLabel = styled(InputLabel)(({ theme }) => ({
+  fontSize: '16px',
+  fontFeatureSettings: "'clig' off, 'liga' off",
+  fontWeight: 400,
+  color: '#4B465C',
+}))
 
 const style = {
   position: 'absolute',
@@ -24,21 +35,35 @@ const style = {
   px: '18px',
 }
 
-const CustomLabel = styled(InputLabel)(({ theme }) => ({
-  fontSize: '16px',
-  fontFeatureSettings: "'clig' off, 'liga' off",
-  fontWeight: 400,
-  color: '#4B465C',
-}))
-
-const AddSectionType = (props: any) => {
-  const { open, handleShowModal, handleAddType, options } = props
-  const [type, setType] = useState('')
+const FactsModel = (props: any) => {
+  const { open, handleShowModal, handleAddFacts } = props
+  const [values, setValues] = useState({
+    title: '',
+    subTags: [],
+    stars: 1,
+  } as any)
+  const [icon, setIcon] = useState<File | undefined>()
 
   const handleChange = (e: any) => {
-    const { value } = e.target
-    console.log('value is ', value)
-    setType(value)
+    const { value, name } = e.target
+    setValues({
+      ...values,
+      [name]: value,
+    })
+  }
+
+  const handleChangeTags = (tag: any) => {
+    setValues({
+      ...values,
+      subTags: [...values.subTags, tag],
+    })
+  }
+
+  const removeTag = (ind: number) => {
+    setValues({
+      ...values,
+      subTags: values.subTags.filter((_: any, i: number) => i !== ind),
+    })
   }
 
   return (
@@ -62,21 +87,24 @@ const AddSectionType = (props: any) => {
               mb: 3,
             }}
           >
-            Add Section Type
+            Add Collection
           </Typography>
 
-          <CustomLabel
-            id="demo-simple-select-label"
-            sx={{ mb: '7px', fontFamily: 'Public Sans' }}
-          >
-            Section Type
-          </CustomLabel>
-          <CustomSelect
-            placeholder="Select Stars."
-            value={type}
-            options={options}
-            name="type"
+          <TextFieldWraper
+            label="Title"
+            placeholder="Enter Title."
+            value={values?.title}
+            name="title"
             onChange={(e: any) => handleChange(e)}
+          />
+
+          <TagsField
+            label="Tags"
+            placeholder="Enter Tags."
+            tags={values?.subTags}
+            name="subTags"
+            handleChangeTags={handleChangeTags}
+            removeTag={removeTag}
           />
 
           <Stack
@@ -106,13 +134,13 @@ const AddSectionType = (props: any) => {
                 fontFamily: 'Public Sans',
               }}
               onClick={() => {
-                if (!type) return
-                handleAddType(type)
-                setType('')
+                if (!values?.title) return
+                handleAddFacts(values)
+                setValues({ title: '', stars: 0, subTags: [] })
                 handleShowModal()
               }}
             >
-              Add
+              ADD
             </Button>
           </Stack>
         </Box>
@@ -121,4 +149,4 @@ const AddSectionType = (props: any) => {
   )
 }
 
-export default AddSectionType
+export default FactsModel
