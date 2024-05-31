@@ -8,7 +8,7 @@ import { useState } from 'react'
 import TextFieldWraper from '../items/TextfieldWraper'
 
 function MenuAddItem(props: any) {
-  const { handleDelete, handleChange, index } = props
+  const { handleMenuItemDelete, handleChange, index, subIndex } = props
   const [active, setActive] = useState(false)
 
   const handleActive = () => {
@@ -46,7 +46,7 @@ function MenuAddItem(props: any) {
         </Stack>
         <DeleteIcon
           sx={{ fontSize: '18px', color: 'var(--red)', cursor: 'pointer' }}
-          onClick={() => handleDelete(index)}
+          onClick={() => handleMenuItemDelete(index, subIndex)}
         />
       </Stack>
       <Stack
@@ -64,14 +64,14 @@ function MenuAddItem(props: any) {
           placeholder="Enter Menu Name."
           value={props?.menu?.title}
           name="title"
-          onChange={(e: any) => handleChange(index, 'title', e)}
+          onChange={(e: any) => handleChange(index, subIndex, 'title', e)}
         />
         <TextFieldWraper
           label="Menu Link"
           placeholder="Enter Menu Link."
           value={props?.menu?.link}
           name="link"
-          onChange={(e: any) => handleChange(index, 'link', e)}
+          onChange={(e: any) => handleChange(index, subIndex, 'link', e)}
         />
       </Stack>
     </Box>

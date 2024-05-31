@@ -3,36 +3,42 @@
 
 'use client'
 
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import Container from '@mui/material/Container'
-
+import { Box, Typography, Button, Container, Stack } from '@mui/material'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
+import AddIcon from '@mui/icons-material/Add'
 import BoltIcon from '@mui/icons-material/Bolt'
+import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import collectionImg from '../../public/Images/collectionImg.jpg'
 
-export const datas = [{}, {}, {}, {}, {}]
+// interface ITopFiveLuxuryResortsProps {
+//   heading: string
+//   button: string
+//   iconShow: string
+//   radius: string
+//   bottomradius: string
+//   resorts: any,
+//   isAdminSide: boolean,
+//   title: string,
+//   handleChange: any
+// }
+export default function TopFiveLuxuryResorts(props: any) {
+  const {
+    heading,
+    button,
+    iconShow,
+    radius,
+    bottomradius,
+    resorts,
+    isAdminSide,
+    title,
+    handleChange,
+  } = props
 
-interface ITopFiveLuxuryResortsProps {
-  heading: string
-  button: string
-  iconShow: string
-  radius: string
-  bottomradius: string
-}
-export default function TopFiveLuxuryResorts({
-  heading,
-  button,
-  iconShow,
-  radius,
-  bottomradius,
-}: ITopFiveLuxuryResortsProps) {
   const settings = {
     // className: 'center',
     // centerPadding: '60px',
@@ -77,19 +83,49 @@ export default function TopFiveLuxuryResorts({
   }
   return (
     <Container sx={{ maxWidth: '100% !important', px: '0px !important' }}>
-      <Typography
-        variant="h2"
-        sx={{
-          color: 'var(--white)',
-          textAlign: 'center',
-          fontSize: { xs: '22px', md: '30px' },
-          fontWeight: 400,
-          mt: { xs: '60px', md: '120px' },
-          textTransform: 'uppercase',
-        }}
-      >
-        {heading}
-      </Typography>
+      {isAdminSide ? (
+        <>
+          <TextFieldWraper
+            label="Title"
+            placeholder="Enter Title."
+            value={title}
+            name="title"
+            onChange={handleChange}
+          />
+          <Stack direction="row" justifyContent="end">
+            <Button
+              variant="outlined"
+              sx={{
+                border: '1px solid var(--brown)',
+                mt: 1,
+                textTransform: 'capitalize',
+              }}
+              // onClick={handleShowModal}
+            >
+              <Stack direction="row" alignItems="center" gap="10px">
+                <AddIcon sx={{ color: 'var(--brown)', fontSize: '22px' }} />
+                <Typography variant="body1" color="var(--brown)">
+                  Add Section
+                </Typography>
+              </Stack>
+            </Button>
+          </Stack>
+        </>
+      ) : (
+        <Typography
+          variant="h2"
+          sx={{
+            color: 'var(--white)',
+            textAlign: 'center',
+            fontSize: { xs: '22px', md: '30px' },
+            fontWeight: 400,
+            mt: { xs: '60px', md: '120px' },
+            textTransform: 'uppercase',
+          }}
+        >
+          {heading}
+        </Typography>
+      )}
 
       <Box
         sx={{
@@ -99,7 +135,7 @@ export default function TopFiveLuxuryResorts({
         }}
       >
         <Slider {...settings}>
-          {datas.map((data, index) => (
+          {resorts?.map((data: any, index: number) => (
             <Box
               sx={{
                 position: 'relative',

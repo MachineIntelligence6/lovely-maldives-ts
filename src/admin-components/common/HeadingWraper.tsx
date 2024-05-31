@@ -3,6 +3,7 @@ import { Stack } from '@mui/system'
 import React from 'react'
 
 function HeadingWraper(props: any) {
+  const { handleSave } = props
   return (
     <Stack
       direction="row"
@@ -23,10 +24,13 @@ function HeadingWraper(props: any) {
           color: 'white',
           width: '120px',
           height: '36px',
+          textTransform: 'capitalize',
+          fonsSize: '14px',
           '&:hover': {
             bgcolor: 'var(--blue)',
           },
         }}
+        onClick={handleSave}
       >
         Save
       </Button>
