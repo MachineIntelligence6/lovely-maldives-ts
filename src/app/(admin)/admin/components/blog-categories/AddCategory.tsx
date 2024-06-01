@@ -1,14 +1,8 @@
-import React, { useState } from 'react'
-import styled from '@emotion/styled'
-import {
-  Box,
-  Typography,
-  Modal,
-  Button,
-  Stack,
-  InputLabel,
-} from '@mui/material'
-import CustomSelect from '@/admin-components/items/CustomSelect'
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import { Box, Typography, Modal, Button, Stack } from '@mui/material'
+import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 
 const style = {
   position: 'absolute',
@@ -24,23 +18,21 @@ const style = {
   px: '18px',
 }
 
-const CustomLabel = styled(InputLabel)(({ theme }) => ({
-  fontSize: '16px',
-  fontFeatureSettings: "'clig' off, 'liga' off",
-  fontWeight: 400,
-  color: '#4B465C',
-}))
-
-const AddSectionType = (props: any) => {
-  const { open, handleShowModal, handleAddType, options } = props
-  const [type, setType] = useState('')
+const AddCategory = (props: any) => {
+  const { open, handleShowModal, handleAddCategory, edit, handleEditCategory } =
+    props
+  const [category, setCategory] = useState('')
 
   const handleChange = (e: any) => {
     const { value } = e.target
-    console.log('value is ', value)
-    setType(value)
+    setCategory(value)
   }
 
+  useEffect(() => {
+    if (edit) {
+      setCategory(edit?.category)
+    }
+  }, [edit])
   return (
     <div>
       <Modal
@@ -62,20 +54,14 @@ const AddSectionType = (props: any) => {
               mb: 3,
             }}
           >
-            Add Section Type
+            {edit ? 'Update' : 'Add'} Category
           </Typography>
 
-          <CustomLabel
-            id="demo-simple-select-label"
-            sx={{ mb: '7px', fontFamily: 'Public Sans' }}
-          >
-            Section Type
-          </CustomLabel>
-          <CustomSelect
-            placeholder="Select section type."
-            value={type}
-            options={options}
-            name="type"
+          <TextFieldWraper
+            label="Blog Category"
+            placeholder="Enter blog category."
+            value={category}
+            name="category"
             onChange={(e: any) => handleChange(e)}
           />
 
@@ -106,13 +92,17 @@ const AddSectionType = (props: any) => {
                 fontFamily: 'Public Sans',
               }}
               onClick={() => {
-                if (!type) return
-                handleAddType(type)
-                setType('')
+                if (!category) return
+                if (edit) {
+                  handleEditCategory(category, edit?.index)
+                } else {
+                  handleAddCategory(category)
+                }
+                setCategory('')
                 handleShowModal()
               }}
             >
-              Add
+              {edit ? 'Update' : 'Add'}
             </Button>
           </Stack>
         </Box>
@@ -121,4 +111,4 @@ const AddSectionType = (props: any) => {
   )
 }
 
-export default AddSectionType
+export default AddCategory

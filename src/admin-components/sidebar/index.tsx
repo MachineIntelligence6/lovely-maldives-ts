@@ -94,8 +94,6 @@ function Sidebar() {
     }
   }
 
-  console.log('active menu ', openMenus.mainActive)
-
   const renderSubMenuItems = (
     submenus: any,
     depth: any,

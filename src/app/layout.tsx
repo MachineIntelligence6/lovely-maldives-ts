@@ -26,7 +26,7 @@ export default function RootLayout({
 }>): ReactNode {
   return (
     <html lang="en">
-      <body className={centuryGothic.className}>
+      <body suppressHydrationWarning className={centuryGothic.className}>
         <Provider>{children}</Provider>
       </body>
     </html>

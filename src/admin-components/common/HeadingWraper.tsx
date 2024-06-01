@@ -14,7 +14,7 @@ function HeadingWraper(props: any) {
       <Typography
         variant="body1"
         color="var(--black)"
-        sx={{ fontSize: '18px', fontWeight: 'bold', mb: 3 }}
+        sx={{ fontSize: '18px', fontWeight: 'bold' }}
       >
         {props?.title}
       </Typography>
