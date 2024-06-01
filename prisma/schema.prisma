@@ -24,11 +24,6 @@ type Columns {
   menus   Menus[]
 }
 
-// type Sections {
-
-// }
-
-
 
 
 // ADMIN USER MODEL
