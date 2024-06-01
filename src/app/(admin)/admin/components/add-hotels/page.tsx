@@ -128,8 +128,6 @@ const AddHotels = () => {
     setSections(updatedSections)
   }
 
-  console.log('sections ', sections)
-
   return (
     <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
       <HeadingWraper title="Add Hotels" />

@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// TYPES
+type Menus {
+  menu   String
+  link   String
+}
+
+type Columns {
+  title   String
+  menus   Menus[]
+}
+
+// type Sections {
+
+// }
+
+
+
+
+// ADMIN USER MODEL
+model User {
+  id       String  @id @map("_id")
+  name     String
+  email     String @unique
+  role     String
+  isAdmin  Boolean
+  password String
+}
+
+
+// HEADER SECTION MODEL
+model Header {
+    id     String  @id @map("_id")
+    title  String
+    logo   String
+    width  String
+    height String
+    menus  Menus[]
+}
+
+// FOOTER SECTION MODEL
+model Footer {
+    id      String  @id @map("_id")
+    title   String
+    columns Columns[]
+}
+
+// ABOUT MALDVES SECTION MODEL
+model AboutMaldives {
+    id          String  @id @map("_id")
+    title       String
+    description String
+}
+
+// ABOUT US SECTION MODEL
+model AboutUs {
+    id          String  @id @map("_id")
+    title       String
+    description String
+}
+
+// ADD HOTEL MODEL
+// model Hotels {
+//     id          String  @id @map("_id")
+//     title       String
+//     ratings     String
+//     sections    Sections[]
+// }
+
+// RESORT FILTERS MODEL
+model ResortFilters {
+    id          String  @id @map("_id")
+    type        String
+    filter      String
+}
+
+// ADD BLOG MODEL
+model Blogs {
+    id           String  @id @map("_id")
+    title        String
+    descriptions String
+}
+
+// BLOG CATEGORIES MODEL
+model BlogCategories {
+    id          String  @id @map("_id")
+    category    String
+}

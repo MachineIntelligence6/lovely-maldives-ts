@@ -10,7 +10,6 @@ function BreedCrumb() {
   const pathname = usePathname()
   const [links, setLinks] = useState({ title: '', paths: [] as any })
   const paths = pathname?.split('/')
-  console.log('pathname', paths)
 
   useEffect(() => {
     const result = paths?.filter(
@@ -23,7 +22,6 @@ function BreedCrumb() {
     })
   }, [pathname])
 
-  console.log('links are ', links)
   return (
     <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 1 }}>
       {links?.paths?.map((link: any, index: number) => (

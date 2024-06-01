@@ -10,12 +10,11 @@ import ImageResize from 'quill-image-resize-module-react'
 
 Quill.register('modules/imageResize', ImageResize)
 
-const customColors = ['#FF0000', '#00FF00', '#0000FF']
-
 const ReactQuillEditor = (props: any) => {
-  const { height } = props
+  const { height, handleEditorValue, value } = props
   const quillRef = useRef(null)
-  const [value, setValue] = useState('')
+  // const [value, setValue] = useState('')
+  // console.log('value: ', value)
 
   const modules = {
     toolbar: [
@@ -74,14 +73,6 @@ const ReactQuillEditor = (props: any) => {
 
   useEffect(() => {
     const quill = (quillRef.current as unknown as ReactQuill)?.getEditor()
-
-    const toolbarOptions = [
-      [{ header: [1, 2, false] }],
-      ['bold', 'italic', 'underline'],
-      ['image', 'code-block'],
-      [{ color: ['#F00', '#0F0', '#00F', '#000', '#FFF', 'color-picker'] }],
-    ]
-
     const toolbar = quill?.getModule('toolbar')
 
     const showColorPicker = (val: any) => {
@@ -107,10 +98,6 @@ const ReactQuillEditor = (props: any) => {
     }
 
     toolbar.addHandler('color', showColorPicker)
-
-    // return () => {
-    //   toolbar.removeHandler('color', showColorPicker)
-    // }
   }, [])
 
   return (
@@ -118,7 +105,11 @@ const ReactQuillEditor = (props: any) => {
       theme="snow"
       ref={quillRef}
       value={value}
-      onChange={setValue}
+      onChange={(val) => {
+        console.log('val ->>>', val)
+        // setValue(val)
+        handleEditorValue(val)
+      }}
       style={{ height: height || '250px' }}
       modules={modules}
       formats={formats}

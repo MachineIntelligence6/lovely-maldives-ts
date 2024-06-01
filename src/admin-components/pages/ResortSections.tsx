@@ -74,8 +74,6 @@ const ResortSections = () => {
     setOptions(ops)
   }, [])
 
-  console.log('sections ', sections)
-
   return (
     <Box>
       <AddSectionType

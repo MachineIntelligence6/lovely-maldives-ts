@@ -22,26 +22,26 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export async function generateMetadata(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // read route params
-  const { slug } = params
+// export async function generateMetadata(
+//   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+//   { params, searchParams }: Props,
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   // read route params
+//   const { slug } = params
 
-  const blogPost = (await axiosInstance.get(`/blogs/${slug}`)).data
+//   const blogPost = (await axiosInstance.get(`/blogs/${slug}`)).data
 
-  // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
+//   // optionally access and extend (rather than replace) parent metadata
+//   const previousImages = (await parent).openGraph?.images || []
 
-  return {
-    title: blogPost.title,
-    openGraph: {
-      images: ['/images/banner.jpg', ...previousImages],
-    },
-  }
-}
+//   return {
+//     title: blogPost.title,
+//     openGraph: {
+//       images: ['/images/banner.jpg', ...previousImages],
+//     },
+//   }
+// }
 
 export default function SingleBlogPage() {
   // const isOpen = useMenuStore((state) => state.isOpen)
