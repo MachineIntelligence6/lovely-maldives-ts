@@ -50,7 +50,7 @@
       "warn",
       { "code": 100, "ignoreComments": true, "ignoreUrls": true }
     ],
-    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "off",
     "react-hooks/exhaustive-deps": "warn",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",

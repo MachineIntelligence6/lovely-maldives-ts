@@ -19,6 +19,7 @@ import LocalHotelIcon from '@mui/icons-material/LocalHotel'
 import LocationCityIcon from '@mui/icons-material/LocationCity'
 import MovingIcon from '@mui/icons-material/Moving'
 import LocalAirportIcon from '@mui/icons-material/LocalAirport'
+import { useSession } from 'next-auth/react'
 
 import { hexToRGBA } from '@/utils/hexToRgba'
 import { CustomCard } from '../styled/CustomCard'
@@ -75,6 +76,9 @@ const tabData = [
 ]
 
 const renderTabs = (value: any) => {
+  const { data } = useSession()
+
+  console.log('data is ', data)
   return tabData.map((item, index) => {
     return (
       <Tab

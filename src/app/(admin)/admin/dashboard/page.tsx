@@ -4,12 +4,16 @@ import LocalHotelIcon from '@mui/icons-material/LocalHotel'
 import LocationCityIcon from '@mui/icons-material/LocationCity'
 import MovingIcon from '@mui/icons-material/Moving'
 import LocalAirportIcon from '@mui/icons-material/LocalAirport'
+import { getServerSession } from 'next-auth'
 
 import TotalCardItem from '@/admin-components/dashboard/TotalCardItem'
 import EarningReportCard from '@/admin-components/dashboard/EarningReportCard'
 import LatestHotlBooking from '@/admin-components/dashboard/LatestHotlBooking'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  // const session = await getServerSession(authOptions)
+  // console.log('session =>>', session)
   return (
     <Box sx={{ pb: 4 }}>
       <Grid

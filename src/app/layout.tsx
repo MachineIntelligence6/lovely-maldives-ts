@@ -5,7 +5,7 @@ import './globals.css'
 import { ReactNode } from 'react'
 
 import localFont from 'next/font/local'
-// import { dbConnection } from '@/config/db'
+import AuthProvider from '@/admin-components/auth/AuthProvider'
 import Provider from './provider'
 
 const centuryGothic = localFont({ src: './fonts/century-gothic/gothic.ttf' })
@@ -27,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning className={centuryGothic.className}>
-        <Provider>{children}</Provider>
+        <AuthProvider>
+          <Provider>{children}</Provider>
+        </AuthProvider>
       </body>
     </html>
   )
