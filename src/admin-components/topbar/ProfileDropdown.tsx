@@ -9,11 +9,14 @@ import {
   Typography,
 } from '@mui/material'
 import { Box } from '@mui/system'
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function ProfileDropdown() {
+  const router = useRouter()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -33,6 +36,17 @@ function ProfileDropdown() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+
+  const logout = async () => {
+    console.log('signout 1')
+    try {
+      await signOut();
+      router.push('/admin/login');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  }
+
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
@@ -61,7 +75,15 @@ function ProfileDropdown() {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
+          <MenuItem
+            key={setting}
+            onClick={(e) => {
+              if (setting === 'Logout') {
+                logout()
+              }
+              handleCloseUserMenu()
+            }}
+          >
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}
