@@ -74,8 +74,6 @@ export default function SignUp() {
     return null
   }
 
-  console.log("isPending ", isPending)
-
   return (
     <Box
       sx={{
