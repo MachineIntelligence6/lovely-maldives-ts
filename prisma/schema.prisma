@@ -39,31 +39,32 @@ model User {
 
 // HEADER SECTION MODEL
 model Header {
-    id     String  @id @map("_id")
-    title  String
-    logo   String
-    width  String
-    height String
-    menus  Menus[]
+    id      String  @id @default(auto()) @map("_id") @db.ObjectId
+    title   String
+    logo    String
+    width   String
+    height  String
+    bgcolor String
+    menus   Menus[]
 }
 
 // FOOTER SECTION MODEL
 model Footer {
-    id      String  @id @map("_id")
-    title   String
-    columns Columns[]
+    id        String  @id @default(auto()) @map("_id") @db.ObjectId
+    title     String
+    columns   Columns[]
 }
 
 // ABOUT MALDVES SECTION MODEL
 model AboutMaldives {
-    id          String  @id @map("_id")
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
     title       String
     description String
 }
 
 // ABOUT US SECTION MODEL
 model AboutUs {
-    id          String  @id @map("_id")
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
     title       String
     description String
 }
@@ -78,20 +79,20 @@ model AboutUs {
 
 // RESORT FILTERS MODEL
 model ResortFilters {
-    id          String  @id @map("_id")
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
     type        String
     filter      String
 }
 
 // ADD BLOG MODEL
 model Blogs {
-    id           String  @id @map("_id")
+    id           String  @id @default(auto()) @map("_id") @db.ObjectId
     title        String
     descriptions String
 }
 
 // BLOG CATEGORIES MODEL
 model BlogCategories {
-    id          String  @id @map("_id")
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
     category    String
 }

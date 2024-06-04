@@ -43,10 +43,14 @@ function HeaderSettings() {
     setMenus(menus.filter((menu, index) => index !== ind))
   }
 
+  const handleSave = () => {
+    console.log(menus)
+  }
+
   return (
     <Box sx={{ pb: 4 }}>
       <CustomCard sx={{ padding: '40px !important' }}>
-        <HeadingWraper title="Header Main" />
+        <HeadingWraper title="Header Main" handleSave={handleSave} />
         <Stack
           direction="row"
           alignItems="start"
