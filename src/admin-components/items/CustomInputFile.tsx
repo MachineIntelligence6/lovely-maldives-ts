@@ -16,14 +16,38 @@ function LogoInputFile() {
     setValues({ ...values, [name]: value })
   }
 
-  const hanldeChange = (e: any) => {
+  const hanldeChange = async (e: any) => {
     const value = e.target.files[0]
     setFile(value)
-    const fileReader = new FileReader()
-    fileReader.onload = () => {
-      setPreviewUrl(fileReader.result as string)
+    // const fileReader = new FileReader()
+    // fileReader.onload = () => {
+    //   setPreviewUrl(fileReader.result as string)
+    // }
+    // fileReader.readAsDataURL(value)
+
+    const formData = new FormData()
+    formData.append('file', value)
+    formData.append('upload_preset', 'j8epfynh')
+
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/de1fnstbu/image/upload`,
+        {
+          method: 'POST',
+          body: formData,
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error('Error uploading image')
+      }
+
+      const data = await response.json()
+      console.log('Image URL:', data.secure_url)
+      setPreviewUrl(data.secure_url)
+    } catch (error) {
+      console.log('error ', error)
     }
-    fileReader.readAsDataURL(value)
   }
   return (
     <Stack direction="row" alignItems="start" gap="1.5rem">
