@@ -88,7 +88,8 @@ model ResortFilters {
 model Blogs {
     id           String  @id @default(auto()) @map("_id") @db.ObjectId
     title        String
-    descriptions String
+    category     String
+    description String
 }
 
 // BLOG CATEGORIES MODEL

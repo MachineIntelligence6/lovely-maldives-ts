@@ -1,17 +1,29 @@
-// import { customAlphabet } from 'nanoid'
-// import blog from '../../../../../public/Images/landingTree.jpg'
+import { NextResponse } from 'next/server'
+import { connectToDatabase } from '@/helpers/server-helpers'
+import prisma from '../../../../../prisma'
 
-// const nanoid = customAlphabet('1234567890abcdef', 10)
+export async function GET(req: Request, route: { [key: string]: any }) {
+  console.log('route ', route)
+  const { params } = route
+  const { slug } = params
+  try {
+    await connectToDatabase()
 
-// export async function GET() {
-//   const blogPost = {
-//     id: nanoid,
-//     image: blog,
-//     title:
-//       'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
-//     date: '04 Feb 2024',
-//     slug: 'luxury-resorts-1',
-//   }
+    const result = await prisma.blogs.findFirst({ where: { title: slug } })
+    if (!result)
+      return NextResponse.json(
+        { message: 'No blog data found.' },
+        { status: 404 }
+      )
 
-//   return Response.json(blogPost)
-// }
+    return NextResponse.json(
+      { message: 'Success', data: result },
+      { status: 200 }
+    )
+  } catch (error) {
+    console.log('Error', error)
+    return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
+  } finally {
+    await prisma.$disconnect()
+  }
+}

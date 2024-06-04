@@ -10,13 +10,13 @@ export async function GET() {
     const result = await prisma.blogCategories.findMany()
     if (!result)
       return NextResponse.json(
-        { message: 'No resort filters data found.' },
+        { message: 'No categories data found.' },
         { status: 404 }
       )
 
     return NextResponse.json(
       { message: 'Success', data: result },
-      { status: 201 }
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)
@@ -28,7 +28,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('about maldives', bodyData)
+  console.log('acategories', bodyData)
   if (!bodyData?.category)
     return NextResponse.json(
       { message: 'Please send blog category.' },
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
 
     if (isExist)
       return NextResponse.json(
-        { message: 'This Filter already exists.' },
+        { message: 'This Category already exists.' },
         { status: 409 }
       )
 
@@ -84,7 +84,8 @@ export async function PUT(req: Request) {
     if (!isExist)
       return NextResponse.json(
         {
-          message: 'Filter not found, please send correct filter id to update.',
+          message:
+            'Category not found, please send correct category id to update.',
         },
         { status: 404 }
       )
@@ -113,7 +114,7 @@ export async function DELETE(req: Request) {
   console.log('id is ', id)
   if (!id)
     return NextResponse.json(
-      { message: 'Please send filter id to delete.' },
+      { message: 'Please send category id to delete.' },
       { status: 422 }
     )
   try {
@@ -131,7 +132,7 @@ export async function DELETE(req: Request) {
       return NextResponse.json(
         {
           message:
-            'Filter deletion failed, please send correct filter id to delete.',
+            'Category deletion failed, please send correct category id to delete.',
         },
         { status: 404 }
       )

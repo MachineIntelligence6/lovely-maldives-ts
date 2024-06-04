@@ -1,7 +1,7 @@
 'use client'
 
 import styled from '@emotion/styled'
-import React, { ChangeEvent, useState } from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Typography,
