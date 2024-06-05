@@ -3,7 +3,7 @@
 
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import ReactQuill, { Quill } from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import ImageResize from 'quill-image-resize-module-react'
@@ -105,7 +105,7 @@ const ReactQuillEditor = (props: any) => {
       theme="snow"
       ref={quillRef}
       value={value}
-      onChange={(val) => {
+      onChange={(val: any) => {
         console.log('val ->>>', val)
         // setValue(val)
         handleEditorValue(val)

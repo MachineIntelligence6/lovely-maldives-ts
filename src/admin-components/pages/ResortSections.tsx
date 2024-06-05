@@ -29,10 +29,23 @@ const ResortSections = () => {
   const [showHotelModal, setShowHotelModal] = useState(false)
   const [sections, setSections] = useState([] as any)
   const [options, setOptions] = useState([])
+  const [editorText, setEditorText] = useState('')
+
+  const handleEditorValue = (val: any, index: number) => {
+    setEditorText(val)
+    const updatedSections = sections.map((sec: any, ind: number) => {
+      if (ind === index) {
+        return { ...sec, description: val }
+      }
+      return sec
+    })
+    setSections(updatedSections)
+  }
 
   const handleShowModal = () => setShowModal(!showModal)
   const handleShowHotelModal = () => setShowHotelModal(!showHotelModal)
 
+  console.log('Sections ', sections)
   const handleAddType = (type: string) => {
     setSections([...sections, { type }])
   }
@@ -111,7 +124,13 @@ const ResortSections = () => {
                     Remove
                   </Button>
                 </Stack>
-                <ReactQuillEditor height={400} />
+                <ReactQuillEditor
+                  height={400}
+                  handleEditorValue={(val: any) =>
+                    handleEditorValue(val, index)
+                  }
+                  value={editorText}
+                />
               </Box>
             )
           }
