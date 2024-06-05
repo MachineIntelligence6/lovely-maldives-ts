@@ -11,6 +11,7 @@ import HeadingWraper from '../common/HeadingWraper'
 const HomeBgUploader = () => {
   const [files, setFiles] = useState([] as any)
   const [mobileFiles, setMobileFiles] = useState([] as any)
+  const [titles, setTitles] = useState({ title: '', subTitle: '' })
 
   const handleChange = (e: any, label: string) => {
     const file = e.target.files[0]
@@ -38,11 +39,17 @@ const HomeBgUploader = () => {
           label="Title"
           placeholder="Enter Title."
           name="title"
+          value={titles.title}
+          onChange={(e: any) => setTitles({ ...titles, title: e.target.value })}
         />
         <TextFieldWraper
           label="Subtitle"
           placeholder="Enter subtitle."
-          name="link"
+          name="subTitle"
+          value={titles.subTitle}
+          onChange={(e: any) =>
+            setTitles({ ...titles, subTitle: e.target.value })
+          }
         />
       </Stack>
 

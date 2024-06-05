@@ -30,6 +30,18 @@ const typeOptions = [
 const AddHotels = () => {
   const [showModal, setShowModal] = useState(false)
   const [sections, setSections] = useState([] as any)
+  const [value, setValue] = useState('')
+
+  const handleEditorValue = (val: any, index: number) => {
+    setValue(val)
+    const updatedSections = sections.map((sec: any, ind: number) => {
+      if (ind === index) {
+        return { ...sec, description: val }
+      }
+      return sec
+    })
+    setSections(updatedSections)
+  }
 
   const handleShowModal = () => setShowModal(!showModal)
 
@@ -127,6 +139,8 @@ const AddHotels = () => {
     })
     setSections(updatedSections)
   }
+
+  console.log('Sections ', sections)
 
   return (
     <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
@@ -251,7 +265,13 @@ const AddHotels = () => {
                     index={index}
                     title="Add Description"
                   />
-                  <ReactQuillEditor height="400px" />
+                  <ReactQuillEditor
+                    height="400px"
+                    handleEditorValue={(val: any) =>
+                      handleEditorValue(val, index)
+                    }
+                    value={value}
+                  />
                 </Box>
               )
             })}

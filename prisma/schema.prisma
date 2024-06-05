@@ -14,6 +14,11 @@ generator client {
 }
 
 // TYPES
+type Facts {
+  title    String
+  tags    String[]
+}
+
 type Menus {
   menu   String
   link   String
@@ -24,6 +29,21 @@ type Columns {
   menus   Menus[]
 }
 
+type Sections {
+  type         String
+  title        String?
+  ratings      String?
+  description  String?
+  images       String[]
+  facts        Facts[]
+}
+
+type ResortSections {
+  type   String
+  title  String?
+  description  String?
+  hotels String[]
+}
 
 
 // ADMIN USER MODEL
@@ -70,12 +90,12 @@ model AboutUs {
 }
 
 // ADD HOTEL MODEL
-// model Hotels {
-//     id          String  @id @map("_id")
-//     title       String
-//     ratings     String
-//     sections    Sections[]
-// }
+model Hotels {
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
+    title       String @unique
+    ratings     String?
+    sections    Sections[]
+}
 
 // RESORT FILTERS MODEL
 model ResortFilters {
@@ -96,4 +116,88 @@ model Blogs {
 model BlogCategories {
     id          String  @id @default(auto()) @map("_id") @db.ObjectId
     category    String
+}
+
+
+// HOME PAGE MODEL
+model HomeBg {
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
+    title       String
+    subTitle    String?
+    bgImages    String[]
+    services    Services[]
+    wonders     Wonders[]
+    collections Collections[]
+    brands      Brands[]
+    aboutMaldivesShort AboutMaldivesShort[]
+    aboutUsShort AboutUsShort[]
+    socialLinkSection SocialLinkSection[]
+}
+
+model Services {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  icon        String
+  bgColor     String?
+  homeBgId    String @map("homeBg_id") @db.ObjectId
+  homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
+}
+
+model Wonders {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  image       String
+  homeBgId    String @map("homeBg_id") @db.ObjectId
+  homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
+}
+
+model Collections {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  image       String
+  ratings     String
+  homeBgId    String @map("homeBg_id") @db.ObjectId
+  homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
+}
+
+model Brands {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  ratings     String
+  bgColor     String?
+  homeBgId    String @map("homeBg_id") @db.ObjectId
+  homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
+}
+
+model AboutMaldivesShort {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  homeBgId    String @map("homeBg_id") @db.ObjectId
+  homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
+}
+
+model AboutUsShort {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  promises    String[]
+  homeBgId    String @map("homeBg_id") @db.ObjectId
+  homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
+}
+
+model SocialLinkSection {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  socialMedia String
+  link        String
+  homeBgId    String @map("homeBg_id") @db.ObjectId
+  homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
+}
+
+// RESORT MODEL
+model Resorts {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  resortSections   ResortSections[]
 }
