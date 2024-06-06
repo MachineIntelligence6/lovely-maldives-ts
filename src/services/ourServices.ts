@@ -8,35 +8,22 @@ interface OurServices {
 }
 
 export async function createOurService(data: OurServices) {
-  const isExist = await prisma.services.findFirst()
-  let result
-  if (isExist) {
-    result = await prisma.services.update({
-      where: {
-        id: isExist.id,
-      },
-      data,
-    })
-  } else {
-    result = await prisma.services.create({
-      data: {
-        title: data.title,
-        icon: data.icon,
-        bgColor: data.bgColor,
-        homeBg: {
-          connect: {
-            id: data.homeBgId,
-          },
+  return prisma.services.create({
+    data: {
+      title: data.title,
+      icon: data.icon,
+      bgColor: data.bgColor,
+      homeBg: {
+        connect: {
+          id: data.homeBgId,
         },
       },
-    })
-  }
-
-  return result
+    },
+  })
 }
 
 export async function getOurServices() {
-  return prisma.services.findFirst()
+  return prisma.services.findMany()
 }
 
 export async function deleteOurService() {

@@ -1,14 +1,21 @@
+/* eslint-disable no-alert */
+
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState, useTransition } from 'react'
 import dynamic from 'next/dynamic'
 import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { Box, Button, Stack, Typography } from '@mui/material'
+import { Alert, Box, Button, Stack, Typography } from '@mui/material'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import HeadingWraper from '@/admin-components/common/HeadingWraper'
+import {
+  aboutusShortRequest,
+  getaboutusShortRequest,
+} from '@/utils/api-requests/aboutus-short.request'
 import AddOptionModal from './modals/AddOptionModal'
+import CustomLoader from '../common/CustomLoader'
 
 const ReactQuillEditor = dynamic(
   () => import('@/admin-components/common/ReactQuillEditor'),
@@ -19,6 +26,15 @@ const HomeAboutus = () => {
   const [showModal, setShowModal] = useState(false)
   const [options, setOptions] = useState([] as any)
   const [edit, setEdit] = useState(null)
+  const [isPending, startTransition] = useTransition()
+  const [editorText, setEditorText] = useState('')
+  const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
+  const [detectChange, setDetectChange] = useState(false)
+
+  const handleEditorValue = (value: any) => {
+    setEditorText(value)
+    setDetectChange(true)
+  }
 
   const handleShowModal = () => setShowModal(!showModal)
 
@@ -33,9 +49,64 @@ const HomeAboutus = () => {
       setOptions(values)
     }
     handleShowModal()
+    setDetectChange(true)
   }
 
   const handleEdit = (value: any) => setEdit(value as any)
+
+  const getAboutusShort = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getaboutusShortRequest()
+        const data = res?.data?.data
+        if (res?.status === 200) {
+          setEditorText(data?.description)
+          setOptions(data?.promises)
+        } else {
+          alert('Error occured while fetching about maldives data.')
+          console.log('response about maldives', res)
+        }
+      })
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
+  const handleSave = async () => {
+    const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+    try {
+      startTransition(async () => {
+        const res = await aboutusShortRequest({
+          title: 'About Us',
+          description: editorText,
+          promises: options,
+          homeBgId,
+        })
+        if (res?.status === 201) {
+          getAboutusShort()
+          setDetectChange(false)
+          setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+      setDetectChange(false)
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+    }
+  }
+
+  useEffect(() => {
+    getAboutusShort()
+  }, [])
 
   return (
     <>
@@ -47,9 +118,24 @@ const HomeAboutus = () => {
         handleEdit={handleEdit}
       />
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
-        <HeadingWraper title="About Us" />
+        {isPending && <CustomLoader />}
+        {alertMsg.message && (
+          <Alert sx={{ mb: 2 }} severity={alertMsg.type as any}>
+            {alertMsg.message}
+          </Alert>
+        )}
+        <HeadingWraper
+          title="About Us"
+          handleSave={handleSave}
+          isPending={isPending}
+          detectChange={detectChange}
+        />
         <Box sx={{ mt: 3, pb: 5 }}>
-          <ReactQuillEditor />
+          <ReactQuillEditor
+            handleEditorValue={handleEditorValue}
+            value={editorText}
+            height={200}
+          />
         </Box>
 
         <Stack

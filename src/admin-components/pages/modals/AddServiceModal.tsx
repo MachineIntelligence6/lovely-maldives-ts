@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react'
 import { Box, Typography, Modal, Button, Stack } from '@mui/material'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
+import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 
 const style = {
   position: 'absolute',
@@ -18,22 +19,31 @@ const style = {
 
 const AddServiceModal = (props: any) => {
   const { open, handleShowModal, handleAddService } = props
-  const [title, setTitle] = useState('')
+  const [values, setValues] = useState({ title: '', bgColor: '' })
   const [icon, setIcon] = useState<File | undefined>()
+  const [iconUrl, setIconUrl] = useState('')
 
   const handleChange = (e: any) => {
-    const { value } = e.target
-    console.log('value is ', value)
-    setTitle(value)
+    const { value, name } = e.target
+    setValues({
+      ...values,
+      [name]: value,
+    })
   }
 
-  const handleIconChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleIconChange = async (e: ChangeEvent<HTMLInputElement>) => {
     // eslint-disable-next-line prefer-destructuring
-    const files = e.target.files
-    if (files && files.length > 0) {
-      setIcon(files[0])
-    }
+    const file = e.target.files?.[0]
+    setIcon(file)
+
+    const formData = new FormData()
+    formData.append('file', file as any)
+    formData.append('upload_preset', 'j8epfynh')
+    const res = await uploadImgToCloudinary(formData)
+    setIconUrl(res?.secure_url)
   }
+
+  console.log('url ', iconUrl)
 
   return (
     <div>
@@ -86,10 +96,19 @@ const AddServiceModal = (props: any) => {
           <TextFieldWraper
             label="Title"
             placeholder="Enter Title."
-            value={title}
+            value={values.title}
             name="title"
             onChange={(e: any) => handleChange(e)}
           />
+
+          {/* <TextFieldWraper
+            label="Background Color"
+            placeholder="Select background color."
+            value={values.bgColor}
+            name="bgColor"
+            type="color"
+            onChange={(e: any) => handleChange(e)}
+          /> */}
 
           <Stack
             direction="row"
@@ -117,9 +136,10 @@ const AddServiceModal = (props: any) => {
                 fontFamily: 'Public Sans',
               }}
               onClick={() => {
-                if (!title) return
-                handleAddService({ title, icon })
-                setTitle('')
+                if (!values.title) return
+                handleAddService({ ...values, icon: iconUrl })
+                setValues({ bgColor: '', title: '' })
+                setIcon(null as any)
                 handleShowModal()
               }}
             >

@@ -1,9 +1,9 @@
-import { Button, Typography } from '@mui/material'
+import { Button, CircularProgress, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import React from 'react'
 
 function HeadingWraper(props: any) {
-  const { handleSave } = props
+  const { handleSave, detectChange } = props
   return (
     <Stack
       direction="row"
@@ -20,7 +20,7 @@ function HeadingWraper(props: any) {
       </Typography>
       <Button
         sx={{
-          bgcolor: 'var(--blue)',
+          bgcolor: !detectChange ? 'silver' : 'var(--blue)',
           color: 'white',
           width: '120px',
           height: '36px',
@@ -31,6 +31,7 @@ function HeadingWraper(props: any) {
           },
         }}
         onClick={handleSave}
+        disabled={!detectChange}
       >
         Save
       </Button>

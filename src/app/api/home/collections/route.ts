@@ -1,23 +1,22 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
 import {
-  createCollection,
-  deleteCollection,
-  getCollections,
+  createOurCollection,
+  deleteOurCollection,
+  getOurCollections,
 } from '@/services/collections'
 import prisma from '../../../../../prisma'
 
 export async function GET() {
   try {
     await connectToDatabase()
-
-    const result = await getCollections()
-    if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 404 })
+    const result = await getOurCollections()
+    if (result?.length === 0)
+      return NextResponse.json({ message: 'No data found.', status: 422 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
-      { status: 201 }
+      { message: 'Success', data: result, status: 200 },
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)
@@ -29,21 +28,26 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const { title, image, ratings, homeBgId } = await req.json()
-
+  console.log('data ', title, image, ratings, homeBgId)
   if (!title || !homeBgId || !image || !ratings)
-    return NextResponse.json(
-      { message: 'Please send all field to save data.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send all field to save data.',
+      status: 422,
+    })
 
   try {
     await connectToDatabase()
 
-    const result = await createCollection({ title, image, ratings, homeBgId })
-    if (!result) return NextResponse.json({ message: 'Error' }, { status: 500 })
+    const result = await createOurCollection({
+      title,
+      image,
+      ratings: ratings.toString(),
+      homeBgId,
+    })
+    if (!result) return NextResponse.json({ message: 'Error', status: 500 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {
@@ -57,7 +61,7 @@ export async function POST(req: Request) {
 export async function DELETE(req: Request) {
   try {
     await connectToDatabase()
-    const result = await deleteCollection()
+    const result = await deleteOurCollection()
     if (result === 'NOT_FOUND')
       return NextResponse.json({ message: 'No data found.' }, { status: 404 })
 
