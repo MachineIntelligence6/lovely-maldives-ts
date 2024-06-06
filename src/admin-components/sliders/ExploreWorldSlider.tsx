@@ -136,7 +136,7 @@ const ExploreWorldSlider = (props: any) => {
                 }}
               >
                 <Image
-                  src={URL.createObjectURL(data.image)}
+                  src={data.image}
                   alt="exploreImg"
                   width={300}
                   height={500}

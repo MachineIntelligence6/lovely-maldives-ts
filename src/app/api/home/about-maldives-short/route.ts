@@ -13,11 +13,11 @@ export async function GET() {
 
     const result = await getAboutMaldivesShort()
     if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 404 })
+      return NextResponse.json({ message: 'No data found' }, { status: 200 })
 
     return NextResponse.json(
       { message: 'Success', data: result },
-      { status: 201 }
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
 export async function DELETE(req: Request) {
   try {
     await connectToDatabase()
-    
+
     const result = await deleteAboutMaldivesShort()
     if (result === 'NOT_FOUND')
       return NextResponse.json({ message: 'No data found.' }, { status: 404 })

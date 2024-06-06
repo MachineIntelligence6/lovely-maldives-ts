@@ -127,7 +127,7 @@ model HomeBg {
     bgImages    String[]
     services    Services[]
     wonders     Wonders[]
-    collections Collections[]
+    collections OurCollections[]
     brands      Brands[]
     aboutMaldivesShort AboutMaldivesShort[]
     aboutUsShort AboutUsShort[]
@@ -152,6 +152,13 @@ model Wonders {
 }
 
 model Collections {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  image       String
+  ratings     String
+}
+
+model OurCollections {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   image       String

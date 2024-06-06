@@ -15,7 +15,18 @@ const TopBrands = dynamic(() => import('@/components/TopBrands'))
 const Banner = dynamic(() => import('@/components/Banner'))
 const OurServices = dynamic(() => import('@/components/OurServices'))
 
-export default function Home() {
+// export const getHomeData = async () => {
+//   try {
+//     const response = await apiClient.get('/home')
+//     return response.data
+//   } catch (error: any) {
+//     throw new Error(error)
+//   }
+// }
+
+export default async function Home() {
+  // const data = await getHomeData()
+  // console.log('data is ', data)
   return (
     <>
       <Header />

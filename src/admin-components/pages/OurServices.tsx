@@ -1,27 +1,86 @@
+/* eslint-disable no-alert */
+
 'use client'
 
-import React, { useState } from 'react'
-import { Button, Typography, Stack, Box } from '@mui/material'
+import React, { useEffect, useState, useTransition } from 'react'
+import { Button, Typography, Stack, Box, Alert } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import CloseIcon from '@mui/icons-material/Close'
+import {
+  getOurServicesRequest,
+  ourServicesRequest,
+} from '@/utils/api-requests/services.request'
 import AddServiceModal from './modals/AddServiceModal'
 import { CustomCard } from '../styled/CustomCard'
 import CardsSlider from '../sliders/CardsSlider'
+import CustomLoader from '../common/CustomLoader'
 
 const OurServices = () => {
+  const [isPending, startTransition] = useTransition()
   const [showModal, setShowModal] = useState(false)
   const [services, setServices] = useState([] as any)
+  const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
+  const [detectChange, setDetectChange] = useState(false)
 
   const handleShowModal = () => setShowModal(!showModal)
-
-  const handleAddService = (newService: any) => {
-    setServices([...services, newService])
-    handleShowModal()
-  }
 
   const handleDeleteFile = (index: number) => {
     setServices(services.filter((_: any, i: number) => i !== index))
   }
+
+  const getOurServices = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getOurServicesRequest()
+        const data = res?.data?.data
+        if (res?.status === 200) {
+          setServices(data)
+        } else {
+          alert('Error occured while fetching about maldives data.')
+          console.log('response about maldives', res)
+        }
+        console.log('response ', res)
+      })
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
+  const handleAddService = async (newService: any) => {
+    const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+    try {
+      startTransition(async () => {
+        const res = await ourServicesRequest({
+          title: newService?.title,
+          icon: newService?.icon,
+          bgColor: '#5d7496',
+          homeBgId,
+        })
+        if (res?.status === 201) {
+          getOurServices()
+          setDetectChange(false)
+          handleShowModal()
+          setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+      setDetectChange(false)
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+    }
+  }
+
+  useEffect(() => {
+    getOurServices()
+  }, [])
 
   return (
     <>
@@ -31,6 +90,12 @@ const OurServices = () => {
         handleAddService={handleAddService}
       />
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
+        {isPending && <CustomLoader />}
+        {alertMsg.message && (
+          <Alert sx={{ mb: 2 }} severity={alertMsg.type as any}>
+            {alertMsg.message}
+          </Alert>
+        )}
         <Stack
           direction="row"
           alignItems="center"
@@ -71,63 +136,6 @@ const OurServices = () => {
             </Stack>
           </Button>
         </Stack>
-
-        {/* <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '1rem',
-            justifyContent: 'space-between',
-            mt: 2,
-          }}
-        >
-          {services?.map((service: any, index: number) => (
-            <Box
-              key={index}
-              sx={{
-                width: '150px',
-                height: '180px',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                position: 'relative',
-                backgroundColor: 'var(--blue)',
-              }}
-            >
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: '10px',
-                  right: '10px',
-                  width: '25px',
-                  height: '25px',
-                  borderRadius: '50%',
-                  border: '1px solid var(--red)',
-                  background: 'rgba(0,0,0,0.7)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <CloseIcon
-                  sx={{
-                    fontSize: '20px',
-                    color: 'var(--red)',
-                    cursor: 'pointer',
-                  }}
-                  onClick={() => handleDeleteFile(index)}
-                />
-              </Box>
-              <Typography variant="body1" color="white">
-                {service?.title}
-              </Typography>
-            </Box>
-          ))}
-        </Box> */}
 
         {services?.length > 0 ? (
           <CardsSlider services={services} />

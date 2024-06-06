@@ -7,34 +7,21 @@ interface Wonders {
 }
 
 export async function createWonders(data: Wonders) {
-  const isExist = await prisma.wonders.findFirst()
-  let result
-  if (isExist) {
-    result = await prisma.wonders.update({
-      where: {
-        id: isExist.id,
-      },
-      data,
-    })
-  } else {
-    result = await prisma.wonders.create({
-      data: {
-        title: data.title,
-        image: data.image,
-        homeBg: {
-          connect: {
-            id: data.homeBgId,
-          },
+  return prisma.wonders.create({
+    data: {
+      title: data.title,
+      image: data.image,
+      homeBg: {
+        connect: {
+          id: data.homeBgId,
         },
       },
-    })
-  }
-
-  return result
+    },
+  })
 }
 
 export async function getWonders() {
-  return prisma.wonders.findFirst()
+  return prisma.wonders.findMany()
 }
 
 export async function deleteWonders() {

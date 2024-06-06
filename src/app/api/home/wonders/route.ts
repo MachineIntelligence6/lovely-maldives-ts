@@ -9,11 +9,11 @@ export async function GET() {
 
     const result = await getWonders()
     if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 404 })
+      return NextResponse.json({ message: 'No data found' }, { status: 200 })
 
     return NextResponse.json(
       { message: 'Success', data: result },
-      { status: 201 }
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)
@@ -25,12 +25,12 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const { title, image, homeBgId } = await req.json()
-
+  console.log('body data ', { title, image, homeBgId })
   if (!title || !image || !homeBgId)
-    return NextResponse.json(
-      { message: 'Please send all field to save data.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send all field to save data.',
+      status: 422,
+    })
 
   try {
     await connectToDatabase()
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     if (!result) return NextResponse.json({ message: 'Error' }, { status: 500 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {

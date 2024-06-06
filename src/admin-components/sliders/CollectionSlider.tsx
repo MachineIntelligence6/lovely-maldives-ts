@@ -85,7 +85,7 @@ const CollectionSlider = (props: any) => {
             <Image
               width={300}
               height={300}
-              src={URL.createObjectURL(collection?.image)}
+              src={collection?.image}
               alt="Resort item"
               style={{
                 width: '92%',

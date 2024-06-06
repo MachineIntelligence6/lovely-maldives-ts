@@ -1,11 +1,21 @@
-import React from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react'
 import BackupIcon from '@mui/icons-material/Backup'
 import { Box } from '@mui/material'
 import Image from 'next/image'
 import CloseIcon from '@mui/icons-material/Close'
 
 const ImagesUploader = (props: any) => {
-  const { handleDeleteFile, handleChange, label, files } = props
+  const [images, setImages] = useState([] as any)
+  const { handleDeleteFile, handleChange, label, files, urls } = props
+
+  useEffect(() => {
+    if (urls?.length > 0) {
+      setImages(urls)
+    } else {
+      setImages(files)
+    }
+  }, [urls, files])
   return (
     <Box
       sx={{
@@ -15,7 +25,7 @@ const ImagesUploader = (props: any) => {
         mt: 2,
       }}
     >
-      {files?.map((file: any, index: number) => (
+      {images?.map((file: any, index: number) => (
         <Box
           key={index}
           sx={{
@@ -61,7 +71,7 @@ const ImagesUploader = (props: any) => {
             width={180}
             height={150}
             alt="bg-image"
-            src={URL.createObjectURL(file)}
+            src={file}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         </Box>

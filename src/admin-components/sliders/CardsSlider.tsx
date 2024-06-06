@@ -212,12 +212,7 @@ const CardsSlider = (props: any) => {
                   py: '45px',
                 }}
               >
-                <Image
-                  alt="img"
-                  width={45}
-                  height={45}
-                  src={URL.createObjectURL(item.icon)}
-                />
+                <Image alt="img" width={45} height={45} src={item.icon} />
                 <Typography
                   sx={{
                     mt: '20px',

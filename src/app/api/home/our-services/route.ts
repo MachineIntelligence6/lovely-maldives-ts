@@ -13,11 +13,11 @@ export async function GET() {
 
     const result = await getOurServices()
     if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 404 })
+      return NextResponse.json({ message: 'No data found' }, { status: 200 })
 
     return NextResponse.json(
       { message: 'Success', data: result },
-      { status: 201 }
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)

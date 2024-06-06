@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react'
 import { Box, Typography, Modal, Button, Stack } from '@mui/material'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
+import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 
 const style = {
   position: 'absolute',
@@ -20,19 +21,23 @@ const AddCardModal = (props: any) => {
   const { open, handleShowModal, handleAddCard } = props
   const [title, setTitle] = useState('')
   const [image, setImage] = useState<File | undefined>()
+  const [imageUrl, setImageUrl] = useState('')
 
   const handleChange = (e: any) => {
     const { value } = e.target
-    console.log('value is ', value)
     setTitle(value)
   }
 
-  const handleIconChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleIconChange = async (e: ChangeEvent<HTMLInputElement>) => {
     // eslint-disable-next-line prefer-destructuring
-    const files = e.target.files
-    if (files && files.length > 0) {
-      setImage(files[0])
-    }
+    const file = e.target.files?.[0]
+    setImage(file)
+
+    const formData = new FormData()
+    formData.append('file', file as any)
+    formData.append('upload_preset', 'j8epfynh')
+    const res = await uploadImgToCloudinary(formData)
+    setImageUrl(res?.secure_url)
   }
 
   return (
@@ -118,8 +123,9 @@ const AddCardModal = (props: any) => {
               }}
               onClick={() => {
                 if (!title) return
-                handleAddCard({ title, image })
+                handleAddCard({ title, img: imageUrl })
                 setTitle('')
+                setImage('' as any)
                 handleShowModal()
               }}
             >

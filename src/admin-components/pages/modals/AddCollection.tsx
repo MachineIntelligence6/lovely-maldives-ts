@@ -12,6 +12,7 @@ import {
 } from '@mui/material'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import CustomSelect from '@/admin-components/items/CustomSelect'
+import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 
 const CustomLabel = styled(InputLabel)(({ theme }) => ({
   fontSize: '16px',
@@ -46,6 +47,7 @@ const AddCollection = (props: any) => {
   const { open, handleShowModal, handleAddCollection } = props
   const [values, setValues] = useState({ title: '', stars: 1 })
   const [image, setImage] = useState<File | undefined>()
+  const [imageUrl, setImageUrl] = useState('')
 
   const handleChange = (e: any) => {
     const { value, name } = e.target
@@ -55,14 +57,18 @@ const AddCollection = (props: any) => {
     })
   }
 
-  const handleIconChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleIconChange = async (e: ChangeEvent<HTMLInputElement>) => {
     // eslint-disable-next-line prefer-destructuring
-    const files = e.target.files
-    if (files && files.length > 0) {
-      setImage(files[0])
-    }
+    const file = e.target.files?.[0]
+    setImage(file)
+
+    const formData = new FormData()
+    formData.append('file', file as any)
+    formData.append('upload_preset', 'j8epfynh')
+    const res = await uploadImgToCloudinary(formData)
+    setImageUrl(res?.secure_url)
   }
-  console.log('values ', values)
+console.log("imageurl ", imageUrl)
   return (
     <div>
       <Modal
@@ -161,8 +167,9 @@ const AddCollection = (props: any) => {
               }}
               onClick={() => {
                 if (!values?.title || !values?.stars) return
-                handleAddCollection({ ...values, image })
+                handleAddCollection({ ...values, img: imageUrl })
                 setValues({ title: '', stars: 0 })
+                setImage(undefined)
                 handleShowModal()
               }}
             >
