@@ -9,36 +9,34 @@ interface Brands {
 }
 
 export async function createBrand(data: Brands) {
-  const isExist = await prisma.brands.findFirst()
-  let result
-  if (isExist) {
-    result = await prisma.brands.update({
-      where: {
-        id: isExist.id,
-      },
-      data,
-    })
-  } else {
-    result = await prisma.brands.create({
-      data: {
-        title: data.title,
-        description: data.description,
-        ratings: data.ratings,
-        bgColor: data.bgColor,
-        homeBg: {
-          connect: {
-            id: data.homeBgId,
-          },
+  const isExist = await prisma.brands.findFirst({
+    where: {
+      title: data.title,
+      description: data.description,
+      ratings: data.ratings,
+      bgColor: data.bgColor,
+    },
+  })
+
+  if (isExist) return 'This brand already exists'
+
+  return prisma.brands.create({
+    data: {
+      title: data.title,
+      description: data.description,
+      ratings: data.ratings,
+      bgColor: data.bgColor,
+      homeBg: {
+        connect: {
+          id: data.homeBgId,
         },
       },
-    })
-  }
-
-  return result
+    },
+  })
 }
 
 export async function getBrands() {
-  return prisma.brands.findFirst()
+  return prisma.brands.findMany()
 }
 
 export async function deleteBrand() {

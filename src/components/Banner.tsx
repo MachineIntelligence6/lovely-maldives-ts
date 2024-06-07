@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client'
 
 import React from 'react'
@@ -19,7 +21,8 @@ export const mobileImgUrl: any = [
   'Images/explorImg5.jpg',
 ]
 
-export default function Banner() {
+export default function Banner(props: any) {
+  const { bannerData } = props
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const [bgImgStyle, setBgImgStyle] = React.useState({
     backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
@@ -33,11 +36,14 @@ export default function Banner() {
   })
 
   React.useEffect(() => {
-    const randomIndexdev: number = Math.floor(Math.random() * imgUrl.length)
+    const bannersLength = bannerData?.bgImages.length
+    const bannerImages = bannerData?.bgImages
+
+    const randomIndexdev: number = Math.floor(Math.random() * bannersLength)
+
     const randomIndexmob: number = Math.floor(
       Math.random() * mobileImgUrl.length
     )
-
     if (lessThanMd) {
       setBgImgStyle({
         backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
@@ -52,7 +58,12 @@ export default function Banner() {
     } else {
       setBgImgStyle({
         backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
-         rgba(150, 127, 93, 0.20)), url('${imgUrl[randomIndexdev].src}')`,
+         rgba(150, 127, 93, 0.20)), 
+         url('${
+           bannersLength > 0
+             ? bannerImages[randomIndexdev]
+             : imgUrl[randomIndexdev].src
+         }')`,
         backgroundSize: 'cover',
         backgroundPosition: '100%',
         width: '100%',
@@ -89,7 +100,7 @@ export default function Banner() {
         >
           <Box sx={{ pb: { xs: '10%', md: '6%' }, px: '10px' }}>
             <Typography sx={{ fontSize: { xs: '24px', md: '35px' } }}>
-              Welcome to Lovely Maldives
+              {bannerData?.title}
             </Typography>
             <Typography
               variant="h1"
@@ -99,7 +110,7 @@ export default function Banner() {
                 fontWeight: 600,
               }}
             >
-              Essence of Pure Luxury{' '}
+              {bannerData?.subTitle}{' '}
             </Typography>
           </Box>
         </Box>

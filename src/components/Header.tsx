@@ -4,7 +4,7 @@
 
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -27,13 +27,15 @@ import SubNav from './SubNav'
 import profilePic from '../../public/Images/logo.svg'
 import profilePicCol from '../../public/Images/logo-colored.svg'
 
-function Header() {
+function Header(props: any) {
+  const { data } = props
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const isOpen = useMenuStore((state) => state.isOpen)
   const open = useMenuStore((state) => state.open)
   const close = useMenuStore((state) => state.close)
   const toggleMenu = useMenuStore((state) => state.toggleMenu)
   const { scrollY } = useScroll()
+  const [headerData, setHeaderData] = useState(null as any)
 
   const menuItem = [
     { label: 'About Maldives', route: '/about-maldives' },
@@ -83,6 +85,13 @@ function Header() {
     }
   }, [isOpen, lessThanMd])
 
+  React.useEffect(() => {
+    if (data?.id) {
+      console.log('inner')
+      setHeaderData(data)
+    }
+  }, [])
+  console.log('header data is =>>> ', headerData)
   return (
     <Box component="header">
       <AppBar
@@ -97,9 +106,9 @@ function Header() {
           width: '100%',
           background: isScrolled
             ? isOpen && lessThanMd
-              ? 'var(--brown)'
-              : 'white'
-            : 'var(--brown)',
+              ? data?.otherBgcolor || 'var(--brown)'
+              : data?.heroBgcolor || 'white'
+            : data?.otherBgcolor || 'var(--brown)',
           transition: 'all ease .5s',
           zIndex: 998,
         }}

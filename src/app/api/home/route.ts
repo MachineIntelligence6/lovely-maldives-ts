@@ -9,11 +9,11 @@ export async function GET() {
 
     const result = await getHomeSections()
     if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 404 })
+      return NextResponse.json({ message: 'No data found', status: 409 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
-      { status: 201 }
+      { message: 'Success', data: result, status: 200 },
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)

@@ -13,10 +13,10 @@ export async function GET() {
 
     const result = await getSocialSection()
     if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 200 })
+      return NextResponse.json({ message: 'No data found', status: 409 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 200 },
       { status: 200 }
     )
   } catch (error) {
@@ -28,13 +28,13 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { title, socialMedia, homeBgId, link } = await req.json()
+  const { title, socialMedia, homeBgId, link, image } = await req.json()
 
-  if (!title || !homeBgId || !socialMedia || !link)
-    return NextResponse.json(
-      { message: 'Please send all field to save data.' },
-      { status: 422 }
-    )
+  if (!title || !homeBgId || !socialMedia || !link || !image)
+    return NextResponse.json({
+      message: 'Please send all field to save data.',
+      status: 422,
+    })
 
   try {
     await connectToDatabase()
@@ -44,11 +44,16 @@ export async function POST(req: Request) {
       link,
       homeBgId,
       socialMedia,
+      image,
     })
-    if (!result) return NextResponse.json({ message: 'Error' }, { status: 500 })
+    if (!result)
+      return NextResponse.json({
+        message: 'Data not saved, please try again.',
+        status: 422,
+      })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {

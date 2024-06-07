@@ -4,6 +4,7 @@ interface SocialSection {
   title: string
   socialMedia: string
   link: string
+  image: string
   homeBgId: string
 }
 
@@ -23,6 +24,7 @@ export async function createSocialSection(data: SocialSection) {
         title: data.title,
         socialMedia: data.socialMedia,
         link: data.link,
+        image: data.image,
         homeBg: {
           connect: {
             id: data.homeBgId,

@@ -35,7 +35,10 @@ const OurServices = () => {
         if (res?.status === 200) {
           setServices(data)
         } else {
-          alert('Error occured while fetching about maldives data.')
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
           console.log('response about maldives', res)
         }
         console.log('response ', res)
@@ -47,11 +50,13 @@ const OurServices = () => {
 
   const handleAddService = async (newService: any) => {
     const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+    console.log('new service ', newService)
     try {
       startTransition(async () => {
         const res = await ourServicesRequest({
           title: newService?.title,
           icon: newService?.icon,
+          image: newService?.image,
           bgColor: '#5d7496',
           homeBgId,
         })

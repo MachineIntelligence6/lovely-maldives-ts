@@ -24,11 +24,6 @@ const OurCollection = () => {
 
   const handleShowModal = () => setShowModal(!showModal)
 
-  // const handleAddCollection = (newCollection: any) => {
-  //   setCollections([...collections, newCollection])
-  //   handleShowModal()
-  // }
-
   const handleDeleteCard = (index: number) => {
     setCollections(collections.filter((_: any, i: number) => i !== index))
   }

@@ -41,7 +41,7 @@ function MenuAddItem(props: any) {
             }}
           />
           <Typography variant="body1" color="var(--black)">
-            {props?.menu?.title}
+            {props?.menu?.menu}
           </Typography>
         </Stack>
         <DeleteIcon
@@ -62,9 +62,9 @@ function MenuAddItem(props: any) {
         <TextFieldWraper
           label="Menu Name"
           placeholder="Enter Menu Name."
-          value={props?.menu?.title}
-          name="title"
-          onChange={(e: any) => handleChange(index, subIndex, 'title', e)}
+          value={props?.menu?.menu}
+          name="menu"
+          onChange={(e: any) => handleChange(index, subIndex, 'menu', e)}
         />
         <TextFieldWraper
           label="Menu Link"

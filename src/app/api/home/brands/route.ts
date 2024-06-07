@@ -12,7 +12,7 @@ export async function GET() {
       return NextResponse.json({ message: 'No data found' }, { status: 200 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 200 },
       { status: 200 }
     )
   } catch (error) {
@@ -27,10 +27,10 @@ export async function POST(req: Request) {
   const { title, description, ratings, homeBgId, bgColor } = await req.json()
 
   if (!title || !homeBgId || !ratings)
-    return NextResponse.json(
-      { message: 'Please send all field to save data.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send all field to save data.',
+      status: 422,
+    })
 
   try {
     await connectToDatabase()
@@ -38,14 +38,18 @@ export async function POST(req: Request) {
     const result = await createBrand({
       title,
       description,
-      ratings,
+      ratings: ratings.toString(),
       homeBgId,
       bgColor,
     })
-    if (!result) return NextResponse.json({ message: 'Error' }, { status: 500 })
+    if (!result)
+      return NextResponse.json(
+        { message: 'Brand creation failed, please try again' },
+        { status: 500 }
+      )
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Brand created successfully.', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {

@@ -3,6 +3,7 @@ import prisma from '../../prisma'
 interface OurServices {
   title: string
   icon: string
+  bgImage: string
   homeBgId: string
   bgColor: string
 }
@@ -12,6 +13,7 @@ export async function createOurService(data: OurServices) {
     data: {
       title: data.title,
       icon: data.icon,
+      bgImage: data.bgImage,
       bgColor: data.bgColor,
       homeBg: {
         connect: {

@@ -21,6 +21,7 @@ interface IOurCollectionProps {
   iconShow: string
   radius: string
   bottomradius: string
+  collections: any
 }
 export default function OurCollection({
   heading,
@@ -28,6 +29,7 @@ export default function OurCollection({
   iconShow,
   radius,
   bottomradius,
+  collections,
 }: IOurCollectionProps) {
   const settings = {
     dots: true,
@@ -101,7 +103,7 @@ export default function OurCollection({
         className="slider-container"
       >
         <Slider {...settings}>
-          {datas.map((data, index) => (
+          {collections?.map((collection: any, index: number) => (
             <Box
               sx={{
                 position: 'relative',
@@ -111,9 +113,7 @@ export default function OurCollection({
               key={index}
             >
               <Box
-                component={Image}
-                src={collectionImg}
-                alt="Resort item"
+                component="div"
                 sx={{
                   width: { xs: '100%', md: '92%' },
                   height: { xs: '250px', md: '300px' },
@@ -123,8 +123,17 @@ export default function OurCollection({
                     md: `${radius} ${radius} 0px 0px`,
                   },
                   margin: '0 auto',
+                  position: 'relative', // Next.js Image component requires position: relative for sizing
                 }}
-              />
+              >
+                <Image
+                  src={collection?.image}
+                  alt="Resort item"
+                  layout="fill"
+                  objectFit="cover"
+                  sizes="(max-width: 600px) 100vw, 50vw"
+                />
+              </Box>
               <Box
                 sx={{
                   width: { xs: '100%', md: '92%' },
@@ -163,15 +172,42 @@ export default function OurCollection({
                   }}
                 >
                   <Typography sx={{ px: 4, fontSize: '20px' }}>
-                    One n Only Reethi Rah{' '}
+                    {collection?.title}{' '}
                   </Typography>
                   <BoltIcon sx={{ display: `${iconShow}` }} />
                 </Box>
                 <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
+                  {collection?.ratings === '1' && <StarRateIcon />}
+                  {collection?.ratings === '2' && (
+                    <>
+                      <StarRateIcon />
+                      <StarRateIcon />
+                    </>
+                  )}
+                  {collection?.ratings === '3' && (
+                    <>
+                      <StarRateIcon />
+                      <StarRateIcon />
+                      <StarRateIcon />
+                    </>
+                  )}
+                  {collection?.ratings === '4' && (
+                    <>
+                      <StarRateIcon />
+                      <StarRateIcon />
+                      <StarRateIcon />
+                      <StarRateIcon />
+                    </>
+                  )}
+                  {collection?.ratings === '5' && (
+                    <>
+                      <StarRateIcon />
+                      <StarRateIcon />
+                      <StarRateIcon />
+                      <StarRateIcon />
+                      <StarRateIcon />
+                    </>
+                  )}
                 </Box>
               </Box>
             </Box>
