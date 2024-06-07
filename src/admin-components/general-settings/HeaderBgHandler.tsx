@@ -4,22 +4,24 @@ import { Box, Stack } from '@mui/system'
 import React, { useState } from 'react'
 import { CustomLabel } from '../styled/CustomLabels'
 
-function HeaderBgHandler() {
-  const [selectedColor, setSelectedColor] = useState('#967f5d') // Default black color
+function HeaderBgHandler(props: any) {
+  const {handleValuesChange, value, name} = props
+  // const [selectedColor, setSelectedColor] = useState('#967f5d') // Default black color
 
-  const handleColorChange = (e: any) => {
-    setSelectedColor(e.target.value)
-  }
+  // const handleColorChange = (e: any) => {
+  //   setSelectedColor(e.target.value)
+  // }
 
-  const handleHexInputChange = (e: any) => {
-    setSelectedColor(e.target.value)
-  }
+  // const handleHexInputChange = (e: any) => {
+  //   setSelectedColor(e.target.value)
+  // }
   return (
     <Stack direction="row" alignItems="start">
       <input
         type="color"
-        value={selectedColor}
-        onChange={handleColorChange}
+        value={value}
+        name={name}
+        onChange={handleValuesChange}
         style={{
           width: '72px',
           height: '72px',
@@ -31,8 +33,9 @@ function HeaderBgHandler() {
         </CustomLabel>
         <input
           type="text"
-          value={selectedColor}
-          onChange={handleHexInputChange}
+          value={value}
+          name={name}
+          onChange={handleValuesChange}
           style={{
             width: '100px',
             height: '36px',

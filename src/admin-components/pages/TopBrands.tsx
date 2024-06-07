@@ -1,26 +1,97 @@
+/* eslint-disable no-alert */
+
 'use client'
 
-import React, { useState } from 'react'
-import { Button, Typography, Stack, Box } from '@mui/material'
+import React, { useEffect, useState, useTransition } from 'react'
+import { Button, Typography, Stack, Box, Alert } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
+import {
+  getTopBrandsRequest,
+  topBrandsRequest,
+} from '@/utils/api-requests/brands.request'
 import AddBrand from './modals/AddBrand'
 import { CustomCard } from '../styled/CustomCard'
 import TopBrandsSlider from '../sliders/TopBrandsSlider'
+import CustomLoader from '../common/CustomLoader'
 
 const TopBrands = () => {
+  const [isPending, startTransition] = useTransition()
   const [showModal, setShowModal] = useState(false)
   const [brands, setBrands] = useState([] as any)
+  const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
+  const [detectChange, setDetectChange] = useState(false)
 
   const handleShowModal = () => setShowModal(!showModal)
 
-  const handleAddBrand = (newService: any) => {
-    setBrands([...brands, newService])
-    handleShowModal()
-  }
+  // const handleAddBrand = (newService: any) => {
+  //   setBrands([...brands, newService])
+  //   handleShowModal()
+  // }
 
   const handleDeleteFile = (index: number) => {
     setBrands(brands.filter((_: any, i: number) => i !== index))
   }
+
+  const getTopBrands = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getTopBrandsRequest()
+        const data = res?.data
+        console.log('response data  ', data)
+        if (data?.status === 200) {
+          setBrands(data?.data)
+        } else {
+          // alert('Error occured while fetching about maldives data.')
+          console.log('response top brands', res)
+        }
+      })
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
+  const handleAddBrand = async (newBrand: any) => {
+    const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+    console.log('newBrand', newBrand)
+    try {
+      startTransition(async () => {
+        const res = await topBrandsRequest({
+          title: newBrand?.title,
+          ratings: newBrand?.stars,
+          description: newBrand?.description,
+          bgColor: '#5d7496',
+          homeBgId,
+        })
+        console.log('data =>>> ', res?.data)
+        const data = res?.data
+        if (data?.status === 201) {
+          getTopBrands()
+          setDetectChange(false)
+          handleShowModal()
+          setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          alert(data?.message)
+        }
+      })
+      setDetectChange(false)
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+    }
+  }
+
+  useEffect(() => {
+    getTopBrands()
+  }, [])
 
   return (
     <>
@@ -30,6 +101,12 @@ const TopBrands = () => {
         handleAddBrand={handleAddBrand}
       />
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
+        {isPending && <CustomLoader />}
+        {alertMsg.message && (
+          <Alert sx={{ mb: 2 }} severity={alertMsg.type as any}>
+            {alertMsg.message}
+          </Alert>
+        )}
         <Stack
           direction="row"
           alignItems="center"

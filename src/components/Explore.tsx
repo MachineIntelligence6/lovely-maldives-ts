@@ -36,7 +36,8 @@ export const datas = [
     image: exploreImg4,
   },
 ]
-export default function Explore() {
+export default function Explore(props: any) {
+  const { wonders } = props
   const settings = {
     centerMode: true,
     className: 'slick-center-mode',
@@ -127,7 +128,7 @@ export default function Explore() {
         }}
       >
         <Slider {...settings}>
-          {datas.map((data, index) => (
+          {wonders?.map((data: any, index: number) => (
             <Box
               key={index}
               sx={{
@@ -155,16 +156,29 @@ export default function Explore() {
                     overflow: 'hidden',
                   }}
                 >
-                  <Box
-                    component={Image}
-                    src={data.image}
+                  <Image
+                    src={data?.image}
                     alt="exploreImg"
-                    sx={{
+                    width={400}
+                    height={500}
+                    style={{
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
                     }}
                   />
+                  {/* <Box
+                    component={Image}
+                    src={data?.image}
+                    alt="exploreImg"
+                    width={400}
+                    height={500}
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  /> */}
                   <Box
                     sx={{
                       position: 'absolute',

@@ -1,21 +1,19 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
+import { createHeader, getHeader } from '@/services/header'
 import prisma from '../../../../prisma'
 
 export async function GET() {
   try {
     await connectToDatabase()
 
-    const result = await prisma.header.findFirst()
+    const result = await getHeader()
     if (!result)
-      return NextResponse.json(
-        { message: 'No header data found' },
-        { status: 404 }
-      )
+      return NextResponse.json({ message: 'No header data found', status: 409 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
-      { status: 201 }
+      { message: 'Success', data: result, status: 200 },
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)
@@ -27,28 +25,43 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
+  const {
+    heroUrl,
+    otherUrl,
+    heroWidth,
+    otherWidth,
+    heroHeight,
+    otherHeight,
+    heroBgcolor,
+    otherBgcolor,
+    homeBgId,
+    menus,
+  } = bodyData
 
-  let result
   try {
     await connectToDatabase()
 
-    const isExist = await prisma.header.findFirst()
+    const result = await createHeader({
+      heroLogo: heroUrl,
+      otherLogo: otherUrl,
+      heroWidth: heroWidth?.toString(),
+      otherWidth: otherWidth?.toString(),
+      heroHeight: heroHeight?.toString(),
+      otherHeight: otherHeight?.toString(),
+      heroBgcolor,
+      otherBgcolor,
+      homeBgId,
+      menus,
+    })
 
-    if (isExist) {
-      result = await prisma.header.update({
-        where: {
-          id: isExist.id,
-        },
-        data: bodyData,
+    if (!result)
+      return NextResponse.json({
+        message: 'Header data not saved, please try again',
+        status: 422,
       })
-    } else {
-      result = await prisma.header.create({
-        data: bodyData,
-      })
-    }
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Header data saved successfully.', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {

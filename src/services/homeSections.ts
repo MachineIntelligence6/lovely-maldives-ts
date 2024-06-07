@@ -10,6 +10,7 @@ export async function getHomeSections() {
       collections: true,
       brands: true,
       socialLinkSection: true,
+      header: true,
     },
   })
 }

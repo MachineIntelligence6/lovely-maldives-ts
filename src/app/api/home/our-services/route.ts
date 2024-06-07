@@ -28,18 +28,24 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { title, icon, bgColor, homeBgId } = await req.json()
+  const { title, icon, image, bgColor, homeBgId } = await req.json()
 
-  if (!title || !icon)
-    return NextResponse.json(
-      { message: 'Please send all field to save data.' },
-      { status: 422 }
-    )
+  if (!title || !icon || !image || !homeBgId)
+    return NextResponse.json({
+      message: 'Please send all field to save data.',
+      status: 422,
+    })
 
   try {
     await connectToDatabase()
 
-    const result = await createOurService({ title, icon, bgColor, homeBgId })
+    const result = await createOurService({
+      title,
+      icon,
+      bgColor,
+      homeBgId,
+      bgImage: image,
+    })
     if (!result) return NextResponse.json({ message: 'Error' }, { status: 500 })
 
     return NextResponse.json(

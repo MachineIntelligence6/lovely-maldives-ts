@@ -5,54 +5,66 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import TextFieldWraper from './TextfieldWraper'
 
-function LogoInputFile() {
+function LogoInputFile(props: any) {
+  const {
+    handleValuesChange,
+    nameWidth,
+    nameHeight,
+    value,
+    hanldeFileChange,
+    logoUrl,
+    values,
+    width,
+    height,
+    logoFor,
+  } = props
   const [file, setFile] = useState('')
   const [previewUrl, setPreviewUrl] = React.useState('')
-  const [values, setValues] = useState({ width: 95, height: 60 })
+  // const [values, setValues] = useState({ width: 95, height: 60 })
 
-  const handleWidthHeightChange = (e: any) => {
-    const { name, value } = e.target
-    if (value > 1000) return
-    setValues({ ...values, [name]: value })
-  }
+  // const handleWidthHeightChange = (e: any) => {
+  //   const { name, value } = e.target
+  //   if (value > 1000) return
+  //   setValues({ ...values, [name]: value })
+  // }
 
-  const hanldeChange = async (e: any) => {
-    const value = e.target.files[0]
-    setFile(value)
-    // const fileReader = new FileReader()
-    // fileReader.onload = () => {
-    //   setPreviewUrl(fileReader.result as string)
-    // }
-    // fileReader.readAsDataURL(value)
+  // const hanldeChange = async (e: any) => {
+  //   const value = e.target.files[0]
+  //   setFile(value)
+  //   // const fileReader = new FileReader()
+  //   // fileReader.onload = () => {
+  //   //   setPreviewUrl(fileReader.result as string)
+  //   // }
+  //   // fileReader.readAsDataURL(value)
 
-    const formData = new FormData()
-    formData.append('file', value)
-    formData.append('upload_preset', 'j8epfynh')
+  //   const formData = new FormData()
+  //   formData.append('file', value)
+  //   formData.append('upload_preset', 'j8epfynh')
 
-    try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/de1fnstbu/image/upload`,
-        {
-          method: 'POST',
-          body: formData,
-        }
-      )
+  //   try {
+  //     const response = await fetch(
+  //       `https://api.cloudinary.com/v1_1/de1fnstbu/image/upload`,
+  //       {
+  //         method: 'POST',
+  //         body: formData,
+  //       }
+  //     )
 
-      if (!response.ok) {
-        throw new Error('Error uploading image')
-      }
+  //     if (!response.ok) {
+  //       throw new Error('Error uploading image')
+  //     }
 
-      const data = await response.json()
-      console.log('Image URL:', data.secure_url)
-      setPreviewUrl(data.secure_url)
-    } catch (error) {
-      console.log('error ', error)
-    }
-  }
+  //     const data = await response.json()
+  //     console.log('Image URL:', data.secure_url)
+  //     setPreviewUrl(data.secure_url)
+  //   } catch (error) {
+  //     console.log('error ', error)
+  //   }
+  // }
   return (
     <Stack direction="row" alignItems="start" gap="1.5rem">
-      <label htmlFor="fileInput">
-        <input id="fileInput" type="file" hidden onChange={hanldeChange} />
+      <label htmlFor={logoFor}>
+        <input id={logoFor} type="file" hidden onChange={hanldeFileChange} />
         <Box
           sx={{
             position: 'relative',
@@ -68,26 +80,26 @@ function LogoInputFile() {
             p: 2,
           }}
         >
-          {previewUrl ? (
+          {previewUrl || logoUrl ? (
             <Image
-              width={values?.width}
-              height={values?.height}
+              width={width}
+              height={height}
               alt="logo-img"
               style={{
                 objectFit: 'contain',
-                width: `${values?.width}px`,
-                height: `${values?.height}px`,
+                width: `${width}px`,
+                height: `${height}px`,
               }}
-              src={previewUrl}
+              src={logoUrl || previewUrl}
             />
           ) : (
             <Image
-              width={values?.width}
-              height={values?.height}
+              width={width}
+              height={height}
               alt="logo-img"
               style={{
                 objectFit: 'contain',
-                width: `${values?.width}px`,
+                width: `${value}px`,
                 height: `${values?.height}px`,
               }}
               src="/logo.png"
@@ -100,17 +112,17 @@ function LogoInputFile() {
           label="Logo Width"
           type="number"
           placeholder="Enter logo width"
-          name="width"
-          value={values.width}
-          onChange={handleWidthHeightChange}
+          name={nameWidth}
+          value={width}
+          onChange={handleValuesChange}
         />
         <TextFieldWraper
           label="Logo Height"
           type="number"
           placeholder="Enter logo height."
-          value={values.height}
-          name="height"
-          onChange={handleWidthHeightChange}
+          name={nameHeight}
+          value={height}
+          onChange={handleValuesChange}
         />
       </Box>
     </Stack>

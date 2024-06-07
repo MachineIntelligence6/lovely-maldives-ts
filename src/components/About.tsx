@@ -4,7 +4,8 @@ import Typography from '@mui/material/Typography'
 // import Image from 'next/image'
 // import sparkle from '../../public/Images/Quarters-w.svg'
 
-export default function About() {
+export default function About(props: any) {
+  const { data } = props
   return (
     <div>
       <Container
@@ -48,6 +49,8 @@ export default function About() {
               />
             </Box>
             <Typography
+              component="div"
+              variant="body1"
               sx={{
                 fontSize: { xs: '18px', md: '22px' },
                 fontWeight: '200',
@@ -55,11 +58,14 @@ export default function About() {
                 textAlign: 'justify',
                 px: { xs: '20px', md: '0' },
               }}
+              dangerouslySetInnerHTML={{
+                __html: data?.description,
+              }}
             >
-              Lovely Maldives, a distinguished travel agency from the Maldives
+              {/* Lovely Maldives, a distinguished travel agency from the Maldives
               strives to redene Luxury travel experiences in the Maldives. Lorem
               ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.
+              tempor incididunt ut labore et dolore magna aliqua. */}
             </Typography>
           </Box>
           <Box>
@@ -169,7 +175,7 @@ export default function About() {
                     width: '50%',
                   }}
                 >
-                  Best Rates
+                  {data?.promises?.[0]}
                 </Typography>
                 <Typography
                   sx={{
@@ -180,7 +186,7 @@ export default function About() {
                     width: '50%',
                   }}
                 >
-                  Top Resorts
+                  {data?.promises?.[1]}
                 </Typography>
                 <Typography
                   sx={{
@@ -191,7 +197,7 @@ export default function About() {
                     width: '50%',
                   }}
                 >
-                  100% Privacy
+                  {data?.promises?.[2]}
                 </Typography>
                 <Typography
                   sx={{
@@ -202,7 +208,7 @@ export default function About() {
                     width: '50%',
                   }}
                 >
-                  Rapid Service
+                  {data?.promises?.[3]}
                 </Typography>
               </Box>
             </Box>

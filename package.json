@@ -52,6 +52,7 @@
     "reflect-metadata": "^0.2.1",
     "sharp": "^0.33.2",
     "slick-carousel": "^1.8.1",
+    "swr": "^2.2.5",
     "zod": "^3.23.8",
     "zustand": "^4.5.2"
   },

@@ -4,8 +4,10 @@ import Typography from '@mui/material/Typography'
 
 import Box from '@mui/system/Box'
 import dynamic from 'next/dynamic'
-import Header from '@/components/Header'
+// import Header from '@/components/Header'
+import apiClient from '@/services/apiClient'
 
+const Header = dynamic(() => import('@/components/Header'))
 const Footer = dynamic(() => import('@/components/Footer'))
 const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
 const OurCollection = dynamic(() => import('@/components/OurCollection'))
@@ -15,22 +17,23 @@ const TopBrands = dynamic(() => import('@/components/TopBrands'))
 const Banner = dynamic(() => import('@/components/Banner'))
 const OurServices = dynamic(() => import('@/components/OurServices'))
 
-// export const getHomeData = async () => {
-//   try {
-//     const response = await apiClient.get('/home')
-//     return response.data
-//   } catch (error: any) {
-//     throw new Error(error)
-//   }
-// }
+export const getHomeData = async () => {
+  try {
+    const response = await apiClient.get('/home')
+    return response.data
+  } catch (error: any) {
+    throw new Error(error)
+  }
+}
 
 export default async function Home() {
-  // const data = await getHomeData()
-  // console.log('data is ', data)
+  const data = await getHomeData()
+  const aboutMaldives = data?.data?.aboutMaldivesShort
+
   return (
     <>
-      <Header />
-      <Banner />
+      <Header data={data?.data?.header?.[0]} />
+      <Banner bannerData={data?.data} />
       <Box
         sx={{
           position: 'relative',
@@ -57,9 +60,11 @@ export default async function Home() {
               fontWeight: 400,
             }}
           >
-            ABOUT MALDIVES
+            {aboutMaldives?.title}
           </Typography>
           <Typography
+            component="div"
+            variant="body1"
             sx={{
               textAlign: 'justify',
               fontSize: { xs: '18px', md: '22px' },
@@ -67,12 +72,16 @@ export default async function Home() {
               mt: { xs: '30px', md: '60px' },
               width: { xs: '100%', md: '750px' },
               mx: 'auto',
+              fontFamily: 'century-gothic',
+            }}
+            dangerouslySetInnerHTML={{
+              __html: aboutMaldives?.[0]?.description,
             }}
           >
-            Maldives is a small country located in the Indian Ocean consisting
+            {/* Maldives is a small country located in the Indian Ocean consisting
             of 1250 islands and 62 atolls. Lorem ipsum Lorem ipsum dolor sit
             amet, Maldives is a small country located in the Indian Ocean
-            consisting of 1250 island sand 62 at olls.
+            consisting of 1250 island sand 62 at olls. */}
           </Typography>
           <Box
             sx={{
@@ -105,18 +114,22 @@ export default async function Home() {
           </Box>
         </Box>
         <SidePalmTree />
-        <OurServices />
+        <OurServices services={data?.data?.services} />
       </Box>
-      <About />
-      <Explore />
+      <About data={data?.data?.aboutUsShort?.[0]} />
+      <Explore wonders={data?.data?.wonders} />
       <OurCollection
         heading="Our Collection"
         button="block"
         iconShow="none"
         radius="0"
         bottomradius="0"
+        collections={data?.data?.collections}
       />
-      <TopBrands />
+      <TopBrands
+        brands={data?.data?.brands}
+        socialLinkSection={data?.data?.socialLinkSection?.[0]}
+      />
       <Footer />
     </>
   )

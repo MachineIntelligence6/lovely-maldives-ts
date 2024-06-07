@@ -12,65 +12,11 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import WifiIcon from '@mui/icons-material/Wifi'
-import NoteAltIcon from '@mui/icons-material/NoteAlt'
-import EditNoteIcon from '@mui/icons-material/EditNote'
-import WifiPasswordIcon from '@mui/icons-material/WifiPassword'
-import LaptopMacIcon from '@mui/icons-material/LaptopMac'
-import PhonelinkRingIcon from '@mui/icons-material/PhonelinkRing'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 
 import Image from 'next/image'
-import exploreImg1 from '../../public/Images/exploreImg.jpg'
-import exploreImg3 from '../../public/Images/explorImg2.jpg'
-import exploreImg2 from '../../public/Images/exploreImg3.jpg'
-import exploreImg4 from '../../public/Images/explorImg5.jpg'
 
-export const data = [
-  {
-    title: 'TRAVEL COUNSELING ',
-    icon: <WifiIcon sx={{ fontSize: '40px' }} />,
-    description:
-      'We do all types of travel related services to all our customers.',
-    image: exploreImg1,
-  },
-  {
-    title: 'VIP YOUR CITY',
-    icon: <NoteAltIcon sx={{ fontSize: '40px' }} />,
-    description:
-      'We do all types of travel related services to all our customers.',
-    image: exploreImg3,
-  },
-  {
-    title: 'HOTEL BOOKING',
-    icon: <EditNoteIcon sx={{ fontSize: '40px' }} />,
-    description:
-      'We do all types of travel related services to all our customers.',
-    image: exploreImg2,
-  },
-  {
-    title: 'VIP YOUR CITY',
-    icon: <WifiPasswordIcon sx={{ fontSize: '40px' }} />,
-    description:
-      'We do all types of travel related services to all our customers.',
-    image: exploreImg4,
-  },
-  {
-    title: 'VIP AIRPORT CONCIERGE SERVICE',
-    icon: <LaptopMacIcon sx={{ fontSize: '40px' }} />,
-    description:
-      'We do all types of travel related services to all our customers.',
-    image: exploreImg1,
-  },
-  {
-    title: 'HOTEL BOOKING',
-    icon: <PhonelinkRingIcon sx={{ fontSize: '40px' }} />,
-    description:
-      'We do all types of travel related services to all our customers.',
-    image: exploreImg3,
-  },
-]
 export function SampleNextArrow(props: any) {
   const { className, style, onClick } = props
   return (
@@ -109,9 +55,9 @@ export function SamplePrevArrow(props: any) {
   )
 }
 
-export default function OurServices() {
+export default function OurServices(props: any) {
+  const { services } = props
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
-
   const settings = {
     className: 'services-slider',
     dots: true,
@@ -199,7 +145,7 @@ export default function OurServices() {
       </Typography>
       <Box className="slider-container" sx={{ mt: { xs: '30px', md: '60px' } }}>
         <Slider {...settings}>
-          {data.map((item, index) => (
+          {services?.map((item: any, index: number) => (
             <Box
               // eslint-disable-next-line react/no-array-index-key
               key={index}
@@ -220,20 +166,22 @@ export default function OurServices() {
                   }}
                 >
                   <Image
-                    src={item.image}
+                    src={item?.bgImage}
                     alt="exploreImg"
+                    width={400}
+                    height={500}
                     style={{
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      filter: 'brightness(0.7)',
+                      filter: 'brightness(1)',
                     }}
                   />
                   <Box
                     sx={{
                       width: '100%',
                       height: '100%',
-                      backgroundColor: 'rgba(150, 127, 93, 0.5)',
+                      backgroundColor: 'rgba(150, 127, 93, 0.1)',
                       position: 'absolute',
                       top: 0,
                       left: 0,
@@ -300,13 +248,23 @@ export default function OurServices() {
                       py: '45px',
                     }}
                   >
-                    <Typography>{item.icon}</Typography>
+                    <Image
+                      src={item?.icon}
+                      alt="exploreImg"
+                      width={35}
+                      height={35}
+                      style={{
+                        objectFit: 'cover',
+                        filter: 'brightness(1)',
+                      }}
+                    />
                     <Typography
                       sx={{
                         mt: '20px',
                         fontSize: '16px',
                         textAlign: 'center',
                         width: '100px',
+                        textTransform: 'uppercase',
                       }}
                     >
                       {item.title}

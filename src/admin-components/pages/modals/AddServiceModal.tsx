@@ -21,7 +21,9 @@ const AddServiceModal = (props: any) => {
   const { open, handleShowModal, handleAddService } = props
   const [values, setValues] = useState({ title: '', bgColor: '' })
   const [icon, setIcon] = useState<File | undefined>()
+  const [image, setImage] = useState<File | undefined>()
   const [iconUrl, setIconUrl] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
 
   const handleChange = (e: any) => {
     const { value, name } = e.target
@@ -43,7 +45,17 @@ const AddServiceModal = (props: any) => {
     setIconUrl(res?.secure_url)
   }
 
-  console.log('url ', iconUrl)
+  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    // eslint-disable-next-line prefer-destructuring
+    const file = e.target.files?.[0]
+    setImage(file)
+
+    const formData = new FormData()
+    formData.append('file', file as any)
+    formData.append('upload_preset', 'j8epfynh')
+    const res = await uploadImgToCloudinary(formData)
+    setImageUrl(res?.secure_url)
+  }
 
   return (
     <div>
@@ -71,7 +83,13 @@ const AddServiceModal = (props: any) => {
 
           <label htmlFor="icon_">
             Icon
-            <input type="file" id="icon_" hidden onChange={handleIconChange} />
+            <input
+              type="file"
+              id="icon_"
+              name="icon"
+              hidden
+              onChange={handleIconChange}
+            />
             <Box
               sx={{
                 width: '100%',
@@ -89,7 +107,37 @@ const AddServiceModal = (props: any) => {
                 overflow: 'hidden',
               }}
             >
-              {icon?.name ? icon?.name : 'Upload file'}
+              {icon?.name ? icon?.name : 'Upload icon.'}
+            </Box>
+          </label>
+
+          <label htmlFor="image_">
+            Background Image
+            <input
+              type="file"
+              id="image_"
+              name="image"
+              hidden
+              onChange={handleImageChange}
+            />
+            <Box
+              sx={{
+                width: '100%',
+                height: '38px',
+                border: '1px solid #e1e1e1',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                pl: '10px',
+                color: 'darkgray',
+                fontSize: '14px',
+                fontWeight: 300,
+                mb: 3,
+                mt: 1,
+                overflow: 'hidden',
+              }}
+            >
+              {image?.name ? image?.name : 'Upload Background Image.'}
             </Box>
           </label>
 
@@ -137,9 +185,10 @@ const AddServiceModal = (props: any) => {
               }}
               onClick={() => {
                 if (!values.title) return
-                handleAddService({ ...values, icon: iconUrl })
+                handleAddService({ ...values, icon: iconUrl, image: imageUrl })
                 setValues({ bgColor: '', title: '' })
                 setIcon(null as any)
+                setImage(null as any)
                 handleShowModal()
               }}
             >

@@ -48,7 +48,8 @@ export const datas = [
     description: 'ultra luxury',
   },
 ]
-export default function TopBrands() {
+export default function TopBrands(props: any) {
+  const { brands, socialLinkSection } = props
   const settings = {
     dots: true,
     infinite: true,
@@ -109,7 +110,7 @@ export default function TopBrands() {
         }}
       >
         <Box component={Slider} {...settings}>
-          {datas.map((data, index) => (
+          {brands.map((brand: any, index: number) => (
             <Box
               key={index}
               // sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap:'90px' }}
@@ -145,7 +146,7 @@ export default function TopBrands() {
                       fontWeight: 600,
                     }}
                   >
-                    {data.title}
+                    {brand?.title}
                   </Typography>
                 </Box>
                 <Box
@@ -160,13 +161,13 @@ export default function TopBrands() {
                   }}
                 >
                   <Typography sx={{ fontSize: '18px', fontWeight: 200 }}>
-                    {data.starNum}
+                    {brand?.ratings}
                   </Typography>
                   <StarRateIcon sx={{ fontSize: '18px', mb: '5px' }} />
                   <Typography
                     sx={{ fontSize: '12px', fontWeight: 200, mb: '4px' }}
                   >
-                    {data.description}
+                    {brand?.description}
                   </Typography>
                 </Box>
               </Box>
@@ -213,7 +214,7 @@ export default function TopBrands() {
                 mx: 'auto',
               }}
             >
-              Let’s Plan Your Journey
+              {socialLinkSection?.title}
             </Typography>
             <Typography
               sx={{
@@ -229,7 +230,7 @@ export default function TopBrands() {
             >
               Say Hi on
               <Link
-                href="/"
+                href={socialLinkSection?.link}
                 style={{
                   textDecoration: 'none',
                   color: 'white',
@@ -239,7 +240,7 @@ export default function TopBrands() {
                 }}
               >
                 {' '}
-                WhatsApp{' '}
+                {socialLinkSection?.socialMedia}{' '}
               </Link>
               <KeyboardArrowRightIcon sx={{ fontSize: '45px' }} />
             </Typography>
