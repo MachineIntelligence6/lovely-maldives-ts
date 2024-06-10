@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable no-alert */
 
@@ -6,9 +8,9 @@
 import { Box, Button, Stack, Typography } from '@mui/material'
 import dynamic from 'next/dynamic'
 import AddIcon from '@mui/icons-material/Add'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useTransition } from 'react'
 import TopFiveLuxuryResorts from '@/components/TopFiveLuxuryResorts'
-import { hotels } from '@/utils/StaticData'
+import { getHotelsRequest } from '@/utils/api-requests/addHotels.request'
 import AddSectionType from './modals/AddSectionType'
 import SelectHotel from './modals/SelectHotel'
 import ResortsGallery from './ResortsGallery'
@@ -30,6 +32,9 @@ const ResortSections = () => {
   const [sections, setSections] = useState([] as any)
   const [options, setOptions] = useState([])
   const [editorText, setEditorText] = useState('')
+  const [isPending, startTransition] = useTransition()
+  const [galleryHotels, setGalleryHotels] = useState([] as any)
+  const [sliderHotels, setSliderHotels] = useState([] as any)
 
   const handleEditorValue = (val: any, index: number) => {
     setEditorText(val)
@@ -50,16 +55,34 @@ const ResortSections = () => {
     setSections([...sections, { type }])
   }
 
-  const handleAddHotel = (index: number, id: string) => {
-    const updatedSections = sections.map((sec: any, ind: number) => {
-      if (ind === index) {
-        const ids = sec.ids ? [...sec.ids, id] : [id]
-        const filteredData = hotels.filter((item) => ids.includes(item.id))
-        return { ...sec, hotels: filteredData, ids }
-      }
-      return sec
-    })
-    setSections(updatedSections)
+  const handleAddHotel = (index: number, id: string, type: string) => {
+    if (type === 'images_gallery') {
+      const updatedSections = sections.map((sec: any, ind: number) => {
+        if (ind === index) {
+          const ids = sec.ids ? [...sec.ids, id] : [id]
+          const filteredData = galleryHotels.filter((item: any) =>
+            ids.includes(item.id)
+          )
+          getHotels(ids, 'images_gallery')
+          return { ...sec, hotels: filteredData, ids }
+        }
+        return sec
+      })
+      setSections(updatedSections)
+    } else {
+      const updatedSections = sections.map((sec: any, ind: number) => {
+        if (ind === index) {
+          const ids = sec.ids ? [...sec.ids, id] : [id]
+          const filteredData = sliderHotels.filter((item: any) =>
+            ids.includes(item.id)
+          )
+          getHotels(ids, 'images_slider')
+          return { ...sec, hotels: filteredData, ids }
+        }
+        return sec
+      })
+      setSections(updatedSections)
+    }
   }
 
   const handleRemoveSection = (index: number) => {
@@ -79,13 +102,44 @@ const ResortSections = () => {
     setSections(updatedSections)
   }
 
-  useEffect(() => {
-    const ops = [] as any
-    hotels?.map((hotel: any) =>
-      ops.push({ label: hotel.title, value: hotel.id })
-    )
-    setOptions(ops)
-  }, [])
+  const getHotels = async (ids: any, type: string) => {
+    if (ids?.length === 0) return
+    try {
+      if (ids?.[0].length > 0) {
+        startTransition(async () => {
+          const res = await getHotelsRequest(1, 500, ids)
+          const data = res?.data
+          const hotelsData = [] as any
+          if (data?.status === 200) {
+            if (type === 'images_gallery') {
+              setGalleryHotels(data?.data)
+            } else {
+              setSliderHotels(data?.data)
+            }
+          } else {
+            console.log('response about maldives', res)
+          }
+        })
+      }
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
+  console.log('sliderHotels are =>>> ', sliderHotels)
+  console.log('galleryHotels are =>>> ', galleryHotels)
+
+  // useEffect(() => {
+  //   getHotels()
+  // }, [showHotelModal])
+
+  // useEffect(() => {
+  //   const ops = [] as any
+  //   hotels?.map((hotel: any) =>
+  //     ops.push({ label: hotel.title, value: hotel.id })
+  //   )
+  //   setOptions(ops)
+  // }, [])
 
   return (
     <Box>
@@ -143,8 +197,11 @@ const ResortSections = () => {
                 <SelectHotel
                   open={showHotelModal}
                   handleShowModal={handleShowHotelModal}
-                  handleAddHotel={(id: any) => handleAddHotel(index, id)}
+                  handleAddHotel={(id: any) =>
+                    handleAddHotel(index, id, 'images_gallery')
+                  }
                   options={options}
+                  type="images_gallery"
                 />
                 <Stack
                   direction="row"
@@ -169,7 +226,7 @@ const ResortSections = () => {
                 </Stack>
                 <Box>
                   <ResortsGallery
-                    hotels={section?.hotels}
+                    hotels={galleryHotels}
                     handleChange={(e: any) => handleChange(e, index)}
                     title={section?.title}
                     handleShowModal={handleShowHotelModal}
@@ -186,7 +243,9 @@ const ResortSections = () => {
               <SelectHotel
                 open={showHotelModal}
                 handleShowModal={handleShowHotelModal}
-                handleAddHotel={(id: any) => handleAddHotel(index, id)}
+                handleAddHotel={(id: any) =>
+                  handleAddHotel(index, id, 'slider_images')
+                }
                 options={options}
               />
               <Stack
@@ -217,7 +276,7 @@ const ResortSections = () => {
                   iconShow="flex"
                   radius="20px"
                   bottomradius="0 0 20px  20px"
-                  resorts={section?.hotels}
+                  resorts={sliderHotels}
                   isAdminSide={true}
                   handleChange={(e: any) => handleChange(e, index)}
                   title={section?.title}

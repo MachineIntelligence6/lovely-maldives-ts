@@ -1,62 +1,105 @@
+/* eslint-disable consistent-return */
+
 'use client'
 
-import React, { useState } from 'react'
-import { Typography, Box, Button, Stack } from '@mui/material'
+import React, { useEffect, useState, useTransition } from 'react'
+import { Typography, Box, Button, Stack, Alert } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import HeadingWraper from '@/admin-components/common/HeadingWraper'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import ColumnBlock from '@/admin-components/general-settings/ColumnBlock'
 import AddTitleModal from '@/admin-components/general-settings/modals/AddTitleModal'
+import {
+  footerRequest,
+  getFooterRequest,
+} from '@/utils/api-requests/footer.request'
+import CustomLoader from '@/admin-components/common/CustomLoader'
+import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 
 function FooterSettings() {
+  const [isPending, startTransition] = useTransition()
+  const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [showModal, setShowModal] = useState(false)
-  const [menus, setMenus] = useState([
-    {
-      title: 'Links',
-      links: [
-        {
-          title: 'Home',
-          link: '/',
-        },
-      ],
-    },
-  ])
+  const [detectChange, setDetectChange] = useState(true)
+  const [menus, setMenus] = useState([] as any)
 
-  const handleChange = (
+  const handleChange = async (
     index: number,
     subIndex: number,
     field: string,
     e: any
   ) => {
-    const { name, value } = e.target
+    if (field === 'icon') {
+      console.log('values ', index, subIndex, field)
+      const file = e.target.files?.[0]
 
-    const updatedMenus = menus.map((menu, i) => {
-      if (i === index) {
-        return {
-          ...menu,
-          links: menu.links.map((link, j) => {
-            if (j === subIndex) {
-              return {
-                ...link,
-                [field]: value,
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('upload_preset', 'j8epfynh')
+      const res = await uploadImgToCloudinary(formData)
+
+      console.log('res. ', res?.secure_url)
+      if (!res?.secure_url) return console.log('file upload failed.')
+      const updatedMenus = menus.map((menu: any, i: number) => {
+        if (i === index) {
+          return {
+            ...menu,
+            menus: menu.menus.map((link: any, j: number) => {
+              if (j === subIndex) {
+                return {
+                  ...link,
+                  [field]: res?.secure_url,
+                }
               }
-            }
-            return link
-          }),
+              return link
+            }),
+          }
         }
-      }
-      return menu
-    })
+        return menu
+      })
 
-    setMenus(updatedMenus)
+      setMenus(updatedMenus)
+    } else {
+      const { name, value } = e.target
+      console.log('values ', index, subIndex, field)
+
+      const updatedMenus = menus.map((menu: any, i: number) => {
+        if (i === index) {
+          return {
+            ...menu,
+            menus: menu.menus.map((link: any, j: number) => {
+              if (j === subIndex) {
+                return {
+                  ...link,
+                  [field]: value,
+                }
+              }
+              return link
+            }),
+          }
+        }
+        return menu
+      })
+
+      setMenus(updatedMenus)
+    }
   }
 
+  // const handleIconChange = async (
+  //   index: number,
+  //   subIndex: number,
+  //   field: string,
+  //   e: any
+  // ) => {
+
+  // }
+
   const handleMenuItemDelete = (ind: number, subInd: number) => {
-    const updatedMenus = menus.map((menu, i) => {
+    const updatedMenus = menus.map((menu: any, i: number) => {
       if (i === ind) {
         return {
           ...menu,
-          links: menu.links.filter((link, j) => j !== subInd),
+          menus: menu.menus.filter((link: any, j: number) => j !== subInd),
         }
       }
       return menu
@@ -66,7 +109,7 @@ function FooterSettings() {
   }
 
   const handleColumnDelete = (ind: number) => {
-    setMenus(menus.filter((menu, index) => index !== ind))
+    setMenus(menus.filter((menu: any, index: number) => index !== ind))
   }
 
   const handleAddMenuBlock = (title: any) => {
@@ -75,7 +118,7 @@ function FooterSettings() {
       ...menus,
       {
         title,
-        links: [{ title: '', link: '' }],
+        menus: [{ menu: '', link: '' }],
       },
     ])
   }
@@ -86,16 +129,77 @@ function FooterSettings() {
       (menu: any) => menu.title === title
     )
     if (menuIndex !== -1) {
-      updatedMenus[menuIndex].links.push({ title: '', link: '' })
+      updatedMenus[menuIndex]?.menus?.push({ menu: '', link: '' })
       setMenus(updatedMenus)
     }
   }
 
   const handleShowModal = () => setShowModal(!showModal)
 
-  const submitSave = () => {
-    console.log('menus ', menus)
+  const getHeader = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getFooterRequest()
+        const data = res?.data
+        if (data?.status === 200) {
+          setMenus(data?.data?.columns)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+          console.log('response about maldives', res)
+        }
+        console.log('response ', res)
+      })
+    } catch (error: any) {
+      console.log('error ', error)
+    }
   }
+
+  console.log('menus ', menus)
+
+  const handleAddHeader = async () => {
+    const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+
+    try {
+      startTransition(async () => {
+        const res = await footerRequest({
+          menus,
+          homeBgId,
+          title: 'Header Menu',
+        })
+        const data = res?.data
+        if (data?.status === 201) {
+          getHeader()
+          // setDetectChange(false)
+          setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+      // setDetectChange(false)
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+    }
+  }
+
+  useEffect(() => {
+    getHeader()
+  }, [])
 
   return (
     <>
@@ -106,7 +210,17 @@ function FooterSettings() {
       />
       <Box sx={{ pb: 4 }}>
         <CustomCard sx={{ padding: '40px !important' }}>
-          <HeadingWraper handleSave={submitSave} title="Footer Menus" />
+          {isPending && <CustomLoader />}
+          {alertMsg.message && (
+            <Alert sx={{ mb: 2 }} severity={alertMsg.type as any}>
+              {alertMsg.message}
+            </Alert>
+          )}
+          <HeadingWraper
+            handleSave={handleAddHeader}
+            title="Footer Menus"
+            detectChange={detectChange}
+          />
           <Typography
             variant="body1"
             color="var(--black)"
@@ -115,7 +229,7 @@ function FooterSettings() {
             Columns
           </Typography>
           <Box sx={{ borderRadius: '6px' }}>
-            {menus?.map((menu, index) => (
+            {menus?.map((menu: any, index: number) => (
               <ColumnBlock
                 key={index}
                 menu={menu}

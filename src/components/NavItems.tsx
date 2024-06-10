@@ -32,7 +32,7 @@ function NavItems({ items }: any) {
           role="link"
           aria-labelledby={item.label}
           component={Link}
-          href={item.route}
+          href={item.link}
           sx={{
             pt: 1,
             px: '3px',
@@ -63,7 +63,7 @@ function NavItems({ items }: any) {
             },
           }}
         >
-          {item.label}
+          {item?.menu}
         </MenuItem>
       ))}
     </Box>

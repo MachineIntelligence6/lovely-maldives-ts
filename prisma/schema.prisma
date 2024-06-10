@@ -16,12 +16,14 @@ generator client {
 // TYPES
 type Facts {
   title    String
-  tags    String[]
+  subTags    String[]
+  stars    Int?
 }
 
 type Menus {
   menu   String
   link   String
+  icon   String?
 }
 
 type Columns {
@@ -34,7 +36,7 @@ type Sections {
   title        String?
   ratings      String?
   description  String?
-  images       String[]
+  images  String[]
   facts        Facts[]
 }
 
@@ -76,8 +78,10 @@ model Header {
 // FOOTER SECTION MODEL
 model Footer {
     id        String  @id @default(auto()) @map("_id") @db.ObjectId
-    title     String
+    title     String  
     columns   Columns[]
+    homeBgId    String @map("homeBg_id") @db.ObjectId
+    homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
 }
 
 // ABOUT MALDVES SECTION MODEL
@@ -138,6 +142,7 @@ model HomeBg {
     aboutUsShort AboutUsShort[]
     socialLinkSection SocialLinkSection[]
     header      Header[]
+    footer      Footer[]
 }
 
 model Services {

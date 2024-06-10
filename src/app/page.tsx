@@ -4,10 +4,9 @@ import Typography from '@mui/material/Typography'
 
 import Box from '@mui/system/Box'
 import dynamic from 'next/dynamic'
-// import Header from '@/components/Header'
+import Header from '@/components/Header'
 import apiClient from '@/services/apiClient'
 
-const Header = dynamic(() => import('@/components/Header'))
 const Footer = dynamic(() => import('@/components/Footer'))
 const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
 const OurCollection = dynamic(() => import('@/components/OurCollection'))
@@ -32,7 +31,7 @@ export default async function Home() {
 
   return (
     <>
-      <Header data={data?.data?.header?.[0]} />
+      <Header headerData={data?.data?.header?.[0]} />
       <Banner bannerData={data?.data} />
       <Box
         sx={{
@@ -130,7 +129,7 @@ export default async function Home() {
         brands={data?.data?.brands}
         socialLinkSection={data?.data?.socialLinkSection?.[0]}
       />
-      <Footer />
+      <Footer footerData={data?.data?.footer?.[0]} />
     </>
   )
 }

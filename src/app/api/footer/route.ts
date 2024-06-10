@@ -1,21 +1,19 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
+import { createFooter, getFooter } from '@/services/footer'
 import prisma from '../../../../prisma'
 
 export async function GET() {
   try {
     await connectToDatabase()
 
-    const result = await prisma.header.findFirst()
+    const result = await getFooter()
     if (!result)
-      return NextResponse.json(
-        { message: 'No footer data found' },
-        { status: 404 }
-      )
+      return NextResponse.json({ message: 'No footer data found', status: 409 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
-      { status: 201 }
+      { message: 'Success', data: result, status: 200 },
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)
@@ -27,27 +25,24 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  let result
+  const { title, menus, homeBgId } = bodyData
+  if (!homeBgId)
+    return NextResponse.json({
+      message: 'Please enter all fields to save footer data.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
-    const isExist = await prisma.footer.findFirst()
-
-    if (isExist) {
-      result = await prisma.footer.update({
-        where: {
-          id: isExist.id,
-        },
-        data: bodyData,
+    const result = await createFooter({ title, columns: menus, homeBgId })
+    if (!result)
+      return NextResponse.json({
+        message: 'Footer data not saved, please try again',
+        status: 422,
       })
-    } else {
-      result = await prisma.footer.create({
-        data: bodyData,
-      })
-    }
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {

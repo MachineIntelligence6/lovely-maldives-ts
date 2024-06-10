@@ -1,4 +1,8 @@
-import React, { useState } from 'react'
+/* eslint-disable array-callback-return */
+
+'use client'
+
+import React, { useEffect, useState, useTransition } from 'react'
 import styled from '@emotion/styled'
 import {
   Box,
@@ -9,6 +13,7 @@ import {
   InputLabel,
 } from '@mui/material'
 import CustomSelect from '@/admin-components/items/CustomSelect'
+import { getHotelsRequest } from '@/utils/api-requests/addHotels.request'
 
 const style = {
   position: 'absolute',
@@ -32,14 +37,40 @@ const CustomLabel = styled(InputLabel)(({ theme }) => ({
 }))
 
 const SelectHotel = (props: any) => {
-  const { open, handleShowModal, handleAddHotel, options } = props
+  const { open, handleShowModal, handleAddHotel, options, type } = props
   const [hotel, setHotel] = useState('')
+  const [isPending, startTransition] = useTransition()
+  const [hotels, setHotels] = useState([] as any)
 
   const handleChange = (e: any) => {
     const { value } = e.target
     console.log('value is ', value)
     setHotel(value)
   }
+
+  const getHotels = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getHotelsRequest(1, 500, [])
+        const data = res?.data
+        const hotelsData = [] as any
+        if (data?.status === 200) {
+          data?.data?.map((item: any) => {
+            hotelsData.push({ label: item?.title, value: item?.id })
+          })
+          setHotels(hotelsData)
+        } else {
+          console.log('response about maldives', res)
+        }
+      })
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
+  useEffect(() => {
+    getHotels()
+  }, [])
 
   return (
     <div>
@@ -74,7 +105,7 @@ const SelectHotel = (props: any) => {
           <CustomSelect
             placeholder="Select Stars."
             value={hotel}
-            options={options}
+            options={hotels}
             name="hotel"
             onChange={(e: any) => handleChange(e)}
           />

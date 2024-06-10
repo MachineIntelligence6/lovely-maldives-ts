@@ -77,10 +77,10 @@ const ImagesUploader = (props: any) => {
         </Box>
       ))}
 
-      <label htmlFor="fileInput">
+      <label htmlFor={`fileInput_${label}`}>
         <input
           type="file"
-          id="fileInput"
+          id={`fileInput_${label}`}
           hidden
           onChange={(e) => handleChange(e, label)}
         />

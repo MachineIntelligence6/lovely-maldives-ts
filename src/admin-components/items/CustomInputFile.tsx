@@ -77,6 +77,7 @@ function LogoInputFile(props: any) {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            bgcolor: 'silver',
             p: 2,
           }}
         >

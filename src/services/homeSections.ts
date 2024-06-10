@@ -11,6 +11,7 @@ export async function getHomeSections() {
       brands: true,
       socialLinkSection: true,
       header: true,
+      footer: true,
     },
   })
 }

@@ -2,13 +2,22 @@
 
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle'
 import DeleteIcon from '@mui/icons-material/Delete'
+import BackupIcon from '@mui/icons-material/Backup'
 import { Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import { useState } from 'react'
 import TextFieldWraper from '../items/TextfieldWraper'
+import CustomIconUploader from '../items/CustomIconUploader'
 
 function MenuAddItem(props: any) {
-  const { handleMenuItemDelete, handleChange, index, subIndex } = props
+  const {
+    handleMenuItemDelete,
+    handleChange,
+    index,
+    subIndex,
+    isColumns,
+    handleIconChange,
+  } = props
   const [active, setActive] = useState(false)
 
   const handleActive = () => {
@@ -73,6 +82,17 @@ function MenuAddItem(props: any) {
           name="link"
           onChange={(e: any) => handleChange(index, subIndex, 'link', e)}
         />
+        {isColumns && (
+          <CustomIconUploader
+            onChange={(e: any) => {
+              const file = e.target.files?.[0]
+              handleChange(index, subIndex, 'icon', e)
+            }}
+            index={index}
+            value={props?.menu?.icon ? `${props?.menu?.menu} Icon.jpg` : 'Upload Icon'}
+            subIndex={subIndex}
+          />
+        )}
       </Stack>
     </Box>
   )

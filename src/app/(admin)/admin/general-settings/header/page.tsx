@@ -60,7 +60,7 @@ function HeaderSettings() {
       setValues({ ...values, otherUrl: res?.secure_url })
     }
   }
-  console.log('values ', values)
+
   const handleAddMenu = () => {
     setMenus([
       ...menus,
@@ -121,7 +121,7 @@ function HeaderSettings() {
         const data = res?.data
         if (data?.status === 201) {
           getHeader()
-          setDetectChange(false)
+          // setDetectChange(false)
           setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
@@ -133,7 +133,7 @@ function HeaderSettings() {
           }, 3000)
         }
       })
-      setDetectChange(false)
+      // setDetectChange(false)
     } catch (error: any) {
       setAlertMsg({
         type: 'error',
