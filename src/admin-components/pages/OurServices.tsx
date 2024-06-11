@@ -9,7 +9,7 @@ import {
   getOurServicesRequest,
   ourServicesRequest,
 } from '@/utils/api-requests/services.request'
-// import useHomeBgId from '@/utils/useHomeBgId'
+import useHomeBgId from '@/utils/useHomeBgId'
 import AddServiceModal from './modals/AddServiceModal'
 import { CustomCard } from '../styled/CustomCard'
 import CardsSlider from '../sliders/CardsSlider'
@@ -21,8 +21,7 @@ const OurServices = () => {
   const [services, setServices] = useState([] as any)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
-  // const homeBgId = useHomeBgId()
-  const [homeBgId, setHomeBgId] = useState('')
+  const homeBgId = useHomeBgId()
 
   const handleShowModal = () => setShowModal(!showModal)
 
@@ -88,7 +87,6 @@ const OurServices = () => {
 
   useEffect(() => {
     getOurServices()
-    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   return (

@@ -15,7 +15,7 @@ import {
 } from '@/utils/api-requests/footer.request'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
-// import useHomeBgId from '@/utils/useHomeBgId'
+import useHomeBgId from '@/utils/useHomeBgId'
 
 function FooterSettings() {
   const [isPending, startTransition] = useTransition()
@@ -23,8 +23,7 @@ function FooterSettings() {
   const [showModal, setShowModal] = useState(false)
   const [detectChange, setDetectChange] = useState(true)
   const [menus, setMenus] = useState([] as any)
-  // const homeBgId = useHomeBgId()
-  const [homeBgId, setHomeBgId] = useState('')
+  const homeBgId = useHomeBgId()
 
   const handleChange = async (
     index: number,
@@ -202,7 +201,6 @@ function FooterSettings() {
 
   useEffect(() => {
     getHeader()
-    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   return (

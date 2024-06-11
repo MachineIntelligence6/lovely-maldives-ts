@@ -9,7 +9,7 @@ import {
   getTopBrandsRequest,
   topBrandsRequest,
 } from '@/utils/api-requests/brands.request'
-// import useHomeBgId from '@/utils/useHomeBgId'
+import useHomeBgId from '@/utils/useHomeBgId'
 import AddBrand from './modals/AddBrand'
 import { CustomCard } from '../styled/CustomCard'
 import TopBrandsSlider from '../sliders/TopBrandsSlider'
@@ -21,8 +21,7 @@ const TopBrands = () => {
   const [brands, setBrands] = useState([] as any)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
-  // const homeBgId = useHomeBgId()
-  const [homeBgId, setHomeBgId] = useState('')
+  const homeBgId = useHomeBgId()
 
   const handleShowModal = () => setShowModal(!showModal)
 
@@ -94,7 +93,6 @@ const TopBrands = () => {
 
   useEffect(() => {
     getTopBrands()
-    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   return (

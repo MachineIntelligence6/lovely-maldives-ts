@@ -10,7 +10,7 @@ import {
   getSocialLinkSectionRequest,
   socialLinkSectionRequest,
 } from '@/utils/api-requests/social.request'
-// import useHomeBgId from '@/utils/useHomeBgId'
+import useHomeBgId from '@/utils/useHomeBgId'
 import { CustomCard } from '../styled/CustomCard'
 import HeadingWraper from '../common/HeadingWraper'
 import TextFieldWraper from '../items/TextfieldWraper'
@@ -22,8 +22,7 @@ const SocialLinkSection = () => {
   const [imgUrl, setImgUrl] = useState('')
   const [detectChange, setDetectChange] = useState(true)
   const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
-  // const homeBgId = useHomeBgId()
-  const [homeBgId, setHomeBgId] = useState('')
+  const homeBgId = useHomeBgId()
   const [values, setValues] = useState({
     title: '',
     socialMedia: '',
@@ -112,7 +111,6 @@ const SocialLinkSection = () => {
 
   useEffect(() => {
     getSocialLinkSection()
-    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   return (
