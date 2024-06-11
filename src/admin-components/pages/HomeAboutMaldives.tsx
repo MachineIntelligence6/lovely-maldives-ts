@@ -9,7 +9,7 @@ import {
   aboutMaldivesShortRequest,
   getAboutMaldivesShortRequest,
 } from '@/utils/api-requests/about-maldives.request'
-// import useHomeBgId from '@/utils/useHomeBgId'
+import useHomeBgId from '@/utils/useHomeBgId'
 import { CustomCard } from '../styled/CustomCard'
 import HeadingWraper from '../common/HeadingWraper'
 import CustomLoader from '../common/CustomLoader'
@@ -23,8 +23,8 @@ const HomeAboutMaldives = () => {
   const [editorText, setEditorText] = useState('')
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
-  // const homeBgId = useHomeBgId()
-  const [homeBgId, setHomeBgId] = useState('')
+  const homeBgId = useHomeBgId()
+  // const [homeBgId, setHomeBgId] = useState('')
 
   const handleEditorValue = (value: any) => {
     setEditorText(value)
@@ -81,7 +81,6 @@ const HomeAboutMaldives = () => {
 
   useEffect(() => {
     getAboutMaldivesShort()
-    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   return (

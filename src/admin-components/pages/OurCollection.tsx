@@ -10,7 +10,7 @@ import {
   collectionRequest,
   getCollectionsRequest,
 } from '@/utils/api-requests/collections-request'
-// import useHomeBgId from '@/utils/useHomeBgId'
+import useHomeBgId from '@/utils/useHomeBgId'
 import AddCollection from './modals/AddCollection'
 import { CustomCard } from '../styled/CustomCard'
 import CollectionSlider from '../sliders/CollectionSlider'
@@ -22,8 +22,7 @@ const OurCollection = () => {
   const [collections, setCollections] = useState([] as any)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
-  // const homeBgId = useHomeBgId()
-  const [homeBgId, setHomeBgId] = useState('')
+  const homeBgId = useHomeBgId()
 
   const handleShowModal = () => setShowModal(!showModal)
 
@@ -99,7 +98,6 @@ const OurCollection = () => {
 
   useEffect(() => {
     getCollections()
-    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   return (
