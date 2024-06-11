@@ -11,6 +11,7 @@ interface Header {
   otherBgcolor: string
   homeBgId: string
   menus: [{ menu: string; link: string }]
+  menusBgcolor: string
 }
 
 export async function createHeader(data: Header) {
@@ -36,6 +37,7 @@ export async function createHeader(data: Header) {
         heroBgcolor: data?.heroBgcolor,
         otherBgcolor: data?.otherBgcolor,
         menus: data?.menus,
+        menusBgcolor: data?.menusBgcolor,
         homeBg: {
           connect: {
             id: data.homeBgId,

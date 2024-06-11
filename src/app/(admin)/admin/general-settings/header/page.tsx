@@ -38,6 +38,7 @@ function HeaderSettings() {
     otherBgcolor: '',
     heroUrl: '',
     otherUrl: '',
+    menusBgcolor: '',
   })
 
   const hanldeFileChange = async (e: any, logoOf: string) => {
@@ -113,17 +114,15 @@ function HeaderSettings() {
       console.log('error ', error)
     }
   }
-
+  console.log('values ', values)
   const handleAddHeader = async () => {
-    // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
-    console.log('homeBgId ', homeBgId)
+    console.log('values ', values)
     try {
       startTransition(async () => {
         const res = await headerRequest({ ...values, homeBgId, menus })
         const data = res?.data
         if (data?.status === 201) {
           getHeader()
-          // setDetectChange(false)
           setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
@@ -135,7 +134,6 @@ function HeaderSettings() {
           }, 3000)
         }
       })
-      // setDetectChange(false)
     } catch (error: any) {
       setAlertMsg({
         type: 'error',
@@ -256,8 +254,6 @@ function HeaderSettings() {
             />
           </Box>
         </Stack>
-        {/* </CustomCard>
-      <CustomCard sx={{ mt: 4, padding: '40px !important' }}> */}
         <Box
           sx={{
             mt: 4,
@@ -272,13 +268,25 @@ function HeaderSettings() {
         >
           Header Menus
         </Typography>
-        {/* <Typography
+
+        <Box sx={{ my: 3 }}>
+          <CustomLabel id="demo-simple-select-label" sx={{ mb: 2 }}>
+            Menus Background Color
+          </CustomLabel>
+          <HeaderBgHandler
+            handleValuesChange={handleValuesChange}
+            value={values?.menusBgcolor}
+            name="menusBgcolor"
+          />
+        </Box>
+
+        <Typography
           variant="body1"
           color="var(--black)"
-          sx={{ fontSize: '17px', mb: 2, fontWeight: 'bold' }}
+          sx={{ fontSize: '18px', fontWeight: 'bold' }}
         >
           Menus
-        </Typography> */}
+        </Typography>
         <Box sx={{ border: '1px solid #e1e1e1', borderRadius: '6px', mt: 2 }}>
           {menus?.map((menu: any, index: number) => (
             <MenuAddItem

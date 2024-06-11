@@ -71,6 +71,7 @@ model Header {
     heroBgcolor String
     otherBgcolor String
     menus   Menus[]
+    menusBgcolor String
     homeBgId    String @map("homeBg_id") @db.ObjectId
     homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
 }
