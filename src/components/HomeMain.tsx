@@ -8,6 +8,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/system/Box'
 import dynamic from 'next/dynamic'
+import axios from 'axios'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import Header from './Header'
 import Banner from './Banner'
@@ -53,7 +54,7 @@ export default async function HomeMain() {
   const getHomeData = async () => {
     try {
       setLoading(true)
-      const res = await apiClient.get('/home')
+      const res = await axios.get('/api/home')
       const data = res?.data
       console.log('data =>>> ', res)
       setLoading(false)
