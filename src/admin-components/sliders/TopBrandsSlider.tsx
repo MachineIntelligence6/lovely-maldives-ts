@@ -85,7 +85,7 @@ const TopBrandsSlider = (props: any) => {
       }}
     >
       <Box component={Slider} {...settings}>
-        {brands.map((brand: any, index: number) => (
+        {brands?.map((brand: any, index: number) => (
           <Box
             key={index}
             // sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap:'90px' }}

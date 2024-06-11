@@ -81,7 +81,7 @@ export default function Footer(props: any) {
             {/* {iconMapping[menu?.menu]} */}
             <Box
               component={Link}
-              href={menu?.link}
+              href={menu?.link || '/'}
               sx={{
                 color: 'white',
                 textDecoration: 'none',

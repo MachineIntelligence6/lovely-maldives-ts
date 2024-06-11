@@ -59,7 +59,7 @@ export default function About(props: any) {
                 px: { xs: '20px', md: '0' },
               }}
               dangerouslySetInnerHTML={{
-                __html: data?.description,
+                __html: data?.description || '',
               }}
             >
               {/* Lovely Maldives, a distinguished travel agency from the Maldives
