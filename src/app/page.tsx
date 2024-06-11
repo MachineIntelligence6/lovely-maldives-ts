@@ -44,6 +44,7 @@ export default async function Home() {
       socialLinkSection: [],
     },
   }
+  console.log('data ', data)
   if (!data || !data.data) {
     throw new Error('Invalid data structure')
   }
