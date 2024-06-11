@@ -2,7 +2,7 @@
 
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -23,6 +23,7 @@ export const mobileImgUrl: any = [
 
 export default function Banner(props: any) {
   const { bannerData } = props
+  const [data, setData] = useState('' as any)
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const [bgImgStyle, setBgImgStyle] = React.useState({
     backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
@@ -36,8 +37,9 @@ export default function Banner(props: any) {
   })
 
   React.useEffect(() => {
-    const bannersLength = bannerData?.bgImages.length
-    const bannerImages = bannerData?.bgImages
+    console.log('data jkhjksd ', data)
+    const bannersLength = data?.bgImages?.length
+    const bannerImages = data?.bgImages
 
     const randomIndexdev: number = Math.floor(Math.random() * bannersLength)
 
@@ -62,7 +64,7 @@ export default function Banner(props: any) {
          url('${
            bannersLength > 0
              ? bannerImages[randomIndexdev]
-             : imgUrl[randomIndexdev].src
+             : imgUrl[randomIndexdev]?.src
          }')`,
         backgroundSize: 'cover',
         backgroundPosition: '100%',
@@ -72,7 +74,11 @@ export default function Banner(props: any) {
         position: 'relative',
       })
     }
-  }, [lessThanMd])
+  }, [lessThanMd, data])
+  console.log('banner data is ', data)
+  useEffect(() => {
+    setData(JSON.parse(localStorage.getItem('home') as any))
+  }, [bannerData])
 
   return (
     <Box sx={{ backgroundColor: 'lightgray', ...bgImgStyle }}>
@@ -100,7 +106,7 @@ export default function Banner(props: any) {
         >
           <Box sx={{ pb: { xs: '10%', md: '6%' }, px: '10px' }}>
             <Typography sx={{ fontSize: { xs: '24px', md: '35px' } }}>
-              {bannerData?.title}
+              {data?.title}
             </Typography>
             <Typography
               variant="h1"
@@ -110,7 +116,7 @@ export default function Banner(props: any) {
                 fontWeight: 600,
               }}
             >
-              {bannerData?.subTitle}{' '}
+              {data?.subTitle}{' '}
             </Typography>
           </Box>
         </Box>

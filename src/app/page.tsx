@@ -1,4 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
+'use client'
+
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
@@ -7,6 +12,7 @@ import Box from '@mui/system/Box'
 import dynamic from 'next/dynamic'
 import Header from '@/components/Header'
 import apiClient from '@/services/apiClient'
+import CustomLoader from '@/admin-components/common/CustomLoader'
 
 const Footer = dynamic(() => import('@/components/Footer'))
 const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
@@ -19,41 +25,48 @@ const OurServices = dynamic(() => import('@/components/OurServices'))
 
 // export const getHomeData = async () => {
 //   try {
-//     const response = await axios.get(
-//       'https://lovely-maldives-ts.vercel.app/api/home'
-//     )
+//     const response = await apiClient.get('/home')
 //     return response.data
 //   } catch (error: any) {
-//     console.log('Failed to fetch home data:', error.message)
 //     throw new Error(error)
 //   }
 // }
 
-export default async function Home() {
+export default function Home() {
   // const data = await getHomeData()
-  const data = {
-    data: {
-      aboutMaldivesShort: [{ title: '', description: '' }],
-      header: [],
-      footer: [],
-      aboutUsShort: [],
-      services: [],
-      wonders: [],
-      collections: [],
-      brands: [],
-      socialLinkSection: [],
-    },
+  // const aboutMaldives = homeData?.aboutMaldivesShort
+  const [loading, setLoading] = useState(false)
+  const [homeData, setHomeData] = useState('' as any)
+
+  const getHomeData = async () => {
+    try {
+      setLoading(true)
+      const res = await axios.get('/api/home')
+      const data = res?.data
+      console.log('data =>>> ', res)
+      setLoading(false)
+      if (res?.status === 200) {
+        setHomeData(data?.data)
+        localStorage.setItem('home', JSON.stringify(data?.data))
+      } else {
+        // alert('Error occured while fetching about maldives data.')
+        console.log('response about maldives', res)
+      }
+    } catch (error: any) {
+      setLoading(false)
+      console.log('error ', error)
+    }
   }
-  console.log('data ', data)
-  if (!data || !data.data) {
-    throw new Error('Invalid data structure')
-  }
-  const aboutMaldives = data?.data?.aboutMaldivesShort
+
+  useEffect(() => {
+    getHomeData()
+  }, [])
 
   return (
     <>
-      <Header headerData={data?.data?.header?.[0]} />
-      <Banner bannerData={data?.data} />
+      {loading && <CustomLoader />}
+      <Header headerData={homeData?.header?.[0]} />
+      <Banner bannerData={homeData} />
       <Box
         sx={{
           position: 'relative',
@@ -80,7 +93,7 @@ export default async function Home() {
               fontWeight: 400,
             }}
           >
-            {aboutMaldives?.[0]?.title}
+            {homeData?.aboutMaldivesShort?.[0]?.title}
           </Typography>
           <Typography
             component="div"
@@ -95,7 +108,7 @@ export default async function Home() {
               fontFamily: 'century-gothic',
             }}
             dangerouslySetInnerHTML={{
-              __html: aboutMaldives?.[0]?.description || '',
+              __html: homeData?.aboutMaldivesShort?.[0]?.description,
             }}
           >
             {/* Maldives is a small country located in the Indian Ocean consisting
@@ -134,23 +147,23 @@ export default async function Home() {
           </Box>
         </Box>
         <SidePalmTree />
-        <OurServices services={data?.data?.services} />
+        <OurServices services={homeData?.services} />
       </Box>
-      <About data={data?.data?.aboutUsShort?.[0]} />
-      <Explore wonders={data?.data?.wonders} />
+      <About data={homeData?.aboutUsShort?.[0]} />
+      <Explore wonders={homeData?.wonders} />
       <OurCollection
         heading="Our Collection"
         button="block"
         iconShow="none"
         radius="0"
         bottomradius="0"
-        collections={data?.data?.collections}
+        collections={homeData?.collections}
       />
       <TopBrands
-        brands={data?.data?.brands}
-        socialLinkSection={data?.data?.socialLinkSection?.[0]}
+        brands={homeData?.brands}
+        socialLinkSection={homeData?.socialLinkSection?.[0]}
       />
-      <Footer footerData={data?.data?.footer?.[0]} />
+      <Footer footerData={homeData?.footer?.[0]} />
     </>
   )
 }
