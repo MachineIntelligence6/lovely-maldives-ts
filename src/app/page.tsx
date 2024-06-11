@@ -1,46 +1,37 @@
-// import Link from 'next/link'
-// import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
-// import Typography from '@mui/material/Typography'
-// import axios from 'axios'
+import Link from 'next/link'
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
+import Typography from '@mui/material/Typography'
 
-// import Box from '@mui/system/Box'
+import Box from '@mui/system/Box'
 import dynamic from 'next/dynamic'
-// import Header from '@/components/Header'
-// import apiClient from '@/services/apiClient'
+import Header from '@/components/Header'
+import apiClient from '@/services/apiClient'
 
-const HomeMain = dynamic(() => import('../components/HomeMain'))
-// const Footer = dynamic(() => import('@/components/Footer'))
-// const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
-// const OurCollection = dynamic(() => import('@/components/OurCollection'))
-// const Explore = dynamic(() => import('@/components/Explore'))
-// const About = dynamic(() => import('@/components/About'))
-// const TopBrands = dynamic(() => import('@/components/TopBrands'))
-// const Banner = dynamic(() => import('@/components/Banner'))
-// const OurServices = dynamic(() => import('@/components/OurServices'))
+const Footer = dynamic(() => import('@/components/Footer'))
+const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
+const OurCollection = dynamic(() => import('@/components/OurCollection'))
+const Explore = dynamic(() => import('@/components/Explore'))
+const About = dynamic(() => import('@/components/About'))
+const TopBrands = dynamic(() => import('@/components/TopBrands'))
+const Banner = dynamic(() => import('@/components/Banner'))
+const OurServices = dynamic(() => import('@/components/OurServices'))
 
-// export const runtime = 'edge'
-
-// export const getHomeData = async () => {
-//   try {
-//     const response = await axios.get('/home')
-//     return response.data
-//   } catch (error: any) {
-//     console.log('Failed to fetch home data:', error.message)
-//     throw new Error(error)
-//   }
-// }
+export const getHomeData = async () => {
+  try {
+    const response = await apiClient.get('/home')
+    return response.data
+  } catch (error: any) {
+    throw new Error(error)  
+  }
+}
 
 export default async function Home() {
-  // const data = await getHomeData()
-  // if (!data || !data.data) {
-  //   throw new Error('Invalid data structure')
-  // }
-  // const aboutMaldives = data?.data?.aboutMaldivesShort
+  const data = await getHomeData()
+  const aboutMaldives = data?.data?.aboutMaldivesShort
 
   return (
     <>
-      <HomeMain />
-      {/* <Header headerData={data?.data?.header?.[0]} />
+      <Header headerData={data?.data?.header?.[0]} />
       <Banner bannerData={data?.data} />
       <Box
         sx={{
@@ -83,9 +74,13 @@ export default async function Home() {
               fontFamily: 'century-gothic',
             }}
             dangerouslySetInnerHTML={{
-              __html: aboutMaldives?.[0]?.description || '',
+              __html: aboutMaldives?.[0]?.description,
             }}
           >
+            {/* Maldives is a small country located in the Indian Ocean consisting
+            of 1250 islands and 62 atolls. Lorem ipsum Lorem ipsum dolor sit
+            amet, Maldives is a small country located in the Indian Ocean
+            consisting of 1250 island sand 62 at olls. */}
           </Typography>
           <Box
             sx={{
@@ -134,7 +129,7 @@ export default async function Home() {
         brands={data?.data?.brands}
         socialLinkSection={data?.data?.socialLinkSection?.[0]}
       />
-      <Footer footerData={data?.data?.footer?.[0]} /> */}
+      <Footer footerData={data?.data?.footer?.[0]} />
     </>
   )
 }
