@@ -59,7 +59,7 @@ function Header(props: any) {
     window.addEventListener('resize', handleResize)
 
     if (headerData) {
-      // localStorage.setItem('headerData', JSON.stringify(headerData))
+      localStorage.setItem('headerData', JSON.stringify(headerData))
       setData(headerData)
     }
 
