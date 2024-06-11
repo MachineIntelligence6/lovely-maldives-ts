@@ -3,14 +3,14 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
 
 import Box from '@mui/system/Box'
 import dynamic from 'next/dynamic'
-import Header from '@/components/Header'
+// import Header from '@/components/Header'
 import apiClient from '@/services/apiClient'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import { getHomeBgRequest } from '@/utils/api-requests/home.request'
@@ -23,6 +23,8 @@ const About = dynamic(() => import('@/components/About'))
 const TopBrands = dynamic(() => import('@/components/TopBrands'))
 const Banner = dynamic(() => import('@/components/Banner'))
 const OurServices = dynamic(() => import('@/components/OurServices'))
+
+const Header = React.lazy(() => import('@/components/Header'))
 
 // export const getHomeData = async () => {
 //   try {
@@ -83,7 +85,7 @@ export default function Home() {
   }, [])
 
   return (
-    <>
+    <Suspense fallback={<CustomLoader />}>
       {loading && <CustomLoader />}
       <Header />
       <Banner bannerData={homeData} />
@@ -184,6 +186,6 @@ export default function Home() {
         socialLinkSection={homeData?.socialLinkSection?.[0]}
       />
       <Footer footerData={homeData?.footer?.[0]} />
-    </>
+    </Suspense>
   )
 }

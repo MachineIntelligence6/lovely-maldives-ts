@@ -36,6 +36,7 @@ export async function POST(req: Request) {
     otherBgcolor,
     homeBgId,
     menus,
+    menusBgcolor,
   } = bodyData
 
   try {
@@ -52,6 +53,7 @@ export async function POST(req: Request) {
       otherBgcolor,
       homeBgId,
       menus,
+      menusBgcolor,
     })
 
     if (!result)

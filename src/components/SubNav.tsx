@@ -5,12 +5,12 @@ import NavItems from './NavItems'
 
 export default function SubNav({ menuItems }: any) {
   const isOpen = useMenuStore((state) => state.isOpen)
-
+  console.log('menuItems ', menuItems)
   return (
     <Box
       component="nav"
       sx={{
-        background: 'white',
+        background: menuItems?.menusBgcolor || 'white',
         position: 'fixed',
         top: { xs: '0', md: '90px' },
         boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
@@ -33,7 +33,7 @@ export default function SubNav({ menuItems }: any) {
         },
       }}
     >
-      <NavItems items={menuItems} />
+      <NavItems items={menuItems?.menus} />
     </Box>
   )
 }

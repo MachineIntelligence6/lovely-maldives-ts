@@ -57,7 +57,11 @@ function Header() {
     }
   }
 
-  const getHomeData = async () => {
+  const getHeaderData = async () => {
+    // const header = JSON.parse(localStorage.getItem('home') as any)
+    // if (header) {
+    //   setLocalData(header?.header?.[0])
+    // } else {
     try {
       setLoading(true)
       const res = await apiClient.get('/header')
@@ -74,6 +78,7 @@ function Header() {
       setLoading(false)
       console.log('error ', error)
     }
+    // }
   }
 
   React.useEffect(() => {
@@ -107,7 +112,7 @@ function Header() {
   }, [isOpen, lessThanMd])
 
   useEffect(() => {
-    getHomeData()
+    getHeaderData()
   }, [])
   console.log('localData =>>> ', localData)
   return (
@@ -125,9 +130,9 @@ function Header() {
           width: '100%',
           background: isScrolled
             ? isOpen && lessThanMd
-              ? localData?.heroBgcolor
-              : localData?.otherBgcolor
-            : localData?.heroBgcolor,
+              ? localData?.heroBgcolor || 'var(--brown)'
+              : localData?.otherBgcolor || 'white'
+            : localData?.heroBgcolor || 'var(--brown)',
           transition: 'all ease .5s',
           zIndex: 998,
         }}
@@ -188,7 +193,11 @@ function Header() {
                 }}
               >
                 <Image
-                  src={isScrolled ? localData?.otherLogo : localData?.heroLogo}
+                  src={
+                    isScrolled
+                      ? localData?.otherLogo || profilePicCol
+                      : localData?.heroLogo || profilePic
+                  }
                   alt="hero logo"
                   width={localData?.heroWidth}
                   height={localData?.heroHeight}
@@ -254,10 +263,12 @@ function Header() {
           </Box>
         </Toolbar>
       </AppBar>
-      {lessThanMd ? (
+      {loading ? (
+        ''
+      ) : lessThanMd ? (
         <MobileNav menuItems={menuItem} />
       ) : (
-        <SubNav menuItems={localData?.menus} />
+        <SubNav menuItems={localData} />
       )}
     </Box>
   )
