@@ -9,7 +9,6 @@ interface Footer {
 }
 
 export async function createFooter(data: Footer) {
-  console.log('data is ', data)
   const isExist = await prisma.footer.findFirst()
   let result
   if (isExist) {

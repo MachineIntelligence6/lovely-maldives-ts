@@ -33,7 +33,14 @@ const HotelsWraper = (props: any) => {
       >
         {hotels?.length > 0 ? (
           hotels?.map((item: any, index: number) => (
-            <Grid key={index} item xs={12} sm={6} md={6} lg={4}>
+            <Grid
+              key={`hotelwraper_1_${index}`}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={4}
+            >
               <Box
                 component={motion.div}
                 initial={{ opacity: 0, y: 20 }}
@@ -124,7 +131,7 @@ const HotelsWraper = (props: any) => {
                     <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
                       {[...Array(parseInt(item?.ratings, 10))].map(
                         (_: any, ind: number) => (
-                          <StarRateIcon key={index} />
+                          <StarRateIcon key={`_${index}_${ind}`} />
                         )
                       )}
                     </Box>

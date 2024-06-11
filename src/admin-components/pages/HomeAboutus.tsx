@@ -14,6 +14,7 @@ import {
   aboutusShortRequest,
   getaboutusShortRequest,
 } from '@/utils/api-requests/aboutus-short.request'
+// import useHomeBgId from '@/utils/useHomeBgId'
 import AddOptionModal from './modals/AddOptionModal'
 import CustomLoader from '../common/CustomLoader'
 
@@ -30,6 +31,8 @@ const HomeAboutus = () => {
   const [editorText, setEditorText] = useState('')
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
+  // const homeBgId = useHomeBgId()
+  const [homeBgId, setHomeBgId] = useState('')
 
   const handleEditorValue = (value: any) => {
     setEditorText(value)
@@ -73,7 +76,7 @@ const HomeAboutus = () => {
   }
 
   const handleSave = async () => {
-    const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+    // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
     try {
       startTransition(async () => {
         const res = await aboutusShortRequest({
@@ -106,6 +109,7 @@ const HomeAboutus = () => {
 
   useEffect(() => {
     getAboutusShort()
+    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   return (

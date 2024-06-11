@@ -17,12 +17,15 @@ import {
   getHeaderRequest,
   headerRequest,
 } from '@/utils/api-requests/header.request'
+// import useHomeBgId from '@/utils/useHomeBgId'
 
 function HeaderSettings() {
   const [isPending, startTransition] = useTransition()
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(true)
   const [menus, setMenus] = useState([] as any)
+  // const homeBgId = useHomeBgId()
+  const [homeBgId, setHomeBgId] = useState('')
   const [logos, setLogos] = useState({
     hero: null as any,
     other: null as any,
@@ -113,7 +116,7 @@ function HeaderSettings() {
   }
 
   const handleAddHeader = async () => {
-    const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+    // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
 
     try {
       startTransition(async () => {
@@ -148,6 +151,7 @@ function HeaderSettings() {
 
   useEffect(() => {
     getHeader()
+    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   const handleValuesChange = (e: any) => {

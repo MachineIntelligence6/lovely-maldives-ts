@@ -4,7 +4,7 @@
 
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -36,7 +36,7 @@ function Header(props: any) {
   const toggleMenu = useMenuStore((state) => state.toggleMenu)
   const { scrollY } = useScroll()
   const [data, setData] = useState('')
-  const localData = JSON.parse(localStorage.getItem('headerData') as any)
+  const [localData, setLocalData] = useState('' as any)
 
   const menuItem = [
     { label: 'About Maldives', route: '/about-maldives' },
@@ -59,7 +59,7 @@ function Header(props: any) {
     window.addEventListener('resize', handleResize)
 
     if (headerData) {
-      localStorage.setItem('headerData', JSON.stringify(headerData))
+      // localStorage.setItem('headerData', JSON.stringify(headerData))
       setData(headerData)
     }
 
@@ -89,6 +89,10 @@ function Header(props: any) {
       }
     }
   }, [isOpen, lessThanMd])
+
+  useEffect(() => {
+    setLocalData(JSON.parse(localStorage.getItem('headerData') as any))
+  }, [])
 
   return (
     <Box component="header">

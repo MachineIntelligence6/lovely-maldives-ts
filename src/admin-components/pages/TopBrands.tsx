@@ -9,6 +9,7 @@ import {
   getTopBrandsRequest,
   topBrandsRequest,
 } from '@/utils/api-requests/brands.request'
+// import useHomeBgId from '@/utils/useHomeBgId'
 import AddBrand from './modals/AddBrand'
 import { CustomCard } from '../styled/CustomCard'
 import TopBrandsSlider from '../sliders/TopBrandsSlider'
@@ -20,6 +21,8 @@ const TopBrands = () => {
   const [brands, setBrands] = useState([] as any)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
+  // const homeBgId = useHomeBgId()
+  const [homeBgId, setHomeBgId] = useState('')
 
   const handleShowModal = () => setShowModal(!showModal)
 
@@ -51,7 +54,7 @@ const TopBrands = () => {
   }
 
   const handleAddBrand = async (newBrand: any) => {
-    const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+    // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
     console.log('newBrand', newBrand)
     try {
       startTransition(async () => {
@@ -91,6 +94,7 @@ const TopBrands = () => {
 
   useEffect(() => {
     getTopBrands()
+    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   return (

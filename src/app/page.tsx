@@ -16,17 +16,24 @@ const TopBrands = dynamic(() => import('@/components/TopBrands'))
 const Banner = dynamic(() => import('@/components/Banner'))
 const OurServices = dynamic(() => import('@/components/OurServices'))
 
+export const runtime = 'edge'
+
 export const getHomeData = async () => {
   try {
     const response = await apiClient.get('/home')
+    console.log('Response data is =>>> ', response.data)
     return response.data
   } catch (error: any) {
+    console.error('Failed to fetch home data:', error?.message)
     throw new Error(error)
   }
 }
 
 export default async function Home() {
   const data = await getHomeData()
+  if (!data || !data.data) {
+    throw new Error('Invalid data structure')
+  }
   const aboutMaldives = data?.data?.aboutMaldivesShort
 
   return (

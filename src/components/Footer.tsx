@@ -45,7 +45,6 @@ const StyledImage = styled(Image)({
 
 export default function Footer(props: any) {
   const { footerData } = props
-  console.log('footer data ', footerData?.columns)
 
   const FooterBoxes = footerData?.columns?.map((col: any, inde: number) => {
     return (

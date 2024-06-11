@@ -9,6 +9,7 @@ import {
   aboutMaldivesShortRequest,
   getAboutMaldivesShortRequest,
 } from '@/utils/api-requests/about-maldives.request'
+// import useHomeBgId from '@/utils/useHomeBgId'
 import { CustomCard } from '../styled/CustomCard'
 import HeadingWraper from '../common/HeadingWraper'
 import CustomLoader from '../common/CustomLoader'
@@ -22,6 +23,8 @@ const HomeAboutMaldives = () => {
   const [editorText, setEditorText] = useState('')
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
+  // const homeBgId = useHomeBgId()
+  const [homeBgId, setHomeBgId] = useState('')
 
   const handleEditorValue = (value: any) => {
     setEditorText(value)
@@ -36,7 +39,7 @@ const HomeAboutMaldives = () => {
         if (res?.status === 200) {
           setEditorText(data?.description)
         } else {
-          alert("Error occured while fetching about maldives data.")
+          alert('Error occured while fetching about maldives data.')
           console.log('response about maldives', res)
         }
       })
@@ -46,7 +49,7 @@ const HomeAboutMaldives = () => {
   }
 
   const handleSave = async () => {
-    const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+    // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
     try {
       startTransition(async () => {
         const res = await aboutMaldivesShortRequest({
@@ -78,6 +81,7 @@ const HomeAboutMaldives = () => {
 
   useEffect(() => {
     getAboutMaldivesShort()
+    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   return (

@@ -286,7 +286,7 @@ const AddHotels = () => {
                 if (section?.type === 'title') {
                   return (
                     <Box
-                      key={index}
+                      key={`title_${index}`}
                       sx={{
                         mt: 3,
                         pb: 8,
@@ -311,7 +311,7 @@ const AddHotels = () => {
                 if (section?.type === 'ratings') {
                   return (
                     <Box
-                      key={index}
+                      key={`ratings_${index}`}
                       sx={{
                         mt: 3,
                         pb: 8,
@@ -337,7 +337,7 @@ const AddHotels = () => {
                 if (section?.type === 'gallery_slider') {
                   return (
                     <Box
-                      key={index}
+                      key={`gallery_slider_${index}`}
                       sx={{
                         mt: 3,
                         pb: 5,
@@ -362,7 +362,7 @@ const AddHotels = () => {
                 if (section?.type === 'facts') {
                   return (
                     <Box
-                      key={index}
+                      key={`facts_${index}`}
                       sx={{
                         mt: 3,
                         pb: 5,
@@ -385,7 +385,7 @@ const AddHotels = () => {
                 }
                 return (
                   <Box
-                    key={index}
+                    key={`description_${index}`}
                     sx={{
                       mt: 3,
                       pb: 8,

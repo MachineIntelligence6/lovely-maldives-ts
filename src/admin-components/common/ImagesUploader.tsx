@@ -27,7 +27,7 @@ const ImagesUploader = (props: any) => {
     >
       {images?.map((file: any, index: number) => (
         <Box
-          key={index}
+          key={index + 2}
           sx={{
             width: '100%',
             minWidth: '180px',

@@ -23,7 +23,7 @@ function NavItems({ items }: any) {
         gap: { xs: 0, md: '20px' },
       }}
     >
-      {items.map((item: any, index: number) => (
+      {items?.map((item: any, index: number) => (
         <MenuItem
           key={index}
           onClick={() => {

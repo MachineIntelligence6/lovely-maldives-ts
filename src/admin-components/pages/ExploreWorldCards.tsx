@@ -10,6 +10,7 @@ import {
   getWondersRequest,
   wondersRequest,
 } from '@/utils/api-requests/wonders.request'
+import useHomeBgId from '@/utils/useHomeBgId'
 import AddCardModal from './modals/AddCardModal'
 import { CustomCard } from '../styled/CustomCard'
 import ExploreWorldSlider from '../sliders/ExploreWorldSlider'
@@ -21,6 +22,7 @@ const ExploreWorldCards = () => {
   const [cards, setCards] = useState([] as any)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
+  const homeBgId = useHomeBgId()
 
   const handleShowModal = () => setShowModal(!showModal)
 
@@ -39,7 +41,6 @@ const ExploreWorldCards = () => {
           alert('Error occured while fetching about maldives data.')
           console.log('response about maldives', res)
         }
-        console.log('response ', res)
       })
     } catch (error: any) {
       console.log('error ', error)
@@ -47,11 +48,10 @@ const ExploreWorldCards = () => {
   }
 
   const handleAddCard = async (newCard: any) => {
-    const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
     if (!newCard.title) return alert('Please enter title.')
     if (!newCard.img) return alert('Please upload card image.')
 
-      try {
+    try {
       startTransition(async () => {
         const res = await wondersRequest({
           title: newCard?.title,

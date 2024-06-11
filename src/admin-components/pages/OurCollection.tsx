@@ -10,6 +10,7 @@ import {
   collectionRequest,
   getCollectionsRequest,
 } from '@/utils/api-requests/collections-request'
+// import useHomeBgId from '@/utils/useHomeBgId'
 import AddCollection from './modals/AddCollection'
 import { CustomCard } from '../styled/CustomCard'
 import CollectionSlider from '../sliders/CollectionSlider'
@@ -21,6 +22,8 @@ const OurCollection = () => {
   const [collections, setCollections] = useState([] as any)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
+  // const homeBgId = useHomeBgId()
+  const [homeBgId, setHomeBgId] = useState('')
 
   const handleShowModal = () => setShowModal(!showModal)
 
@@ -49,7 +52,7 @@ const OurCollection = () => {
 
   const handleAddCollection = async (newCollection: any) => {
     console.log('new collection ', newCollection)
-    const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+    // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
     if (!newCollection.title) return alert('Please enter title.')
     if (!newCollection.img) return alert('Please upload card image.')
 
@@ -96,6 +99,7 @@ const OurCollection = () => {
 
   useEffect(() => {
     getCollections()
+    setHomeBgId(JSON.parse(window.localStorage.getItem('homeBgId') as any))
   }, [])
 
   return (
