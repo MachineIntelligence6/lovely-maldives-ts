@@ -1,7 +1,8 @@
 import prisma from '../../prisma'
 
 export async function getHomeSections() {
-  return prisma.homeBg.findFirst({
+  console.log('before fetching')
+  const result = await prisma.homeBg.findFirst({
     include: {
       aboutMaldivesShort: true,
       services: true,
@@ -14,4 +15,6 @@ export async function getHomeSections() {
       footer: true,
     },
   })
+  console.log('after fetching =>>> ', result)
+  return result
 }

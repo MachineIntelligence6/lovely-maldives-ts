@@ -117,7 +117,7 @@ function HeaderSettings() {
 
   const handleAddHeader = async () => {
     // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
-
+    console.log('homeBgId ', homeBgId)
     try {
       startTransition(async () => {
         const res = await headerRequest({ ...values, homeBgId, menus })

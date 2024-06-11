@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic'
 import Header from '@/components/Header'
 import apiClient from '@/services/apiClient'
 import CustomLoader from '@/admin-components/common/CustomLoader'
+import { getHomeBgRequest } from '@/utils/api-requests/home.request'
 
 const Footer = dynamic(() => import('@/components/Footer'))
 const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
@@ -48,6 +49,10 @@ export default function Home() {
       if (res?.status === 200) {
         setHomeData(data?.data)
         localStorage.setItem('home', JSON.stringify(data?.data))
+        localStorage.setItem(
+          'headerData',
+          JSON.stringify(data?.data?.header?.[0])
+        )
       } else {
         // alert('Error occured while fetching about maldives data.')
         console.log('response about maldives', res)
@@ -58,14 +63,29 @@ export default function Home() {
     }
   }
 
+  const getHomeBgData = async () => {
+    try {
+      const res = await getHomeBgRequest()
+      const data = res?.data?.data
+      if (res?.status === 200) {
+        localStorage.setItem('homeBgId', JSON.stringify(data?.id))
+      } else {
+        console.log('response homebg ', res)
+      }
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
   useEffect(() => {
     getHomeData()
+    getHomeBgData()
   }, [])
 
   return (
     <>
       {loading && <CustomLoader />}
-      <Header headerData={homeData?.header?.[0]} />
+      <Header />
       <Banner bannerData={homeData} />
       <Box
         sx={{

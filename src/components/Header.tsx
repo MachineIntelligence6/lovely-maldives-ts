@@ -19,6 +19,8 @@ import DragHandle from '@mui/icons-material/DragHandle'
 import useMediaQuery from '@mui/system/useMediaQuery'
 import { useMotionValueEvent, useScroll } from 'framer-motion'
 import { useMenuStore } from '@/providers/menu-store-provider'
+import apiClient from '@/services/apiClient'
+import CustomLoader from '@/admin-components/common/CustomLoader'
 import MobileNav from './MobileNav'
 import SubNav from './SubNav'
 
@@ -27,16 +29,15 @@ import SubNav from './SubNav'
 import profilePic from '../../public/Images/logo.svg'
 import profilePicCol from '../../public/Images/logo-colored.svg'
 
-function Header(props: any) {
-  const { headerData } = props
+function Header() {
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const isOpen = useMenuStore((state) => state.isOpen)
   const open = useMenuStore((state) => state.open)
   const close = useMenuStore((state) => state.close)
   const toggleMenu = useMenuStore((state) => state.toggleMenu)
   const { scrollY } = useScroll()
-  const [data, setData] = useState('')
   const [localData, setLocalData] = useState('' as any)
+  const [loading, setLoading] = useState(false)
 
   const menuItem = [
     { label: 'About Maldives', route: '/about-maldives' },
@@ -55,13 +56,28 @@ function Header(props: any) {
       close()
     }
   }
+
+  const getHomeData = async () => {
+    try {
+      setLoading(true)
+      const res = await apiClient.get('/header')
+      const data = res?.data
+      console.log('data =>>> ', res)
+      setLoading(false)
+      if (res?.status === 200) {
+        setLocalData(data?.data)
+      } else {
+        // alert('Error occured while fetching about maldives data.')
+        console.log('response about maldives', res)
+      }
+    } catch (error: any) {
+      setLoading(false)
+      console.log('error ', error)
+    }
+  }
+
   React.useEffect(() => {
     window.addEventListener('resize', handleResize)
-
-    if (headerData) {
-      localStorage.setItem('headerData', JSON.stringify(headerData))
-      setData(headerData)
-    }
 
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -91,11 +107,12 @@ function Header(props: any) {
   }, [isOpen, lessThanMd])
 
   useEffect(() => {
-    setLocalData(JSON.parse(localStorage.getItem('headerData') as any))
+    getHomeData()
   }, [])
-
+  console.log('localData =>>> ', localData)
   return (
     <Box component="header">
+      {loading && <CustomLoader />}
       <AppBar
         component="nav"
         className={isScrolled ? 'scrolled' : ''}
