@@ -1,4 +1,7 @@
+'use client'
+
 import { Box, Grid } from '@mui/material'
+import { useEffect } from 'react'
 
 import LocalHotelIcon from '@mui/icons-material/LocalHotel'
 import LocationCityIcon from '@mui/icons-material/LocationCity'
@@ -10,10 +13,28 @@ import TotalCardItem from '@/admin-components/dashboard/TotalCardItem'
 import EarningReportCard from '@/admin-components/dashboard/EarningReportCard'
 import LatestHotlBooking from '@/admin-components/dashboard/LatestHotlBooking'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { getHomeBgRequest } from '@/utils/api-requests/home.request'
 
 export default async function Dashboard() {
   // const session = await getServerSession(authOptions)
   // console.log('session =>>', session)
+  const getHomeBgData = async () => {
+    try {
+      const res = await getHomeBgRequest()
+      const data = res?.data?.data
+      if (res?.status === 200) {
+        localStorage.setItem('homeBgId', JSON.stringify(data?.id))
+      } else {
+        console.log('response homebg ', res)
+      }
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
+  useEffect(() => {
+    getHomeBgData()
+  }, [])
   return (
     <Box sx={{ pb: 4 }}>
       <Grid
