@@ -17,8 +17,6 @@ const TopBrands = dynamic(() => import('@/components/TopBrands'))
 const Banner = dynamic(() => import('@/components/Banner'))
 const OurServices = dynamic(() => import('@/components/OurServices'))
 
-// export const runtime = 'edge'
-
 // export const getHomeData = async () => {
 //   try {
 //     const response = await axios.get(
@@ -32,6 +30,7 @@ const OurServices = dynamic(() => import('@/components/OurServices'))
 // }
 
 export default async function Home() {
+  // const data = await getHomeData()
   const data = {
     data: {
       aboutMaldivesShort: [{ title: '', description: '' }],
