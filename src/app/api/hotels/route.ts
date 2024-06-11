@@ -38,36 +38,36 @@ export async function POST(req: Request) {
   const bodyData = await req.json()
   console.log('hotels', bodyData)
   if (!bodyData?.title || !bodyData?.sections)
-    return NextResponse.json(
-      { message: 'Please send complete hotel data to save.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send complete hotel data to save.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
-    const isExist = await prisma.hotels.findMany({
+    const isExist = await prisma.hotels.findFirst({
       where: {
         title: bodyData.title,
       },
     })
 
     if (isExist)
-      return NextResponse.json(
-        { message: 'This hotel already created.' },
-        { status: 409 }
-      )
+      return NextResponse.json({
+        message: 'This hotel already created.',
+        status: 409,
+      })
 
     const result = await prisma.hotels.create({
       data: bodyData,
     })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {
     console.log('Error', error)
-    return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
+    return NextResponse.json({ message: 'Error', data: error, status: 500 })
   } finally {
     await prisma.$disconnect()
   }

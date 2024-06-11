@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable array-callback-return */
+
 'use client'
 
 import Box from '@mui/material/Box'
@@ -7,6 +10,8 @@ import Typography from '@mui/material/Typography'
 import EmailIcon from '@mui/icons-material/Email'
 import CallIcon from '@mui/icons-material/Call'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import FacebookIcon from '@mui/icons-material/Facebook'
+import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import XIcon from '@mui/icons-material/X'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
@@ -15,11 +20,84 @@ import Image from 'next/image'
 import styled from '@mui/system/styled'
 import Link from 'next/link'
 
+const iconMapping: { [key: string]: JSX.Element } = {
+  Whatsapp: (
+    <WhatsAppIcon
+      sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
+    />
+  ),
+  Facebook: (
+    <FacebookIcon
+      sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
+    />
+  ),
+  Twitter: (
+    <TwitterIcon
+      sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
+    />
+  ),
+  // Add more mappings as needed
+}
+
 const StyledImage = styled(Image)({
   padding: 1,
 })
 
-export default function Footer() {
+export default function Footer(props: any) {
+  const { footerData } = props
+
+  const FooterBoxes = footerData?.columns?.map((col: any, inde: number) => {
+    return (
+      <Box key={inde} sx={{ mt: { xs: '30px', md: '0px' } }}>
+        <Typography sx={{ fontSize: '20px', fontWeight: '600', mb: '28px' }}>
+          {col?.title}
+        </Typography>
+        {col?.menus?.map((menu: any, ind: number) => (
+          <Box
+            key={ind}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: { xs: 'center', md: 'flex-start' },
+              mt: '12px',
+            }}
+          >
+            {/* <EmailIcon
+              sx={{
+                display: { xs: 'none', md: 'block' },
+                fontSize: '20px',
+              }}
+            /> */}
+            <Box
+              sx={{
+                display: { xs: 'none', md: 'block' },
+                overflow: 'hidden',
+              }}
+            >
+              {menu?.icon && (
+                <Image src={menu?.icon} alt="icon" width={19} height={19} />
+              )}
+            </Box>
+            {/* {iconMapping[menu?.menu]} */}
+            <Box
+              component={Link}
+              href={menu?.link}
+              sx={{
+                color: 'white',
+                textDecoration: 'none',
+                display: 'block',
+                px: '10px',
+                fontSize: '16px',
+              }}
+            >
+              {menu?.menu}
+            </Box>
+          </Box>
+        ))}
+      </Box>
+    )
+  })
+
   return (
     <Container
       sx={{
@@ -48,295 +126,7 @@ export default function Footer() {
             mx: 'auto',
           }}
         />
-        <Box
-          sx={{
-            mt: { xs: '30px', md: '0px' },
-            borderBottom: { xs: '1px solid white', md: 'none' },
-            pb: 5,
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: '20px',
-              fontWeight: '600',
-              display: { xs: 'none', md: 'block' },
-              mb: '28px',
-            }}
-          >
-            Links
-          </Typography>
-
-          <Box
-            component={Link}
-            href="/about-maldives"
-            sx={{
-              color: 'white',
-              textDecoration: 'none',
-              display: 'block',
-              mt: '10px',
-              fontSize: '16px',
-            }}
-          >
-            About Maldives
-          </Box>
-          <Box
-            component={Link}
-            href="resorts"
-            sx={{
-              color: 'white',
-              textDecoration: 'none',
-              display: 'block',
-              mt: '10px',
-              fontSize: '16px',
-            }}
-          >
-            Hotels
-          </Box>
-          <Box
-            component={Link}
-            href="/"
-            sx={{
-              color: 'white',
-              textDecoration: 'none',
-              display: 'block',
-              mt: '10px',
-              fontSize: '16px',
-            }}
-          >
-            About
-          </Box>
-          <Box
-            component={Link}
-            href="/contact-us"
-            sx={{
-              color: 'white',
-              textDecoration: 'none',
-              display: { xs: 'block', md: 'none' },
-              // px: '10px',
-              mt: '10px',
-              fontSize: '16px',
-            }}
-          >
-            Contact us
-          </Box>
-          <Box
-            component={Link}
-            href="/blogs"
-            sx={{
-              color: 'white',
-              textDecoration: 'none',
-              display: 'block',
-              mt: '10px',
-              fontSize: '16px',
-            }}
-          >
-            Blog
-          </Box>
-          <Box
-            component={Link}
-            href="/frequently-asked-questions"
-            sx={{
-              color: 'white',
-              textDecoration: 'none',
-              display: 'block',
-              mt: '10px',
-              fontSize: '16px',
-            }}
-          >
-            FAQs
-          </Box>
-        </Box>
-
-        <Box sx={{ mt: { xs: '30px', md: '0px' } }}>
-          <Typography sx={{ fontSize: '20px', fontWeight: '600', mb: '28px' }}>
-            Get in touch
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: { xs: 'center', md: 'flex-start' },
-              mt: '10px',
-            }}
-          >
-            <EmailIcon
-              sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
-            />
-            <Box
-              component={Link}
-              href="/"
-              sx={{
-                color: 'white',
-                textDecoration: 'none',
-                display: 'block',
-                px: '10px',
-                fontSize: '16px',
-              }}
-            >
-              Email
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: { xs: 'center', md: 'flex-start' },
-              mt: '10px',
-            }}
-          >
-            <CallIcon
-              sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
-            />
-            <Box
-              component={Link}
-              href="/"
-              sx={{
-                color: 'white',
-                textDecoration: 'none',
-                display: 'block',
-                px: '10px',
-                fontSize: '16px',
-              }}
-            >
-              Contact Number
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              alignItems: 'center',
-              justifyContent: { xs: 'center', md: 'flex-start' },
-              mt: '10px',
-            }}
-          >
-            <WhatsAppIcon
-              sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
-            />
-            <Box
-              component={Link}
-              href="/"
-              sx={{
-                color: 'white',
-                textDecoration: 'none',
-                display: 'block',
-                px: '10px',
-                fontSize: '16px',
-              }}
-            >
-              Whatsapp
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              alignItems: 'center',
-              justifyContent: { xs: 'center', md: 'flex-start' },
-              mt: '10px',
-            }}
-          >
-            <ContactsRoundedIcon
-              sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
-            />
-            <Box
-              component={Link}
-              href="/contact-us"
-              sx={{
-                color: 'white',
-                textDecoration: 'none',
-                display: 'block',
-                px: '10px',
-                fontSize: '16px',
-              }}
-            >
-              Contact us
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={{ mt: { xs: '30px', md: '0px' } }}>
-          <Typography
-            sx={{
-              fontSize: '20px',
-              fontWeight: '600',
-              display: { xs: 'none', md: 'block' },
-              mb: '28px',
-            }}
-          >
-            Social Media
-          </Typography>
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              alignItems: 'center',
-              justifyContent: { xs: 'center', md: 'flex-start' },
-              mt: '10px',
-            }}
-          >
-            <FacebookRoundedIcon style={{ fontSize: '20px' }} />
-            <Box
-              component={Link}
-              href="/"
-              sx={{
-                color: 'white',
-                textDecoration: 'none',
-                display: 'block',
-                px: '10px',
-                fontSize: '16px',
-              }}
-            >
-              Messenger
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              alignItems: 'center',
-              justifyContent: { xs: 'center', md: 'flex-start' },
-              mt: '10px',
-            }}
-          >
-            <XIcon
-              sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
-            />
-            <Box
-              component={Link}
-              href="/"
-              sx={{
-                color: 'white',
-                textDecoration: 'none',
-                display: 'block',
-                px: '10px',
-                fontSize: '16px',
-              }}
-            >
-              Twitter
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              alignItems: 'center',
-              justifyContent: { xs: 'center', md: 'flex-start' },
-              mt: '10px',
-            }}
-          >
-            <InstagramIcon
-              sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
-            />
-            <Box
-              component={Link}
-              href="/"
-              sx={{
-                color: 'white',
-                textDecoration: 'none',
-                display: 'block',
-                px: '10px',
-                fontSize: '16px',
-              }}
-            >
-              Instagram
-            </Box>
-          </Box>
-        </Box>
+        {FooterBoxes}
         <Box
           sx={{
             display: { xs: 'flex', md: 'none' },

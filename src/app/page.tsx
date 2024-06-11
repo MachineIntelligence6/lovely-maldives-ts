@@ -4,10 +4,9 @@ import Typography from '@mui/material/Typography'
 
 import Box from '@mui/system/Box'
 import dynamic from 'next/dynamic'
-// import Header from '@/components/Header'
+import Header from '@/components/Header'
 import apiClient from '@/services/apiClient'
 
-const Header = dynamic(() => import('@/components/Header'))
 const Footer = dynamic(() => import('@/components/Footer'))
 const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
 const OurCollection = dynamic(() => import('@/components/OurCollection'))
@@ -17,22 +16,29 @@ const TopBrands = dynamic(() => import('@/components/TopBrands'))
 const Banner = dynamic(() => import('@/components/Banner'))
 const OurServices = dynamic(() => import('@/components/OurServices'))
 
+export const runtime = 'edge'
+
 export const getHomeData = async () => {
   try {
     const response = await apiClient.get('/home')
+    console.log('Response data is =>>> ', response.data)
     return response.data
   } catch (error: any) {
+    console.error('Failed to fetch home data:', error?.message)
     throw new Error(error)
   }
 }
 
 export default async function Home() {
   const data = await getHomeData()
+  if (!data || !data.data) {
+    throw new Error('Invalid data structure')
+  }
   const aboutMaldives = data?.data?.aboutMaldivesShort
 
   return (
     <>
-      <Header data={data?.data?.header?.[0]} />
+      <Header headerData={data?.data?.header?.[0]} />
       <Banner bannerData={data?.data} />
       <Box
         sx={{
@@ -130,7 +136,7 @@ export default async function Home() {
         brands={data?.data?.brands}
         socialLinkSection={data?.data?.socialLinkSection?.[0]}
       />
-      <Footer />
+      <Footer footerData={data?.data?.footer?.[0]} />
     </>
   )
 }

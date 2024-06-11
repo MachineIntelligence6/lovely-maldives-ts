@@ -78,7 +78,6 @@ const tabData = [
 const renderTabs = (value: any) => {
   const { data } = useSession()
 
-  console.log('data is ', data)
   return tabData.map((item, index) => {
     return (
       <Tab

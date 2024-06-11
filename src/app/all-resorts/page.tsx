@@ -103,6 +103,7 @@ export default function page() {
           iconShow="flex"
           radius="30px"
           bottomradius="0 0 30px  30px"
+          collections={[]}
         />
         <Box>
           <ResortsGallery />

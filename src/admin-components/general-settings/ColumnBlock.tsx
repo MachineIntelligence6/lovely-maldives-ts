@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 import React, { useState } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import { Box, Button, Stack, Typography } from '@mui/material'
@@ -8,6 +9,7 @@ const ColumnBlock = (props: any) => {
   const {
     menu,
     handleChange,
+    handleIconChange,
     handleMenuItemDelete,
     handleAddMenuItem,
     index,
@@ -40,14 +42,16 @@ const ColumnBlock = (props: any) => {
         />
       </Stack>
       <Box>
-        {menu?.links?.map((option: any, subIndex: number) => (
+        {menu?.menus?.map((option: any, subIndex: number) => (
           <MenuAddItem
             key={subIndex}
             subIndex={subIndex}
             index={index}
             menu={option}
             handleChange={handleChange}
+            handleIconChange={handleIconChange}
             handleMenuItemDelete={handleMenuItemDelete}
+            isColumns={true}
           />
         ))}
       </Box>

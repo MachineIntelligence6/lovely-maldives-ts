@@ -28,14 +28,15 @@ import profilePic from '../../public/Images/logo.svg'
 import profilePicCol from '../../public/Images/logo-colored.svg'
 
 function Header(props: any) {
-  const { data } = props
+  const { headerData } = props
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const isOpen = useMenuStore((state) => state.isOpen)
   const open = useMenuStore((state) => state.open)
   const close = useMenuStore((state) => state.close)
   const toggleMenu = useMenuStore((state) => state.toggleMenu)
   const { scrollY } = useScroll()
-  const [headerData, setHeaderData] = useState(null as any)
+  const [data, setData] = useState('')
+  const [localData, setLocalData] = useState('' as any)
 
   const menuItem = [
     { label: 'About Maldives', route: '/about-maldives' },
@@ -54,9 +55,13 @@ function Header(props: any) {
       close()
     }
   }
-
   React.useEffect(() => {
     window.addEventListener('resize', handleResize)
+
+    if (headerData) {
+      // localStorage.setItem('headerData', JSON.stringify(headerData))
+      setData(headerData)
+    }
 
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -85,13 +90,10 @@ function Header(props: any) {
     }
   }, [isOpen, lessThanMd])
 
-  React.useEffect(() => {
-    if (data?.id) {
-      console.log('inner')
-      setHeaderData(data)
-    }
+  useEffect(() => {
+    setLocalData(JSON.parse(localStorage.getItem('headerData') as any))
   }, [])
-  console.log('header data is =>>> ', headerData)
+
   return (
     <Box component="header">
       <AppBar
@@ -106,9 +108,9 @@ function Header(props: any) {
           width: '100%',
           background: isScrolled
             ? isOpen && lessThanMd
-              ? data?.otherBgcolor || 'var(--brown)'
-              : data?.heroBgcolor || 'white'
-            : data?.otherBgcolor || 'var(--brown)',
+              ? localData?.heroBgcolor
+              : localData?.otherBgcolor
+            : localData?.heroBgcolor,
           transition: 'all ease .5s',
           zIndex: 998,
         }}
@@ -155,13 +157,31 @@ function Header(props: any) {
           </Box>
           <Box>
             <Link href="/">
-              <Box
+              {/* <Box
                 component={Image}
                 src={isScrolled ? profilePicCol : profilePic}
                 alt="Logo"
                 width={95.6}
                 height={60}
-              />
+              /> */}
+              <Box
+                sx={{
+                  width: '95.5px',
+                  height: '67px',
+                }}
+              >
+                <Image
+                  src={isScrolled ? localData?.otherLogo : localData?.heroLogo}
+                  alt="hero logo"
+                  width={localData?.heroWidth}
+                  height={localData?.heroHeight}
+                  style={{
+                    // objectFit: 'cover',
+                    width: '100%',
+                    height: '100%',
+                  }}
+                />
+              </Box>
             </Link>
           </Box>
           <Box>
@@ -220,7 +240,7 @@ function Header(props: any) {
       {lessThanMd ? (
         <MobileNav menuItems={menuItem} />
       ) : (
-        <SubNav menuItems={menuItem} />
+        <SubNav menuItems={localData?.menus} />
       )}
     </Box>
   )

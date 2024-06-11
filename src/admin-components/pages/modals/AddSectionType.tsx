@@ -1,3 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
+
+'use client'
+
 import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import {

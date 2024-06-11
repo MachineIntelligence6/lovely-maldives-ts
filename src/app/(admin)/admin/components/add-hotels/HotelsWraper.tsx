@@ -1,63 +1,46 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/no-absolute-path */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 'use client'
 
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-import Button from '@mui/material/Button'
-import { Stack } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
 
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import { motion } from 'framer-motion'
 import BoltIcon from '@mui/icons-material/Bolt'
-import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
-import collectionImg from '/public/Images/collectionImg.jpg'
+import Link from 'next/link'
 
-export default function ResortsGallery(props: any) {
-  const { title, handleChange, handleShowModal, hotels } = props
-
+const HotelsWraper = (props: any) => {
+  const { hotels } = props
+  console.log('reosrt data ', hotels)
   return (
-    <Box sx={{ mb: '40px' }}>
-      <TextFieldWraper
-        label="Title"
-        placeholder="Enter Title."
-        value={title}
-        name="title"
-        onChange={handleChange}
-      />
-      <Stack direction="row" justifyContent="end">
-        <Button
-          variant="outlined"
-          sx={{
-            border: '1px solid var(--brown)',
-            mt: 1,
-            textTransform: 'capitalize',
-          }}
-          onClick={handleShowModal}
-          // disabled={hotels?.length >= 5}
-        >
-          <Stack direction="row" alignItems="center" gap="10px">
-            <AddIcon sx={{ color: 'var(--brown)', fontSize: '22px' }} />
-            <Typography variant="body1" color="var(--brown)">
-              Add Hotel
-            </Typography>
-          </Stack>
-        </Button>
-      </Stack>
+    <Box>
+      <Typography
+        variant="h2"
+        sx={{
+          fontSize: { xs: '22px', md: '30px' },
+          color: 'var(--black)',
+
+          textTransform: 'capitalize',
+        }}
+      >
+        All Uploaded Hotels
+      </Typography>
       <Grid
         container
         spacing={{ xs: 2, md: 4 }}
-        sx={{ mt: { xs: '30px', md: '40px' } }}
+        sx={{ mt: { xs: '30px', md: '30px' } }}
       >
-        {hotels?.length > 0 &&
-          hotels.map((item: any) => (
-            <Grid item xs={12} sm={6} md={6} lg={4} key={item.id}>
+        {hotels?.length > 0 ? (
+          hotels?.map((item: any, index: number) => (
+            <Grid
+              key={`hotelwraper_1_${index}`}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={4}
+            >
               <Box
                 component={motion.div}
                 initial={{ opacity: 0, y: 20 }}
@@ -66,32 +49,43 @@ export default function ResortsGallery(props: any) {
                 sx={{ width: '100%', position: 'relative' }}
               >
                 <Box
-                  //   component={Link}
-                  //   href={`/resorts/${item.slug}`}
+                  component={Link}
+                  href={`/resorts/${item.title}`}
                   sx={{ textDecoration: 'none', position: 'relative' }}
                 >
                   <Box
-                    component={Image}
-                    src={collectionImg}
-                    alt={item.name}
                     sx={{
                       width: '100%',
                       height: { xs: '250px', md: '300px' },
                       objectFit: 'cover',
+                      overflow: 'hidden',
                       borderRadius: {
                         xs: '0px',
                         md: `20px 20px 0px 0px`,
                       },
                     }}
-                  />
+                  >
+                    <Image
+                      src={item?.image}
+                      alt="img"
+                      width={400}
+                      height={450}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </Box>
                   <Box
                     sx={{
                       width: { xs: '100%', md: '100%' },
                       height: { xs: '250px', md: '300px' },
                       bgcolor: 'rgba(150,127,93,0.5)',
                       position: 'absolute',
-                      bottom: '110px',
-                      left: { xs: 0, md: '0px' },
+                      bottom: '105px',
+                      top: 0,
+                      left: 0,
                       borderRadius: {
                         xs: '0px',
                         md: `20px 20px 0px 0px`,
@@ -135,17 +129,33 @@ export default function ResortsGallery(props: any) {
                       <BoltIcon sx={{ display: `flex` }} />
                     </Box>
                     <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
+                      {[...Array(parseInt(item?.ratings, 10))].map(
+                        (_: any, ind: number) => (
+                          <StarRateIcon key={`_${index}_${ind}`} />
+                        )
+                      )}
                     </Box>
                   </Box>
                 </Box>
               </Box>
             </Grid>
-          ))}
+          ))
+        ) : (
+          <Typography
+            variant="body1"
+            color="initial"
+            sx={{
+              fontSize: '20px',
+              color: 'gray',
+              ml: 4,
+            }}
+          >
+            No Hotel found.
+          </Typography>
+        )}
       </Grid>
     </Box>
   )
 }
+
+export default HotelsWraper
