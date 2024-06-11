@@ -110,7 +110,7 @@ export default function TopBrands(props: any) {
         }}
       >
         <Box component={Slider} {...settings}>
-          {brands.map((brand: any, index: number) => (
+          {brands?.map((brand: any, index: number) => (
             <Box
               key={index}
               // sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap:'90px' }}
@@ -230,7 +230,7 @@ export default function TopBrands(props: any) {
             >
               Say Hi on
               <Link
-                href={socialLinkSection?.link}
+                href={socialLinkSection?.link || '/'}
                 style={{
                   textDecoration: 'none',
                   color: 'white',

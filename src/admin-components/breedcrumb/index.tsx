@@ -29,7 +29,7 @@ function BreedCrumb() {
           key={index}
           underline="hover"
           color="inherit"
-          href={link?.path}
+          href={link?.path || "/"}
           style={{ cursor: 'pointer', textTransform: 'capitalize' }}
         >
           {link}

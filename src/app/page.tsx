@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import Typography from '@mui/material/Typography'
+import axios from 'axios'
 
 import Box from '@mui/system/Box'
 import dynamic from 'next/dynamic'
@@ -16,21 +17,34 @@ const TopBrands = dynamic(() => import('@/components/TopBrands'))
 const Banner = dynamic(() => import('@/components/Banner'))
 const OurServices = dynamic(() => import('@/components/OurServices'))
 
-export const runtime = 'edge'
-
-export const getHomeData = async () => {
-  try {
-    const response = await apiClient.get('/home')
-    console.log('Response data is =>>> ', response.data)
-    return response.data
-  } catch (error: any) {
-    console.error('Failed to fetch home data:', error?.message)
-    throw new Error(error)
-  }
-}
+// export const getHomeData = async () => {
+//   try {
+//     const response = await axios.get(
+//       'https://lovely-maldives-ts.vercel.app/api/home'
+//     )
+//     return response.data
+//   } catch (error: any) {
+//     console.log('Failed to fetch home data:', error.message)
+//     throw new Error(error)
+//   }
+// }
 
 export default async function Home() {
-  const data = await getHomeData()
+  // const data = await getHomeData()
+  const data = {
+    data: {
+      aboutMaldivesShort: [{ title: '', description: '' }],
+      header: [],
+      footer: [],
+      aboutUsShort: [],
+      services: [],
+      wonders: [],
+      collections: [],
+      brands: [],
+      socialLinkSection: [],
+    },
+  }
+  console.log('data ', data)
   if (!data || !data.data) {
     throw new Error('Invalid data structure')
   }
@@ -66,7 +80,7 @@ export default async function Home() {
               fontWeight: 400,
             }}
           >
-            {aboutMaldives?.title}
+            {aboutMaldives?.[0]?.title}
           </Typography>
           <Typography
             component="div"
@@ -81,7 +95,7 @@ export default async function Home() {
               fontFamily: 'century-gothic',
             }}
             dangerouslySetInnerHTML={{
-              __html: aboutMaldives?.[0]?.description,
+              __html: aboutMaldives?.[0]?.description || '',
             }}
           >
             {/* Maldives is a small country located in the Indian Ocean consisting
