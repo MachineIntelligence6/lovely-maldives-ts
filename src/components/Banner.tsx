@@ -23,6 +23,7 @@ export const mobileImgUrl: any = [
 
 export default function Banner(props: any) {
   const { bannerData } = props
+  console.log('banner --->>> ', bannerData)
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const [bgImgStyle, setBgImgStyle] = React.useState({
     backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
@@ -36,7 +37,7 @@ export default function Banner(props: any) {
   })
 
   React.useEffect(() => {
-    const bannersLength = bannerData?.bgImages.length
+    const bannersLength = bannerData?.bgImages?.length
     const bannerImages = bannerData?.bgImages
 
     const randomIndexdev: number = Math.floor(Math.random() * bannersLength)
@@ -62,7 +63,7 @@ export default function Banner(props: any) {
          url('${
            bannersLength > 0
              ? bannerImages[randomIndexdev]
-             : imgUrl[randomIndexdev].src
+             : imgUrl[randomIndexdev]?.src
          }')`,
         backgroundSize: 'cover',
         backgroundPosition: '100%',
@@ -72,7 +73,7 @@ export default function Banner(props: any) {
         position: 'relative',
       })
     }
-  }, [lessThanMd])
+  }, [lessThanMd, bannerData?.bgImages])
 
   return (
     <Box sx={{ backgroundColor: 'lightgray', ...bgImgStyle }}>
