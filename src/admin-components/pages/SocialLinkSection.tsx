@@ -44,7 +44,7 @@ const SocialLinkSection = () => {
     const res = await uploadImgToCloudinary(formData)
     setImgUrl(res?.secure_url)
   }
-  console.log('images ', imgUrl)
+
   const getSocialLinkSection = async () => {
     try {
       startTransition(async () => {

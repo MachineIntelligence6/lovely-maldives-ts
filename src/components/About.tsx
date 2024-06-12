@@ -1,6 +1,7 @@
 import Diversity2Icon from '@mui/icons-material/Diversity2'
 import { Box, Container } from '@mui/material'
 import Typography from '@mui/material/Typography'
+import Image from 'next/image'
 // import Image from 'next/image'
 // import sparkle from '../../public/Images/Quarters-w.svg'
 
@@ -30,23 +31,39 @@ export default function About(props: any) {
               textAlign: 'center',
             }}
           >
-            ABOUT US
+            {data?.title || 'About Us'}
           </Typography>
           <Box>
-            <Box sx={{ textAlign: 'center' }}>
-              {/* <Image
-                src="/Images/maldivesLogo.png"
-                height={60}
-                width={100}
-                alt="Lovely Maldives"
-              /> */}
-              <Diversity2Icon
-                sx={{
-                  fontSize: '55px',
-                  mt: { xs: '30px', md: '60px' },
-                  color: 'var(--brown)',
-                }}
-              />
+            <Box
+              sx={{
+                textAlign: 'center',
+                width: '80px',
+                height: '60px',
+                overflow: 'hidden',
+                mx: 'auto',
+                mt: { xs: '30px', md: '60px' },
+              }}
+            >
+              {data?.logo ? (
+                <Image
+                  src={data?.logo}
+                  height={60}
+                  width={100}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                  }}
+                  alt="Lovely Maldives"
+                />
+              ) : (
+                <Diversity2Icon
+                  sx={{
+                    fontSize: '55px',
+                    color: 'var(--brown)',
+                  }}
+                />
+              )}
             </Box>
             <Typography
               component="div"
@@ -76,16 +93,16 @@ export default function About(props: any) {
                 fontWeight: '400',
                 textAlign: 'center',
                 textTransform: 'uppercase',
-                color: 'var(--brown)',
+                color: data?.promiseColor || 'var(--brown)',
               }}
             >
-              Our Promise
+              {data?.promisTitle || 'Our Promises'}
             </Typography>
           </Box>
           <Box
             sx={{
               width: '100%',
-              background: 'var(--brown)',
+              background: data?.cardBgcolor || 'var(--brown)',
               borderRadius: { xs: '0', md: '25px' },
               mx: 'auto',
             }}

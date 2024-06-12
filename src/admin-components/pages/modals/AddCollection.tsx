@@ -1,7 +1,7 @@
 'use client'
 
 import styled from '@emotion/styled'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import {
   Box,
   Typography,
@@ -44,8 +44,8 @@ const options = [
 ]
 
 const AddCollection = (props: any) => {
-  const { open, handleShowModal, handleAddCollection } = props
-  const [values, setValues] = useState({ title: '', stars: 1 })
+  const { open, handleShowModal, handleAddCollection, edit } = props
+  const [values, setValues] = useState({ title: '', ratings: 1 })
   const [image, setImage] = useState<File | undefined>()
   const [imageUrl, setImageUrl] = useState('')
 
@@ -68,7 +68,14 @@ const AddCollection = (props: any) => {
     const res = await uploadImgToCloudinary(formData)
     setImageUrl(res?.secure_url)
   }
-console.log("imageurl ", imageUrl)
+
+  useEffect(() => {
+    if (edit?.title) {
+      setImageUrl(edit?.image)
+      setValues({ title: edit?.title, ratings: edit?.ratings })
+    }
+  }, [edit])
+
   return (
     <div>
       <Modal
@@ -90,7 +97,7 @@ console.log("imageurl ", imageUrl)
               mb: 3,
             }}
           >
-            Add Collection
+            {edit?.title ? 'Update ' : 'Add '} Collection
           </Typography>
 
           <label htmlFor="icon_">
@@ -129,13 +136,13 @@ console.log("imageurl ", imageUrl)
             id="demo-simple-select-label"
             sx={{ mb: '7px', fontFamily: 'Public Sans' }}
           >
-            Stars
+            Star
           </CustomLabel>
           <CustomSelect
             placeholder="Select Stars."
-            value={values?.stars}
+            value={values?.ratings}
             options={options}
-            name="stars"
+            name="ratings"
             onChange={(e: any) => handleChange(e)}
           />
 
@@ -166,14 +173,32 @@ console.log("imageurl ", imageUrl)
                 fontFamily: 'Public Sans',
               }}
               onClick={() => {
-                if (!values?.title || !values?.stars) return
-                handleAddCollection({ ...values, img: imageUrl })
-                setValues({ title: '', stars: 0 })
+                if (!values?.title || !values?.ratings) return
+                if (edit?.title) {
+                  handleAddCollection(
+                    {
+                      ...values,
+                      ratings: values?.ratings?.toString(),
+                      image: imageUrl,
+                    },
+                    'edit'
+                  )
+                } else {
+                  handleAddCollection(
+                    {
+                      ...values,
+                      ratings: values?.ratings?.toString(),
+                      image: imageUrl,
+                    },
+                    'add'
+                  )
+                }
+                setValues({ title: '', ratings: 1 })
                 setImage(undefined)
                 handleShowModal()
               }}
             >
-              ADD
+              {edit?.title ? 'Update ' : 'Add '}
             </Button>
           </Stack>
         </Box>

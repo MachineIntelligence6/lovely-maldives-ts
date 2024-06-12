@@ -9,10 +9,13 @@ export async function GET() {
 
     const result = await getWonders()
     if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 200 })
+      return NextResponse.json(
+        { message: 'No data found', status: 409 },
+        { status: 200 }
+      )
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 200 },
       { status: 200 }
     )
   } catch (error) {
@@ -24,9 +27,9 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { title, image, homeBgId } = await req.json()
-  console.log('body data ', { title, image, homeBgId })
-  if (!title || !image || !homeBgId)
+  const { title, cards, homeBgId } = await req.json()
+
+  if (!title || !cards || cards?.length === 0 || !homeBgId)
     return NextResponse.json({
       message: 'Please send all field to save data.',
       status: 422,
@@ -35,8 +38,8 @@ export async function POST(req: Request) {
   try {
     await connectToDatabase()
 
-    const result = await createWonders({ title, image, homeBgId })
-    if (!result) return NextResponse.json({ message: 'Error' }, { status: 500 })
+    const result = await createWonders({ title, cards, homeBgId })
+    if (!result) return NextResponse.json({ message: 'Error', status: 409 })
 
     return NextResponse.json(
       { message: 'Success', data: result, status: 201 },

@@ -1,4 +1,6 @@
-import React, { ChangeEvent, useState } from 'react'
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Box, Typography, Modal, Button, Stack } from '@mui/material'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
@@ -18,8 +20,8 @@ const style = {
 }
 
 const AddServiceModal = (props: any) => {
-  const { open, handleShowModal, handleAddService } = props
-  const [values, setValues] = useState({ title: '', bgColor: '' })
+  const { open, handleShowModal, handleAddService, edit } = props
+  const [values, setValues] = useState({ title: '' })
   const [icon, setIcon] = useState<File | undefined>()
   const [image, setImage] = useState<File | undefined>()
   const [iconUrl, setIconUrl] = useState('')
@@ -57,6 +59,14 @@ const AddServiceModal = (props: any) => {
     setImageUrl(res?.secure_url)
   }
 
+  useEffect(() => {
+    if (edit?.icon) {
+      setIconUrl(edit?.icon)
+      setImageUrl(edit?.bgImage)
+      setValues({ ...values, title: edit?.title })
+    }
+  }, [edit])
+
   return (
     <div>
       <Modal
@@ -78,7 +88,7 @@ const AddServiceModal = (props: any) => {
               mb: 3,
             }}
           >
-            Add Service
+            {edit?.icon ? 'Update ' : 'Add '} Service
           </Typography>
 
           <label htmlFor="icon_">
@@ -99,7 +109,7 @@ const AddServiceModal = (props: any) => {
                 display: 'flex',
                 alignItems: 'center',
                 pl: '10px',
-                color: 'darkgray',
+                color: 'var(--black)',
                 fontSize: '14px',
                 fontWeight: 300,
                 mb: 3,
@@ -107,7 +117,11 @@ const AddServiceModal = (props: any) => {
                 overflow: 'hidden',
               }}
             >
-              {icon?.name ? icon?.name : 'Upload icon.'}
+              {icon?.name
+                ? icon?.name
+                : iconUrl
+                  ? 'our_service_icon.jpg'
+                  : 'Upload icon.'}
             </Box>
           </label>
 
@@ -129,7 +143,7 @@ const AddServiceModal = (props: any) => {
                 display: 'flex',
                 alignItems: 'center',
                 pl: '10px',
-                color: 'darkgray',
+                color: 'var(--black)',
                 fontSize: '14px',
                 fontWeight: 300,
                 mb: 3,
@@ -137,7 +151,11 @@ const AddServiceModal = (props: any) => {
                 overflow: 'hidden',
               }}
             >
-              {image?.name ? image?.name : 'Upload Background Image.'}
+              {image?.name
+                ? image?.name
+                : imageUrl
+                  ? 'our_service_bgimg.jpg'
+                  : 'Upload Background Image.'}
             </Box>
           </label>
 
@@ -148,15 +166,6 @@ const AddServiceModal = (props: any) => {
             name="title"
             onChange={(e: any) => handleChange(e)}
           />
-
-          {/* <TextFieldWraper
-            label="Background Color"
-            placeholder="Select background color."
-            value={values.bgColor}
-            name="bgColor"
-            type="color"
-            onChange={(e: any) => handleChange(e)}
-          /> */}
 
           <Stack
             direction="row"
@@ -185,14 +194,32 @@ const AddServiceModal = (props: any) => {
               }}
               onClick={() => {
                 if (!values.title) return
-                handleAddService({ ...values, icon: iconUrl, image: imageUrl })
-                setValues({ bgColor: '', title: '' })
+                if (edit?.icon) {
+                  handleAddService(
+                    {
+                      ...values,
+                      icon: iconUrl,
+                      bgImage: imageUrl,
+                    },
+                    'edit'
+                  )
+                } else {
+                  handleAddService(
+                    {
+                      ...values,
+                      icon: iconUrl,
+                      bgImage: imageUrl,
+                    },
+                    'add',
+                  )
+                }
+                setValues({ title: '' })
                 setIcon(null as any)
                 setImage(null as any)
                 handleShowModal()
               }}
             >
-              ADD
+              {edit?.icon ? 'Update ' : 'Add '}
             </Button>
           </Stack>
         </Box>

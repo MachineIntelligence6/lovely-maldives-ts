@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable array-callback-return */
 /* eslint-disable no-alert */
 
 'use client'
@@ -14,28 +16,65 @@ import AddServiceModal from './modals/AddServiceModal'
 import { CustomCard } from '../styled/CustomCard'
 import CardsSlider from '../sliders/CardsSlider'
 import CustomLoader from '../common/CustomLoader'
+import TextFieldWraper from '../items/TextfieldWraper'
+import { CustomLabel } from '../styled/CustomLabels'
+import HeaderBgHandler from '../general-settings/HeaderBgHandler'
+import HeadingWraper from '../common/HeadingWraper'
 
 const OurServices = () => {
   const [isPending, startTransition] = useTransition()
   const [showModal, setShowModal] = useState(false)
   const [services, setServices] = useState([] as any)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
-  const [detectChange, setDetectChange] = useState(false)
+  const [detectChange, setDetectChange] = useState(true)
+  const [edit, setEdit] = useState('' as any)
+  const [values, setValues] = useState({
+    title: '',
+    subTitle: '',
+    subTitleColor: '',
+    cardBgcolor: '',
+  })
   const homeBgId = useHomeBgId()
 
   const handleShowModal = () => setShowModal(!showModal)
 
-  const handleDeleteFile = (index: number) => {
+  const handleDeleteService = (index: number) => {
+    const sure = window.confirm('Are you sure you want to delete this service?')
+    if (!sure) return
     setServices(services.filter((_: any, i: number) => i !== index))
+  }
+
+  const editModelShow = (index: number) => {
+    setEdit(services?.[index])
+    handleShowModal()
+  }
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target
+    setValues({ ...values, [name]: value })
+  }
+
+  const addNewService = (newService: any, type: string) => {
+    if (type === 'edit') {
+      const newServices = services.map((service: any) =>
+        service.title === edit.title ? newService : service
+      )
+      setServices(newServices)
+    } else {
+      setServices([...services, newService])
+    }
+    setDetectChange(true)
   }
 
   const getOurServices = async () => {
     try {
       startTransition(async () => {
         const res = await getOurServicesRequest()
-        const data = res?.data?.data
-        if (res?.status === 200) {
-          setServices(data)
+        const data = res?.data
+        console.log('ouser services data is ', data)
+        if (data?.status === 200) {
+          setServices(data?.data?.services)
+          setValues(data?.data)
         } else {
           setAlertMsg({ type: 'error', message: data?.message })
           setTimeout(() => {
@@ -47,32 +86,29 @@ const OurServices = () => {
       })
     } catch (error: any) {
       console.log('error ', error)
+      throw new Error(error)
     }
   }
 
-  const handleAddService = async (newService: any) => {
-    // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
-    console.log('new service ', newService)
+  const handleAddServices = async () => {
     try {
       startTransition(async () => {
         const res = await ourServicesRequest({
-          title: newService?.title,
-          icon: newService?.icon,
-          image: newService?.image,
-          bgColor: '#5d7496',
+          ...values,
+          services,
           homeBgId,
         })
+        console.log('respose ', res)
         if (res?.status === 201) {
           getOurServices()
-          setDetectChange(false)
-          handleShowModal()
+          // setDetectChange(false)
           setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
         }
       })
-      setDetectChange(false)
+      // setDetectChange(false)
     } catch (error: any) {
       setAlertMsg({
         type: 'error',
@@ -82,6 +118,7 @@ const OurServices = () => {
         setAlertMsg({ type: '', message: '' })
       }, 3000)
       console.log('error ', error)
+      throw new Error(error)
     }
   }
 
@@ -94,7 +131,8 @@ const OurServices = () => {
       <AddServiceModal
         open={showModal}
         handleShowModal={handleShowModal}
-        handleAddService={handleAddService}
+        handleAddService={addNewService}
+        edit={edit}
       />
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
         {isPending && <CustomLoader />}
@@ -103,22 +141,62 @@ const OurServices = () => {
             {alertMsg.message}
           </Alert>
         )}
+        <HeadingWraper
+          title="Our Services"
+          handleSave={handleAddServices}
+          detectChange={detectChange}
+        />
+
+        <Stack direction="row" alignItems="center" gap="20px" sx={{ mb: 2 }}>
+          <TextFieldWraper
+            label="Title"
+            placeholder="Enter our services title."
+            value={values?.title}
+            name="title"
+            onChange={handleChange}
+          />
+          <TextFieldWraper
+            label="Sub-Title"
+            placeholder="Enter our services sub-title."
+            value={values?.subTitle}
+            name="subTitle"
+            onChange={handleChange}
+          />
+        </Stack>
+
+        <Stack direction="row" alignItems="center" gap="20px" sx={{ mb: 4 }}>
+          <Box sx={{ width: '100%' }}>
+            <CustomLabel id="demo-simple-select-label" sx={{ mb: 2 }}>
+              Sub-Title Color
+            </CustomLabel>
+            <HeaderBgHandler
+              handleValuesChange={handleChange}
+              value={values?.subTitleColor}
+              name="subTitleColor"
+            />
+          </Box>
+          <Box sx={{ width: '100%' }}>
+            <CustomLabel id="demo-simple-select-label" sx={{ mb: 2 }}>
+              Card Background Color
+            </CustomLabel>
+            <HeaderBgHandler
+              handleValuesChange={handleChange}
+              value={values?.cardBgcolor}
+              name="cardBgcolor"
+            />
+          </Box>
+        </Stack>
+
         <Stack
           direction="row"
           alignItems="center"
           justifyContent="space-between"
           gap="1rem"
         >
-          <Typography
-            variant="body1"
-            color="var(--black)"
-            sx={{ fontSize: '18px', fontWeight: 'bold', mb: 3 }}
-          >
-            Our Services
-          </Typography>
           <Button
             sx={{
               bgcolor: 'var(--blue)',
+              my: 3,
               color: 'white',
               width: '160px',
               height: '36px',
@@ -145,7 +223,11 @@ const OurServices = () => {
         </Stack>
 
         {services?.length > 0 ? (
-          <CardsSlider services={services} />
+          <CardsSlider
+            services={services}
+            handleDeleteService={handleDeleteService}
+            editModelShow={editModelShow}
+          />
         ) : (
           <Typography variant="body1" color="var(--black)">
             No Services Added...

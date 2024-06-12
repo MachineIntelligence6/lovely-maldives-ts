@@ -9,7 +9,7 @@ export async function GET() {
 
     const result = await getBrands()
     if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 200 })
+      return NextResponse.json({ message: 'No data found', status: 404 }, { status: 200 })
 
     return NextResponse.json(
       { message: 'Success', data: result, status: 200 },
@@ -24,9 +24,9 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { title, description, ratings, homeBgId, bgColor } = await req.json()
+  const { title, brands, homeBgId, bgColor } = await req.json()
 
-  if (!title || !homeBgId || !ratings)
+  if (!title || !homeBgId || !brands || brands?.length === 0)
     return NextResponse.json({
       message: 'Please send all field to save data.',
       status: 422,
@@ -37,15 +37,13 @@ export async function POST(req: Request) {
 
     const result = await createBrand({
       title,
-      description,
-      ratings: ratings.toString(),
+      brands,
       homeBgId,
       bgColor,
     })
     if (!result)
       return NextResponse.json(
-        { message: 'Brand creation failed, please try again' },
-        { status: 500 }
+        { message: 'Brand creation failed, please try again', status: 500 },
       )
 
     return NextResponse.json(

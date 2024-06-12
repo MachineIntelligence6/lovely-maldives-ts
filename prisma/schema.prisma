@@ -47,6 +47,29 @@ type ResortSections {
   hotels String[]
 }
 
+type OurServices {
+  title       String
+  icon        String
+  bgImage     String
+}
+
+type Cards {
+  image  String
+  title  String
+}
+
+type Collection {
+  image  String
+  title  String
+  ratings String
+}
+
+type Brand {
+  logo String
+  tag   String
+  ratings String
+}
+
 
 // ADMIN USER MODEL
 model User {
@@ -144,14 +167,16 @@ model HomeBg {
     socialLinkSection SocialLinkSection[]
     header      Header[]
     footer      Footer[]
+    sideImage   SideImage[]
 }
 
 model Services {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
-  icon        String
-  bgImage     String
-  bgColor     String?
+  subTitle    String
+  subTitleColor String
+  cardBgcolor   String
+  services    OurServices[]
   homeBgId    String @map("homeBg_id") @db.ObjectId
   homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
 }
@@ -159,7 +184,7 @@ model Services {
 model Wonders {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
-  image       String
+  cards       Cards[]
   homeBgId    String @map("homeBg_id") @db.ObjectId
   homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
 }
@@ -174,8 +199,7 @@ model Collections {
 model OurCollections {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
-  image       String
-  ratings     String
+  collections Collection[]
   homeBgId    String @map("homeBg_id") @db.ObjectId
   homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
 }
@@ -183,9 +207,15 @@ model OurCollections {
 model Brands {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
-  description String
-  ratings     String
+  brands      Brand[]
   bgColor     String?
+  homeBgId    String @map("homeBg_id") @db.ObjectId
+  homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
+}
+
+model SideImage {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  image       String
   homeBgId    String @map("homeBg_id") @db.ObjectId
   homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
 }
@@ -193,6 +223,7 @@ model Brands {
 model AboutMaldivesShort {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
+  link        String?
   description String
   homeBgId    String @map("homeBg_id") @db.ObjectId
   homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
@@ -201,6 +232,10 @@ model AboutMaldivesShort {
 model AboutUsShort {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
+  logo        String
+  promisTitle String
+  promiseColor String
+  cardBgcolor String
   description String
   promises    String[]
   homeBgId    String @map("homeBg_id") @db.ObjectId

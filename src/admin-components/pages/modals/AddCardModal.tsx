@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useState } from 'react'
+/* eslint-disable no-nested-ternary */
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Box, Typography, Modal, Button, Stack } from '@mui/material'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
@@ -18,7 +19,7 @@ const style = {
 }
 
 const AddCardModal = (props: any) => {
-  const { open, handleShowModal, handleAddCard } = props
+  const { open, handleShowModal, handleAddCard, edit } = props
   const [title, setTitle] = useState('')
   const [image, setImage] = useState<File | undefined>()
   const [imageUrl, setImageUrl] = useState('')
@@ -39,6 +40,13 @@ const AddCardModal = (props: any) => {
     const res = await uploadImgToCloudinary(formData)
     setImageUrl(res?.secure_url)
   }
+
+  useEffect(() => {
+    if (edit?.title) {
+      setImageUrl(edit?.image)
+      setTitle(edit?.title)
+    }
+  }, [edit])
 
   return (
     <div>
@@ -61,7 +69,7 @@ const AddCardModal = (props: any) => {
               mb: 3,
             }}
           >
-            Add Card
+            {edit?.title ? 'Update ' : 'Add '} Card
           </Typography>
 
           <label htmlFor="icon_">
@@ -84,7 +92,11 @@ const AddCardModal = (props: any) => {
                 overflow: 'hidden',
               }}
             >
-              {image?.name ? image?.name : 'Upload file'}
+              {image?.name
+                ? image?.name
+                : imageUrl
+                  ? 'image.jpg'
+                  : 'Upload file'}
             </Box>
           </label>
 
@@ -123,13 +135,31 @@ const AddCardModal = (props: any) => {
               }}
               onClick={() => {
                 if (!title) return
-                handleAddCard({ title, img: imageUrl })
+                // handleAddCard({ title, image: imageUrl })
+                if (edit?.title) {
+                  handleAddCard(
+                    {
+                      image: imageUrl,
+                      title,
+                    },
+                    'edit'
+                  )
+                } else {
+                  handleAddCard(
+                    {
+                      image: imageUrl,
+                      title,
+                    },
+                    'add'
+                  )
+                }
                 setTitle('')
+                setImageUrl('' as any)
                 setImage('' as any)
                 handleShowModal()
               }}
             >
-              ADD
+              {edit?.title ? 'Update ' : 'Add '}
             </Button>
           </Stack>
         </Box>

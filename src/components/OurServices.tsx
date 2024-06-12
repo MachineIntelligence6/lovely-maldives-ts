@@ -57,6 +57,7 @@ export function SamplePrevArrow(props: any) {
 
 export default function OurServices(props: any) {
   const { services } = props
+  console.log('services ', services)
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const settings = {
     className: 'services-slider',
@@ -131,21 +132,23 @@ export default function OurServices(props: any) {
           fontSize: { xs: '22px', md: '30px' },
         }}
       >
-        OUR SERVICES
+        {services?.title}
       </Typography>
       <Typography
         sx={{
-          color: 'var(--brown)',
+          color: services?.subTitleColor
+            ? services?.subTitleColor
+            : 'var(--brown)',
           textAlign: 'center',
           mt: { xs: '15px', md: '30px' },
           fontSize: { xs: '20px', md: '26px' },
         }}
       >
-        Towards Excellence
+        {services?.subTitle}
       </Typography>
       <Box className="slider-container" sx={{ mt: { xs: '30px', md: '60px' } }}>
         <Slider {...settings}>
-          {services?.map((item: any, index: number) => (
+          {services?.services?.map((item: any, index: number) => (
             <Box
               // eslint-disable-next-line react/no-array-index-key
               key={index}
@@ -225,7 +228,7 @@ export default function OurServices(props: any) {
                   elevation={3}
                   className="expSlider"
                   sx={{
-                    bgcolor: 'var(--blue)',
+                    bgcolor: services?.cardBgcolor || 'var(--blue)',
                     color: 'white',
                     mx: 'auto',
                     width: {

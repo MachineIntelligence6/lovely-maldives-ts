@@ -7,6 +7,8 @@ import { Box, Typography, Button, Container } from '@mui/material'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
@@ -21,7 +23,7 @@ interface IOurCollectionProps {
 }
 
 const CollectionSlider = (props: any) => {
-  const { collections, handleDeleteCard } = props
+  const { collections, handleDeleteCard, editModelShow } = props
   const settings = {
     dots: true,
     infinite: true,
@@ -82,6 +84,56 @@ const CollectionSlider = (props: any) => {
             }}
             key={index}
           >
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '1rem',
+                right: '4rem',
+                width: '200px',
+                height: '30px',
+                maxWidth: '30px',
+                maxHeight: '30px',
+                zIndex: 999,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                cursor: 'pointer',
+              }}
+            >
+              <Box
+                sx={{
+                  width: '35px',
+                  minWidth: '35px',
+                  height: '35px',
+                  maxHeight: '35px',
+                  borderRadius: '50%',
+                  bgcolor: 'var(--red)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                onClick={() => handleDeleteCard(index)}
+              >
+                <DeleteIcon sx={{ color: 'white', fontSize: '14px' }} />
+              </Box>
+              <Box
+                sx={{
+                  width: '35px',
+                  minWidth: '35px',
+                  height: '35px',
+                  maxHeight: '35px',
+                  borderRadius: '50%',
+                  bgcolor: 'var(--darkBlue)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                onClick={() => editModelShow(index)}
+              >
+                <EditIcon sx={{ color: 'white', fontSize: '14px' }} />
+              </Box>
+            </Box>
+
             <Image
               width={300}
               height={300}

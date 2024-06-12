@@ -7,10 +7,12 @@ import CloseIcon from '@mui/icons-material/Close'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import { SampleNextArrow, SamplePrevArrow } from '@/components/OurServices'
 
 const ExploreWorldSlider = (props: any) => {
-  const { cards, handleDeleteCard } = props
+  const { cards, handleDeleteCard, editModelShow } = props
   const settings = {
     centerMode: true,
     className: 'slick-center-mode',
@@ -76,6 +78,7 @@ const ExploreWorldSlider = (props: any) => {
       },
     ],
   }
+  console.log('cardssssssssssss ', cards)
   return (
     <Box
       className="slider-container explore-slider"
@@ -109,23 +112,50 @@ const ExploreWorldSlider = (props: any) => {
                 sx={{
                   position: 'absolute',
                   top: '1rem',
-                  right: '1rem',
-                  width: '30px',
+                  right: '4rem',
+                  width: '200px',
                   height: '30px',
                   maxWidth: '30px',
                   maxHeight: '30px',
-                  bgcolor: 'rgba(0,0,0,0.6)',
-                  borderRadius: '50%',
                   zIndex: 999,
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  gap: 1,
                   cursor: 'pointer',
-                  border: '1px solid var(--red)',
                 }}
-                onClick={() => handleDeleteCard(index)}
               >
-                <CloseIcon sx={{ color: 'var(--red)', fontSize: '20px' }} />
+                <Box
+                  sx={{
+                    width: '35px',
+                    minWidth: '35px',
+                    height: '35px',
+                    maxHeight: '35px',
+                    borderRadius: '50%',
+                    bgcolor: 'var(--red)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onClick={() => handleDeleteCard(index)}
+                >
+                  <DeleteIcon sx={{ color: 'white', fontSize: '14px' }} />
+                </Box>
+                <Box
+                  sx={{
+                    width: '35px',
+                    minWidth: '35px',
+                    height: '35px',
+                    maxHeight: '35px',
+                    borderRadius: '50%',
+                    bgcolor: 'var(--darkBlue)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onClick={() => editModelShow(index)}
+                >
+                  <EditIcon sx={{ color: 'white', fontSize: '14px' }} />
+                </Box>
               </Box>
               <Box
                 sx={{

@@ -13,10 +13,13 @@ export async function GET() {
 
     const result = await getOurServices()
     if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 200 })
+      return NextResponse.json(
+        { message: 'No data found', status: 404 },
+        { status: 200 }
+      )
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 200 },
       { status: 200 }
     )
   } catch (error) {
@@ -28,9 +31,10 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { title, icon, image, bgColor, homeBgId } = await req.json()
-
-  if (!title || !icon || !image || !homeBgId)
+  const { title, subTitle, homeBgId, subTitleColor, cardBgcolor, services } =
+    await req.json()
+  console.log('data is ', title, homeBgId, services)
+  if (!title || !homeBgId || !services || services?.length === 0)
     return NextResponse.json({
       message: 'Please send all field to save data.',
       status: 422,
@@ -41,15 +45,16 @@ export async function POST(req: Request) {
 
     const result = await createOurService({
       title,
-      icon,
-      bgColor,
+      subTitle,
+      subTitleColor,
+      cardBgcolor,
       homeBgId,
-      bgImage: image,
+      services,
     })
-    if (!result) return NextResponse.json({ message: 'Error' }, { status: 500 })
+    if (!result) return NextResponse.json({ message: 'Error', status: 500 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {
@@ -65,9 +70,15 @@ export async function DELETE(req: Request) {
     await connectToDatabase()
     const result = await deleteOurService()
     if (result === 'NOT_FOUND')
-      return NextResponse.json({ message: 'No data found.' }, { status: 404 })
+      return NextResponse.json(
+        { message: 'No data found.', status: 404 },
+        { status: 200 }
+      )
 
-    return NextResponse.json({ message: 'Success' }, { status: 201 })
+    return NextResponse.json(
+      { message: 'Success', status: 200 },
+      { status: 200 }
+    )
   } catch (error) {
     console.log('Error', error)
     return NextResponse.json({ message: 'Error', data: error }, { status: 500 })

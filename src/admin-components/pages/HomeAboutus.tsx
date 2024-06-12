@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-alert */
 
 'use client'
@@ -14,9 +15,13 @@ import {
   aboutusShortRequest,
   getaboutusShortRequest,
 } from '@/utils/api-requests/aboutus-short.request'
+import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 import useHomeBgId from '@/utils/useHomeBgId'
 import AddOptionModal from './modals/AddOptionModal'
 import CustomLoader from '../common/CustomLoader'
+import TextFieldWraper from '../items/TextfieldWraper'
+import { CustomLabel } from '../styled/CustomLabels'
+import HeaderBgHandler from '../general-settings/HeaderBgHandler'
 
 const ReactQuillEditor = dynamic(
   () => import('@/admin-components/common/ReactQuillEditor'),
@@ -31,6 +36,14 @@ const HomeAboutus = () => {
   const [editorText, setEditorText] = useState('')
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
+  const [values, setValues] = useState({
+    title: '',
+    logo: '',
+    promisTitle: '',
+    promiseColor: '',
+    cardBgcolor: '',
+  })
+  const [image, setImage] = useState('' as any)
   const homeBgId = useHomeBgId()
 
   const handleEditorValue = (value: any) => {
@@ -41,17 +54,35 @@ const HomeAboutus = () => {
   const handleShowModal = () => setShowModal(!showModal)
 
   const handleAddOption = (newOption: any, status: string) => {
+    console.log('newoption ', newOption, status)
     if (status === 'add') {
-      setOptions([...options, newOption])
+      setOptions(options?.length > 0 ? [...options, newOption] : [newOption])
       handleShowModal()
     } else {
-      const values = [...options]
-      const index = values.indexOf(edit)
-      values[index] = newOption
-      setOptions(values)
+      const vals = [...options]
+      const index = vals.indexOf(edit)
+      vals[index] = newOption
+      setOptions(vals)
     }
     handleShowModal()
     setDetectChange(true)
+  }
+
+  const handleImageChange = async (e: any) => {
+    setDetectChange(true)
+    const file = e.target.files?.[0]
+    setImage(file)
+
+    const formData = new FormData()
+    formData.append('file', file as any)
+    formData.append('upload_preset', 'j8epfynh')
+    const res = await uploadImgToCloudinary(formData)
+    setValues({ ...values, logo: res?.secure_url })
+  }
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target
+    setValues({ ...values, [name]: value })
   }
 
   const handleEdit = (value: any) => setEdit(value as any)
@@ -60,10 +91,11 @@ const HomeAboutus = () => {
     try {
       startTransition(async () => {
         const res = await getaboutusShortRequest()
-        const data = res?.data?.data
-        if (res?.status === 200) {
-          setEditorText(data?.description)
-          setOptions(data?.promises)
+        const data = res?.data
+        if (data?.status === 200) {
+          setEditorText(data?.data?.description)
+          setValues(data?.data)
+          setOptions(data?.data?.promises || [])
         } else {
           alert('Error occured while fetching about maldives data.')
           console.log('response about maldives', res)
@@ -74,12 +106,23 @@ const HomeAboutus = () => {
     }
   }
 
+  console.log('values ', values)
+
   const handleSave = async () => {
-    // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
+    if (!values.title) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Please enter title.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      return
+    }
     try {
       startTransition(async () => {
         const res = await aboutusShortRequest({
-          title: 'About Us',
+          ...values,
           description: editorText,
           promises: options,
           homeBgId,
@@ -133,6 +176,51 @@ const HomeAboutus = () => {
           detectChange={detectChange}
         />
         <Box sx={{ mt: 3, pb: 5 }}>
+          <Stack direction="row" alignItems="center" gap="20px" sx={{ mb: 2 }}>
+            <TextFieldWraper
+              label="Title"
+              placeholder="Enter about us title."
+              value={values?.title}
+              name="title"
+              onChange={(e: any) => {
+                setDetectChange(true)
+                setValues({ ...values, title: e.target.value })
+              }}
+            />
+            <label htmlFor="image_" style={{ width: '100%', marginTop: '7px' }}>
+              About Us Logo
+              <input
+                type="file"
+                id="image_"
+                name="image"
+                hidden
+                onChange={handleImageChange}
+              />
+              <Box
+                sx={{
+                  width: '100%',
+                  height: '38px',
+                  border: '1px solid darkgray',
+                  borderRadius: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  pl: '10px',
+                  color: 'var(--black)',
+                  fontSize: '14px',
+                  fontWeight: 300,
+                  mb: 3,
+                  mt: 1,
+                  overflow: 'hidden',
+                }}
+              >
+                {image?.name
+                  ? image?.name
+                  : values?.logo
+                    ? 'aboutus-logo.jpg'
+                    : 'Upload about us logo.'}
+              </Box>
+            </label>
+          </Stack>
           <ReactQuillEditor
             handleEditorValue={handleEditorValue}
             value={editorText}
@@ -140,47 +228,74 @@ const HomeAboutus = () => {
           />
         </Box>
 
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          gap="1rem"
-          sx={{ mt: 5 }}
+        <Typography
+          variant="body1"
+          color="var(--black)"
+          sx={{ fontSize: '18px', fontWeight: 'bold', mt: 3, mb: 1 }}
         >
-          <Typography
-            variant="body1"
-            color="var(--black)"
-            sx={{ fontSize: '18px', fontWeight: 'bold', mb: 3 }}
-          >
-            Our Promises
-          </Typography>
-          <Button
-            sx={{
-              bgcolor: 'var(--blue)',
-              color: 'white',
-              width: '160px',
-              height: '36px',
-              '&:hover': {
-                bgcolor: 'var(--blue)',
-              },
-            }}
-            onClick={handleShowModal}
-          >
-            <Stack direction="row" alignItems="center" gap="10px">
-              <AddIcon sx={{ color: 'white', fontSize: '18px' }} />
-              <Typography
-                variant="body1"
-                color="white"
-                sx={{
-                  textTransform: 'capitalize',
-                  fontSize: '14px',
-                }}
-              >
-                Add Option
-              </Typography>
-            </Stack>
-          </Button>
+          Our Promises
+        </Typography>
+
+        <TextFieldWraper
+          label="Promise Title"
+          placeholder="Enter Promies title."
+          value={values?.promisTitle}
+          name="promisTitle"
+          onChange={(e: any) => {
+            setDetectChange(true)
+            setValues({ ...values, promisTitle: e.target.value })
+          }}
+        />
+        <Stack direction="row" alignItems="center" gap="20px" sx={{ mb: 4 }}>
+          <Box sx={{ width: '100%' }}>
+            <CustomLabel id="demo-simple-select-label" sx={{ mb: 2 }}>
+              Promise Title Color
+            </CustomLabel>
+            <HeaderBgHandler
+              handleValuesChange={handleChange}
+              value={values?.promiseColor}
+              name="promiseColor"
+            />
+          </Box>
+          <Box sx={{ width: '100%' }}>
+            <CustomLabel id="demo-simple-select-label" sx={{ mb: 2 }}>
+              Card Background Color
+            </CustomLabel>
+            <HeaderBgHandler
+              handleValuesChange={handleChange}
+              value={values?.cardBgcolor}
+              name="cardBgcolor"
+            />
+          </Box>
         </Stack>
+
+        <Button
+          sx={{
+            bgcolor: 'var(--blue)',
+            color: 'white',
+            width: '160px',
+            height: '36px',
+            mb: 3,
+            '&:hover': {
+              bgcolor: 'var(--blue)',
+            },
+          }}
+          onClick={handleShowModal}
+        >
+          <Stack direction="row" alignItems="center" gap="10px">
+            <AddIcon sx={{ color: 'white', fontSize: '18px' }} />
+            <Typography
+              variant="body1"
+              color="white"
+              sx={{
+                textTransform: 'capitalize',
+                fontSize: '14px',
+              }}
+            >
+              Add Option
+            </Typography>
+          </Stack>
+        </Button>
 
         <Box
           sx={{
