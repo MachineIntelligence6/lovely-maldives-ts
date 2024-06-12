@@ -2,26 +2,39 @@ import prisma from '../../prisma'
 
 interface Wonders {
   title: string
-  image: string
+  cards: [{ image: string; title: string }]
   homeBgId: string
 }
 
 export async function createWonders(data: Wonders) {
-  return prisma.wonders.create({
-    data: {
-      title: data.title,
-      image: data.image,
-      homeBg: {
-        connect: {
-          id: data.homeBgId,
+  const isExist = await prisma.wonders.findFirst()
+  let result
+  if (isExist) {
+    result = await prisma.wonders.update({
+      where: {
+        id: isExist.id,
+      },
+      data,
+    })
+  } else {
+    result = await prisma.wonders.create({
+      data: {
+        title: data.title,
+        cards: data.cards,
+        homeBg: {
+          connect: {
+            id: data.homeBgId,
+          },
         },
       },
-    },
-  })
+    })
+  }
+
+  return result
 }
 
 export async function getWonders() {
-  return prisma.wonders.findMany()
+  return prisma.wonders.findFirst()
 }
 
 export async function deleteWonders() {

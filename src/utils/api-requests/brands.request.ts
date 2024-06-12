@@ -1,19 +1,18 @@
 import apiClient from '@/services/apiClient'
 
-interface TopBrands {
-  title: string
-  description: string
-  ratings: string
-  bgColor: string
-  homeBgId: string
-}
+// interface TopBrands {
+//   title: string
+//   description: string
+//   ratings: string
+//   bgColor: string
+//   homeBgId: string
+// }
 
-export const topBrandsRequest = async (data: TopBrands) => {
+export const topBrandsRequest = async (data: any) => {
   return apiClient.post('/home/brands', {
     title: data.title,
-    ratings: data.ratings,
+    brands: data.brands,
     bgColor: data.bgColor,
-    description: data.description,
     homeBgId: data.homeBgId,
   })
 }

@@ -4,8 +4,17 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-import { Box, Paper, Typography, useMediaQuery } from '@mui/material'
+import {
+  Box,
+  Button,
+  Paper,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from '@mui/material'
 import Image from 'next/image'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 
 export function SampleNextArrow(props: any) {
   const { className, style, onClick } = props
@@ -46,7 +55,7 @@ export function SamplePrevArrow(props: any) {
 }
 
 const CardsSlider = (props: any) => {
-  const { services } = props
+  const { services, handleDeleteService, editModelShow } = props
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
 
   const settings = {
@@ -224,6 +233,42 @@ const CardsSlider = (props: any) => {
                 >
                   {item.title}
                 </Typography>
+
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  gap="8px"
+                  sx={{ mt: 2 }}
+                >
+                  <Box
+                    sx={{
+                      width: '25px',
+                      height: '25px',
+                      borderRadius: '50%',
+                      bgcolor: 'var(--red)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    onClick={() => handleDeleteService(index)}
+                  >
+                    <DeleteIcon sx={{ color: 'white', fontSize: '14px' }} />
+                  </Box>
+                  <Box
+                    sx={{
+                      width: '25px',
+                      height: '25px',
+                      borderRadius: '50%',
+                      bgcolor: 'var(--darkBlue)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    onClick={() => editModelShow(index)}
+                  >
+                    <EditIcon sx={{ color: 'white', fontSize: '14px' }} />
+                  </Box>
+                </Stack>
               </Box>
             </Paper>
           )}

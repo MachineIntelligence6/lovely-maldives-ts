@@ -103,7 +103,7 @@ export default function OurCollection({
         className="slider-container"
       >
         <Slider {...settings}>
-          {collections?.map((collection: any, index: number) => (
+          {collections?.collections?.map((collection: any, index: number) => (
             <Box
               sx={{
                 position: 'relative',
@@ -123,7 +123,7 @@ export default function OurCollection({
                     md: `${radius} ${radius} 0px 0px`,
                   },
                   margin: '0 auto',
-                  position: 'relative', // Next.js Image component requires position: relative for sizing
+                  position: 'relative',
                 }}
               >
                 <Image

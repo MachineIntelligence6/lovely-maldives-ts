@@ -99,7 +99,7 @@ export default function TopBrands(props: any) {
           mt: { xs: '60px', md: '120px' },
         }}
       >
-        TOP BRANDS
+        {brands?.title}
       </Typography>
 
       <Box
@@ -110,7 +110,7 @@ export default function TopBrands(props: any) {
         }}
       >
         <Box component={Slider} {...settings}>
-          {brands?.map((brand: any, index: number) => (
+          {brands?.brands?.map((brand: any, index: number) => (
             <Box
               key={index}
               // sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap:'90px' }}
@@ -120,7 +120,7 @@ export default function TopBrands(props: any) {
                 sx={{
                   width: { xs: '93%', md: 'calc(65% + 9px)' },
                   height: { xs: '250px', md: '210px' },
-                  background: 'var(--brown)',
+                  background: brands?.bgColor || 'var(--brown)',
                   color: 'white',
                   textAlign: 'center',
                   display: 'flex',
@@ -134,11 +134,26 @@ export default function TopBrands(props: any) {
               >
                 <Box
                   sx={{
-                    pt: { xs: '50%', md: '40%' },
+                    pt: { xs: '40%', md: '30%' },
                     height: '50%',
                   }}
                 >
-                  <Typography
+                  <Box
+                    sx={{ width: '100%', height: '80px', overflow: 'hidden' }}
+                  >
+                    <Image
+                      src={brand?.logo}
+                      alt="brand-logo"
+                      width={100}
+                      height={80}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                      }}
+                    />
+                  </Box>
+                  {/* <Typography
                     sx={{
                       width: '100px',
                       fontSize: '26px',
@@ -147,7 +162,7 @@ export default function TopBrands(props: any) {
                     }}
                   >
                     {brand?.title}
-                  </Typography>
+                  </Typography> */}
                 </Box>
                 <Box
                   sx={{
@@ -167,7 +182,7 @@ export default function TopBrands(props: any) {
                   <Typography
                     sx={{ fontSize: '12px', fontWeight: 200, mb: '4px' }}
                   >
-                    {brand?.description}
+                    {brand?.tag}
                   </Typography>
                 </Box>
               </Box>

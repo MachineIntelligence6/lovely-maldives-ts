@@ -3,6 +3,7 @@ import prisma from '../../prisma'
 interface AboutMaldivesShortData {
   title: string
   description: string
+  link: string
   homeBgId: string
 }
 
@@ -21,6 +22,7 @@ export async function createAboutMaldivesShort(data: AboutMaldivesShortData) {
       data: {
         title: data.title,
         description: data.description,
+        link: data.link,
         homeBg: {
           connect: {
             id: data.homeBgId,

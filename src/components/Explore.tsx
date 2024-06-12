@@ -118,7 +118,7 @@ export default function Explore(props: any) {
           textTransform: 'uppercase',
         }}
       >
-        Explore A World Of Wonders
+        {wonders?.title}
       </Typography>
       <Box
         className="slider-container explore-slider"
@@ -128,7 +128,7 @@ export default function Explore(props: any) {
         }}
       >
         <Slider {...settings}>
-          {wonders?.map((data: any, index: number) => (
+          {wonders?.cards?.map((data: any, index: number) => (
             <Box
               key={index}
               sx={{

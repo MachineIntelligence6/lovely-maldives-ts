@@ -27,6 +27,10 @@ const menuItems = [
         path: 'admin/general-settings/footer',
       },
       {
+        title: 'Side Image',
+        path: 'admin/general-settings/side-image',
+      },
+      {
         title: 'Subscribe Letter',
         path: 'admin/general-settings/subscribe-letter',
       },

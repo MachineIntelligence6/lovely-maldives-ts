@@ -13,6 +13,7 @@ export async function getHomeSections() {
       socialLinkSection: true,
       header: true,
       footer: true,
+      sideImage: true,
     },
   })
   console.log('after fetching =>>> ', result)

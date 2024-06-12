@@ -2,28 +2,39 @@ import prisma from '../../prisma'
 
 interface Collections {
   title: string
-  image: string
-  ratings: string
+  collections: [{ title: string; image: string; ratings: string }]
   homeBgId: string
 }
 
 export async function createOurCollection(data: Collections) {
-  return prisma.ourCollections.create({
-    data: {
-      title: data.title,
-      image: data.image,
-      ratings: data.ratings,
-      homeBg: {
-        connect: {
-          id: data.homeBgId,
+  const isExist = await prisma.ourCollections.findFirst()
+  let result
+  if (isExist) {
+    result = await prisma.ourCollections.update({
+      where: {
+        id: isExist.id,
+      },
+      data,
+    })
+  } else {
+    result = await prisma.ourCollections.create({
+      data: {
+        title: data.title,
+        collections: data.collections,
+        homeBg: {
+          connect: {
+            id: data.homeBgId,
+          },
         },
       },
-    },
-  })
+    })
+  }
+
+  return result
 }
 
 export async function getOurCollections() {
-  return prisma.ourCollections.findMany()
+  return prisma.ourCollections.findFirst()
 }
 
 export async function deleteOurCollection() {

@@ -1,7 +1,9 @@
+/* eslint-disable no-nested-ternary */
+
 'use client'
 
 import styled from '@emotion/styled'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Box,
   Typography,
@@ -12,6 +14,7 @@ import {
 } from '@mui/material'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import CustomSelect from '@/admin-components/items/CustomSelect'
+import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 
 const CustomLabel = styled(InputLabel)(({ theme }) => ({
   fontSize: '16px',
@@ -45,8 +48,9 @@ const style = {
 }
 
 const AddBrand = (props: any) => {
-  const { open, handleShowModal, handleAddBrand } = props
-  const [values, setValues] = useState({ title: '', stars: 1, description: '' })
+  const { open, handleShowModal, handleAddBrand, edit } = props
+  const [values, setValues] = useState({ logo: '', ratings: 1, tag: '' })
+  const [image, setImage] = useState('' as any)
 
   const handleChange = (e: any) => {
     const { value, name } = e.target
@@ -56,13 +60,31 @@ const AddBrand = (props: any) => {
     })
   }
 
+  const handleIconChange = async (e: any) => {
+    // eslint-disable-next-line prefer-destructuring
+    const file = e.target.files?.[0]
+    setImage(file)
+
+    const formData = new FormData()
+    formData.append('file', file as any)
+    formData.append('upload_preset', 'j8epfynh')
+    const res = await uploadImgToCloudinary(formData)
+    setValues({ ...values, logo: res?.secure_url })
+  }
+
+  useEffect(() => {
+    if (edit?.ratings) {
+      setValues(edit)
+    }
+  }, [edit])
+
   return (
     <div>
       <Modal
         open={open}
         onClose={handleShowModal}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-describedby="modal-modal-tag"
       >
         <Box sx={style}>
           <Typography
@@ -77,22 +99,42 @@ const AddBrand = (props: any) => {
               mb: 3,
             }}
           >
-            Add Brand
+            {edit?.ratings ? 'Update' : 'Add'} Brand
           </Typography>
 
-          <TextFieldWraper
-            label="Title"
-            placeholder="Enter Title."
-            value={values?.title}
-            name="title"
-            onChange={(e: any) => handleChange(e)}
-          />
+          <label htmlFor="icon_">
+            Brand Logo
+            <input type="file" id="icon_" hidden onChange={handleIconChange} />
+            <Box
+              sx={{
+                width: '100%',
+                height: '38px',
+                border: '1px solid #e1e1e1',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                pl: '10px',
+                color: 'darkgray',
+                fontSize: '14px',
+                fontWeight: 300,
+                mb: 3,
+                mt: 1,
+                overflow: 'hidden',
+              }}
+            >
+              {image?.name
+                ? image?.name
+                : values?.logo
+                  ? 'brand-logo.jpg'
+                  : 'Upload file'}
+            </Box>
+          </label>
 
           <TextFieldWraper
-            label="description"
+            label="Tag"
             placeholder="e.g. Ulta Luxury."
-            value={values?.description}
-            name="description"
+            value={values?.tag}
+            name="tag"
             onChange={(e: any) => handleChange(e)}
           />
 
@@ -104,9 +146,9 @@ const AddBrand = (props: any) => {
           </CustomLabel>
           <CustomSelect
             placeholder="Select Stars."
-            value={values?.stars}
+            value={values?.ratings}
             options={options}
-            name="stars"
+            name="ratings"
             onChange={(e: any) => handleChange(e)}
           />
 
@@ -137,13 +179,30 @@ const AddBrand = (props: any) => {
                 fontFamily: 'Public Sans',
               }}
               onClick={() => {
-                if (!values?.title || !values?.stars) return
+                if (!values?.logo || !values?.ratings) return
                 handleAddBrand(values)
-                setValues({ title: '', stars: 0, description: '' })
+                if (edit?.ratings) {
+                  handleAddBrand(
+                    {
+                      ...values,
+                      ratings: values?.ratings?.toString(),
+                    },
+                    'edit'
+                  )
+                } else {
+                  handleAddBrand(
+                    {
+                      ...values,
+                      ratings: values?.ratings?.toString(),
+                    },
+                    'add'
+                  )
+                }
+                setValues({ logo: '', ratings: 0, tag: '' })
                 handleShowModal()
               }}
             >
-              ADD
+              {edit?.ratings ? 'Update' : 'Add'}
             </Button>
           </Stack>
         </Box>

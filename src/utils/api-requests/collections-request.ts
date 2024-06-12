@@ -1,17 +1,17 @@
 import apiClient from '@/services/apiClient'
 
-interface OurCollection {
-  title: string
-  image: string
-  ratings: string
-  homeBgId: string
-}
+// interface OurCollection {
+//   title: string
+//   image: string
+//   ratings: string
+//   homeBgId: string
+// }
 
-export const collectionRequest = async (data: OurCollection) => {
+export const collectionRequest = async (data: any) => {
+  console.log('data  ->>> ', data)
   return apiClient.post('/home/collections', {
     title: data.title,
-    image: data.image,
-    ratings: data.ratings,
+    collections: data?.collections,
     homeBgId: data.homeBgId,
   })
 }

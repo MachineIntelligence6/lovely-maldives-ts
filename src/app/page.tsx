@@ -46,7 +46,6 @@ export default function Home() {
       setLoading(true)
       const res = await axios.get('/api/home')
       const data = res?.data
-      console.log('data =>>> ', res)
       setLoading(false)
       if (res?.status === 200) {
         setHomeData(data?.data)
@@ -148,7 +147,7 @@ export default function Home() {
             }}
           >
             <Link
-              href="/"
+              href={homeData?.aboutMaldivesShort?.[0]?.link || '/'}
               className="readmore"
               style={{
                 paddingTop: '5px',
@@ -168,21 +167,21 @@ export default function Home() {
             />
           </Box>
         </Box>
-        <SidePalmTree />
-        <OurServices services={homeData?.services} />
+        <SidePalmTree data={homeData?.sideImage?.[0]} />
+        <OurServices services={homeData?.services?.[0]} />
       </Box>
       <About data={homeData?.aboutUsShort?.[0]} />
-      <Explore wonders={homeData?.wonders} />
+      <Explore wonders={homeData?.wonders?.[0]} />
       <OurCollection
-        heading="Our Collection"
+        heading={homeData?.collections?.[0]?.title}
         button="block"
         iconShow="none"
         radius="0"
         bottomradius="0"
-        collections={homeData?.collections}
+        collections={homeData?.collections?.[0]}
       />
       <TopBrands
-        brands={homeData?.brands}
+        brands={homeData?.brands?.[0]}
         socialLinkSection={homeData?.socialLinkSection?.[0]}
       />
       <Footer footerData={homeData?.footer?.[0]} />

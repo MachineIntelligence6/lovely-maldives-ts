@@ -2,12 +2,17 @@ import prisma from '../../prisma'
 
 interface AboutusShort {
   title: string
+  logo: string
   description: string
+  promisTitle: string
+  promiseColor: string
+  cardBgcolor: string
   promises: string[]
   homeBgId: string
 }
 
 export async function createAboutusShort(data: AboutusShort) {
+  console.log('data ', data)
   const isExist = await prisma.aboutUsShort.findFirst()
   let result
   if (isExist) {
@@ -20,9 +25,13 @@ export async function createAboutusShort(data: AboutusShort) {
   } else {
     result = await prisma.aboutUsShort.create({
       data: {
-        title: data.title,
-        description: data.description,
-        promises: data.promises,
+        title: data?.title,
+        logo: data?.logo,
+        description: data?.description,
+        promisTitle: data?.promisTitle,
+        promiseColor: data?.promiseColor,
+        cardBgcolor: data?.cardBgcolor,
+        promises: data?.promises,
         homeBg: {
           connect: {
             id: data.homeBgId,

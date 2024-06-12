@@ -6,11 +6,15 @@ import StarRateIcon from '@mui/icons-material/StarRate'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
+import Image from 'next/image'
 
 import { SampleNextArrow, SamplePrevArrow } from '@/components/OurServices'
 
 const TopBrandsSlider = (props: any) => {
-  const { brands, handleDeleteCard } = props
+  const { brands, handleDeleteBrand, editModelShow } = props
+  console.log('brands ====>>> > ', brands)
   const settings = {
     centerMode: true,
     className: 'slick-center-mode',
@@ -104,25 +108,78 @@ const TopBrandsSlider = (props: any) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 alignSelf: 'center',
+                position: 'relative',
                 mx: { xs: 'auto', md: '30px' },
               }}
             >
               <Box
                 sx={{
-                  pt: '40%',
+                  position: 'absolute',
+                  top: '.5rem',
+                  right: '2.5rem',
+                  width: '200px',
+                  height: '30px',
+                  maxWidth: '30px',
+                  maxHeight: '30px',
+                  zIndex: 999,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+                  cursor: 'pointer',
+                }}
+              >
+                <Box
+                  sx={{
+                    width: '25px',
+                    minWidth: '25px',
+                    height: '25px',
+                    maxHeight: '25px',
+                    borderRadius: '50%',
+                    bgcolor: 'var(--red)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onClick={() => handleDeleteBrand(index)}
+                >
+                  <DeleteIcon sx={{ color: 'white', fontSize: '14px' }} />
+                </Box>
+                <Box
+                  sx={{
+                    width: '25px',
+                    minWidth: '25px',
+                    height: '25px',
+                    maxHeight: '25px',
+                    borderRadius: '50%',
+                    bgcolor: 'var(--darkBlue)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onClick={() => editModelShow(index)}
+                >
+                  <EditIcon sx={{ color: 'white', fontSize: '14px' }} />
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  pt: '30%',
                   height: '50%',
                 }}
               >
-                <Typography
-                  sx={{
-                    width: '100px',
-                    fontSize: '22px',
-                    textAlign: 'center',
-                    fontWeight: 600,
-                  }}
-                >
-                  {brand.title}
-                </Typography>
+                <Box sx={{ width: '100%', height: '80px', overflow: 'hidden' }}>
+                  <Image
+                    src={brand?.logo}
+                    alt="brand-logo"
+                    width={100}
+                    height={80}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                    }}
+                  />
+                </Box>
               </Box>
               <Box
                 sx={{
@@ -136,13 +193,13 @@ const TopBrandsSlider = (props: any) => {
                 }}
               >
                 <Typography sx={{ fontSize: '18px', fontWeight: 200 }}>
-                  {brand.stars}
+                  {brand.ratings}
                 </Typography>
                 <StarRateIcon sx={{ fontSize: '18px', mb: '5px' }} />
                 <Typography
                   sx={{ fontSize: '12px', fontWeight: 200, mb: '4px' }}
                 >
-                  {brand?.description}
+                  {brand?.tag}
                 </Typography>
               </Box>
             </Box>

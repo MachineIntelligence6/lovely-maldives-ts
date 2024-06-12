@@ -11,7 +11,7 @@ export async function GET() {
   try {
     await connectToDatabase()
     const result = await getOurCollections()
-    if (result?.length === 0)
+    if (!result)
       return NextResponse.json({ message: 'No data found.', status: 422 })
 
     return NextResponse.json(
@@ -27,9 +27,9 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { title, image, ratings, homeBgId } = await req.json()
-  console.log('data ', title, image, ratings, homeBgId)
-  if (!title || !homeBgId || !image || !ratings)
+  const { title, collections, homeBgId } = await req.json()
+
+  if (!title || !homeBgId || !collections || collections?.length === 0)
     return NextResponse.json({
       message: 'Please send all field to save data.',
       status: 422,
@@ -40,8 +40,7 @@ export async function POST(req: Request) {
 
     const result = await createOurCollection({
       title,
-      image,
-      ratings: ratings.toString(),
+      collections,
       homeBgId,
     })
     if (!result) return NextResponse.json({ message: 'Error', status: 500 })

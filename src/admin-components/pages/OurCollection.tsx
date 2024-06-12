@@ -15,6 +15,8 @@ import AddCollection from './modals/AddCollection'
 import { CustomCard } from '../styled/CustomCard'
 import CollectionSlider from '../sliders/CollectionSlider'
 import CustomLoader from '../common/CustomLoader'
+import HeadingWraper from '../common/HeadingWraper'
+import TextFieldWraper from '../items/TextfieldWraper'
 
 const OurCollection = () => {
   const [isPending, startTransition] = useTransition()
@@ -22,12 +24,33 @@ const OurCollection = () => {
   const [collections, setCollections] = useState([] as any)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
+  const [values, setValues] = useState({ title: '' })
+  const [edit, setEdit] = useState('' as any)
   const homeBgId = useHomeBgId()
 
   const handleShowModal = () => setShowModal(!showModal)
 
   const handleDeleteCard = (index: number) => {
+    const sure = window.confirm('Are you sure you want to delete?')
+    if (!sure) return
     setCollections(collections.filter((_: any, i: number) => i !== index))
+  }
+
+  const editModelShow = (index: number) => {
+    setEdit(collections?.[index])
+    handleShowModal()
+  }
+
+  const addNewCollection = (newCollection: any, type: string) => {
+    if (type === 'edit') {
+      const newCollections = collections.map((collection: any) =>
+        collection.title === edit.title ? newCollection : collection
+      )
+      setCollections(newCollections)
+    } else {
+      setCollections([...collections, newCollection])
+    }
+    setDetectChange(true)
   }
 
   const getCollections = async () => {
@@ -37,9 +60,14 @@ const OurCollection = () => {
         const data = res?.data
         console.log('data ', data)
         if (data?.status === 200) {
-          setCollections(data?.data)
+          setCollections(data?.data?.collections || [])
+          setValues(data?.data)
         } else {
-          alert('Error occured while fetching about maldives data.')
+          // alert('Error occured while fetching about maldives data.')
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
           console.log('response about maldives', res)
         }
         console.log('response ', res)
@@ -51,16 +79,13 @@ const OurCollection = () => {
 
   const handleAddCollection = async (newCollection: any) => {
     console.log('new collection ', newCollection)
-    // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
-    if (!newCollection.title) return alert('Please enter title.')
-    if (!newCollection.img) return alert('Please upload card image.')
+    if (!values.title) return alert('Please enter title.')
 
     try {
       startTransition(async () => {
         const res = await collectionRequest({
-          title: newCollection?.title,
-          image: newCollection?.img,
-          ratings: newCollection?.stars,
+          title: values?.title,
+          collections,
           homeBgId,
         })
         const data = res?.data
@@ -68,7 +93,6 @@ const OurCollection = () => {
         if (data.status === 201) {
           getCollections()
           setDetectChange(false)
-          handleShowModal()
           setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
@@ -105,7 +129,8 @@ const OurCollection = () => {
       <AddCollection
         open={showModal}
         handleShowModal={handleShowModal}
-        handleAddCollection={handleAddCollection}
+        handleAddCollection={addNewCollection}
+        edit={edit}
       />
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
         {isPending && <CustomLoader />}
@@ -115,51 +140,56 @@ const OurCollection = () => {
           </Alert>
         )}
 
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          gap="1rem"
-        >
-          <Typography
-            variant="body1"
-            color="var(--black)"
-            sx={{ fontSize: '18px', fontWeight: 'bold', mb: 3 }}
-          >
-            Our Collection
-          </Typography>
-          <Button
-            sx={{
+        <HeadingWraper
+          title="Our Collections"
+          handleSave={handleAddCollection}
+          detectChange={detectChange}
+        />
+
+        <TextFieldWraper
+          label="Title"
+          placeholder="Enter title."
+          value={values?.title}
+          name="title"
+          onChange={(e: any) => {
+            setDetectChange(true)
+            setValues({ ...values, title: e.target.value })
+          }}
+        />
+
+        <Button
+          sx={{
+            bgcolor: 'var(--blue)',
+            color: 'white',
+            width: '160px',
+            mt: 1,
+            height: '36px',
+            '&:hover': {
               bgcolor: 'var(--blue)',
-              color: 'white',
-              width: '160px',
-              height: '36px',
-              '&:hover': {
-                bgcolor: 'var(--blue)',
-              },
-            }}
-            onClick={handleShowModal}
-          >
-            <Stack direction="row" alignItems="center" gap="10px">
-              <AddIcon sx={{ color: 'white', fontSize: '18px' }} />
-              <Typography
-                variant="body1"
-                color="white"
-                sx={{ fontSize: '14px', textTransform: 'capitalize' }}
-              >
-                Add Collection
-              </Typography>
-            </Stack>
-          </Button>
-        </Stack>
+            },
+          }}
+          onClick={handleShowModal}
+        >
+          <Stack direction="row" alignItems="center" gap="10px">
+            <AddIcon sx={{ color: 'white', fontSize: '18px' }} />
+            <Typography
+              variant="body1"
+              color="white"
+              sx={{ fontSize: '14px', textTransform: 'capitalize' }}
+            >
+              Add Collection
+            </Typography>
+          </Stack>
+        </Button>
 
         {collections?.length > 0 ? (
           <CollectionSlider
             collections={collections}
             handleDeleteCard={handleDeleteCard}
+            editModelShow={editModelShow}
           />
         ) : (
-          <Typography variant="body1" color="var(--black)">
+          <Typography variant="body1" color="var(--black)" sx={{ mt: 3 }}>
             No Collection Added...
           </Typography>
         )}

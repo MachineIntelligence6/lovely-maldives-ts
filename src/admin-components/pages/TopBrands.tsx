@@ -14,6 +14,10 @@ import AddBrand from './modals/AddBrand'
 import { CustomCard } from '../styled/CustomCard'
 import TopBrandsSlider from '../sliders/TopBrandsSlider'
 import CustomLoader from '../common/CustomLoader'
+import HeadingWraper from '../common/HeadingWraper'
+import TextFieldWraper from '../items/TextfieldWraper'
+import { CustomLabel } from '../styled/CustomLabels'
+import HeaderBgHandler from '../general-settings/HeaderBgHandler'
 
 const TopBrands = () => {
   const [isPending, startTransition] = useTransition()
@@ -21,16 +25,32 @@ const TopBrands = () => {
   const [brands, setBrands] = useState([] as any)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
+  const [values, setValues] = useState({ title: '', bgColor: '' })
+  const [edit, setEdit] = useState('' as any)
   const homeBgId = useHomeBgId()
 
   const handleShowModal = () => setShowModal(!showModal)
 
-  // const handleAddBrand = (newService: any) => {
-  //   setBrands([...brands, newService])
-  //   handleShowModal()
-  // }
+  const editModelShow = (index: number) => {
+    setEdit(brands?.[index])
+    handleShowModal()
+  }
 
-  const handleDeleteFile = (index: number) => {
+  const addNewBrand = (newBrand: any, type: string) => {
+    if (type === 'edit') {
+      const newBrands = brands.map((brand: any) =>
+        brand.logo === edit.logo ? newBrand : brand
+      )
+      setBrands(newBrands)
+    } else {
+      setBrands([...brands, newBrand])
+    }
+    setDetectChange(true)
+  }
+
+  const handleDeleteBrand = (index: number) => {
+    const sure = window.confirm('Are you sure you want to delete?')
+    if (!sure) return
     setBrands(brands.filter((_: any, i: number) => i !== index))
   }
 
@@ -41,7 +61,8 @@ const TopBrands = () => {
         const data = res?.data
         console.log('response data  ', data)
         if (data?.status === 200) {
-          setBrands(data?.data)
+          setBrands(data?.data?.brands || [])
+          setValues(data?.data)
         } else {
           // alert('Error occured while fetching about maldives data.')
           console.log('response top brands', res)
@@ -52,16 +73,14 @@ const TopBrands = () => {
     }
   }
 
-  const handleAddBrand = async (newBrand: any) => {
+  const handleAddBrand = async () => {
     // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
-    console.log('newBrand', newBrand)
     try {
       startTransition(async () => {
         const res = await topBrandsRequest({
-          title: newBrand?.title,
-          ratings: newBrand?.stars,
-          description: newBrand?.description,
-          bgColor: '#5d7496',
+          title: values?.title,
+          brands,
+          bgColor: values?.bgColor,
           homeBgId,
         })
         console.log('data =>>> ', res?.data)
@@ -69,7 +88,6 @@ const TopBrands = () => {
         if (data?.status === 201) {
           getTopBrands()
           setDetectChange(false)
-          handleShowModal()
           setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
@@ -100,7 +118,8 @@ const TopBrands = () => {
       <AddBrand
         open={showModal}
         handleShowModal={handleShowModal}
-        handleAddBrand={handleAddBrand}
+        handleAddBrand={addNewBrand}
+        edit={edit}
       />
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
         {isPending && <CustomLoader />}
@@ -109,51 +128,79 @@ const TopBrands = () => {
             {alertMsg.message}
           </Alert>
         )}
+        <HeadingWraper
+          title="Top Brands"
+          handleSave={handleAddBrand}
+          detectChange={detectChange}
+        />
+
         <Stack
-          direction="row"
+          direction="column"
           alignItems="center"
           justifyContent="space-between"
           gap="1rem"
         >
-          <Typography
-            variant="body1"
-            color="var(--black)"
-            sx={{ fontSize: '18px', fontWeight: 'bold', mb: 3 }}
-          >
-            Top Brands
-          </Typography>
-          <Button
-            sx={{
-              bgcolor: 'var(--blue)',
-              color: 'white',
-              width: '160px',
-              height: '36px',
-              '&:hover': {
-                bgcolor: 'var(--blue)',
-              },
+          <TextFieldWraper
+            label="Title"
+            placeholder="Enter title."
+            value={values?.title}
+            name="title"
+            onChange={(e: any) => {
+              setDetectChange(true)
+              setValues({ ...values, title: e.target.value })
             }}
-            onClick={handleShowModal}
-          >
-            <Stack direction="row" alignItems="center" gap="10px">
-              <AddIcon sx={{ color: 'white', fontSize: '18px' }} />
-              <Typography
-                variant="body1"
-                color="white"
-                sx={{
-                  textTransform: 'capitalize',
-                  fonsSize: '14px',
-                }}
-              >
-                Add Brand
-              </Typography>
-            </Stack>
-          </Button>
+          />
+
+          <Box sx={{ width: '100%', mb: 3 }}>
+            <CustomLabel id="demo-simple-select-label" sx={{ mb: 2 }}>
+              Card Background Color
+            </CustomLabel>
+            <HeaderBgHandler
+              handleValuesChange={(e: any) =>
+                setValues({ ...values, bgColor: e.target.value })
+              }
+              value={values?.bgColor}
+              name="bgColor"
+            />
+          </Box>
         </Stack>
 
+        <Button
+          sx={{
+            bgcolor: 'var(--blue)',
+            color: 'white',
+            width: '160px',
+            mt: 1,
+            height: '36px',
+            '&:hover': {
+              bgcolor: 'var(--blue)',
+            },
+          }}
+          onClick={handleShowModal}
+        >
+          <Stack direction="row" alignItems="center" gap="10px">
+            <AddIcon sx={{ color: 'white', fontSize: '18px' }} />
+            <Typography
+              variant="body1"
+              color="white"
+              sx={{
+                textTransform: 'capitalize',
+                fonsSize: '14px',
+              }}
+            >
+              Add Brand
+            </Typography>
+          </Stack>
+        </Button>
+
         {brands?.length > 0 ? (
-          <TopBrandsSlider brands={brands} />
+          <TopBrandsSlider
+            brands={brands}
+            editModelShow={editModelShow}
+            handleDeleteBrand={handleDeleteBrand}
+          />
         ) : (
-          <Typography variant="body1" color="var(--black)">
+          <Typography variant="body1" color="var(--black)" sx={{ mt: 3 }}>
             No Brand Added...
           </Typography>
         )}
