@@ -22,6 +22,7 @@ export default function SidePalmTree(props: any) {
           top: 0,
           right: 0,
           zIndex: 99,
+          objectFit: 'contain',
           transform: 'translateY(-30%)',
         }}
       />

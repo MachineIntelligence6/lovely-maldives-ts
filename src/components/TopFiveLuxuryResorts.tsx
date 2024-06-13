@@ -147,20 +147,30 @@ export default function TopFiveLuxuryResorts(props: any) {
               key={index}
             >
               <Box
-                component={Image}
-                src={collectionImg}
-                alt="Resort item"
                 sx={{
                   width: { xs: '100%', md: '96%' },
                   height: { xs: '250px', md: '300px' },
                   objectFit: 'cover',
+                  overflow: 'hidden',
                   borderRadius: {
                     xs: '0px',
                     md: `${radius} ${radius} 0px 0px`,
                   },
                   margin: '0 auto',
                 }}
-              />
+              >
+                <Image
+                  src={data?.image || collectionImg}
+                  alt="image"
+                  width={400}
+                  height={500}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                />
+              </Box>
               <Box
                 sx={{
                   width: { xs: '100%', md: '96%' },
@@ -168,6 +178,7 @@ export default function TopFiveLuxuryResorts(props: any) {
                   bgcolor: 'rgba(150,127,93,0.5)',
                   position: 'absolute',
                   top: '0',
+                  right: 0,
                   left: { xs: 0, md: '8px' },
                   '@media only screen and (min-width: 1600px)': {
                     left: '11px',
@@ -210,10 +221,11 @@ export default function TopFiveLuxuryResorts(props: any) {
                   <BoltIcon sx={{ display: `${iconShow}` }} />
                 </Box>
                 <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
+                  {[...Array(parseInt(data?.ratings, 10))].map(
+                    (_: any, ind: number) => (
+                      <StarRateIcon key={`_${index}_${ind}`} />
+                    )
+                  )}
                 </Box>
               </Box>
             </Box>

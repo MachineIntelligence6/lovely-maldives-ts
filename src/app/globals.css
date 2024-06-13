@@ -19,6 +19,13 @@
   font-family: 'Gothic', sans-serif;
 }
 
+.quill-content {
+  width: 100%;
+}
+.ql-align-center {
+  text-align: center;
+}
+
 .admin-main-layout * {
   font-family: 'Public Sans' !important;
 }
@@ -405,21 +412,15 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   overflow-y: hidden;
 }
 
-
-
-
-
-
-
 #editor-container {
   height: 375px;
 }
 
-.ql-color .ql-picker-options [data-value=color-picker]:before {
+.ql-color .ql-picker-options [data-value='color-picker']:before {
   content: 'Pick Color';
 }
 
-.ql-color .ql-picker-options [data-value=color-picker] {
+.ql-color .ql-picker-options [data-value='color-picker'] {
   background: none !important;
   width: 100% !important;
   height: 25px !important;

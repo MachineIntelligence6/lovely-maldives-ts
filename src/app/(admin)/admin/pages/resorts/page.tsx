@@ -8,7 +8,6 @@ import ResortSections from '@/admin-components/pages/ResortSections'
 const Resorts = () => {
   return (
     <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
-      <HeadingWraper title="Resorts" />
       {/* <Box sx={{ mt: 3, pb: 5 }}>
         <ReactQuillEditor height={400} />
       </Box> */}

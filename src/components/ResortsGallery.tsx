@@ -14,20 +14,19 @@ import StarRateIcon from '@mui/icons-material/StarRate'
 import { motion } from 'framer-motion'
 import BoltIcon from '@mui/icons-material/Bolt'
 import Link from 'next/link'
-import { Resort, resorts } from '@/data'
+// import { Resort, resorts } from '@/data'
 import collectionImg from '../../public/Images/collectionImg.jpg'
 
-export default function ResortsGallery() {
-  const [resortsData, setResortsData]: [
-    Resort[],
-    Dispatch<SetStateAction<Resort[]>>,
-  ] = useState<Resort[]>([...resorts])
+export default function ResortsGallery(props: any) {
+  const { resorts } = props
+  const [resortsData, setResortsData] = useState([])
   const [isFullyLoaded, setIsFullyLoaded] = useState(false)
-
+  console.log('resortsData ', resortsData)
   const loadMore = () => {
-    setResortsData([...resortsData, ...resorts])
+    setResortsData(resorts)
     setIsFullyLoaded(true)
   }
+  console.log('Resorts ', resorts)
   return (
     <>
       <Box sx={{ my: { xs: '40px', md: '80px' } }}>
@@ -48,8 +47,8 @@ export default function ResortsGallery() {
           spacing={{ xs: 2, md: 4 }}
           sx={{ mt: { xs: '30px', md: '40px' } }}
         >
-          {resortsData.map((item) => (
-            <Grid item xs={12} sm={6} md={6} lg={4} key={item.id}>
+          {resorts?.map((item: any, index: number) => (
+            <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
               <Box
                 component={motion.div}
                 initial={{ opacity: 0, y: 20 }}
@@ -63,19 +62,29 @@ export default function ResortsGallery() {
                   sx={{ textDecoration: 'none', position: 'relative' }}
                 >
                   <Box
-                    component={Image}
-                    src={collectionImg}
-                    alt={item.name}
                     sx={{
                       width: '100%',
                       height: { xs: '250px', md: '300px' },
                       objectFit: 'cover',
+                      overflow: 'hidden',
                       borderRadius: {
                         xs: '0px',
                         md: `20px 20px 0px 0px`,
                       },
                     }}
-                  />
+                  >
+                    <Image
+                      src={item?.image || collectionImg}
+                      alt="image"
+                      width={400}
+                      height={500}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </Box>
                   <Box
                     sx={{
                       width: { xs: '100%', md: '100%' },
@@ -83,6 +92,8 @@ export default function ResortsGallery() {
                       bgcolor: 'rgba(150,127,93,0.5)',
                       position: 'absolute',
                       bottom: '110px',
+                      top: 0,
+                      right: 0,
                       left: { xs: 0, md: '0px' },
                       borderRadius: {
                         xs: '0px',
@@ -120,17 +131,18 @@ export default function ResortsGallery() {
                       }}
                     >
                       <Typography sx={{ fontSize: '20px' }}>
-                        {item.name.length > 20
-                          ? `${item.name.substring(0, 20)}...`
-                          : item.name}
+                        {item.title.length > 20
+                          ? `${item.title.substring(0, 20)}...`
+                          : item.title}
                       </Typography>
                       <BoltIcon sx={{ display: `flex` }} />
                     </Box>
                     <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
+                      {[...Array(parseInt(item?.ratings, 10))].map(
+                        (_: any, ind: number) => (
+                          <StarRateIcon key={`_${index}_${ind}`} />
+                        )
+                      )}
                     </Box>
                   </Box>
                 </Box>
@@ -139,32 +151,34 @@ export default function ResortsGallery() {
           ))}
         </Grid>
       </Box>
-      <Box
-        sx={{
-          textAlign: 'center',
-          mb: { xs: 6, md: 2 },
-          display: isFullyLoaded ? 'none' : 'block',
-        }}
-      >
-        <Button
+      {resorts?.length > 6 && (
+        <Box
           sx={{
-            bgcolor: 'var(--brown)',
-            color: 'white',
-            px: { xs: '12px', md: '16px' },
-            py: { xs: '6px', md: '8px' },
             textAlign: 'center',
-            fontSize: '18px',
-            '&:hover': {
-              backgroundColor: 'var(--blue) !important',
-            },
+            mb: { xs: 6, md: 2 },
+            display: isFullyLoaded ? 'none' : 'block',
           }}
-          onClick={loadMore}
-          title="Load more resorts"
-          aria-label="Load more resorts"
         >
-          Load More
-        </Button>
-      </Box>
+          <Button
+            sx={{
+              bgcolor: 'var(--brown)',
+              color: 'white',
+              px: { xs: '12px', md: '16px' },
+              py: { xs: '6px', md: '8px' },
+              textAlign: 'center',
+              fontSize: '18px',
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
+            }}
+            onClick={loadMore}
+            title="Load more resorts"
+            aria-label="Load more resorts"
+          >
+            Load More
+          </Button>
+        </Box>
+      )}
       <Box
         sx={{
           textAlign: 'center',

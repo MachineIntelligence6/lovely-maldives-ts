@@ -9,14 +9,14 @@ export async function GET() {
 
     const result = await prisma.resortFilters.findMany()
     if (!result)
-      return NextResponse.json(
-        { message: 'No resort filters data found.' },
-        { status: 404 }
-      )
+      return NextResponse.json({
+        message: 'No resort filters data found.',
+        status: 404,
+      })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
-      { status: 201 }
+      { message: 'Success', data: result, status: 200 },
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)
@@ -30,10 +30,10 @@ export async function POST(req: Request) {
   const bodyData = await req.json()
   console.log('about maldives', bodyData)
   if (!bodyData?.type || !bodyData?.filter)
-    return NextResponse.json(
-      { message: 'Please send all fields ( type and filter ).' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send all fields ( type and filter ).',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
@@ -45,17 +45,17 @@ export async function POST(req: Request) {
     })
 
     if (isExist)
-      return NextResponse.json(
-        { message: 'This Filter already exists.' },
-        { status: 409 }
-      )
+      return NextResponse.json({
+        message: 'This Filter already exists.',
+        status: 409,
+      })
 
     const result = await prisma.resortFilters.create({
       data: bodyData,
     })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {
@@ -70,10 +70,10 @@ export async function PUT(req: Request) {
   const bodyData = await req.json()
   console.log('about maldives', bodyData)
   if (!bodyData.id || !bodyData.type || !bodyData.filter)
-    return NextResponse.json(
-      { message: 'Please send filter id to update.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send filter id to update.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
@@ -84,12 +84,10 @@ export async function PUT(req: Request) {
     })
 
     if (!isExist)
-      return NextResponse.json(
-        {
-          message: 'Filter not found, please send correct filter id to update.',
-        },
-        { status: 404 }
-      )
+      return NextResponse.json({
+        message: 'Filter not found, please send correct filter id to update.',
+        status: 409,
+      })
 
     const result = await prisma.resortFilters.update({
       where: {
@@ -99,8 +97,8 @@ export async function PUT(req: Request) {
     })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
-      { status: 201 }
+      { message: 'Success', data: result, status: 200 },
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)
@@ -114,10 +112,10 @@ export async function DELETE(req: Request) {
   const id = getIdParam(req.url)
   console.log('id is ', id)
   if (!id)
-    return NextResponse.json(
-      { message: 'Please send filter id to delete.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send filter id to delete.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
@@ -127,20 +125,16 @@ export async function DELETE(req: Request) {
       },
     })
 
-    console.log('result ', result)
-
     if (!result)
-      return NextResponse.json(
-        {
-          message:
-            'Filter deletion failed, please send correct filter id to delete.',
-        },
-        { status: 404 }
-      )
+      return NextResponse.json({
+        message:
+          'Filter deletion failed, please send correct filter id to delete.',
+        status: 409,
+      })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
-      { status: 201 }
+      { message: 'Success', data: result, status: 200 },
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)

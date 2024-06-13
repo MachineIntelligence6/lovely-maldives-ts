@@ -9,11 +9,11 @@ export async function GET() {
 
     const result = await getResorts()
     if (!result)
-      return NextResponse.json({ message: 'No data found.' }, { status: 404 })
+      return NextResponse.json({ message: 'No data found.', status: 404 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
-      { status: 201 }
+      { message: 'Data Fetched successfully', data: result, status: 200 },
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)
@@ -30,10 +30,10 @@ export async function POST(req: Request) {
 
     const result = await createResorts(bodyData)
     if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 404 })
+      return NextResponse.json({ message: 'No data found', status: 404 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Data saved successfully.', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {
@@ -50,15 +50,13 @@ export async function DELETE() {
 
     const result = await deleteResorts()
     if (result === 'NOT_FOUND')
-      return NextResponse.json(
-        {
-          message:
-            'Filter deletion failed, please send correct filter id to delete.',
-        },
-        { status: 404 }
-      )
+      return NextResponse.json({
+        message:
+          'Filter deletion failed, please send correct filter id to delete.',
+        status: 404,
+      })
 
-    return NextResponse.json({ message: 'Success' }, { status: 201 })
+    return NextResponse.json({ message: 'Success', status: 201 })
   } catch (error) {
     console.log('Error', error)
     return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
