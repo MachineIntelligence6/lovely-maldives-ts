@@ -2,6 +2,7 @@ import 'reflect-metadata'
 
 import type { Metadata } from 'next'
 import './globals.css'
+import 'react-quill/dist/quill.snow.css' // Include quill styles
 import { ReactNode } from 'react'
 
 import localFont from 'next/font/local'

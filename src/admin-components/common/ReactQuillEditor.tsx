@@ -5,28 +5,25 @@
 
 import React, { useEffect, useRef } from 'react'
 import ReactQuill, { Quill } from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
+import 'react-quill/dist/quill.snow.css';
 import ImageResize from 'quill-image-resize-module-react'
 
 Quill.register('modules/imageResize', ImageResize)
 
+const Font = ReactQuill.Quill.import('formats/font')
+Font.whitelist = ['large', 'medium', 'small', 'regular', 'bold', 'pullquote']
+
+ReactQuill.Quill.register(Font, true)
+
 const ReactQuillEditor = (props: any) => {
   const { height, handleEditorValue, value } = props
   const quillRef = useRef(null)
-  // const [value, setValue] = useState('')
-  // console.log('value: ', value)
 
   const modules = {
     toolbar: [
       [{ header: '1' }, { header: '2' }, { font: [] }],
       [{ size: [] }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      // [
-      //   { color: customColors },
-      //   { background: [] },
-      //   { script: 'sub' },
-      //   { script: 'super' },
-      // ],
       [
         {
           color: ['#F00', '#0F0', '#00F', '#000', '#FFF', 'color-picker'],

@@ -79,15 +79,15 @@ const ResortFilter = (props: any) => {
                     fontSize: '22px',
                     cursor: 'pointer',
                   }}
-                  onClick={() => editFilter({ ...filter, id: index })}
+                  onClick={() => editFilter({ ...filter, id: filter?.id })}
                 />
                 <DeleteIcon
                   sx={{
                     color: 'var(--red)',
                     fontSize: '22px',
                     cursor: 'pointer',
-                  }}
-                  onClick={() => deleteFilter(index)}
+                  }}  
+                  onClick={() => deleteFilter(filter?.id)}
                 />
               </Stack>
             </TableCell>

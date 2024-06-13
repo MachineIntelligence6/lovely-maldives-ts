@@ -234,9 +234,6 @@ const AddHotels = () => {
   useEffect(() => {
     getHotels()
   }, [])
-
-  console.log('hotem ', hotels)
-
   return (
     <>
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>

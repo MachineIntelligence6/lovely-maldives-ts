@@ -37,15 +37,18 @@ const CustomLabel = styled(InputLabel)(({ theme }) => ({
 }))
 
 const SelectHotel = (props: any) => {
-  const { open, handleShowModal, handleAddHotel, options, type } = props
-  const [hotel, setHotel] = useState('')
+  const { open, handleShowModal, handleAddHotel, options, index } = props
+  console.log('index ', index)
+  const [hotel, setHotel] = useState('' as any)
   const [isPending, startTransition] = useTransition()
   const [hotels, setHotels] = useState([] as any)
 
   const handleChange = (e: any) => {
     const { value } = e.target
     console.log('value is ', value)
-    setHotel(value)
+    const findHotel = hotels.find((item: any) => item.id === value)
+    console.log('find Hotel ', findHotel)
+    setHotel(findHotel)
   }
 
   const getHotels = async () => {
@@ -56,7 +59,7 @@ const SelectHotel = (props: any) => {
         const hotelsData = [] as any
         if (data?.status === 200) {
           data?.data?.map((item: any) => {
-            hotelsData.push({ label: item?.title, value: item?.id })
+            hotelsData.push({ ...item, label: item?.title, value: item?.id })
           })
           setHotels(hotelsData)
         } else {
@@ -76,7 +79,7 @@ const SelectHotel = (props: any) => {
     <div>
       <Modal
         open={open}
-        onClose={handleShowModal}
+        onClose={() => handleShowModal(null)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -93,7 +96,7 @@ const SelectHotel = (props: any) => {
               mb: 3,
             }}
           >
-            Add Hotel
+            Add Resort
           </Typography>
 
           <CustomLabel
@@ -104,7 +107,7 @@ const SelectHotel = (props: any) => {
           </CustomLabel>
           <CustomSelect
             placeholder="Select Stars."
-            value={hotel}
+            value={hotel.value}
             options={hotels}
             name="hotel"
             onChange={(e: any) => handleChange(e)}
@@ -124,7 +127,7 @@ const SelectHotel = (props: any) => {
                 textTransform: 'capitalize',
                 fontFamily: 'Public Sans',
               }}
-              onClick={handleShowModal}
+              onClick={() => handleShowModal(null)}
             >
               Cancel
             </Button>
@@ -138,9 +141,17 @@ const SelectHotel = (props: any) => {
               }}
               onClick={() => {
                 if (!hotel) return
-                handleAddHotel(hotel)
+                handleAddHotel(
+                  {
+                    id: hotel.id,
+                    image: hotel.image,
+                    ratings: hotel.ratings,
+                    title: hotel.title,
+                  },
+                  index
+                )
                 setHotel('')
-                handleShowModal()
+                handleShowModal(null)
               }}
             >
               Add

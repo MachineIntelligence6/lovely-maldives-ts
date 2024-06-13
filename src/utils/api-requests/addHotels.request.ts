@@ -14,3 +14,11 @@ export const getHotelsRequest = async (
     { data: ids }
   )
 }
+
+export const AddResortSectionRequest = async (data: any) => {
+  return apiClient.post('/resorts', { resortSections: data })
+}
+
+export const getResortSectionRequest = async () => {
+  return apiClient.get('/resorts')
+}

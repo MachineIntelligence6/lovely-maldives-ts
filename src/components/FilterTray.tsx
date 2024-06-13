@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded'
 import {
   Box,
@@ -27,7 +29,9 @@ const Checkbox = styled(MuiCheckbox)<CheckboxProps>(() => ({
   },
 }))
 
-export default function FilterTray() {
+export default function FilterTray(props: any) {
+  const { filters } = props
+  const [allFilters, setAllFilters] = useState()
   const [open, setOpen] = React.useState(false)
 
   const [value, setValue] = React.useState<number[]>([20, 37])
@@ -40,6 +44,27 @@ export default function FilterTray() {
     setOpen(newOpen)
   }
 
+  const transformedData = filters.reduce((acc: any, item: any) => {
+    console.log('Acc ', acc)
+    console.log('Item ', item)
+    const existingType = acc.find((entry: any) => entry.type === item.type)
+    console.log('existingType ', existingType)
+    if (existingType) {
+      existingType.filters.push({ filter: item.filter })
+    } else {
+      acc.push({
+        type: item.type,
+        filters: [{ filter: item.filter }],
+      })
+    }
+
+    return acc
+  }, [])
+  console.log('transformedData ', transformedData)
+
+  useEffect(() => {
+    setAllFilters(transformedData)
+  }, [filters])
   return (
     <Box>
       <IconButton
@@ -67,6 +92,7 @@ export default function FilterTray() {
               <Close />
             </IconButton>
           </Box>
+
           <FormControl>
             <FormLabel>Property Types</FormLabel>
             <FormGroup sx={{ ml: '10px' }}>

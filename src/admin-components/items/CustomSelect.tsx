@@ -3,6 +3,7 @@ import React from 'react'
 
 function CustomSelect(props: any) {
   const { value, placeholder, options, onChange, name } = props
+  console.log('options ', options)
   return (
     <Select
       id="outlined-basic"

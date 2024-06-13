@@ -20,6 +20,13 @@ type Facts {
   stars    Int?
 }
 
+type Hotel {
+  id      String
+  title   String
+  ratings String
+  image  String
+}
+
 type Menus {
   menu   String
   link   String
@@ -44,7 +51,7 @@ type ResortSections {
   type   String
   title  String?
   description  String?
-  hotels String[]
+  hotels Hotel[]
 }
 
 type OurServices {

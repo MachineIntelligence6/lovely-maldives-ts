@@ -2,13 +2,20 @@
 
 'use client'
 
-import React, { useState } from 'react'
-import { Button, Stack, Typography } from '@mui/material'
+import React, { useEffect, useState, useTransition } from 'react'
+import { Alert, Button, Stack, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import ResortFilter from '@/admin-components/tables/ResortFilter'
 import CustomSearchField from '@/admin-components/items/CustomSearchField'
 import CustomDropdown from '@/admin-components/items/CustomDropdown'
+import {
+  AddResortFilterRequest,
+  deleteResortFilterRequest,
+  editResortFilterRequest,
+  getResortFilterRequest,
+} from '@/utils/api-requests/resortfilter.request'
+import CustomLoader from '@/admin-components/common/CustomLoader'
 import AddFilterModel from './AddFilterModel'
 
 const options = [
@@ -21,16 +28,19 @@ const options = [
 ]
 
 const ResortsFilters = () => {
+  const [isPending, startTransition] = useTransition()
+
   const [showModal, setShowModal] = useState(false)
   const [filters, setFilters] = useState([] as any)
   const [edit, setEdit] = useState(null)
   const [filter, setFilter] = useState('')
+  const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
 
   const handleShowModal = () => setShowModal(!showModal)
 
-  const handleAddFilter = (fil: any) => {
-    setFilters([...filters, fil])
-  }
+  // const handleAddFilter = (fil: any) => {
+  //   setFilters([...filters, fil])
+  // }
 
   const handleFilterChange = (option: any) => {
     setFilter(option)
@@ -38,27 +48,27 @@ const ResortsFilters = () => {
     setFilters(filtered)
   }
 
-  const deleteFilter = (id: any) => {
-    const sure = window.confirm('Are you sure?')
-    if (!sure) return
-    setFilters(filters.filter((_: any, index: number) => index !== id))
-  }
+  // const deleteFilter = (id: any) => {
+  //   const sure = window.confirm('Are you sure?')
+  //   if (!sure) return
+  //   setFilters(filters.filter((_: any, index: number) => index !== id))
+  // }
 
   const editFilter = (fil: any) => {
     setEdit(fil)
     handleShowModal()
   }
-  const handleEditFilter = (val: any) => {
-    setEdit(null)
-    setFilters(
-      filters.map((_: any, index: number) => {
-        if (index === val.id) {
-          return val
-        }
-        return _
-      })
-    )
-  }
+  // const handleEditFilter = (val: any) => {
+  //   setEdit(null)
+  //   setFilters(
+  //     filters.map((_: any, index: number) => {
+  //       if (index === val.id) {
+  //         return val
+  //       }
+  //       return _
+  //     })
+  //   )
+  // }
 
   const searchFilters = (e: any) => {
     const { value } = e.target
@@ -73,8 +83,138 @@ const ResortsFilters = () => {
     }
   }
 
+  const getFilters = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getResortFilterRequest()
+        const data = res?.data
+        console.log('data', data)
+        if (data?.status === 200) {
+          setFilters(data?.data)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
+  const handleAddFilter = async (fil: any) => {
+    try {
+      startTransition(async () => {
+        const res = await AddResortFilterRequest(fil)
+        const data = res?.data
+        if (data?.status === 201) {
+          getFilters()
+          setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+    }
+  }
+
+  const deleteFilter = (id: string) => {
+    console.log('id ', id)
+    const sure = window.confirm('Are you sure?')
+    if (!sure) return
+    try {
+      startTransition(async () => {
+        const res = await deleteResortFilterRequest(id)
+        const data = res?.data
+        if (data?.status === 200) {
+          getFilters()
+          setAlertMsg({
+            type: 'success',
+            message: 'Data deleted successfully.',
+          })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while deleting data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+    }
+  }
+
+  const handleEditFilter = (values: any) => {
+    console.log('values ', values)
+    try {
+      startTransition(async () => {
+        const res = await editResortFilterRequest(values)
+        const data = res?.data
+        if (data?.status === 200) {
+          getFilters()
+          setAlertMsg({
+            type: 'success',
+            message: 'Data deleted successfully.',
+          })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while deleting data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+    }
+  }
+
+  useEffect(() => {
+    getFilters()
+  }, [])
+
   return (
     <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
+      {isPending && <CustomLoader />}
+      {alertMsg.message && (
+        <Alert sx={{ mb: 2 }} severity={alertMsg.type as any}>
+          {alertMsg.message}
+        </Alert>
+      )}
       <AddFilterModel
         open={showModal}
         edit={edit}

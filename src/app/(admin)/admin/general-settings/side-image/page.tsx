@@ -36,7 +36,6 @@ function SideImage() {
       formData.append('file', file as any)
       formData.append('upload_preset', 'j8epfynh')
       const res = await uploadImgToCloudinary(formData)
-      console.log('url => ', res?.secure_url)
       setImageUrl(res?.secure_url)
     })
   }

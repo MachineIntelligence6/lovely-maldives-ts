@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-boolean-value */
@@ -5,36 +6,50 @@
 
 'use client'
 
-import { Box, Button, Stack, Typography } from '@mui/material'
+import { Alert, Box, Button, Stack, Typography } from '@mui/material'
 import dynamic from 'next/dynamic'
 import AddIcon from '@mui/icons-material/Add'
 import React, { useEffect, useState, useTransition } from 'react'
 import TopFiveLuxuryResorts from '@/components/TopFiveLuxuryResorts'
-import { getHotelsRequest } from '@/utils/api-requests/addHotels.request'
-import AddSectionType from './modals/AddSectionType'
+import {
+  AddResortSectionRequest,
+  getHotelsRequest,
+  getResortSectionRequest,
+} from '@/utils/api-requests/addHotels.request'
 import SelectHotel from './modals/SelectHotel'
+import AddSectionType from './modals/AddSectionType'
 import ResortsGallery from './ResortsGallery'
+import CustomLoader from '../common/CustomLoader'
+import HeadingWraper from '../common/HeadingWraper'
+// import JoditTextEditor from '../common/JoditTextEditor'
 
 const ReactQuillEditor = dynamic(
   () => import('@/admin-components/common/ReactQuillEditor'),
   { ssr: false }
 )
 
+const JoditTextEditor = dynamic(() => import('../common/JoditTextEditor'), {
+  ssr: false,
+})
+
 const typeOptions = [
   { label: 'Text Editor', value: 'text' },
   { label: 'Images Gallery', value: 'images_gallery' },
-  { label: 'Images Slider', value: 'slider' },
+  { label: 'Images Slider', value: 'images_slider' },
 ]
 
 const ResortSections = () => {
   const [showModal, setShowModal] = useState(false)
-  const [showHotelModal, setShowHotelModal] = useState(false)
+  const [showHotelModal, setShowHotelModal] = useState({
+    show: false,
+    index: null as any,
+  })
   const [sections, setSections] = useState([] as any)
   const [options, setOptions] = useState([])
   const [editorText, setEditorText] = useState('')
   const [isPending, startTransition] = useTransition()
-  const [galleryHotels, setGalleryHotels] = useState([] as any)
-  const [sliderHotels, setSliderHotels] = useState([] as any)
+  const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
+  const [detectChange, setDetectChange] = useState(true)
 
   const handleEditorValue = (val: any, index: number) => {
     setEditorText(val)
@@ -48,41 +63,25 @@ const ResortSections = () => {
   }
 
   const handleShowModal = () => setShowModal(!showModal)
-  const handleShowHotelModal = () => setShowHotelModal(!showHotelModal)
+  const handleShowHotelModal = (index: number) =>
+    setShowHotelModal({ show: !showHotelModal?.show, index })
 
   console.log('Sections ', sections)
   const handleAddType = (type: string) => {
     setSections([...sections, { type }])
   }
 
-  const handleAddHotel = (index: number, id: string, type: string) => {
-    if (type === 'images_gallery') {
-      const updatedSections = sections.map((sec: any, ind: number) => {
-        if (ind === index) {
-          const ids = sec.ids ? [...sec.ids, id] : [id]
-          const filteredData = galleryHotels.filter((item: any) =>
-            ids.includes(item.id)
-          )
-          getHotels(ids, 'images_gallery')
-          return { ...sec, hotels: filteredData, ids }
-        }
-        return sec
-      })
-      setSections(updatedSections)
-    } else {
-      const updatedSections = sections.map((sec: any, ind: number) => {
-        if (ind === index) {
-          const ids = sec.ids ? [...sec.ids, id] : [id]
-          const filteredData = sliderHotels.filter((item: any) =>
-            ids.includes(item.id)
-          )
-          getHotels(ids, 'images_slider')
-          return { ...sec, hotels: filteredData, ids }
-        }
-        return sec
-      })
-      setSections(updatedSections)
-    }
+  const handleAddHotel = async (index: number, hotel: any) => {
+    console.log('index: ', index)
+    const updatedSections = sections.map((sec: any, ind: number) => {
+      if (ind === index) {
+        const hotels = sec.hotels ? [...sec.hotels, hotel] : [hotel]
+        console.log('ids ', hotels)
+        return { ...sec, hotels }
+      }
+      return sec
+    })
+    setSections(updatedSections)
   }
 
   const handleRemoveSection = (index: number) => {
@@ -102,44 +101,67 @@ const ResortSections = () => {
     setSections(updatedSections)
   }
 
-  const getHotels = async (ids: any, type: string) => {
-    if (ids?.length === 0) return
+  const getResortSection = () => {
     try {
-      if (ids?.[0].length > 0) {
-        startTransition(async () => {
-          const res = await getHotelsRequest(1, 500, ids)
-          const data = res?.data
-          const hotelsData = [] as any
-          if (data?.status === 200) {
-            if (type === 'images_gallery') {
-              setGalleryHotels(data?.data)
-            } else {
-              setSliderHotels(data?.data)
+      startTransition(async () => {
+        const res = await getResortSectionRequest()
+        const data = res?.data
+        console.log('get resort section data is =>>> ', data)
+        if (data?.status === 200) {
+          setSections(data?.data?.resortSections)
+          data?.data?.resortSections?.map((sec: any) => {
+            if (sec?.type === 'text') {
+              setEditorText(sec?.description)
             }
-          } else {
-            console.log('response about maldives', res)
-          }
-        })
-      }
+          })
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
     } catch (error: any) {
       console.log('error ', error)
     }
   }
 
-  console.log('sliderHotels are =>>> ', sliderHotels)
-  console.log('galleryHotels are =>>> ', galleryHotels)
+  const handleAddSections = async () => {
+    try {
+      startTransition(async () => {
+        const res = await AddResortSectionRequest(sections)
+        const data = res?.data
+        console.log('data ===>>> ', data)
+        if (data?.status === 201) {
+          getResortSection()
+          setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+          console.log('response about maldives', res)
+        }
+      })
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+      throw new Error(error)
+    }
+  }
 
-  // useEffect(() => {
-  //   getHotels()
-  // }, [showHotelModal])
-
-  // useEffect(() => {
-  //   const ops = [] as any
-  //   hotels?.map((hotel: any) =>
-  //     ops.push({ label: hotel.title, value: hotel.id })
-  //   )
-  //   setOptions(ops)
-  // }, [])
+  useEffect(() => {
+    getResortSection()
+  }, [])
 
   return (
     <Box>
@@ -149,7 +171,27 @@ const ResortSections = () => {
         handleAddType={handleAddType}
         options={typeOptions}
       />
+
+      <SelectHotel
+        open={showHotelModal.show}
+        handleShowModal={handleShowHotelModal}
+        handleAddHotel={(hotel: any, ind: number) => handleAddHotel(ind, hotel)}
+        options={options}
+        index={showHotelModal.index}
+      />
       <Box sx={{ my: 2 }}>
+        {isPending && <CustomLoader />}
+        {alertMsg.message && (
+          <Alert sx={{ mb: 2 }} severity={alertMsg.type as any}>
+            {alertMsg.message}
+          </Alert>
+        )}
+
+        <HeadingWraper
+          title="Our Services"
+          handleSave={handleAddSections}
+          detectChange={detectChange}
+        />
         {sections.map((section: any, index: number) => {
           if (section?.type === 'text') {
             return (
@@ -178,8 +220,14 @@ const ResortSections = () => {
                     Remove
                   </Button>
                 </Stack>
-                <ReactQuillEditor
+                {/* <ReactQuillEditor
                   height={400}
+                  handleEditorValue={(val: any) =>
+                    handleEditorValue(val, index)
+                  }
+                  value={editorText}
+                /> */}
+                <JoditTextEditor
                   handleEditorValue={(val: any) =>
                     handleEditorValue(val, index)
                   }
@@ -194,15 +242,6 @@ const ResortSections = () => {
                 key={index}
                 sx={{ mt: 3, pb: 5, borderBottom: '1px solid var(--black)' }}
               >
-                <SelectHotel
-                  open={showHotelModal}
-                  handleShowModal={handleShowHotelModal}
-                  handleAddHotel={(id: any) =>
-                    handleAddHotel(index, id, 'images_gallery')
-                  }
-                  options={options}
-                  type="images_gallery"
-                />
                 <Stack
                   direction="row"
                   alignItems="center"
@@ -226,10 +265,10 @@ const ResortSections = () => {
                 </Stack>
                 <Box>
                   <ResortsGallery
-                    hotels={galleryHotels}
+                    hotels={section?.hotels}
                     handleChange={(e: any) => handleChange(e, index)}
                     title={section?.title}
-                    handleShowModal={handleShowHotelModal}
+                    handleShowModal={() => handleShowHotelModal(index)}
                   />
                 </Box>
               </Box>
@@ -240,14 +279,6 @@ const ResortSections = () => {
               key={index}
               sx={{ mt: 3, pb: 5, borderBottom: '1px solid var(--black)' }}
             >
-              <SelectHotel
-                open={showHotelModal}
-                handleShowModal={handleShowHotelModal}
-                handleAddHotel={(id: any) =>
-                  handleAddHotel(index, id, 'slider_images')
-                }
-                options={options}
-              />
               <Stack
                 direction="row"
                 alignItems="center"
@@ -276,11 +307,11 @@ const ResortSections = () => {
                   iconShow="flex"
                   radius="20px"
                   bottomradius="0 0 20px  20px"
-                  resorts={sliderHotels}
+                  resorts={section?.hotels}
                   isAdminSide={true}
                   handleChange={(e: any) => handleChange(e, index)}
                   title={section?.title}
-                  handleShowModal={handleShowHotelModal}
+                  handleShowModal={() => handleShowHotelModal(index)}
                 />
               </Box>
             </Box>
