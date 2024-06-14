@@ -22,7 +22,6 @@ const AddTitleModal = (props: any) => {
 
   const handleChange = (e: any) => {
     const { value } = e.target
-    console.log('value is ', value)
     setTitle(value)
   }
   return (

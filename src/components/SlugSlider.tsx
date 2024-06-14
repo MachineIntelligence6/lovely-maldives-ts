@@ -21,6 +21,7 @@ interface IOurCollectionProps {
   iconShow: string
   radius: string
   bottomradius: string
+  recomendations: any
 }
 export default function OurCollection({
   heading,
@@ -28,6 +29,7 @@ export default function OurCollection({
   iconShow,
   radius,
   bottomradius,
+  recomendations,
 }: IOurCollectionProps) {
   const settings = {
     dots: true,
@@ -70,6 +72,7 @@ export default function OurCollection({
       },
     ],
   }
+  console.log('recomendations ', recomendations)
   return (
     <Container sx={{ maxWidth: '100% !important', px: '0px !important' }}>
       <Typography
@@ -94,8 +97,8 @@ export default function OurCollection({
         }}
         className="slider-container"
       >
-        <Slider {...settings}>
-          {datas.map((data, index) => (
+        <Slider {...(settings as any)}>
+          {recomendations.map((data: any, index: number) => (
             <Box
               sx={{
                 position: 'relative',
@@ -104,7 +107,7 @@ export default function OurCollection({
               }}
               key={index}
             >
-              <Box
+              {/* <Box
                 component={Image}
                 src={collectionImg}
                 alt="Resort item"
@@ -118,7 +121,33 @@ export default function OurCollection({
                   },
                   margin: '0 auto',
                 }}
-              />
+              /> */}
+              <Box
+                sx={{
+                  width: { xs: '100%', md: '96%' },
+                  height: { xs: '250px', md: '300px' },
+                  objectFit: 'cover',
+                  overflow: 'hidden',
+                  borderRadius: {
+                    xs: '0px',
+                    md: `${radius} ${radius} 0px 0px`,
+                  },
+                  margin: '0 auto',
+                  cursor: 'pointer',
+                }}
+              >
+                <Image
+                  src={data?.image || collectionImg}
+                  alt="image"
+                  width={400}
+                  height={500}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                />
+              </Box>
               <Box
                 sx={{
                   width: { xs: '100%', md: '96%' },
@@ -160,15 +189,16 @@ export default function OurCollection({
                   }}
                 >
                   <Typography sx={{ fontSize: '20px' }}>
-                    One and Only Reethi Rah{' '}
+                    {data?.title}{' '}
                   </Typography>
                   <BoltIcon sx={{ display: `${iconShow}`, mt: '2px' }} />
                 </Box>
                 <Box sx={{ textAlign: 'left', fontSize: '10px', px: 3 }}>
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
+                  {[...Array(parseInt(data?.ratings, 10))].map(
+                    (_: any, ind: number) => (
+                      <StarRateIcon key={`_${index}_${ind}`} />
+                    )
+                  )}
                 </Box>
               </Box>
             </Box>

@@ -11,6 +11,10 @@ import {
 } from '@/utils/api-requests/about-maldives.request'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import CustomLoader from '@/admin-components/common/CustomLoader'
+import {
+  aboutUsRequest,
+  getAboutUsRequest,
+} from '@/utils/api-requests/aboutus-short.request'
 
 // const ReactQuillEditor = dynamic(
 //   () => import('@/admin-components/common/ReactQuillEditor'),
@@ -22,7 +26,7 @@ const JoditTextEditor = dynamic(
   { ssr: false }
 )
 
-const AboutMaldives = () => {
+const AboutUs = () => {
   const [isPending, startTransition] = useTransition()
   const [detectChange, setDetectChange] = useState(true)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
@@ -36,7 +40,7 @@ const AboutMaldives = () => {
   const getAboutMaldives = async () => {
     try {
       startTransition(async () => {
-        const res = await getAboutMaldivesRequest()
+        const res = await getAboutUsRequest()
         const data = res?.data
         if (data?.status === 200) {
           setEditorText(data?.data?.description)
@@ -58,7 +62,7 @@ const AboutMaldives = () => {
   const submitData = async () => {
     try {
       startTransition(async () => {
-        const res = await aboutMaldivesRequest({
+        const res = await aboutUsRequest({
           ...values,
           description: editorText,
         })
@@ -102,7 +106,7 @@ const AboutMaldives = () => {
         </Alert>
       )}
       <HeadingWraper
-        title="About Maldives"
+        title="About Us"
         detectChange={detectChange}
         handleSave={submitData}
       />
@@ -111,7 +115,7 @@ const AboutMaldives = () => {
         <Box sx={{ mb: 4 }}>
           <TextFieldWraper
             label="Title"
-            placeholder="Enter About Maldives Title."
+            placeholder="Enter About Us Title."
             value={values?.title}
             name="title"
             onChange={(e: any) =>
@@ -128,4 +132,4 @@ const AboutMaldives = () => {
   )
 }
 
-export default AboutMaldives
+export default AboutUs

@@ -1,27 +1,48 @@
 'use client'
 
-import { Container, Box, Typography, Button, Link, Paper } from '@mui/material'
-import Image from 'next/image'
-
-import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import EmailIcon from '@mui/icons-material/Email'
-import WhatsAppIcon from '@mui/icons-material/WhatsApp'
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { Container, Box, Typography } from '@mui/material'
+import { useEffect, useState, useTransition } from 'react'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
 import MailBox from '@/components/MailBox'
-import article from '../../../public/Images/main.jpg'
-import blog from '../../../public/Images/landingTree.jpg'
+import { getAboutMaldivesRequest } from '@/utils/api-requests/about-maldives.request'
 
 export default function Page() {
+  const [isPending, startTransition] = useTransition()
   const [readMore, setReadMore] = useState(false)
+  const [editorText, setEditorText] = useState('' as any)
+  const [title, setTitle] = useState('')
 
   const showExtraContent = () => {
     setReadMore(!readMore)
   }
+
+  const getAboutMaldives = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getAboutMaldivesRequest()
+        const data = res?.data
+        if (data?.status === 200) {
+          setEditorText(data?.data?.description)
+          setTitle(data?.data?.title)
+        } else {
+          // setAlertMsg({ type: 'error', message: data?.message })
+          // setTimeout(() => {
+          //   setAlertMsg({ type: '', message: '' })
+          // }, 3000)
+          console.log('about maldives =>>>', res)
+        }
+        console.log('response ', res)
+      })
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
+  useEffect(() => {
+    getAboutMaldives()
+  }, [])
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
       <Header />
@@ -46,9 +67,17 @@ export default function Page() {
             mt: '60px',
           }}
         >
-          ABOUT MALDIVES
+          {title}
         </Typography>
         <Box
+          dangerouslySetInnerHTML={{
+            __html: editorText,
+          }}
+        />
+
+
+
+        {/* <Box
           className="articleBlog"
           sx={{
             // width: '100%',
@@ -303,7 +332,7 @@ export default function Page() {
               BACK TO HOME
             </Link>
           </Button>
-        </Box>
+        </Box> */}
       </Container>
       <Box sx={{ width: { xs: 'auto', md: '63%' }, mx: 'auto' }}>
         <MailBox />

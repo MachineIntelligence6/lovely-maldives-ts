@@ -66,7 +66,6 @@ function Header() {
       setLoading(true)
       const res = await apiClient.get('/header')
       const data = res?.data
-      console.log('data =>>> ', res)
       setLoading(false)
       if (res?.status === 200) {
         setLocalData(data?.data)
@@ -114,7 +113,7 @@ function Header() {
   useEffect(() => {
     getHeaderData()
   }, [])
-  console.log('localData =>>> ', localData)
+
   return (
     <Box component="header">
       {loading && <CustomLoader />}

@@ -4,20 +4,20 @@ import prisma from '../../../../../prisma'
 
 export async function GET(req: Request, route: { [key: string]: any }) {
   const { params } = route
-  const { id } = params
+  const { slug } = params
+  console.log('slug ', slug)
   try {
     await connectToDatabase()
 
-    const result = await prisma.hotels.findMany({ where: { id } })
+    const result = await prisma.hotels.findMany({
+      where: { title: slug },
+    })
 
     if (!result)
-      return NextResponse.json(
-        { message: 'No hotel data found.' },
-        { status: 404 }
-      )
+      return NextResponse.json({ message: 'No hotel data found.', status: 409 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 200 },
       { status: 200 }
     )
   } catch (error) {

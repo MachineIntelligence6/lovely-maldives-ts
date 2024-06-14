@@ -6,10 +6,10 @@ export async function GET() {
   try {
     await connectToDatabase()
 
-    const result = await prisma.aboutMaldives.findFirst()
+    const result = await prisma.aboutUs.findFirst()
     if (!result)
       return NextResponse.json({
-        message: 'No about maldives data found',
+        message: 'No about us data found',
         status: 409,
       })
 
@@ -30,27 +30,27 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('about maldives', bodyData)
+  console.log('about us', bodyData)
   if (!bodyData?.description)
     return NextResponse.json(
-      { message: 'Please send description of about maldives.' },
+      { message: 'Please send description of about us.' },
       { status: 422 }
     )
   let result
   try {
     await connectToDatabase()
 
-    const isExist = await prisma.aboutMaldives.findFirst()
+    const isExist = await prisma.aboutUs.findFirst()
 
     if (isExist) {
-      result = await prisma.aboutMaldives.update({
+      result = await prisma.aboutUs.update({
         where: {
           id: isExist.id,
         },
         data: bodyData,
       })
     } else {
-      result = await prisma.aboutMaldives.create({
+      result = await prisma.aboutUs.create({
         data: bodyData,
       })
     }

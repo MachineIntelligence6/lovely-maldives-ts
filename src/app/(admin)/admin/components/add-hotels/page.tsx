@@ -32,8 +32,13 @@ import CustomLoader from '@/admin-components/common/CustomLoader'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 import HotelsWraper from './HotelsWraper'
 
-const ReactQuillEditor = dynamic(
-  () => import('@/admin-components/common/ReactQuillEditor'),
+// const ReactQuillEditor = dynamic(
+//   () => import('@/admin-components/common/ReactQuillEditor'),
+//   { ssr: false }
+// )
+
+const JoditTextEditor = dynamic(
+  () => import('@/admin-components/common/JoditTextEditor'),
   { ssr: false }
 )
 
@@ -394,8 +399,14 @@ const AddHotels = () => {
                       index={index}
                       title="Add Description"
                     />
-                    <ReactQuillEditor
+                    {/* <ReactQuillEditor
                       height="400px"
+                      handleEditorValue={(val: any) =>
+                        handleEditorValue(val, index)
+                      }
+                      value={value}
+                    /> */}
+                    <JoditTextEditor
                       handleEditorValue={(val: any) =>
                         handleEditorValue(val, index)
                       }

@@ -44,11 +44,8 @@ export default function FilterTray(props: any) {
     setOpen(newOpen)
   }
 
-  const transformedData = filters.reduce((acc: any, item: any) => {
-    console.log('Acc ', acc)
-    console.log('Item ', item)
+  const transformedData = filters?.reduce((acc: any, item: any) => {
     const existingType = acc.find((entry: any) => entry.type === item.type)
-    console.log('existingType ', existingType)
     if (existingType) {
       existingType.filters.push({ filter: item.filter })
     } else {
@@ -60,7 +57,6 @@ export default function FilterTray(props: any) {
 
     return acc
   }, [])
-  console.log('transformedData ', transformedData)
 
   useEffect(() => {
     setAllFilters(transformedData)

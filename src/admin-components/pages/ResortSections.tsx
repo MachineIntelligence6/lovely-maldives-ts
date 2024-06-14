@@ -40,6 +40,7 @@ const typeOptions = [
 
 const ResortSections = () => {
   const [showModal, setShowModal] = useState(false)
+  const [pages, setPages] = useState({ page: 1, limit: 6 })
   const [showHotelModal, setShowHotelModal] = useState({
     show: false,
     index: null as any,
@@ -104,7 +105,7 @@ const ResortSections = () => {
   const getResortSection = () => {
     try {
       startTransition(async () => {
-        const res = await getResortSectionRequest()
+        const res = await getResortSectionRequest(pages)
         const data = res?.data
         console.log('get resort section data is =>>> ', data)
         if (data?.status === 200) {

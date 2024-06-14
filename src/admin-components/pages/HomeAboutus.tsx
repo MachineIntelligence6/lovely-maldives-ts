@@ -54,7 +54,6 @@ const HomeAboutus = () => {
   const handleShowModal = () => setShowModal(!showModal)
 
   const handleAddOption = (newOption: any, status: string) => {
-    console.log('newoption ', newOption, status)
     if (status === 'add') {
       setOptions(options?.length > 0 ? [...options, newOption] : [newOption])
       handleShowModal()
@@ -98,7 +97,6 @@ const HomeAboutus = () => {
           setOptions(data?.data?.promises || [])
         } else {
           alert('Error occured while fetching about maldives data.')
-          console.log('response about maldives', res)
         }
       })
     } catch (error: any) {
@@ -106,7 +104,6 @@ const HomeAboutus = () => {
     }
   }
 
-  console.log('values ', values)
 
   const handleSave = async () => {
     if (!values.title) {

@@ -19,6 +19,14 @@ export const AddResortSectionRequest = async (data: any) => {
   return apiClient.post('/resorts', { resortSections: data })
 }
 
-export const getResortSectionRequest = async () => {
-  return apiClient.get('/resorts')
+export const getResortSectionRequest = async (data: any) => {
+  return apiClient.get(`/resorts?page=${data.page}&limit=${data.limit}`)
+}
+
+export const getHotelRequest = async (data: any) => {
+  return apiClient.get(`/hotels/${data}`)
+}
+
+export const getRecomendationsRequest = async () => {
+  return apiClient.get(`/hotels/recomendations`)
 }
