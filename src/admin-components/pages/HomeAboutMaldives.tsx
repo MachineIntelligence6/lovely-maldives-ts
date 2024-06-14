@@ -43,20 +43,17 @@ const HomeAboutMaldives = () => {
       startTransition(async () => {
         const res = await getAboutMaldivesShortRequest()
         const data = res?.data
-        console.log('data :::: ', data)
         if (data?.status === 200) {
           setEditorText(data?.data?.description)
           setValues({ title: data?.data?.title, link: data?.data?.link })
         } else {
           alert('Error occured while fetching about maldives data.')
-          console.log('response about maldives', res)
         }
       })
     } catch (error: any) {
       console.log('error ', error)
     }
   }
-  console.log('values', values)
 
   const handleSave = async () => {
     if (!values?.title || !values?.link) {

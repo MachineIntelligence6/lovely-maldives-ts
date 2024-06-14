@@ -1,22 +1,57 @@
 'use client'
 
 import { Container, Box, Typography, Paper, Button } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { motion } from 'framer-motion'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import About from '@/components/About'
+import { getAboutUsRequest } from '@/utils/api-requests/aboutus-short.request'
+import BreadCrumb from '@/components/BreadCrumb'
 
 function AboutUsPage() {
+  const [isPending, startTransition] = useTransition()
   const [readMore, setReadMore] = useState(false)
+  const [editorText, setEditorText] = useState('' as any)
+  const [title, setTitle] = useState('')
 
   const showExtraContent = () => {
     setReadMore(!readMore)
   }
+
+  const getAboutMaldives = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getAboutUsRequest()
+        const data = res?.data
+        if (data?.status === 200) {
+          setEditorText(data?.data?.description)
+          setTitle(data?.data?.title)
+        } else {
+          // setAlertMsg({ type: 'error', message: data?.message })
+          // setTimeout(() => {
+          //   setAlertMsg({ type: '', message: '' })
+          // }, 3000)
+          console.log('about maldives =>>>', res)
+        }
+        console.log('response ', res)
+      })
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
+  useEffect(() => {
+    getAboutMaldives()
+  }, [])
+
   return (
-    <Box sx={{ pt: { xs: '100px', md: '140px' } }}>
+    <Box sx={{ pt: { xs: '100px', md: '200px' } }}>
       <Header />
-      <About />
+      {/* <About /> */}
+      <Container sx={{ maxWidth: { xs: '100%', md: '90%' } }}>
+        <BreadCrumb />
+      </Container>
       <Container
         sx={{
           maxWidth: { xs: '90%', md: '80%' },
@@ -27,7 +62,23 @@ function AboutUsPage() {
           },
         }}
       >
-        <Paper
+        <Typography
+          sx={{
+            fontSize: { xs: '24px', md: '35px' },
+            color: 'var(--white)',
+            textAlign: 'center',
+            mt: '60px',
+          }}
+        >
+          {title}
+        </Typography>
+
+        <Box
+          dangerouslySetInnerHTML={{
+            __html: editorText,
+          }}
+        />
+        {/* <Paper
           elevation={0}
           sx={{
             background: 'transparent',
@@ -107,7 +158,7 @@ function AboutUsPage() {
               </Typography>
             </Box>
           </Box>
-        )}
+        )} */}
       </Container>
       <Footer />
     </Box>

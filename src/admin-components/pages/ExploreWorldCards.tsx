@@ -67,7 +67,6 @@ const ExploreWorldCards = () => {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('response about maldives', res)
         }
       })
     } catch (error: any) {
@@ -85,7 +84,6 @@ const ExploreWorldCards = () => {
           homeBgId,
         })
         const data = res?.data
-        console.log('response upload ', data)
         if (data.status === 201) {
           getWonders()
           setDetectChange(false)

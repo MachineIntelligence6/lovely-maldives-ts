@@ -5,7 +5,7 @@ import NavItems from './NavItems'
 
 export default function SubNav({ menuItems }: any) {
   const isOpen = useMenuStore((state) => state.isOpen)
-  console.log('menuItems ', menuItems)
+
   return (
     <Box
       component="nav"

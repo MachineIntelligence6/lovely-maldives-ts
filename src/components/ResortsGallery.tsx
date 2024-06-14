@@ -1,13 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client'
 
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
+import { useRouter } from 'next/navigation'
 
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
@@ -18,15 +20,19 @@ import Link from 'next/link'
 import collectionImg from '../../public/Images/collectionImg.jpg'
 
 export default function ResortsGallery(props: any) {
-  const { resorts } = props
-  const [resortsData, setResortsData] = useState([])
-  const [isFullyLoaded, setIsFullyLoaded] = useState(false)
-  console.log('resortsData ', resortsData)
-  const loadMore = () => {
-    setResortsData(resorts)
-    setIsFullyLoaded(true)
-  }
-  console.log('Resorts ', resorts)
+  const { resorts, pages, loadMore, isFullyLoaded } = props
+  const router = useRouter()
+
+  // const loadMore = () => {
+  //   setResortsData(resorts)
+  //   setIsFullyLoaded(true)
+  // }
+  // console.log('Resorts ', resorts)
+
+  // useEffect(() => {
+  //   setResortsData([...resortsData, ...resorts])
+  // }, [pages?.page])
+
   return (
     <>
       <Box sx={{ my: { xs: '40px', md: '80px' } }}>
@@ -54,7 +60,10 @@ export default function ResortsGallery(props: any) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                sx={{ width: '100%', position: 'relative' }}
+                sx={{ width: '100%', position: 'relative', cursor: 'pointer' }}
+                onClick={() =>
+                  router.push(`/resorts/${encodeURIComponent(item?.title)}`)
+                }
               >
                 <Box
                   component={Link}
@@ -151,7 +160,7 @@ export default function ResortsGallery(props: any) {
           ))}
         </Grid>
       </Box>
-      {resorts?.length > 6 && (
+      {pages?.totalGalleryImages > resorts?.length && (
         <Box
           sx={{
             textAlign: 'center',

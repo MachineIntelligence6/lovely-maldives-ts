@@ -16,6 +16,7 @@ interface RouteSegment {
 
 function generateRouteSegments(path: string): RouteSegment[] {
   const segments = path.split('/').filter((segment) => segment !== '')
+  console.log('segments ', decodeURIComponent(segments?.[1]))
   const routeSegments: RouteSegment[] = []
 
   routeSegments.push({
@@ -25,8 +26,9 @@ function generateRouteSegments(path: string): RouteSegment[] {
 
   let currentPath = '/'
   segments.forEach((segment) => {
-    currentPath += `${segment}/`
-    const formattedLabel = segment
+    currentPath += `${decodeURIComponent(segment)}/`
+    const decodedSegment = decodeURIComponent(segment)
+    const formattedLabel = decodedSegment
       .split('-')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ')

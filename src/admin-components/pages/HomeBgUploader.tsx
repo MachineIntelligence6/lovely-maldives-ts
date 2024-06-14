@@ -51,7 +51,6 @@ const HomeBgUploader = () => {
     const url = urls[index]
     setUrls(urls.filter((_: any, i: number) => i !== index))
     const result = await deleteCloudinaryImage(url)
-    console.log('Image Delete Result ', result)
   }
 
   const getHomeBgData = async () => {
@@ -80,7 +79,6 @@ const HomeBgUploader = () => {
     try {
       startTransition(async () => {
         const res = await homeBgRequest({ ...titles, bgImages: urls })
-        console.log('Response ', res)
         if (res?.status === 201) {
           getHomeBgData()
           setAlertMsg({ type: 'success', message: 'Data saved successfully.' })

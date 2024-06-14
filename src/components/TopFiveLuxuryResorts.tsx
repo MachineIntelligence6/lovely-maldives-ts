@@ -7,6 +7,7 @@ import { Box, Typography, Button, Container, Stack } from '@mui/material'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { useRouter } from 'next/navigation'
 
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
@@ -27,6 +28,7 @@ import collectionImg from '../../public/Images/collectionImg.jpg'
 //   handleChange: any
 // }
 export default function TopFiveLuxuryResorts(props: any) {
+  const router = useRouter()
   const {
     heading,
     button,
@@ -143,8 +145,12 @@ export default function TopFiveLuxuryResorts(props: any) {
                 position: 'relative',
                 borderRadius: `${radius}`,
                 margin: '0 auto',
+                cursor: 'pointer',
               }}
               key={index}
+              onClick={() => {
+                router.push(`/resorts/${encodeURIComponent(data?.title)}`)
+              }}
             >
               <Box
                 sx={{
@@ -157,6 +163,7 @@ export default function TopFiveLuxuryResorts(props: any) {
                     md: `${radius} ${radius} 0px 0px`,
                   },
                   margin: '0 auto',
+                  cursor: 'pointer',
                 }}
               >
                 <Image

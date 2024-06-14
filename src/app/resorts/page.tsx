@@ -35,10 +35,16 @@ export const datas = [{}, {}, {}, {}, {}]
 export default function ResortsPage() {
   const [isPending, startTransition] = useTransition()
   const [filters, setFilters] = useState([] as any)
-
+  const [pages, setPages] = useState({
+    page: 1,
+    limit: 6,
+    totalGalleryImages: 0,
+  })
+  const [isFullyLoaded, setIsFullyLoaded] = useState(false)
+  const [resortsData, setResortsData] = useState([] as any)
   const [sections, setSections] = useState([] as any)
   const [editorText, setEditorText] = useState('')
-
+  console.log('pages ', pages)
   const getHotels = async (ids: any, type: string) => {
     if (ids?.length === 0) return
     try {
@@ -62,22 +68,26 @@ export default function ResortsPage() {
   const getResortSection = () => {
     try {
       startTransition(async () => {
-        const res = await getResortSectionRequest()
+        const res = await getResortSectionRequest(pages)
         const data = res?.data
-        console.log('get resort section data is =>>> ', data)
         if (data?.status === 200) {
-          setSections(data?.data?.resortSections)
-          data?.data?.resortSections?.map((sec: any) => {
+          setSections(data?.data)
+          console.log('data ', data?.data)
+          setPages({
+            ...pages,
+            totalGalleryImages: data?.totalGalleryImages,
+          })
+          data?.data?.map((sec: any) => {
             if (sec?.type === 'text') {
               setEditorText(sec?.description)
             }
             if (sec?.type === 'images_gallery') {
-              getHotels(sec?.ids, 'images_gallery')
+              setResortsData([...resortsData, ...sec.hotels])
             }
-            if (sec?.type === 'images_slider') {
-              getHotels(sec?.ids, 'images_slider')
-            }
-            // return null
+            // if (sec?.type === 'images_slider') {
+            //   getHotels(sec?.ids, 'images_slider')
+            // }
+            // // return null
           })
         } else {
           console.log('response about maldives', res)
@@ -97,7 +107,6 @@ export default function ResortsPage() {
       // startTransition(async () => {
       const res = await getResortFilterRequest()
       const data = res?.data
-      console.log('data', data)
       if (data?.status === 200) {
         setFilters(data?.data)
       } else {
@@ -113,10 +122,14 @@ export default function ResortsPage() {
     }
   }
 
+  const loadMore = () => {
+    setPages({ ...pages, page: (pages.page + 1) as any })
+  }
+
   useEffect(() => {
     getResortSection()
     getFilters()
-  }, [])
+  }, [pages?.page])
 
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
@@ -165,7 +178,14 @@ export default function ResortsPage() {
             )
           }
           if (sec?.type === 'images_gallery') {
-            return <ResortsGallery resorts={sec?.hotels} />
+            return (
+              <ResortsGallery
+                resorts={resortsData}
+                loadMore={loadMore}
+                pages={pages}
+                isFullyLoaded={isFullyLoaded}
+              />
+            )
           }
 
           return null

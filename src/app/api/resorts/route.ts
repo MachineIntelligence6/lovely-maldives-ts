@@ -1,18 +1,48 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
 import { createResorts, deleteResorts, getResorts } from '@/services/resorts'
+import { getAllParams } from '@/utils/getIdParam'
 import prisma from '../../../../prisma'
 
-export async function GET() {
+export async function GET(req: Request) {
+  const params = getAllParams(req.url)
+  console.log('params ', params)
+  const page = Number(params.get('page')) || 1
+  const limit = Number(params.get('limit')) || 6
+
+  const skipGalleryImages = (page - 1) * limit
+  const takeGalleryImages = limit
+
   try {
     await connectToDatabase()
 
     const result = await getResorts()
     if (!result)
       return NextResponse.json({ message: 'No data found.', status: 404 })
+    let totalGalleryImages
+    const paginatedData = result?.resortSections?.map((item: any) => {
+      if (item.type === 'images_gallery') {
+        totalGalleryImages = item?.hotels?.length
+        return {
+          ...item,
+          hotels: item.hotels.slice(
+            skipGalleryImages,
+            skipGalleryImages + takeGalleryImages
+          ),
+        }
+      }
+      return item
+    })
+
+    console.log('totalGalleryImages: ', totalGalleryImages)
 
     return NextResponse.json(
-      { message: 'Data Fetched successfully', data: result, status: 200 },
+      {
+        message: 'Data Fetched successfully',
+        data: paginatedData,
+        status: 200,
+        totalGalleryImages,
+      },
       { status: 200 }
     )
   } catch (error) {

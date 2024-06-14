@@ -103,7 +103,6 @@ const ReactQuillEditor = (props: any) => {
       ref={quillRef}
       value={value}
       onChange={(val: any) => {
-        console.log('val ->>>', val)
         // setValue(val)
         handleEditorValue(val)
       }}

@@ -3,7 +3,7 @@
 
 'use client'
 
-import React, { useRef } from 'react'
+import React, { useMemo, useRef } from 'react'
 import JoditEditor from 'jodit-react'
 
 const JoditTextEditor = (props: any) => {
@@ -64,14 +64,25 @@ const JoditTextEditor = (props: any) => {
     ],
   }
 
+  // const config = useMemo(
+  // 	{
+  // 		readonly: false, // all options from https://xdsoft.net/jodit/docs/,
+  // 		placeholder: 'Start typings...'
+  // 	},
+  // 	[]
+  // );
+
   return (
     <JoditEditor
       ref={editor}
       value={value}
       config={config}
-      onChange={(newContent) => {
+      onBlur={(newContent) => {
         handleEditorValue(newContent)
       }}
+      // onChange={(newContent) => {
+      //   handleEditorValue(newContent)
+      // }}
     />
   )
 }

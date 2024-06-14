@@ -1,37 +1,20 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
 import { getAllParams } from '@/utils/getIdParam'
-import prisma from '../../../../prisma'
+import prisma from '../../../../../prisma'
 
 export async function GET(req: Request) {
   const params = getAllParams(req.url)
   console.log('params ', params)
-  const page = Number(params.get('page')) || 1
-  const limit = Number(params.get('limit')) || 20
-  const skip = (page - 1) * limit
+  const limit = Number(params.get('limit')) || 12
 
-  const ids = params.get('filterIds')?.split(',')
   try {
     await connectToDatabase()
 
-    let hotels
-    if (ids?.length as any > 0 && ids?.[0] !== '') {
-      console.log('found ', ids)
-      hotels = await prisma.hotels.findMany({
-        where: {
-          id: {
-            in: ids,
-          },
-        },
-        take: limit,
-        skip,
-      })
-    } else {
-      hotels = await prisma.hotels.findMany({
-        take: limit,
-        skip,
-      })
-    }
+    const hotels = await prisma.hotels.findMany({
+      take: limit,
+    })
+
     const total = await prisma.hotels.count()
 
     if (!hotels || hotels?.length === 0)
@@ -54,7 +37,7 @@ export async function GET(req: Request) {
     })
 
     return NextResponse.json(
-      { message: 'Success', data: result, total, status: 200 },
+      { message: 'Success', data: result, status: 200 },
       { status: 200 }
     )
   } catch (error) {
