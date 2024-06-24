@@ -7,7 +7,8 @@ import { Box } from '@mui/system'
 import { Typography } from '@mui/material'
 import { articles } from '@/app/blogs/page'
 
-export default function ArticlesGallery() {
+export default function ArticlesGallery(props: any) {
+  const { blogs } = props
   return (
     <Box>
       <Typography
@@ -31,11 +32,11 @@ export default function ArticlesGallery() {
           gap: { xs: '10px', md: '20px' },
         }}
       >
-        {articles.slice(0, 3).map((blogItem: any, index: number) => (
+        {blogs?.map((blogItem: any, index: number) => (
           <Box
             key={index}
             component={Link}
-            href={`blogs/${blogItem.slug}`}
+            href={`blogs/${encodeURIComponent(blogItem.title)}`}
             sx={{
               width: { xs: 'calc(100%)', md: 'calc(33.3% - 20px)' },
               borderRadius: '20px',
@@ -47,8 +48,10 @@ export default function ArticlesGallery() {
             }}
           >
             <Image
-              src={blogItem.image}
+              src={blogItem?.coverImage}
               alt="blog"
+              width={300}
+              height={200}
               style={{
                 width: '100%',
                 borderRadius: '20px 20px 0 0px',
@@ -78,11 +81,11 @@ export default function ArticlesGallery() {
               }}
             >
               <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                {blogItem.title}
+                {blogItem?.title}
               </Typography>
 
               <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                {blogItem.date}
+                {blogItem.date || '12 February, 2024'}
               </Typography>
             </Box>
           </Box>

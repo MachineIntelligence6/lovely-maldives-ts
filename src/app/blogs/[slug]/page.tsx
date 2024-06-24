@@ -21,7 +21,10 @@ import ArticleSharer from '@/components/ArticleSharer'
 import ArticlesGallery from '@/components/ArticlesGallery'
 import axiosInstance from '@/config/axiosInstance'
 import CustomLoader from '@/admin-components/common/CustomLoader'
-import { getSingleBlogRequest } from '@/utils/api-requests/blogs.request'
+import {
+  getRelatedBlogsRequest,
+  getSingleBlogRequest,
+} from '@/utils/api-requests/blogs.request'
 import articleImage from '../../../../public/Images/main.jpg'
 
 type Props = {
@@ -53,6 +56,7 @@ type Props = {
 export default function SingleBlogPage() {
   // const isOpen = useMenuStore((state) => state.isOpen)
   const [blog, setBlog] = useState(null as any)
+  const [relatedArticles, setRelatedArticles] = useState([] as any)
   const [isPending, startTransition] = useTransition()
   const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
   const params = useParams()
@@ -83,9 +87,40 @@ export default function SingleBlogPage() {
     }
   }
 
+  const getRelatedBlogArticles = async (id: string) => {
+    console.log('blog?.id ', id)
+    if (!id) return
+    try {
+      // startTransition(async () => {
+      const res = await getRelatedBlogsRequest(id)
+      const data = res?.data
+      console.log('blog: ', data)
+      if (data?.status === 200) {
+        setRelatedArticles(data?.data)
+      } else {
+        console.log('response a get  =>>> ', res)
+      }
+      // })
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+      throw new Error(error)
+    }
+  }
+
   useEffect(() => {
     getBlog()
   }, [])
+
+  useEffect(() => {
+    getRelatedBlogArticles(blog?.id)
+  }, [blog?.id])
 
   return (
     <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
@@ -353,7 +388,7 @@ export default function SingleBlogPage() {
             mt: '60px',
           }}
         >
-          <ArticlesGallery />
+          <ArticlesGallery blogs={relatedArticles} />
         </Container>
       </Container>
       <Box sx={{ width: { xs: 'auto', md: '63%' }, mx: 'auto' }}>
