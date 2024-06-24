@@ -23,3 +23,7 @@ export const getBlogsRequest = async (data: any) => {
 export const getSingleBlogRequest = async (title: any) => {
   return apiClient.get(`/blogs/${title}`)
 }
+
+export const getRelatedBlogsRequest = async (category: any) => {
+  return apiClient.get(`/blogs/related-articles?id=${category}`)
+}

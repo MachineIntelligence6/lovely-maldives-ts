@@ -66,10 +66,13 @@ export default function LatestBlogs(props: any) {
           {blogs?.category}
         </Typography>
         <Box
+          component={Link}
+          href={`blogs/${encodeURIComponent(blogs?.blogs?.[0]?.title)}`}
           sx={{
             width: { xs: '100%', md: '100%' },
             height: { xs: '350px', md: '450px' },
             bgcolor: 'var(--brown)',
+            textDecoration: 'none',
             // position: { xs: 'relative', md: 'unset' },
             borderRadius: '20px',
             display: { xs: 'block', md: 'flex' },
