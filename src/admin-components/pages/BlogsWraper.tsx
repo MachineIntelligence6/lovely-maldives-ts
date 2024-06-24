@@ -1,59 +1,57 @@
-/* eslint-disable react/no-array-index-key */
-
 'use client'
 
-import { Box, Typography } from '@mui/material'
+import { Box, Stack, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 import BlogSlider from '@/components/BlogSlider'
-import blog from '../../public/Images/landingTree.jpg'
+import covImage from '../../../public/Images/collectionImg.jpg'
 
-export const popularBlogs = [
-  {
-    image: blog,
-    title:
-      'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
-    date: '04 Feb 2024',
-    slug: 'seyta-opens-dhunthari-resort',
-  },
-  {
-    image: blog,
-    title:
-      'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
-    date: '04 Feb 2024',
-    slug: 'seyta-opens-dhunthari-resort-1',
-  },
-  {
-    image: blog,
-    title:
-      'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
-    date: '04 Feb 2024',
-    slug: 'seyta-opens-dhunthari-resort-2',
-  },
-  {
-    image: blog,
-    title:
-      'Seyta Opens Dhunthari Resort & Spa in the beautiful islands of the Maldives.',
-    date: '04 Feb 2024',
-    slug: 'seyta-opens-dhunthari-resort-3',
-  },
-]
-export default function PopularBlogs(props: any) {
-  const { blogs } = props
+const BlogsWraper = (props: any) => {
+  const { blogs, category, updateBlog, sectionId, deleteBlogSection } = props
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
       <Box>
-        <Typography
-          sx={{
-            fontSize: '35px',
-            textAlign: 'center',
-            color: 'var(--white)',
-            mt: '60px',
-            textTransform: 'uppercase',
-          }}
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          gap="1rem"
+          sx={{ mt: '60px' }}
         >
-          {blogs?.category}
-        </Typography>
+          <Typography
+            sx={{
+              fontSize: '35px',
+              textAlign: 'center',
+              color: 'var(--white)',
+            }}
+          >
+            {category}
+          </Typography>
+          <Stack direction="row" alignItems="center" gap="10px">
+            <DeleteIcon
+              sx={{
+                cursor: 'pointer',
+                fontSize: '35px',
+                color: 'var(--red)',
+                border: '1px solid var(--red)',
+                p: '2px',
+              }}
+              onClick={() => deleteBlogSection(sectionId)}
+            />
+            <EditIcon
+              sx={{
+                cursor: 'pointer',
+                fontSize: '35px',
+                color: 'var(--blue)',
+                border: '1px solid var(--blue)',
+                p: '2px',
+              }}
+              onClick={() => updateBlog({ category, blogs, sectionId })}
+            />
+          </Stack>
+        </Stack>
         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
           <BlogSlider />
         </Box>
@@ -67,11 +65,11 @@ export default function PopularBlogs(props: any) {
             px: 2.5,
           }}
         >
-          {blogs?.blogs.map((popularBlog: any, index: number) => (
+          {blogs?.map((blog: any, index: number) => (
             <Box
               key={index}
               component={Link}
-              href={`/blogs/${popularBlog.slug}`}
+              href={`/blogs/${blog.slug}`}
               sx={{
                 width: { xs: 'calc(100%)', md: 'calc(33.3% - 14px)' },
                 borderRadius: '20px',
@@ -92,7 +90,7 @@ export default function PopularBlogs(props: any) {
                 }}
               >
                 <Image
-                  src={popularBlog?.coverImage}
+                  src={blog?.coverImage || covImage}
                   alt="blog"
                   width={300}
                   height={200}
@@ -125,13 +123,13 @@ export default function PopularBlogs(props: any) {
                 }}
               >
                 <Typography sx={{ fontSize: '20px', mt: '20px' }}>
-                  {popularBlog.title}
+                  {blog.title}
                 </Typography>
                 {/* <Typography sx={{ fontSize: '24px', mt: '20px' }}>
-                  {popularBlog.description}
+                  {blog.description}
                 </Typography> */}
                 <Typography sx={{ fontSize: '14px', mt: '20px' }}>
-                  {popularBlog.date || '12 February, 2024'}
+                  {blog.date}
                 </Typography>
               </Box>
             </Box>
@@ -141,3 +139,5 @@ export default function PopularBlogs(props: any) {
     </Box>
   )
 }
+
+export default BlogsWraper

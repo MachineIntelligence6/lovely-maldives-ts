@@ -4,6 +4,7 @@ interface Blogs {
   title: string
   description: string
   category: string
+  coverImage: string
 }
 
 export const addBlogRequest = async (data: Blogs) => {
@@ -11,9 +12,14 @@ export const addBlogRequest = async (data: Blogs) => {
     title: data.title,
     description: data.description,
     category: data.category,
+    coverImage: data.coverImage,
   })
 }
 
 export const getBlogsRequest = async (data: any) => {
   return apiClient.get(`/blogs?page=${data.page}&limit=${data.limit}`)
+}
+
+export const getSingleBlogRequest = async (title: any) => {
+  return apiClient.get(`/blogs/${title}`)
 }

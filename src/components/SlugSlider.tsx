@@ -151,7 +151,7 @@ export default function OurCollection({
               <Box
                 sx={{
                   width: { xs: '100%', md: '96%' },
-                  height: { xs: '250px', md: '220px' },
+                  height: { xs: '250px', md: '320px' },
                   bgcolor: 'rgba(150,127,93,0.5)',
                   position: 'absolute',
                   top: '0',
