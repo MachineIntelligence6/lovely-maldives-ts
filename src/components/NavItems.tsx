@@ -26,13 +26,13 @@ function NavItems({ items }: any) {
       {items?.map((item: any, index: number) => (
         <MenuItem
           key={index}
-          onClick={() => {
-            handleMenu(item.route)
-          }}
+          // onClick={() => {
+          //   handleMenu(item.route)
+          // }}
           role="link"
           aria-labelledby={item.label}
           component={Link}
-          href={item.link || '/'}
+          href={item.link}
           sx={{
             pt: 1,
             px: '3px',
