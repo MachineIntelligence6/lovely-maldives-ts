@@ -48,7 +48,8 @@ export const latestBlog = [
   },
 ]
 
-export default function LatestBlogs() {
+export default function LatestBlogs(props: any) {
+  const { blogs } = props
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' }, px: 2.5 }}>
       <Box>
@@ -62,7 +63,7 @@ export default function LatestBlogs() {
             px: '20px',
           }}
         >
-          Latest News
+          {blogs?.category}
         </Typography>
         <Box
           sx={{
@@ -80,19 +81,29 @@ export default function LatestBlogs() {
           }}
         >
           <Box
-            component={Image}
-            src={blog}
-            alt="blog"
             sx={{
               height: '100%',
               objectFit: 'cover',
               width: '100%',
+              overflow: 'hidden',
               borderRadius: {
                 xs: '20px 20px 20px 20px',
                 md: '20px 0px 0px 20px',
               },
             }}
-          />
+          >
+            <Image
+              src={blogs?.blogs?.[0]?.coverImage || blog}
+              alt="blog"
+              width={500}
+              height={400}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          </Box>
           <Box
             sx={{
               width: { xs: '100%', md: '60%' },
@@ -134,7 +145,7 @@ export default function LatestBlogs() {
                 ml: { xs: '15px', md: '50px' },
               }}
             >
-              Luxury Resorts
+              {blogs?.blogs?.[0]?.title}
             </Typography>
             <Typography
               sx={{
@@ -146,7 +157,7 @@ export default function LatestBlogs() {
                 // zIndex: 999,
               }}
             >
-              Seyta Opens Dhunthari Resort& Spa Long in the Maldives
+              {blogs?.blogs?.[0]?.title}
             </Typography>
             <Typography
               sx={{
@@ -169,75 +180,87 @@ export default function LatestBlogs() {
             mb: { xs: '30px', md: '0' },
           }}
         >
-          {latestBlog.map((latest, index) => (
-            <Box
-              key={index}
-              component={Link}
-              href={`/blogs/${latest.slug}`}
-              sx={{
-                width: { xs: 'calc(100%)', md: 'calc(50% - 10px)' },
-                borderRadius: '20px',
-                bgcolor: 'var(--brown)',
-                boxSizing: 'border-box',
-                boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
-                textDecoration: 'none',
-                position: 'relative',
-              }}
-            >
+          {blogs?.blogs
+            ?.slice(1, blogs?.blogs?.length)
+            ?.map((latest: any, index: number) => (
               <Box
-                component={Image}
-                src={latest.img}
-                alt="blog"
+                key={index}
+                component={Link}
+                href={`/blogs/${encodeURIComponent(latest.title)}`}
                 sx={{
-                  width: '100%',
-                  borderRadius: '20px 20px 0 0px',
-                  height: '300px',
-                  objectFit: 'cover',
-                }}
-              />
-              <Box
-                sx={{
-                  width: '100%',
-                  height: '300px',
-                  bgcolor: 'rgba(150,127,93,0.5)',
-                  position: 'absolute',
-                  top: '0',
-                  // left: { xs: '0', md: '240.5px' },
-                  borderRadius: '20px 20px 0 0',
-                }}
-              />
-              <Box
-                sx={{
-                  // mt: '20px',
+                  width: { xs: 'calc(100%)', md: 'calc(50% - 10px)' },
+                  borderRadius: '20px',
                   bgcolor: 'var(--brown)',
-                  color: 'white',
-                  pb: '20px',
-                  px: { xs: '20px', md: '20px' },
-                  borderRadius: '0  0 20px 20px ',
+                  boxSizing: 'border-box',
+                  boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
+                  textDecoration: 'none',
+                  position: 'relative',
                 }}
               >
-                <Typography
-                  sx={{ fontSize: { xs: '14px', md: '16px' }, pt: '20px' }}
-                >
-                  {latest.title}
-                </Typography>
-                <Typography
+                <Box
                   sx={{
-                    fontSize: { xs: '20px', md: '24px' },
-                    fontWeight: 600,
-                    mt: '10px',
+                    width: '100%',
+                    borderRadius: '20px 20px 0 0px',
+                    height: '300px',
+                    objectFit: 'cover',
+                    overflow: 'hidden',
                   }}
                 >
-                  {latest.description}
-                </Typography>
-                <Typography
-                  sx={{ fontSize: { xs: '16px', md: '16px' }, mt: '10px' }}
+                  <Image
+                    src={latest.coverImage}
+                    alt="blog"
+                    width={400}
+                    height={300}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '300px',
+                    bgcolor: 'rgba(150,127,93,0.5)',
+                    position: 'absolute',
+                    top: '0',
+                    // left: { xs: '0', md: '240.5px' },
+                    borderRadius: '20px 20px 0 0',
+                  }}
+                />
+                <Box
+                  sx={{
+                    // mt: '20px',
+                    bgcolor: 'var(--brown)',
+                    color: 'white',
+                    pb: '20px',
+                    px: { xs: '20px', md: '20px' },
+                    borderRadius: '0  0 20px 20px ',
+                  }}
                 >
-                  {latest.date}
-                </Typography>
+                  <Typography
+                    sx={{ fontSize: { xs: '14px', md: '16px' }, pt: '20px' }}
+                  >
+                    {latest.category}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: { xs: '20px', md: '24px' },
+                      fontWeight: 600,
+                      mt: '10px',
+                    }}
+                  >
+                    {latest.title}
+                  </Typography>
+                  <Typography
+                    sx={{ fontSize: { xs: '16px', md: '16px' }, mt: '10px' }}
+                  >
+                    {latest.date || 'February 12, 2024'}
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))}
         </Box>
       </Box>
     </Box>

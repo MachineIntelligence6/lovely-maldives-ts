@@ -1,9 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react/no-array-index-key */
 
+'use client'
+
+import { useEffect, useState, useTransition } from 'react'
 import { Grid, Typography } from '@mui/material'
 import Box from '@mui/system/Box'
 import Container from '@mui/system/Container'
+import { useParams } from 'next/navigation'
 
 import Image from 'next/image'
 import { Metadata, ResolvingMetadata } from 'next'
@@ -15,6 +20,8 @@ import MailBox from '@/components/MailBox'
 import ArticleSharer from '@/components/ArticleSharer'
 import ArticlesGallery from '@/components/ArticlesGallery'
 import axiosInstance from '@/config/axiosInstance'
+import CustomLoader from '@/admin-components/common/CustomLoader'
+import { getSingleBlogRequest } from '@/utils/api-requests/blogs.request'
 import articleImage from '../../../../public/Images/main.jpg'
 
 type Props = {
@@ -45,9 +52,44 @@ type Props = {
 
 export default function SingleBlogPage() {
   // const isOpen = useMenuStore((state) => state.isOpen)
+  const [blog, setBlog] = useState(null as any)
+  const [isPending, startTransition] = useTransition()
+  const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
+  const params = useParams()
+
+  const getBlog = async () => {
+    const slug = params?.slug
+    try {
+      startTransition(async () => {
+        const res = await getSingleBlogRequest(slug)
+        const data = res?.data
+        console.log('blog: ', data)
+        if (data?.status === 200) {
+          setBlog(data?.data)
+        } else {
+          console.log('response a get  =>>> ', res)
+        }
+      })
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+      throw new Error(error)
+    }
+  }
+
+  useEffect(() => {
+    getBlog()
+  }, [])
 
   return (
     <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
+      {isPending && <CustomLoader />}
       <Header />
       <BlogHeader />
       <Container
@@ -75,10 +117,15 @@ export default function SingleBlogPage() {
                 px: { xs: '30px', md: '0px' },
               }}
             >
-              Seyta Opens Dhunthari Resort & Spa Long Heading Capacity here.
+              {blog?.title}
             </Typography>
-            <ArticleSharer />
-            <Box sx={{ position: 'relative' }}>
+            <Box
+              dangerouslySetInnerHTML={{
+                __html: blog?.description,
+              }}
+            />
+            {/* <ArticleSharer /> */}
+            {/* <Box sx={{ position: 'relative' }}>
               <Box
                 component={Image}
                 src={articleImage}
@@ -298,7 +345,7 @@ export default function SingleBlogPage() {
               }}
             >
               <ArticleSharer />
-            </Box>
+            </Box> */}
           </Grid>
         </Grid>
         <Container

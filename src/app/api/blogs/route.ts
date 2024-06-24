@@ -13,7 +13,7 @@ export async function GET(req: Request) {
   try {
     await connectToDatabase()
 
-    const result = await prisma.blogs.findMany({take: limit, skip})
+    const result = await prisma.blogs.findMany({ take: limit, skip })
     const totalBlogs = await prisma.blogs.count()
 
     if (!result)
@@ -37,7 +37,7 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   const bodyData = await req.json()
   console.log('blogs', bodyData)
-  if (!bodyData?.category || !bodyData?.description || !bodyData?.title)
+  if (!bodyData?.category || !bodyData?.description || !bodyData?.title || !bodyData?.coverImage)
     return NextResponse.json({
       message: 'Please send complete blog data to save.',
       status: 422,
@@ -50,6 +50,7 @@ export async function POST(req: Request) {
         category: bodyData.category,
         title: bodyData.title,
         description: bodyData.description,
+        coverImage: bodyData.coverImage,
       },
     })
 
@@ -105,6 +106,7 @@ export async function PUT(req: Request) {
         category: bodyData.category,
         title: bodyData.title,
         description: bodyData.description,
+        coverImage: bodyData.coverImage,
       },
     })
 

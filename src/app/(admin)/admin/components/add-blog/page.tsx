@@ -4,12 +4,14 @@
 
 'use client'
 
-import { Alert, Box, InputLabel, Typography } from '@mui/material'
+import { Alert, Box, InputLabel, Stack, Typography } from '@mui/material'
 import styled from '@emotion/styled'
 import { useEffect, useState, useTransition } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
+import EditIcon from '@mui/icons-material/Edit'
+import BackupIcon from '@mui/icons-material/Backup'
 import HeadingWraper from '@/admin-components/common/HeadingWraper'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
@@ -20,6 +22,7 @@ import {
 } from '@/utils/api-requests/blogs.request'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import blog from '/public/Images/landingTree.jpg'
+import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 
 // const ReactQuillEditor = dynamic(
 //   () => import('@/admin-components/common/ReactQuillEditor'),
@@ -52,9 +55,22 @@ export default function AddBlog() {
   const [editorText, setEditorText] = useState('')
   const [pages, setPages] = useState({ page: 1, limit: 12 })
   const [blogs, setBlogs] = useState([] as any)
+  const [coverPhoto, setCoverPhoto] = useState(null as any)
+  const [coverUrl, setCoverUrl] = useState(null as any)
 
   const handleEditorValue = (val: any) => {
     setEditorText(val)
+  }
+
+  const handleFileChange = async (e: any) => {
+    const value = e.target.files?.[0]
+    setCoverPhoto(value)
+
+    const formData = new FormData()
+    formData.append('file', value as any)
+    formData.append('upload_preset', 'j8epfynh')
+    const res = await uploadImgToCloudinary(formData)
+    setCoverUrl(res?.secure_url)
   }
 
   const getAllBlogs = async () => {
@@ -84,6 +100,7 @@ export default function AddBlog() {
         const res = await addBlogRequest({
           ...values,
           description: editorText,
+          coverImage: coverUrl,
         })
         const data = res?.data
         if (data?.status === 201) {
@@ -131,7 +148,13 @@ export default function AddBlog() {
           handleSave={submitData}
         />
         <Box sx={{ mt: 3, pb: 5 }}>
-          <Box sx={{ mb: 3 }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            gap="1rem"
+            sx={{ mb: 1 }}
+          >
             <TextFieldWraper
               label="Blog Title"
               name="title"
@@ -142,23 +165,109 @@ export default function AddBlog() {
                 setValues({ ...values, title: e.target.value })
               }
             />
-          </Box>
+
+            <Box sx={{ width: '100%', mb: 2 }}>
+              <CustomLabel
+                id="demo-simple-select-label"
+                sx={{ fontFamily: 'Public Sans', mb: '5px' }}
+              >
+                Blog Category
+              </CustomLabel>
+              <CustomSelect
+                placeholder="Enter blog category."
+                value={values?.category}
+                options={options}
+                name="category"
+                onChange={(e: any) =>
+                  setValues({ ...values, category: e.target.value })
+                }
+              />
+            </Box>
+          </Stack>
+
           <Box sx={{ mb: 3 }}>
-            <CustomLabel
-              id="demo-simple-select-label"
-              sx={{ mb: '7px', fontFamily: 'Public Sans' }}
-            >
-              Blog Category
-            </CustomLabel>
-            <CustomSelect
-              placeholder="Enter blog category."
-              value={values?.category}
-              options={options}
-              name="category"
-              onChange={(e: any) =>
-                setValues({ ...values, category: e.target.value })
-              }
-            />
+            <label htmlFor="bgFileInput">
+              <input
+                type="file"
+                id="bgFileInput"
+                hidden
+                onChange={handleFileChange}
+              />
+              <Box
+                sx={{
+                  width: '100%',
+                  minHeight: '250px',
+                  maxHeight: '450px',
+                  border: '1px dashed gray',
+                  borderRadius: '6px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  overflow: 'hidden',
+                }}
+              >
+                {coverPhoto || coverUrl ? (
+                  <Box
+                    sx={{
+                      position: 'relative',
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        right: '1rem',
+                        top: '1rem',
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '50%',
+                        border: '1px solid white',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        zIndex: 999,
+                        bgcolor: 'rgba(0,0,0,0.6)',
+                      }}
+                    >
+                      <EditIcon
+                        sx={{
+                          fontSize: '25px',
+                          color: 'white',
+                          cursor: 'pointer',
+                        }}
+                      />
+                    </Box>
+                    <Image
+                      width={1000}
+                      height={350}
+                      src={coverUrl || URL.createObjectURL(coverPhoto)}
+                      style={{ objectFit: 'cover' }}
+                      alt="bg-img"
+                    />
+                  </Box>
+                ) : (
+                  <>
+                    <BackupIcon
+                      sx={{
+                        fontSize: '55px',
+                        color: 'var(--brown)',
+                      }}
+                    />
+                    <Typography
+                      variant="body1"
+                      color="var(--brown)"
+                      sx={{ mt: 2, fontSize: '18px' }}
+                    >
+                      Upload Blog Cover Image
+                    </Typography>
+                  </>
+                )}
+              </Box>
+            </label>
           </Box>
           {/* <ReactQuillEditor
           height={400}
@@ -215,7 +324,7 @@ export default function AddBlog() {
                 }}
               >
                 <Image
-                  src={blogItem?.image || blog}
+                  src={blogItem?.coverImage || blog}
                   alt="blog"
                   width={200}
                   height={250}

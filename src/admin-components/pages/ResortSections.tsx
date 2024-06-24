@@ -67,7 +67,6 @@ const ResortSections = () => {
   const handleShowHotelModal = (index: number) =>
     setShowHotelModal({ show: !showHotelModal?.show, index })
 
-  console.log('Sections ', sections)
   const handleAddType = (type: string) => {
     setSections([...sections, { type }])
   }

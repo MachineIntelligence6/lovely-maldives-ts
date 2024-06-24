@@ -2,21 +2,28 @@ import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
 import prisma from '../../../../../prisma'
 
-export async function GET(req: Request, route: { [key: string]: any }) {
-  console.log('route ', route)
+export async function DELETE(req: Request, route: { [key: string]: any }) {
   const { params } = route
-  const { slug } = params
+  const { id } = params
+  console.log('id ', id)
+  if (!id)
+    return NextResponse.json({
+      message: 'Please send blog section id to delete.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
-    const result = await prisma.blogs.findFirst({ where: { title: decodeURIComponent(slug) } })
-    if (!result)
-      return NextResponse.json(
-        { message: 'No blog data found.', status: 404 },
-      )
+    const result = await prisma.categoryBlogs.delete({
+      where: {
+        id,
+      },
+    })
+
+    console.log('result ', result)
 
     return NextResponse.json(
-      { message: 'Success', data: result, status: 200 },
+      { message: 'Section deleted successfully.', status: 200 },
       { status: 200 }
     )
   } catch (error) {

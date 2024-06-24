@@ -150,6 +150,14 @@ model Blogs {
     title        String
     category     String
     description String
+    coverImage  String
+}
+
+// ADD BLOG MODEL
+model CategoryBlogs {
+    id           String  @id @default(auto()) @map("_id") @db.ObjectId
+    category       String
+    ids     String[]
 }
 
 // BLOG CATEGORIES MODEL

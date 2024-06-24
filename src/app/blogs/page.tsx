@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-array-index-key */
 
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useTransition } from 'react'
 import { Container, Box, Typography, Button } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,6 +15,9 @@ import Header from '@/components/Header'
 import MailBox from '@/components/MailBox'
 import LatestBlogs from '@/components/LatestBlogs'
 import PopularBlogs from '@/components/PopularBlogs'
+import { getBlogsSectionRequest } from '@/utils/api-requests/blogcategs-request'
+import { getBlogsRequest } from '@/utils/api-requests/blogs.request'
+import CustomLoader from '@/admin-components/common/CustomLoader'
 import blog from '../../../public/Images/landingTree.jpg'
 import articleImage from '../../../public/Images/main.jpg'
 
@@ -84,11 +88,68 @@ export const articles: any[] = [
 ]
 
 export default function Page() {
+  const [isPending, startTransition] = useTransition()
+  const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
   const [addSlice, setAddSlice] = useState<any>([] as any)
+  const [allBlogs, setAllBlogs] = useState([] as any)
+  const [allArticles, setAllArticles] = useState([] as any)
+  const [totalBlogs, setTotalBlogs] = useState(null as any)
+  const [pages, setPages] = useState({ page: 1, limit: 3 })
 
+  const getSections = () => {
+    try {
+      startTransition(async () => {
+        const res = await getBlogsSectionRequest()
+        const data = res?.data
+        if (data?.status === 200) {
+          setAllBlogs(data?.data)
+        } else {
+          console.log('response a get  =>>> ', res)
+        }
+      })
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+      throw new Error(error)
+    }
+  }
+
+  const getAllBlogs = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getBlogsRequest(pages)
+        const data = res?.data
+        if (data?.status === 200) {
+          const newArticles = data?.data
+          setAllArticles([...allArticles, ...newArticles])
+          setTotalBlogs(data?.totalBlogs)
+        } else {
+          console.log('response a get  =>>> ', res)
+        }
+      })
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+      throw new Error(error)
+    }
+  }
+  
   useEffect(() => {
     const windowWidth = window.innerWidth
 
+    getSections()
     if (windowWidth < 768) {
       const slicedArticles: any[] = articles.slice(0, 3)
       setAddSlice(slicedArticles as any[])
@@ -96,8 +157,14 @@ export default function Page() {
       setAddSlice(articles as any[])
     }
   }, [])
+
+  useEffect(() => {
+    getAllBlogs()
+  }, [pages?.page])
+
   return (
     <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
+      {isPending && <CustomLoader />}
       <Header />
       <BlogHeader />
       <Container
@@ -111,8 +178,8 @@ export default function Page() {
           },
         }}
       >
-        <LatestBlogs />
-        <PopularBlogs />
+        {allBlogs?.[0] && <LatestBlogs blogs={allBlogs?.[0]} />}
+        {allBlogs?.[1] && <PopularBlogs blogs={allBlogs?.[1]} />}
         <Box>
           <Typography
             sx={{
@@ -133,191 +200,216 @@ export default function Page() {
               px: 2.5,
             }}
           >
-            {addSlice.map((blogItem: any, index: number) => (
-              <Box
-                key={index}
-                component={Link}
-                href={`blogs/${blogItem.slug}`}
-                sx={{
-                  width: { xs: 'calc(100%)', md: 'calc(33.3% - 14px)' },
-                  borderRadius: '20px',
-                  bgcolor: 'var(--brown)',
-                  boxSizing: 'border-box',
-                  boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
-                  textDecoration: 'none',
-                  position: 'relative',
-                }}
-              >
+            {allArticles?.length > 0 &&
+              allArticles.map((blogItem: any, index: number) => (
                 <Box
-                  component={Image}
-                  src={blogItem.image}
-                  alt="blog"
-                  sx={{
-                    width: '100%',
-                    borderRadius: '20px 20px 0 0px',
-                    height: '200px',
-                    objectFit: 'cover',
-                  }}
-                />
-                <Box
-                  sx={{
-                    width: '100%',
-                    height: '200px',
-                    bgcolor: 'rgba(150,127,93,0.5)',
-                    position: 'absolute',
-                    top: '0',
-                    // left: { xs: '0', md: '240.5px' },
-                    borderRadius: '20px 20px 0 0',
-                  }}
-                />
-                <Box
-                  sx={{
-                    // mt: '20px',
-                    color: 'white',
-                    bgcolor: 'var(--brown)',
-                    pb: '20px',
-                    px: { xs: '20px', md: '20px' },
-                    borderRadius: '0 0 20px 20px ',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '20px', mt: '20px' }}>
-                    {blogItem.title}
-                  </Typography>
-
-                  <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                    {blogItem.date}
-                  </Typography>
-                </Box>
-              </Box>
-            ))}
-          </Box>
-          <Box sx={{ textAlign: 'center' }}>
-            <Button
-              sx={{
-                px: '50px',
-                py: 2,
-                mt: '60px',
-                backgroundColor: 'var(--brown)',
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: 'var(--blue) !important',
-                },
-              }}
-              title="More articles"
-              color="primary"
-              aria-label="More articles"
-            >
-              MORE ARTICLES
-            </Button>
-          </Box>
-        </Box>
-        <Box>
-          <Typography
-            sx={{
-              fontSize: '35px',
-              textAlign: 'center',
-              color: 'var(--white)',
-              mt: '60px',
-            }}
-          >
-            More from Newsroom
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              mt: { xs: '30px', md: '40px' },
-              px: { xs: 2.5, md: 0 },
-            }}
-          >
-            {addSlice.map((blogItem: any, index: number) => (
-              <Box
-                key={index}
-                sx={{
-                  width: { xs: '100%', md: '50%' },
-                  borderBottom: '1px solid lightgray',
-                  px: '0px',
-                }}
-              >
-                <Box
+                  key={index}
                   component={Link}
-                  href={`blogs/${blogItem.slug}`}
+                  href={`blogs/${blogItem.title}`}
                   sx={{
+                    width: { xs: 'calc(100%)', md: 'calc(33.3% - 14px)' },
+                    borderRadius: '20px',
+                    bgcolor: 'var(--brown)',
+                    boxSizing: 'border-box',
+                    boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
                     textDecoration: 'none',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    // position: 'relative',
+                    position: 'relative',
                   }}
                 >
-                  <Box sx={{ position: 'relative', width: '265px' }}>
-                    <Box
-                      sx={{
+                  <Box
+                    sx={{
+                      width: '100%',
+                      borderRadius: '20px 20px 0 0px',
+                      height: '200px',
+                      objectFit: 'cover',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <Image
+                      src={blogItem?.coverImage}
+                      alt="blog"
+                      width={300}
+                      height={200}
+                      style={{
                         width: '100%',
-                        borderRadius: '20px',
-                        height: { xs: '90px', md: '132px' },
+                        height: '100%',
                         objectFit: 'cover',
-                        backgroundPosition: '100%',
-                        backgroundSize: 'cover',
-                        backgroundImage: `url(${blogItem.image.src})`,
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        width: '100%',
-                        height: { xs: '90px', md: '132px' },
-                        bgcolor: 'rgba(150,127,93,0.5)',
-                        position: 'absolute',
-                        top: { xs: '0', md: '0px' },
-                        left: 0,
-                        borderRadius: '20px',
                       }}
                     />
                   </Box>
                   <Box
                     sx={{
-                      mt: '20px',
-                      color: 'var(--white)',
+                      width: '100%',
+                      height: '200px',
+                      bgcolor: 'rgba(150,127,93,0.5)',
+                      position: 'absolute',
+                      top: '0',
+                      // left: { xs: '0', md: '240.5px' },
+                      borderRadius: '20px 20px 0 0',
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      // mt: '20px',
+                      color: 'white',
+                      bgcolor: 'var(--brown)',
                       pb: '20px',
                       px: { xs: '20px', md: '20px' },
+                      borderRadius: '0 0 20px 20px ',
                     }}
                   >
-                    <Box>
-                      <Typography
-                        sx={{ fontSize: '16px', mt: '20px', fontWeight: 600 }}
-                      >
-                        {blogItem.title}
-                      </Typography>
+                    <Typography sx={{ fontSize: '20px', mt: '20px' }}>
+                      {blogItem.title}
+                    </Typography>
 
-                      <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                        {blogItem.date}
-                      </Typography>
+                    <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                      {blogItem.date || '12 February, 2024'}
+                    </Typography>
+                  </Box>
+                </Box>
+              ))}
+          </Box>
+          {totalBlogs === allArticles.length ? (
+            ''
+          ) : (
+            <Box sx={{ textAlign: 'center' }}>
+              <Button
+                sx={{
+                  px: '50px',
+                  py: 2,
+                  mt: '60px',
+                  backgroundColor: 'var(--brown)',
+                  color: 'white',
+                  '&:hover': {
+                    backgroundColor: 'var(--blue) !important',
+                  },
+                }}
+                title="More articles"
+                color="primary"
+                aria-label="More articles"
+                onClick={() =>
+                  setPages({ ...pages, page: (pages?.page as any) + 1 })
+                }
+              >
+                MORE ARTICLES
+              </Button>
+            </Box>
+          )}
+        </Box>
+        {allBlogs?.[2] && (
+          <Box>
+            <Typography
+              sx={{
+                fontSize: '35px',
+                textAlign: 'center',
+                color: 'var(--white)',
+                mt: '60px',
+              }}
+            >
+              {allBlogs?.[2]?.category}
+            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                mt: { xs: '30px', md: '40px' },
+                px: { xs: 2.5, md: 0 },
+              }}
+            >
+              {allBlogs?.[2]?.blogs?.map((blogItem: any, index: number) => (
+                <Box
+                  key={index}
+                  sx={{
+                    width: { xs: '100%', md: '50%' },
+                    borderBottom: '1px solid lightgray',
+                    px: '0px',
+                    mb: 2,
+                    pb: 2,
+                  }}
+                >
+                  <Box
+                    component={Link}
+                    href={`blogs/${encodeURIComponent(blogItem.title)}`}
+                    sx={{
+                      textDecoration: 'none',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      // position: 'relative',
+                    }}
+                  >
+                    <Box sx={{ position: 'relative', width: '200px' }}>
+                      <Box
+                        sx={{
+                          width: '100%',
+                          maxWidth: '200px',
+                          borderRadius: '20px',
+                          aspectRatio: '1.3',
+                          // height: { xs: '90px', md: '132px' },
+                          objectFit: 'cover',
+                          backgroundPosition: '100%',
+                          backgroundSize: 'cover',
+                          backgroundImage: `url(${blogItem?.coverImage})`,
+                        }}
+                      />
+                      <Box
+                        sx={{
+                          width: '100%',
+                          // height: { xs: '90px', md: '132px' },
+                          bgcolor: 'rgba(150,127,93,0.5)',
+                          position: 'absolute',
+                          top: { xs: '0', md: '0px' },
+                          left: 0,
+                          bottom: 0,
+                          borderRadius: '20px',
+                        }}
+                      />
+                    </Box>
+                    <Box
+                      sx={{
+                        mt: '20px',
+                        color: 'var(--white)',
+                        pb: '20px',
+                        px: { xs: '20px', md: '20px' },
+                      }}
+                    >
+                      <Box>
+                        <Typography
+                          sx={{ fontSize: '16px', mt: '20px', fontWeight: 600 }}
+                        >
+                          {blogItem.title}
+                        </Typography>
+
+                        <Typography sx={{ fontSize: '16px', mt: '20px' }}>
+                          {blogItem.date || '12 February, 2024'}
+                        </Typography>
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
-              </Box>
-            ))}
+              ))}
+            </Box>
+            {/* <Box sx={{ textAlign: 'center' }}>
+          <Button
+            sx={{
+              px: '50px',
+              py: 2,
+              mt: '60px',
+              backgroundColor: 'var(--brown)',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
+            }}
+            title="View Archive"
+            aria-label="View Archive"
+            color="primary"
+          >
+            VIEW ARCHIVE
+          </Button>
+        </Box> */}
           </Box>
-          <Box sx={{ textAlign: 'center' }}>
-            <Button
-              sx={{
-                px: '50px',
-                py: 2,
-                mt: '60px',
-                backgroundColor: 'var(--brown)',
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: 'var(--blue) !important',
-                },
-              }}
-              title="View Archive"
-              aria-label="View Archive"
-              color="primary"
-            >
-              VIEW ARCHIVE
-            </Button>
-          </Box>
-        </Box>
+        )}
         <MailBox />
       </Container>
       <Footer />
