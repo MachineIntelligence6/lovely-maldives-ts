@@ -134,6 +134,7 @@ export default function OurCollection({
                   },
                   margin: '0 auto',
                   cursor: 'pointer',
+                  position: 'relative',
                 }}
               >
                 <Image
@@ -147,21 +148,21 @@ export default function OurCollection({
                     objectFit: 'cover',
                   }}
                 />
+                <Box
+                  sx={{
+                    bottom: '0',
+                    right: 0,
+                    bgcolor: 'rgba(150,127,93,0.5)',
+                    position: 'absolute',
+                    top: '0',
+                    borderRadius: {
+                      xs: '0px',
+                      md: `${radius} ${radius} 0px 0px`,
+                    },
+                    left: 0,
+                  }}
+                />
               </Box>
-              <Box
-                sx={{
-                  width: { xs: '100%', md: '96%' },
-                  height: { xs: '250px', md: '320px' },
-                  bgcolor: 'rgba(150,127,93,0.5)',
-                  position: 'absolute',
-                  top: '0',
-                  borderRadius: {
-                    xs: '0px',
-                    md: `${radius} ${radius} 0px 0px`,
-                  },
-                  left: { xs: 0, md: '6.5px' },
-                }}
-              />
               <Box
                 sx={{
                   width: { xs: '100%', md: '96%' },

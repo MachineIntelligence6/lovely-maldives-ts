@@ -137,6 +137,12 @@ model Hotels {
     sections    Sections[]
 }
 
+model HotelBookings {
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
+    userEmail   String @unique
+    hotelId     String?
+}
+
 // RESORT FILTERS MODEL
 model ResortFilters {
     id          String  @id @default(auto()) @map("_id") @db.ObjectId

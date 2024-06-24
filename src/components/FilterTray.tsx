@@ -31,7 +31,7 @@ const Checkbox = styled(MuiCheckbox)<CheckboxProps>(() => ({
 
 export default function FilterTray(props: any) {
   const { filters } = props
-  const [allFilters, setAllFilters] = useState()
+  const [allFilters, setAllFilters] = useState([] as any)
   const [open, setOpen] = React.useState(false)
 
   const [value, setValue] = React.useState<number[]>([20, 37])
@@ -57,7 +57,7 @@ export default function FilterTray(props: any) {
 
     return acc
   }, [])
-
+  console.log('all Filter are ', allFilters)
   useEffect(() => {
     setAllFilters(transformedData)
   }, [filters])
@@ -88,8 +88,59 @@ export default function FilterTray(props: any) {
               <Close />
             </IconButton>
           </Box>
+          {allFilters?.map((filter: any, index: number) => {
+            if (filter?.type?.toLowerCase() === 'distance from city') {
+              return (
+                <>
+                  <FormControl key={index}>
+                    <FormLabel id="demo-radio-buttons-group-label">
+                      {filter?.type}
+                    </FormLabel>
+                    <FormGroup sx={{ ml: '10px' }}>
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        name="radio-buttons-group"
+                      >
+                        {filter?.filters?.map((fil: any, ind: number) => (
+                          <FormControlLabel
+                            key={ind}
+                            value={fil?.filter}
+                            control={<Radio />}
+                            label={fil?.filter}
+                          />
+                        ))}
+                      </RadioGroup>
+                    </FormGroup>
+                  </FormControl>
+                  <Slider
+                    getAriaLabel={() => 'Distance slider'}
+                    value={value}
+                    onChange={handleChange}
+                    valueLabelDisplay="auto"
+                    getAriaValueText={(distanceValue: number) =>
+                      `${distanceValue}KM`
+                    }
+                  />
+                </>
+              )
+            }
+            return (
+              <FormControl>
+                <FormLabel>{filter?.type}</FormLabel>
+                <FormGroup sx={{ ml: '10px' }}>
+                  {filter?.filters?.map((fil: any, ind: number) => (
+                    <FormControlLabel
+                      key={ind}
+                      control={<Checkbox />}
+                      label={fil?.filter}
+                    />
+                  ))}
+                </FormGroup>
+              </FormControl>
+            )
+          })}
 
-          <FormControl>
+          {/* <FormControl>
             <FormLabel>Property Types</FormLabel>
             <FormGroup sx={{ ml: '10px' }}>
               <FormControlLabel
@@ -103,9 +154,9 @@ export default function FilterTray(props: any) {
               <FormControlLabel control={<Checkbox />} label="Motels" />
               <FormControlLabel control={<Checkbox />} label="Cottage" />
             </FormGroup>
-          </FormControl>
+          </FormControl> */}
 
-          <FormControl>
+          {/* <FormControl>
             <FormLabel>Amenities</FormLabel>
             <FormGroup sx={{ ml: '10px' }}>
               <FormControlLabel
@@ -123,6 +174,7 @@ export default function FilterTray(props: any) {
               <FormControlLabel control={<Checkbox />} label="Family Rooms" />
             </FormGroup>
           </FormControl>
+
           <FormControl>
             <FormLabel>Hotel Class</FormLabel>
 
@@ -140,6 +192,7 @@ export default function FilterTray(props: any) {
               <FormControlLabel control={<Checkbox />} label="1 Star" />
             </FormGroup>
           </FormControl>
+
           <FormControl>
             <FormLabel id="style-label">Style</FormLabel>
             <FormGroup sx={{ ml: '10px' }}>
@@ -159,6 +212,7 @@ export default function FilterTray(props: any) {
               <FormControlLabel control={<Checkbox />} label="1 Star" />
             </FormGroup>
           </FormControl>
+
           <FormControl>
             <FormLabel id="demo-radio-buttons-group-label">
               Distance from City
@@ -185,16 +239,9 @@ export default function FilterTray(props: any) {
                 />
               </RadioGroup>
             </FormGroup>
-          </FormControl>
-          <Slider
-            getAriaLabel={() => 'Distance slider'}
-            value={value}
-            onChange={handleChange}
-            valueLabelDisplay="auto"
-            getAriaValueText={(distanceValue: number) => `${distanceValue}KM`}
-          />
+          </FormControl> */}
 
-          <FormControl sx={{ ml: '10px' }}>
+          {/* <FormControl sx={{ ml: '10px' }}>
             <FormLabel id="traveler-rating-radio-label">
               Traveler Rating
             </FormLabel>
@@ -208,7 +255,8 @@ export default function FilterTray(props: any) {
                 <FormControlLabel value="3+" control={<Radio />} label="3+" />
               </RadioGroup>
             </FormGroup>
-          </FormControl>
+          </FormControl> */}
+
           <FormControl
             sx={{
               textAlign: 'center',
