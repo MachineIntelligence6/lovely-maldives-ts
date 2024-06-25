@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 
   try {
     await connectToDatabase()
-
+    console.log('services ', services)
     const result = await createOurService({
       title,
       subTitle,

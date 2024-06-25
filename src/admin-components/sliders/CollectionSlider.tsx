@@ -31,7 +31,7 @@ const CollectionSlider = (props: any) => {
     slidesToShow: 2,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 4000,
     centerMode: true,
     centerPadding: '200px',
@@ -137,7 +137,7 @@ const CollectionSlider = (props: any) => {
             <Image
               width={300}
               height={300}
-              src={collection?.image}
+              src={collection?.coverImage}
               alt="Resort item"
               style={{
                 width: '92%',
@@ -189,10 +189,11 @@ const CollectionSlider = (props: any) => {
                 <BoltIcon sx={{ display: `none` }} />
               </Box>
               <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                <StarRateIcon />
-                <StarRateIcon />
-                <StarRateIcon />
-                <StarRateIcon />
+                {[...Array(parseInt(collection?.ratings, 10))].map(
+                  (_: any, ind: number) => (
+                    <StarRateIcon key={`_${index}_${ind}`} />
+                  )
+                )}
               </Box>
             </Box>
           </Box>

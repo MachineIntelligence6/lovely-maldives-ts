@@ -55,6 +55,7 @@ const OurServices = () => {
   }
 
   const addNewService = (newService: any, type: string) => {
+    console.log('new services ', newService)
     if (type === 'edit') {
       const newServices = services.map((service: any) =>
         service.title === edit.title ? newService : service

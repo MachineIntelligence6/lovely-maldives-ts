@@ -23,8 +23,13 @@ import TextFieldWraper from '../items/TextfieldWraper'
 import { CustomLabel } from '../styled/CustomLabels'
 import HeaderBgHandler from '../general-settings/HeaderBgHandler'
 
-const ReactQuillEditor = dynamic(
-  () => import('@/admin-components/common/ReactQuillEditor'),
+// const ReactQuillEditor = dynamic(
+//   () => import('@/admin-components/common/ReactQuillEditor'),
+//   { ssr: false }
+// )
+
+const JoditTextEditor = dynamic(
+  () => import('@/admin-components/common/JoditTextEditor'),
   { ssr: false }
 )
 
@@ -218,10 +223,14 @@ const HomeAboutus = () => {
               </Box>
             </label>
           </Stack>
-          <ReactQuillEditor
+          {/* <ReactQuillEditor
             handleEditorValue={handleEditorValue}
             value={editorText}
             height={200}
+          /> */}
+          <JoditTextEditor
+            handleEditorValue={(val: any) => handleEditorValue(val)}
+            value={editorText}
           />
         </Box>
 

@@ -41,7 +41,7 @@ export async function POST(req: Request) {
 
   try {
     await connectToDatabase()
-
+    console.log('bodyData', bodyData)
     const result = await createHeader({
       heroLogo: heroUrl,
       otherLogo: otherUrl,

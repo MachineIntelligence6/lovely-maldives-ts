@@ -86,7 +86,7 @@ const CardsSlider = (props: any) => {
           slidesToScroll: 1,
           initialSlide: 1,
           arrows: true,
-          autoplay: true,
+          autoplay: false,
         },
       },
       {
@@ -98,7 +98,7 @@ const CardsSlider = (props: any) => {
           slidesToScroll: 1,
           initialSlide: 1,
           arrows: true,
-          autoplay: true,
+          autoplay: false,
         },
       },
       {
@@ -110,7 +110,7 @@ const CardsSlider = (props: any) => {
           slidesToScroll: 1,
           initialSlide: 1,
           arrows: true,
-          autoplay: true,
+          autoplay: false,
         },
       },
     ],

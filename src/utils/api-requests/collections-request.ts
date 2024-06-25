@@ -11,7 +11,7 @@ export const collectionRequest = async (data: any) => {
   console.log('data  ->>> ', data)
   return apiClient.post('/home/collections', {
     title: data.title,
-    collections: data?.collections,
+    ids: data?.ids,
     homeBgId: data.homeBgId,
   })
 }

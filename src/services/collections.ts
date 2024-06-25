@@ -2,7 +2,7 @@ import prisma from '../../prisma'
 
 interface Collections {
   title: string
-  collections: [{ title: string; image: string; ratings: string }]
+  ids: string[]
   homeBgId: string
 }
 
@@ -20,7 +20,7 @@ export async function createOurCollection(data: Collections) {
     result = await prisma.ourCollections.create({
       data: {
         title: data.title,
-        collections: data.collections,
+        ids: data.ids,
         homeBg: {
           connect: {
             id: data.homeBgId,
@@ -34,7 +34,34 @@ export async function createOurCollection(data: Collections) {
 }
 
 export async function getOurCollections() {
-  return prisma.ourCollections.findFirst()
+  const result = await prisma.ourCollections.findFirst()
+  if (!result) return 'NOT_FOUND'
+  const data = await prisma.hotels.findMany({
+    where: {
+      id: {
+        in: result?.ids,
+      },
+    },
+    take: 12,
+  })
+
+  const filtered = data.map((hotel: any) => {
+    // Find the first section with images
+    const imageSection = hotel.sections.find(
+      (section: any) => section.images && section.images.length > 0
+    )
+    // Get the first image if available
+    const firstImage = imageSection ? imageSection.images[0] : null
+
+    return {
+      id: hotel.id,
+      title: hotel.title,
+      ratings: hotel.ratings,
+      coverImage: firstImage,
+    }
+  })
+
+  return { title: result.title, collections: filtered }
 }
 
 export async function deleteOurCollection() {

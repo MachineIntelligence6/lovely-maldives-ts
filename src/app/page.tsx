@@ -15,6 +15,7 @@ import apiClient from '@/services/apiClient'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import { getHomeBgRequest } from '@/utils/api-requests/home.request'
 import { getThemeConfigRequest } from '@/utils/api-requests/theme.request'
+import { getCollectionsRequest } from '@/utils/api-requests/collections-request'
 
 const Footer = dynamic(() => import('@/components/Footer'))
 const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
@@ -41,7 +42,8 @@ export default function Home() {
   // const aboutMaldives = homeData?.aboutMaldivesShort
   const [loading, setLoading] = useState(false)
   const [homeData, setHomeData] = useState('' as any)
-  const[themeData, setThemeData] = useState('' as any)
+  const [themeData, setThemeData] = useState('' as any)
+  const [collections, setCollections] = useState({} as any)
 
   const getHomeData = async () => {
     try {
@@ -82,14 +84,34 @@ export default function Home() {
 
   const getThemeData = async () => {
     try {
-        const res = await getThemeConfigRequest()
-        const data = res?.data
-        console.log('theme data is  ', data)
-        if (data?.status === 200) {
-          setThemeData(data?.data)
-        } else {
-          console.log('data ', data)
-        }
+      const res = await getThemeConfigRequest()
+      const data = res?.data
+      if (data?.status === 200) {
+        setThemeData(data?.data)
+      } else {
+        console.log('data ', data)
+      }
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
+  const getCollections = async () => {
+    try {
+      const res = await getCollectionsRequest()
+      const data = res?.data
+      console.log('collections data ', data)
+      if (data?.status === 200) {
+        setCollections(data?.data)
+      } else {
+        // alert('Error occured while fetching about maldives data.')
+        // setAlertMsg({ type: 'error', message: data?.message })
+        // setTimeout(() => {
+        //   setAlertMsg({ type: '', message: '' })
+        // }, 3000)
+        console.log('response about maldives', res)
+      }
+      console.log('response ', res)
     } catch (error: any) {
       console.log('error ', error)
     }
@@ -99,6 +121,7 @@ export default function Home() {
     getHomeData()
     getHomeBgData()
     getThemeData()
+    getCollections()
   }, [])
 
   return (
@@ -144,7 +167,7 @@ export default function Home() {
               mt: { xs: '30px', md: '60px' },
               width: { xs: '100%', md: '750px' },
               mx: 'auto',
-              fontFamily: 'century-gothic',
+              fontFamily: 'Century Gothic !important',
             }}
             dangerouslySetInnerHTML={{
               __html: homeData?.aboutMaldivesShort?.[0]?.description,
@@ -186,17 +209,17 @@ export default function Home() {
           </Box>
         </Box>
         <SidePalmTree data={homeData?.sideImage?.[0]} />
-        <OurServices services={homeData?.services?.[0]} />
+        <OurServices services={homeData?.services?.[0]} themeData={themeData} />
       </Box>
       <About data={homeData?.aboutUsShort?.[0]} />
       <Explore wonders={homeData?.wonders?.[0]} />
       <OurCollection
-        heading={homeData?.collections?.[0]?.title}
+        heading={collections?.title}
         button="block"
         iconShow="none"
         radius="0"
         bottomradius="0"
-        collections={homeData?.collections?.[0]}
+        collections={collections?.collections}
       />
       <TopBrands
         brands={homeData?.brands?.[0]}
