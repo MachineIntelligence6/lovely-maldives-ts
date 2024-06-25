@@ -1,19 +1,25 @@
+/* eslint-disable radix */
 import Box from '@mui/system/Box'
 
 import { useMenuStore } from '@/providers/menu-store-provider'
 import NavItems from './NavItems'
 
-export default function SubNav({ menuItems }: any) {
+export default function SubNav({ menuItems, isScrolled }: any) {
   const isOpen = useMenuStore((state) => state.isOpen)
-
+  console.log('menutttt ', menuItems)
   return (
     <Box
       component="nav"
       sx={{
         background: menuItems?.menusBgcolor || 'white',
         position: 'fixed',
-        top: { xs: '0', md: '90px' },
-        boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
+        top: {
+          xs: '0',
+          md: isScrolled
+            ? `${parseInt(menuItems?.otherHeight) + 23}px`
+            : `${parseInt(menuItems?.heroHeight) + 24}px`,
+        },
+        borderBottom: '1px solid silver',
         py: '10px',
         width: '100%',
         px: '100px',
@@ -25,7 +31,7 @@ export default function SubNav({ menuItems }: any) {
         flexDirection: 'row',
         overflow: 'hidden',
         mt: { md: '0', xs: '85px' },
-        gap: { md: '18px', xs: '0' },
+        gap: { md: '1px', xs: '0' },
         borderTop: '1.5px solid lightgray',
         '@media only screen and (min-width: 1600px)': {
           borderTop: '1.5px solid lightgray',

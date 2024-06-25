@@ -29,7 +29,7 @@ export default function MobileNav({ menuItems }: any) {
         zIndex: 999,
         transform: isOpen ? 'translateY(0%)' : 'translateY(-110%)',
         background: 'var(--brown)',
-        boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
+        borderBottom: '1px solid silver',
         pb: '20px',
         opacity: isOpen ? 1 : 0,
         transition: 'opacity 0.4s, transform 0.4s',

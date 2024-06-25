@@ -115,10 +115,11 @@ function Header() {
         component="nav"
         className={isScrolled ? 'scrolled' : ''}
         sx={{
-          boxShadow: isScrolled
+          boxShadow: 'none',
+          borderBottom: isScrolled
             ? isOpen
               ? 'none'
-              : '0 0 25px rgb(0 0 0 / 10%)'
+              : '1px solid silver'
             : 'none',
           width: '100%',
           // height: ,
@@ -277,7 +278,7 @@ function Header() {
       ) : lessThanMd ? (
         <MobileNav menuItems={localData?.menus} />
       ) : (
-        <SubNav menuItems={localData} />
+        <SubNav menuItems={localData} isScrolled={isScrolled} />
       )}
     </Box>
   )
