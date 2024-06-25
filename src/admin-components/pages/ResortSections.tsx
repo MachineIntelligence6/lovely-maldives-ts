@@ -108,8 +108,9 @@ const ResortSections = () => {
         const data = res?.data
         console.log('get resort section data is =>>> ', data)
         if (data?.status === 200) {
-          setSections(data?.data?.resortSections)
-          data?.data?.resortSections?.map((sec: any) => {
+          // setSections(data?.data?.resortSections)
+          setSections(data?.data)
+          data?.data?.map((sec: any) => {
             if (sec?.type === 'text') {
               setEditorText(sec?.description)
             }
@@ -192,7 +193,7 @@ const ResortSections = () => {
           handleSave={handleAddSections}
           detectChange={detectChange}
         />
-        {sections.map((section: any, index: number) => {
+        {sections?.map((section: any, index: number) => {
           if (section?.type === 'text') {
             return (
               <Box

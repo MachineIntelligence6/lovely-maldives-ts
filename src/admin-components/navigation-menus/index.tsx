@@ -64,6 +64,18 @@ const menuItems = [
         title: 'Blogs',
         path: 'admin/pages/blogs',
       },
+      {
+        title: 'Privacy Policy',
+        path: 'admin/pages/privacy-policy',
+      },
+      {
+        title: 'Blogs',
+        path: 'admin/pages/blogs/terms-of-conditions',
+      },
+      {
+        title: 'FAQs',
+        path: 'admin/pages/blogs/faqs',
+      },
     ],
   },
   {

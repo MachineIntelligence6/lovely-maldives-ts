@@ -18,7 +18,7 @@ import logoMobile from '../../public/Images/lovely-maldives-logo-white.png'
 export default function MobileNav({ menuItems }: any) {
   const isOpen = useMenuStore((state) => state.isOpen)
   const close = useMenuStore((state) => state.close)
-
+  console.log('mobile menuItems are ', menuItems)
   return (
     <Box
       sx={{

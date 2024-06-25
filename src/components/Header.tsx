@@ -58,10 +58,6 @@ function Header() {
   }
 
   const getHeaderData = async () => {
-    // const header = JSON.parse(localStorage.getItem('home') as any)
-    // if (header) {
-    //   setLocalData(header?.header?.[0])
-    // } else {
     try {
       setLoading(true)
       const res = await apiClient.get('/header')
@@ -70,14 +66,12 @@ function Header() {
       if (res?.status === 200) {
         setLocalData(data?.data)
       } else {
-        // alert('Error occured while fetching about maldives data.')
         console.log('response about maldives', res)
       }
     } catch (error: any) {
       setLoading(false)
       console.log('error ', error)
     }
-    // }
   }
 
   React.useEffect(() => {
@@ -127,6 +121,7 @@ function Header() {
               : '0 0 25px rgb(0 0 0 / 10%)'
             : 'none',
           width: '100%',
+          // height: ,
           background: isScrolled
             ? isOpen && lessThanMd
               ? localData?.heroBgcolor || 'var(--brown)'
@@ -142,7 +137,7 @@ function Header() {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            py: '12px',
+            py: isScrolled ? '0px' : '12px',
           }}
         >
           <Box sx={{ visibility: { md: 'visible', xs: 'hidden' } }}>
@@ -187,8 +182,14 @@ function Header() {
               /> */}
               <Box
                 sx={{
-                  width: '95.5px',
-                  height: '67px',
+                  width: isScrolled
+                    ? localData?.otherWidth
+                    : localData?.heroWidth,
+                  height: isScrolled
+                    ? localData?.otherHeight
+                    : localData?.heroHeight,
+                  maxWidth: '120px',
+                  maxHeight: '85px',
                 }}
               >
                 <Image
@@ -198,12 +199,21 @@ function Header() {
                       : localData?.heroLogo || profilePic
                   }
                   alt="hero logo"
-                  width={localData?.heroWidth}
-                  height={localData?.heroHeight}
+                  width={
+                    isScrolled ? localData?.otherWidth : localData?.heroWidth
+                  }
+                  height={
+                    isScrolled ? localData?.otherHeight : localData?.heroHeight
+                  }
                   style={{
-                    // objectFit: 'cover',
-                    width: '100%',
-                    height: '100%',
+                    width: isScrolled
+                      ? localData?.otherWidth
+                      : localData?.heroWidth,
+                    height: isScrolled
+                      ? localData?.otherHeight
+                      : localData?.heroHeight,
+                    maxWidth: '120px',
+                    maxHeight: '85px',
                   }}
                 />
               </Box>
@@ -265,7 +275,7 @@ function Header() {
       {loading ? (
         ''
       ) : lessThanMd ? (
-        <MobileNav menuItems={menuItem} />
+        <MobileNav menuItems={localData?.menus} />
       ) : (
         <SubNav menuItems={localData} />
       )}

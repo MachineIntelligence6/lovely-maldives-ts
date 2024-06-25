@@ -14,6 +14,7 @@ import dynamic from 'next/dynamic'
 import apiClient from '@/services/apiClient'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import { getHomeBgRequest } from '@/utils/api-requests/home.request'
+import { getThemeConfigRequest } from '@/utils/api-requests/theme.request'
 
 const Footer = dynamic(() => import('@/components/Footer'))
 const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
@@ -40,6 +41,7 @@ export default function Home() {
   // const aboutMaldives = homeData?.aboutMaldivesShort
   const [loading, setLoading] = useState(false)
   const [homeData, setHomeData] = useState('' as any)
+  const[themeData, setThemeData] = useState('' as any)
 
   const getHomeData = async () => {
     try {
@@ -78,16 +80,32 @@ export default function Home() {
     }
   }
 
+  const getThemeData = async () => {
+    try {
+        const res = await getThemeConfigRequest()
+        const data = res?.data
+        console.log('theme data is  ', data)
+        if (data?.status === 200) {
+          setThemeData(data?.data)
+        } else {
+          console.log('data ', data)
+        }
+    } catch (error: any) {
+      console.log('error ', error)
+    }
+  }
+
   useEffect(() => {
     getHomeData()
     getHomeBgData()
+    getThemeData()
   }, [])
 
   return (
     <Suspense fallback={<CustomLoader />}>
       {loading && <CustomLoader />}
       <Header />
-      <Banner bannerData={homeData} />
+      <Banner bannerData={homeData} themeData={themeData} />
       <Box
         sx={{
           position: 'relative',
