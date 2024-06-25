@@ -50,6 +50,7 @@ export const datas = [
 ]
 export default function TopBrands(props: any) {
   const { brands, socialLinkSection } = props
+  console.log('brands  ', brands)
   const settings = {
     dots: true,
     infinite: true,
