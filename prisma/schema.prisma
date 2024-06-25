@@ -264,17 +264,25 @@ model AboutUsShort {
 }
 
 model SocialLinkSection {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  socialMedia String
-  link        String
-  image        String
-  homeBgId    String @map("homeBg_id") @db.ObjectId
-  homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  socialMedia   String
+  link          String
+  image         String
+  homeBgId      String @map("homeBg_id") @db.ObjectId
+  homeBg        HomeBg  @relation(fields: [homeBgId], references: [id])
 }
 
 // RESORT MODEL
 model Resorts {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   resortSections   ResortSections[]
+}
+
+
+// THEME CONFIGURATION MODELS
+model Theme {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  fontFamily String?
+  gradient  String?
 }

@@ -22,12 +22,15 @@ export const mobileImgUrl: any = [
 ]
 
 export default function Banner(props: any) {
-  const { bannerData } = props
+  const { bannerData, themeData } = props
   const [data, setData] = useState('' as any)
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const [bgImgStyle, setBgImgStyle] = React.useState({
-    backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
-     rgba(150, 127, 93, 0.20)), url('${banner}')`,
+    backgroundImage: `${
+      themeData?.gradient ||
+      `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
+     rgba(150, 127, 93, 0.20))`
+    }, url('${banner}')`,
     backgroundSize: 'cover',
     backgroundPosition: '100%',
     width: '100%',
@@ -48,8 +51,11 @@ export default function Banner(props: any) {
     )
     if (lessThanMd) {
       setBgImgStyle({
-        backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
-         rgba(150, 127, 93, 0.20)), url('${mobileImgUrl[randomIndexmob]}')`,
+        backgroundImage: `${
+          themeData?.gradient ||
+          `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
+     rgba(150, 127, 93, 0.20))`
+        }, url('${mobileImgUrl[randomIndexmob]}')`,
         backgroundSize: 'cover',
         backgroundPosition: '100%',
         width: '100%',
@@ -59,8 +65,11 @@ export default function Banner(props: any) {
       })
     } else {
       setBgImgStyle({
-        backgroundImage: `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
-         rgba(150, 127, 93, 0.20)), 
+        backgroundImage: `${
+          themeData?.gradient ||
+          `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
+     rgba(150, 127, 93, 0.20))`
+        }, 
          url('${
            bannersLength > 0
              ? bannerImages[randomIndexdev]
