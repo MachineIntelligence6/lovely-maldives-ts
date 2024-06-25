@@ -4,13 +4,25 @@
 'use client'
 
 import React, { useMemo, useRef } from 'react'
-import JoditEditor from 'jodit-react'
+import JoditEditor, { Jodit } from 'jodit-react'
 
 const JoditTextEditor = (props: any) => {
   const { handleEditorValue, value } = props
   const editor = useRef(null)
 
   const config = {
+    controls: {
+      font: {
+        component: 'select',
+        // Redefine font.list
+        list: Jodit.atom({
+          'Century Gothic': 'Century Gothic',
+          'Tahoma,Geneva,sans-serif': 'Tahoma',
+          'Public Sans': 'Public Sans',
+          'Roboto Medium,Arial,sans-serif': 'Roboto',
+        }),
+      },
+    },
     uploader: {
       insertImageAsBase64URI: true, // Allows uploading images as base64
       url: '/upload', // URL to your backend upload endpoint
@@ -76,7 +88,7 @@ const JoditTextEditor = (props: any) => {
     <JoditEditor
       ref={editor}
       value={value}
-      config={config}
+      config={config as any}
       onBlur={(newContent) => {
         handleEditorValue(newContent)
       }}

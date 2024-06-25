@@ -16,9 +16,13 @@ import HeadingWraper from '../common/HeadingWraper'
 import CustomLoader from '../common/CustomLoader'
 import TextFieldWraper from '../items/TextfieldWraper'
 
-const ReactQuillEditor = dynamic(() => import('../common/ReactQuillEditor'), {
-  ssr: false,
-})
+// const ReactQuillEditor = dynamic(() => import('../common/ReactQuillEditor'), {
+//   ssr: false,
+// })
+const JoditTextEditor = dynamic(
+  () => import('@/admin-components/common/JoditTextEditor'),
+  { ssr: false }
+)
 
 const HomeAboutMaldives = () => {
   const [isPending, startTransition] = useTransition()
@@ -141,10 +145,15 @@ const HomeAboutMaldives = () => {
             onChange={handleChange}
           />
         </Stack>
-        <ReactQuillEditor
+        {/* <ReactQuillEditor
           handleEditorValue={handleEditorValue}
           value={editorText}
           height={200}
+        /> */}
+
+        <JoditTextEditor
+          handleEditorValue={(val: any) => handleEditorValue(val)}
+          value={editorText}
         />
       </Box>
     </CustomCard>

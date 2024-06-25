@@ -13,7 +13,7 @@ export async function GET() {
     const result = await getOurCollections()
     if (!result)
       return NextResponse.json({ message: 'No data found.', status: 422 })
-
+    console.log('collections ', result)
     return NextResponse.json(
       { message: 'Success', data: result, status: 200 },
       { status: 200 }
@@ -27,9 +27,9 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { title, collections, homeBgId } = await req.json()
+  const { title, ids, homeBgId } = await req.json()
 
-  if (!title || !homeBgId || !collections || collections?.length === 0)
+  if (!title || !homeBgId || !ids || ids?.length === 0)
     return NextResponse.json({
       message: 'Please send all field to save data.',
       status: 422,
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
     const result = await createOurCollection({
       title,
-      collections,
+      ids,
       homeBgId,
     })
     if (!result) return NextResponse.json({ message: 'Error', status: 500 })

@@ -38,7 +38,7 @@ export default function OurCollection({
     slidesToShow: 2,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 4000,
     centerMode: true,
     centerPadding: '200px',
@@ -103,10 +103,10 @@ export default function OurCollection({
         className="slider-container"
       >
         <Slider {...settings}>
-          {collections?.collections?.map((collection: any, index: number) => (
+          {collections?.map((collection: any, index: number) => (
             <Box
               sx={{
-                position: 'relative',
+                // position: 'relative',
                 borderRadius: `${radius}`,
                 margin: '0 auto',
               }}
@@ -126,27 +126,30 @@ export default function OurCollection({
                   position: 'relative',
                 }}
               >
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    bgcolor: 'rgba(150,127,93,0.5)',
+                    position: 'absolute',
+                    top: '0',
+                    bottom: '0',
+                    right: '0',
+                    zIndex: '1',
+                    left: 0,
+                    // '@media only screen and (min-width: 1600px)': {
+                    //   left: '30px',
+                    // },
+                  }}
+                />
                 <Image
-                  src={collection?.image}
+                  src={collection?.coverImage}
                   alt="Resort item"
                   layout="fill"
                   objectFit="cover"
                   sizes="(max-width: 600px) 100vw, 50vw"
                 />
               </Box>
-              <Box
-                sx={{
-                  width: { xs: '100%', md: '92%' },
-                  height: { xs: '250px', md: '300px' },
-                  bgcolor: 'rgba(150,127,93,0.5)',
-                  position: 'absolute',
-                  top: '0',
-                  left: { xs: 0, md: '22px' },
-                  '@media only screen and (min-width: 1600px)': {
-                    left: '30px',
-                  },
-                }}
-              />
               <Box
                 sx={{
                   width: { xs: '100%', md: '92%' },
@@ -177,36 +180,10 @@ export default function OurCollection({
                   <BoltIcon sx={{ display: `${iconShow}` }} />
                 </Box>
                 <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                  {collection?.ratings === '1' && <StarRateIcon />}
-                  {collection?.ratings === '2' && (
-                    <>
-                      <StarRateIcon />
-                      <StarRateIcon />
-                    </>
-                  )}
-                  {collection?.ratings === '3' && (
-                    <>
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
-                    </>
-                  )}
-                  {collection?.ratings === '4' && (
-                    <>
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
-                    </>
-                  )}
-                  {collection?.ratings === '5' && (
-                    <>
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
-                      <StarRateIcon />
-                    </>
+                  {[...Array(parseInt(collection?.ratings, 10))].map(
+                    (_: any, ind: number) => (
+                      <StarRateIcon key={`_${index}_${ind}`} />
+                    )
                   )}
                 </Box>
               </Box>

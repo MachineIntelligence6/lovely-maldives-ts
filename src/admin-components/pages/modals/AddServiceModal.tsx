@@ -21,7 +21,7 @@ const style = {
 
 const AddServiceModal = (props: any) => {
   const { open, handleShowModal, handleAddService, edit } = props
-  const [values, setValues] = useState({ title: '' })
+  const [values, setValues] = useState({ title: '', captionText: '' })
   const [icon, setIcon] = useState<File | undefined>()
   const [image, setImage] = useState<File | undefined>()
   const [iconUrl, setIconUrl] = useState('')
@@ -44,6 +44,7 @@ const AddServiceModal = (props: any) => {
     formData.append('file', file as any)
     formData.append('upload_preset', 'j8epfynh')
     const res = await uploadImgToCloudinary(formData)
+    console.log('res ', res)
     setIconUrl(res?.secure_url)
   }
 
@@ -51,19 +52,20 @@ const AddServiceModal = (props: any) => {
     // eslint-disable-next-line prefer-destructuring
     const file = e.target.files?.[0]
     setImage(file)
-
+    console.log('filesss ', file)
     const formData = new FormData()
     formData.append('file', file as any)
     formData.append('upload_preset', 'j8epfynh')
     const res = await uploadImgToCloudinary(formData)
+    console.log('res ', res)
     setImageUrl(res?.secure_url)
   }
-
+  console.log('image url ', imageUrl)
   useEffect(() => {
     if (edit?.icon) {
       setIconUrl(edit?.icon)
       setImageUrl(edit?.bgImage)
-      setValues({ ...values, title: edit?.title })
+      setValues({ ...values, title: edit?.title, captionText: edit?.captionText })
     }
   }, [edit])
 
@@ -125,12 +127,12 @@ const AddServiceModal = (props: any) => {
             </Box>
           </label>
 
-          <label htmlFor="image_">
+          <label htmlFor="bgImage">
             Background Image
             <input
               type="file"
-              id="image_"
-              name="image"
+              id="bgImage"
+              name="bgImage"
               hidden
               onChange={handleImageChange}
             />
@@ -164,6 +166,14 @@ const AddServiceModal = (props: any) => {
             placeholder="Enter Title."
             value={values.title}
             name="title"
+            onChange={(e: any) => handleChange(e)}
+          />
+
+          <TextFieldWraper
+            label="Caption"
+            placeholder="Enter caption text."
+            value={values.captionText}
+            name="captionText"
             onChange={(e: any) => handleChange(e)}
           />
 
@@ -210,10 +220,10 @@ const AddServiceModal = (props: any) => {
                       icon: iconUrl,
                       bgImage: imageUrl,
                     },
-                    'add',
+                    'add'
                   )
                 }
-                setValues({ title: '' })
+                setValues({ title: '', captionText: '' })
                 setIcon(null as any)
                 setImage(null as any)
                 handleShowModal()

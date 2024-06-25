@@ -48,7 +48,14 @@ export default function Footer(props: any) {
 
   const FooterBoxes = footerData?.columns?.map((col: any, inde: number) => {
     return (
-      <Box key={inde} sx={{ mt: { xs: '30px', md: '0px' } }}>
+      <Box
+        key={inde}
+        sx={{
+          mt: { xs: '30px', md: '0px' },
+          borderBottom: { xs: '1px solid white', md: 'none' },
+          pb: 5,
+        }}
+      >
         <Typography sx={{ fontSize: '20px', fontWeight: '600', mb: '28px' }}>
           {col?.title}
         </Typography>
@@ -59,7 +66,7 @@ export default function Footer(props: any) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: { xs: 'center', md: 'flex-start' },
-              mt: '12px',
+              mt: '10px',
             }}
           >
             {/* <EmailIcon
@@ -75,7 +82,13 @@ export default function Footer(props: any) {
               }}
             >
               {menu?.icon && (
-                <Image src={menu?.icon} alt="icon" width={19} height={19} />
+                <Image
+                  src={menu?.icon}
+                  alt="icon"
+                  width={19}
+                  height={19}
+                  style={{ marginRight: '10px', marginBottom: '-5px' }}
+                />
               )}
             </Box>
             {/* {iconMapping[menu?.menu]} */}
@@ -86,7 +99,7 @@ export default function Footer(props: any) {
                 color: 'white',
                 textDecoration: 'none',
                 display: 'block',
-                px: '10px',
+                // px: '10px',
                 fontSize: '16px',
               }}
             >
@@ -131,7 +144,7 @@ export default function Footer(props: any) {
           sx={{
             display: { xs: 'flex', md: 'none' },
             justifyContent: 'center',
-            mt: '30px',
+            mt: '60px',
             gap: '20px',
           }}
         >

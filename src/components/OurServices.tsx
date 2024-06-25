@@ -65,6 +65,7 @@ export default function OurServices(props: any) {
     infinite: true,
     speed: 200,
     slidesToShow: 4,
+    autoplay: false,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
@@ -87,7 +88,7 @@ export default function OurServices(props: any) {
           slidesToScroll: 1,
           initialSlide: 1,
           arrows: true,
-          autoplay: true,
+          autoplay: false,
         },
       },
       {
@@ -99,7 +100,7 @@ export default function OurServices(props: any) {
           slidesToScroll: 1,
           initialSlide: 1,
           arrows: true,
-          autoplay: true,
+          autoplay: false,
         },
       },
       {
@@ -111,7 +112,7 @@ export default function OurServices(props: any) {
           slidesToScroll: 1,
           initialSlide: 1,
           arrows: true,
-          autoplay: true,
+          autoplay: false,
         },
       },
     ],
@@ -177,14 +178,14 @@ export default function OurServices(props: any) {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      filter: 'brightness(1)',
+                      filter: 'brightness(0.7)',
                     }}
                   />
                   <Box
                     sx={{
                       width: '100%',
                       height: '100%',
-                      backgroundColor: 'rgba(150, 127, 93, 0.1)',
+                      backgroundColor: 'rgba(150, 127, 93, 0.5)',
                       position: 'absolute',
                       top: 0,
                       left: 0,
@@ -220,7 +221,7 @@ export default function OurServices(props: any) {
                       textAlign: 'left',
                     }}
                   >
-                    {item.description}
+                    {item.caption}
                   </Typography>
                 </Box>
               ) : (
@@ -263,10 +264,10 @@ export default function OurServices(props: any) {
                     />
                     <Typography
                       sx={{
-                        mt: '20px',
+                        mt: '30px',
                         fontSize: '16px',
                         textAlign: 'center',
-                        width: '100px',
+                        width: '115px',
                         textTransform: 'uppercase',
                       }}
                     >

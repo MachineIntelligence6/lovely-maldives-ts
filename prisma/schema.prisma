@@ -56,6 +56,7 @@ type ResortSections {
 
 type OurServices {
   title       String
+  captionText       String
   icon        String
   bgImage     String
 }
@@ -65,11 +66,10 @@ type Cards {
   title  String
 }
 
-type Collection {
-  image  String
-  title  String
-  ratings String
-}
+// type Collection {
+//   title  String
+//   ids String[]
+// }
 
 type Brand {
   logo String
@@ -220,7 +220,7 @@ model Collections {
 model OurCollections {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
-  collections Collection[]
+  ids         String[]
   homeBgId    String @map("homeBg_id") @db.ObjectId
   homeBg      HomeBg  @relation(fields: [homeBgId], references: [id])
 }

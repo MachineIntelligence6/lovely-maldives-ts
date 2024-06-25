@@ -38,7 +38,7 @@ export default function OurCollection({
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 4000,
     // centerMode: true,
     // centerPadding: '250px',

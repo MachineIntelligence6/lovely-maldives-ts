@@ -37,8 +37,8 @@ export default function About(props: any) {
             <Box
               sx={{
                 textAlign: 'center',
-                width: '80px',
-                height: '60px',
+                width: '60px',
+                height: '45px',
                 overflow: 'hidden',
                 mx: 'auto',
                 mt: { xs: '30px', md: '60px' },
@@ -47,8 +47,8 @@ export default function About(props: any) {
               {data?.logo ? (
                 <Image
                   src={data?.logo}
-                  height={60}
-                  width={100}
+                  height={40}
+                  width={55}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -112,7 +112,7 @@ export default function About(props: any) {
                 py: '50px',
                 position: 'relative',
                 width: { xs: '300px', md: '500px' },
-                height: { xs: '400px', md: '500px' },
+                height: { xs: '350px', md: '500px' },
                 mx: 'auto',
                 mt: { md: '60px', xs: '40px' },
               }}
@@ -120,7 +120,7 @@ export default function About(props: any) {
               <Box
                 sx={{
                   width: { xs: '300px', md: '500px' },
-                  height: { xs: '300px', md: '300px' },
+                  height: { xs: '250px', md: '300px' },
                   position: 'absolute',
                   top: { xs: '50%', md: '35%' },
                   left: { xs: '50%', md: '50%' },
@@ -188,7 +188,7 @@ export default function About(props: any) {
                     pl: '25px',
                     // textAlign: 'right',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '28%', md: '25%' },
+                    pt: { xs: '18%', md: '25%' },
                     width: '50%',
                   }}
                 >
@@ -199,7 +199,7 @@ export default function About(props: any) {
                     pl: { md: '55px', xs: '40px' },
                     textAlign: 'left',
                     fontSize: { xs: '16px', md: '24px' },
-                    pt: { xs: '28%', md: '25%' },
+                    pt: { xs: '18%', md: '25%' },
                     width: '50%',
                   }}
                 >

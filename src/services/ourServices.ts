@@ -6,7 +6,9 @@ interface OurServices {
   subTitleColor: string
   cardBgcolor: string
   homeBgId: string
-  services: [{ title: string; icon: string; bgImage: string }]
+  services: [
+    { title: string; icon: string; bgImage: string; captionText: string },
+  ]
 }
 
 export async function createOurService(data: OurServices) {

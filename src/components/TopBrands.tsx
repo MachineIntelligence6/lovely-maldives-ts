@@ -53,7 +53,7 @@ export default function TopBrands(props: any) {
   const settings = {
     dots: true,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 4000,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -139,7 +139,7 @@ export default function TopBrands(props: any) {
                   }}
                 >
                   <Box
-                    sx={{ width: '100%', height: '80px', overflow: 'hidden' }}
+                    sx={{ width: '70px', height: '50px', overflow: 'hidden' }}
                   >
                     <Image
                       src={brand?.logo}
@@ -147,8 +147,8 @@ export default function TopBrands(props: any) {
                       width={100}
                       height={80}
                       style={{
-                        width: '100%',
-                        height: '100%',
+                        width: '70px',
+                        height: '50px',
                         objectFit: 'contain',
                       }}
                     />
@@ -201,7 +201,9 @@ export default function TopBrands(props: any) {
           }}
         >
           <Image
-            src={journeyImg}
+            src={socialLinkSection?.image || journeyImg}
+            width={500}
+            height={450}
             alt="journey"
             className="imgRadius"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}

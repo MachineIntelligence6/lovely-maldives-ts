@@ -164,7 +164,7 @@ function HeaderSettings() {
       setValues({ ...values, [name]: value })
     }
   }
-
+  console.log('values ', values)
   return (
     <Box sx={{ pb: 4 }}>
       <CustomCard sx={{ padding: '40px !important' }}>

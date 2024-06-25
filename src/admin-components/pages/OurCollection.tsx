@@ -11,6 +11,7 @@ import {
   getCollectionsRequest,
 } from '@/utils/api-requests/collections-request'
 import useHomeBgId from '@/utils/useHomeBgId'
+import SelectHotel from './modals/SelectHotel'
 import AddCollection from './modals/AddCollection'
 import { CustomCard } from '../styled/CustomCard'
 import CollectionSlider from '../sliders/CollectionSlider'
@@ -20,15 +21,24 @@ import TextFieldWraper from '../items/TextfieldWraper'
 
 const OurCollection = () => {
   const [isPending, startTransition] = useTransition()
+
+  const [showHotelModal, setShowHotelModal] = useState({
+    show: false,
+    index: null as any,
+  })
+  const [options, setOptions] = useState([])
   const [showModal, setShowModal] = useState(false)
   const [collections, setCollections] = useState([] as any)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
   const [values, setValues] = useState({ title: '' })
+  const [ids, setIds] = useState([] as any)
   const [edit, setEdit] = useState('' as any)
   const homeBgId = useHomeBgId()
 
   const handleShowModal = () => setShowModal(!showModal)
+  const handleShowHotelModal = (index: number) =>
+    setShowHotelModal({ show: !showHotelModal?.show, index })
 
   const handleDeleteCard = (index: number) => {
     const sure = window.confirm('Are you sure you want to delete?')
@@ -40,6 +50,15 @@ const OurCollection = () => {
     setEdit(collections?.[index])
     handleShowModal()
   }
+
+  const handleAddHotel = async (index: number, hotel: any) => {
+    console.log('index: ', hotel)
+    setIds([...ids, hotel?.id])
+    setCollections([...collections, hotel])
+  }
+
+  console.log('collections ', collections)
+  console.log('ids ', ids)
 
   const addNewCollection = (newCollection: any, type: string) => {
     if (type === 'edit') {
@@ -85,7 +104,7 @@ const OurCollection = () => {
       startTransition(async () => {
         const res = await collectionRequest({
           title: values?.title,
-          collections,
+          ids,
           homeBgId,
         })
         const data = res?.data
@@ -132,6 +151,15 @@ const OurCollection = () => {
         handleAddCollection={addNewCollection}
         edit={edit}
       />
+
+      <SelectHotel
+        open={showHotelModal.show}
+        handleShowModal={handleShowHotelModal}
+        handleAddHotel={(hotel: any, ind: number) => handleAddHotel(ind, hotel)}
+        options={options}
+        index={showHotelModal.index}
+      />
+
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
         {isPending && <CustomLoader />}
         {alertMsg.message && (
@@ -168,7 +196,7 @@ const OurCollection = () => {
               bgcolor: 'var(--blue)',
             },
           }}
-          onClick={handleShowModal}
+          onClick={() => handleShowHotelModal(null as any)}
         >
           <Stack direction="row" alignItems="center" gap="10px">
             <AddIcon sx={{ color: 'white', fontSize: '18px' }} />

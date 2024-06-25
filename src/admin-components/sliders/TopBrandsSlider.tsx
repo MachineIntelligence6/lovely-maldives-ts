@@ -14,14 +14,13 @@ import { SampleNextArrow, SamplePrevArrow } from '@/components/OurServices'
 
 const TopBrandsSlider = (props: any) => {
   const { brands, handleDeleteBrand, editModelShow } = props
-  console.log('brands ====>>> > ', brands)
   const settings = {
     centerMode: true,
     className: 'slick-center-mode',
     dots: true,
     centerPadding: '0px',
     // infinite: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 4000,
     slidesToShow: brands.length >= 4 ? 4 : brands.length || 1,
     slidesToScroll: 1,
@@ -51,7 +50,7 @@ const TopBrandsSlider = (props: any) => {
           slidesToScroll: 1,
           initialSlide: 1,
           arrows: true,
-          autoplay: true,
+          autoplay: false,
         },
       },
       {
@@ -63,7 +62,7 @@ const TopBrandsSlider = (props: any) => {
           slidesToScroll: 1,
           initialSlide: 1,
           arrows: true,
-          autoplay: true,
+          autoplay: false,
         },
       },
       {
@@ -75,7 +74,7 @@ const TopBrandsSlider = (props: any) => {
           slidesToScroll: 1,
           initialSlide: 1,
           arrows: true,
-          autoplay: true,
+          autoplay: false,
         },
       },
     ],
@@ -167,16 +166,16 @@ const TopBrandsSlider = (props: any) => {
                   height: '50%',
                 }}
               >
-                <Box sx={{ width: '100%', height: '80px', overflow: 'hidden' }}>
+                <Box sx={{ width: '70px', height: '50px', overflow: 'hidden' }}>
                   <Image
                     src={brand?.logo}
                     alt="brand-logo"
                     width={100}
                     height={80}
                     style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'contain',
+                      width: '70px',
+                      height: '50px',
+                      // objectFit: 'cover',
                     }}
                   />
                 </Box>
