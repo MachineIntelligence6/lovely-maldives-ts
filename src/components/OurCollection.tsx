@@ -12,6 +12,7 @@ import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import BoltIcon from '@mui/icons-material/Bolt'
 import collectionImg from '../../public/Images/collectionImg.jpg'
+import Link from 'next/link'
 
 export const datas = [{}, {}, {}, {}, {}]
 
@@ -192,8 +193,11 @@ export default function OurCollection({
         </Slider>
         <Box sx={{ textAlign: 'center' }}>
           <Button
+            component={Link}
+            href="/resorts"
             sx={{
               bgcolor: 'var(--brown)',
+              maxWidth: '270px',
               color: 'white',
               width: 'auto',
               mx: 'auto',
