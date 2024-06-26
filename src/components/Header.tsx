@@ -9,6 +9,7 @@ import Image from 'next/image'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
+import SearchIcon from '@mui/icons-material/Search'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -23,6 +24,7 @@ import apiClient from '@/services/apiClient'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import MobileNav from './MobileNav'
 import SubNav from './SubNav'
+import SearchModal from './SearchModal'
 
 // const profilePic = '/Images/logo.svg'
 // const profilePicCol = '/Images/logo-colored.svg'
@@ -38,6 +40,9 @@ function Header() {
   const { scrollY } = useScroll()
   const [localData, setLocalData] = useState('' as any)
   const [loading, setLoading] = useState(false)
+  const [openSearchModal, setOpenSearchModal] = useState(false)
+
+  const handleSearchModelOpen = () => setOpenSearchModal(!openSearchModal)
 
   const menuItem = [
     { label: 'About Maldives', route: '/about-maldives' },
@@ -110,6 +115,10 @@ function Header() {
 
   return (
     <Box component="header">
+      <SearchModal
+        open={openSearchModal}
+        handleSearchModelOpen={handleSearchModelOpen}
+      />
       {loading && <CustomLoader />}
       <AppBar
         component="nav"
@@ -141,7 +150,11 @@ function Header() {
             py: isScrolled ? '0px' : '12px',
           }}
         >
-          <Box sx={{ visibility: { md: 'visible', xs: 'hidden' } }}>
+          <Box
+            sx={{
+              display: { md: 'block', xs: isScrolled ? 'none' : 'hidden' },
+            }}
+          >
             <IconButton
               className="menuBtn"
               disableRipple
@@ -222,32 +235,46 @@ function Header() {
           </Box>
           <Box>
             {lessThanMd ? (
-              <Button
-                className="menuBtn"
-                disableRipple
-                sx={{
-                  height: '25px',
-                }}
-                title="Menu button"
-                aria-label="Menu button"
-                onClick={toggleMenu}
-              >
-                {isOpen ? (
-                  <Close
-                    sx={{
-                      color: 'white',
-                      fontSize: '46px',
-                    }}
-                  />
-                ) : (
-                  <DragHandle
-                    sx={{
-                      color: isScrolled ? 'var(--brown)' : 'white',
-                      fontSize: '46px',
-                    }}
-                  />
+              <>
+                {isScrolled && (
+                  <IconButton
+                    type="button"
+                    sx={{ p: '10px' }}
+                    aria-label="search"
+                    onClick={handleSearchModelOpen}
+                  >
+                    <SearchIcon
+                      sx={{ fontSize: '28px', color: 'var(--brown)' }}
+                    />
+                  </IconButton>
                 )}
-              </Button>
+                <Button
+                  className="menuBtn"
+                  disableRipple
+                  sx={{
+                    height: '25px',
+                  }}
+                  title="Menu button"
+                  aria-label="Menu button"
+                  onClick={toggleMenu}
+                >
+                  {isOpen ? (
+                    <Close
+                      sx={{
+                        color: 'white',
+                        fontSize: '46px',
+                      }}
+                    />
+                  ) : (
+                    <DragHandle
+                      sx={{
+                        color: isScrolled ? 'var(--brown)' : 'white',
+                        fontSize: '46px',
+                      }}
+                    />
+                  )}
+                </Button>
+              </>
             ) : (
               <Button
                 title="Enquire"
@@ -255,7 +282,7 @@ function Header() {
                   color: 'white',
                   bgcolor: 'var(--brown)',
                   px: 2.4,
-                  py: 1.2,
+                  py: 0.9,
                   visibility: isScrolled ? 'visible' : 'hidden',
                   opacity: isScrolled ? '1' : '0',
                   transition: isScrolled

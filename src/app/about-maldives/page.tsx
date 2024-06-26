@@ -1,7 +1,8 @@
 'use client'
 
-import { Container, Box, Typography } from '@mui/material'
+import { Container, Box, Typography, Button } from '@mui/material'
 import { useEffect, useState, useTransition } from 'react'
+import Link from 'next/link'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
@@ -75,7 +76,24 @@ export default function Page() {
           }}
         />
 
-
+        <Box sx={{ textAlign: 'center', mt: '60px' }}>
+          <Button
+            sx={{
+              bgcolor: 'var(--brown)',
+              px: '30px',
+              py: 2,
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
+            }}
+            aria-label="Back to home"
+            title="Back to home"
+          >
+            <Link href="/" style={{ color: 'white', textDecoration: 'none' }}>
+              BACK TO HOME
+            </Link>
+          </Button>
+        </Box>
 
         {/* <Box
           className="articleBlog"

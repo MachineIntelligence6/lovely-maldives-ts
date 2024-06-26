@@ -10,7 +10,7 @@ export default function SidePalmTree(props: any) {
   const lessThanMd = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: 'relative', bgcolor: 'transparent' }}>
       <Image
         src={data?.image || sidePalm}
         alt="Palm tree"
@@ -24,6 +24,7 @@ export default function SidePalmTree(props: any) {
           zIndex: 99,
           objectFit: 'contain',
           transform: 'translateY(-30%)',
+          backgroundColor: 'transparent',
         }}
       />
     </Box>
