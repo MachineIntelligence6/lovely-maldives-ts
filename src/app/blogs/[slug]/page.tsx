@@ -10,48 +10,17 @@ import Box from '@mui/system/Box'
 import Container from '@mui/system/Container'
 import { useParams } from 'next/navigation'
 
-import Image from 'next/image'
-import { Metadata, ResolvingMetadata } from 'next'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import BlogHeader from '@/components/BlogHeader'
-// import { useMenuStore } from '@/providers/menu-store-provider'
 import MailBox from '@/components/MailBox'
-import ArticleSharer from '@/components/ArticleSharer'
 import ArticlesGallery from '@/components/ArticlesGallery'
-import axiosInstance from '@/config/axiosInstance'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import {
   getRelatedBlogsRequest,
   getSingleBlogRequest,
 } from '@/utils/api-requests/blogs.request'
-import articleImage from '../../../../public/Images/main.jpg'
-
-type Props = {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-// export async function generateMetadata(
-//   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-//   { params, searchParams }: Props,
-//   parent: ResolvingMetadata
-// ): Promise<Metadata> {
-//   // read route params
-//   const { slug } = params
-
-//   const blogPost = (await axiosInstance.get(`/blogs/${slug}`)).data
-
-//   // optionally access and extend (rather than replace) parent metadata
-//   const previousImages = (await parent).openGraph?.images || []
-
-//   return {
-//     title: blogPost.title,
-//     openGraph: {
-//       images: ['/images/banner.jpg', ...previousImages],
-//     },
-//   }
-// }
+import useApiStore from '@/stores/themeApiStore'
 
 export default function SingleBlogPage() {
   // const isOpen = useMenuStore((state) => state.isOpen)
@@ -60,6 +29,12 @@ export default function SingleBlogPage() {
   const [isPending, startTransition] = useTransition()
   const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
   const params = useParams()
+
+  const { themeData, error, fetchData } = useApiStore((state: any) => ({
+    themeData: state.themeData,
+    error: state.error,
+    fetchData: state.fetchData,
+  }))
 
   const getBlog = async () => {
     const slug = params?.slug
@@ -74,7 +49,7 @@ export default function SingleBlogPage() {
           console.log('response a get  =>>> ', res)
         }
       })
-    } catch (error: any) {
+    } catch (err: any) {
       setAlertMsg({
         type: 'error',
         message: 'Error occured while saving data, please try again.',
@@ -82,8 +57,8 @@ export default function SingleBlogPage() {
       setTimeout(() => {
         setAlertMsg({ type: '', message: '' })
       }, 3000)
-      console.log('error ', error)
-      throw new Error(error)
+      console.log('error ', err)
+      throw new Error(err)
     }
   }
 
@@ -101,7 +76,7 @@ export default function SingleBlogPage() {
         console.log('response a get  =>>> ', res)
       }
       // })
-    } catch (error: any) {
+    } catch (err: any) {
       setAlertMsg({
         type: 'error',
         message: 'Error occured while saving data, please try again.',
@@ -109,13 +84,14 @@ export default function SingleBlogPage() {
       setTimeout(() => {
         setAlertMsg({ type: '', message: '' })
       }, 3000)
-      console.log('error ', error)
-      throw new Error(error)
+      console.log('error ', err)
+      throw new Error(err)
     }
   }
 
   useEffect(() => {
     getBlog()
+    fetchData()
   }, [])
 
   useEffect(() => {
@@ -123,7 +99,7 @@ export default function SingleBlogPage() {
   }, [blog?.id])
 
   return (
-    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
+    <Box sx={{ pt: { md: '180px', xs: '0px' }, bgcolor: themeData?.bgColor }}>
       {isPending && <CustomLoader />}
       <Header />
       <BlogHeader />
@@ -155,6 +131,12 @@ export default function SingleBlogPage() {
               {blog?.title}
             </Typography>
             <Box
+              sx={{
+                bgcolor: 'transparent',
+                '& *': {
+                  bgcolor: 'transparent !important',
+                },
+              }}
               dangerouslySetInnerHTML={{
                 __html: blog?.description,
               }}

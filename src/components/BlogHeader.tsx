@@ -1,20 +1,39 @@
+/* eslint-disable radix */
+
 'use client'
 
 import { Box, Link } from '@mui/material'
-import { motion } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { useMenuStore } from '@/providers/menu-store-provider'
 
 export default function BlogHeader() {
   const constraintsRef = useRef(null)
   const isOpen = useMenuStore((state) => state.isOpen)
+  const [headerData, setHeaderData] = useState('' as any)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const { scrollY } = useScroll()
 
+  useMotionValueEvent(scrollY, 'change', (latest: any) => {
+    setIsScrolled(latest > 0)
+  })
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('headerData') as any)
+    console.log('header data ', data)
+    setHeaderData(data)
+  }, [])
   return (
     <Box
       sx={{
         background: 'black',
         position: { xs: 'fixed', md: 'fixed' },
-        top: { xs: '0', md: '168px' },
+        top: {
+          xs: '0',
+          md: isScrolled
+            ? `${parseInt(headerData?.otherHeight) + 100}px`
+            : `${parseInt(headerData?.heroHeight) + 100}px`,
+        },
         boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
         width: '100%',
         zIndex: 995,

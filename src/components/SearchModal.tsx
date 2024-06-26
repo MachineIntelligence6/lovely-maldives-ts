@@ -63,8 +63,8 @@ const SearchModal = (props: any) => {
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
-            placeholder="Search Resort"
-            inputProps={{ 'aria-label': 'search resort' }}
+            placeholder="Search here"
+            inputProps={{ 'aria-label': 'search here' }}
           />
           <IconButton
             type="button"

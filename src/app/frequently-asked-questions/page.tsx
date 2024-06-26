@@ -1,13 +1,28 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
+'use client'
+
 import { Container, Box, Typography } from '@mui/material'
+import { useEffect } from 'react'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
 import FaqsAccordion from '@/components/Accordion'
 import MailBox from '@/components/MailBox'
+import useApiStore from '@/stores/themeApiStore'
 
 export default function page() {
+  const { themeData, error, fetchData } = useApiStore((state: any) => ({
+    themeData: state.themeData,
+    error: state.error,
+    fetchData: state.fetchData,
+  }))
+
+  useEffect(() => {
+    fetchData()
+  }, [])
   return (
-    <Box sx={{ pt: { md: '180px', xs: '100px' } }}>
+    <Box sx={{ pt: { md: '180px', xs: '100px' }, bgcolor: themeData?.bgColor }}>
       <Header />
       <Container sx={{ maxWidth: { xs: '100%', md: '90%' } }}>
         <BreadCrumb />

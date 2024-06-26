@@ -16,6 +16,7 @@ export async function createThemeConfig(data: any) {
       data: {
         fontFamily: data.fontFamily,
         gradient: data.gradient,
+        bgColor: data.bgColor,
       },
     })
   } else {
@@ -23,6 +24,7 @@ export async function createThemeConfig(data: any) {
       data: {
         fontFamily: data.fontFamily,
         gradient: data.gradient,
+        bgColor: data.bgColor,
       },
     })
   }

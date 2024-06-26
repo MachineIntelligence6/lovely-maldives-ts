@@ -74,6 +74,10 @@ export default function About(props: any) {
                 mt: { xs: '30px', md: '60px' },
                 textAlign: 'justify',
                 px: { xs: '20px', md: '0' },
+                bgcolor: 'transparent',
+                '& *': {
+                  bgcolor: 'transparent !important',
+                },
               }}
               dangerouslySetInnerHTML={{
                 __html: data?.description || '',

@@ -16,6 +16,7 @@ import CustomLoader from '@/admin-components/common/CustomLoader'
 import { getHomeBgRequest } from '@/utils/api-requests/home.request'
 import { getThemeConfigRequest } from '@/utils/api-requests/theme.request'
 import { getCollectionsRequest } from '@/utils/api-requests/collections-request'
+import useApiStore from '@/stores/themeApiStore'
 
 const Footer = dynamic(() => import('@/components/Footer'))
 const SidePalmTree = dynamic(() => import('@/components/SidePalmTree'))
@@ -42,8 +43,14 @@ export default function Home() {
   // const aboutMaldives = homeData?.aboutMaldivesShort
   const [loading, setLoading] = useState(false)
   const [homeData, setHomeData] = useState('' as any)
-  const [themeData, setThemeData] = useState('' as any)
+  // const [themeData, setThemeData] = useState('' as any)
   const [collections, setCollections] = useState({} as any)
+
+  const { themeData, error, fetchData } = useApiStore((state: any) => ({
+    themeData: state.themeData,
+    error: state.error,
+    fetchData: state.fetchData,
+  }))
 
   const getHomeData = async () => {
     try {
@@ -59,12 +66,11 @@ export default function Home() {
           JSON.stringify(data?.data?.header?.[0])
         )
       } else {
-        // alert('Error occured while fetching about maldives data.')
         console.log('response about maldives', res)
       }
-    } catch (error: any) {
+    } catch (err: any) {
       setLoading(false)
-      console.log('error ', error)
+      console.log('err ', error)
     }
   }
 
@@ -77,22 +83,8 @@ export default function Home() {
       } else {
         console.log('response homebg ', res)
       }
-    } catch (error: any) {
-      console.log('error ', error)
-    }
-  }
-
-  const getThemeData = async () => {
-    try {
-      const res = await getThemeConfigRequest()
-      const data = res?.data
-      if (data?.status === 200) {
-        setThemeData(data?.data)
-      } else {
-        console.log('data ', data)
-      }
-    } catch (error: any) {
-      console.log('error ', error)
+    } catch (err: any) {
+      console.log('err ', err)
     }
   }
 
@@ -104,128 +96,132 @@ export default function Home() {
       if (data?.status === 200) {
         setCollections(data?.data)
       } else {
-        // alert('Error occured while fetching about maldives data.')
-        // setAlertMsg({ type: 'error', message: data?.message })
-        // setTimeout(() => {
-        //   setAlertMsg({ type: '', message: '' })
-        // }, 3000)
         console.log('response about maldives', res)
       }
       console.log('response ', res)
-    } catch (error: any) {
-      console.log('error ', error)
+    } catch (err: any) {
+      console.log('err ', err)
     }
   }
 
   useEffect(() => {
     getHomeData()
     getHomeBgData()
-    getThemeData()
+    fetchData()
     getCollections()
   }, [])
 
   return (
     <Suspense fallback={<CustomLoader />}>
-      {loading && <CustomLoader />}
-      <Header />
-      <Banner bannerData={homeData} themeData={themeData} />
-      <Box
-        sx={{
-          position: 'relative',
-          paddingTop: '10px',
-          width: '100%',
-        }}
-      >
+      <Box sx={{ bgcolor: themeData?.bgColor }}>
+        {loading && <CustomLoader />}
+        <Header />
+        <Banner bannerData={homeData} themeData={themeData} />
         <Box
           sx={{
             position: 'relative',
-            mx: 'auto',
-            mt: { xs: '60px', md: '120px' },
-            zIndex: 1,
-            color: 'var(--white)',
-            px: { xs: '20px', md: '0px' },
+            paddingTop: '10px',
+            width: '100%',
           }}
         >
-          <Typography
-            variant="h2"
+          <Box
             sx={{
-              color: 'var(--white)',
-              textAlign: 'center',
-              fontSize: { xs: '22px', md: '30px' },
-              fontWeight: 400,
-            }}
-          >
-            {homeData?.aboutMaldivesShort?.[0]?.title}
-          </Typography>
-          <Typography
-            component="div"
-            variant="body1"
-            sx={{
-              textAlign: 'justify',
-              fontSize: { xs: '18px', md: '22px' },
-              fontWeight: '200',
-              mt: { xs: '30px', md: '60px' },
-              width: { xs: '100%', md: '750px' },
+              position: 'relative',
               mx: 'auto',
-              fontFamily: 'Century Gothic !important',
-            }}
-            dangerouslySetInnerHTML={{
-              __html: homeData?.aboutMaldivesShort?.[0]?.description,
+              mt: { xs: '60px', md: '120px' },
+              zIndex: 1,
+              color: 'var(--white)',
+              px: { xs: '20px', md: '0px' },
             }}
           >
-            {/* Maldives is a small country located in the Indian Ocean consisting
+            <Typography
+              variant="h2"
+              sx={{
+                color: 'var(--white)',
+                textAlign: 'center',
+                fontSize: { xs: '22px', md: '30px' },
+                fontWeight: 400,
+              }}
+            >
+              {homeData?.aboutMaldivesShort?.[0]?.title}
+            </Typography>
+            <Typography
+              component="div"
+              variant="body1"
+              sx={{
+                textAlign: 'justify',
+                fontSize: { xs: '18px', md: '22px' },
+                fontWeight: '200',
+                mt: { xs: '30px', md: '60px' },
+                width: { xs: '100%', md: '750px' },
+                mx: 'auto',
+                fontFamily: 'Century Gothic !important',
+                bgcolor: 'transparent',
+                '& *': {
+                  bgcolor: 'transparent !important',
+                },
+              }}
+              dangerouslySetInnerHTML={{
+                __html: homeData?.aboutMaldivesShort?.[0]?.description,
+              }}
+            >
+              {/* Maldives is a small country located in the Indian Ocean consisting
             of 1250 islands and 62 atolls. Lorem ipsum Lorem ipsum dolor sit
             amet, Maldives is a small country located in the Indian Ocean
             consisting of 1250 island sand 62 at olls. */}
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              mt: { xs: '30px', md: '60px' },
-              fontWeight: 400,
-            }}
-          >
-            <Link
-              href={homeData?.aboutMaldivesShort?.[0]?.link || '/'}
-              className="readmore"
-              style={{
-                paddingTop: '5px',
-                textDecoration: 'none',
-                color: 'var(--white)',
-                fontWeight: 'bold',
+            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mt: { xs: '30px', md: '60px' },
+                fontWeight: 400,
               }}
             >
-              Read More
-            </Link>
-            <KeyboardArrowRightIcon
-              sx={{
-                fontSize: { xs: '24px', md: '30px' },
-                fontWeight: 'bold',
-                mt: '4px',
-              }}
-            />
+              <Link
+                href={homeData?.aboutMaldivesShort?.[0]?.link || '/'}
+                className="readmore"
+                style={{
+                  paddingTop: '5px',
+                  textDecoration: 'none',
+                  color: 'var(--white)',
+                  fontWeight: 'bold',
+                }}
+              >
+                Read More
+              </Link>
+              <KeyboardArrowRightIcon
+                sx={{
+                  fontSize: { xs: '24px', md: '30px' },
+                  fontWeight: 'bold',
+                  mt: '4px',
+                }}
+              />
+            </Box>
           </Box>
+          <SidePalmTree data={homeData?.sideImage?.[0]} />
+          <OurServices
+            services={homeData?.services?.[0]}
+            themeData={themeData}
+          />
         </Box>
-        <SidePalmTree data={homeData?.sideImage?.[0]} />
-        <OurServices services={homeData?.services?.[0]} themeData={themeData} />
+        <About data={homeData?.aboutUsShort?.[0]} />
+        <Explore wonders={homeData?.wonders?.[0]} />
+        <OurCollection
+          heading={collections?.title}
+          button="block"
+          iconShow="none"
+          radius="0"
+          bottomradius="0"
+          collections={collections?.collections}
+        />
+        <TopBrands
+          brands={homeData?.brands?.[0]}
+          socialLinkSection={homeData?.socialLinkSection?.[0]}
+        />
+        <Footer footerData={homeData?.footer?.[0]} />
       </Box>
-      <About data={homeData?.aboutUsShort?.[0]} />
-      <Explore wonders={homeData?.wonders?.[0]} />
-      <OurCollection
-        heading={collections?.title}
-        button="block"
-        iconShow="none"
-        radius="0"
-        bottomradius="0"
-        collections={collections?.collections}
-      />
-      <TopBrands
-        brands={homeData?.brands?.[0]}
-        socialLinkSection={homeData?.socialLinkSection?.[0]}
-      />
-      <Footer footerData={homeData?.footer?.[0]} />
     </Suspense>
   )
 }

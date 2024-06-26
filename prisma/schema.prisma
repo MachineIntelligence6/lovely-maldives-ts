@@ -77,6 +77,11 @@ type Brand {
   ratings String
 }
 
+type Policies {
+  question   String
+  answer     String
+}
+
 
 // ADMIN USER MODEL
 model User {
@@ -282,7 +287,31 @@ model Resorts {
 
 // THEME CONFIGURATION MODELS
 model Theme {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
   fontFamily String?
-  gradient  String?
+  bgColor    String?
+  gradient   String?
+}
+
+// TERMS OF USE
+model TermsOfUse {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  description String
+}
+
+// PRIVACY POLICY
+model PrivacyPolicy {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  policies   Policies[]
+}
+
+// FAQS MODEL
+model FAQS {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  policies   Policies[]
+  categories String[]
+  description String
 }

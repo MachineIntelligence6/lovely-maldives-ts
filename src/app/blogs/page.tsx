@@ -18,6 +18,7 @@ import PopularBlogs from '@/components/PopularBlogs'
 import { getBlogsSectionRequest } from '@/utils/api-requests/blogcategs-request'
 import { getBlogsRequest } from '@/utils/api-requests/blogs.request'
 import CustomLoader from '@/admin-components/common/CustomLoader'
+import useApiStore from '@/stores/themeApiStore'
 import blog from '../../../public/Images/landingTree.jpg'
 import articleImage from '../../../public/Images/main.jpg'
 
@@ -96,6 +97,12 @@ export default function Page() {
   const [totalBlogs, setTotalBlogs] = useState(null as any)
   const [pages, setPages] = useState({ page: 1, limit: 3 })
 
+  const { themeData, error, fetchData } = useApiStore((state: any) => ({
+    themeData: state.themeData,
+    error: state.error,
+    fetchData: state.fetchData,
+  }))
+
   const getSections = () => {
     try {
       startTransition(async () => {
@@ -107,7 +114,7 @@ export default function Page() {
           console.log('response a get  =>>> ', res)
         }
       })
-    } catch (error: any) {
+    } catch (err: any) {
       setAlertMsg({
         type: 'error',
         message: 'Error occured while saving data, please try again.',
@@ -115,8 +122,8 @@ export default function Page() {
       setTimeout(() => {
         setAlertMsg({ type: '', message: '' })
       }, 3000)
-      console.log('error ', error)
-      throw new Error(error)
+      console.log('err ', err)
+      throw new Error(err)
     }
   }
 
@@ -133,7 +140,7 @@ export default function Page() {
           console.log('response a get  =>>> ', res)
         }
       })
-    } catch (error: any) {
+    } catch (err: any) {
       setAlertMsg({
         type: 'error',
         message: 'Error occured while saving data, please try again.',
@@ -141,11 +148,11 @@ export default function Page() {
       setTimeout(() => {
         setAlertMsg({ type: '', message: '' })
       }, 3000)
-      console.log('error ', error)
-      throw new Error(error)
+      console.log('error ', err)
+      throw new Error(err)
     }
   }
-  
+
   useEffect(() => {
     const windowWidth = window.innerWidth
 
@@ -162,8 +169,12 @@ export default function Page() {
     getAllBlogs()
   }, [pages?.page])
 
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   return (
-    <Box sx={{ pt: { md: '180px', xs: '0px' } }}>
+    <Box sx={{ pt: { md: '180px', xs: '0px' }, bgcolor: themeData?.bgColor }}>
       {isPending && <CustomLoader />}
       <Header />
       <BlogHeader />

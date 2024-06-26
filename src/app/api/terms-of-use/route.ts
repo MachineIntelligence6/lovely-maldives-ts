@@ -1,13 +1,15 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
-import { createThemeConfig, getThemeConfig } from '@/services/theme'
+import { getIdParam } from '@/utils/getIdParam'
+import { createTermsOfUse } from '@/services/termsOfUse'
 import prisma from '../../../../prisma'
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
     await connectToDatabase()
 
-    const result = await getThemeConfig()
+    const result = await prisma.termsOfUse.findFirst()
+
     if (!result)
       return NextResponse.json({ message: 'No data found.', status: 404 })
 
@@ -25,16 +27,19 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
+  if (!bodyData?.title || !bodyData?.description)
+    return NextResponse.json({
+      message: 'Please send complete data to save.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
-    const result = await createThemeConfig(bodyData)
-    if (!result)
-      return NextResponse.json({ message: 'No data found', status: 404 })
+    const result = await createTermsOfUse(bodyData)
 
     return NextResponse.json(
       {
-        message: 'Theme configuration saved successfully.',
+        message: 'Terms and Conditions updated successfully.',
         data: result,
         status: 201,
       },
@@ -42,26 +47,38 @@ export async function POST(req: Request) {
     )
   } catch (error) {
     console.log('Error', error)
-    return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
+    return NextResponse.json({ message: 'Error', data: error, status: 500 })
   } finally {
     await prisma.$disconnect()
   }
 }
 
-export async function DELETE() {
+export async function DELETE(req: Request) {
+  const id = getIdParam(req.url)
+  console.log('id is ', id)
+  if (!id)
+    return NextResponse.json(
+      { message: 'Please send id to delete.' },
+      { status: 422 }
+    )
   try {
     await connectToDatabase()
 
-    const result = await getThemeConfig()
+    const result = await prisma.termsOfUse.delete({
+      where: {
+        id,
+      },
+    })
+
     if (!result)
       return NextResponse.json({
-        message: 'No Data found, please add first.',
-        status: 409,
+        message: 'Deletion failed, please send correct id to delete.',
+        status: '404',
       })
 
     return NextResponse.json(
-      { message: 'Success', status: 200 },
-      { status: 200 }
+      { message: 'Deleted Successfuly', status: 200 },
+      { status: 20 }
     )
   } catch (error) {
     console.log('Error', error)

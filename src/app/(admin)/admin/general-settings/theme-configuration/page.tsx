@@ -2,7 +2,6 @@
 
 import { Alert, Box, Typography } from '@mui/material'
 import React, { useEffect, useState, useTransition } from 'react'
-import Image from 'next/image'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import CustomLoader from '@/admin-components/common/CustomLoader'
@@ -11,6 +10,14 @@ import {
   createThemeConfigRequest,
   getThemeConfigRequest,
 } from '@/utils/api-requests/theme.request'
+import { CustomLabel } from '@/admin-components/styled/CustomLabels'
+import HeaderBgHandler from '@/admin-components/general-settings/HeaderBgHandler'
+import CustomSelect from '@/admin-components/items/CustomSelect'
+
+const options = [
+  { label: 'Century Gothic', value: 'Century Gothic' },
+  { label: 'Public Sans', value: 'Public Sans' },
+]
 
 const ThemeConfiguration = () => {
   const [isPending, startTransition] = useTransition()
@@ -20,6 +27,7 @@ const ThemeConfiguration = () => {
   const [values, setValues] = useState({
     fontFamily: '',
     gradient: '',
+    bgColor: '',
   })
 
   const handleSave = () => {
@@ -91,7 +99,7 @@ const ThemeConfiguration = () => {
           detectChange={detectChange}
         />
         <Box sx={{ mt: 3 }}>
-          <TextFieldWraper
+          {/* <TextFieldWraper
             label="Font Family"
             placeholder="Enter font family."
             value={values.fontFamily}
@@ -99,7 +107,44 @@ const ThemeConfiguration = () => {
             onChange={(e: any) =>
               setValues({ ...values, fontFamily: e.target.value })
             }
+          /> */}
+          <CustomSelect
+            placeholder="Select font family."
+            value={values.fontFamily}
+            options={options}
+            name="fontFamily"
+            onChange={(e: any) =>
+              setValues({ ...values, fontFamily: e.target.value })
+            }
           />
+        </Box>
+
+        <Box
+          sx={{
+            mt: 4,
+            pt: 4,
+            borderTop: '1px solid var(--black)',
+          }}
+        >
+          <Typography
+            variant="body1"
+            color="var(--black)"
+            sx={{ fontSize: '18px', fontWeight: 'bold' }}
+          >
+            Background Color Theme
+          </Typography>
+          <Box sx={{ width: '100%' }}>
+            <CustomLabel id="demo-simple-select-label" sx={{ mb: 2 }}>
+              Background Color
+            </CustomLabel>
+            <HeaderBgHandler
+              handleValuesChange={(e: any) =>
+                setValues({ ...values, bgColor: e.target.value })
+              }
+              value={values?.bgColor}
+              name="bgColor"
+            />
+          </Box>
         </Box>
 
         <Box
@@ -146,29 +191,6 @@ const ThemeConfiguration = () => {
                 backgroundPosition: '100%',
               }}
             />
-            {/* <Box
-                sx={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  background:
-                    'linear-gradient(to right, var(--black) 0%, var(--white) 100%)',
-                }}
-              /> */}
-            {/* <Image
-                src="/images/collectionImg.jpg"
-                alt="image"
-                width={800}
-                height={300}
-                style={{
-                  objectFit: 'cover',
-                  width: '100%',
-                  height: '100%',
-                }}
-              /> */}
-            {/* </Box> */}
           </Box>
         </Box>
       </CustomCard>

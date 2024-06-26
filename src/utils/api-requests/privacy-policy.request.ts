@@ -2,16 +2,16 @@ import apiClient from '@/services/apiClient'
 
 interface HomeBg {
   title: string
-  description: string
+  policies: [{ question: string; answer: string }]
 }
 
 export const addPrivacyPolicyRequest = async (data: HomeBg) => {
-  return apiClient.post('/home/home-bg', {
+  return apiClient.post('/privacy-policy', {
     title: data.title,
-    subTitle: data.description,
+    policies: data.policies,
   })
 }
 
 export const getPrivacyPolicyRequest = async () => {
-  return apiClient.get('/home/home-bg')
+  return apiClient.get('/privacy-policy')
 }
