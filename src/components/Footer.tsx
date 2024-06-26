@@ -173,8 +173,8 @@ export default function Footer(props: any) {
         >
           <StyledImage
             src="/Images/lovely-maldives-logo-white.png"
-            height={31}
-            width={40}
+            height={25}
+            width={35}
             alt="Logo Footer"
             sx={{
               display: { xs: 'none', md: 'block' },

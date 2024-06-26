@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
-import { createPrivacyPolicy, getPrivacyPolicy } from '@/services/privacyPolicy'
+import { createFAQS, getFAQs } from '@/services/faqs'
 import prisma from '../../../../prisma'
 
 export async function GET(req: Request) {
   try {
     await connectToDatabase()
 
-    const result = await getPrivacyPolicy()
+    const result = await getFAQs()
 
     if (!result)
       return NextResponse.json({ message: 'No data found.', status: 404 })
@@ -30,7 +30,10 @@ export async function POST(req: Request) {
   if (
     !bodyData?.title ||
     !bodyData?.policies ||
-    bodyData.policies?.length === 0
+    bodyData.policies?.length === 0 ||
+    !bodyData?.description ||
+    bodyData.categories?.length === 0 ||
+    !bodyData?.categories
   )
     return NextResponse.json({
       message: 'Please send complete data to save.',
@@ -39,10 +42,10 @@ export async function POST(req: Request) {
   try {
     await connectToDatabase()
 
-    const result = await createPrivacyPolicy(bodyData)
+    const result = await createFAQS(bodyData)
 
     return NextResponse.json(
-      { message: 'Success', data: result, status: 201 },
+      { message: 'FAQs data saved successfully.', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {

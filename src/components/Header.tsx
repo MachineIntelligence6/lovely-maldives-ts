@@ -43,19 +43,12 @@ function Header() {
   const [openSearchModal, setOpenSearchModal] = useState(false)
 
   const handleSearchModelOpen = () => setOpenSearchModal(!openSearchModal)
-
-  const menuItem = [
-    { label: 'About Maldives', route: '/about-maldives' },
-    { label: 'Hotels', route: '/resorts' },
-    { label: 'About us', route: '/about-us' },
-    { label: 'Blog', route: '/blogs' },
-  ]
-
   const [isScrolled, setIsScrolled] = React.useState(false)
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setIsScrolled(latest > 0)
   })
+
   const handleResize = () => {
     if (lessThanMd) {
       close()

@@ -1,16 +1,53 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client'
 
 import { Box, Container, Typography } from '@mui/material'
+import { useEffect, useState, useTransition } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import BreadCrumb from '@/components/BreadCrumb'
 import DropdownButton from '@/components/DropdownButton'
 import Markdown from '@/components/Markdown'
 import termsOfUse from '@/md/terms-of-use.md'
+import useApiStore from '@/stores/themeApiStore'
+import { getTermsRequest } from '@/utils/api-requests/term-os-use.request'
 
 export default function TermsOfUsePage() {
+  const [isPending, startTransition] = useTransition()
+  const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
+  const [terms, setTerms] = useState('' as any)
+
+  const { themeData, error, fetchData } = useApiStore((state: any) => ({
+    themeData: state.themeData,
+    error: state.error,
+    fetchData: state.fetchData,
+  }))
+
+  const getTermsofUse = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getTermsRequest()
+        const data = res?.data
+        console.log('terms are ', terms)
+        if (data?.status === 200) {
+          setTerms(data?.data)
+        } else {
+          // alert('Error occured while fetching about maldives data.')
+          console.log('res error  => ', data?.message)
+        }
+      })
+    } catch (err: any) {
+      console.log('err ', err)
+    }
+  }
+
+  useEffect(() => {
+    getTermsofUse()
+    fetchData()
+  }, [])
   return (
-    <Box sx={{ pt: { xs: '0px', md: '190px' } }}>
+    <Box sx={{ pt: { xs: '0px', md: '190px' }, bgcolor: themeData?.bgColor }}>
       <Header />
       <Container
         sx={{
@@ -37,9 +74,20 @@ export default function TermsOfUsePage() {
       >
         <Box sx={{ mt: 7, mb: 12 }}>
           <Typography variant="h3" sx={{ textAlign: 'center', mb: 6 }}>
-            Website Terms of Use
+            {terms?.title}
           </Typography>
-          <Markdown>{termsOfUse}</Markdown>
+          <Box
+            sx={{
+              bgcolor: 'transparent',
+              '& *': {
+                bgcolor: 'transparent !important',
+              },
+            }}
+            dangerouslySetInnerHTML={{
+              __html: terms?.description,
+            }}
+          />
+          {/* <Markdown>{termsOfUse}</Markdown> */}
         </Box>
       </Container>
       <Footer />

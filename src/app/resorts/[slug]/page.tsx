@@ -30,7 +30,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 // import OurCollection from '@/components/OurCollection'
 import FilterTray from '@/components/FilterTray'
-import SocialSharer from '@/components/SocialSharer'
+import useApiStore from '@/stores/themeApiStore'
 import SlugSlider from '@/components/SlugSlider'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import {
@@ -53,9 +53,14 @@ export default function Resort() {
   const [sliderMain4Nav, setSliderMain4Nav] = useState<Slider>()
   const sliderMain3Ref = useRef<Slider>()
   const sliderMain4Ref = useRef<Slider>()
-  const [amenities, setAmenities] = useState([...Array(8)])
   const [hotel, setHotel] = useState('' as any)
   const [recomendations, setRecomendations] = useState([] as any)
+
+  const { themeData, error, fetchData } = useApiStore((state: any) => ({
+    themeData: state.themeData,
+    error: state.error,
+    fetchData: state.fetchData,
+  }))
 
   const mainSlider1 = {
     dots: false,
@@ -99,8 +104,8 @@ export default function Resort() {
           console.log('response about maldives', res)
         }
       })
-    } catch (error: any) {
-      console.log('error ', error)
+    } catch (err: any) {
+      console.log('err ', err)
     }
   }
 
@@ -116,8 +121,8 @@ export default function Resort() {
         console.log('response about maldives', res)
       }
       // })
-    } catch (error: any) {
-      console.log('error ', error)
+    } catch (err: any) {
+      console.log('err ', err)
     }
   }
 
@@ -130,9 +135,11 @@ export default function Resort() {
 
     getResortSection()
     getOtherRecomendations()
+
+    fetchData()
   }, [])
   return (
-    <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
+    <Box sx={{ pt: { xs: '120px', md: '190px' }, bgcolor: themeData?.bgColor }}>
       <Header />
       {isPending && <CustomLoader />}
       <Container
@@ -290,7 +297,13 @@ export default function Resort() {
                   if (section?.type === 'description') {
                     return (
                       <Box
-                        sx={{ mt: 3 }}
+                        sx={{
+                          mt: 3,
+                          bgcolor: 'transparent',
+                          '& *': {
+                            bgcolor: 'transparent !important',
+                          },
+                        }}
                         dangerouslySetInnerHTML={{
                           __html: section.description,
                         }}

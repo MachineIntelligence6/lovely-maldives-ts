@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client'
 
 import { Container, Box, Typography, Button } from '@mui/material'
@@ -8,16 +10,18 @@ import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
 import MailBox from '@/components/MailBox'
 import { getAboutMaldivesRequest } from '@/utils/api-requests/about-maldives.request'
+import useApiStore from '@/stores/themeApiStore'
 
 export default function Page() {
   const [isPending, startTransition] = useTransition()
-  const [readMore, setReadMore] = useState(false)
   const [editorText, setEditorText] = useState('' as any)
   const [title, setTitle] = useState('')
 
-  const showExtraContent = () => {
-    setReadMore(!readMore)
-  }
+  const { themeData, error, fetchData } = useApiStore((state: any) => ({
+    themeData: state.themeData,
+    error: state.error,
+    fetchData: state.fetchData,
+  }))
 
   const getAboutMaldives = async () => {
     try {
@@ -36,16 +40,17 @@ export default function Page() {
         }
         console.log('response ', res)
       })
-    } catch (error: any) {
-      console.log('error ', error)
+    } catch (err: any) {
+      console.log('err ', err)
     }
   }
 
   useEffect(() => {
     getAboutMaldives()
+    fetchData()
   }, [])
   return (
-    <Box sx={{ pt: { xs: '120px', md: '190px' } }}>
+    <Box sx={{ pt: { xs: '120px', md: '190px' }, bgcolor: themeData?.bgColor }}>
       <Header />
       <Container sx={{ maxWidth: { xs: '100%', md: '90%' } }}>
         <BreadCrumb />
@@ -71,6 +76,12 @@ export default function Page() {
           {title}
         </Typography>
         <Box
+          sx={{
+            bgcolor: 'transparent',
+            '& *': {
+              bgcolor: 'transparent !important',
+            },
+          }}
           dangerouslySetInnerHTML={{
             __html: editorText,
           }}

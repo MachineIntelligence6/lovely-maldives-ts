@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client'
 
 import { Container, Box, Typography, Paper, Button } from '@mui/material'
@@ -8,16 +10,18 @@ import Footer from '@/components/Footer'
 import About from '@/components/About'
 import { getAboutUsRequest } from '@/utils/api-requests/aboutus-short.request'
 import BreadCrumb from '@/components/BreadCrumb'
+import useApiStore from '@/stores/themeApiStore'
 
 function AboutUsPage() {
   const [isPending, startTransition] = useTransition()
-  const [readMore, setReadMore] = useState(false)
   const [editorText, setEditorText] = useState('' as any)
   const [title, setTitle] = useState('')
 
-  const showExtraContent = () => {
-    setReadMore(!readMore)
-  }
+  const { themeData, error, fetchData } = useApiStore((state: any) => ({
+    themeData: state.themeData,
+    error: state.error,
+    fetchData: state.fetchData,
+  }))
 
   const getAboutMaldives = async () => {
     try {
@@ -36,17 +40,18 @@ function AboutUsPage() {
         }
         console.log('response ', res)
       })
-    } catch (error: any) {
-      console.log('error ', error)
+    } catch (err: any) {
+      console.log('err ', error)
     }
   }
 
   useEffect(() => {
     getAboutMaldives()
+    fetchData()
   }, [])
 
   return (
-    <Box sx={{ pt: { xs: '100px', md: '200px' } }}>
+    <Box sx={{ pt: { xs: '100px', md: '200px' }, bgcolor: themeData?.bgColor }}>
       <Header />
       {/* <About /> */}
       <Container sx={{ maxWidth: { xs: '100%', md: '90%' } }}>
@@ -74,6 +79,12 @@ function AboutUsPage() {
         </Typography>
 
         <Box
+          sx={{
+            bgcolor: 'transparent',
+            '& *': {
+              bgcolor: 'transparent !important',
+            },
+          }}
           dangerouslySetInnerHTML={{
             __html: editorText,
           }}

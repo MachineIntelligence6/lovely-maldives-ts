@@ -69,12 +69,12 @@ const menuItems = [
         path: 'admin/pages/privacy-policy',
       },
       {
-        title: 'Blogs',
-        path: 'admin/pages/blogs/terms-of-conditions',
+        title: 'Terms & Conditions',
+        path: 'admin/pages/terms-of-use',
       },
       {
         title: 'FAQs',
-        path: 'admin/pages/blogs/faqs',
+        path: 'admin/pages/faqs',
       },
     ],
   },
