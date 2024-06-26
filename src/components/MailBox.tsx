@@ -1,4 +1,4 @@
-import { Box, Typography, TextField, IconButton } from '@mui/material'
+import { Box, Typography, TextField, IconButton, Button } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import Image from 'next/image'
 
@@ -57,9 +57,11 @@ export default function MailBox() {
             borderRadius: '10px',
             background: 'white',
             width: '100%',
+            border: 'none',
+            outline: 'none',
           }}
         />
-        <IconButton
+        {/* <IconButton
           aria-label="subscribe"
           sx={{
             position: 'absolute',
@@ -75,7 +77,28 @@ export default function MailBox() {
           }}
         >
           <SendIcon />
-        </IconButton>
+        </IconButton> */}
+      </Box>
+      <Box sx={{ textAlign: 'center' }}>
+        <Button
+          sx={{
+            bgcolor: 'var(--brown)',
+            color: 'white',
+            width: 'auto',
+            mx: 'auto',
+            mt: 2,
+            px: '30px',
+            py: '10px',
+            textAlign: 'center',
+            fontSize: '16px',
+            '&:hover': {
+              backgroundColor: 'var(--brown) !important',
+            },
+          }}
+          aria-label="All hotels"
+        >
+          Subscribe
+        </Button>
       </Box>
     </Box>
   )
