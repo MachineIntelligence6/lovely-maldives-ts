@@ -22,8 +22,8 @@ const CustomTableLabel = styled(TableSortLabel)(({ theme }) => ({
   color: '#5D596C',
 }))
 
-const CategoriesTable = (props: any) => {
-  const { dataArray, deleteFilter, editCategory, headOptions } = props
+const SubscriptionTable = (props: any) => {
+  const { dataArray, deleteSubscription, headOptions } = props
   const [anchorEl, setAnchorEl] = useState(null)
 
   const handleClose = () => {
@@ -46,12 +46,6 @@ const CategoriesTable = (props: any) => {
               <CustomTableLabel>{option}</CustomTableLabel>
             </TableCell>
           ))}
-          {/* <TableCell>
-            <CustomTableLabel>Category</CustomTableLabel>
-          </TableCell>
-          <TableCell sx={{ textAlign: 'right' }}>
-            <CustomTableLabel>Actions</CustomTableLabel>
-          </TableCell> */}
         </TableRow>
       </TableHead>
       <TableBody>
@@ -69,7 +63,18 @@ const CategoriesTable = (props: any) => {
                 fontWeight: 500,
               }}
             >
-              {value}
+              {value?.email}
+            </TableCell>
+            <TableCell
+              sx={{
+                color: '#6F6B7D',
+                fontSize: '15px',
+                fontWeight: 500,
+              }}
+            >
+              {value?.createdAt
+                ? new Date(value?.createdAt).toDateString()
+                : 'N/A'}
             </TableCell>
             <TableCell sx={{ pr: 4 }}>
               <Stack
@@ -78,21 +83,13 @@ const CategoriesTable = (props: any) => {
                 alignItems="center"
                 justifyContent="end"
               >
-                <EditIcon
-                  sx={{
-                    color: 'var(--blue)',
-                    fontSize: '22px',
-                    cursor: 'pointer',
-                  }}
-                  onClick={() => editCategory({ value, index })}
-                />
                 <DeleteIcon
                   sx={{
                     color: 'var(--red)',
                     fontSize: '22px',
                     cursor: 'pointer',
                   }}
-                  onClick={() => deleteFilter(index)}
+                  onClick={() => deleteSubscription(value?.id)}
                 />
               </Stack>
             </TableCell>
@@ -103,4 +100,4 @@ const CategoriesTable = (props: any) => {
   )
 }
 
-export default CategoriesTable
+export default SubscriptionTable

@@ -1,8 +1,58 @@
-import { Box, Typography, TextField, IconButton, Button } from '@mui/material'
-import SendIcon from '@mui/icons-material/Send'
+'use client'
+
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  CircularProgress,
+} from '@mui/material'
 import Image from 'next/image'
+import { useState, useTransition } from 'react'
+import { createSubscriptionRequest } from '@/utils/api-requests/subscribe.request'
+import SuccessMsg from '@/admin-components/pages/modals/SuccessMsg'
 
 export default function MailBox() {
+  const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
+  const [isPending, startTransition] = useTransition()
+  const [open, setOpen] = useState(false)
+  const [email, setEmail] = useState('')
+
+  const handleSearchModelOpen = () => setOpen(!open)
+
+  const submitData = () => {
+    if (!email || email?.length <= 3) {
+      setAlertMsg({ type: 'error', message: 'Please enter valid email.' })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      return
+    }
+    try {
+      startTransition(async () => {
+        const res = await createSubscriptionRequest({ email })
+        const data = res?.data
+        if (data?.status === 201) {
+          setAlertMsg({ type: 'success', message: 'Subscribed successfully.' })
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+        }
+        setEmail('')
+        handleSearchModelOpen()
+      })
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+    }
+  }
+
+  console.log('alert message ', alertMsg)
   return (
     <Box
       sx={{
@@ -20,6 +70,12 @@ export default function MailBox() {
         alignItems: 'center',
       }}
     >
+      <SuccessMsg
+        open={open}
+        handleSearchModelOpen={handleSearchModelOpen}
+        message={alertMsg?.message}
+        type={alertMsg?.type}
+      />
       <Image
         src="/Images/lovely-maldives-logo-white.png"
         height={31}
@@ -53,31 +109,23 @@ export default function MailBox() {
           placeholder="Enter email address"
           multiline
           className="input"
+          value={email}
+          onChange={(e: any) => setEmail(e.target.value)}
           sx={{
             borderRadius: '10px',
             background: 'white',
             width: '100%',
-            border: 'none',
+            color:
+              alertMsg?.type === 'error'
+                ? 'var(--red) !important'
+                : 'var(--black)',
+            border:
+              alertMsg?.type === 'error'
+                ? '1px solid var(--red) !important'
+                : 'none',
             outline: 'none',
           }}
         />
-        {/* <IconButton
-          aria-label="subscribe"
-          sx={{
-            position: 'absolute',
-            right: { xs: '70px', md: '22%' },
-            // transform: 'translateY(-50%)',
-            // bgcolor: 'primary.main',
-            color: 'primary.main',
-            borderRadius: '0 10px 10px 0',
-            '&:hover': {
-              color: 'primary.dark',
-              background: 'none',
-            },
-          }}
-        >
-          <SendIcon />
-        </IconButton> */}
       </Box>
       <Box sx={{ textAlign: 'center' }}>
         <Button
@@ -96,8 +144,13 @@ export default function MailBox() {
             },
           }}
           aria-label="All hotels"
+          onClick={submitData}
         >
-          Subscribe
+          {isPending ? (
+            <CircularProgress size={30} thickness={3} sx={{ color: '#fff' }} />
+          ) : (
+            'Subscribe'
+          )}
         </Button>
       </Box>
     </Box>

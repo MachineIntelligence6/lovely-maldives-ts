@@ -31,8 +31,8 @@ const menuItems = [
         path: 'admin/general-settings/side-image',
       },
       {
-        title: 'Subscribe Letter',
-        path: 'admin/general-settings/subscribe-letter',
+        title: 'Subscription',
+        path: 'admin/general-settings/subscriptions',
       },
       {
         title: 'Theme Configuration',
@@ -107,14 +107,6 @@ const menuItems = [
       {
         title: 'User Roles',
         path: 'admin/user-management/user-roles',
-      },
-      {
-        title: 'Blogs',
-        path: 'admin/user-management/user-accounts',
-      },
-      {
-        title: 'Media Library',
-        path: 'admin/user-management/activity-logs',
       },
     ],
   },

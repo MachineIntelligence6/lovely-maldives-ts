@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography'
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { CircularProgress } from '@mui/material'
@@ -25,8 +25,7 @@ export const loginFormSchema = z.object({
     .string({ required_error: 'This field is required.' })
     .min(1, { message: 'This field is required.' })
     .email({ message: 'please enter a valid email address' }),
-  password: z
-    .string({ required_error: 'This field is required.' })
+  password: z.string({ required_error: 'This field is required.' }),
 })
 export type LoginFormSchema = z.infer<typeof loginFormSchema>
 
@@ -44,8 +43,8 @@ export default function Login() {
       password: '',
     },
   })
-  const [isPending, startTransition] = React.useTransition();
-  const[errMsg, setErrMsg] = React.useState('')
+  const [isPending, startTransition] = React.useTransition()
+  const [errMsg, setErrMsg] = React.useState('')
 
   const onSubmit = async () => {
     console.log({
@@ -54,22 +53,22 @@ export default function Login() {
     })
 
     try {
-      startTransition(async() => {
+      startTransition(async () => {
         const res = await signIn('credentials', {
           email: watch('email'),
           password: watch('password'),
           redirect: false,
         })
         console.log('res =>>> ', res)
-          if (res?.status === 200) {
-            router.push("/admin/dashboard")
-          }else{
-            setErrMsg("Invalid Credntials.")
-          }
+        if (res?.status === 200) {
+          router.push('/admin/dashboard')
+        } else {
+          setErrMsg('Invalid Credntials or you are not authorized to login.')
+        }
       })
     } catch (error) {
-      console.log("error ", error)
-      setErrMsg("Invalid Credntials.")
+      console.log('error ', error)
+      setErrMsg('Invalid Credntials or you are not authorized to login.')
       // return throw new Error(error)
     }
   }
@@ -100,7 +99,7 @@ export default function Login() {
               fullWidth
               id="email"
               label="Email Address"
-              {...register("email")}
+              {...register('email')}
               error={!!errors.email}
               helperText={errors.email?.message}
               disabled={isPending}
@@ -111,7 +110,7 @@ export default function Login() {
             <TextField
               required
               fullWidth
-              {...register("password")}
+              {...register('password')}
               error={!!errors.password}
               helperText={errors.password?.message}
               disabled={isPending}
@@ -122,9 +121,15 @@ export default function Login() {
             />
           </Grid>
           <Grid item xs={12}>
-            {errMsg && <Typography variant="body1" color="var(--red)" sx={{fontSize: '14px'}}>
-              {errMsg}
-            </Typography>}
+            {errMsg && (
+              <Typography
+                variant="body1"
+                color="var(--red)"
+                sx={{ fontSize: '14px' }}
+              >
+                {errMsg}
+              </Typography>
+            )}
           </Grid>
           {/* <Grid item xs={12}>
             <FormControlLabel
@@ -139,7 +144,7 @@ export default function Login() {
           variant="contained"
           sx={{ mt: 3, mb: 2, height: '50px' }}
         >
-          {isPending ? <CircularProgress sx={{color: 'white'}} /> : 'Sign In'}
+          {isPending ? <CircularProgress sx={{ color: 'white' }} /> : 'Sign In'}
         </Button>
         <Grid container justifyContent="flex-end">
           <Grid item>

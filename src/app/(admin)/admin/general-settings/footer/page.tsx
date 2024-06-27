@@ -87,15 +87,6 @@ function FooterSettings() {
     }
   }
 
-  // const handleIconChange = async (
-  //   index: number,
-  //   subIndex: number,
-  //   field: string,
-  //   e: any
-  // ) => {
-
-  // }
-
   const handleMenuItemDelete = (ind: number, subInd: number) => {
     const updatedMenus = menus.map((menu: any, i: number) => {
       if (i === ind) {
@@ -158,8 +149,6 @@ function FooterSettings() {
       console.log('error ', error)
     }
   }
-
-  console.log('menus ', menus)
 
   const handleAddHeader = async () => {
     // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)

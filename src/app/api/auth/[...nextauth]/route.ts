@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials: any) {
-        console.log("credentials ", credentials);
+        console.log('credentials ', credentials)
         if (!credentials || !credentials.email || !credentials.password)
           return null
 
@@ -32,18 +32,21 @@ export const authOptions: NextAuthOptions = {
           const user = await prisma.user.findFirst({
             where: { email: credentials.email },
           })
-          console.log("user ", user)
           if (!user) {
             return null
           }
+
+          if (!user.isApproved)
+            throw new Error('You are not approved yet. Please contact admin.')
 
           const isMatched = await bcrypt.compare(
             credentials.password,
             user?.password
           )
-          if (isMatched) return user
 
-          return null as any
+          if (!isMatched) return null
+
+          return user
         } catch (error) {
           console.log('error ', error)
           return null
