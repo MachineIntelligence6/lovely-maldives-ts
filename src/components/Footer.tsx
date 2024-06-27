@@ -7,37 +7,15 @@ import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 
-import EmailIcon from '@mui/icons-material/Email'
-import CallIcon from '@mui/icons-material/Call'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import XIcon from '@mui/icons-material/X'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
-import ContactsRoundedIcon from '@mui/icons-material/ContactsRounded'
 import Image from 'next/image'
 import styled from '@mui/system/styled'
 import Link from 'next/link'
-
-const iconMapping: { [key: string]: JSX.Element } = {
-  Whatsapp: (
-    <WhatsAppIcon
-      sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
-    />
-  ),
-  Facebook: (
-    <FacebookIcon
-      sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
-    />
-  ),
-  Twitter: (
-    <TwitterIcon
-      sx={{ display: { xs: 'none', md: 'block' }, fontSize: '20px' }}
-    />
-  ),
-  // Add more mappings as needed
-}
 
 const StyledImage = styled(Image)({
   padding: 1,

@@ -9,6 +9,7 @@ import {
   TableSortLabel,
   TableBody,
   Stack,
+  Box,
 } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -22,8 +23,8 @@ const CustomTableLabel = styled(TableSortLabel)(({ theme }) => ({
   color: '#5D596C',
 }))
 
-const CategoriesTable = (props: any) => {
-  const { dataArray, deleteFilter, editCategory, headOptions } = props
+const UsersTable = (props: any) => {
+  const { dataArray, deleteUser, headOptions, changeStatus } = props
   const [anchorEl, setAnchorEl] = useState(null)
 
   const handleClose = () => {
@@ -46,12 +47,6 @@ const CategoriesTable = (props: any) => {
               <CustomTableLabel>{option}</CustomTableLabel>
             </TableCell>
           ))}
-          {/* <TableCell>
-            <CustomTableLabel>Category</CustomTableLabel>
-          </TableCell>
-          <TableCell sx={{ textAlign: 'right' }}>
-            <CustomTableLabel>Actions</CustomTableLabel>
-          </TableCell> */}
         </TableRow>
       </TableHead>
       <TableBody>
@@ -69,7 +64,51 @@ const CategoriesTable = (props: any) => {
                 fontWeight: 500,
               }}
             >
-              {value}
+              {value?.name}
+            </TableCell>
+            <TableCell
+              sx={{
+                color: '#6F6B7D',
+                fontSize: '15px',
+                fontWeight: 500,
+              }}
+            >
+              {value?.email}
+            </TableCell>
+            <TableCell
+              sx={{
+                color: '#6F6B7D',
+                fontSize: '15px',
+                fontWeight: 500,
+              }}
+            >
+              {value?.role ? value.role : 'N/A'}
+            </TableCell>
+            <TableCell>
+              <Box
+                sx={{
+                  color: value?.isApproved ? '#28C76F' : '#F3103C',
+                  fontSize: '14px',
+                  px: '5px',
+                  fontWeight: 400,
+                  bgcolor: value?.isApproved
+                    ? 'rgba(40, 199, 111, 0.15)'
+                    : 'rgba(243, 16, 60, 0.15)',
+                  padding: '5px 10px',
+                  textAlign: 'center',
+                  borderRadius: '4px',
+                  maxWidth: '130px',
+                  cursor: 'pointer',
+                }}
+                onClick={() =>
+                  changeStatus(
+                    value?.id,
+                    value?.status === 'Pending' ? 'Approved' : 'Pending'
+                  )
+                }
+              >
+                {value?.status}
+              </Box>
             </TableCell>
             <TableCell sx={{ pr: 4 }}>
               <Stack
@@ -78,21 +117,13 @@ const CategoriesTable = (props: any) => {
                 alignItems="center"
                 justifyContent="end"
               >
-                <EditIcon
-                  sx={{
-                    color: 'var(--blue)',
-                    fontSize: '22px',
-                    cursor: 'pointer',
-                  }}
-                  onClick={() => editCategory({ value, index })}
-                />
                 <DeleteIcon
                   sx={{
                     color: 'var(--red)',
                     fontSize: '22px',
                     cursor: 'pointer',
                   }}
-                  onClick={() => deleteFilter(index)}
+                  onClick={() => deleteUser(value?.id)}
                 />
               </Stack>
             </TableCell>
@@ -103,4 +134,4 @@ const CategoriesTable = (props: any) => {
   )
 }
 
-export default CategoriesTable
+export default UsersTable

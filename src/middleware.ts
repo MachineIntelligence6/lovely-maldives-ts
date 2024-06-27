@@ -23,6 +23,7 @@ export const config = {
     '/admin/user-management/user-roles',
     '/admin/user-management/user-accounts',
     '/admin/user-management/activity-logs',
-    '/admin/help'
+    '/admin/help',
+    '/admin/general-settings/subscriptions',
   ],
 }

@@ -20,6 +20,8 @@ const options = [
   { label: 'Traveler Rating' },
 ]
 
+const headOptions = ['Id', 'Type', 'Actions']
+
 const BlogCategories = () => {
   const [showModal, setShowModal] = useState(false)
   const [categories, setCategories] = useState([] as any)
@@ -131,7 +133,8 @@ const BlogCategories = () => {
         />
       </Stack>
       <CategoriesTable
-        categories={categories}
+        dataArray={categories}
+        headOptions={headOptions}
         deleteFilter={deleteFilter}
         editCategory={editCategory}
       />

@@ -369,7 +369,17 @@ const FAQs = () => {
                 <AccordionDetails
                   sx={{ fontFamily: 'Century Gothic', px: { xs: 2, md: 4 } }}
                 >
-                  {faq.answer}
+                  <Box
+                    sx={{
+                      bgcolor: 'transparent',
+                      '& *': {
+                        bgcolor: 'transparent !important',
+                      },
+                    }}
+                    dangerouslySetInnerHTML={{
+                      __html: faq?.answer,
+                    }}
+                  />
                 </AccordionDetails>
               </Accordion>
             ))}

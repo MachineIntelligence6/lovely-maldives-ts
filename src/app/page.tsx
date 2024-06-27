@@ -26,24 +26,11 @@ const About = dynamic(() => import('@/components/About'))
 const TopBrands = dynamic(() => import('@/components/TopBrands'))
 const Banner = dynamic(() => import('@/components/Banner'))
 const OurServices = dynamic(() => import('@/components/OurServices'))
-
 const Header = React.lazy(() => import('@/components/Header'))
 
-// export const getHomeData = async () => {
-//   try {
-//     const response = await apiClient.get('/home')
-//     return response.data
-//   } catch (error: any) {
-//     throw new Error(error)
-//   }
-// }
-
 export default function Home() {
-  // const data = await getHomeData()
-  // const aboutMaldives = homeData?.aboutMaldivesShort
   const [loading, setLoading] = useState(false)
   const [homeData, setHomeData] = useState('' as any)
-  // const [themeData, setThemeData] = useState('' as any)
   const [collections, setCollections] = useState({} as any)
 
   const { themeData, error, fetchData } = useApiStore((state: any) => ({
@@ -114,7 +101,7 @@ export default function Home() {
   return (
     <Suspense fallback={<CustomLoader />}>
       <Box sx={{ bgcolor: themeData?.bgColor }}>
-        {loading && <CustomLoader />}
+        {/* {loading && <CustomLoader />} */}
         <Header />
         <Banner bannerData={homeData} themeData={themeData} />
         <Box
@@ -164,12 +151,7 @@ export default function Home() {
               dangerouslySetInnerHTML={{
                 __html: homeData?.aboutMaldivesShort?.[0]?.description,
               }}
-            >
-              {/* Maldives is a small country located in the Indian Ocean consisting
-            of 1250 islands and 62 atolls. Lorem ipsum Lorem ipsum dolor sit
-            amet, Maldives is a small country located in the Indian Ocean
-            consisting of 1250 island sand 62 at olls. */}
-            </Typography>
+            />
             <Box
               sx={{
                 display: 'flex',

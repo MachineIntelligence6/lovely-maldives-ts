@@ -4,6 +4,7 @@
 'use client'
 
 import { Box, Typography, Button, Container } from '@mui/material'
+import Link from 'next/link'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -11,8 +12,6 @@ import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import BoltIcon from '@mui/icons-material/Bolt'
-import collectionImg from '../../public/Images/collectionImg.jpg'
-import Link from 'next/link'
 
 export const datas = [{}, {}, {}, {}, {}]
 

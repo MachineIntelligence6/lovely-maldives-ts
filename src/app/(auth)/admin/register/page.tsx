@@ -14,15 +14,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Link from 'next/link'
 import axios from 'axios'
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { CircularProgress } from '@mui/material'
 
 export const registerFormSchema = z.object({
-  firstName: z
-    .string({ required_error: 'This field is required.' }),
+  firstName: z.string({ required_error: 'This field is required.' }),
   lastName: z.string().optional(),
   email: z
     .string({ required_error: 'This field is required.' })
@@ -50,25 +49,28 @@ export default function SignUp() {
       password: '',
     },
   })
-  const [isPending, startTransition] = React.useTransition();
-  const[errMsg, setErrMsg] = React.useState('')
+  const [isPending, startTransition] = React.useTransition()
+  const [errMsg, setErrMsg] = React.useState('')
 
   const onSubmit = async () => {
-    const name = `${watch('firstName')} ${watch("lastName")}`
+    const name = `${watch('firstName')} ${watch('lastName')}`
 
     try {
       startTransition(async () => {
-        const res = await axios.post('http://localhost:3000/api/auth/register', {
-          name,
-          email: watch('email'),
-          password: watch('password'),
-        })
+        const res = await axios.post(
+          'http://localhost:3000/api/auth/register',
+          {
+            name,
+            email: watch('email'),
+            password: watch('password'),
+          }
+        )
         console.log('res =>>> ', res)
-        if (res.status === 201) router.push("/admin/login")
+        if (res.status === 201) router.push('/admin/login')
       })
     } catch (error) {
-      setErrMsg("Invalid Credentials.")
-      console.log("error ", error)
+      setErrMsg('Invalid Credentials.')
+      console.log('error ', error)
     }
 
     return null
@@ -95,7 +97,6 @@ export default function SignUp() {
       <form onSubmit={handleSubmit(onSubmit as any)}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            
             <TextField
               autoComplete="given-name"
               required
@@ -103,7 +104,7 @@ export default function SignUp() {
               id="firstName"
               label="First Name"
               autoFocus
-              {...register("firstName")}
+              {...register('firstName')}
               error={!!errors.firstName}
               helperText={errors.firstName?.message}
               disabled={isPending}
@@ -111,11 +112,10 @@ export default function SignUp() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
               fullWidth
               id="lastName"
               label="Last Name"
-              {...register("lastName")}
+              {...register('lastName')}
               autoComplete="family-name"
               error={!!errors.lastName}
               helperText={errors.lastName?.message}
@@ -128,7 +128,7 @@ export default function SignUp() {
               fullWidth
               id="email"
               label="Email Address"
-              {...register("email")}
+              {...register('email')}
               autoComplete="email"
               error={!!errors.email}
               helperText={errors.email?.message}
@@ -139,7 +139,7 @@ export default function SignUp() {
             <TextField
               required
               fullWidth
-              {...register("password")}
+              {...register('password')}
               label="Password"
               type="password"
               id="password"
@@ -150,9 +150,15 @@ export default function SignUp() {
             />
           </Grid>
           <Grid item xs={12}>
-            {errMsg && <Typography variant="body1" color="var(--red)" sx={{fontSize: '14px'}}>
-              {errMsg}
-            </Typography>}
+            {errMsg && (
+              <Typography
+                variant="body1"
+                color="var(--red)"
+                sx={{ fontSize: '14px' }}
+              >
+                {errMsg}
+              </Typography>
+            )}
           </Grid>
         </Grid>
 
@@ -162,7 +168,7 @@ export default function SignUp() {
           variant="contained"
           sx={{ mt: 3, mb: 2, height: '50px' }}
         >
-          {isPending ? <CircularProgress sx={{color: 'white'}} /> : 'Sign Up'}
+          {isPending ? <CircularProgress sx={{ color: 'white' }} /> : 'Sign Up'}
         </Button>
         <Grid container justifyContent="flex-end">
           <Grid item>
