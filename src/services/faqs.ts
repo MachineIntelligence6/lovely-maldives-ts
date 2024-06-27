@@ -1,10 +1,12 @@
 import prisma from '../../prisma'
 
 interface FAQS {
-    title: string,
-    description: string,
-    categories: string[],
-    policies: [{ question: string; answer: string }]
+  title: string
+  description: string
+  categories: string[]
+  faqs: [
+    { category: string; questions: [{ question: string; answer: string }] },
+  ]
 }
 
 export async function createFAQS(data: FAQS) {
@@ -17,18 +19,18 @@ export async function createFAQS(data: FAQS) {
       },
       data: {
         title: data.title,
-        policies: data.policies,
+        faqs: data.faqs,
         description: data.description,
-        categories: data.categories,
+        // categories: data.categories,
       },
     })
   } else {
     result = await prisma.fAQS.create({
       data: {
         title: data.title,
-        policies: data.policies,
+        faqs: data.faqs,
         description: data.description,
-        categories: data.categories,
+        // categories: data.categories,
       },
     })
   }

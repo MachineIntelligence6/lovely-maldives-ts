@@ -17,6 +17,8 @@ import {
   Typography,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import dynamic from 'next/dynamic'
 import AddIcon from '@mui/icons-material/Add'
 import React, { useEffect, useState, useTransition } from 'react'
@@ -24,8 +26,6 @@ import CustomLoader from '@/admin-components/common/CustomLoader'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import HeadingWraper from '@/admin-components/common/HeadingWraper'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
-import TagsField from '@/admin-components/items/TagsField'
-import AddFaq from '@/admin-components/pages/modals/AddFaq'
 import { CustomLabel } from '@/admin-components/styled/CustomLabels'
 import { addFaqRequest, getFaqRequest } from '@/utils/api-requests/faqs.request'
 import AddQuestion from '@/admin-components/pages/modals/AddQuestion'
@@ -45,64 +45,69 @@ const FAQs = () => {
   const [values, setValues] = useState({
     title: '',
     description: '',
-    categories: [] as any,
   })
   const [editId, setEditId] = useState(null as any)
 
   const handleShowModal = (index: any) => setOpen({ index, show: !open.show })
-
-  const handleChangeCategories = (category: any) => {
-    setValues({
-      ...values,
-      categories: [...values.categories, category],
-    })
-  }
-
-  const removeCategory = (ind: number) => {
-    setValues({
-      ...values,
-      categories: values.categories.filter((_: any, i: number) => i !== ind),
-    })
-  }
-
   const handleAddQuestion = (newQues: any, type: string) => {
-    console.log('newQuestion ', newQues)
     if (type === 'add') {
       setPolicies(
         policies.map((pol: any, ind: any) => {
           if (ind === open?.index) {
             return { ...pol, questions: [...pol.questions, newQues] }
+          } else {
+            return pol
           }
         })
       )
     } else {
-      setPolicies(
-        policies.map((pol: any, ind: any) => {
-          if (ind === open?.index) {
-            pol?.questions?.map((qe: any, i: number) => {
-              if (i === editId) {
-                return newQues
-              } else {
-                return qe
-              }
-            })
-          }
-        })
-      )
+      const filtered = policies.map((pol: any, ind: any) => {
+        if (ind === open?.index) {
+          const result = pol?.questions?.map((qe: any, i: number) => {
+            if (i === editId) {
+              return newQues
+            } else {
+              return qe
+            }
+          })
+          return { ...pol, questions: result }
+        } else {
+          return pol
+        }
+      })
+      setPolicies(filtered)
     }
     setEdit('')
   }
-  console.log('policies ', policies)
-  const editQuestion = (policy: any, id: any) => {
-    setEditId(id)
+
+  const editQuestion = (policy: any, id: any, ind: number) => {
+    setEditId(ind)
     setEdit(policy)
-    handleShowModal(null)
+    handleShowModal(id)
   }
 
-  const deleteQuestion = (ques: string) => {
+  const deleteQuestion = (ques: string, index: number) => {
     const sure = window.confirm('Are you sure you want to delete?')
     if (!sure) return
-    setPolicies(policies.filter((p: any) => p.question !== ques))
+    // setPolicies(policies.filter((p: any) => p.question !== ques))
+    const filtered = policies?.map((pol: any, ind: number) => {
+      if (ind === index) {
+        const result = pol?.questions?.filter((p: any) => p.question !== ques)
+        return {
+          ...pol,
+          questions: result,
+        }
+      } else {
+        return pol
+      }
+    })
+    setPolicies(filtered)
+  }
+
+  const deleteQuestionType = (category: string) => {
+    const sure = window.confirm('Are you sure you want to delete?')
+    if (!sure) return
+    setPolicies(policies?.filter((p: any) => p.category !== category))
   }
 
   const handleSave = () => {
@@ -145,8 +150,12 @@ const FAQs = () => {
         const res = await getFaqRequest()
         const data = res?.data
         if (data?.status === 200) {
-          setPolicies(data?.data?.policies)
-          setValues({ ...values, title: data?.data?.title })
+          setPolicies(data?.data?.faqs)
+          setValues({
+            ...values,
+            title: data?.data?.title,
+            description: data?.data?.description,
+          })
         } else {
           console.log('privacy policy else ', data)
         }
@@ -202,25 +211,16 @@ const FAQs = () => {
         />
       </Box>
 
-      <Box sx={{ my: 3 }}>
-        <TagsField
-          label="Category"
-          placeholder="Enter category."
-          tags={values?.categories}
-          name="categories"
-          handleChangeTags={handleChangeCategories}
-          removeTag={removeCategory}
-        />
-      </Box>
-
       <Button
         variant="outlined"
         sx={{
           border: '1px solid var(--brown)',
           textTransform: 'capitalize',
-          mb: 3,
+          my: 3,
         }}
-        onClick={() => setPolicies([...policies, { type: '', questions: [] }])}
+        onClick={() =>
+          setPolicies([...policies, { category: '', questions: [] }])
+        }
       >
         <Stack direction="row" alignItems="center" gap="10px">
           <AddIcon sx={{ color: 'var(--brown)', fontSize: '22px' }} />
@@ -233,22 +233,52 @@ const FAQs = () => {
       {policies.map((faqs: any, index: number) => (
         <Box
           key={index}
-          sx={{ border: '1px solid silver', p: 2, mb: 2, borderRadius: '6px' }}
+          sx={{
+            border: '1px solid silver',
+            p: 2,
+            pt: 4,
+            mb: 2,
+            borderRadius: '6px',
+            position: 'relative',
+          }}
         >
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              cursor: 'pointer',
+              color: 'var(--brown)',
+            }}
+          >
+            <DeleteIcon
+              sx={{
+                color: 'var(--red)',
+                fontSize: '35px',
+                cursor: 'pointer',
+                p: '6px',
+                border: '1px solid var(--red)',
+                borderRadius: '50%',
+              }}
+              onClick={() => deleteQuestionType(faqs?.category)}
+            />
+          </Box>
           <Box sx={{ mb: 3 }}>
             <TextFieldWraper
-              label="Type"
-              placeholder="Enter type."
-              name="type"
-              value={faqs?.type}
+              label="Category"
+              placeholder="Enter category."
+              name="category"
+              value={faqs?.category}
               onChange={(e: any) =>
                 setPolicies(
                   policies?.map((pol: any, ind: number) => {
                     if (ind === index) {
                       return {
                         ...pol,
-                        type: e.target.value,
+                        category: e.target.value,
                       }
+                    } else {
+                      return pol
                     }
                   })
                 )
@@ -305,7 +335,36 @@ const FAQs = () => {
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
-                  {faq.question}
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    sx={{ width: '100%' }}
+                  >
+                    <Typography sx={{ px: 1 }}>{faq.question}</Typography>
+                    <Stack
+                      direction="row"
+                      alignItems="center"
+                      sx={{ mr: 2, gap: 1 }}
+                    >
+                      <EditIcon
+                        sx={{
+                          color: 'var(--blue)',
+                          fontSize: '22px',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => editQuestion(faq, index, ind)}
+                      />
+                      <DeleteIcon
+                        sx={{
+                          color: 'var(--red)',
+                          fontSize: '22px',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => deleteQuestion(faq?.question, index)}
+                      />
+                    </Stack>
+                  </Stack>
                 </AccordionSummary>
                 <AccordionDetails
                   sx={{ fontFamily: 'Century Gothic', px: { xs: 2, md: 4 } }}

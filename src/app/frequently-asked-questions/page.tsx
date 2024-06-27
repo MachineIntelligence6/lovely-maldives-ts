@@ -3,26 +3,48 @@
 'use client'
 
 import { Container, Box, Typography } from '@mui/material'
-import { useEffect } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
 import FaqsAccordion from '@/components/Accordion'
 import MailBox from '@/components/MailBox'
 import useApiStore from '@/stores/themeApiStore'
+import { getFaqRequest } from '@/utils/api-requests/faqs.request'
+import CustomLoader from '@/admin-components/common/CustomLoader'
 
 export default function page() {
+  const [isPending, startTransition] = useTransition()
+  const [faqs, setFaqs] = useState({} as any)
   const { themeData, error, fetchData } = useApiStore((state: any) => ({
     themeData: state.themeData,
     error: state.error,
     fetchData: state.fetchData,
   }))
 
+  const getFaqs = async () => {
+    try {
+      startTransition(async () => {
+        const res = await getFaqRequest()
+        const data = res?.data
+        if (data?.status === 200) {
+          setFaqs(data?.data)
+        } else {
+          console.log('privacy policy else ', data)
+        }
+      })
+    } catch (err: any) {
+      console.log('err ', err)
+    }
+  }
+  console.log('FAQS ', faqs)
   useEffect(() => {
+    getFaqs()
     fetchData()
   }, [])
   return (
     <Box sx={{ pt: { md: '180px', xs: '100px' }, bgcolor: themeData?.bgColor }}>
+      {isPending && <CustomLoader />}
       <Header />
       <Container sx={{ maxWidth: { xs: '100%', md: '90%' } }}>
         <BreadCrumb />
@@ -48,30 +70,20 @@ export default function page() {
               textAlign: 'center',
             }}
           >
-            FREQUENTLY ASKED QUESTIONS
+            {faqs?.title}
           </Typography>
-          <Typography
+          <Box
             sx={{
-              fontSize: { xs: '20', md: '22px' },
               mt: { xs: '40px', md: '0' },
+              bgcolor: 'transparent',
+              '& *': {
+                bgcolor: 'transparent !important',
+              },
             }}
-          >
-            Our Frequently Asked Questions (FAQ) is tailor-made to assist
-            tourists visiting to the Maldives and will be covering a wide range
-            of questions by tourists regarding the tourist Visa, rules and
-            regulations and several other areas.
-          </Typography>
-          <Typography
-            sx={{ display: { xs: 'none', md: 'block' }, fontSize: '22px' }}
-          >
-            Our Frequently Asked Questions (FAQ) is tailor-made to assist
-            tourists visiting to the Maldives and will be covering a wide range
-            of questions by tourists regarding the tourist Visa, rules and
-            regulations and several other areas. Our Frequently Asked Questions
-            (FAQ) is tailor-made to assist tourists visiting to the Maldives and
-            will be covering a wide range of questions by tourists regarding the
-            tourist Visa, rules and regulations and several other areas.
-          </Typography>
+            dangerouslySetInnerHTML={{
+              __html: faqs?.description,
+            }}
+          />
           <Box
             sx={{
               width: { xs: 'auto', md: '75%' },
@@ -84,71 +96,12 @@ export default function page() {
             }}
           >
             <Typography sx={{ fontWeight: 600, mt: 2 }}>Categories:</Typography>
-            <Typography sx={{ mt: 2 }}>Visa and Arrival</Typography>
-            <Typography sx={{ mt: 2 }}>Legal Queries</Typography>
-            <Typography sx={{ mt: 2 }}>General Questions</Typography>
-            <Typography sx={{ mt: 2, mb: 4 }}>
-              More Category Add from Beknd
-            </Typography>
+            {faqs?.faqs?.map((faq: any, index: number) => (
+              <Typography key={index} sx={{ mt: 2 }}>{faq?.category}</Typography>
+            ))}
           </Box>
         </Box>
-        <FaqsAccordion />
-        {/* <Box
-          sx={{
-            mt: { xs: '60px', md: '120px' },
-            width: { xs: '90%', md: '55%' },
-            height: { xs: '250px', md: '350px' },
-            mx: 'auto',
-            borderRadius: '25px',
-            position: 'relative',
-            bgcolor: 'var(--blue)',
-            textAlign: 'center',
-          }}
-        >
-          <Diversity2Icon
-            sx={{
-              color: 'white',
-              mt: { xs: '7%', md: '10%' },
-              fontSize: '45px',
-            }}
-          />
-          <Typography
-            sx={{
-              color: 'white',
-              fontSize: { xs: '16px', md: '24px' },
-              fontWeight: 200,
-              textAlign: 'center',
-              mt: '20px',
-              px: 4,
-            }}
-          >
-            Subscribe to get the latest news and offers by Lovely Maldives
-          </Typography>
-          <Box>
-            <TextField
-              id="outlined-multiline-flexible"
-              label="Enter email adress"
-              multiline
-              className="input"
-              // maxRows={10}
-              sx={{
-                bgcolor: 'white',
-                mt: '20px',
-                borderRadius: '10px',
-                width: '60%',
-                position: 'relative',
-              }}
-            />
-            <SendIcon
-              sx={{
-                position: 'absolute',
-                top: { xs: '70%', md: '71%' },
-                right: '22%',
-                color: 'var(--blue)',
-              }}
-            />
-          </Box>
-        </Box> */}
+        <FaqsAccordion faqs={faqs?.faqs} />
       </Container>
       <Box sx={{ width: { xs: 'auto', md: '63%' }, mx: 'auto' }}>
         <MailBox />

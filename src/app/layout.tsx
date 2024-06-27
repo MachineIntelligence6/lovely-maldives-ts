@@ -16,9 +16,16 @@ export const metadata: Metadata = {
   description:
     // eslint-disable-next-line max-len
     'Lovely Maldives, a distinguished travel agency from the Maldives strives to redene Luxury travel experiences in the Maldives.',
+  icons: {
+    icon: '/images/lovely-maldives-logo-brown.png',
+    shortcut: '/images/lovely-maldives-logo-brown.png',
+    apple: '/images/lovely-maldives-logo-brown.png',
+    other: {
+      rel: '/images/lovely-maldives-logo-brown.png',
+      url: '/images/lovely-maldives-logo-brown.png.png',
+    },
+  },
 }
-
-// dbConnection().catch(() => {})
 
 export default function RootLayout({
   children,

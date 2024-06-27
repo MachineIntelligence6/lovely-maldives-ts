@@ -29,11 +29,9 @@ export async function POST(req: Request) {
   console.log('privacy policies data', bodyData)
   if (
     !bodyData?.title ||
-    !bodyData?.policies ||
-    bodyData.policies?.length === 0 ||
-    !bodyData?.description ||
-    bodyData.categories?.length === 0 ||
-    !bodyData?.categories
+    !bodyData?.faqs ||
+    bodyData.faqs?.length === 0 ||
+    !bodyData?.description
   )
     return NextResponse.json({
       message: 'Please send complete data to save.',
