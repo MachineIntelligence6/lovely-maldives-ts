@@ -1,18 +1,20 @@
 import apiClient from '@/services/apiClient'
 
-interface FAQs {
-  title: string,
-  description: string,
-  categories: string[],
-  policies: [{ question: string; answer: string }]
+interface FAQS {
+  title: string
+  description: string
+  // categories: string[]
+  policies: [
+    { category: string; questions: [{ question: string; answer: string }] },
+  ]
 }
 
-export const addFaqRequest = async (data: FAQs) => {
+export const addFaqRequest = async (data: FAQS) => {
   return apiClient.post('/faqs', {
     title: data.title,
-    policies: data.policies,
-    categories: data.categories,
-    description: data.description
+    faqs: data.policies,
+    // categories: data.categories,
+    description: data.description,
   })
 }
 

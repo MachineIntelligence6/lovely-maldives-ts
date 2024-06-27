@@ -82,6 +82,16 @@ type Policies {
   answer     String
 }
 
+type Questions {
+  question   String
+  answer     String
+}
+
+type FaqsWithCategory {
+  category   String
+  questions  Questions[]
+}
+
 
 // ADMIN USER MODEL
 model User {
@@ -311,7 +321,6 @@ model PrivacyPolicy {
 model FAQS {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
   title      String
-  policies   Policies[]
-  categories String[]
+  faqs   FaqsWithCategory[]
   description String
 }

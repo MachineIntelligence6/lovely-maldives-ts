@@ -10,10 +10,10 @@ import {
   Modal,
   Button,
   Stack,
-  InputLabel,
 } from '@mui/material'
 import dynamic from 'next/dynamic'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
+import { CustomLabel } from '@/admin-components/styled/CustomLabels'
 
 const JoditTextEditor = dynamic(
   () => import('@/admin-components/common/JoditTextEditor'),
@@ -80,6 +80,9 @@ const AddQuestion = (props: any) => {
             }
           />
 
+          <CustomLabel id="demo-simple-select-label" sx={{ mb: 2, fontFamily: 'Public Sans' }}>
+            Answer
+          </CustomLabel>
           <JoditTextEditor
             handleEditorValue={(val: any) =>
               setValues({ ...values, answer: val })
