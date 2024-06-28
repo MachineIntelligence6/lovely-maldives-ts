@@ -50,7 +50,7 @@ export default function ResortsPage() {
     error: state.error,
     fetchData: state.fetchData,
   }))
-  
+
   const getHotels = async (ids: any, type: string) => {
     if (ids?.length === 0) return
     try {
@@ -166,16 +166,18 @@ export default function ResortsPage() {
         {sections?.map((sec: any, index: number) => {
           if (sec?.type === 'text') {
             return (
-              <Box
-                className="quill-content"
-                sx={{
-                  bgcolor: 'transparent',
-                  '& *': {
-                    bgcolor: 'transparent !important',
-                  },
-                }}
-                dangerouslySetInnerHTML={createMarkup(sec?.description)}
-              />
+              <Box sx={{ maxWidth: '1000px !important', mx: 'auto' }}>
+                <Box
+                  className="quill-content"
+                  sx={{
+                    bgcolor: 'transparent',
+                    '& *': {
+                      bgcolor: 'transparent !important',
+                    },
+                  }}
+                  dangerouslySetInnerHTML={createMarkup(sec?.description)}
+                />
+              </Box>
             )
           }
           if (sec?.type === 'images_slider') {
