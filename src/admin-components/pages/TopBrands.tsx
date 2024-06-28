@@ -59,7 +59,6 @@ const TopBrands = () => {
       startTransition(async () => {
         const res = await getTopBrandsRequest()
         const data = res?.data
-        console.log('response data  ', data)
         if (data?.status === 200) {
           setBrands(data?.data?.brands || [])
           setValues(data?.data)
@@ -83,7 +82,6 @@ const TopBrands = () => {
           bgColor: values?.bgColor,
           homeBgId,
         })
-        console.log('data =>>> ', res?.data)
         const data = res?.data
         if (data?.status === 201) {
           getTopBrands()

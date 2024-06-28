@@ -44,13 +44,13 @@ export default function ResortsPage() {
   const [resortsData, setResortsData] = useState([] as any)
   const [sections, setSections] = useState([] as any)
   const [editorText, setEditorText] = useState('')
-
+  console.log('Sections ', sections)
   const { themeData, error, fetchData } = useApiStore((state: any) => ({
     themeData: state.themeData,
     error: state.error,
     fetchData: state.fetchData,
   }))
-  
+
   const getHotels = async (ids: any, type: string) => {
     if (ids?.length === 0) return
     try {
@@ -78,7 +78,6 @@ export default function ResortsPage() {
         const data = res?.data
         if (data?.status === 200) {
           setSections(data?.data)
-          console.log('data ', data?.data)
           setPages({
             ...pages,
             totalGalleryImages: data?.totalGalleryImages,
@@ -90,10 +89,6 @@ export default function ResortsPage() {
             if (sec?.type === 'images_gallery') {
               setResortsData([...resortsData, ...sec.hotels])
             }
-            // if (sec?.type === 'images_slider') {
-            //   getHotels(sec?.ids, 'images_slider')
-            // }
-            // // return null
           })
         } else {
           console.log('response about maldives', res)
@@ -116,10 +111,6 @@ export default function ResortsPage() {
       if (data?.status === 200) {
         setFilters(data?.data)
       } else {
-        // setAlertMsg({ type: 'error', message: data?.message })
-        // setTimeout(() => {
-        //   setAlertMsg({ type: '', message: '' })
-        // }, 3000)
         console.log('data ', data)
       }
       // })
@@ -167,15 +158,20 @@ export default function ResortsPage() {
           if (sec?.type === 'text') {
             return (
               <Box
-                className="quill-content"
-                sx={{
-                  bgcolor: 'transparent',
-                  '& *': {
-                    bgcolor: 'transparent !important',
-                  },
-                }}
-                dangerouslySetInnerHTML={createMarkup(sec?.description)}
-              />
+                key={`text_${index}`}
+                sx={{ maxWidth: '1000px !important', mx: 'auto' }}
+              >
+                <Box
+                  className="quill-content"
+                  sx={{
+                    bgcolor: 'transparent',
+                    '& *': {
+                      bgcolor: 'transparent !important',
+                    },
+                  }}
+                  dangerouslySetInnerHTML={createMarkup(sec?.description)}
+                />
+              </Box>
             )
           }
           if (sec?.type === 'images_slider') {
@@ -196,6 +192,7 @@ export default function ResortsPage() {
           if (sec?.type === 'images_gallery') {
             return (
               <ResortsGallery
+                key={`gallery_${index}`}
                 resorts={resortsData}
                 loadMore={loadMore}
                 pages={pages}

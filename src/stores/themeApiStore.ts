@@ -10,7 +10,6 @@ const useApiStore = create((set) => ({
       set({ loading: true, error: null })
       const res = await getThemeConfigRequest()
       const data = await res.data
-      console.log('zustands data => ', data)
       if (data?.status === 200) {
         set({ themeData: data?.data, loading: false })
       } else {

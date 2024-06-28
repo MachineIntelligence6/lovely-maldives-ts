@@ -38,7 +38,6 @@ function ProfileDropdown() {
   }
 
   const logout = async () => {
-    console.log('signout 1')
     try {
       await signOut();
       router.push('/admin/login');

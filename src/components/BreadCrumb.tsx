@@ -16,7 +16,6 @@ interface RouteSegment {
 
 function generateRouteSegments(path: string): RouteSegment[] {
   const segments = path.split('/').filter((segment) => segment !== '')
-  console.log('segments ', decodeURIComponent(segments?.[1]))
   const routeSegments: RouteSegment[] = []
 
   routeSegments.push({

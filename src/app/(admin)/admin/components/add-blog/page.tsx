@@ -87,7 +87,6 @@ export default function AddBlog() {
           }, 3000)
           console.log('response about maldives', res)
         }
-        console.log('response ', res)
       })
     } catch (error: any) {
       console.log('error ', error)

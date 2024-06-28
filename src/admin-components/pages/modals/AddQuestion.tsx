@@ -39,7 +39,6 @@ const style = {
 const AddQuestion = (props: any) => {
   const { open, handleShowModal, handleAddQuestion, edit } = props
   const [values, setValues] = useState({ question: '', answer: '' })
-  console.log('edit s ', edit)
   useEffect(() => {
     if (edit?.question) {
       setValues({ question: edit.question, answer: edit.answer })

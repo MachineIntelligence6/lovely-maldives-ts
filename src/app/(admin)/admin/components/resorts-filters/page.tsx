@@ -37,42 +37,19 @@ const ResortsFilters = () => {
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
 
   const handleShowModal = () => setShowModal(!showModal)
-
-  // const handleAddFilter = (fil: any) => {
-  //   setFilters([...filters, fil])
-  // }
-
   const handleFilterChange = (option: any) => {
     setFilter(option)
     const filtered = filters.filter((fltr: any) => fltr.type === option)
     setFilters(filtered)
   }
 
-  // const deleteFilter = (id: any) => {
-  //   const sure = window.confirm('Are you sure?')
-  //   if (!sure) return
-  //   setFilters(filters.filter((_: any, index: number) => index !== id))
-  // }
-
   const editFilter = (fil: any) => {
     setEdit(fil)
     handleShowModal()
   }
-  // const handleEditFilter = (val: any) => {
-  //   setEdit(null)
-  //   setFilters(
-  //     filters.map((_: any, index: number) => {
-  //       if (index === val.id) {
-  //         return val
-  //       }
-  //       return _
-  //     })
-  //   )
-  // }
 
   const searchFilters = (e: any) => {
     const { value } = e.target
-    console.log('search ', value)
     if (value === '') {
       setFilters(filters)
     } else {
@@ -88,7 +65,6 @@ const ResortsFilters = () => {
       startTransition(async () => {
         const res = await getResortFilterRequest()
         const data = res?.data
-        console.log('data', data)
         if (data?.status === 200) {
           setFilters(data?.data)
         } else {
@@ -134,7 +110,6 @@ const ResortsFilters = () => {
   }
 
   const deleteFilter = (id: string) => {
-    console.log('id ', id)
     const sure = window.confirm('Are you sure?')
     if (!sure) return
     try {
@@ -170,7 +145,6 @@ const ResortsFilters = () => {
   }
 
   const handleEditFilter = (values: any) => {
-    console.log('values ', values)
     try {
       startTransition(async () => {
         const res = await editResortFilterRequest(values)

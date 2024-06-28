@@ -34,8 +34,6 @@ export async function GET(req: Request) {
       return item
     })
 
-    console.log('totalGalleryImages: ', totalGalleryImages)
-
     return NextResponse.json(
       {
         message: 'Data Fetched successfully',

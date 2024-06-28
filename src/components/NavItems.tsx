@@ -10,7 +10,6 @@ import { Box } from '@mui/system'
 
 function NavItems({ items }: any) {
   const router = useRouter()
-  console.log('mobile items ', items)
   return (
     <Box
       sx={{
