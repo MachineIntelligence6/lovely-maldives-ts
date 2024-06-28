@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 /* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
@@ -40,12 +41,18 @@ const typeOptions = [
 
 const ResortSections = () => {
   const [showModal, setShowModal] = useState(false)
-  const [pages, setPages] = useState({ page: 1, limit: 6 })
+  const [pages, setPages] = useState({
+    page: 1,
+    limit: 6,
+    totalGalleryImages: null as any,
+  })
   const [showHotelModal, setShowHotelModal] = useState({
     show: false,
     index: null as any,
   })
+  const [isFullyLoaded, setIsFullyLoaded] = useState(false)
   const [sections, setSections] = useState([] as any)
+  const [hotelsData, setHotelsData] = useState([] as any)
   const [options, setOptions] = useState([])
   const [editorText, setEditorText] = useState('')
   const [isPending, startTransition] = useTransition()
@@ -63,6 +70,10 @@ const ResortSections = () => {
     setSections(updatedSections)
   }
 
+  const loadMore = () => {
+    setPages({ ...pages, page: (pages.page + 1) as any })
+  }
+
   const handleShowModal = () => setShowModal(!showModal)
   const handleShowHotelModal = (index: number) =>
     setShowHotelModal({ show: !showHotelModal?.show, index })
@@ -70,17 +81,20 @@ const ResortSections = () => {
   const handleAddType = (type: string) => {
     setSections([...sections, { type }])
   }
+  console.log('sections are ', sections)
 
   const handleAddHotel = async (index: number, hotel: any) => {
-    console.log('index: ', index)
     const updatedSections = sections.map((sec: any, ind: number) => {
       if (ind === index) {
         const hotels = sec.hotels ? [...sec.hotels, hotel] : [hotel]
-        console.log('ids ', hotels)
         return { ...sec, hotels }
       }
       return sec
     })
+
+    if (sections?.[index]?.type === 'images_gallery') {
+      setHotelsData([...hotelsData, hotel])
+    }
     setSections(updatedSections)
   }
 
@@ -88,6 +102,10 @@ const ResortSections = () => {
     const sure = window.confirm('Are you sure you want to remove?')
     if (!sure) return
     setSections(sections.filter((_: any, i: number) => i !== index))
+    if (sections?.[index]?.type === 'images_gallery') {
+      setHotelsData([])
+    }
+    setPages({ ...pages, totalGalleryImages: 0 })
   }
 
   const handleChange = (e: any, index: number) => {
@@ -106,15 +124,38 @@ const ResortSections = () => {
       startTransition(async () => {
         const res = await getResortSectionRequest(pages)
         const data = res?.data
-        console.log('get resort section data is =>>> ', data)
         if (data?.status === 200) {
-          // setSections(data?.data?.resortSections)
-          setSections(data?.data)
+          setPages({
+            ...pages,
+            totalGalleryImages: data?.totalGalleryImages,
+          })
+          // setSections(data?.data)
           data?.data?.map((sec: any) => {
             if (sec?.type === 'text') {
               setEditorText(sec?.description)
             }
+            if (sec?.type === 'images_gallery') {
+              setHotelsData([...hotelsData, ...sec.hotels])
+            }
           })
+
+          const result = sections?.map(
+            (section: any) =>
+              section?.type === 'images_gallery' && section.hotels
+          )
+          console.log('Result sections ', result)
+          setSections(
+            data?.data?.map((sec: any) => {
+              if (sec?.type === 'images_gallery') {
+                return {
+                  ...sec,
+                  hotels: [...result, ...sec.hotels],
+                }
+              } else {
+                return sec
+              }
+            })
+          )
         } else {
           setAlertMsg({ type: 'error', message: data?.message })
           setTimeout(() => {
@@ -132,7 +173,6 @@ const ResortSections = () => {
       startTransition(async () => {
         const res = await AddResortSectionRequest(sections)
         const data = res?.data
-        console.log('data ===>>> ', data)
         if (data?.status === 201) {
           getResortSection()
           setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
@@ -162,7 +202,7 @@ const ResortSections = () => {
 
   useEffect(() => {
     getResortSection()
-  }, [])
+  }, [pages?.page])
 
   return (
     <Box>
@@ -221,13 +261,6 @@ const ResortSections = () => {
                     Remove
                   </Button>
                 </Stack>
-                {/* <ReactQuillEditor
-                  height={400}
-                  handleEditorValue={(val: any) =>
-                    handleEditorValue(val, index)
-                  }
-                  value={editorText}
-                /> */}
                 <JoditTextEditor
                   handleEditorValue={(val: any) =>
                     handleEditorValue(val, index)
@@ -266,10 +299,13 @@ const ResortSections = () => {
                 </Stack>
                 <Box>
                   <ResortsGallery
-                    hotels={section?.hotels}
+                    hotels={hotelsData}
                     handleChange={(e: any) => handleChange(e, index)}
                     title={section?.title}
+                    pages={pages}
                     handleShowModal={() => handleShowHotelModal(index)}
+                    isFullyLoaded={isFullyLoaded}
+                    loadMore={loadMore}
                   />
                 </Box>
               </Box>

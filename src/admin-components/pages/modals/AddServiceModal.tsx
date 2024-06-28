@@ -44,7 +44,6 @@ const AddServiceModal = (props: any) => {
     formData.append('file', file as any)
     formData.append('upload_preset', 'j8epfynh')
     const res = await uploadImgToCloudinary(formData)
-    console.log('res ', res)
     setIconUrl(res?.secure_url)
   }
 
@@ -52,15 +51,12 @@ const AddServiceModal = (props: any) => {
     // eslint-disable-next-line prefer-destructuring
     const file = e.target.files?.[0]
     setImage(file)
-    console.log('filesss ', file)
     const formData = new FormData()
     formData.append('file', file as any)
     formData.append('upload_preset', 'j8epfynh')
     const res = await uploadImgToCloudinary(formData)
-    console.log('res ', res)
     setImageUrl(res?.secure_url)
   }
-  console.log('image url ', imageUrl)
   useEffect(() => {
     if (edit?.icon) {
       setIconUrl(edit?.icon)

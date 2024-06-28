@@ -12,7 +12,6 @@ import Link from 'next/link'
 
 const HotelsWraper = (props: any) => {
   const { hotels } = props
-  console.log('reosrt data ', hotels)
   return (
     <Box>
       <Typography

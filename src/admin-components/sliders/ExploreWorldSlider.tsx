@@ -78,7 +78,6 @@ const ExploreWorldSlider = (props: any) => {
       },
     ],
   }
-  console.log('cardssssssssssss ', cards)
   return (
     <Box
       className="slider-container explore-slider"

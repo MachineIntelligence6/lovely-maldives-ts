@@ -20,8 +20,16 @@ import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import collectionImg from '/public/Images/collectionImg.jpg'
 
 export default function ResortsGallery(props: any) {
-  const { title, handleChange, handleShowModal, hotels } = props
-
+  const {
+    title,
+    handleChange,
+    handleShowModal,
+    hotels,
+    pages,
+    isFullyLoaded,
+    loadMore,
+  } = props
+  console.log('hotels are ', hotels)
   return (
     <Box sx={{ mb: '40px' }}>
       <TextFieldWraper
@@ -71,19 +79,29 @@ export default function ResortsGallery(props: any) {
                   sx={{ textDecoration: 'none', position: 'relative' }}
                 >
                   <Box
-                    component={Image}
-                    src={collectionImg}
-                    alt={item.name}
                     sx={{
                       width: '100%',
                       height: { xs: '250px', md: '300px' },
                       objectFit: 'cover',
+                      overflow: 'hidden',
                       borderRadius: {
                         xs: '0px',
                         md: `20px 20px 0px 0px`,
                       },
                     }}
-                  />
+                  >
+                    <Image
+                      src={item?.image || collectionImg}
+                      alt="image"
+                      width={400}
+                      height={500}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </Box>
                   <Box
                     sx={{
                       width: { xs: '100%', md: '100%' },
@@ -146,6 +164,36 @@ export default function ResortsGallery(props: any) {
             </Grid>
           ))}
       </Grid>
+
+      {pages?.totalGalleryImages > hotels?.length && (
+        <Box
+          sx={{
+            textAlign: 'center',
+            mt: 4,
+            mb: { xs: 6, md: 2 },
+            display: isFullyLoaded ? 'none' : 'block',
+          }}
+        >
+          <Button
+            sx={{
+              bgcolor: 'var(--brown)',
+              color: 'white',
+              px: { xs: '12px', md: '16px' },
+              py: { xs: '6px', md: '8px' },
+              textAlign: 'center',
+              fontSize: '18px',
+              '&:hover': {
+                backgroundColor: 'var(--blue) !important',
+              },
+            }}
+            onClick={loadMore}
+            title="Load more resorts"
+            aria-label="Load more resorts"
+          >
+            Load More
+          </Button>
+        </Box>
+      )}
     </Box>
   )
 }

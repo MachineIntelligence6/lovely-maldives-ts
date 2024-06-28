@@ -49,9 +49,7 @@ const SocialLinkSection = () => {
     try {
       startTransition(async () => {
         const res = await getSocialLinkSectionRequest()
-        console.log('response ', res)
         const data = res?.data
-        console.log('data ', data)
         if (data?.status === 200) {
           setValues(data?.data)
           setImgUrl(data?.data?.image)

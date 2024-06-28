@@ -52,13 +52,9 @@ const OurCollection = () => {
   }
 
   const handleAddHotel = async (index: number, hotel: any) => {
-    console.log('index: ', hotel)
     setIds([...ids, hotel?.id])
     setCollections([...collections, hotel])
   }
-
-  console.log('collections ', collections)
-  console.log('ids ', ids)
 
   const addNewCollection = (newCollection: any, type: string) => {
     if (type === 'edit') {
@@ -77,7 +73,6 @@ const OurCollection = () => {
       startTransition(async () => {
         const res = await getCollectionsRequest()
         const data = res?.data
-        console.log('data ', data)
         if (data?.status === 200) {
           setCollections(data?.data?.collections || [])
           setValues(data?.data)
@@ -89,7 +84,6 @@ const OurCollection = () => {
           }, 3000)
           console.log('response about maldives', res)
         }
-        console.log('response ', res)
       })
     } catch (error: any) {
       console.log('error ', error)
@@ -97,7 +91,6 @@ const OurCollection = () => {
   }
 
   const handleAddCollection = async (newCollection: any) => {
-    console.log('new collection ', newCollection)
     if (!values.title) return alert('Please enter title.')
 
     try {
@@ -108,7 +101,6 @@ const OurCollection = () => {
           homeBgId,
         })
         const data = res?.data
-        console.log('response upload ', data)
         if (data.status === 201) {
           getCollections()
           setDetectChange(false)

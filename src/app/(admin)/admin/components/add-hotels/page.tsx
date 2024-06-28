@@ -85,7 +85,6 @@ const AddHotels = () => {
 
   // ADD SECTION TYPE (e.g. TEXT, TITLE, etc)
   const handleAddType = (type: string) => {
-    console.log('type is ', type)
     if (type === 'ratings') {
       setSections([...sections, { type, ratings: '1' }])
     } else {
@@ -126,7 +125,6 @@ const AddHotels = () => {
     const file = e.target.files?.[0]
     setDetectChange(true)
     setFiles([...files, file])
-    console.log('handleChange ', label)
     startTransition(async () => {
       const formData = new FormData()
       formData.append('file', file)
@@ -147,7 +145,6 @@ const AddHotels = () => {
       setSections(updatedSections)
     })
   }
-  console.log('sections are ', sections)
   // DELETE A FILE
   const handleDeleteFile = (index: number, subIndex: number) => {
     const updatedSections = sections.map((sec: any, ind: number) => {
@@ -164,7 +161,6 @@ const AddHotels = () => {
 
   // ADD FACTS IN HOTEL
   const handleAddFacts = (fact: any, index: number) => {
-    console.log('fact ', fact)
     const updatedSections = sections.map((sec: any, ind: number) => {
       if (ind === index) {
         return {
@@ -191,7 +187,6 @@ const AddHotels = () => {
           }, 3000)
           console.log('response about maldives', res)
         }
-        console.log('response ', res)
       })
     } catch (error: any) {
       console.log('error ', error)

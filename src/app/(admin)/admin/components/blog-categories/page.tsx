@@ -64,7 +64,6 @@ const BlogCategories = () => {
 
   const searchcategories = (e: any) => {
     const { value } = e.target
-    console.log('search ', value)
     if (value === '') {
       setCategories(categories)
     } else {

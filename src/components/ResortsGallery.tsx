@@ -23,16 +23,6 @@ export default function ResortsGallery(props: any) {
   const { resorts, pages, loadMore, isFullyLoaded } = props
   const router = useRouter()
 
-  // const loadMore = () => {
-  //   setResortsData(resorts)
-  //   setIsFullyLoaded(true)
-  // }
-  // console.log('Resorts ', resorts)
-
-  // useEffect(() => {
-  //   setResortsData([...resortsData, ...resorts])
-  // }, [pages?.page])
-
   return (
     <>
       <Box sx={{ my: { xs: '40px', md: '80px' } }}>

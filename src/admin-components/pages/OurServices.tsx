@@ -55,7 +55,6 @@ const OurServices = () => {
   }
 
   const addNewService = (newService: any, type: string) => {
-    console.log('new services ', newService)
     if (type === 'edit') {
       const newServices = services.map((service: any) =>
         service.title === edit.title ? newService : service
@@ -72,7 +71,6 @@ const OurServices = () => {
       startTransition(async () => {
         const res = await getOurServicesRequest()
         const data = res?.data
-        console.log('ouser services data is ', data)
         if (data?.status === 200) {
           setServices(data?.data?.services)
           setValues(data?.data)
@@ -83,7 +81,6 @@ const OurServices = () => {
           }, 3000)
           console.log('response about maldives', res)
         }
-        console.log('response ', res)
       })
     } catch (error: any) {
       console.log('error ', error)
@@ -99,7 +96,6 @@ const OurServices = () => {
           services,
           homeBgId,
         })
-        console.log('respose ', res)
         if (res?.status === 201) {
           getOurServices()
           // setDetectChange(false)

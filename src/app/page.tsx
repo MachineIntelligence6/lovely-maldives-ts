@@ -79,13 +79,11 @@ export default function Home() {
     try {
       const res = await getCollectionsRequest()
       const data = res?.data
-      console.log('collections data ', data)
       if (data?.status === 200) {
         setCollections(data?.data)
       } else {
         console.log('response about maldives', res)
       }
-      console.log('response ', res)
     } catch (err: any) {
       console.log('err ', err)
     }

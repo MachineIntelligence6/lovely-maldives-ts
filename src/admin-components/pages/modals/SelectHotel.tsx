@@ -38,16 +38,13 @@ const CustomLabel = styled(InputLabel)(({ theme }) => ({
 
 const SelectHotel = (props: any) => {
   const { open, handleShowModal, handleAddHotel, options, index } = props
-  console.log('index ', index)
   const [hotel, setHotel] = useState('' as any)
   const [isPending, startTransition] = useTransition()
   const [hotels, setHotels] = useState([] as any)
 
   const handleChange = (e: any) => {
     const { value } = e.target
-    console.log('value is ', value)
     const findHotel = hotels.find((item: any) => item.id === value)
-    console.log('find Hotel ', findHotel)
     setHotel(findHotel)
   }
 
