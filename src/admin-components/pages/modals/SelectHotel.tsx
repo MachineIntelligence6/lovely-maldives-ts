@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 
 'use client'
@@ -13,7 +14,7 @@ import {
   InputLabel,
 } from '@mui/material'
 import CustomSelect from '@/admin-components/items/CustomSelect'
-import { getHotelsRequest } from '@/utils/api-requests/addHotels.request'
+import { getSelectHotelsRequest } from '@/utils/api-requests/addHotels.request'
 
 const style = {
   position: 'absolute',
@@ -37,10 +38,12 @@ const CustomLabel = styled(InputLabel)(({ theme }) => ({
 }))
 
 const SelectHotel = (props: any) => {
-  const { open, handleShowModal, handleAddHotel, options, index } = props
+  const { open, handleShowModal, handleAddHotel, addedHotels, index } = props
   const [hotel, setHotel] = useState('' as any)
   const [isPending, startTransition] = useTransition()
   const [hotels, setHotels] = useState([] as any)
+
+  const [addedIds, setAddedIds] = useState([] as any)
 
   const handleChange = (e: any) => {
     const { value } = e.target
@@ -50,19 +53,20 @@ const SelectHotel = (props: any) => {
 
   const getHotels = async () => {
     try {
-      startTransition(async () => {
-        const res = await getHotelsRequest(1, 500, [])
-        const data = res?.data
-        const hotelsData = [] as any
-        if (data?.status === 200) {
-          data?.data?.map((item: any) => {
-            hotelsData.push({ ...item, label: item?.title, value: item?.id })
-          })
-          setHotels(hotelsData)
-        } else {
-          console.log('response about maldives', res)
-        }
-      })
+      // startTransition(async () => {
+      const res = await getSelectHotelsRequest(1, 500, [])
+      const data = res?.data
+      console.log('data is ', data)
+      const hotelsData = [] as any
+      if (data?.status === 200) {
+        data?.data?.map((item: any) => {
+          hotelsData.push({ ...item, label: item?.title, value: item?.id })
+        })
+        setHotels(hotelsData)
+      } else {
+        console.log('response about maldives', res)
+      }
+      // })
     } catch (error: any) {
       console.log('error ', error)
     }
@@ -71,6 +75,14 @@ const SelectHotel = (props: any) => {
   useEffect(() => {
     getHotels()
   }, [])
+
+  useEffect(() => {
+    if (addedIds) {
+      const newHotels = hotels?.filter((htl: any) => !addedIds.includes(htl.id))
+      console.log('newHotels', newHotels)
+      setHotels(newHotels)
+    }
+  }, [addedIds])
 
   return (
     <div>
@@ -149,6 +161,7 @@ const SelectHotel = (props: any) => {
                 )
                 setHotel('')
                 handleShowModal(null)
+                setAddedIds([...addedIds, hotel.id])
               }}
             >
               Add

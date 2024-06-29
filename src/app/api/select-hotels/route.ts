@@ -1,6 +1,8 @@
+/* eslint-disable array-callback-return */
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
 import { getAllParams } from '@/utils/getIdParam'
+import { getResorts } from '@/services/resorts'
 import prisma from '../../../../prisma'
 
 export async function GET(req: Request) {
@@ -14,13 +16,23 @@ export async function GET(req: Request) {
   try {
     await connectToDatabase()
 
+    const allIds = [] as any
+    const resorts = await getResorts()
+    resorts?.resortSections?.map((sec) => {
+      if (sec?.type === 'images_gallery' || sec?.type === 'images_slider') {
+        sec?.hotels?.map((hotel) => {
+          allIds.push(hotel?.id)
+        })
+      }
+    })
+
     let hotels
-    if (ids?.length as any > 0 && ids?.[0] !== '') {
-      console.log('found ', ids)
+    if ((allIds?.length as any) > 0 && allIds?.[0] !== '') {
+      console.log('found ', allIds)
       hotels = await prisma.hotels.findMany({
         where: {
-            id: {
-              in: ids,
+          id: {
+            notIn: allIds,
           },
         },
         take: limit,

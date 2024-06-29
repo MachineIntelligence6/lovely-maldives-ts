@@ -14,7 +14,6 @@ import React, { useEffect, useState, useTransition } from 'react'
 import TopFiveLuxuryResorts from '@/components/TopFiveLuxuryResorts'
 import {
   AddResortSectionRequest,
-  getHotelsRequest,
   getResortSectionRequest,
 } from '@/utils/api-requests/addHotels.request'
 import SelectHotel from './modals/SelectHotel'
@@ -22,12 +21,6 @@ import AddSectionType from './modals/AddSectionType'
 import ResortsGallery from './ResortsGallery'
 import CustomLoader from '../common/CustomLoader'
 import HeadingWraper from '../common/HeadingWraper'
-// import JoditTextEditor from '../common/JoditTextEditor'
-
-const ReactQuillEditor = dynamic(
-  () => import('@/admin-components/common/ReactQuillEditor'),
-  { ssr: false }
-)
 
 const JoditTextEditor = dynamic(() => import('../common/JoditTextEditor'), {
   ssr: false,
@@ -67,6 +60,7 @@ const ResortSections = () => {
       }
       return sec
     })
+    console.log('updated secctions ', updatedSections)
     setSections(updatedSections)
   }
 
@@ -81,8 +75,7 @@ const ResortSections = () => {
   const handleAddType = (type: string) => {
     setSections([...sections, { type }])
   }
-  console.log('sections are ', sections)
-
+  console.log('Sections are ', sections)
   const handleAddHotel = async (index: number, hotel: any) => {
     const updatedSections = sections.map((sec: any, ind: number) => {
       if (ind === index) {
@@ -130,26 +123,38 @@ const ResortSections = () => {
             totalGalleryImages: data?.totalGalleryImages,
           })
           // setSections(data?.data)
+          let allHotels = [] as any
           data?.data?.map((sec: any) => {
             if (sec?.type === 'text') {
               setEditorText(sec?.description)
             }
             if (sec?.type === 'images_gallery') {
+              const resultHotels = [] as any
+              const allIds = hotelsData?.map((htl: any) => htl?.id)
+              sec?.hotels?.map((htl: any) => {
+                if (!allIds?.includes(htl.id)) {
+                  resultHotels.push(htl)
+                }
+              })
               setHotelsData([...hotelsData, ...sec.hotels])
+              allHotels = [...hotelsData, ...sec.hotels]
             }
           })
 
-          const result = sections?.map(
-            (section: any) =>
-              section?.type === 'images_gallery' && section.hotels
-          )
-          console.log('Result sections ', result)
+          // let resultHotels = [] as any
+
+          // sections?.map((section: any) => {
+          //   if (section.type === 'images_gallery') {
+          //     resultHotels = section.hotels
+          //   }
+          // })
+          console.log('allHotels ', allHotels)
           setSections(
             data?.data?.map((sec: any) => {
               if (sec?.type === 'images_gallery') {
                 return {
                   ...sec,
-                  hotels: [...result, ...sec.hotels],
+                  hotels: allHotels,
                 }
               } else {
                 return sec
@@ -169,6 +174,7 @@ const ResortSections = () => {
   }
 
   const handleAddSections = async () => {
+    console.log('SEctions submitting ', sections)
     try {
       startTransition(async () => {
         const res = await AddResortSectionRequest(sections)

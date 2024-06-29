@@ -53,6 +53,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
+  console.log('body Data ', bodyData)
   try {
     await connectToDatabase()
 
