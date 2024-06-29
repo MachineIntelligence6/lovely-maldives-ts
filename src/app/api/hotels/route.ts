@@ -5,7 +5,6 @@ import prisma from '../../../../prisma'
 
 export async function GET(req: Request) {
   const params = getAllParams(req.url)
-  console.log('params ', params)
   const page = Number(params.get('page')) || 1
   const limit = Number(params.get('limit')) || 20
 
@@ -13,7 +12,7 @@ export async function GET(req: Request) {
   try {
     await connectToDatabase()
 
-    const result = await prisma.hotels.findMany({ take: limit, skip })
+    const result = await prisma.hotels.findMany({ take: limit, skip, })
     const total = await prisma.hotels.count()
 
     if (!result)
