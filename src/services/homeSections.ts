@@ -1,6 +1,8 @@
 import prisma from '../../prisma'
 
-export async function getHomeSections() {
+export async function getHomeSections(req: any, res: any) {
+  res.setHeader('Cache-Control', 'no-store')
+
   const result = await prisma.homeBg.findFirst({
     include: {
       aboutMaldivesShort: true,
