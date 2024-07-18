@@ -42,11 +42,12 @@ export default function Home() {
   const getHomeData = async () => {
     try {
       setLoading(true)
-      const res = await axios.get('/api/home')
+      const res = await apiClient.get('/api/home')
       const data = res?.data
       setLoading(false)
       if (res?.status === 200) {
         setHomeData(data?.data)
+        console.log('data saved ', data?.data)
         localStorage.setItem('home', JSON.stringify(data?.data))
         localStorage.setItem(
           'headerData',

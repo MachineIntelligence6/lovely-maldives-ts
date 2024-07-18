@@ -16,10 +16,10 @@ import styled from '@emotion/styled'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import { usePathname, useRouter } from 'next/navigation'
+import createToggler from '@/stores/toggle-hamburger-store'
 import Logo from './Logo'
 import SectionTitle from '../common/SectionTitle'
 import menuItems from '../navigation-menus'
-// import { toggleHamburger } from "@/redux/slices/hamburger";
 
 const SidebarMainBox = styled(Box)(({ theme }) => ({
   height: '100vh',
@@ -36,16 +36,16 @@ const SidebarMainBox = styled(Box)(({ theme }) => ({
 }))
 
 function Sidebar() {
-  // const theme = useTheme()
-  // const dispatch = useDispatch();
   const [openMenus, setOpenMenus] = useState({
     mainActive: null,
     subMenus: [],
   })
   const pathname = usePathname()
   const router = useRouter()
-  const [showSidebar, setShowSidebar] = useState(false)
-  // const showSidebar = useSelector((state: any) => state.hamburger.show);
+  const { isOpen, toggleHamburger } = createToggler((state: any) => ({
+    isOpen: state.isOpen,
+    toggleHamburger: state.toggleHamburger,
+  }))
 
   useEffect(() => {
     let activeInd = 0
@@ -120,11 +120,6 @@ function Sidebar() {
                 height: '40px',
                 pr: '4px',
                 borderRadius: '6px',
-                // backgroundColor: openMenus?.subMenus?.includes(
-                //   (parentIndex + '.' + subIndex) as never
-                // )
-                //   ? 'var(--brown-light)'
-                //   : 'transparent',
               }}
             >
               {submenu.icon && (
@@ -272,11 +267,11 @@ function Sidebar() {
 
   return (
     <>
-      {showSidebar && (
+      {isOpen && (
         <Box
-          // onClick={() => dispatch(toggleHamburger(false))}
+          onClick={() => toggleHamburger(false)}
           sx={{
-            position: 'absolute',
+            position: 'absolute', 
             top: 0,
             left: 0,
             right: 0,
@@ -289,12 +284,8 @@ function Sidebar() {
       <SidebarMainBox
         sx={{
           width: '25%',
-          maxWidth: showSidebar
-            ? '265px'
-            : { xs: '0px', md: '0px', lg: '265px' },
-          minWidth: showSidebar
-            ? '265px'
-            : { xs: '0px', md: '0px', lg: '265px' },
+          maxWidth: isOpen ? '265px' : { xs: '0px', md: '0px', lg: '265px' },
+          minWidth: isOpen ? '265px' : { xs: '0px', md: '0px', lg: '265px' },
           '&::-webkit-scrollbar': {
             width: '4px',
             height: '4px',

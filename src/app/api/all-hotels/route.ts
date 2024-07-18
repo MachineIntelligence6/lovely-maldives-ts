@@ -15,34 +15,10 @@ export async function GET(req: Request) {
   try {
     await connectToDatabase()
 
-    const allIds = [] as any
-    const resorts = await getResorts()
-    resorts?.resortSections?.map((sec) => {
-      if (sec?.type === 'images_gallery' || sec?.type === 'images_slider') {
-        sec?.hotels?.map((hotel) => {
-          allIds.push(hotel?.id)
-        })
-      }
-    })
-
-    let hotels
-    if ((allIds?.length as any) > 0 && allIds?.[0] !== '') {
-      console.log('found ', allIds)
-      hotels = await prisma.hotels.findMany({
-        where: {
-          id: {
-            notIn: allIds,
-          },
-        },
+    const hotels = await prisma.hotels.findMany({
         take: limit,
         skip,
       })
-    } else {
-      hotels = await prisma.hotels.findMany({
-        take: limit,
-        skip,
-      })
-    }
     const total = await prisma.hotels.count()
 
     if (!hotels || hotels?.length === 0)

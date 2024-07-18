@@ -20,49 +20,14 @@ function LogoInputFile(props: any) {
   } = props
   const [file, setFile] = useState('')
   const [previewUrl, setPreviewUrl] = React.useState('')
-  // const [values, setValues] = useState({ width: 95, height: 60 })
 
-  // const handleWidthHeightChange = (e: any) => {
-  //   const { name, value } = e.target
-  //   if (value > 1000) return
-  //   setValues({ ...values, [name]: value })
-  // }
-
-  // const hanldeChange = async (e: any) => {
-  //   const value = e.target.files[0]
-  //   setFile(value)
-  //   // const fileReader = new FileReader()
-  //   // fileReader.onload = () => {
-  //   //   setPreviewUrl(fileReader.result as string)
-  //   // }
-  //   // fileReader.readAsDataURL(value)
-
-  //   const formData = new FormData()
-  //   formData.append('file', value)
-  //   formData.append('upload_preset', 'j8epfynh')
-
-  //   try {
-  //     const response = await fetch(
-  //       `https://api.cloudinary.com/v1_1/de1fnstbu/image/upload`,
-  //       {
-  //         method: 'POST',
-  //         body: formData,
-  //       }
-  //     )
-
-  //     if (!response.ok) {
-  //       throw new Error('Error uploading image')
-  //     }
-
-  //     const data = await response.json()
-  //     console.log('Image URL:', data.secure_url)
-  //     setPreviewUrl(data.secure_url)
-  //   } catch (error) {
-  //     console.log('error ', error)
-  //   }
-  // }
   return (
-    <Stack direction="row" alignItems="start" gap="1.5rem">
+    <Stack
+      direction={{ xs: 'column', sm: 'row' }}
+      alignItems="start"
+      gap="1.5rem"
+      sx={{ width: { xs: '100%', md: 'auto' } }}
+    >
       <label htmlFor={logoFor}>
         <input id={logoFor} type="file" hidden onChange={hanldeFileChange} />
         <Box
@@ -108,7 +73,7 @@ function LogoInputFile(props: any) {
           )}
         </Box>
       </label>
-      <Box>
+      <Box sx={{ width: { xs: '100%', md: 'auto' } }}>
         <TextFieldWraper
           label="Logo Width"
           type="number"

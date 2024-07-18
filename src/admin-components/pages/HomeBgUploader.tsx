@@ -118,7 +118,7 @@ const HomeBgUploader = () => {
         detectChange={detectChange}
       />
       <Stack
-        direction="row"
+        direction={{ xs: 'column', md: 'row' }}
         alignItems="center"
         justifyContent="space-between"
         gap="1rem"
@@ -152,13 +152,6 @@ const HomeBgUploader = () => {
         files={files}
         urls={urls}
       />
-      {/* 
-      <DesktopBgImages
-        label="Mobile"
-        handleDeleteFile={handleDeleteFile}
-        handleChange={handleChange}
-        files={mobileFiles}
-      /> */}
     </CustomCard>
   )
 }

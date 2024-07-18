@@ -105,7 +105,7 @@ const CardsSlider = (props: any) => {
         breakpoint: 480,
         settings: {
           centerMode: true,
-          centerPadding: '60px',
+          centerPadding: '30px',
           slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 1,
@@ -140,8 +140,10 @@ const CardsSlider = (props: any) => {
               }}
             >
               <Image
-                src={item.image}
+                src={item.bgImage}
                 alt="exploreImg"
+                width={400}
+                height={500}
                 style={{
                   width: '100%',
                   height: '100%',
@@ -190,7 +192,8 @@ const CardsSlider = (props: any) => {
                   textAlign: 'left',
                 }}
               >
-                {item.description}
+                {item.caption}
+                {console.log('item?.caption ', item?.caption)}
               </Typography>
             </Box>
           ) : (

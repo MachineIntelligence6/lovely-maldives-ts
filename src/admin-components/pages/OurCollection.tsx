@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable consistent-return */
 /* eslint-disable no-alert */
 
@@ -68,7 +69,7 @@ const OurCollection = () => {
     setDetectChange(true)
   }
 
-  const getCollections = async () => {
+  const getCollections = async (): Promise<void> => {
     try {
       startTransition(async () => {
         const res = await getCollectionsRequest()
@@ -89,7 +90,8 @@ const OurCollection = () => {
       console.log('error ', error)
     }
   }
-
+console.log("ids are ", ids)
+console.log("collections are ", collections)
   const handleAddCollection = async (newCollection: any) => {
     if (!values.title) return alert('Please enter title.')
 
@@ -149,6 +151,7 @@ const OurCollection = () => {
         handleShowModal={handleShowHotelModal}
         handleAddHotel={(hotel: any, ind: number) => handleAddHotel(ind, hotel)}
         options={options}
+        isCollection={true}
         index={showHotelModal.index}
       />
 

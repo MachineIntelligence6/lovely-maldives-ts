@@ -59,9 +59,9 @@ function MenuAddItem(props: any) {
         />
       </Stack>
       <Stack
-        direction="row"
+        direction={{ xs: 'column', md: 'row' }}
         alignItems="center"
-        gap="2rem"
+        gap={{ xs: '1rem', lg: '2rem' }}
         sx={{
           p: 3,
           border: '1px solid var(--blue)',
@@ -89,7 +89,11 @@ function MenuAddItem(props: any) {
               handleChange(index, subIndex, 'icon', e)
             }}
             index={index}
-            value={props?.menu?.icon ? `${props?.menu?.menu} Icon.jpg` : 'Upload Icon'}
+            value={
+              props?.menu?.icon
+                ? `${props?.menu?.menu} Icon.jpg`
+                : 'Upload Icon'
+            }
             subIndex={subIndex}
           />
         )}

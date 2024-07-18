@@ -1,12 +1,20 @@
+'use client'
+
 import React from 'react'
 
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, Avatar, Box, Stack, Toolbar } from '@mui/material'
+import createToggler from '@/stores/toggle-hamburger-store'
 import ProfileDropdown from './ProfileDropdown'
 
 function TopBar() {
+  const { isOpen, toggleHamburger } = createToggler((state: any) => ({
+    isOpen: state.isOpen,
+    toggleHamburger: state.toggleHamburger,
+  }))
+
   return (
     <Box sx={{ width: '100%', float: 'right', height: '62px' }}>
       <AppBar
@@ -36,7 +44,7 @@ function TopBar() {
                 cursor: 'pointer',
                 display: { xs: 'block', md: 'block', lg: 'none' },
               }}
-              // onClick={() => dispatch(toggleHamburger(true))}
+              onClick={() => toggleHamburger(true)}
             />
             <Stack
               direction="row"

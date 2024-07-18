@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
             return null
           }
 
-          if (!user.isApproved)
+          if (user.status !== 'Approved')
             throw new Error('You are not approved yet. Please contact admin.')
 
           const isMatched = await bcrypt.compare(

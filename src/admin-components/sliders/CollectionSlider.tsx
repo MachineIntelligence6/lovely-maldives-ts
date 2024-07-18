@@ -137,7 +137,7 @@ const CollectionSlider = (props: any) => {
             <Image
               width={300}
               height={300}
-              src={collection?.coverImage}
+              src={collection?.image || collection?.coverImage}
               alt="Resort item"
               style={{
                 width: '92%',

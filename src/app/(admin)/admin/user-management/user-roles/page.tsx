@@ -3,7 +3,7 @@
 'use client'
 
 import React, { useEffect, useState, useTransition } from 'react'
-import { Alert, Stack } from '@mui/material'
+import { Alert, Box, Stack } from '@mui/material'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import CustomSearchField from '@/admin-components/items/CustomSearchField'
 import CustomDropdown from '@/admin-components/items/CustomDropdown'
@@ -11,6 +11,7 @@ import { deleteSubscriptionsRequest } from '@/utils/api-requests/subscribe.reque
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import {
   changeUserStatusRequest,
+  deleteUserRequest,
   getUsersRequest,
 } from '@/utils/api-requests/users.request'
 import UsersTable from '@/admin-components/tables/UsersTable'
@@ -42,12 +43,12 @@ const UserRoles = () => {
     }
   }
 
-  const deleteSubscription = (id: any) => {
+  const deleteUser = (id: any) => {
     const sure = window.confirm('Are you sure?')
     if (!sure) return
     try {
       startTransition(async () => {
-        const res = await deleteSubscriptionsRequest(id)
+        const res = await deleteUserRequest(id)
         const data = res?.data
         if (data?.status === 200) {
           getAllUsers()
@@ -147,12 +148,14 @@ const UserRoles = () => {
           //   filter={filter}
         />
       </Stack>
-      <UsersTable
-        dataArray={users}
-        headOptions={headOptions}
-        deleteSubscription={deleteSubscription}
-        changeStatus={changeStatus}
-      />
+      <Box sx={{ width: '100%', overflow: 'auto' }}>
+        <UsersTable
+          dataArray={users}
+          headOptions={headOptions}
+          deleteUser={deleteUser}
+          changeStatus={changeStatus}
+        />
+      </Box>
     </CustomCard>
   )
 }

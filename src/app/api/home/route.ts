@@ -10,7 +10,7 @@ export async function GET() {
     console.log('after connection to db')
 
     const result = await getHomeSections()
-    console.log('after get homeSection servuce')
+    console.log('after get homeSection service')
     if (!result)
       return NextResponse.json({ message: 'No data found', status: 409 })
 
@@ -19,7 +19,6 @@ export async function GET() {
       { status: 200 }
     )
   } catch (error) {
-    console.log('Error', error)
     return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
   } finally {
     await prisma.$disconnect()
