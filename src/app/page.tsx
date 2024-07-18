@@ -46,6 +46,7 @@ export default function Home() {
         { headers: { 'Content-Type': 'application/json' } }
       )
       const data = res?.data
+      console.log('data is ', data)
       setLoading(false)
       if (res?.status === 200) {
         setHomeData(data?.data)

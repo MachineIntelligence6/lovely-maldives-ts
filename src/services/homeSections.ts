@@ -1,18 +1,16 @@
 import prisma from '../../prisma'
 
 export async function getHomeSections() {
-  const sections = {} as any
-  sections.data = await prisma.homeBg.findFirst()
-  sections.data.aboutMaldivesShort = [
-    await prisma.aboutMaldivesShort.findFirst(),
-  ]
-  sections.data.services = [await prisma.services.findFirst()]
-  sections.data.aboutUsShort = [await prisma.aboutUsShort.findFirst()]
-  sections.data.wonders = [await prisma.wonders.findFirst()]
-  sections.data.brands = [await prisma.brands.findFirst()]
-  sections.data.socialLinkSection = [await prisma.socialLinkSection.findFirst()]
-  sections.data.header = [await prisma.header.findFirst()]
-  sections.data.footer = [await prisma.footer.findFirst()]
+  let sections = {} as any
+  sections = await prisma.homeBg.findFirst()
+  sections.aboutMaldivesShort = [await prisma.aboutMaldivesShort.findFirst()]
+  sections.services = [await prisma.services.findFirst()]
+  sections.aboutUsShort = [await prisma.aboutUsShort.findFirst()]
+  sections.wonders = [await prisma.wonders.findFirst()]
+  sections.brands = [await prisma.brands.findFirst()]
+  sections.socialLinkSection = [await prisma.socialLinkSection.findFirst()]
+  sections.header = [await prisma.header.findFirst()]
+  sections.footer = [await prisma.footer.findFirst()]
   // const result = await prisma.homeBg.findFirst({
   //   include: {
   //     aboutMaldivesShort: true,
