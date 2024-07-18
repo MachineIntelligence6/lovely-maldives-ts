@@ -41,11 +41,10 @@ export default function Home() {
   const getHomeData = async () => {
     try {
       setLoading(true)
-      const res = await apiClient.get(
-        `/home?timestamp=${new Date().getTime()}`,
-        { headers: { 'Content-Type': 'application/json' } }
-      )
-      const data = res?.data
+      const res = await fetch(`/api/home?timestamp=${new Date().getTime()}`, {
+        cache: 'no-store',
+      })
+      const data = await res?.json()
       console.log('data is ', data)
       setLoading(false)
       if (res?.status === 200) {

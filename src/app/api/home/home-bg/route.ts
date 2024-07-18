@@ -9,10 +9,10 @@ export async function GET() {
 
     const result = await getHomeBg()
     if (!result)
-      return NextResponse.json({ message: 'No data found' }, { status: 200 })
+      return NextResponse.json({ message: 'No data found', status: 409 })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 200 },
       { status: 200 }
     )
   } catch (error) {
