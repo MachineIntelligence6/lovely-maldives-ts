@@ -4,13 +4,11 @@ import { getHomeSections } from '@/services/homeSections'
 import prisma from '../../../../prisma'
 
 export async function GET() {
-  console.log('before connection to db')
   try {
     await connectToDatabase()
-    console.log('after connection to db')
-
+    console.log('home data is fetching...')
     const result = await getHomeSections()
-    console.log('after get homeSection servuce')
+    console.log('home data is: ', result)
     if (!result)
       return NextResponse.json({ message: 'No data found', status: 409 })
 

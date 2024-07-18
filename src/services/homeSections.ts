@@ -1,8 +1,6 @@
 import prisma from '../../prisma'
 
 export async function getHomeSections() {
-  console.log('before fetching')
-
   const result = await prisma.homeBg.findFirst({
     include: {
       aboutMaldivesShort: true,
@@ -16,6 +14,5 @@ export async function getHomeSections() {
       sideImage: true,
     },
   })
-  console.log('after fetching =>>> ', result)
   return result
 }

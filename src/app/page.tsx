@@ -42,7 +42,7 @@ export default function Home() {
   const getHomeData = async () => {
     try {
       setLoading(true)
-      const res = await apiClient.get('/home')
+      const res = await apiClient.get(`/home?timestamp=${new Date().getTime()}`)
       const data = res?.data
       setLoading(false)
       if (res?.status === 200) {
