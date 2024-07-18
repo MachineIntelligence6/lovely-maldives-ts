@@ -31,7 +31,7 @@ const SubscriptionTable = (props: any) => {
   }
 
   return (
-    <Table>
+    <Table sx={{ minWidth: '600px' }}>
       <TableHead>
         <TableRow sx={{ mt: 2 }}>
           {headOptions?.map((option: any, index: number) => (

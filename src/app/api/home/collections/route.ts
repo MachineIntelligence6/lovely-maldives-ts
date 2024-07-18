@@ -11,6 +11,7 @@ export async function GET() {
   try {
     await connectToDatabase()
     const result = await getOurCollections()
+    console.log('collections are ', result)
     if (!result)
       return NextResponse.json({ message: 'No data found.', status: 422 })
     console.log('collections ', result)

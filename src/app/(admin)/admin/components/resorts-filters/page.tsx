@@ -3,7 +3,7 @@
 'use client'
 
 import React, { useEffect, useState, useTransition } from 'react'
-import { Alert, Button, Stack, Typography } from '@mui/material'
+import { Alert, Box, Button, Stack, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import ResortFilter from '@/admin-components/tables/ResortFilter'
@@ -246,11 +246,13 @@ const ResortsFilters = () => {
           filter={filter}
         />
       </Stack>
-      <ResortFilter
-        filters={filters}
-        deleteFilter={deleteFilter}
-        editFilter={editFilter}
-      />
+      <Box sx={{ width: '100%', overflow: 'auto' }}>
+        <ResortFilter
+          filters={filters}
+          deleteFilter={deleteFilter}
+          editFilter={editFilter}
+        />
+      </Box>
       {/* </>
       )} */}
     </CustomCard>

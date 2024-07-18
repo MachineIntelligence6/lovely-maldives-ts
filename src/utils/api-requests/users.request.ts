@@ -4,10 +4,10 @@ export const getUsersRequest = async () => {
   return apiClient.get('/users')
 }
 
-export const changeUserStatusRequest = async (id: any, isApproved: boolean) => {
-    return apiClient.put(`/users?id=${id}&isApproved=${isApproved}`)
-  }
+export const changeUserStatusRequest = async (id: any, status: any) => {
+  return apiClient.put(`/users?id=${id}&status=${status}`)
+}
 
-export const deleteSubscriptionsRequest = async (id: any) => {
-  return apiClient.delete(`/subscribe/${id}`)
+export const deleteUserRequest = async (id: any) => {
+  return apiClient.delete(`/users/${id}`)
 }

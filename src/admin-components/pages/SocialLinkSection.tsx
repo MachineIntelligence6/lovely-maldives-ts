@@ -132,10 +132,10 @@ const SocialLinkSection = () => {
         onChange={handleChange}
       />
       <Stack
-        direction="row"
+        direction={{ xs: 'column', md: 'row' }}
         alignItems="center"
         justifyContent="space-between"
-        gap="1rem"
+        gap={{ xs: '10px', md: '1rem' }}
       >
         <TextFieldWraper
           label="Social Media"

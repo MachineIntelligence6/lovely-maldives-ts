@@ -14,7 +14,10 @@ import {
   InputLabel,
 } from '@mui/material'
 import CustomSelect from '@/admin-components/items/CustomSelect'
-import { getSelectHotelsRequest } from '@/utils/api-requests/addHotels.request'
+import {
+  getAllHotelsRequest,
+  getSelectHotelsRequest,
+} from '@/utils/api-requests/addHotels.request'
 
 const style = {
   position: 'absolute',
@@ -38,9 +41,9 @@ const CustomLabel = styled(InputLabel)(({ theme }) => ({
 }))
 
 const SelectHotel = (props: any) => {
-  const { open, handleShowModal, handleAddHotel, addedHotels, index } = props
+  const { open, handleShowModal, handleAddHotel, isCollection, index } = props
   const [hotel, setHotel] = useState('' as any)
-  const [isPending, startTransition] = useTransition()
+  // const [isPending, startTransition] = useTransition()
   const [hotels, setHotels] = useState([] as any)
 
   const [addedIds, setAddedIds] = useState([] as any)
@@ -54,7 +57,9 @@ const SelectHotel = (props: any) => {
   const getHotels = async () => {
     try {
       // startTransition(async () => {
-      const res = await getSelectHotelsRequest(1, 500, [])
+      const res = isCollection
+        ? await getAllHotelsRequest(1, 500)
+        : await getSelectHotelsRequest(1, 500, [])
       const data = res?.data
       console.log('data is ', data)
       const hotelsData = [] as any

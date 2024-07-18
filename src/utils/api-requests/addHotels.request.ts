@@ -26,6 +26,10 @@ export const getSelectHotelsRequest = async (
   )
 }
 
+export const getAllHotelsRequest = async (page: number, limit: number) => {
+  return apiClient.get(`/all-hotels?page=${page}&limit=${limit || 20}`)
+}
+
 export const AddResortSectionRequest = async (data: any) => {
   return apiClient.post('/resorts', { resortSections: data })
 }

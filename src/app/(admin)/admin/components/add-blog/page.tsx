@@ -148,10 +148,10 @@ export default function AddBlog() {
         />
         <Box sx={{ mt: 3, pb: 5 }}>
           <Stack
-            direction="row"
+            direction={{ xs: 'column', md: 'row' }}
             alignItems="center"
             justifyContent="space-between"
-            gap="1rem"
+            gap={{ xs: '10px', md: '1rem' }}
             sx={{ mb: 1 }}
           >
             <TextFieldWraper

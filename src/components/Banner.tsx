@@ -40,7 +40,6 @@ export default function Banner(props: any) {
   })
 
   React.useEffect(() => {
-    console.log('data jkhjksd ', data)
     const bannersLength = data?.bgImages?.length
     const bannerImages = data?.bgImages
 
@@ -84,7 +83,7 @@ export default function Banner(props: any) {
       })
     }
   }, [lessThanMd, data])
-  console.log('banner data is ', data)
+
   useEffect(() => {
     setData(JSON.parse(localStorage.getItem('home') as any))
   }, [bannerData])

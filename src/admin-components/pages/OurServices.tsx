@@ -144,7 +144,12 @@ const OurServices = () => {
           detectChange={detectChange}
         />
 
-        <Stack direction="row" alignItems="center" gap="20px" sx={{ mb: 2 }}>
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          alignItems="center"
+          gap="20px"
+          sx={{ mb: 2 }}
+        >
           <TextFieldWraper
             label="Title"
             placeholder="Enter our services title."
@@ -161,7 +166,12 @@ const OurServices = () => {
           />
         </Stack>
 
-        <Stack direction="row" alignItems="center" gap="20px" sx={{ mb: 4 }}>
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          alignItems="center"
+          gap="20px"
+          sx={{ mb: 4 }}
+        >
           <Box sx={{ width: '100%' }}>
             <CustomLabel id="demo-simple-select-label" sx={{ mb: 2 }}>
               Sub-Title Color

@@ -31,7 +31,7 @@ const ResortFilter = (props: any) => {
   }
 
   return (
-    <Table>
+    <Table sx={{minWidth: '600px'}}>
       <TableHead>
         <TableRow>
           <TableCell>

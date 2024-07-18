@@ -9,8 +9,6 @@ import prisma from '../../../../prisma'
 export async function GET(req: NextApiRequest) {
   try {
     await connectToDatabase()
-    // const session = await getSession({ req })
-    // console.log('session ', session)
     const result = await getAllUsers()
     if (!result)
       return NextResponse.json({ message: 'No data found.', status: 404 })
@@ -26,29 +24,6 @@ export async function GET(req: NextApiRequest) {
     await prisma.$disconnect()
   }
 }
-
-// export async function DELETE() {
-//   try {
-//     await connectToDatabase()
-
-//     const result = await getThemeConfig()
-//     if (!result)
-//       return NextResponse.json({
-//         message: 'No Data found, please add first.',
-//         status: 409,
-//       })
-
-//     return NextResponse.json(
-//       { message: 'Success', status: 200 },
-//       { status: 200 }
-//     )
-//   } catch (error) {
-//     console.log('Error', error)
-//     return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
-//   } finally {
-//     await prisma.$disconnect()
-//   }
-// }
 
 export async function PUT(req: Request) {
   const params = getAllParams(req.url)

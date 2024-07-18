@@ -25,14 +25,9 @@ const CustomTableLabel = styled(TableSortLabel)(({ theme }) => ({
 
 const UsersTable = (props: any) => {
   const { dataArray, deleteUser, headOptions, changeStatus } = props
-  const [anchorEl, setAnchorEl] = useState(null)
-
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
 
   return (
-    <Table>
+    <Table sx={{ minWidth: '600px' }}>
       <TableHead>
         <TableRow sx={{ mt: 2 }}>
           {headOptions?.map((option: any, index: number) => (
@@ -87,13 +82,14 @@ const UsersTable = (props: any) => {
             <TableCell>
               <Box
                 sx={{
-                  color: value?.isApproved ? '#28C76F' : '#F3103C',
+                  color: value?.status === 'Approved' ? '#28C76F' : '#F3103C',
                   fontSize: '14px',
                   px: '5px',
                   fontWeight: 400,
-                  bgcolor: value?.isApproved
-                    ? 'rgba(40, 199, 111, 0.15)'
-                    : 'rgba(243, 16, 60, 0.15)',
+                  bgcolor:
+                    value?.status === 'Approved'
+                      ? 'rgba(40, 199, 111, 0.15)'
+                      : 'rgba(243, 16, 60, 0.15)',
                   padding: '5px 10px',
                   textAlign: 'center',
                   borderRadius: '4px',

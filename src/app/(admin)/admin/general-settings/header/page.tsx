@@ -187,7 +187,7 @@ function HeaderSettings() {
           Hero Section Header
         </Typography>
         <Stack
-          direction="row"
+          direction={{ xs: 'column', md: 'row' }}
           alignItems="start"
           gap={{ xs: '1rem', md: '3rem', lg: '4rem' }}
         >
@@ -228,7 +228,7 @@ function HeaderSettings() {
           Second Header
         </Typography>
         <Stack
-          direction="row"
+          direction={{ xs: 'column', md: 'row' }}
           alignItems="start"
           gap={{ xs: '1rem', md: '3rem', lg: '4rem' }}
         >

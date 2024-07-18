@@ -16,9 +16,6 @@ import HeadingWraper from '../common/HeadingWraper'
 import CustomLoader from '../common/CustomLoader'
 import TextFieldWraper from '../items/TextfieldWraper'
 
-// const ReactQuillEditor = dynamic(() => import('../common/ReactQuillEditor'), {
-//   ssr: false,
-// })
 const JoditTextEditor = dynamic(
   () => import('@/admin-components/common/JoditTextEditor'),
   { ssr: false }
@@ -129,7 +126,11 @@ const HomeAboutMaldives = () => {
         handleSave={handleSave}
       />
       <Box sx={{ mt: 3, pb: 5 }}>
-        <Stack direction="row" alignItems="center" gap="20px">
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          alignItems="center"
+          gap="20px"
+        >
           <TextFieldWraper
             label="Title"
             placeholder="Enter about maldives title."

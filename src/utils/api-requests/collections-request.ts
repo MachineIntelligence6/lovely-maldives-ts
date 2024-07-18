@@ -8,7 +8,6 @@ import apiClient from '@/services/apiClient'
 // }
 
 export const collectionRequest = async (data: any) => {
-  console.log('data  ->>> ', data)
   return apiClient.post('/home/collections', {
     title: data.title,
     ids: data?.ids,

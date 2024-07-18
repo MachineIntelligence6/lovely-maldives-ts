@@ -3,7 +3,7 @@
 'use client'
 
 import React, { useEffect, useState, useTransition } from 'react'
-import { Alert, Stack } from '@mui/material'
+import { Alert, Box, Stack } from '@mui/material'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import CustomSearchField from '@/admin-components/items/CustomSearchField'
 import CustomDropdown from '@/admin-components/items/CustomDropdown'
@@ -117,11 +117,13 @@ const Subscriptions = () => {
           //   filter={filter}
         />
       </Stack>
-      <SubscriptionTable
-        dataArray={subs}
-        headOptions={headOptions}
-        deleteSubscription={deleteSubscription}
-      />
+      <Box sx={{ width: '100%', overflow: 'auto' }}>
+        <SubscriptionTable
+          dataArray={subs}
+          headOptions={headOptions}
+          deleteSubscription={deleteSubscription}
+        />
+      </Box>
     </CustomCard>
   )
 }

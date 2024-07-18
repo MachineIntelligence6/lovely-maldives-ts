@@ -109,7 +109,6 @@ const HomeAboutus = () => {
     }
   }
 
-
   const handleSave = async () => {
     if (!values.title) {
       setAlertMsg({
@@ -178,7 +177,12 @@ const HomeAboutus = () => {
           detectChange={detectChange}
         />
         <Box sx={{ mt: 3, pb: 5 }}>
-          <Stack direction="row" alignItems="center" gap="20px" sx={{ mb: 2 }}>
+          <Stack
+            direction={{ xs: 'column', md: 'row' }}
+            alignItems="center"
+            gap={{ xs: '14px', md: '20px' }}
+            sx={{ mb: 2 }}
+          >
             <TextFieldWraper
               label="Title"
               placeholder="Enter about us title."
@@ -223,11 +227,6 @@ const HomeAboutus = () => {
               </Box>
             </label>
           </Stack>
-          {/* <ReactQuillEditor
-            handleEditorValue={handleEditorValue}
-            value={editorText}
-            height={200}
-          /> */}
           <JoditTextEditor
             handleEditorValue={(val: any) => handleEditorValue(val)}
             value={editorText}
@@ -252,7 +251,12 @@ const HomeAboutus = () => {
             setValues({ ...values, promisTitle: e.target.value })
           }}
         />
-        <Stack direction="row" alignItems="center" gap="20px" sx={{ mb: 4 }}>
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          alignItems="center"
+          gap="20px"
+          sx={{ mb: 4 }}
+        >
           <Box sx={{ width: '100%' }}>
             <CustomLabel id="demo-simple-select-label" sx={{ mb: 2 }}>
               Promise Title Color
@@ -307,7 +311,7 @@ const HomeAboutus = () => {
           sx={{
             width: '100%',
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
             gap: '1rem',
           }}
         >

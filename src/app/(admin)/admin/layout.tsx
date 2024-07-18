@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }: any) {
       <Box
         sx={{
           pt: '75px',
-          ml: '279px',
+          ml: { xs: '20px', lg: '279px' },
           pr: '20px',
         }}
       >
