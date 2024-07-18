@@ -14,7 +14,6 @@ import dynamic from 'next/dynamic'
 import apiClient from '@/services/apiClient'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import { getHomeBgRequest } from '@/utils/api-requests/home.request'
-import { getThemeConfigRequest } from '@/utils/api-requests/theme.request'
 import { getCollectionsRequest } from '@/utils/api-requests/collections-request'
 import useApiStore from '@/stores/themeApiStore'
 
@@ -42,7 +41,10 @@ export default function Home() {
   const getHomeData = async () => {
     try {
       setLoading(true)
-      const res = await apiClient.get(`/home?timestamp=${new Date().getTime()}`)
+      const res = await apiClient.get(
+        `/home?timestamp=${new Date().getTime()}`,
+        { headers: { 'Content-Type': 'application/json' } }
+      )
       const data = res?.data
       setLoading(false)
       if (res?.status === 200) {
