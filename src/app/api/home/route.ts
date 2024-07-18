@@ -1,16 +1,16 @@
 import { NextResponse } from 'next/server'
-import { NextApiRequest, NextApiResponse } from 'next'
 import { connectToDatabase } from '@/helpers/server-helpers'
 import { getHomeSections } from '@/services/homeSections'
 import prisma from '../../../../prisma'
 
-export async function GET(req: NextApiRequest,
-  res: NextApiResponse) {
+export async function GET() {
+  console.log('before connection to db')
   try {
     await connectToDatabase()
-    console.log('home data is fetching...')
-    const result = await getHomeSections(req, res)
-    console.log('home data is: ', result)
+    console.log('after connection to db')
+
+    const result = await getHomeSections()
+    console.log('after get homeSection servuce')
     if (!result)
       return NextResponse.json({ message: 'No data found', status: 409 })
 
