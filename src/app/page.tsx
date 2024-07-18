@@ -47,7 +47,6 @@ export default function Home() {
       setLoading(false)
       if (res?.status === 200) {
         setHomeData(data?.data)
-        console.log('data saved ', data?.data)
         localStorage.setItem('home', JSON.stringify(data?.data))
         localStorage.setItem(
           'headerData',
