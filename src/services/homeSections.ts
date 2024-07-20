@@ -1,8 +1,7 @@
 import prisma from '../../prisma'
 
 export async function getHomeSections() {
-
-  return prisma.homeBg.findFirst({
+  return prisma.homeBg.findMany({
     include: {
       aboutMaldivesShort: true,
       services: true,

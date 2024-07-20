@@ -26,5 +26,17 @@ export async function createHomeBg(data: AboutMaldivesShortData) {
 }
 
 export async function getHomeBg() {
-  return prisma.homeBg.findFirst()
+  return prisma.homeBg.findFirst({
+    include: {
+      aboutMaldivesShort: true,
+      services: true,
+      aboutUsShort: true,
+      wonders: true,
+      brands: true,
+      socialLinkSection: true,
+      header: true,
+      footer: true,
+      sideImage: true,
+    },
+  })
 }
