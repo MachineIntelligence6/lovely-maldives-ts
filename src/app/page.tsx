@@ -43,14 +43,14 @@ export default function Home() {
         cache: 'no-store',
       })
       const data = await res?.json()
-      console.log('home data is : ', data?.data?.[0])
+      console.log('home data is : ', data?.data)
       setLoading(false)
       if (data?.status === 200) {
-        setHomeData(data?.data?.[0])
-        localStorage.setItem('home', JSON.stringify(data?.data?.[0]))
+        setHomeData(data?.data)
+        localStorage.setItem('home', JSON.stringify(data?.data))
         localStorage.setItem(
           'headerData',
-          JSON.stringify(data?.data?.[0]?.header?.[0])
+          JSON.stringify(data?.data?.header?.[0])
         )
       }
     } catch (err: any) {
