@@ -39,18 +39,18 @@ export default function Home() {
     console.log('getting home data...')
     try {
       setLoading(true)
-      const res = await fetch(`/api/home/home-data`, {
+      const res = await fetch(`/api/home/home-bg`, {
         cache: 'no-store',
       })
       const data = await res?.json()
-      console.log('home data is : ', data)
+      console.log('home data is : ', data?.data?.[0])
       setLoading(false)
-      if (res?.status === 200) {
-        setHomeData(data?.data)
-        localStorage.setItem('home', JSON.stringify(data?.data))
+      if (data?.status === 200) {
+        setHomeData(data?.data?.[0])
+        localStorage.setItem('home', JSON.stringify(data?.data?.[0]))
         localStorage.setItem(
           'headerData',
-          JSON.stringify(data?.data?.header?.[0])
+          JSON.stringify(data?.data?.[0]?.header?.[0])
         )
       }
     } catch (err: any) {
