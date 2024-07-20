@@ -52,8 +52,7 @@ export default function Resort() {
   const sliderMain4Ref = useRef<Slider>()
   const [hotel, setHotel] = useState('' as any)
   const [recomendations, setRecomendations] = useState([] as any)
-  console.log('hotel --->>> ', hotel)
-  console.log('recomendded --->>> ', recomendations)
+
   const { themeData, error, fetchData } = useApiStore((state: any) => ({
     themeData: state.themeData,
     error: state.error,
@@ -72,8 +71,6 @@ export default function Resort() {
         const data = res?.data
         if (data?.status === 200) {
           setHotel(data?.data?.[0])
-        } else {
-          console.log('response', res)
         }
       })
     } catch (err: any) {
@@ -87,8 +84,6 @@ export default function Resort() {
       const data = res?.data
       if (data?.status === 200) {
         setRecomendations(data?.data)
-      } else {
-        console.log('response', res)
       }
     } catch (err: any) {
       console.log('err ', err)

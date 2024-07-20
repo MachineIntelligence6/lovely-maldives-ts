@@ -33,7 +33,6 @@ export async function GET() {
 export async function POST(req: Request) {
   const { title, subTitle, homeBgId, subTitleColor, cardBgcolor, services } =
     await req.json()
-  console.log('data is ', title, homeBgId, services)
   if (!title || !homeBgId || !services || services?.length === 0)
     return NextResponse.json({
       message: 'Please send all field to save data.',
@@ -42,7 +41,6 @@ export async function POST(req: Request) {
 
   try {
     await connectToDatabase()
-    console.log('services ', services)
     const result = await createOurService({
       title,
       subTitle,

@@ -1,12 +1,5 @@
 import apiClient from '@/services/apiClient'
 
-// interface AboutusShort {
-//   title: string
-//   description: string
-//   logo: string
-//   homeBgId: string
-//   promises: string[]
-// }
 interface AboutUs {
   title: string
   description: string
@@ -14,7 +7,6 @@ interface AboutUs {
 
 
 export const aboutusShortRequest = async (data: any) => {
-  console.log('about us short data is =>>> ', data)
   return apiClient.post('/home/aboutus-short', data)
 }
 

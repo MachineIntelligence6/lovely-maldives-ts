@@ -32,7 +32,6 @@ function FooterSettings() {
     e: any
   ) => {
     if (field === 'icon') {
-      console.log('values ', index, subIndex, field)
       const file = e.target.files?.[0]
 
       const formData = new FormData()
@@ -40,8 +39,7 @@ function FooterSettings() {
       formData.append('upload_preset', 'j8epfynh')
       const res = await uploadImgToCloudinary(formData)
 
-      console.log('res. ', res?.secure_url)
-      if (!res?.secure_url) return console.log('file upload failed.')
+      if (!res?.secure_url) return
       const updatedMenus = menus.map((menu: any, i: number) => {
         if (i === index) {
           return {
@@ -63,7 +61,6 @@ function FooterSettings() {
       setMenus(updatedMenus)
     } else {
       const { name, value } = e.target
-      console.log('values ', index, subIndex, field)
 
       const updatedMenus = menus.map((menu: any, i: number) => {
         if (i === index) {
@@ -141,9 +138,7 @@ function FooterSettings() {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('response about maldives', res)
         }
-        console.log('response ', res)
       })
     } catch (error: any) {
       console.log('error ', error)

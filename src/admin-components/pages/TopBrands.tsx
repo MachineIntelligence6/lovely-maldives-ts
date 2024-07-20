@@ -62,9 +62,6 @@ const TopBrands = () => {
         if (data?.status === 200) {
           setBrands(data?.data?.brands || [])
           setValues(data?.data)
-        } else {
-          // alert('Error occured while fetching about maldives data.')
-          console.log('response top brands', res)
         }
       })
     } catch (error: any) {
@@ -73,7 +70,6 @@ const TopBrands = () => {
   }
 
   const handleAddBrand = async () => {
-    // const homeBgId = JSON.parse(localStorage.getItem('homeBgId') as any)
     try {
       startTransition(async () => {
         const res = await topBrandsRequest({

@@ -27,7 +27,6 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('body data ', bodyData)
   if (!bodyData?.email)
     return NextResponse.json({
       message: 'Please enter email to subscribe.',

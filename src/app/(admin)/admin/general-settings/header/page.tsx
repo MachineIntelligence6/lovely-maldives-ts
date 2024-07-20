@@ -106,17 +106,13 @@ function HeaderSettings() {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('response about maldives', res)
         }
-        console.log('response ', res)
       })
     } catch (error: any) {
       console.log('error ', error)
     }
   }
-  console.log('values ', values)
   const handleAddHeader = async () => {
-    console.log('values ', values)
     try {
       startTransition(async () => {
         const res = await headerRequest({ ...values, homeBgId, menus })
@@ -164,7 +160,6 @@ function HeaderSettings() {
       setValues({ ...values, [name]: value })
     }
   }
-  console.log('values ', values)
   return (
     <Box sx={{ pb: 4 }}>
       <CustomCard sx={{ padding: '40px !important' }}>

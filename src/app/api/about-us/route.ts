@@ -30,7 +30,6 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('about us', bodyData)
   if (!bodyData?.description)
     return NextResponse.json(
       { message: 'Please send description of about us.' },

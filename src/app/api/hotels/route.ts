@@ -35,7 +35,6 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('hotels', bodyData)
   if (!bodyData?.title || !bodyData?.sections)
     return NextResponse.json({
       message: 'Please send complete hotel data to save.',
@@ -121,7 +120,6 @@ export async function PUT(req: Request) {
 
 export async function DELETE(req: Request) {
   const id = getIdParam(req.url)
-  console.log('id is ', id)
   if (!id)
     return NextResponse.json(
       { message: 'Please send hotel id to delete.' },
@@ -135,8 +133,6 @@ export async function DELETE(req: Request) {
         id,
       },
     })
-
-    console.log('result ', result)
 
     if (!result)
       return NextResponse.json(

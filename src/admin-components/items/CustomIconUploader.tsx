@@ -14,10 +14,6 @@ const CustomIconUploader = (props: any) => {
         id={`icon_menu_items_${index}_${subIndex}`}
         hidden
         onChange={onChange}
-        // onChange={(e: any) => {
-        //   console.log('icons is ', index)
-        //   handleIconChange(index, subIndex, 'icon', e)
-        // }}
       />
       <Box
         sx={{

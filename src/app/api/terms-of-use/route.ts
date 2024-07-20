@@ -55,7 +55,6 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request) {
   const id = getIdParam(req.url)
-  console.log('id is ', id)
   if (!id)
     return NextResponse.json(
       { message: 'Please send id to delete.' },

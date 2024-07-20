@@ -29,7 +29,6 @@ export async function POST(req: Request, res: NextResponse) {
         isAdmin: false,
       },
     })
-    console.log('user is ', user)
     return NextResponse.json(
       { data: user, message: 'Success' },
       { status: 201 }

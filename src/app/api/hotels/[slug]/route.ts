@@ -5,7 +5,6 @@ import prisma from '../../../../../prisma'
 export async function GET(req: Request, route: { [key: string]: any }) {
   const { params } = route
   const { slug } = params
-  console.log('slug ', slug)
   try {
     await connectToDatabase()
 

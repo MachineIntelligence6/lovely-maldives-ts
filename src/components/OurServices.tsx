@@ -57,7 +57,6 @@ export function SamplePrevArrow(props: any) {
 
 export default function OurServices(props: any) {
   const { services } = props
-  console.log('services ', services)
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const settings = {
     className: 'services-slider',

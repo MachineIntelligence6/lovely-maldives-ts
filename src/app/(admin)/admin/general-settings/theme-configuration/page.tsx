@@ -31,7 +31,6 @@ const ThemeConfiguration = () => {
   })
 
   const handleSave = () => {
-    console.log('font family ', values)
     try {
       startTransition(async () => {
         const res = await createThemeConfigRequest(values)
@@ -50,7 +49,6 @@ const ThemeConfiguration = () => {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('data ', data)
         }
       })
     } catch (error: any) {
@@ -63,7 +61,6 @@ const ThemeConfiguration = () => {
       startTransition(async () => {
         const res = await getThemeConfigRequest()
         const data = res?.data
-        console.log('theme data is  ', data)
         if (data?.status === 200) {
           setValues(data?.data)
         } else {
@@ -71,7 +68,6 @@ const ThemeConfiguration = () => {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('data ', data)
         }
       })
     } catch (error: any) {

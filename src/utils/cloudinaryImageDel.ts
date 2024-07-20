@@ -5,7 +5,6 @@ import { getPublicIdFromUrl } from './getPublicIdFromUrl'
 export const deleteCloudinaryImage = async (url: any) => {
   const timestamp = Math.round(new Date().getTime() / 1000).toString()
   const publicId = getPublicIdFromUrl(url)
-  console.log('public id ', publicId)
   const signature = generateSignature(publicId, timestamp)
 
   try {
@@ -24,7 +23,6 @@ export const deleteCloudinaryImage = async (url: any) => {
             body: formData,
         }
     )
-    console.log('REsponse ', response)
     if (!response.ok) {
       throw new Error('Error deleting image')
     }

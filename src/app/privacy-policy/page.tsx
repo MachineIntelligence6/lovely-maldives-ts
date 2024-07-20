@@ -35,8 +35,6 @@ export default function PrivacyPolicyPage() {
         if (data?.status === 200) {
           setPolicies(data?.data?.policies)
           setTitle(data?.data?.title)
-        } else {
-          console.log('privacy policy else ', data)
         }
       })
     } catch (err: any) {

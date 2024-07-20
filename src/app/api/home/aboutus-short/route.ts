@@ -32,7 +32,6 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('body Data ', bodyData)
   const {
     title,
     logo,

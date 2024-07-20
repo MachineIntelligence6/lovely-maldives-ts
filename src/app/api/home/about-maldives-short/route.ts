@@ -33,7 +33,6 @@ export async function GET() {
 export async function POST(req: Request) {
   const bodyData = await req.json()
   const { title, link, description, homeBgId } = bodyData
-  console.log('home', bodyData)
   if (!description || !title || !link)
     return NextResponse.json({
       message: 'Please send all field to save data.',

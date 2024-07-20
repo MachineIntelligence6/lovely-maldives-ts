@@ -1,7 +1,6 @@
 import prisma from '../../prisma'
 
 export async function getHomeSections() {
-  console.log('before fetching')
 
   return prisma.homeBg.findFirst({
     include: {

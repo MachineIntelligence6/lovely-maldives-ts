@@ -62,8 +62,6 @@ const SelectBlog = (props: any) => {
             blogsData.push({ ...item, label: item?.title, value: item?.id })
           })
           setBlogs(blogsData)
-        } else {
-          console.log('response about maldives', res)
         }
       })
     } catch (error: any) {

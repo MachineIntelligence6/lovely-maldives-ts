@@ -156,8 +156,6 @@ const FAQs = () => {
             title: data?.data?.title,
             description: data?.data?.description,
           })
-        } else {
-          console.log('privacy policy else ', data)
         }
       })
     } catch (error: any) {

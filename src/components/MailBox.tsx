@@ -52,7 +52,6 @@ export default function MailBox() {
     }
   }
 
-  console.log('alert message ', alertMsg)
   return (
     <Box
       sx={{

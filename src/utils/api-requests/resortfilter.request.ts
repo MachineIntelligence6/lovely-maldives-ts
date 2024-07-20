@@ -12,7 +12,6 @@ interface EditResortFilter {
   }
 
 export const AddResortFilterRequest = async (data: ResortFilter) => {
-  console.log('data filter ', data)
   return apiClient.post('/resort-filters', {
     type: data.type,
     filter: data.filter,

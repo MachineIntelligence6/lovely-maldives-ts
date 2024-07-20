@@ -5,7 +5,6 @@ import prisma from '../../../../prisma'
 
 export async function GET(req: Request) {
   const params = getAllParams(req.url)
-  console.log('params ', params)
   const page = Number(params.get('page')) || 1
   const limit = Number(params.get('limit')) || 20
   const skip = (page - 1) * limit
@@ -36,7 +35,6 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('blogs', bodyData)
   if (!bodyData?.category || !bodyData?.description || !bodyData?.title || !bodyData?.coverImage)
     return NextResponse.json({
       message: 'Please send complete blog data to save.',
@@ -124,7 +122,6 @@ export async function PUT(req: Request) {
 
 export async function DELETE(req: Request) {
   const id = getIdParam(req.url)
-  console.log('id is ', id)
   if (!id)
     return NextResponse.json({
       message: 'Please send blog id to delete.',
@@ -138,8 +135,6 @@ export async function DELETE(req: Request) {
         id,
       },
     })
-
-    console.log('result ', result)
 
     if (!result)
       return NextResponse.json({

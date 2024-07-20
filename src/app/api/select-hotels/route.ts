@@ -27,7 +27,6 @@ export async function GET(req: Request) {
 
     let hotels
     if ((allIds?.length as any) > 0 && allIds?.[0] !== '') {
-      console.log('found ', allIds)
       hotels = await prisma.hotels.findMany({
         where: {
           id: {

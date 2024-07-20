@@ -78,20 +78,16 @@ const OurCollection = () => {
           setCollections(data?.data?.collections || [])
           setValues(data?.data)
         } else {
-          // alert('Error occured while fetching about maldives data.')
           setAlertMsg({ type: 'error', message: data?.message })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('response about maldives', res)
         }
       })
     } catch (error: any) {
       console.log('error ', error)
     }
   }
-console.log("ids are ", ids)
-console.log("collections are ", collections)
   const handleAddCollection = async (newCollection: any) => {
     if (!values.title) return alert('Please enter title.')
 
