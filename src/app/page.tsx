@@ -39,7 +39,7 @@ export default function Home() {
     console.log('getting home data...')
     try {
       setLoading(true)
-      const res = await fetch(`/api/home?timestamp=${new Date().getTime()}`, {
+      const res = await fetch(`/api/home/home-data`, {
         cache: 'no-store',
       })
       const data = await res?.json()
