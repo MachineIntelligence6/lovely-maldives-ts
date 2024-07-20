@@ -29,7 +29,6 @@ export default function ResortsGallery(props: any) {
     isFullyLoaded,
     loadMore,
   } = props
-  console.log('hotels are ', hotels)
   return (
     <Box sx={{ mb: '40px' }}>
       <TextFieldWraper

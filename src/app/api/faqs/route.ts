@@ -26,7 +26,6 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('privacy policies data', bodyData)
   if (
     !bodyData?.title ||
     !bodyData?.faqs ||

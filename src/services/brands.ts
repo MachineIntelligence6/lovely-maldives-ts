@@ -8,7 +8,6 @@ interface Brands {
 }
 
 export async function createBrand(data: Brands) {
-  console.log('brands ', data?.brands)
   const isExist = await prisma.brands.findFirst()
   let result
   if (isExist) {

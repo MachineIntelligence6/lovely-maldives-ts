@@ -6,7 +6,6 @@ import prisma from '../../../../prisma'
 
 export async function GET(req: Request) {
   const params = getAllParams(req.url)
-  console.log('params ', params)
   const page = Number(params.get('page')) || 1
   const limit = Number(params.get('limit')) || 6
 
@@ -53,7 +52,6 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('body Data ', bodyData)
   try {
     await connectToDatabase()
 

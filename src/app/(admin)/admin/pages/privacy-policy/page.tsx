@@ -41,7 +41,6 @@ const PrivacyPolicy = () => {
   const handleShowModal = () => setOpen(!open)
 
   const handleAddQuestion = (newQues: any, type: string) => {
-    console.log('newQuestion ', newQues)
     if (type === 'add') {
       setPolicies([...policies, newQues])
     } else {
@@ -57,7 +56,6 @@ const PrivacyPolicy = () => {
     }
     setEdit('')
   }
-  console.log('policies ', policies)
   const editQuestion = (policy: any, id: any) => {
     setEditId(id)
     setEdit(policy)
@@ -112,8 +110,6 @@ const PrivacyPolicy = () => {
         if (data?.status === 200) {
           setPolicies(data?.data?.policies)
           setValues({ title: data?.data?.title })
-        } else {
-          console.log('privacy policy else ', data)
         }
       })
     } catch (error: any) {

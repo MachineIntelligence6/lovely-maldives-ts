@@ -65,7 +65,6 @@ export default function SignUp() {
             password: watch('password'),
           }
         )
-        console.log('res =>>> ', res)
         if (res.status === 201) router.push('/admin/login')
       })
     } catch (error) {

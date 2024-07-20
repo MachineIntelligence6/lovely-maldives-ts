@@ -30,13 +30,9 @@ const UserRoles = () => {
       startTransition(async () => {
         const res = await getUsersRequest()
         const data = res?.data
-        console.log('subscsriotions email ', data)
         if (data?.status === 200) {
           setUsers(data?.data)
-        } else {
-          console.log('response about maldives', res)
         }
-        console.log('response ', res)
       })
     } catch (error: any) {
       console.log('error ', error)
@@ -67,7 +63,6 @@ const UserRoles = () => {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('response about maldives', res)
         }
       })
     } catch (error: any) {

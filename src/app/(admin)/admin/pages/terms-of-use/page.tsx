@@ -77,9 +77,6 @@ const PrivacyPolicy = () => {
         if (data?.status === 200) {
           setValue(data?.data?.description)
           setValues({ title: data?.data?.title })
-        } else {
-          // alert('Error occured while fetching about maldives data.')
-          console.log('res error  => ', data?.message)
         }
       })
     } catch (error: any) {

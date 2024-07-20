@@ -23,8 +23,6 @@ export const getHomeBgData = async () => {
     if (res?.status === 200) {
       localStorage.setItem('homeBgId', JSON.stringify(data?.id))
       bgId = data?.id
-    } else {
-      console.log('response homebg ', res)
     }
   } catch (error: any) {
     console.log('error ', error)
@@ -33,9 +31,6 @@ export const getHomeBgData = async () => {
 }
 
 export default async function Dashboard() {
-  // const session = await getServerSession(authOptions)
-  // console.log('session =>>', session)
-
   useEffect(() => {
     getHomeBgData()
   }, [])

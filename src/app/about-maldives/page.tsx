@@ -31,14 +31,7 @@ export default function Page() {
         if (data?.status === 200) {
           setEditorText(data?.data?.description)
           setTitle(data?.data?.title)
-        } else {
-          // setAlertMsg({ type: 'error', message: data?.message })
-          // setTimeout(() => {
-          //   setAlertMsg({ type: '', message: '' })
-          // }, 3000)
-          console.log('about maldives =>>>', res)
         }
-        console.log('response ', res)
       })
     } catch (err: any) {
       console.log('err ', err)

@@ -29,15 +29,12 @@ export default function page() {
         const data = res?.data
         if (data?.status === 200) {
           setFaqs(data?.data)
-        } else {
-          console.log('privacy policy else ', data)
         }
       })
     } catch (err: any) {
       console.log('err ', err)
     }
   }
-  console.log('FAQS ', faqs)
   useEffect(() => {
     getFaqs()
     fetchData()

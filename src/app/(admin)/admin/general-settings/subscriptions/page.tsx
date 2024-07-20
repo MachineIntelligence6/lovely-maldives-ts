@@ -35,13 +35,9 @@ const Subscriptions = () => {
       startTransition(async () => {
         const res = await getSubscriptionsRequest()
         const data = res?.data
-        console.log('subscsriotions email ', data)
         if (data?.status === 200) {
           setSubs(data?.data)
-        } else {
-          console.log('response about maldives', res)
         }
-        console.log('response ', res)
       })
     } catch (error: any) {
       console.log('error ', error)
@@ -72,7 +68,6 @@ const Subscriptions = () => {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('response about maldives', res)
         }
       })
     } catch (error: any) {

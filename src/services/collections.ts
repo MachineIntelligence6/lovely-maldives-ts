@@ -35,7 +35,6 @@ export async function createOurCollection(data: Collections) {
 
 export async function getOurCollections() {
   const result = await prisma.ourCollections.findFirst()
-  console.log('result ids ', result)
   if (!result) return 'NOT_FOUND'
   const data = await prisma.hotels.findMany({
     where: {
@@ -46,7 +45,6 @@ export async function getOurCollections() {
     take: 12,
   })
 
-  console.log('searched collections ', data)
 
   const filtered = data.map((hotel: any) => {
     // Find the first section with images

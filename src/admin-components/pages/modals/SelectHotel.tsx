@@ -56,22 +56,17 @@ const SelectHotel = (props: any) => {
 
   const getHotels = async () => {
     try {
-      // startTransition(async () => {
       const res = isCollection
         ? await getAllHotelsRequest(1, 500)
         : await getSelectHotelsRequest(1, 500, [])
       const data = res?.data
-      console.log('data is ', data)
       const hotelsData = [] as any
       if (data?.status === 200) {
         data?.data?.map((item: any) => {
           hotelsData.push({ ...item, label: item?.title, value: item?.id })
         })
         setHotels(hotelsData)
-      } else {
-        console.log('response about maldives', res)
       }
-      // })
     } catch (error: any) {
       console.log('error ', error)
     }
@@ -84,7 +79,6 @@ const SelectHotel = (props: any) => {
   useEffect(() => {
     if (addedIds) {
       const newHotels = hotels?.filter((htl: any) => !addedIds.includes(htl.id))
-      console.log('newHotels', newHotels)
       setHotels(newHotels)
     }
   }, [addedIds])

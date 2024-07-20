@@ -130,7 +130,7 @@ const AddHotels = () => {
       formData.append('file', file)
       formData.append('upload_preset', 'j8epfynh')
       const res = await uploadImgToCloudinary(formData)
-      if (!res?.secure_url) return console.log('Error uploading ', res)
+      if (!res?.secure_url) return
       const updatedSections = sections.map((sec: any, ind: number) => {
         if (ind === label) {
           return {
@@ -185,7 +185,6 @@ const AddHotels = () => {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('response about maldives', res)
         }
       })
     } catch (error: any) {

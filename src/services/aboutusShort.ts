@@ -12,7 +12,6 @@ interface AboutusShort {
 }
 
 export async function createAboutusShort(data: AboutusShort) {
-  console.log('data ', data)
   const isExist = await prisma.aboutUsShort.findFirst()
   let result
   if (isExist) {

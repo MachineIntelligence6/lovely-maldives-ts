@@ -72,7 +72,6 @@ export default function OurCollection({
       },
     ],
   }
-  console.log('recomendations ', recomendations)
   return (
     <Container sx={{ maxWidth: '100% !important', px: '0px !important' }}>
       <Typography

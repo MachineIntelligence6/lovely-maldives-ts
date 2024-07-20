@@ -5,7 +5,6 @@ import prisma from '../../../../prisma'
 
 export async function GET(req: Request) {
   const params = getAllParams(req.url)
-  console.log('params ', params)
   const page = Number(params.get('page')) || 1
   const limit = Number(params.get('limit')) || 20
   const skip = (page - 1) * limit
@@ -16,7 +15,6 @@ export async function GET(req: Request) {
 
     let hotels
     if (ids?.length as any > 0 && ids?.[0] !== '') {
-      console.log('found ', ids)
       hotels = await prisma.hotels.findMany({
         where: {
             id: {

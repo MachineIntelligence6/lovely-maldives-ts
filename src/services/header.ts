@@ -25,7 +25,6 @@ export async function createHeader(data: Header) {
       data,
     })
   } else {
-    console.log('data ', data)
     result = await prisma.header.create({
       data: {
         heroLogo: data?.heroLogo,

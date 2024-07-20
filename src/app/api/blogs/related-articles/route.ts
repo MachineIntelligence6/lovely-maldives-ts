@@ -5,7 +5,6 @@ import prisma from '../../../../../prisma'
 
 export async function GET(req: Request) {
   const params = getAllParams(req.url)
-  console.log('params ', params)
   const id = params.get('id')
   try {
     await connectToDatabase()
@@ -20,7 +19,6 @@ export async function GET(req: Request) {
       },
       take: 3,
     })
-    console.log('result', result)
     if (!result)
       return NextResponse.json({
         message: 'No related blog article found.',

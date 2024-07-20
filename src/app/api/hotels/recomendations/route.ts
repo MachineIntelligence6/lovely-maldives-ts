@@ -5,7 +5,6 @@ import prisma from '../../../../../prisma'
 
 export async function GET(req: Request) {
   const params = getAllParams(req.url)
-  console.log('params ', params)
   const limit = Number(params.get('limit')) || 12
 
   try {

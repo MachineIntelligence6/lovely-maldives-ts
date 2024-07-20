@@ -193,7 +193,6 @@ const CardsSlider = (props: any) => {
                 }}
               >
                 {item.caption}
-                {console.log('item?.caption ', item?.caption)}
               </Typography>
             </Box>
           ) : (

@@ -5,7 +5,6 @@ import prisma from '../../../../../prisma'
 export async function DELETE(req: Request, route: { [key: string]: any }) {
   const { params } = route
   const { id } = params
-  console.log('id ', id)
   if (!id)
     return NextResponse.json({
       message: 'Please send id to delete user.',

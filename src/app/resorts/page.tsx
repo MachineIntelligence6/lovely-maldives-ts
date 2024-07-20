@@ -44,7 +44,6 @@ export default function ResortsPage() {
   const [resortsData, setResortsData] = useState([] as any)
   const [sections, setSections] = useState([] as any)
   const [editorText, setEditorText] = useState('')
-  console.log('Sections ', sections)
   const { themeData, error, fetchData } = useApiStore((state: any) => ({
     themeData: state.themeData,
     error: state.error,
@@ -58,11 +57,8 @@ export default function ResortsPage() {
         startTransition(async () => {
           const res = await getHotelsRequest(1, 500, ids)
           const data = res?.data
-          console.log('data ', data)
           if (data?.status === 200) {
             setSections(data?.data?.resortSections)
-          } else {
-            console.log('response about maldives', res)
           }
         })
       }
@@ -90,8 +86,6 @@ export default function ResortsPage() {
               setResortsData([...resortsData, ...sec.hotels])
             }
           })
-        } else {
-          console.log('response about maldives', res)
         }
       })
     } catch (err: any) {
@@ -105,15 +99,11 @@ export default function ResortsPage() {
 
   const getFilters = async () => {
     try {
-      // startTransition(async () => {
       const res = await getResortFilterRequest()
       const data = res?.data
       if (data?.status === 200) {
         setFilters(data?.data)
-      } else {
-        console.log('data ', data)
       }
-      // })
     } catch (err: any) {
       console.log('err ', err)
     }

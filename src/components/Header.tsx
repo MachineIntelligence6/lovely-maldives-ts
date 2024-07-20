@@ -63,8 +63,6 @@ function Header() {
       setLoading(false)
       if (res?.status === 200) {
         setLocalData(data?.data)
-      } else {
-        console.log('response about maldives', res)
       }
     } catch (error: any) {
       setLoading(false)

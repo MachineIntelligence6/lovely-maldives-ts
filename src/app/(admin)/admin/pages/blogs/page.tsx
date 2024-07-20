@@ -53,12 +53,10 @@ export default function Blogs() {
   }
 
   const updateBlog = (data: any) => {
-    console.log('data ', data)
     setValues({ ...values, category: data.category })
     setBlogs(data?.blogs)
     setBlogSecId(data?.sectionId)
     const allIds = data?.blogs?.map((blo: any) => blo?.id)
-    console.log('allIds ', allIds, data)
     setIds(allIds)
   }
 
@@ -143,8 +141,6 @@ export default function Blogs() {
         const data = res?.data
         if (data?.status === 200) {
           setAllBlogs(data?.data)
-        } else {
-          console.log('response a get  =>>> ', res)
         }
       })
     } catch (error: any) {

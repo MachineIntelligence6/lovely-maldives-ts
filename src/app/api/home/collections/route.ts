@@ -13,7 +13,6 @@ export async function GET() {
     const result = await getOurCollections()
     if (!result)
       return NextResponse.json({ message: 'No data found.', status: 422 })
-    console.log('collections ', result)
     return NextResponse.json(
       { message: 'Success', data: result, status: 200 },
       { status: 200 }

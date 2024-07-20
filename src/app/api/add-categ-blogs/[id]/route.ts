@@ -5,7 +5,6 @@ import prisma from '../../../../../prisma'
 export async function DELETE(req: Request, route: { [key: string]: any }) {
   const { params } = route
   const { id } = params
-  console.log('id ', id)
   if (!id)
     return NextResponse.json({
       message: 'Please send blog section id to delete.',
@@ -19,8 +18,6 @@ export async function DELETE(req: Request, route: { [key: string]: any }) {
         id,
       },
     })
-
-    console.log('result ', result)
 
     return NextResponse.json(
       { message: 'Section deleted successfully.', status: 200 },

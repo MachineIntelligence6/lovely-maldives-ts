@@ -14,11 +14,6 @@ export async function POST(req: Request, res: NextResponse) {
       { message: 'Please enter all fields.' },
       { status: 400 }
     )
-  //   const hashedPassword =
-  //     '$2b$10$IuQid.3lGS3R1SCS75qg9OcJlsUv3zzskXTgVLnmorWJ7jgaSejym'
-  //   const comparedPass = await bcrypt.compare(password, hashedPassword)
-  //   console.log('comparedPass ', comparedPass)
-
   if (!process.env.SECRET_KEY) {
     throw new Error('Missing SECRET_KEY environment variable')
   }

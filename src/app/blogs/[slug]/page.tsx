@@ -42,11 +42,8 @@ export default function SingleBlogPage() {
       startTransition(async () => {
         const res = await getSingleBlogRequest(slug)
         const data = res?.data
-        console.log('blog: ', data)
         if (data?.status === 200) {
           setBlog(data?.data)
-        } else {
-          console.log('response a get  =>>> ', res)
         }
       })
     } catch (err: any) {
@@ -63,19 +60,13 @@ export default function SingleBlogPage() {
   }
 
   const getRelatedBlogArticles = async (id: string) => {
-    console.log('blog?.id ', id)
     if (!id) return
     try {
-      // startTransition(async () => {
       const res = await getRelatedBlogsRequest(id)
       const data = res?.data
-      console.log('blog: ', data)
       if (data?.status === 200) {
         setRelatedArticles(data?.data)
-      } else {
-        console.log('response a get  =>>> ', res)
       }
-      // })
     } catch (err: any) {
       setAlertMsg({
         type: 'error',

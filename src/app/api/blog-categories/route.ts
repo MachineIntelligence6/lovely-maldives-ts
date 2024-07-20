@@ -28,7 +28,6 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('acategories', bodyData)
   if (!bodyData?.category)
     return NextResponse.json(
       { message: 'Please send blog category.' },
@@ -111,7 +110,6 @@ export async function PUT(req: Request) {
 
 export async function DELETE(req: Request) {
   const id = getIdParam(req.url)
-  console.log('id is ', id)
   if (!id)
     return NextResponse.json(
       { message: 'Please send category id to delete.' },
@@ -125,8 +123,6 @@ export async function DELETE(req: Request) {
         id,
       },
     })
-
-    console.log('result ', result)
 
     if (!result)
       return NextResponse.json(

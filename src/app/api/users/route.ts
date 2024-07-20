@@ -27,7 +27,6 @@ export async function GET(req: NextApiRequest) {
 
 export async function PUT(req: Request) {
   const params = getAllParams(req.url)
-  console.log('params ', params)
   const id = params.get('id')
   const status = params.get('status')
 

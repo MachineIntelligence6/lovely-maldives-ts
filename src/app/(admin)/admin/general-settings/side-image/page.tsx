@@ -25,12 +25,10 @@ function SideImage() {
   const homeBgId = useHomeBgId()
   const [image, setImage] = useState('' as any)
   const [imageUrl, setImageUrl] = useState('' as any)
-  console.log('image uri is ', imageUrl)
 
   const hanldeFileChange = async (e: any) => {
     const file = e.target.files?.[0]
     setImage(file)
-    console.log('file is ', file)
     startTransition(async () => {
       const formData = new FormData()
       formData.append('file', file as any)
@@ -52,9 +50,7 @@ function SideImage() {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('response about maldives', res)
         }
-        console.log('response ', res)
       })
     } catch (error: any) {
       console.log('error ', error)

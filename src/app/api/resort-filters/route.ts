@@ -28,7 +28,6 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('about maldives', bodyData)
   if (!bodyData?.type || !bodyData?.filter)
     return NextResponse.json({
       message: 'Please send all fields ( type and filter ).',
@@ -68,7 +67,6 @@ export async function POST(req: Request) {
 
 export async function PUT(req: Request) {
   const bodyData = await req.json()
-  console.log('about maldives', bodyData)
   if (!bodyData.id || !bodyData.type || !bodyData.filter)
     return NextResponse.json({
       message: 'Please send filter id to update.',
@@ -110,7 +108,6 @@ export async function PUT(req: Request) {
 
 export async function DELETE(req: Request) {
   const id = getIdParam(req.url)
-  console.log('id is ', id)
   if (!id)
     return NextResponse.json({
       message: 'Please send filter id to delete.',

@@ -58,7 +58,6 @@ const SocialLinkSection = () => {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('response about maldives', res)
         }
       })
     } catch (error: any) {

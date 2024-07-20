@@ -20,7 +20,6 @@ export default function BlogHeader() {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('headerData') as any)
-    console.log('header data ', data)
     setHeaderData(data)
   }, [])
   return (

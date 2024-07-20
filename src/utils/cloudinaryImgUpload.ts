@@ -7,7 +7,6 @@ export const uploadImgToCloudinary = async (formData: any) => {
       body: formData,
     }
   )
-  console.log('Response ', response)
   if (!response.ok) {
     throw new Error('Error uploading image')
   }

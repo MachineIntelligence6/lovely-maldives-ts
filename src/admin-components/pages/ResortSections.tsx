@@ -60,7 +60,6 @@ const ResortSections = () => {
       }
       return sec
     })
-    console.log('updated secctions ', updatedSections)
     setSections(updatedSections)
   }
 
@@ -75,7 +74,6 @@ const ResortSections = () => {
   const handleAddType = (type: string) => {
     setSections([...sections, { type }])
   }
-  console.log('Sections are ', sections)
   const handleAddHotel = async (index: number, hotel: any) => {
     const updatedSections = sections.map((sec: any, ind: number) => {
       if (ind === index) {
@@ -141,14 +139,6 @@ const ResortSections = () => {
             }
           })
 
-          // let resultHotels = [] as any
-
-          // sections?.map((section: any) => {
-          //   if (section.type === 'images_gallery') {
-          //     resultHotels = section.hotels
-          //   }
-          // })
-          console.log('allHotels ', allHotels)
           setSections(
             data?.data?.map((sec: any) => {
               if (sec?.type === 'images_gallery') {
@@ -174,7 +164,6 @@ const ResortSections = () => {
   }
 
   const handleAddSections = async () => {
-    console.log('SEctions submitting ', sections)
     try {
       startTransition(async () => {
         const res = await AddResortSectionRequest(sections)
@@ -190,7 +179,6 @@ const ResortSections = () => {
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
-          console.log('response about maldives', res)
         }
       })
     } catch (error: any) {

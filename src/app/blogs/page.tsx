@@ -110,8 +110,6 @@ export default function Page() {
         const data = res?.data
         if (data?.status === 200) {
           setAllBlogs(data?.data)
-        } else {
-          console.log('response a get  =>>> ', res)
         }
       })
     } catch (err: any) {
@@ -136,8 +134,6 @@ export default function Page() {
           const newArticles = data?.data
           setAllArticles([...allArticles, ...newArticles])
           setTotalBlogs(data?.totalBlogs)
-        } else {
-          console.log('response a get  =>>> ', res)
         }
       })
     } catch (err: any) {

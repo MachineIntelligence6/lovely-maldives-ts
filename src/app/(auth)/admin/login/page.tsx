@@ -47,11 +47,6 @@ export default function Login() {
   const [errMsg, setErrMsg] = React.useState('')
 
   const onSubmit = async () => {
-    console.log({
-      email: watch('email'),
-      password: watch('password'),
-    })
-
     try {
       startTransition(async () => {
         const res = await signIn('credentials', {
@@ -59,7 +54,6 @@ export default function Login() {
           password: watch('password'),
           redirect: false,
         })
-        console.log('res =>>> ', res)
         if (res?.status === 200) {
           router.push('/admin/dashboard')
         } else {

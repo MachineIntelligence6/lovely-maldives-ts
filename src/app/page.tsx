@@ -6,12 +6,9 @@ import Link from 'next/link'
 import React, { Suspense, useEffect, useState } from 'react'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import Typography from '@mui/material/Typography'
-import axios from 'axios'
 
 import Box from '@mui/system/Box'
 import dynamic from 'next/dynamic'
-// import Header from '@/components/Header'
-import apiClient from '@/services/apiClient'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import { getHomeBgRequest } from '@/utils/api-requests/home.request'
 import { getCollectionsRequest } from '@/utils/api-requests/collections-request'
@@ -39,13 +36,14 @@ export default function Home() {
   }))
 
   const getHomeData = async () => {
+    console.log('getting home data...')
     try {
       setLoading(true)
       const res = await fetch(`/api/home?timestamp=${new Date().getTime()}`, {
         cache: 'no-store',
       })
       const data = await res?.json()
-      console.log('data is ', data)
+      console.log('home data is : ', data)
       setLoading(false)
       if (res?.status === 200) {
         setHomeData(data?.data)
@@ -54,12 +52,10 @@ export default function Home() {
           'headerData',
           JSON.stringify(data?.data?.header?.[0])
         )
-      } else {
-        console.log('response about maldives', res)
       }
     } catch (err: any) {
       setLoading(false)
-      console.log('err ', error)
+      console.log('home data fetching err : ', error)
     }
   }
 
@@ -69,8 +65,6 @@ export default function Home() {
       const data = res?.data?.data
       if (res?.status === 200) {
         localStorage.setItem('homeBgId', JSON.stringify(data?.id))
-      } else {
-        console.log('response homebg ', res)
       }
     } catch (err: any) {
       console.log('err ', err)
@@ -83,8 +77,6 @@ export default function Home() {
       const data = res?.data
       if (data?.status === 200) {
         setCollections(data?.data)
-      } else {
-        console.log('response about maldives', res)
       }
     } catch (err: any) {
       console.log('err ', err)
@@ -101,7 +93,6 @@ export default function Home() {
   return (
     <Suspense fallback={<CustomLoader />}>
       <Box sx={{ bgcolor: themeData?.bgColor }}>
-        {/* {loading && <CustomLoader />} */}
         <Header />
         <Banner bannerData={homeData} themeData={themeData} />
         <Box

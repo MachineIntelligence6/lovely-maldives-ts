@@ -5,7 +5,6 @@ import prisma from '../../../../prisma'
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('blogs', bodyData)
   if (!bodyData?.category || !bodyData?.ids || bodyData?.ids?.length === 0)
     return NextResponse.json({
       message: 'Please send complete blog data to save.',
@@ -83,8 +82,6 @@ export async function GET(req: Request, res: Response) {
             take: 20,
           })
 
-          console.log('response', response)
-
           // Push into blogData with the original index to maintain order
           blogData[index] = {
             category: re?.category,
@@ -103,31 +100,3 @@ export async function GET(req: Request, res: Response) {
     await prisma.$disconnect()
   }
 }
-
-// export async function DELETE(req: Request) {
-//   const bodyData = await req.json()
-//   if (!bodyData?.id)
-//     return NextResponse.json({
-//       message: 'Please send blog section id to delete.',
-//       status: 422,
-//     })
-//   try {
-//     await connectToDatabase()
-
-//     const result = await prisma.categoryBlogs.delete({
-//       where: {
-//         id: bodyData.id,
-//       },
-//     })
-
-//     return NextResponse.json(
-//       { message: 'Section deleted successfully.', status: 200 },
-//       { status: 200 }
-//     )
-//   } catch (error) {
-//     console.log('Error', error)
-//     return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
-//   } finally {
-//     await prisma.$disconnect()
-//   }
-// }

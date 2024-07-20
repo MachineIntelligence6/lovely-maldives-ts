@@ -3,7 +3,6 @@ import { connectToDatabase } from '@/helpers/server-helpers'
 import prisma from '../../../../../prisma'
 
 export async function GET(req: Request, route: { [key: string]: any }) {
-  console.log('route ', route)
   const { params } = route
   const { slug } = params
   try {

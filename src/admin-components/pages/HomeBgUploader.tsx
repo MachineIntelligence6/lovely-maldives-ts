@@ -61,11 +61,7 @@ const HomeBgUploader = () => {
         if (res?.status === 200) {
           setUrls(data?.bgImages)
           setTitles({ title: data?.title, subTitle: data?.subTitle })
-          // if (typeof window !== 'undefined') {
           localStorage.setItem('homeBgId', JSON.stringify(data?.id))
-          // }
-        } else {
-          console.log('response homebg ', res)
         }
       })
     } catch (error: any) {
