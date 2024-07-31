@@ -7,10 +7,9 @@
   --white: #666666;
   --blue: #5d7496;
   --darkBlue: #2b5088;
-  --darkBrown: #60584c; /* #444444; */
+  --darkBrown: #60584c;
   --black: #333;
   --red: #d03939;
-  /* --fontMon:"Montserrat", sans-serif; */
 }
 
 * {
@@ -44,21 +43,16 @@
   position: absolute;
   top: 0;
   display: inline-block;
-  /* width: 100%; */
   height: 3px;
-  /* transition: all 0.5s ease; */
   transition:
     opacity 0.5s ease,
     transform 0.5s ease;
 }
 .line1 {
   transform: rotate(45deg);
-  /* margin-bottom: 1rem */
 }
 .line2 {
-  /* top: 1rem; */
   transform: rotate(-45deg);
-  /* margin-bottom: 1rem */
 }
 .searchIcon {
   display: none;
@@ -100,15 +94,7 @@ body {
 .navbar {
   transition: all 0.3s ease-in 0s;
 }
-/* .mainImg{
-    background-image: url("../../public/Images/banner.jpg");
-    background-size:cover;
-    background-position:100%;
-    width:100%;
-    height:100vh;
-    background-repeat:no-repeat;
-    position:relative;
-} */
+
 .sideTree {
   height: auto;
   right: -5%;
@@ -191,13 +177,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
 .expSlider:hover {
   transform: scale(1.1);
   cursor: pointer;
-  /* height:190px;
-    width:155px */
 }
-/* .blogImg {
-  width: 70%;
-  border-radius: 20px 0 0 20px;
-} */
 .articleBlog {
   width: 700px;
   height: 400px;
@@ -261,11 +241,7 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   padding: 16px !important;
 }
 @media screen and (min-width: 900px) and (max-width: 1024px) {
-  /* .exploreImges {
-    width: 250px;
-  } */
   .sideTree {
-    /* height:55% ; */
     right: -20%;
   }
 }
@@ -319,7 +295,6 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     padding: 15px 0 0 0;
   }
   .sideTree {
-    /* height:55% ; */
     right: -35%;
   }
   .imgRadius {
@@ -329,10 +304,6 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
   .collectionImg {
     width: 95%;
   }
-  /* .blogImg {
-    width: 100%;
-    border-radius: 20px;
-  } */
   .articleBlog {
     width: 85%;
     height: 200px;
@@ -352,27 +323,11 @@ label + .css-1x0154w-MuiInputBase-root-MuiInput-root {
     width: 100%;
     height: 100%;
   }
-  /* .topBrandSlider .slick-slide{
-    width: 186px !important;
-  } */
   .topBrandSlider .slick-list {
     max-height: 250px !important;
   }
-  /* .rightPalm {
-    transform: translateX(15%);
-  } */
 }
 
-/* @media screen and (max-width: 480px) {
-  .rightPalm {
-    top: 400px;
-  }
-} */
-/* @media screen and (min-width: 1600px) {
-  .rightPalm {
-    transform: translateX(150%);
-  }
-} */
 .burger-menu {
   min-width: max-content;
   height: 2rem;

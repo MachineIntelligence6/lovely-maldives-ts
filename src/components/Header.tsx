@@ -178,13 +178,6 @@ function Header() {
           </Box>
           <Box>
             <Link href="/">
-              {/* <Box
-                component={Image}
-                src={isScrolled ? profilePicCol : profilePic}
-                alt="Logo"
-                width={95.6}
-                height={60}
-              /> */}
               <Box
                 sx={{
                   width: isScrolled

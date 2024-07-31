@@ -96,7 +96,7 @@ export default function Footer(props: any) {
         px: { xs: '24px', md: '120px' },
         bgcolor: 'var(--brown)',
         color: 'white',
-        mt: { xs: '0px', md: '60px' },
+        mt: { xs: '40px', md: '60px' },
       }}
     >
       <Box
