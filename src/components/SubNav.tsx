@@ -25,11 +25,11 @@ export default function SubNav({ menuItems, isScrolled }: any) {
           top: {
             xs: '0',
             md: isScrolled
-              ? `${parseInt(menuItems?.otherHeight) + 23}px`
-              : `${parseInt(menuItems?.heroHeight) + 24}px`,
+              ? `${parseInt(menuItems?.otherHeight) + 45}px`
+              : `${parseInt(menuItems?.heroHeight) + 40}px`,
           },
           borderBottom: '1px solid silver',
-          py: '10px',
+          pb: '10px',
           width: '100%',
           px: '100px',
           zIndex: 997,

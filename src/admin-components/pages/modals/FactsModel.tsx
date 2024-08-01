@@ -13,6 +13,8 @@ import {
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import CustomSelect from '@/admin-components/items/CustomSelect'
 import TagsField from '@/admin-components/items/TagsField'
+import IconUploader from '@/admin-components/common/IconUploader'
+import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 
 const CustomLabel = styled(InputLabel)(({ theme }) => ({
   fontSize: '16px',
@@ -39,6 +41,7 @@ const FactsModel = (props: any) => {
   const { open, handleShowModal, handleAddFacts } = props
   const [values, setValues] = useState({
     title: '',
+    icon: '',
     subTags: [],
     stars: 1,
   } as any)
@@ -50,6 +53,18 @@ const FactsModel = (props: any) => {
       ...values,
       [name]: value,
     })
+  }
+
+  const handleIconChange = async (e: any) => {
+    const file = e.target.files?.[0]
+    setIcon(file)
+    console.log('file ', file)
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('upload_preset', 'j8epfynh')
+    const res = await uploadImgToCloudinary(formData)
+    console.log('file icon res ', res)
+    setValues({ ...values, icon: res?.secure_url })
   }
 
   const handleChangeTags = (tag: any) => {
@@ -87,7 +102,7 @@ const FactsModel = (props: any) => {
               mb: 3,
             }}
           >
-            Add Collection
+            Add Fact
           </Typography>
 
           <TextFieldWraper
@@ -105,6 +120,12 @@ const FactsModel = (props: any) => {
             name="subTags"
             handleChangeTags={handleChangeTags}
             removeTag={removeTag}
+          />
+
+          <IconUploader
+            label="Icon"
+            onChange={handleIconChange}
+            iconName={icon?.name ?? values?.icon ? 'icon.jpg' : 'Upload Icon'}
           />
 
           <Stack

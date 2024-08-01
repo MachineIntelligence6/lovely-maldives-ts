@@ -8,8 +8,6 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
-import FacebookIcon from '@mui/icons-material/Facebook'
-import TwitterIcon from '@mui/icons-material/Twitter'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import XIcon from '@mui/icons-material/X'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'

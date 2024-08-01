@@ -26,8 +26,6 @@ import MobileNav from './MobileNav'
 import SubNav from './SubNav'
 import SearchModal from './SearchModal'
 
-// const profilePic = '/Images/logo.svg'
-// const profilePicCol = '/Images/logo-colored.svg'
 import profilePic from '../../public/Images/logo.svg'
 import profilePicCol from '../../public/Images/logo-colored.svg'
 
@@ -188,6 +186,7 @@ function Header() {
                     : localData?.heroHeight,
                   maxWidth: '120px',
                   maxHeight: '85px',
+                  mt: '8px',
                 }}
               >
                 <Image

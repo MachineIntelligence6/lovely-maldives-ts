@@ -32,11 +32,6 @@ import CustomLoader from '@/admin-components/common/CustomLoader'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 import HotelsWraper from './HotelsWraper'
 
-// const ReactQuillEditor = dynamic(
-//   () => import('@/admin-components/common/ReactQuillEditor'),
-//   { ssr: false }
-// )
-
 const JoditTextEditor = dynamic(
   () => import('@/admin-components/common/JoditTextEditor'),
   { ssr: false }

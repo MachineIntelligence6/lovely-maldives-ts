@@ -8,7 +8,6 @@ export async function GET() {
     await connectToDatabase()
 
     const result = await getThemeConfig()
-    console.log('theme data is : ', result)
     if (!result)
       return NextResponse.json({ message: 'No data found.', status: 404 })
 
