@@ -104,7 +104,7 @@ export default function TopFiveLuxuryResorts(props: any) {
                 textTransform: 'capitalize',
               }}
               onClick={handleShowModal}
-              disabled={resorts?.length >= 5}
+              // disabled={resorts?.length >= 5}
             >
               <Stack direction="row" alignItems="center" gap="10px">
                 <AddIcon sx={{ color: 'var(--brown)', fontSize: '22px' }} />

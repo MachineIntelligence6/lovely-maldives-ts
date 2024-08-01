@@ -21,6 +21,8 @@ export default function SidePalmTree(props: any) {
           position: 'absolute',
           top: 0,
           right: 0,
+          maxWidth: '300px',
+          height: 'auto',
           zIndex: 99,
           objectFit: 'contain',
           transform: 'translateY(-30%)',

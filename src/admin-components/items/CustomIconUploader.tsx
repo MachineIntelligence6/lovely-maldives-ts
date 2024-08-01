@@ -13,7 +13,7 @@ const CustomIconUploader = (props: any) => {
         type="file"
         id={`icon_menu_items_${index}_${subIndex}`}
         hidden
-        onChange={onChange}
+        onChange={onChange} 
       />
       <Box
         sx={{

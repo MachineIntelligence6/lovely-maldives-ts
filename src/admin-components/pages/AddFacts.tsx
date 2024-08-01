@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@mui/material'
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { ModeOfTravel } from '@mui/icons-material'
 import AddIcon from '@mui/icons-material/Add'
 import FactsModel from './modals/FactsModel'
@@ -57,7 +58,22 @@ const AddFacts = (props: any) => {
                 }}
               >
                 <ListItemIcon sx={{ minWidth: '30px', mt: 1.2 }}>
-                  <ModeOfTravel />
+                  {fact?.icon ? (
+                    <Image
+                      src={fact?.icon}
+                      width={30}
+                      height={30}
+                      alt="fact-icon"
+                      style={{
+                        width: '30px',
+                        height: '30px',
+                        objectFit: 'contain',
+                        marginRight: '8px'
+                      }}
+                    />
+                  ) : (
+                    <ModeOfTravel />
+                  )}
                 </ListItemIcon>
                 <ListItemText
                   primary={

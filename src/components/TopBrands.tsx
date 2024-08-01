@@ -153,16 +153,6 @@ export default function TopBrands(props: any) {
                       }}
                     />
                   </Box>
-                  {/* <Typography
-                    sx={{
-                      width: '100px',
-                      fontSize: '26px',
-                      textAlign: 'center',
-                      fontWeight: 600,
-                    }}
-                  >
-                    {brand?.title}
-                  </Typography> */}
                 </Box>
                 <Box
                   sx={{
