@@ -26,7 +26,7 @@ export default function SubNav({ menuItems, isScrolled }: any) {
             xs: '0',
             md: isScrolled
               ? `${parseInt(menuItems?.otherHeight) + 45}px`
-              : `${parseInt(menuItems?.heroHeight) + 40}px`,
+              : `${parseInt(menuItems?.heroHeight) + 39}px`,
           },
           borderBottom: '1px solid silver',
           pb: '10px',

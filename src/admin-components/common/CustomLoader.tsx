@@ -1,5 +1,6 @@
 import React from 'react'
-import { CircularProgress, Box } from '@mui/material'
+import { Box } from '@mui/material'
+import Image from 'next/image'
 
 const CustomLoader = () => {
   return (
@@ -17,15 +18,22 @@ const CustomLoader = () => {
         width: '100vw',
         height: '100vh',
         flexDirection: 'column',
-        backgroundColor: 'rgba(0,0,0,0.5)', // Change to match your website's background color
+        backgroundColor: 'white',
       }}
     >
-      <CircularProgress
+      {/* <CircularProgress
         size={50}
         thickness={4.5}
-        sx={{ color: '#fff', marginBottom: 2 }}
-      />
-      {/* <Image src="/logo.png" alt="Loading..." width={150} height={50} />{' '} */}
+        sx={{ color: '#000', marginBottom: 2 }}
+      /> */}
+      <Image
+        src="/favicon.png"
+        alt="Loading..."
+        width={400}
+        height={400}
+        className='custom-loader-image'
+        style={{ objectFit: 'contain', width: '200px', height: '200px' }}
+      />{' '}
       {/* Adjust the size as needed */}
     </Box>
   )

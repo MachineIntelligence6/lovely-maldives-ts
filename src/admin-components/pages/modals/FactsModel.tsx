@@ -58,7 +58,6 @@ const FactsModel = (props: any) => {
   const handleIconChange = async (e: any) => {
     const file = e.target.files?.[0]
     setIcon(file)
-    console.log('file ', file)
     const formData = new FormData()
     formData.append('file', file)
     formData.append('upload_preset', 'j8epfynh')

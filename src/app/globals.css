@@ -69,13 +69,29 @@ body {
   font-family: 'Century Gothic', sans-serif;
   background-color: #fbfbfd !important;
 }
-/* .rotateTop{
-    transform:rotate(45deg);
-    transform:translateY(6)
+
+.custom-loader-image {
+  animation: slide 1s linear infinite;
 }
-.rotateBot{
-    transform:rotate(-45deg);
-} */
+
+@keyframes slide {
+  0% {
+    transform: scale(.5);
+  }
+  25% {
+    transform: scale(0.75);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(0.75);
+  }
+  100% {
+    transform: scale(.5);
+  }
+}
+
 .css-1jebkij-MuiToolbar-root {
   padding: 0;
 }

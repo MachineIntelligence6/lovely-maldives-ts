@@ -162,6 +162,7 @@ export default function Resort() {
                       <Box
                         sx={{
                           mt: 3,
+                          px: { xs: '24px', md: '0px' },
                           bgcolor: 'transparent',
                           '& *': {
                             bgcolor: 'transparent !important',
@@ -217,6 +218,7 @@ export default function Resort() {
                             <ListItem
                               sx={{
                                 p: 0,
+                                px: { xs: '24px', md: '0px' },
                                 display: 'flex',
                                 alignItems: 'start',
                               }}
