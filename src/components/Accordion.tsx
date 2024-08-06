@@ -47,7 +47,7 @@ export default function FaqsAccordion(props: any) {
   return (
     <Box sx={{ mt: { xs: '40px', md: '60px' } }}>
       {faqs?.map((faq: any, index: number) => (
-        <Box sx={{ mb: '40px' }}>
+        <Box key={index} sx={{ mb: '40px' }}>
           <Typography
             sx={{ fontWeight: 600, fontSize: '20px', mb: 3, color: 'black' }}
           >
@@ -91,6 +91,7 @@ export default function FaqsAccordion(props: any) {
                 sx={{ fontFamily: 'Century Gothic', px: { xs: 2, md: 4 } }}
               >
                 <Box
+                  className="jodit-editor-text-wraper"
                   sx={{
                     bgcolor: 'transparent',
                     '& *': {

@@ -368,6 +368,7 @@ const FAQs = () => {
                   sx={{ fontFamily: 'Century Gothic', px: { xs: 2, md: 4 } }}
                 >
                   <Box
+                    className="jodit-editor-text-wraper"
                     sx={{
                       bgcolor: 'transparent',
                       '& *': {

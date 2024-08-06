@@ -152,7 +152,7 @@ export default function ResortsPage() {
                 sx={{ maxWidth: '1000px !important', mx: 'auto' }}
               >
                 <Box
-                  className="quill-content"
+                  className="quill-content jodit-editor-text-wraper"
                   sx={{
                     bgcolor: 'transparent',
                     '& *': {

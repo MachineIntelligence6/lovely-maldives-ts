@@ -160,6 +160,7 @@ export default function Resort() {
                   if (section?.type === 'description') {
                     return (
                       <Box
+                        className="jodit-editor-text-wraper"
                         sx={{
                           mt: 3,
                           bgcolor: 'transparent',
