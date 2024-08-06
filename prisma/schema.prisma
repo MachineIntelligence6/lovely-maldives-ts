@@ -16,6 +16,7 @@ generator client {
 // TYPES
 type Facts {
   title    String
+  icon      String
   subTags    String[]
   stars    Int?
 }

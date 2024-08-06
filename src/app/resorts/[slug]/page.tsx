@@ -40,12 +40,6 @@ export default function Resort() {
   const params = useParams()
   const [isPending, startTransition] = useTransition()
 
-  // const [readMore, setReadMore] = useState(false)
-  // const [sliderMain1Nav, setSliderMain1Nav] = useState<Slider>()
-  // const [sliderMain2Nav, setSliderMain2Nav] = useState<Slider>()
-  // const sliderMain1Ref = useRef<Slider>()
-  // const sliderMain2Ref = useRef<Slider>()
-
   const [sliderMain3Nav, setSliderMain3Nav] = useState<Slider>()
   const [sliderMain4Nav, setSliderMain4Nav] = useState<Slider>()
   const sliderMain3Ref = useRef<Slider>()
@@ -58,10 +52,6 @@ export default function Resort() {
     error: state.error,
     fetchData: state.fetchData,
   }))
-
-  // const showExtraContent = () => {
-  //   setReadMore(!readMore)
-  // }
 
   const getResortSection = () => {
     const slug = params?.slug
@@ -223,7 +213,22 @@ export default function Resort() {
                               }}
                             >
                               <ListItemIcon sx={{ minWidth: '30px', mt: 1.2 }}>
-                                <ModeOfTravel />
+                                {fact?.icon ? (
+                                  <Image
+                                    src={fact?.icon}
+                                    width={30}
+                                    height={30}
+                                    alt="fact-icon"
+                                    style={{
+                                      width: '24px',
+                                      height: '24px',
+                                      objectFit: 'contain',
+                                      marginRight: '8px',
+                                    }}
+                                  />
+                                ) : (
+                                  <ModeOfTravel />
+                                )}
                               </ListItemIcon>
                               <ListItemText
                                 primary={
@@ -246,27 +251,6 @@ export default function Resort() {
                                     </Typography>
                                   )
                                 )}
-                                //   <Typography
-                                //     paragraph
-                                //     sx={{
-                                //       fontSize: '0.875rem',
-                                //       color: '#666',
-                                //       mb: '2px',
-                                //     }}
-                                //   >
-                                //     (20 minutes to reach the hotel)
-                                //   </Typography>,
-                                //   <Typography
-                                //     paragraph
-                                //     sx={{
-                                //       fontSize: '0.875rem',
-                                //       color: '#666',
-                                //       mb: '2px',
-                                //     }}
-                                //   >
-                                //     (20 minutes to reach the hotel)
-                                //   </Typography>,
-                                // ]}
                               />
                             </ListItem>
                           </Grid>
