@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
+import loaderImg from '../../../public/Images/lovely-maldives-logo-brown.png'
 
 const CustomLoader = () => {
   return (
@@ -27,7 +28,7 @@ const CustomLoader = () => {
         sx={{ color: '#fff', marginBottom: 2 }}
       /> */}
       <Image
-        src="/images/lovely-maldives-logo-brown.png"
+        src={loaderImg}
         alt="Loading..."
         className="loader-img"
         width={150}
