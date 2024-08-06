@@ -27,7 +27,6 @@ export default function Footer(props: any) {
     try {
       const res = await fetch(`/api/footer`)
       const data = await res?.json()
-      console.log('footer data is : ', data?.data)
       if (data?.status === 200) {
         setFooterData(data?.data)
       }
