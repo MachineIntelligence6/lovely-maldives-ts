@@ -188,6 +188,7 @@ function Header() {
                     : localData?.heroHeight,
                   maxWidth: '120px',
                   maxHeight: '85px',
+                  mt: '8px',
                 }}
               >
                 <Image
