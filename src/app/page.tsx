@@ -36,7 +36,6 @@ export default function Home() {
   }))
 
   const getHomeData = async () => {
-    console.log('getting home data...')
     try {
       setLoading(true)
       const res = await fetch(`/api/home/home-bg`, {
