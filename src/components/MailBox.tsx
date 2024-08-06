@@ -57,7 +57,7 @@ export default function MailBox() {
       sx={{
         mt: { xs: '40px', md: '60px' },
         width: { xs: '100%', md: '55%' },
-        // height: { xs: '250px', md: '350px' },
+        minWidth: { xs: '100%', md: '500px' },
         mx: 'auto',
         py: '50px',
         borderRadius: { xs: '0', md: '25px' },
@@ -80,7 +80,6 @@ export default function MailBox() {
         height={31}
         width={40}
         alt="Logo subscribe mailing"
-        // style={{ marginTop: '8%' }}
       />
       <Typography
         sx={{

@@ -16,17 +16,6 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import collectionImg from '../../public/Images/collectionImg.jpg'
 
-// interface ITopFiveLuxuryResortsProps {
-//   heading: string
-//   button: string
-//   iconShow: string
-//   radius: string
-//   bottomradius: string
-//   resorts: any,
-//   isAdminSide: boolean,
-//   title: string,
-//   handleChange: any
-// }
 export default function TopFiveLuxuryResorts(props: any) {
   const router = useRouter()
   const {
@@ -43,8 +32,6 @@ export default function TopFiveLuxuryResorts(props: any) {
   } = props
 
   const settings = {
-    // className: 'center',
-    // centerPadding: '60px',
     dots: true,
     infinite: true,
     speed: 200,
@@ -104,7 +91,6 @@ export default function TopFiveLuxuryResorts(props: any) {
                 textTransform: 'capitalize',
               }}
               onClick={handleShowModal}
-              disabled={resorts?.length >= 5}
             >
               <Stack direction="row" alignItems="center" gap="10px">
                 <AddIcon sx={{ color: 'var(--brown)', fontSize: '22px' }} />
