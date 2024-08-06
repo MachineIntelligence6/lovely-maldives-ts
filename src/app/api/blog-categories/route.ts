@@ -9,13 +9,13 @@ export async function GET() {
 
     const result = await prisma.blogCategories.findMany()
     if (!result)
-      return NextResponse.json(
-        { message: 'No categories data found.' },
-        { status: 404 }
-      )
+      return NextResponse.json({
+        message: 'No categories data found.',
+        status: 409,
+      })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Success', data: result, status: 200 },
       { status: 200 }
     )
   } catch (error) {
@@ -43,17 +43,17 @@ export async function POST(req: Request) {
     })
 
     if (isExist)
-      return NextResponse.json(
-        { message: 'This Category already exists.' },
-        { status: 409 }
-      )
+      return NextResponse.json({
+        message: 'This Category already exists.',
+        status: 409,
+      })
 
     const result = await prisma.blogCategories.create({
       data: bodyData,
     })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Category added successfully.', data: result, status: 201 },
       { status: 201 }
     )
   } catch (error) {
@@ -67,10 +67,10 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   const bodyData = await req.json()
   if (!bodyData.id || !bodyData.category)
-    return NextResponse.json(
-      { message: 'Please send category id to update.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send category id to update.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
@@ -81,13 +81,11 @@ export async function PUT(req: Request) {
     })
 
     if (!isExist)
-      return NextResponse.json(
-        {
-          message:
-            'Category not found, please send correct category id to update.',
-        },
-        { status: 404 }
-      )
+      return NextResponse.json({
+        message:
+          'Category not found, please send correct category id to update.',
+        status: 404,
+      })
 
     const result = await prisma.blogCategories.update({
       where: {
@@ -97,8 +95,8 @@ export async function PUT(req: Request) {
     })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
-      { status: 201 }
+      { message: 'Success', data: result, status: 200 },
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)
@@ -110,11 +108,12 @@ export async function PUT(req: Request) {
 
 export async function DELETE(req: Request) {
   const id = getIdParam(req.url)
+  console.log('id ', id)
   if (!id)
-    return NextResponse.json(
-      { message: 'Please send category id to delete.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send category id to delete.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
@@ -125,17 +124,15 @@ export async function DELETE(req: Request) {
     })
 
     if (!result)
-      return NextResponse.json(
-        {
-          message:
-            'Category deletion failed, please send correct category id to delete.',
-        },
-        { status: 404 }
-      )
+      return NextResponse.json({
+        message:
+          'Category deletion failed, please send correct category id to delete.',
+        status: 404,
+      })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
-      { status: 201 }
+      { message: 'Success', data: result, status: 200 },
+      { status: 200 }
     )
   } catch (error) {
     console.log('Error', error)

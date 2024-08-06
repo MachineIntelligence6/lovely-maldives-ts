@@ -52,7 +52,7 @@
       { "code": 100, "ignoreComments": true, "ignoreUrls": true }
     ],
     "react-hooks/rules-of-hooks": "off",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "off",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     // "prettier/prettier": ["error", { "endOfLine": "auto" }],

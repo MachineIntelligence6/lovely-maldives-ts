@@ -2,8 +2,8 @@
 
 import { Alert, Box, Typography } from '@mui/material'
 import React, { useEffect, useState, useTransition } from 'react'
-import ColorPicker from 'react-best-gradient-color-picker'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
+import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import HeadingWraper from '@/admin-components/common/HeadingWraper'
 import {
@@ -26,8 +26,7 @@ const ThemeConfiguration = () => {
 
   const [values, setValues] = useState({
     fontFamily: '',
-    gradient:
-      'linear-gradient(180deg, rgba(131, 117, 96, 0.1) 0%, rgba(150, 127, 93, 0.2) 100%)',
+    gradient: '',
     bgColor: '',
   })
 
@@ -52,7 +51,7 @@ const ThemeConfiguration = () => {
           }, 3000)
         }
       })
-    } catch (error) {
+    } catch (error: any) {
       console.log('error ', error)
     }
   }
@@ -71,7 +70,7 @@ const ThemeConfiguration = () => {
           }, 3000)
         }
       })
-    } catch (error) {
+    } catch (error: any) {
       console.log('error ', error)
     }
   }
@@ -79,17 +78,6 @@ const ThemeConfiguration = () => {
   useEffect(() => {
     getThemeData()
   }, [])
-
-  const handleGradientChange = (gradient: any) => {
-    if (gradient.includes('NaN%')) {
-      // Replace NaN% with a default value, e.g., 100%
-      const result = gradient.replace('NaN%', '100%')
-      setValues({ ...values, gradient: result })
-    } else {
-      setValues({ ...values, gradient })
-    }
-    console.log('gradient ', gradient)
-  }
 
   return (
     <Box sx={{ pb: 4 }}>
@@ -107,6 +95,15 @@ const ThemeConfiguration = () => {
           detectChange={detectChange}
         />
         <Box sx={{ mt: 3 }}>
+          {/* <TextFieldWraper
+            label="Font Family"
+            placeholder="Enter font family."
+            value={values.fontFamily}
+            name="fontFamily"
+            onChange={(e: any) =>
+              setValues({ ...values, fontFamily: e.target.value })
+            }
+          /> */}
           <CustomSelect
             placeholder="Select font family."
             value={values.fontFamily}
@@ -161,9 +158,14 @@ const ThemeConfiguration = () => {
             Gradient Layer
           </Typography>
           <Box sx={{ mt: 3 }}>
-            <ColorPicker
+            <TextFieldWraper
+              label="Gradient Color"
+              placeholder="Enter gradient color."
               value={values.gradient}
-              onChange={handleGradientChange}
+              name="gradient"
+              onChange={(e: any) =>
+                setValues({ ...values, gradient: e.target.value })
+              }
             />
 
             <Typography

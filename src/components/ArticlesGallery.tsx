@@ -5,7 +5,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Box } from '@mui/system'
 import { Typography } from '@mui/material'
-import { articles } from '@/app/blogs/page'
 
 export default function ArticlesGallery(props: any) {
   const { blogs } = props

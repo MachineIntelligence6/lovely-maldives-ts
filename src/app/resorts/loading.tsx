@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 
-const CustomLoader = () => {
+const Loading = () => {
   return (
     <Box
       sx={{
@@ -18,14 +18,9 @@ const CustomLoader = () => {
         width: '100vw',
         height: '100vh',
         flexDirection: 'column',
-        backgroundColor: 'white', // Change to match your website's background color
+        backgroundColor: 'white',
       }}
     >
-      {/* <CircularProgress
-        size={50}
-        thickness={4.5}
-        sx={{ color: '#fff', marginBottom: 2 }}
-      /> */}
       <Image
         src="/images/lovely-maldives-logo-brown.png"
         alt="Loading..."
@@ -40,9 +35,8 @@ const CustomLoader = () => {
       >
         Loading...
       </Typography>
-      {/* Adjust the size as needed */}
     </Box>
   )
 }
 
-export default CustomLoader
+export default Loading

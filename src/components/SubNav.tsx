@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+
 'use client'
 
 /* eslint-disable radix */
@@ -25,16 +27,20 @@ export default function SubNav({ menuItems, isScrolled }: any) {
           top: {
             xs: '0',
             md: isScrolled
-              ? `${parseInt(menuItems?.otherHeight) + 45}px`
-              : `${parseInt(menuItems?.heroHeight) + 40}px`,
+              ? `${parseInt(menuItems?.otherHeight) + 23}px`
+              : `${parseInt(menuItems?.heroHeight) + 24}px`,
           },
           borderBottom: '1px solid silver',
-          pb: '10px',
+          py: '10px',
           width: '100%',
           px: '100px',
           zIndex: 997,
           opacity: isOpen ? 1 : 0,
-          transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
+          transform: isOpen
+            ? isScrolled
+              ? 'translateY(20%)'
+              : 'translateY(0%)'
+            : 'translateY(-100%)',
           transition: 'opacity 0.4s, transform 0.4s',
           display: 'flex',
           flexDirection: 'row',

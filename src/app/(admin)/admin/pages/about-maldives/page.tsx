@@ -12,6 +12,11 @@ import {
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 
+// const ReactQuillEditor = dynamic(
+//   () => import('@/admin-components/common/ReactQuillEditor'),
+//   { ssr: false }
+// )
+
 const JoditTextEditor = dynamic(
   () => import('@/admin-components/common/JoditTextEditor'),
   { ssr: false }
@@ -69,6 +74,7 @@ const AboutMaldives = () => {
           }, 3000)
         }
       })
+      // setDetectChange(false)
     } catch (error: any) {
       setAlertMsg({
         type: 'error',
@@ -99,6 +105,7 @@ const AboutMaldives = () => {
         handleSave={submitData}
       />
       <Box sx={{ mt: 3, pb: 5 }}>
+        {/* <ReactQuillEditor height={400} /> */}
         <Box sx={{ mb: 4 }}>
           <TextFieldWraper
             label="Title"

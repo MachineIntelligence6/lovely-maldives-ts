@@ -71,7 +71,7 @@ export default function PopularBlogs(props: any) {
             <Box
               key={index}
               component={Link}
-              href={`/blogs/${popularBlog.slug}`}
+              href={`/blogs/${popularBlog?.slug}`}
               sx={{
                 width: { xs: 'calc(100%)', md: 'calc(33.3% - 14px)' },
                 borderRadius: '20px',

@@ -5,6 +5,7 @@ import prisma from '../../../../prisma'
 
 export async function GET(req: Request) {
   const params = getAllParams(req.url)
+  const category = params.get('category')?.replace('-', ' ')
   const page = Number(params.get('page')) || 1
   const limit = Number(params.get('limit')) || 20
   const skip = (page - 1) * limit
@@ -12,7 +13,21 @@ export async function GET(req: Request) {
   try {
     await connectToDatabase()
 
-    const result = await prisma.blogs.findMany({ take: limit, skip })
+    let result
+    if (category && category !== 'all blogs') {
+      result = await prisma.blogs.findMany({
+        where: {
+          category: {
+            contains: category,
+            mode: 'insensitive',
+          },
+        },
+        take: limit,
+        skip,
+      })
+    } else {
+      result = await prisma.blogs.findMany({ take: limit, skip })
+    }
     const totalBlogs = await prisma.blogs.count()
 
     if (!result)
@@ -35,7 +50,12 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  if (!bodyData?.category || !bodyData?.description || !bodyData?.title || !bodyData?.coverImage)
+  if (
+    !bodyData?.category ||
+    !bodyData?.description ||
+    !bodyData?.title ||
+    !bodyData?.coverImage
+  )
     return NextResponse.json({
       message: 'Please send complete blog data to save.',
       status: 422,

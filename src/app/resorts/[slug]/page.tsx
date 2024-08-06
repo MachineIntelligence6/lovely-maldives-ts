@@ -222,22 +222,7 @@ export default function Resort() {
                               }}
                             >
                               <ListItemIcon sx={{ minWidth: '30px', mt: 1.2 }}>
-                                {fact?.icon ? (
-                                  <Image
-                                    src={fact?.icon}
-                                    width={30}
-                                    height={30}
-                                    alt="fact-icon"
-                                    style={{
-                                      width: '24px',
-                                      height: '24px',
-                                      objectFit: 'contain',
-                                      marginRight: '8px',
-                                    }}
-                                  />
-                                ) : (
-                                  <ModeOfTravel />
-                                )}
+                                <ModeOfTravel />
                               </ListItemIcon>
                               <ListItemText
                                 primary={
@@ -260,6 +245,27 @@ export default function Resort() {
                                     </Typography>
                                   )
                                 )}
+                                //   <Typography
+                                //     paragraph
+                                //     sx={{
+                                //       fontSize: '0.875rem',
+                                //       color: '#666',
+                                //       mb: '2px',
+                                //     }}
+                                //   >
+                                //     (20 minutes to reach the hotel)
+                                //   </Typography>,
+                                //   <Typography
+                                //     paragraph
+                                //     sx={{
+                                //       fontSize: '0.875rem',
+                                //       color: '#666',
+                                //       mb: '2px',
+                                //     }}
+                                //   >
+                                //     (20 minutes to reach the hotel)
+                                //   </Typography>,
+                                // ]}
                               />
                             </ListItem>
                           </Grid>

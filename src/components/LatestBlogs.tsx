@@ -116,21 +116,8 @@ export default function LatestBlogs(props: any) {
               top: 0,
               left: 0,
               borderRadius: '20px',
-              // left: { xs: '0', md: '240.5px' },
             }}
           />
-          {/* <Box
-            sx={{
-              display: { xs: 'block', md: 'none' },
-              bgcolor: 'rgba(0,0,0,0.5)',
-              position: 'absolute',
-              top: '0',
-              left: '0',
-              width: '100%',
-              height: '100%',
-              borderRadius: '20px 20px 20px 20px',
-            }}
-          /> */}
           <Box
             sx={{
               position: { xs: 'absolute', md: 'unset' },
@@ -157,7 +144,6 @@ export default function LatestBlogs(props: any) {
                 textAlign: { xs: 'left', md: 'left' },
                 ml: { xs: '15px', md: '50px' },
                 fontWeight: 600,
-                // zIndex: 999,
               }}
             >
               {blogs?.blogs?.[0]?.title}

@@ -24,11 +24,6 @@ import CustomLoader from '@/admin-components/common/CustomLoader'
 import blog from '/public/Images/landingTree.jpg'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 
-// const ReactQuillEditor = dynamic(
-//   () => import('@/admin-components/common/ReactQuillEditor'),
-//   { ssr: false }
-// )
-
 const JoditTextEditor = dynamic(
   () => import('@/admin-components/common/JoditTextEditor'),
   { ssr: false }

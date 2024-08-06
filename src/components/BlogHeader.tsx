@@ -6,6 +6,12 @@ import { Box, Link } from '@mui/material'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { useMenuStore } from '@/providers/menu-store-provider'
+import useCategoriesStore from '@/stores/blogCategoriesApiStore'
+
+interface CategoriesProps {
+  category: string
+  id: string
+}
 
 export default function BlogHeader() {
   const constraintsRef = useRef(null)
@@ -14,11 +20,21 @@ export default function BlogHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
   const { scrollY } = useScroll()
 
+  const { categories, error, loading, fetchData } = useCategoriesStore(
+    (state: any) => ({
+      categories: state.categories,
+      error: state.error,
+      loading: state.loading,
+      fetchData: state.fetchData,
+    })
+  )
+
   useMotionValueEvent(scrollY, 'change', (latest: any) => {
     setIsScrolled(latest > 0)
   })
 
   useEffect(() => {
+    fetchData()
     const data = JSON.parse(localStorage.getItem('headerData') as any)
     setHeaderData(data)
   }, [])
@@ -30,19 +46,21 @@ export default function BlogHeader() {
         top: {
           xs: '0',
           md: isScrolled
-            ? `${parseInt(headerData?.otherHeight) + 100}px`
-            : `${parseInt(headerData?.heroHeight) + 100}px`,
+            ? `${parseInt(headerData?.otherHeight)}px`
+            : `${parseInt(headerData?.heroHeight)}px`,
         },
         boxShadow: '0 0 25px rgb(0 0 0 / 10%)',
         width: '100%',
         zIndex: 995,
-        // opacity: isOpen ? 1 : 0,
-        transform: isOpen ? 'translateY(0px)' : 'translateY(-78px)',
+        transform: isOpen ? 'translateY(-30px)' : 'translateY(-78px)',
         transition: 'opacity 0.4s, transform 0.4s',
         display: 'block',
         flexDirection: 'row',
         overflow: 'hidden',
-        mt: { md: '0', xs: '168px' },
+        mt: {
+          md: '0',
+          xs: isScrolled ? `130px` : `168px`,
+        },
         gap: { md: '18px', xs: '0' },
         borderTop: '1px solid lightgray',
       }}
@@ -50,10 +68,18 @@ export default function BlogHeader() {
       {' '}
       <Box
         className="blogScroll"
-        sx={{ color: 'white', width: '100%', overflowX: 'auto' }}
+        sx={{
+          color: 'white',
+          width: '100%',
+          overflowX: 'auto',
+          bgcolor: 'black',
+          mt: {
+            sm: isScrolled ? `15px` : 0,
+            md: isScrolled ? `120px` : `140px`,
+          },
+        }}
       >
         <Box
-          // className="blogScroll"
           sx={{
             color: 'white',
             width: '100%',
@@ -77,8 +103,8 @@ export default function BlogHeader() {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-around',
-              width: '1920px',
+              gap: 3,
+              maxWidth: '1920px',
               overflowX: 'scroll',
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
@@ -87,96 +113,22 @@ export default function BlogHeader() {
               },
             }}
           >
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/blogs"
-            >
-              All Blogs
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/latest-blog"
-            >
-              Latest Blog
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/popular-blog"
-            >
-              Popular Blog
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Blog Title
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Fade
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Pre-Opening
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Blog Title
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Fade
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Pre-Opening
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Blog Title
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Fade
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Pre-Opening
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Blog Title
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Fade
-            </Link>
-            <Link
-              sx={{ color: 'white', py: 2, textDecoration: 'none' }}
-              href="/"
-            >
-              Pre-Opening
-            </Link>
+            {categories?.map((category: CategoriesProps) => (
+              <Link
+                key={category.id}
+                sx={{
+                  color: 'white',
+                  py: 2,
+                  textDecoration: 'none',
+                  maxWidth: '300px',
+                  minWidth: '120px',
+                  textAlign: 'center',
+                }}
+                href={`/blogs?category=${encodeURIComponent(category?.category?.replace(' ', '-')?.toLocaleLowerCase())}`}
+              >
+                {category?.category}
+              </Link>
+            ))}
           </Box>
         </Box>
       </Box>
