@@ -14,13 +14,31 @@ import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 import Image from 'next/image'
 import styled from '@mui/system/styled'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 const StyledImage = styled(Image)({
   padding: 1,
 })
 
 export default function Footer(props: any) {
-  const { footerData } = props
+  const [footerData, setFooterData] = useState<any>({})
+
+  const getFooterData = async () => {
+    try {
+      const res = await fetch(`/api/footer`)
+      const data = await res?.json()
+      console.log('footer data is : ', data?.data)
+      if (data?.status === 200) {
+        setFooterData(data?.data)
+      }
+    } catch (err: any) {
+      console.log('home data fetching err : ', err)
+    }
+  }
+
+  useEffect(() => {
+    getFooterData()
+  }, [])
 
   const FooterBoxes = footerData?.columns?.map((col: any, inde: number) => {
     return (
@@ -45,12 +63,6 @@ export default function Footer(props: any) {
               mt: '10px',
             }}
           >
-            {/* <EmailIcon
-              sx={{
-                display: { xs: 'none', md: 'block' },
-                fontSize: '20px',
-              }}
-            /> */}
             <Box
               sx={{
                 display: { xs: 'none', md: 'block' },
