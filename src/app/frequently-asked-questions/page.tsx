@@ -70,6 +70,7 @@ export default function page() {
             {faqs?.title}
           </Typography>
           <Box
+            className="jodit-editor-text-wraper"
             sx={{
               mt: { xs: '40px', md: '0' },
               bgcolor: 'transparent',
@@ -94,7 +95,9 @@ export default function page() {
           >
             <Typography sx={{ fontWeight: 600, mt: 2 }}>Categories:</Typography>
             {faqs?.faqs?.map((faq: any, index: number) => (
-              <Typography key={index} sx={{ mt: 2 }}>{faq?.category}</Typography>
+              <Typography key={index} sx={{ mt: 2 }}>
+                {faq?.category}
+              </Typography>
             ))}
           </Box>
         </Box>

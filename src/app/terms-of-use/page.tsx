@@ -73,6 +73,7 @@ export default function TermsOfUsePage() {
             {terms?.title}
           </Typography>
           <Box
+            className="jodit-editor-text-wraper"
             sx={{
               bgcolor: 'transparent',
               '& *': {
@@ -83,7 +84,6 @@ export default function TermsOfUsePage() {
               __html: terms?.description,
             }}
           />
-          {/* <Markdown>{termsOfUse}</Markdown> */}
         </Box>
       </Container>
       <Footer />

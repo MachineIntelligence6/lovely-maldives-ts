@@ -26,6 +26,11 @@
   text-align: center;
 }
 
+.jodit-editor-text-wraper img {
+  max-width: 100% !important;
+  object-fit: cover;
+}
+
 .admin-main-layout * {
   font-family: 'Public Sans' !important;
 }

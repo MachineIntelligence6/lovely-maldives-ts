@@ -222,6 +222,7 @@ const PrivacyPolicy = () => {
                 <AccordionDetails>
                   <Box sx={{ px: 1 }}>
                     <Box
+                    className="jodit-editor-text-wraper"
                       sx={{
                         bgcolor: 'transparent',
                         '& *': {

@@ -98,6 +98,7 @@ export default function PrivacyPolicyPage() {
                 <AccordionDetails>
                   <Box sx={{ px: 1 }}>
                     <Box
+                      className="jodit-editor-text-wraper"
                       sx={{
                         bgcolor: 'transparent',
                         '& *': {
