@@ -149,11 +149,7 @@ export default function ResortsPage() {
             return (
               <Box
                 key={`text_${index}`}
-                sx={{
-                  maxWidth: '1000px !important',
-                  mx: 'auto',
-                  px: { xs: '24px', md: 0 },
-                }}
+                sx={{ maxWidth: '1000px !important', mx: 'auto' }}
               >
                 <Box
                   className="quill-content"

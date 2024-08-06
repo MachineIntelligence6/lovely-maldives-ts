@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-array-index-key */
@@ -8,6 +9,7 @@ import { useState, useEffect, useTransition } from 'react'
 import { Container, Box, Typography, Button } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import BlogHeader from '@/components/BlogHeader'
 import Footer from '@/components/Footer'
 
@@ -90,12 +92,16 @@ export const articles: any[] = [
 
 export default function Page() {
   const [isPending, startTransition] = useTransition()
-  const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
-  const [addSlice, setAddSlice] = useState<any>([] as any)
   const [allBlogs, setAllBlogs] = useState([] as any)
   const [allArticles, setAllArticles] = useState([] as any)
   const [totalBlogs, setTotalBlogs] = useState(null as any)
   const [pages, setPages] = useState({ page: 1, limit: 3 })
+  const [latestBlogs, setLatestBlogs] = useState({ category: '', blogs: [] })
+  const [popularBlogs, setPopularBlogs] = useState({ category: '', blogs: [] })
+
+  const searchParams = useSearchParams()
+  const category = searchParams.get('category')
+  console.log('all blogs ', allBlogs)
 
   const { themeData, error, fetchData } = useApiStore((state: any) => ({
     themeData: state.themeData,
@@ -106,20 +112,28 @@ export default function Page() {
   const getSections = () => {
     try {
       startTransition(async () => {
-        const res = await getBlogsSectionRequest()
+        const res = await getBlogsSectionRequest(category ?? '')
         const data = res?.data
         if (data?.status === 200) {
           setAllBlogs(data?.data)
+          data?.data?.map((da: any) => {
+            if (da?.category?.toLowerCase() === 'latest blogs') {
+              if (da?.blogs?.length > 0) {
+                setLatestBlogs(da)
+              } else {
+                setLatestBlogs({ ...da, blogs: [] })
+              }
+            } else if (da?.category?.toLowerCase() === 'popular') {
+              if (da?.blogs?.length > 0) {
+                setPopularBlogs(da)
+              } else {
+                setPopularBlogs({ ...da, blogs: [] })
+              }
+            }
+          })
         }
       })
     } catch (err: any) {
-      setAlertMsg({
-        type: 'error',
-        message: 'Error occured while saving data, please try again.',
-      })
-      setTimeout(() => {
-        setAlertMsg({ type: '', message: '' })
-      }, 3000)
       console.log('err ', err)
       throw new Error(err)
     }
@@ -128,7 +142,7 @@ export default function Page() {
   const getAllBlogs = async () => {
     try {
       startTransition(async () => {
-        const res = await getBlogsRequest(pages)
+        const res = await getBlogsRequest(pages, category ?? '')
         const data = res?.data
         if (data?.status === 200) {
           const newArticles = data?.data
@@ -137,28 +151,13 @@ export default function Page() {
         }
       })
     } catch (err: any) {
-      setAlertMsg({
-        type: 'error',
-        message: 'Error occured while saving data, please try again.',
-      })
-      setTimeout(() => {
-        setAlertMsg({ type: '', message: '' })
-      }, 3000)
       console.log('error ', err)
       throw new Error(err)
     }
   }
 
   useEffect(() => {
-    const windowWidth = window.innerWidth
-
     getSections()
-    if (windowWidth < 768) {
-      const slicedArticles: any[] = articles.slice(0, 3)
-      setAddSlice(slicedArticles as any[])
-    } else {
-      setAddSlice(articles as any[])
-    }
   }, [])
 
   useEffect(() => {
@@ -185,8 +184,12 @@ export default function Page() {
           },
         }}
       >
-        {allBlogs?.[0] && <LatestBlogs blogs={allBlogs?.[0]} />}
-        {allBlogs?.[1] && <PopularBlogs blogs={allBlogs?.[1]} />}
+        {latestBlogs?.blogs?.length > 0 && (
+          <LatestBlogs blogs={allBlogs?.[0]} />
+        )}
+        {popularBlogs?.blogs?.length > 0 && (
+          <PopularBlogs blogs={allBlogs?.[1]} />
+        )}
         <Box>
           <Typography
             sx={{
@@ -208,9 +211,9 @@ export default function Page() {
             }}
           >
             {allArticles?.length > 0 &&
-              allArticles.map((blogItem: any, index: number) => (
+              allArticles?.map((blogItem: any, index: number) => (
                 <Box
-                  key={index}
+                  key={blogItem?.id}
                   component={Link}
                   href={`blogs/${blogItem.title}`}
                   sx={{
@@ -325,7 +328,7 @@ export default function Page() {
             >
               {allBlogs?.[2]?.blogs?.map((blogItem: any, index: number) => (
                 <Box
-                  key={index}
+                  key={blogItem?.id}
                   sx={{
                     width: { xs: '100%', md: '50%' },
                     borderBottom: '1px solid lightgray',
@@ -396,25 +399,6 @@ export default function Page() {
                 </Box>
               ))}
             </Box>
-            {/* <Box sx={{ textAlign: 'center' }}>
-          <Button
-            sx={{
-              px: '50px',
-              py: 2,
-              mt: '60px',
-              backgroundColor: 'var(--brown)',
-              color: 'white',
-              '&:hover': {
-                backgroundColor: 'var(--blue) !important',
-              },
-            }}
-            title="View Archive"
-            aria-label="View Archive"
-            color="primary"
-          >
-            VIEW ARCHIVE
-          </Button>
-        </Box> */}
           </Box>
         )}
         <MailBox />

@@ -16,8 +16,10 @@ export const addBlogRequest = async (data: Blogs) => {
   })
 }
 
-export const getBlogsRequest = async (data: any) => {
-  return apiClient.get(`/blogs?page=${data.page}&limit=${data.limit}`)
+export const getBlogsRequest = async (data: any, category: string) => {
+  return apiClient.get(
+    `/blogs?page=${data.page}&limit=${data.limit}&category=${category}`
+  )
 }
 
 export const getSingleBlogRequest = async (title: any) => {

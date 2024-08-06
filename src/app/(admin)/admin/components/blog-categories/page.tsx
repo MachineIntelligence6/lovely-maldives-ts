@@ -1,14 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 
 'use client'
 
-import React, { useState } from 'react'
-import { Button, Stack, Typography } from '@mui/material'
+import React, { useEffect, useState, useTransition } from 'react'
+import { Alert, Button, Stack, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import CustomSearchField from '@/admin-components/items/CustomSearchField'
 import CustomDropdown from '@/admin-components/items/CustomDropdown'
 import CategoriesTable from '@/admin-components/tables/CategoriesTable'
+import {
+  createBlogCategory,
+  delBlogCategories,
+  updateBlogCategories,
+} from '@/utils/api-requests/blog-categories.request'
+import CustomLoader from '@/admin-components/common/CustomLoader'
+import useCategoriesStore from '@/stores/blogCategoriesApiStore'
 import AddCategory from './AddCategory'
 
 const options = [
@@ -23,56 +31,148 @@ const options = [
 const headOptions = ['Id', 'Type', 'Actions']
 
 const BlogCategories = () => {
+  const [isPending, startTransition] = useTransition()
+  const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
   const [showModal, setShowModal] = useState(false)
-  const [categories, setCategories] = useState([] as any)
   const [edit, setEdit] = useState(null)
   const [filter, setFilter] = useState('')
+
+  const { categories, error, loading, fetchData } = useCategoriesStore(
+    (state: any) => ({
+      categories: state.categories,
+      error: state.error,
+      loading: state.loading,
+      fetchData: state.fetchData,
+    })
+  )
 
   const handleShowModal = () => setShowModal(!showModal)
 
   const handleAddCategory = (fil: any) => {
-    setCategories([...categories, fil])
+    try {
+      startTransition(async () => {
+        const res = await createBlogCategory({ category: fil })
+        const data = res?.data
+        if (data?.status === 201) {
+          fetchData()
+          setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (err: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', err)
+    }
   }
 
   const handleFilterChange = (option: any) => {
     setFilter(option)
-    const filtered = categories.filter((fltr: any) => fltr.type === option)
-    setCategories(filtered)
+    // const filtered = categories.filter((fltr: any) => fltr.type === option)
+    // setCategories(filtered)
   }
 
   const deleteFilter = (id: any) => {
     const sure = window.confirm('Are you sure?')
     if (!sure) return
-    setCategories(categories.filter((_: any, index: number) => index !== id))
+    try {
+      startTransition(async () => {
+        const res = await delBlogCategories(id)
+        const data = res?.data
+        if (data?.status === 200) {
+          fetchData()
+          setAlertMsg({
+            type: 'success',
+            message: 'Category deleted successfully.',
+          })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (err: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', err)
+    }
   }
 
   const editCategory = (categ: any) => {
     setEdit(categ)
     handleShowModal()
   }
-  const handleEditCategory = (val: any, ind: number) => {
+
+  const handleEditCategory = (category: any, id: string) => {
     setEdit(null)
-    setCategories(
-      categories.map((_: any, index: number) => {
-        if (index === ind) {
-          return val
+    try {
+      startTransition(async () => {
+        const res = await updateBlogCategories({ id, category })
+        const data = res?.data
+        if (data?.status === 200) {
+          fetchData()
+          setAlertMsg({
+            type: 'success',
+            message: 'Category updated successfully.',
+          })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
         }
-        return _
       })
-    )
+    } catch (err: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occured while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', err)
+    }
   }
 
   const searchcategories = (e: any) => {
     const { value } = e.target
     if (value === '') {
-      setCategories(categories)
+      // setCategories(categories)
     } else {
       const filtered = categories.filter((item: any) =>
         item.filter?.toLowerCase().includes(value.toLowerCase())
       )
-      setCategories(filtered)
+      // setCategories(filtered)
     }
   }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
@@ -83,6 +183,12 @@ const BlogCategories = () => {
         handleAddCategory={handleAddCategory}
         handleEditCategory={handleEditCategory}
       />
+      {isPending || loading ? <CustomLoader /> : ''}
+      {alertMsg.message && (
+        <Alert sx={{ mb: 2 }} severity={alertMsg.type as any}>
+          {alertMsg.message}
+        </Alert>
+      )}
       <Stack
         direction="row"
         alignItems="center"

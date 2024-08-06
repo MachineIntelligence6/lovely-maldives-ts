@@ -15,18 +15,13 @@ const JoditTextEditor = (props: any) => {
       controls: {
         font: {
           component: 'select',
+          // Redefine font.list
           list: Jodit.atom({
             'Century Gothic': 'Century Gothic',
             'Tahoma,Geneva,sans-serif': 'Tahoma',
             'Public Sans': 'Public Sans',
             'Roboto Medium,Arial,sans-serif': 'Roboto',
           }),
-        },
-      },
-      style: {
-        img: {
-          'max-width': '100%',
-          height: 'auto',
         },
       },
       uploader: {

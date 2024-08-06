@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   try {
     await connectToDatabase()
 
-    const result = await prisma.hotels.findMany({ take: limit, skip })
+    const result = await prisma.hotels.findMany({ take: limit, skip, })
     const total = await prisma.hotels.count()
 
     if (!result)
@@ -35,7 +35,6 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
-  console.log('body data: ', bodyData)
   if (!bodyData?.title || !bodyData?.sections)
     return NextResponse.json({
       message: 'Please send complete hotel data to save.',

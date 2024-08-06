@@ -3,7 +3,7 @@
 'use client'
 
 import { Container, Box, Typography } from '@mui/material'
-import { useEffect, useRef, useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import Header from '@/components/Header'
 import BreadCrumb from '@/components/BreadCrumb'
 import Footer from '@/components/Footer'
@@ -13,10 +13,8 @@ import useApiStore from '@/stores/themeApiStore'
 import { getFaqRequest } from '@/utils/api-requests/faqs.request'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 
-export default function Page() {
+export default function page() {
   const [isPending, startTransition] = useTransition()
-  const refs = useRef<(HTMLDivElement | null)[]>([])
-
   const [faqs, setFaqs] = useState({} as any)
   const { themeData, error, fetchData } = useApiStore((state: any) => ({
     themeData: state.themeData,
@@ -37,20 +35,6 @@ export default function Page() {
       console.log('err ', err)
     }
   }
-
-  const handleCategoryClick = (index: number) => {
-    if (refs.current[index]) {
-      const element = refs.current[index]
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - 100 // Adjust -50 to however many pixels before the actual view you need
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      })
-    }
-  }
-
   useEffect(() => {
     getFaqs()
     fetchData()
@@ -110,17 +94,11 @@ export default function Page() {
           >
             <Typography sx={{ fontWeight: 600, mt: 2 }}>Categories:</Typography>
             {faqs?.faqs?.map((faq: any, index: number) => (
-              <Typography
-                key={index}
-                sx={{ mt: 2, cursor: 'pointer' }}
-                onClick={() => handleCategoryClick(index)}
-              >
-                {faq?.category}
-              </Typography>
+              <Typography key={index} sx={{ mt: 2 }}>{faq?.category}</Typography>
             ))}
           </Box>
         </Box>
-        <FaqsAccordion faqs={faqs?.faqs} refs={refs} />
+        <FaqsAccordion faqs={faqs?.faqs} />
       </Container>
       <Box sx={{ width: { xs: 'auto', md: '63%' }, mx: 'auto' }}>
         <MailBox />

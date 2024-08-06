@@ -46,17 +46,11 @@ const CategoriesTable = (props: any) => {
               <CustomTableLabel>{option}</CustomTableLabel>
             </TableCell>
           ))}
-          {/* <TableCell>
-            <CustomTableLabel>Category</CustomTableLabel>
-          </TableCell>
-          <TableCell sx={{ textAlign: 'right' }}>
-            <CustomTableLabel>Actions</CustomTableLabel>
-          </TableCell> */}
         </TableRow>
       </TableHead>
       <TableBody>
         {dataArray?.map((value: any, index: number) => (
-          <TableRow key={index}>
+          <TableRow key={value?.id}>
             <TableCell
               sx={{ color: '#6F6B7D', fontSize: '15px', fontWeight: 400 }}
             >
@@ -69,7 +63,7 @@ const CategoriesTable = (props: any) => {
                 fontWeight: 500,
               }}
             >
-              {value}
+              {value?.category}
             </TableCell>
             <TableCell sx={{ pr: 4 }}>
               <Stack
@@ -84,7 +78,7 @@ const CategoriesTable = (props: any) => {
                     fontSize: '22px',
                     cursor: 'pointer',
                   }}
-                  onClick={() => editCategory({ value, index })}
+                  onClick={() => editCategory(value)}
                 />
                 <DeleteIcon
                   sx={{
@@ -92,7 +86,7 @@ const CategoriesTable = (props: any) => {
                     fontSize: '22px',
                     cursor: 'pointer',
                   }}
-                  onClick={() => deleteFilter(index)}
+                  onClick={() => deleteFilter(value?.id)}
                 />
               </Stack>
             </TableCell>

@@ -94,7 +94,7 @@ const AddCategory = (props: any) => {
               onClick={() => {
                 if (!category) return
                 if (edit) {
-                  handleEditCategory(category, edit?.index)
+                  handleEditCategory(category, edit?.id)
                 } else {
                   handleAddCategory(category)
                 }
