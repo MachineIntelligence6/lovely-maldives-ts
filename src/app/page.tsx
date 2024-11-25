@@ -3,7 +3,7 @@
 'use client'
 
 import Link from 'next/link'
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState, useCallback } from 'react'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import Typography from '@mui/material/Typography'
 
@@ -26,8 +26,8 @@ const Header = React.lazy(() => import('@/components/Header'))
 
 export default function Home() {
   const [loading, setLoading] = useState(false)
-  const [homeData, setHomeData] = useState('' as any)
-  const [collections, setCollections] = useState({} as any)
+  const [homeData, setHomeData] = useState<any>(null)
+  const [collections, setCollections] = useState<any>({})
 
   const { themeData, error, fetchData } = useApiStore((state: any) => ({
     themeData: state.themeData,
@@ -35,56 +35,45 @@ export default function Home() {
     fetchData: state.fetchData,
   }))
 
-  const getHomeData = async () => {
+  const getHomeData = useCallback(async () => {
     try {
       setLoading(true)
-      const res = await fetch(`/api/home/home-bg`, {
-        cache: 'no-store',
-      })
-      const data = await res?.json()
-      console.log('home data is : ', data?.data)
-      setLoading(false)
+      const res = await fetch(`/api/home/home-bg`)
+      const data = await res.json()
       if (data?.status === 200) {
         setHomeData(data?.data)
         localStorage.setItem('home', JSON.stringify(data?.data))
+        localStorage.setItem('homeBgId', JSON.stringify(data?.data?.id))
         localStorage.setItem(
           'headerData',
           JSON.stringify(data?.data?.header?.[0])
         )
       }
-    } catch (err: any) {
+    } catch (err) {
       setLoading(false)
-      console.log('home data fetching err : ', error)
+      console.error('home data fetching err: ', err)
+    } finally {
+      setLoading(false)
     }
-  }
+  }, [])
 
-  const getHomeBgData = async () => {
-    try {
-      const res = await getHomeBgRequest()
-      const data = res?.data?.data
-      if (res?.status === 200) {
-        localStorage.setItem('homeBgId', JSON.stringify(data?.id))
-      }
-    } catch (err: any) {
-      console.log('err ', err)
-    }
-  }
-
-  const getCollections = async () => {
+  const getCollections = useCallback(async () => {
     try {
       const res = await getCollectionsRequest()
-      const data = res?.data
-      if (data?.status === 200) {
-        setCollections(data?.data)
+      if (res.data?.status === 200) {
+        setCollections(res.data?.data)
       }
-    } catch (err: any) {
-      console.log('err ', err)
+    } catch (err) {
+      console.error('err: ', err)
     }
-  }
+  }, [])
 
   useEffect(() => {
-    getHomeData()
-    getHomeBgData()
+    console.log('home data ', homeData)
+    if (!homeData) {
+      console.log('home data ')
+      getHomeData()
+    }
     fetchData()
     getCollections()
   }, [])
@@ -94,13 +83,7 @@ export default function Home() {
       <Box sx={{ bgcolor: themeData?.bgColor }}>
         <Header />
         <Banner bannerData={homeData} themeData={themeData} />
-        <Box
-          sx={{
-            position: 'relative',
-            paddingTop: '10px',
-            width: '100%',
-          }}
-        >
+        <Box sx={{ position: 'relative', paddingTop: '10px', width: '100%' }}>
           <Box
             sx={{
               position: 'relative',

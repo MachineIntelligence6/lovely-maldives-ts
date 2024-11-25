@@ -4,7 +4,7 @@
 
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -26,8 +26,6 @@ import MobileNav from './MobileNav'
 import SubNav from './SubNav'
 import SearchModal from './SearchModal'
 
-// const profilePic = '/Images/logo.svg'
-// const profilePicCol = '/Images/logo-colored.svg'
 import profilePic from '../../public/Images/logo.svg'
 import profilePicCol from '../../public/Images/logo-colored.svg'
 
@@ -38,12 +36,13 @@ function Header() {
   const close = useMenuStore((state) => state.close)
   const toggleMenu = useMenuStore((state) => state.toggleMenu)
   const { scrollY } = useScroll()
-  const [localData, setLocalData] = useState('' as any)
+  const [localData, setLocalData] = useState<any>(null)
   const [loading, setLoading] = useState(false)
   const [openSearchModal, setOpenSearchModal] = useState(false)
+  const [isScrolled, setIsScrolled] = React.useState(false)
+  const [isHeaderFetched, setIsHeaderFetched] = useState(false)
 
   const handleSearchModelOpen = () => setOpenSearchModal(!openSearchModal)
-  const [isScrolled, setIsScrolled] = React.useState(false)
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setIsScrolled(latest > 0)
@@ -55,7 +54,9 @@ function Header() {
     }
   }
 
-  const getHeaderData = async () => {
+  const getHeaderData = useCallback(async () => {
+    if (isHeaderFetched) return // Check if header API has already been fetched
+
     try {
       setLoading(true)
       const res = await apiClient.get('/header')
@@ -63,12 +64,13 @@ function Header() {
       setLoading(false)
       if (res?.status === 200) {
         setLocalData(data?.data)
+        setIsHeaderFetched(true) // Set flag to true after fetching
       }
     } catch (error: any) {
       setLoading(false)
       console.log('error ', error)
     }
-  }
+  }, [isHeaderFetched])
 
   React.useEffect(() => {
     window.addEventListener('resize', handleResize)
@@ -101,7 +103,9 @@ function Header() {
   }, [isOpen, lessThanMd])
 
   useEffect(() => {
-    getHeaderData()
+    if (!localData) {
+      getHeaderData()
+    }
   }, [])
 
   return (

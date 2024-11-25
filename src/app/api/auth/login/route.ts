@@ -9,6 +9,7 @@ export async function POST(req: Request, res: NextResponse) {
       { status: 400 }
     )
   const { email, password } = await req.json()
+
   if (!email || !password)
     return NextResponse.json(
       { message: 'Please enter all fields.' },
