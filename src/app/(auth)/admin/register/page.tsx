@@ -57,14 +57,11 @@ export default function SignUp() {
 
     try {
       startTransition(async () => {
-        const res = await axios.post(
-          'http://localhost:3000/api/auth/register',
-          {
-            name,
-            email: watch('email'),
-            password: watch('password'),
-          }
-        )
+        const res = await axios.post('/api/auth/register', {
+          name,
+          email: watch('email'),
+          password: watch('password'),
+        })
         if (res.status === 201) router.push('/admin/login')
       })
     } catch (error) {

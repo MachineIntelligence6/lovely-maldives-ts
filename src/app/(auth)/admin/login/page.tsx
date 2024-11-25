@@ -57,6 +57,7 @@ export default function Login() {
         if (res?.status === 200) {
           router.push('/admin/dashboard')
         } else {
+          console.log('error => ', res)
           setErrMsg('Invalid Credntials or you are not authorized to login.')
         }
       })

@@ -34,7 +34,6 @@ export const authOptions: NextAuthOptions = {
           if (!user) {
             return null
           }
-
           if (user.status !== 'Approved')
             throw new Error('You are not approved yet. Please contact admin.')
 
