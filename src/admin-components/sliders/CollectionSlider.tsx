@@ -13,6 +13,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import BoltIcon from '@mui/icons-material/Bolt'
+import { useRouter } from 'next/navigation'
 
 interface IOurCollectionProps {
   heading: string
@@ -23,7 +24,11 @@ interface IOurCollectionProps {
 }
 
 const CollectionSlider = (props: any) => {
+  const router = useRouter()
   const { collections, handleDeleteCard, editModelShow } = props
+
+  const isFewItems = collections.length < 3
+
   const settings = {
     dots: true,
     infinite: true,
@@ -34,7 +39,7 @@ const CollectionSlider = (props: any) => {
     autoplay: false,
     autoplaySpeed: 4000,
     centerMode: true,
-    centerPadding: '200px',
+    centerPadding: isFewItems ? '0px' : '200px',
     responsive: [
       {
         breakpoint: 600,
@@ -74,131 +79,274 @@ const CollectionSlider = (props: any) => {
       }}
       className="slider-container"
     >
-      <Slider {...settings}>
-        {collections.map((collection: any, index: number) => (
-          <Box
-            sx={{
-              position: 'relative',
-              borderRadius: `0`,
-              margin: '0 auto',
-            }}
-            key={index}
-          >
+      {collections?.length <= 2 ? (
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '20px',
+          }}
+        >
+          {collections.map((collection: any, index: number) => (
             <Box
               sx={{
-                position: 'absolute',
-                top: '1rem',
-                right: '4rem',
-                width: '200px',
-                height: '30px',
-                maxWidth: '30px',
-                maxHeight: '30px',
-                zIndex: 999,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 1,
-                cursor: 'pointer',
+                position: 'relative',
+                borderRadius: `0`,
+                margin: '0 auto',
+                maxWidth: '350px',
+                cursor: "pointer",
+              }}
+              key={index}
+              onClick={() => {
+                router.push(`/resorts/${encodeURIComponent(collection?.title)}`)
               }}
             >
               <Box
                 sx={{
-                  width: '35px',
-                  minWidth: '35px',
-                  height: '35px',
-                  maxHeight: '35px',
-                  borderRadius: '50%',
-                  bgcolor: 'var(--red)',
+                  position: 'absolute',
+                  top: '1rem',
+                  right: '4rem',
+                  width: '200px',
+                  height: '30px',
+                  maxWidth: '30px',
+                  maxHeight: '30px',
+                  zIndex: 999,
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  gap: 1,
+                  cursor: 'pointer',
                 }}
-                onClick={() => handleDeleteCard(index)}
               >
-                <DeleteIcon sx={{ color: 'white', fontSize: '14px' }} />
+                <Box
+                  sx={{
+                    width: '35px',
+                    minWidth: '35px',
+                    height: '35px',
+                    maxHeight: '35px',
+                    borderRadius: '50%',
+                    bgcolor: 'var(--red)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onClick={() => handleDeleteCard(index)}
+                >
+                  <DeleteIcon sx={{ color: 'white', fontSize: '14px' }} />
+                </Box>
+                <Box
+                  sx={{
+                    width: '35px',
+                    minWidth: '35px',
+                    height: '35px',
+                    maxHeight: '35px',
+                    borderRadius: '50%',
+                    bgcolor: 'var(--darkBlue)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onClick={() => editModelShow(index)}
+                >
+                  <EditIcon sx={{ color: 'white', fontSize: '14px' }} />
+                </Box>
               </Box>
-              <Box
-                sx={{
-                  width: '35px',
-                  minWidth: '35px',
-                  height: '35px',
-                  maxHeight: '35px',
-                  borderRadius: '50%',
-                  bgcolor: 'var(--darkBlue)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                onClick={() => editModelShow(index)}
-              >
-                <EditIcon sx={{ color: 'white', fontSize: '14px' }} />
-              </Box>
-            </Box>
 
-            <Image
-              width={300}
-              height={300}
-              src={collection?.image || collection?.coverImage}
-              alt="Resort item"
-              style={{
-                width: '92%',
-                height: '300px',
-                objectFit: 'cover',
-                margin: '0 auto',
-              }}
-            />
+              <Image
+                width={300}
+                height={300}
+                src={collection?.image || collection?.coverImage}
+                alt="Resort item"
+                style={{
+                  width: '100%',
+                  height: '300px',
+                  objectFit: 'cover',
+                  margin: '0 auto',
+                }}
+              />
+              <Box
+                sx={{
+                  width: { xs: '100%', md: '100%' },
+                  height: { xs: '250px', md: '300px' },
+                  bgcolor: 'rgba(150,127,93,0.5)',
+                  position: 'absolute',
+                  top: '0',
+                  left: { xs: 0, md: '0px' },
+                  '@media only screen and (min-width: 1600px)': {
+                    left: '0px',
+                  },
+                }}
+              />
+              <Box
+                sx={{
+                  width: { xs: '100%', md: '100%' },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  color: 'white',
+                  fontSize: '12px',
+                  fontWeight: '200',
+                  zIndex: '99',
+                  gap: 1,
+                  py: '24px',
+                  bgcolor: 'var(--darkBrown)',
+                  borderRadius: { xs: '0px', md: `0px` },
+                  margin: '0 auto',
+                  marginTop: '-8px',
+                }}
+              >
+                <Box
+                  sx={{
+                    // mt: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    height: 'auto',
+                  }}
+                >
+                  <Typography sx={{ px: 4, fontSize: '20px' }}>
+                    {collection?.title}
+                  </Typography>
+                  <BoltIcon sx={{ display: `none` }} />
+                </Box>
+                <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
+                  {[...Array(parseInt(collection?.ratings, 10))].map(
+                    (_: any, ind: number) => (
+                      <StarRateIcon key={`_${index}_${ind}`} />
+                    )
+                  )}
+                </Box>
+              </Box>
+            </Box>
+          ))}
+        </Box>
+      ) : (
+        <Slider {...settings}>
+          {collections.map((collection: any, index: number) => (
             <Box
               sx={{
-                width: { xs: '100%', md: '92%' },
-                height: { xs: '250px', md: '300px' },
-                bgcolor: 'rgba(150,127,93,0.5)',
-                position: 'absolute',
-                top: '0',
-                left: { xs: 0, md: '15px' },
-                '@media only screen and (min-width: 1600px)': {
-                  left: '30px',
-                },
-              }}
-            />
-            <Box
-              sx={{
-                width: { xs: '100%', md: '92%' },
-                display: 'flex',
-                flexDirection: 'column',
-                color: 'white',
-                fontSize: '12px',
-                fontWeight: '200',
-                zIndex: '99',
-                gap: 1,
-                py: '24px',
-                bgcolor: 'var(--darkBrown)',
-                borderRadius: { xs: '0px', md: `0px` },
+                position: 'relative',
+                borderRadius: `0`,
                 margin: '0 auto',
+                cursor: "pointer",
+              }}
+              key={index}
+              onClick={() => {
+                router.push(`/resorts/${encodeURIComponent(collection?.title)}`)
               }}
             >
               <Box
                 sx={{
-                  // mt: '24px',
+                  position: 'absolute',
+                  top: '1rem',
+                  right: '4rem',
+                  width: '200px',
+                  height: '30px',
+                  maxWidth: '30px',
+                  maxHeight: '30px',
+                  zIndex: 999,
                   display: 'flex',
                   alignItems: 'center',
-                  height: 'auto',
+                  gap: 1,
+                  cursor: 'pointer',
                 }}
               >
-                <Typography sx={{ px: 4, fontSize: '20px' }}>
-                  {collection?.title}
-                </Typography>
-                <BoltIcon sx={{ display: `none` }} />
+                <Box
+                  sx={{
+                    width: '35px',
+                    minWidth: '35px',
+                    height: '35px',
+                    maxHeight: '35px',
+                    borderRadius: '50%',
+                    bgcolor: 'var(--red)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onClick={() => handleDeleteCard(index)}
+                >
+                  <DeleteIcon sx={{ color: 'white', fontSize: '14px' }} />
+                </Box>
+                <Box
+                  sx={{
+                    width: '35px',
+                    minWidth: '35px',
+                    height: '35px',
+                    maxHeight: '35px',
+                    borderRadius: '50%',
+                    bgcolor: 'var(--darkBlue)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onClick={() => editModelShow(index)}
+                >
+                  <EditIcon sx={{ color: 'white', fontSize: '14px' }} />
+                </Box>
               </Box>
-              <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                {[...Array(parseInt(collection?.ratings, 10))].map(
-                  (_: any, ind: number) => (
-                    <StarRateIcon key={`_${index}_${ind}`} />
-                  )
-                )}
+
+              <Image
+                width={300}
+                height={300}
+                src={collection?.image || collection?.coverImage}
+                alt="Resort item"
+                style={{
+                  width: '92%',
+                  height: '300px',
+                  objectFit: 'cover',
+                  margin: '0 auto',
+                }}
+              />
+              <Box
+                sx={{
+                  width: { xs: '100%', md: '92%' },
+                  height: { xs: '250px', md: '300px' },
+                  bgcolor: 'rgba(150,127,93,0.5)',
+                  position: 'absolute',
+                  top: '0',
+                  left: { xs: 0, md: '15px' },
+                  '@media only screen and (min-width: 1600px)': {
+                    left: '30px',
+                  },
+                }}
+              />
+              <Box
+                sx={{
+                  width: { xs: '100%', md: '92%' },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  color: 'white',
+                  fontSize: '12px',
+                  fontWeight: '200',
+                  zIndex: '99',
+                  gap: 1,
+                  py: '24px',
+                  bgcolor: 'var(--darkBrown)',
+                  borderRadius: { xs: '0px', md: `0px` },
+                  margin: '0 auto',
+                }}
+              >
+                <Box
+                  sx={{
+                    // mt: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    height: 'auto',
+                  }}
+                >
+                  <Typography sx={{ px: 4, fontSize: '20px' }}>
+                    {collection?.title}
+                  </Typography>
+                  <BoltIcon sx={{ display: `none` }} />
+                </Box>
+                <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
+                  {[...Array(parseInt(collection?.ratings, 10))].map(
+                    (_: any, ind: number) => (
+                      <StarRateIcon key={`_${index}_${ind}`} />
+                    )
+                  )}
+                </Box>
               </Box>
             </Box>
-          </Box>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      )}
     </Box>
   )
 }

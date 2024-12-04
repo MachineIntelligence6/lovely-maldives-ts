@@ -34,6 +34,7 @@ const TopBrands = () => {
   const editModelShow = (index: number) => {
     setEdit(brands?.[index])
     handleShowModal()
+    setDetectChange(true)
   }
 
   const addNewBrand = (newBrand: any, type: string) => {
@@ -51,6 +52,7 @@ const TopBrands = () => {
   const handleDeleteBrand = (index: number) => {
     const sure = window.confirm('Are you sure you want to delete?')
     if (!sure) return
+    setDetectChange(true)
     setBrands(brands.filter((_: any, i: number) => i !== index))
   }
 

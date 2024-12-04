@@ -146,6 +146,14 @@ model AboutUs {
     description String
 }
 
+
+// ABOUT US SECTION MODEL
+model ContactUs {
+    id          String  @id @default(auto()) @map("_id") @db.ObjectId
+    title       String
+    description String
+}
+
 // ADD HOTEL MODEL
 model Hotels {
     id          String  @id @default(auto()) @map("_id") @db.ObjectId

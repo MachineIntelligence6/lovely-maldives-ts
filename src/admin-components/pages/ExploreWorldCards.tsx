@@ -33,12 +33,14 @@ const ExploreWorldCards = () => {
   const handleDeleteCard = (index: number) => {
     const sure = window.confirm('Are you sure you want to delete?')
     if (!sure) return
+    setDetectChange(true)
     setCards(cards.filter((_: any, i: number) => i !== index))
   }
 
   const editModelShow = (index: number) => {
     setEdit(cards?.[index])
     handleShowModal()
+    setDetectChange(true)
   }
 
   const addNewService = (newCard: any, type: string) => {
@@ -63,7 +65,7 @@ const ExploreWorldCards = () => {
           setValues(data?.data)
         } else {
           // alert('Error occured while fetching about maldives data.')
-          setAlertMsg({type: 'error', message: data?.message})
+          setAlertMsg({ type: 'error', message: data?.message })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)

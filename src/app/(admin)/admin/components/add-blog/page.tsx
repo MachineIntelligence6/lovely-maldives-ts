@@ -30,9 +30,9 @@ const JoditTextEditor = dynamic(
 )
 
 const options = [
-  { value: 'All Blogs', label: 'All Blogs' },
-  { value: 'Latest Blogs', label: 'Latest Blogs' },
-  { value: 'Popular Blogs', label: 'Popular Blogs' },
+  { value: 'All Articles', label: 'All Articles' },
+  { value: 'Latest Articles', label: 'Latest Articles' },
+  { value: 'Popular Articles', label: 'Popular Articles' },
 ]
 
 const CustomLabel = styled(InputLabel)(({ theme }) => ({
@@ -71,7 +71,7 @@ export default function AddBlog() {
   const getAllBlogs = async () => {
     try {
       startTransition(async () => {
-        const res = await getBlogsRequest(pages)
+        const res = await getBlogsRequest(pages, '')
         const data = res?.data
         if (data?.status === 200) {
           setBlogs(data?.data)
@@ -136,7 +136,7 @@ export default function AddBlog() {
           </Alert>
         )}
         <HeadingWraper
-          title="Blogs"
+          title="Articles"
           detectChange={detectChange}
           handleSave={submitData}
         />
@@ -149,7 +149,7 @@ export default function AddBlog() {
             sx={{ mb: 1 }}
           >
             <TextFieldWraper
-              label="Blog Title"
+              label="Article Title"
               name="title"
               type="text"
               placeholder="Enter blog title."
@@ -164,7 +164,7 @@ export default function AddBlog() {
                 id="demo-simple-select-label"
                 sx={{ fontFamily: 'Public Sans', mb: '5px' }}
               >
-                Blog Category
+                Article Category
               </CustomLabel>
               <CustomSelect
                 placeholder="Enter blog category."
@@ -255,7 +255,7 @@ export default function AddBlog() {
                       color="var(--brown)"
                       sx={{ mt: 2, fontSize: '18px' }}
                     >
-                      Upload Blog Cover Image
+                      Upload Article Cover Image
                     </Typography>
                   </>
                 )}
@@ -282,7 +282,7 @@ export default function AddBlog() {
             mt: '60px',
           }}
         >
-          ALL Uploaded Blogs
+          ALL Uploaded Artciles
         </Typography>
         <Box
           sx={{
