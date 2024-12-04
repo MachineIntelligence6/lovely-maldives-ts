@@ -15,14 +15,17 @@ import {
   aboutUsRequest,
   getAboutUsRequest,
 } from '@/utils/api-requests/aboutus-short.request'
-
+import {
+  contactUsRequest,
+  getContactUsRequest,
+} from '@/utils/api-requests/contactus.request'
 
 const JoditTextEditor = dynamic(
   () => import('@/admin-components/common/JoditTextEditor'),
   { ssr: false }
 )
 
-const AboutUs = () => {
+const ContactUs = () => {
   const [isPending, startTransition] = useTransition()
   const [detectChange, setDetectChange] = useState(true)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
@@ -33,10 +36,10 @@ const AboutUs = () => {
     setEditorText(val)
   }
 
-  const getAboutMaldives = async () => {
+  const getContactUs = async () => {
     try {
       startTransition(async () => {
-        const res = await getAboutUsRequest()
+        const res = await getContactUsRequest()
         const data = res?.data
         if (data?.status === 200) {
           setEditorText(data?.data?.description)
@@ -56,13 +59,13 @@ const AboutUs = () => {
   const submitData = async () => {
     try {
       startTransition(async () => {
-        const res = await aboutUsRequest({
+        const res = await contactUsRequest({
           ...values,
           description: editorText,
         })
         const data = res?.data
         if (data?.status === 201) {
-          getAboutMaldives()
+          getContactUs()
           setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
@@ -88,7 +91,7 @@ const AboutUs = () => {
   }
 
   useEffect(() => {
-    getAboutMaldives()
+    getContactUs()
   }, [])
 
   return (
@@ -100,7 +103,7 @@ const AboutUs = () => {
         </Alert>
       )}
       <HeadingWraper
-        title="About Us"
+        title="Contact Us"
         detectChange={detectChange}
         handleSave={submitData}
       />
@@ -109,7 +112,7 @@ const AboutUs = () => {
         <Box sx={{ mb: 4 }}>
           <TextFieldWraper
             label="Title"
-            placeholder="Enter About Us Title."
+            placeholder="Enter Contact Us Title."
             value={values?.title}
             name="title"
             onChange={(e: any) =>
@@ -126,4 +129,4 @@ const AboutUs = () => {
   )
 }
 
-export default AboutUs
+export default ContactUs

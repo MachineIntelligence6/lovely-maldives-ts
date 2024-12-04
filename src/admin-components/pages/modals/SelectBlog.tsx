@@ -54,7 +54,7 @@ const SelectBlog = (props: any) => {
   const getAllBlogs = async () => {
     try {
       startTransition(async () => {
-        const res = await getBlogsRequest(pages)
+        const res = await getBlogsRequest(pages, '')
         const data = res?.data
         const blogsData = [] as any
         if (data?.status === 200) {

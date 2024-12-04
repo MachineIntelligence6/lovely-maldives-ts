@@ -31,7 +31,7 @@ const HotelsWraper = (props: any) => {
         sx={{ mt: { xs: '30px', md: '30px' } }}
       >
         {hotels?.length > 0 ? (
-          hotels?.map((item: any, index: number) => (
+          hotels?.map((hotelItem: any, index: number) => (
             <Grid
               key={`hotelwraper_1_${index}`}
               item
@@ -41,7 +41,7 @@ const HotelsWraper = (props: any) => {
               lg={4}
             >
               <Box
-                component={motion.div}
+                component={motion?.div}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -49,7 +49,7 @@ const HotelsWraper = (props: any) => {
               >
                 <Box
                   component={Link}
-                  href={`/resorts/${item.title}`}
+                  href={`/resorts/${hotelItem?.title}`}
                   sx={{ textDecoration: 'none', position: 'relative' }}
                 >
                   <Box
@@ -64,17 +64,19 @@ const HotelsWraper = (props: any) => {
                       },
                     }}
                   >
-                    <Image
-                      src={item?.image}
-                      alt="img"
-                      width={400}
-                      height={450}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
+                    {hotelItem?.image && (
+                      <Image
+                        src={hotelItem?.image}
+                        alt="img"
+                        width={400}
+                        height={450}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                      />
+                    )}
                   </Box>
                   <Box
                     sx={{
@@ -121,14 +123,14 @@ const HotelsWraper = (props: any) => {
                       }}
                     >
                       <Typography sx={{ fontSize: '20px' }}>
-                        {item.title.length > 20
-                          ? `${item.title.substring(0, 20)}...`
-                          : item.title}
+                        {hotelItem?.title.length > 20
+                          ? `${hotelItem?.title.substring(0, 20)}...`
+                          : hotelItem?.title}
                       </Typography>
                       <BoltIcon sx={{ display: `flex` }} />
                     </Box>
                     <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                      {[...Array(parseInt(item?.ratings, 10))].map(
+                      {[...Array(parseInt(hotelItem?.ratings, 10))].map(
                         (_: any, ind: number) => (
                           <StarRateIcon key={`_${index}_${ind}`} />
                         )

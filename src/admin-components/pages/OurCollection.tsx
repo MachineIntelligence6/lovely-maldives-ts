@@ -44,12 +44,14 @@ const OurCollection = () => {
   const handleDeleteCard = (index: number) => {
     const sure = window.confirm('Are you sure you want to delete?')
     if (!sure) return
+    setDetectChange(true)
     setCollections(collections.filter((_: any, i: number) => i !== index))
   }
 
   const editModelShow = (index: number) => {
     setEdit(collections?.[index])
     handleShowModal()
+    setDetectChange(true)
   }
 
   const handleAddHotel = async (index: number, hotel: any) => {

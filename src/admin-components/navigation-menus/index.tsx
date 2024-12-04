@@ -65,6 +65,10 @@ const menuItems = [
         path: 'admin/pages/blogs',
       },
       {
+        title: 'Contact Us',
+        path: 'admin/pages/contact-us',
+      },
+      {
         title: 'Privacy Policy',
         path: 'admin/pages/privacy-policy',
       },
@@ -91,7 +95,7 @@ const menuItems = [
         path: 'admin/components/resorts-filters',
       },
       {
-        title: 'Add Blog',
+        title: 'Add Article',
         path: 'admin/components/add-blog',
       },
       {
