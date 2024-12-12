@@ -31,16 +31,20 @@ const CustomLoader = () => {
         src={loaderImg}
         alt="Loading..."
         className="loader-img"
-        width={150}
-        height={150}
+        width={100}
+        height={100}
+        style={{
+          width: '60px',
+          height: '60px',
+        }}
       />{' '}
-      <Typography
+      {/* <Typography
         variant="body1"
         color="#333333"
         sx={{ fontSize: '22px', fontWeight: '500', mt: 4 }}
       >
         Loading...
-      </Typography>
+      </Typography> */}
       {/* Adjust the size as needed */}
     </Box>
   )

@@ -25,16 +25,16 @@ const Loading = () => {
         src="/images/lovely-maldives-logo-brown.png"
         alt="Loading..."
         className="loader-img"
-        width={150}
-        height={150}
+        width={100}
+        height={10}
       />{' '}
-      <Typography
+      {/* <Typography
         variant="body1"
         color="#333333"
         sx={{ fontSize: '22px', fontWeight: '500', mt: 4 }}
       >
         Loading...
-      </Typography>
+      </Typography> */}
     </Box>
   )
 }
