@@ -26,7 +26,11 @@ const Loading = () => {
         alt="Loading..."
         className="loader-img"
         width={100}
-        height={10}
+        height={100}
+        style={{
+          width: '60px',
+          height: '60px',
+        }}
       />{' '}
       {/* <Typography
         variant="body1"
