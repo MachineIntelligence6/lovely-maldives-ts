@@ -9,9 +9,11 @@ import StarRateIcon from '@mui/icons-material/StarRate'
 import { motion } from 'framer-motion'
 import BoltIcon from '@mui/icons-material/Bolt'
 import Link from 'next/link'
+import CloseIcon from '@mui/icons-material/Close'
+import { Button } from '@mui/material'
 
 const HotelsWraper = (props: any) => {
-  const { hotels } = props
+  const { hotels, deleteHotel } = props
   return (
     <Box>
       <Typography
@@ -45,12 +47,30 @@ const HotelsWraper = (props: any) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                sx={{ width: '100%', position: 'relative' }}
+                sx={{
+                  width: '100%',
+                  position: 'relative',
+                }}
               >
+                <Button
+                  sx={{
+                    position: 'absolute',
+                    top: '15px',
+                    right: '0',
+                    zIndex: '10000',
+                    color: 'white',
+                  }}
+                  onClick={() => deleteHotel(hotelItem?.id)}
+                >
+                  <CloseIcon />
+                </Button>
                 <Box
                   component={Link}
                   href={`/resorts/${hotelItem?.title}`}
-                  sx={{ textDecoration: 'none', position: 'relative' }}
+                  sx={{
+                    textDecoration: 'none',
+                    position: 'relative',
+                  }}
                 >
                   <Box
                     sx={{

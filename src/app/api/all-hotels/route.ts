@@ -16,9 +16,9 @@ export async function GET(req: Request) {
     await connectToDatabase()
 
     const hotels = await prisma.hotels.findMany({
-        take: limit,
-        skip,
-      })
+      take: limit,
+      skip,
+    })
     const total = await prisma.hotels.count()
 
     if (!hotels || hotels?.length === 0)
@@ -47,6 +47,46 @@ export async function GET(req: Request) {
   } catch (error) {
     console.log('Error', error)
     return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
+  } finally {
+    await prisma.$disconnect()
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url)
+    const hotelId = searchParams.get('id')
+
+    if (!hotelId) {
+      return NextResponse.json(
+        { message: 'Hotel ID is required.', status: 400 },
+        { status: 400 }
+      )
+    }
+
+    // Delete hotel by ID
+    const deletedHotel = await prisma.hotels.delete({
+      where: {
+        id: hotelId,
+      },
+    })
+
+    return NextResponse.json(
+      {
+        message: 'Hotel deleted successfully.',
+        data: deletedHotel,
+        status: 200,
+      },
+      { status: 200 }
+    )
+  } catch (error) {
+    console.error('Error deleting hotel:', error)
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error'
+    return NextResponse.json(
+      { message: 'Failed to delete hotel.', error: errorMessage, status: 500 },
+      { status: 500 }
+    )
   } finally {
     await prisma.$disconnect()
   }

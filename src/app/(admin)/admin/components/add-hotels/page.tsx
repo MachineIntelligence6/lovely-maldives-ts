@@ -30,6 +30,7 @@ import {
 import AddFacts from '@/admin-components/pages/AddFacts'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
+import { deleteHotelRequest } from '@/utils/api-requests/hotels.request'
 import HotelsWraper from './HotelsWraper'
 
 // const ReactQuillEditor = dynamic(
@@ -189,6 +190,48 @@ const AddHotels = () => {
       })
     } catch (error: any) {
       console.log('error ', error)
+    }
+  }
+
+  // delete Hotel
+  const deleteHotel = (id: string) => {
+    const sure = window.confirm('Are you sure to delete the hotel?')
+    if (!sure) return
+
+    try {
+      startTransition(async () => {
+        const res = await deleteHotelRequest(id)
+        const data = res?.data
+
+        if (data?.status === 200) {
+          await getHotels()
+          setAlertMsg({
+            type: 'success',
+            message: 'Hotel deleted successfully.',
+          })
+
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (err: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occurred while deleting the hotel, please try again.',
+      })
+
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+
+      console.error('Error deleting hotel:', err)
     }
   }
 
@@ -430,7 +473,7 @@ const AddHotels = () => {
         </Box>
       </CustomCard>
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
-        <HotelsWraper hotels={hotels} />
+        <HotelsWraper hotels={hotels} deleteHotel={deleteHotel} />
       </CustomCard>
     </>
   )

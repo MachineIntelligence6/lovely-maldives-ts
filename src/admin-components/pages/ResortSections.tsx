@@ -16,6 +16,7 @@ import {
   AddResortSectionRequest,
   getResortSectionRequest,
 } from '@/utils/api-requests/addHotels.request'
+import { deleteResortHotelRequest } from '@/utils/api-requests/resorts.request'
 import SelectHotel from './modals/SelectHotel'
 import AddSectionType from './modals/AddSectionType'
 import ResortsGallery from './ResortsGallery'
@@ -99,6 +100,93 @@ const ResortSections = () => {
     setPages({ ...pages, totalGalleryImages: 0 })
   }
 
+  const getResortSection = async () => {
+    try {
+      const res = await getResortSectionRequest(pages)
+      const data = res?.data
+
+      if (data?.status === 200) {
+        setPages({
+          ...pages,
+          totalGalleryImages: data?.totalGalleryImages,
+        })
+
+        const allHotels = []
+
+        const updatedSections = data?.data?.map((sec: any) => {
+          if (sec?.type === 'text') {
+            setEditorText(sec?.description)
+          }
+
+          if (sec?.type === 'images_gallery') {
+            allHotels.push(...sec.hotels) // Collect all hotels for this section
+          }
+
+          return sec
+        })
+
+        // Update state with fetched sections and hotels
+        setHotelsData([...allHotels]) // Create a new array reference
+        setSections([...updatedSections]) // Create a new array reference
+      } else {
+        setAlertMsg({ type: 'error', message: data?.message })
+        setTimeout(() => setAlertMsg({ type: '', message: '' }), 3000)
+      }
+    } catch (error) {
+      console.error('Error fetching resort sections:', error)
+    }
+  }
+
+  // delete Hotel
+  const deleteResortHotel = (hotelId: string) => {
+    const sure = window.confirm('Are you sure to delete the hotel?')
+    if (!sure) return
+
+    // Optimistic UI update
+    setHotelsData((prevHotels) =>
+      prevHotels.filter((hotel) => hotel.id !== hotelId)
+    )
+    setSections((prevSections) =>
+      prevSections.map((section) => ({
+        ...section,
+        hotels: section.hotels.filter((hotel) => hotel.id !== hotelId),
+      }))
+    )
+
+    startTransition(async () => {
+      try {
+        const res = await deleteResortHotelRequest(hotelId)
+        const data = res?.data
+
+        if (
+          data?.status === 200 ||
+          data?.message === 'Hotel removed successfully'
+        ) {
+          await getResortSection() // Sync with backend
+          setAlertMsg({
+            type: 'success',
+            message: 'Hotel deleted successfully.',
+          })
+        } else {
+          throw new Error(data?.message || 'Failed to delete hotel.')
+        }
+      } catch (err: any) {
+        console.error('Error deleting hotel:', err)
+
+        // Rollback optimistic update on error
+        await getResortSection()
+        setAlertMsg({
+          type: 'error',
+          message: 'Error occurred while deleting the hotel, please try again.',
+        })
+      } finally {
+        setTimeout(() => {
+          setAlertMsg({ type: '', message: '' })
+        }, 3000)
+      }
+    })
+  }
+
   const handleChange = (e: any, index: number) => {
     const { value } = e.target
     const updatedSections = sections.map((sec: any, ind: number) => {
@@ -108,59 +196,6 @@ const ResortSections = () => {
       return sec
     })
     setSections(updatedSections)
-  }
-
-  const getResortSection = () => {
-    try {
-      startTransition(async () => {
-        const res = await getResortSectionRequest(pages)
-        const data = res?.data
-        if (data?.status === 200) {
-          setPages({
-            ...pages,
-            totalGalleryImages: data?.totalGalleryImages,
-          })
-          // setSections(data?.data)
-          let allHotels = [] as any
-          data?.data?.map((sec: any) => {
-            if (sec?.type === 'text') {
-              setEditorText(sec?.description)
-            }
-            if (sec?.type === 'images_gallery') {
-              const resultHotels = [] as any
-              const allIds = hotelsData?.map((htl: any) => htl?.id)
-              sec?.hotels?.map((htl: any) => {
-                if (!allIds?.includes(htl.id)) {
-                  resultHotels.push(htl)
-                }
-              })
-              setHotelsData([...hotelsData, ...sec.hotels])
-              allHotels = [...hotelsData, ...sec.hotels]
-            }
-          })
-
-          setSections(
-            data?.data?.map((sec: any) => {
-              if (sec?.type === 'images_gallery') {
-                return {
-                  ...sec,
-                  hotels: allHotels,
-                }
-              } else {
-                return sec
-              }
-            })
-          )
-        } else {
-          setAlertMsg({ type: 'error', message: data?.message })
-          setTimeout(() => {
-            setAlertMsg({ type: '', message: '' })
-          }, 3000)
-        }
-      })
-    } catch (error: any) {
-      console.log('error ', error)
-    }
   }
 
   const handleAddSections = async () => {
@@ -300,6 +335,8 @@ const ResortSections = () => {
                     handleShowModal={() => handleShowHotelModal(index)}
                     isFullyLoaded={isFullyLoaded}
                     loadMore={loadMore}
+                    sections={sections}
+                    deleteResortHotel={deleteResortHotel}
                   />
                 </Box>
               </Box>

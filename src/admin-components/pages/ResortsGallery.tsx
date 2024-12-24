@@ -16,6 +16,7 @@ import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import { motion } from 'framer-motion'
 import BoltIcon from '@mui/icons-material/Bolt'
+import CloseIcon from '@mui/icons-material/Close'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import collectionImg from '/public/Images/collectionImg.jpg'
 
@@ -28,6 +29,8 @@ export default function ResortsGallery(props: any) {
     pages,
     isFullyLoaded,
     loadMore,
+    sections,
+    deleteResortHotel,
   } = props
   return (
     <Box sx={{ mb: '40px' }}>
@@ -72,6 +75,18 @@ export default function ResortsGallery(props: any) {
                 transition={{ duration: 0.5 }}
                 sx={{ width: '100%', position: 'relative' }}
               >
+                <Button
+                  sx={{
+                    position: 'absolute',
+                    top: '15px',
+                    right: '0',
+                    zIndex: '10000',
+                    color: 'white',
+                  }}
+                  onClick={() => deleteResortHotel(item.id)}
+                >
+                  <CloseIcon />
+                </Button>
                 <Box
                   //   component={Link}
                   //   href={`/resorts/${item.slug}`}
