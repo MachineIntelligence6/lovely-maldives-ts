@@ -10,6 +10,7 @@ import { useEffect, useState, useTransition } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
+import Head from 'next/head'
 import EditIcon from '@mui/icons-material/Edit'
 import BackupIcon from '@mui/icons-material/Backup'
 import HeadingWraper from '@/admin-components/common/HeadingWraper'
@@ -22,6 +23,7 @@ import {
 } from '@/utils/api-requests/blogs.request'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import blog from '/public/Images/landingTree.jpg'
+import TagsField from '@/admin-components/items/TagsField'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 
 const JoditTextEditor = dynamic(
@@ -42,13 +44,14 @@ const CustomLabel = styled(InputLabel)(({ theme }) => ({
   color: '#4B465C',
 }))
 
-export default function AddBlog() {
+function AddBlog() {
   const [isPending, startTransition] = useTransition()
   const [detectChange, setDetectChange] = useState(true)
   const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
   const [values, setValues] = useState({ title: '', category: '' })
   const [editorText, setEditorText] = useState('')
   const [pages, setPages] = useState({ page: 1, limit: 12 })
+  const [metatags, setMetatags] = useState([] as string[])
   const [blogs, setBlogs] = useState([] as any)
   const [coverPhoto, setCoverPhoto] = useState(null as any)
   const [coverUrl, setCoverUrl] = useState(null as any)
@@ -67,6 +70,8 @@ export default function AddBlog() {
     const res = await uploadImgToCloudinary(formData)
     setCoverUrl(res?.secure_url)
   }
+
+  console.log(blogs, 'blogs')
 
   const getAllBlogs = async () => {
     try {
@@ -94,10 +99,14 @@ export default function AddBlog() {
           ...values,
           description: editorText,
           coverImage: coverUrl,
+          metatags,
         })
         const data = res?.data
         if (data?.status === 201) {
           getAllBlogs()
+          setCoverPhoto(null)
+          setValues({ title: '', category: '' })
+          setMetatags([])
           setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
@@ -122,12 +131,34 @@ export default function AddBlog() {
     }
   }
 
+  const handleChangeTags = (tag: any) => {
+    setMetatags([...metatags, tag])
+  }
+
+  const removeTag = (ind: number) => {
+    setMetatags((prevMetatags) => prevMetatags.filter((_, i) => i !== ind))
+  }
+
   useEffect(() => {
     getAllBlogs()
   }, [])
 
   return (
     <>
+      {blogs?.map((item: any) => {
+        console.log(item, 'items')
+        return (
+          <Head key={item.id}>
+            <title>{item.title}</title>
+            <meta name="description" content={item.description} />
+            <meta name="keywords" content={item.metatags.join(', ')} />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+          </Head>
+        )
+      })}
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
         {isPending && <CustomLoader />}
         {alertMsg.message && (
@@ -177,6 +208,20 @@ export default function AddBlog() {
               />
             </Box>
           </Stack>
+          <CustomLabel
+            id="demo-simple-select-label"
+            sx={{ mt: '7px', fontFamily: 'Public Sans' }}
+          >
+            Metatags
+          </CustomLabel>
+          <TagsField
+            // label="Tags"
+            placeholder="Enter Tags."
+            tags={metatags}
+            name="subTags"
+            handleChangeTags={handleChangeTags}
+            removeTag={removeTag}
+          />
 
           <Box sx={{ mb: 3 }}>
             <label htmlFor="bgFileInput">
@@ -364,3 +409,5 @@ export default function AddBlog() {
     </>
   )
 }
+
+export default AddBlog

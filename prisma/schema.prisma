@@ -159,6 +159,7 @@ model Hotels {
     id          String  @id @default(auto()) @map("_id") @db.ObjectId
     title       String @unique
     ratings     String?
+    metatags    String[]
     sections    Sections[]
     createdAt  DateTime   @default(now())
     updatedAt  DateTime   @updatedAt
@@ -184,6 +185,7 @@ model Blogs {
     category     String
     description String
     coverImage  String
+     metatags String[]
 }
 
 // ADD BLOG MODEL

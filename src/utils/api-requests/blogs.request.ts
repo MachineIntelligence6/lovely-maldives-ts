@@ -5,6 +5,7 @@ interface Blogs {
   description: string
   category: string
   coverImage: string
+  metatags: string[]
 }
 
 export const addBlogRequest = async (data: Blogs) => {
@@ -13,6 +14,7 @@ export const addBlogRequest = async (data: Blogs) => {
     description: data.description,
     category: data.category,
     coverImage: data.coverImage,
+    metatags: data.metatags,
   })
 }
 

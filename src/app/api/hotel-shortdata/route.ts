@@ -14,11 +14,11 @@ export async function GET(req: Request) {
     await connectToDatabase()
 
     let hotels
-    if (ids?.length as any > 0 && ids?.[0] !== '') {
+    if ((ids?.length as any) > 0 && ids?.[0] !== '') {
       hotels = await prisma.hotels.findMany({
         where: {
-            id: {
-              in: ids,
+          id: {
+            in: ids,
           },
         },
         take: limit,
@@ -47,6 +47,7 @@ export async function GET(req: Request) {
         id: hotel.id,
         title: hotel.title,
         ratings: hotel.ratings,
+        metatags: hotel.metatags,
         image: firstImage,
       }
     })
