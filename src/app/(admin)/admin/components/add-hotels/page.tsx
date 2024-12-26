@@ -5,6 +5,7 @@
 'use client'
 
 import React, { useEffect, useState, useTransition } from 'react'
+import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import AddIcon from '@mui/icons-material/Add'
 import styled from '@emotion/styled'
@@ -30,6 +31,8 @@ import {
 import AddFacts from '@/admin-components/pages/AddFacts'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
+import { deleteHotelRequest } from '@/utils/api-requests/hotels.request'
+import TagsField from '@/admin-components/items/TagsField'
 import HotelsWraper from './HotelsWraper'
 
 // const ReactQuillEditor = dynamic(
@@ -64,6 +67,7 @@ const AddHotels = () => {
   const [showModal, setShowModal] = useState(false)
   const [title, setTitle] = useState('')
   const [ratings, setRatings] = useState(1)
+  const [metatags, setMetatags] = useState([] as string[])
   const [sections, setSections] = useState([] as any)
   const [value, setValue] = useState('')
   const [hotels, setHotels] = useState([] as any)
@@ -192,12 +196,55 @@ const AddHotels = () => {
     }
   }
 
+  // delete Hotel
+  const deleteHotel = (id: string) => {
+    const sure = window.confirm('Are you sure to delete the hotel?')
+    if (!sure) return
+
+    try {
+      startTransition(async () => {
+        const res = await deleteHotelRequest(id)
+        const data = res?.data
+
+        if (data?.status === 200) {
+          await getHotels()
+          setAlertMsg({
+            type: 'success',
+            message: 'Hotel deleted successfully.',
+          })
+
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (err: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occurred while deleting the hotel, please try again.',
+      })
+
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+
+      console.error('Error deleting hotel:', err)
+    }
+  }
+
   const submitData = async () => {
     try {
       startTransition(async () => {
         const res = await AddHotelsRequest({
           title,
           ratings,
+          metatags,
           sections,
         })
         const data = res?.data
@@ -206,6 +253,7 @@ const AddHotels = () => {
           setSections([])
           setTitle('')
           setRatings(1)
+          setMetatags([])
           setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
@@ -230,11 +278,37 @@ const AddHotels = () => {
     }
   }
 
+  const handleChangeTags = (tag: any) => {
+    setMetatags([...metatags, tag])
+  }
+
+  const removeTag = (ind: number) => {
+    setMetatags((prevMetatags) => prevMetatags.filter((_, i) => i !== ind))
+  }
+
   useEffect(() => {
     getHotels()
   }, [])
+
   return (
     <>
+      {hotels?.map((hotel: any) => {
+        return (
+          <Head key={hotel.id}>
+            <title>{hotel.title}</title>
+            <meta
+              name="description"
+              content={`Hotel: ${hotel.title}, Ratings: ${hotel.ratings}, 
+              Tags: ${hotel.metatags.join(', ')}`}
+            />
+            <meta name="keywords" content={hotel.metatags.join(', ')} />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+          </Head>
+        )
+      })}
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
         {isPending && <CustomLoader />}
         {alertMsg.message && (
@@ -276,6 +350,19 @@ const AddHotels = () => {
               value={ratings}
               sx={{ display: 'flex', m: 0, mb: 2, mt: 1 }}
               onChange={(e: any) => setRatings(e.target.value)}
+            />
+            <CustomLabel
+              id="demo-simple-select-label"
+              sx={{ mt: '20px', fontFamily: 'Public Sans' }}
+            >
+              Metatags
+            </CustomLabel>
+            <TagsField
+              placeholder="Enter Tags."
+              tags={metatags}
+              name="subTags"
+              handleChangeTags={handleChangeTags}
+              removeTag={removeTag}
             />
             <Box sx={{ my: 2 }}>
               {sections.map((section: any, index: number) => {
@@ -430,7 +517,7 @@ const AddHotels = () => {
         </Box>
       </CustomCard>
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
-        <HotelsWraper hotels={hotels} />
+        <HotelsWraper hotels={hotels} deleteHotel={deleteHotel} />
       </CustomCard>
     </>
   )

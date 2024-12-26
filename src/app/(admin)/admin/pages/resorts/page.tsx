@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { startTransition } from 'react'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import ResortSections from '@/admin-components/pages/ResortSections'
+import { deleteResortHotelRequest } from '@/utils/api-requests/resorts.request'
 
 const Resorts = () => {
   return (

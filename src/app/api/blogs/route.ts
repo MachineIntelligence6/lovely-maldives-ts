@@ -54,6 +54,7 @@ export async function POST(req: Request) {
     !bodyData?.category ||
     !bodyData?.description ||
     !bodyData?.title ||
+    !bodyData?.metatags ||
     !bodyData?.coverImage
   )
     return NextResponse.json({
