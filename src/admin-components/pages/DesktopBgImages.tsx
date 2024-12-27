@@ -6,7 +6,14 @@ import CloseIcon from '@mui/icons-material/Close'
 import ImagesUploader from '../common/ImagesUploader'
 
 const DesktopBgImages = (props: any) => {
-  const { files, urls, handleChange, label, handleDeleteFile } = props
+  const {
+    files,
+    urls,
+    handleChange,
+    label,
+    handleDeleteFile,
+    name = 'Background Images',
+  } = props
   return (
     <>
       <Typography
@@ -14,7 +21,7 @@ const DesktopBgImages = (props: any) => {
         color="var(--black)"
         sx={{ mt: 2, fontWeight: 'bold', mb: 1 }}
       >
-        Background Images
+        {name}
       </Typography>
 
       <ImagesUploader

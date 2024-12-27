@@ -208,6 +208,7 @@ model HomeBg {
     title       String
     subTitle    String?
     bgImages    String[]
+    mobileBgImages String[]
     services    Services[]
     wonders     Wonders[]
     collections OurCollections[]

@@ -24,24 +24,31 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { title, subTitle, bgImages } = await req.json()
   try {
+    const { title, subTitle, bgImages, mobileBgImages } = await req.json()
+
+    if (!title || !Array.isArray(bgImages) || !Array.isArray(mobileBgImages)) {
+      return NextResponse.json(
+        { message: 'Invalid input data' },
+        { status: 400 }
+      )
+    }
+
     await connectToDatabase()
 
     const result = await createHomeBg({
       title,
       subTitle,
       bgImages,
+      mobileBgImages,
     })
-
-    if (!result) return NextResponse.json({ message: 'Error' }, { status: 500 })
 
     return NextResponse.json(
       { message: 'Success', data: result },
       { status: 201 }
     )
   } catch (error) {
-    console.log('Error', error)
+    console.error('Error:', error)
     return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
   } finally {
     await prisma.$disconnect()
