@@ -4,7 +4,14 @@
 
 'use client'
 
-import { Alert, Box, InputLabel, Stack, Typography } from '@mui/material'
+import {
+  Alert,
+  Box,
+  Button,
+  InputLabel,
+  Stack,
+  Typography,
+} from '@mui/material'
 import styled from '@emotion/styled'
 import { useEffect, useState, useTransition } from 'react'
 import dynamic from 'next/dynamic'
@@ -13,12 +20,14 @@ import Image from 'next/image'
 import Head from 'next/head'
 import EditIcon from '@mui/icons-material/Edit'
 import BackupIcon from '@mui/icons-material/Backup'
+import CloseIcon from '@mui/icons-material/Close'
 import HeadingWraper from '@/admin-components/common/HeadingWraper'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import CustomSelect from '@/admin-components/items/CustomSelect'
 import {
   addBlogRequest,
+  deleteBlogRequest,
   getBlogsRequest,
 } from '@/utils/api-requests/blogs.request'
 import CustomLoader from '@/admin-components/common/CustomLoader'
@@ -89,6 +98,49 @@ function AddBlog() {
       })
     } catch (error: any) {
       console.log('error ', error)
+    }
+  }
+
+  // delete blog
+  const deleteBlog = (id: string) => {
+    // eslint-disable-next-line no-alert
+    const sure = window.confirm('Are you sure to delete the blog?')
+    if (!sure) return
+
+    try {
+      startTransition(async () => {
+        const res = await deleteBlogRequest(id) // Adjusted request function name
+        const data = res?.data
+
+        if (data?.status === 200) {
+          await getAllBlogs()
+          setAlertMsg({
+            type: 'success',
+            message: 'Blog deleted successfully.',
+          })
+
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (err: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occurred while deleting the blog, please try again.',
+      })
+
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+
+      console.error('Error deleting blog:', err)
     }
   }
 
@@ -353,6 +405,22 @@ function AddBlog() {
                 position: 'relative',
               }}
             >
+              <Button
+                sx={{
+                  position: 'absolute',
+                  top: '15px',
+                  right: '0',
+                  zIndex: '10000',
+                  color: 'white',
+                }}
+                onClick={(e) => {
+                  e.preventDefault() // Prevent navigation
+                  e.stopPropagation() // Stop the click event from bubbling up
+                  deleteBlog(blogItem?.id)
+                }}
+              >
+                <CloseIcon />
+              </Button>
               <Box
                 sx={{
                   width: '100%',
