@@ -12,11 +12,6 @@ import {
 import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 
-// const ReactQuillEditor = dynamic(
-//   () => import('@/admin-components/common/ReactQuillEditor'),
-//   { ssr: false }
-// )
-
 const JoditTextEditor = dynamic(
   () => import('@/admin-components/common/JoditTextEditor'),
   { ssr: false }
