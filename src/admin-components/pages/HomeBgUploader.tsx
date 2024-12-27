@@ -21,84 +21,99 @@ import CustomLoader from '../common/CustomLoader'
 
 const HomeBgUploader = () => {
   const [isPending, startTransition] = useTransition()
-  const [files, setFiles] = useState([] as any)
-  const [mobileFiles, setMobileFiles] = useState([] as any)
+  const [files, setFiles] = useState([] as File[])
+  const [mobileFiles, setMobileFiles] = useState([] as File[])
   const [titles, setTitles] = useState({ title: '', subTitle: '' })
-  const [urls, setUrls] = useState([] as any)
-  const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
+  const [urls, setUrls] = useState<string[]>([])
+  const [mobileUrls, setMobileUrls] = useState<string[]>([])
+  const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
   const [detectChange, setDetectChange] = useState(false)
 
-  const handleChange = async (e: any, label: string) => {
-    const file = e.target.files[0]
-    setDetectChange(true)
-    if (label === 'Desktop') {
-      setFiles([...files, file])
+  const handleChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    label: string
+  ) => {
+    const file = e.target.files?.[0]
+    if (!file) return
 
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('upload_preset', 'j8epfynh')
-      const res = await uploadImgToCloudinary(formData)
-      setUrls([...urls, res?.secure_url])
-    } else {
-      setMobileFiles([...mobileFiles, file])
+    setDetectChange(true)
+
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('upload_preset', 'j8epfynh')
+
+    const res = await uploadImgToCloudinary(formData)
+    if (res?.secure_url) {
+      if (label === 'Desktop') {
+        setFiles([...files, file])
+        setUrls([...urls, res.secure_url])
+      } else if (label === 'Mobile') {
+        setMobileFiles([...mobileFiles, file])
+        setMobileUrls([...mobileUrls, res.secure_url])
+      }
     }
   }
 
-  const handleDeleteFile = async (label: any, index: number) => {
-    setFiles(files.filter((_: any, i: number) => i !== index))
+  const handleDeleteFile = async (label: string, index: number) => {
+    if (label === 'Desktop') {
+      setFiles(files.filter((_, i) => i !== index))
+      const url = urls[index]
+      setUrls(urls.filter((_, i) => i !== index))
+      await deleteCloudinaryImage(url)
+    } else if (label === 'Mobile') {
+      setMobileFiles(mobileFiles.filter((_, i) => i !== index))
+      const url = mobileUrls[index]
+      setMobileUrls(mobileUrls.filter((_, i) => i !== index))
+      await deleteCloudinaryImage(url)
+    }
     setDetectChange(true)
-
-    const url = urls[index]
-    setUrls(urls.filter((_: any, i: number) => i !== index))
-    const result = await deleteCloudinaryImage(url)
   }
 
   const getHomeBgData = async () => {
     try {
       startTransition(async () => {
         const res = await getHomeBgRequest()
-        const data = res?.data?.data
         if (res?.status === 200) {
-          setUrls(data?.bgImages)
-          setTitles({ title: data?.title, subTitle: data?.subTitle })
+          const { data } = res.data
+          setUrls(data?.bgImages || [])
+          setMobileUrls(data?.mobileBgImages || [])
+          setTitles({
+            title: data?.title || '',
+            subTitle: data?.subTitle || '',
+          })
           localStorage.setItem('homeBgId', JSON.stringify(data?.id))
         }
       })
     } catch (error: any) {
-      console.log('error ', error)
+      console.error('Error fetching home background data:', error)
     }
   }
 
   const handleSave = async () => {
-    if (!titles.title) return alert('Please enter title.')
-    if (urls?.length < 1) return alert('Please select images.')
-    try {
-      startTransition(async () => {
-        const res = await homeBgRequest({ ...titles, bgImages: urls })
-        if (res?.status === 201) {
-          getHomeBgData()
-          setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
-          setTimeout(() => {
-            setAlertMsg({ type: '', message: '' })
-          }, 3000)
-        }
-      })
-      setDetectChange(false)
-    } catch (error: any) {
-      setAlertMsg({
-        type: 'error',
-        message: 'Error occured while saving data, please try again.',
-      })
-      setTimeout(() => {
-        setAlertMsg({ type: '', message: '' })
-      }, 3000)
-      console.log('error ', error)
-    }
+    if (!titles.title) return alert('Please enter a title.')
+    if (urls.length < 1) return alert('Please select desktop images.')
+    startTransition(async () => {
+      try {
+        const res = await homeBgRequest({
+          ...titles,
+          bgImages: urls || [],
+          mobileBgImages: mobileUrls || [],
+        })
+
+        setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
+        setTimeout(() => setAlertMsg({ type: '', message: '' }), 3000)
+      } catch (error) {
+        console.error('Error during API call:', error)
+        setAlertMsg({ type: 'error', message: 'Failed to save data.' })
+        setTimeout(() => setAlertMsg({ type: '', message: '' }), 3000)
+      }
+    })
   }
 
   useEffect(() => {
     getHomeBgData()
   }, [])
+
   return (
     <CustomCard sx={{ padding: '40px !important' }}>
       {isPending && <CustomLoader />}
@@ -124,29 +139,45 @@ const HomeBgUploader = () => {
           placeholder="Enter Title."
           name="title"
           value={titles.title}
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setTitles({ ...titles, title: e.target.value })
             setDetectChange(true)
           }}
         />
         <TextFieldWraper
           label="Subtitle"
-          placeholder="Enter subtitle."
+          placeholder="Enter Subtitle."
           name="subTitle"
           value={titles.subTitle}
-          onChange={(e: any) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setTitles({ ...titles, subTitle: e.target.value })
             setDetectChange(true)
           }}
         />
       </Stack>
-
       <DesktopBgImages
         label="Desktop"
-        handleDeleteFile={handleDeleteFile}
-        handleChange={handleChange}
+        name="Desktop Background Images"
+        handleDeleteFile={(label: string, index: number) =>
+          handleDeleteFile(label, index)
+        }
+        handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          handleChange(e, 'Desktop')
+        }
         files={files}
         urls={urls}
+      />
+      <DesktopBgImages
+        label="Mobile"
+        name="Mobile Background Images"
+        handleDeleteFile={(label: string, index: number) =>
+          handleDeleteFile(label, index)
+        }
+        handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          handleChange(e, 'Mobile')
+        }
+        files={mobileFiles}
+        urls={mobileUrls}
       />
     </CustomCard>
   )

@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client'
 
 import React, { useEffect, useState } from 'react'
@@ -15,11 +13,6 @@ import banner3 from '../../public/Images/exploreImg.jpg'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const imgUrl: any = [banner, banner2, banner3]
-export const mobileImgUrl: any = [
-  'Images/exploreImg2.jpg',
-  'Images/explorImg2.jpg',
-  'Images/explorImg5.jpg',
-]
 
 export default function Banner(props: any) {
   const { bannerData, themeData } = props
@@ -42,19 +35,20 @@ export default function Banner(props: any) {
   React.useEffect(() => {
     const bannersLength = data?.bgImages?.length
     const bannerImages = data?.bgImages
+    const mobileBgImages = data?.mobileBgImages
 
     const randomIndexdev: number = Math.floor(Math.random() * bannersLength)
-
     const randomIndexmob: number = Math.floor(
-      Math.random() * mobileImgUrl.length
+      Math.random() * (mobileBgImages?.length || 0)
     )
-    if (lessThanMd) {
+
+    if (lessThanMd && mobileBgImages) {
       setBgImgStyle({
         backgroundImage: `${
           themeData?.gradient ||
           `linear-gradient(to bottom, rgba(150, 127, 93, 0.10),
      rgba(150, 127, 93, 0.20))`
-        }, url('${mobileImgUrl[randomIndexmob]}')`,
+        }, url('${mobileBgImages[randomIndexmob]}')`,
         backgroundSize: 'cover',
         backgroundPosition: '100%',
         width: '100%',
@@ -82,7 +76,7 @@ export default function Banner(props: any) {
         position: 'relative',
       })
     }
-  }, [lessThanMd, data])
+  }, [lessThanMd, data, bannerData, themeData])
 
   useEffect(() => {
     setData(JSON.parse(localStorage.getItem('home') as any))

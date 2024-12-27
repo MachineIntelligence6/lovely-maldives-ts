@@ -4,6 +4,7 @@ interface AboutMaldivesShortData {
   title: string
   subTitle: string
   bgImages: string[]
+  mobileBgImages: string[]
 }
 
 export async function createHomeBg(data: AboutMaldivesShortData) {
@@ -32,6 +33,7 @@ export async function getHomeBg() {
       services: true,
       aboutUsShort: true,
       wonders: true,
+      collections: true,
       brands: true,
       socialLinkSection: true,
       header: true,
