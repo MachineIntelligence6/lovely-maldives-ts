@@ -87,7 +87,7 @@ const menuItems = [
     icon: <BrandingWatermarkIcon sx={{ fontSize: '20px' }} />,
     children: [
       {
-        title: 'Add Hotels',
+        title: 'Add Hotel',
         path: 'admin/components/add-hotels',
       },
       {

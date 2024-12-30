@@ -10,10 +10,11 @@ import { motion } from 'framer-motion'
 import BoltIcon from '@mui/icons-material/Bolt'
 import Link from 'next/link'
 import CloseIcon from '@mui/icons-material/Close'
+import EditIcon from '@mui/icons-material/Edit'
 import { Button } from '@mui/material'
 
 const HotelsWraper = (props: any) => {
-  const { hotels, deleteHotel } = props
+  const { hotels, deleteHotel, handleShowEditHotelModal } = props
   return (
     <Box>
       <Typography
@@ -63,6 +64,23 @@ const HotelsWraper = (props: any) => {
                   onClick={() => deleteHotel(hotelItem?.id)}
                 >
                   <CloseIcon />
+                </Button>
+                <Button
+                  sx={{
+                    position: 'absolute',
+                    top: '15px',
+                    left: '0',
+                    zIndex: '10000',
+                    color: 'white',
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                    handleShowEditHotelModal(hotelItem)
+                  }}
+                >
+                  <EditIcon />
                 </Button>
                 <Box
                   component={Link}
@@ -127,7 +145,7 @@ const HotelsWraper = (props: any) => {
                       py: '24px',
                       bgcolor: 'var(--darkBrown)',
                       borderRadius: { xs: '0px', md: '0px 0px 20px 20px' },
-                      mt: '-10px',
+                      // mt: '-10px',
                     }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -143,9 +161,7 @@ const HotelsWraper = (props: any) => {
                       }}
                     >
                       <Typography sx={{ fontSize: '20px' }}>
-                        {hotelItem?.title.length > 20
-                          ? `${hotelItem?.title.substring(0, 20)}...`
-                          : hotelItem?.title}
+                        {hotelItem?.title}
                       </Typography>
                       <BoltIcon sx={{ display: `flex` }} />
                     </Box>

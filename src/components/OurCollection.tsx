@@ -8,7 +8,7 @@ import Link from 'next/link'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import BoltIcon from '@mui/icons-material/Bolt'
@@ -31,6 +31,7 @@ export default function OurCollection({
   bottomradius,
   collections,
 }: IOurCollectionProps) {
+  const router = useRouter()
   const settings = {
     dots: true,
     infinite: true,
@@ -78,6 +79,7 @@ export default function OurCollection({
       //   },
     ],
   }
+
   return (
     <Container sx={{ maxWidth: '100% !important', px: '0px !important' }}>
       <Typography
@@ -104,92 +106,100 @@ export default function OurCollection({
       >
         {collections?.length > 2 ? (
           <Slider {...settings}>
-            {collections?.map((collection: any, index: number) => (
-              <Box
-                sx={{
-                  // position: 'relative',
-                  borderRadius: `${radius}`,
-                  margin: '0 auto',
-                }}
-                key={index}
-              >
+            {collections?.map((collection: any, index: number) => {
+              return (
                 <Box
-                  component="div"
                   sx={{
-                    width: { xs: '100%', md: '92%' },
-                    height: { xs: '250px', md: '300px' },
-                    objectFit: 'cover',
-                    borderRadius: {
-                      xs: '0px',
-                      md: `${radius} ${radius} 0px 0px`,
-                    },
+                    // position: 'relative',
+                    borderRadius: `${radius}`,
                     margin: '0 auto',
-                    position: 'relative',
+                    cursor: 'pointer',
+                  }}
+                  key={index}
+                  onClick={() => {
+                    router.push(
+                      `/resorts/${encodeURIComponent(collection?.title)}`
+                    )
                   }}
                 >
                   <Box
+                    component="div"
                     sx={{
-                      width: '100%',
-                      height: '100%',
-                      bgcolor: 'rgba(150,127,93,0.5)',
-                      position: 'absolute',
-                      top: '0',
-                      bottom: '0',
-                      right: '0',
-                      zIndex: '1',
-                      left: 0,
-                      // '@media only screen and (min-width: 1600px)': {
-                      //   left: '30px',
-                      // },
-                    }}
-                  />
-                  <Image
-                    src={collection?.coverImage}
-                    alt="Resort item"
-                    layout="fill"
-                    objectFit="cover"
-                    sizes="(max-width: 600px) 100vw, 50vw"
-                  />
-                </Box>
-                <Box
-                  sx={{
-                    width: { xs: '100%', md: '92%' },
-                    display: 'flex',
-                    flexDirection: 'column',
-                    color: 'white',
-                    fontSize: '12px',
-                    fontWeight: '200',
-                    zIndex: '99',
-                    gap: 1,
-                    py: '24px',
-                    bgcolor: 'var(--darkBrown)',
-                    borderRadius: { xs: '0px', md: `${bottomradius}` },
-                    margin: '0 auto',
-                  }}
-                >
-                  <Box
-                    sx={{
-                      // mt: '24px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      height: 'auto',
+                      width: { xs: '100%', md: '92%' },
+                      height: { xs: '250px', md: '300px' },
+                      objectFit: 'cover',
+                      borderRadius: {
+                        xs: '0px',
+                        md: `${radius} ${radius} 0px 0px`,
+                      },
+                      margin: '0 auto',
+                      position: 'relative',
                     }}
                   >
-                    <Typography sx={{ px: 4, fontSize: '20px' }}>
-                      {collection?.title}{' '}
-                    </Typography>
-                    <BoltIcon sx={{ display: `${iconShow}` }} />
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: '100%',
+                        bgcolor: 'rgba(150,127,93,0.5)',
+                        position: 'absolute',
+                        top: '0',
+                        bottom: '0',
+                        right: '0',
+                        zIndex: '1',
+                        left: 0,
+                        // '@media only screen and (min-width: 1600px)': {
+                        //   left: '30px',
+                        // },
+                      }}
+                    />
+                    <Image
+                      src={collection?.coverImage}
+                      alt="Resort item"
+                      layout="fill"
+                      objectFit="cover"
+                      sizes="(max-width: 600px) 100vw, 50vw"
+                    />
                   </Box>
-                  <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                    {[...Array(parseInt(collection?.ratings, 10))].map(
-                      (_: any, ind: number) => (
-                        <StarRateIcon key={`_${index}_${ind}`} />
-                      )
-                    )}
+                  <Box
+                    sx={{
+                      width: { xs: '100%', md: '92%' },
+                      display: 'flex',
+                      flexDirection: 'column',
+                      color: 'white',
+                      fontSize: '12px',
+                      fontWeight: '200',
+                      zIndex: '99',
+                      gap: 1,
+                      py: '24px',
+                      bgcolor: 'var(--darkBrown)',
+                      borderRadius: { xs: '0px', md: `${bottomradius}` },
+                      margin: '0 auto',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        // mt: '24px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        height: 'auto',
+                      }}
+                    >
+                      <Typography sx={{ px: 4, fontSize: '20px' }}>
+                        {collection?.title}{' '}
+                      </Typography>
+                      <BoltIcon sx={{ display: `${iconShow}` }} />
+                    </Box>
+                    <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
+                      {[...Array(parseInt(collection?.ratings, 10))].map(
+                        (_: any, ind: number) => (
+                          <StarRateIcon key={`_${index}_${ind}`} />
+                        )
+                      )}
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
-            ))}
+              )
+            })}
           </Slider>
         ) : (
           <Box
@@ -205,8 +215,14 @@ export default function OurCollection({
                   // position: 'relative',
                   borderRadius: `${radius}`,
                   margin: '0 auto',
+                  cursor: 'pointer',
                 }}
                 key={index}
+                onClick={() => {
+                  router.push(
+                    `/resorts/${encodeURIComponent(collection?.title)}`
+                  )
+                }}
               >
                 <Box
                   component="div"

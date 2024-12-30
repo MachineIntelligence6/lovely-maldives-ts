@@ -129,10 +129,8 @@ export default function ResortsGallery(props: any) {
                         px: 4,
                       }}
                     >
-                      <Typography sx={{ fontSize: '20px' }}>
-                        {item.title.length > 20
-                          ? `${item.title.substring(0, 20)}...`
-                          : item.title}
+                      <Typography sx={{ fontSize: '20px', textWrap: 'wrap' }}>
+                        {item.title}
                       </Typography>
                       <BoltIcon sx={{ display: `flex` }} />
                     </Box>

@@ -19,6 +19,7 @@ import TextFieldWraper from '@/admin-components/items/TextfieldWraper'
 import SelectBlog from '@/admin-components/pages/modals/SelectBlog'
 import BlogsWraper from '@/admin-components/pages/BlogsWraper'
 import CustomLoader from '@/admin-components/common/CustomLoader'
+import { deleteBlogRequest } from '@/utils/api-requests/blogs.request'
 
 // const ReactQuillEditor = dynamic(
 //   () => import('@/admin-components/common/ReactQuillEditor'),
@@ -156,6 +157,51 @@ export default function Blogs() {
     }
   }
 
+  const deleteBlog = (id: string) => {
+    const sure = window.confirm('Are you sure to delete the Blog?')
+    if (!sure) return
+
+    try {
+      startTransition(async () => {
+        const res = await deleteBlogRequest(id)
+        const data = res?.data
+        if (data?.status === 200) {
+          // await getAllBlogs()
+          setAlertMsg({
+            type: 'success',
+            message: 'Blog deleted successfully.',
+          })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (err: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occurred while deleting the blog, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.error('Error deleting blog:', err)
+    }
+  }
+
+  // const handleEditBlog = (index: number, updatedBlog: any) => {
+  //   console.log(updatedBlog, 'updatedBlog')
+  //   const updatedBlogs = blogs.map((blog: any, i: number) =>
+  //     i === index ? updatedBlog : blog
+  //   )
+  //   setBlogs(updatedBlogs)
+  //   setValues({ ...values, category: updatedBlog.category })
+  // }
+
   useEffect(() => {
     getSections()
   }, [])
@@ -212,7 +258,12 @@ export default function Blogs() {
           </Button>
 
           {blogs?.length > 0 && (
-            <BlogsWraper category={values?.category} blogs={blogs} />
+            <BlogsWraper
+              category={values?.category}
+              blogs={blogs}
+              deleteBlog={deleteBlog}
+              // handleEditBlog={handleEditBlog}
+            />
           )}
         </Box>
       </CustomCard>
@@ -227,6 +278,8 @@ export default function Blogs() {
               sectionId={blogsData?.id}
               category={blogsData?.category}
               deleteBlogSection={deleteBlogSection}
+              // deleteBlog={deleteBlog}
+              // handleEditBlog={handleEditBlog}
             />
           ))}
         </CustomCard>

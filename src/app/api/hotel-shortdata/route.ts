@@ -49,6 +49,7 @@ export async function GET(req: Request) {
         ratings: hotel.ratings,
         metatags: hotel.metatags,
         image: firstImage,
+        sections: hotel.sections,
       }
     })
 

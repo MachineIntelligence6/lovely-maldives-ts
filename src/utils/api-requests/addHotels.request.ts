@@ -45,3 +45,8 @@ export const getHotelRequest = async (data: any) => {
 export const getRecomendationsRequest = async () => {
   return apiClient.get(`/hotels/recomendations`)
 }
+
+// Assuming `apiClient` is an instance of axios or similar HTTP client
+export const updateHotelRequest = async (hotelData: any) => {
+  return apiClient.put(`/hotels`, hotelData)
+}
