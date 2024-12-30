@@ -193,6 +193,7 @@ export default function Blogs() {
     }
   }
 
+  // edit blog
   // const handleEditBlog = (index: number, updatedBlog: any) => {
   //   console.log(updatedBlog, 'updatedBlog')
   //   const updatedBlogs = blogs.map((blog: any, i: number) =>
