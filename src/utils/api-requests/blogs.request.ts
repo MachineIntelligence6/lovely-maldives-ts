@@ -31,3 +31,7 @@ export const getSingleBlogRequest = async (title: any) => {
 export const getRelatedBlogsRequest = async (category: any) => {
   return apiClient.get(`/blogs/related-articles?id=${category}`)
 }
+
+export const deleteBlogRequest = async (id: string) => {
+  return apiClient.delete(`/blogs?id=${id}`)
+}
