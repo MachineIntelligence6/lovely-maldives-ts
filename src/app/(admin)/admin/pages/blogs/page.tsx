@@ -4,7 +4,6 @@
 'use client'
 
 import { Alert, Box, Button, Stack, Typography } from '@mui/material'
-import dynamic from 'next/dynamic'
 import { useEffect, useState, useTransition } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import {

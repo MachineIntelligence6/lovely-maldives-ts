@@ -115,6 +115,11 @@ const menuItems = [
     ],
   },
   {
+    title: 'Hotel Booking',
+    icon: <GridViewIcon sx={{ fontSize: '20px' }} />,
+    path: 'admin/hotel-bookings',
+  },
+  {
     title: 'Help & Support',
     icon: <HelpCenterIcon sx={{ fontSize: '20px' }} />,
     path: 'admin/help',

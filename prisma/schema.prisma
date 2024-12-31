@@ -166,10 +166,17 @@ model Hotels {
 }
 
 model HotelBookings {
-    id          String  @id @default(auto()) @map("_id") @db.ObjectId
-    userEmail   String @unique
-    hotelId     String?
+   id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  email       String @unique
+  phone       String
+  checkInDate DateTime
+  checkOutDate DateTime
+  totalGuest  Int
+  totalRooms  Int
+  hotelId     String?
 }
+
 
 // RESORT FILTERS MODEL
 model ResortFilters {
