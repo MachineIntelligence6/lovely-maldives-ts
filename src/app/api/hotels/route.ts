@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   try {
     await connectToDatabase()
 
-    const result = await prisma.hotels.findMany({ take: limit, skip, })
+    const result = await prisma.hotels.findMany({ take: limit, skip })
     const total = await prisma.hotels.count()
 
     if (!result)
@@ -75,7 +75,7 @@ export async function PUT(req: Request) {
   const bodyData = await req.json()
   if (!bodyData.id || !bodyData.title)
     return NextResponse.json(
-      { message: 'Please send blog id to update.' },
+      { message: 'Please send hotel id to update.' },
       { status: 422 }
     )
   try {
@@ -107,7 +107,7 @@ export async function PUT(req: Request) {
     })
 
     return NextResponse.json(
-      { message: 'Success', data: result },
+      { message: 'Hotel updated successfully', data: result, status: 200 },
       { status: 201 }
     )
   } catch (error) {

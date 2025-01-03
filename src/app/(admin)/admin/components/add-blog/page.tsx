@@ -1,7 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/no-absolute-path */
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client'
 
 import {
@@ -29,9 +25,9 @@ import {
   addBlogRequest,
   deleteBlogRequest,
   getBlogsRequest,
+  updateBlogRequest,
 } from '@/utils/api-requests/blogs.request'
 import CustomLoader from '@/admin-components/common/CustomLoader'
-import blog from '/public/Images/landingTree.jpg'
 import TagsField from '@/admin-components/items/TagsField'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
 
@@ -64,6 +60,8 @@ function AddBlog() {
   const [blogs, setBlogs] = useState([] as any)
   const [coverPhoto, setCoverPhoto] = useState(null as any)
   const [coverUrl, setCoverUrl] = useState(null as any)
+  const [editingBlog, setEditingBlog] = useState(null as any)
+  const [showEditBlogModal, setShowEditBlogModal] = useState(false)
 
   const handleEditorValue = (val: any) => {
     setEditorText(val)
@@ -80,7 +78,121 @@ function AddBlog() {
     setCoverUrl(res?.secure_url)
   }
 
-  console.log(blogs, 'blogs')
+  interface Blog {
+    title: string
+    category: string
+    description: string
+    coverImage: string
+    metatags: string[]
+  }
+
+  const handleShowEditBlogModal = (selectedBlog: Blog | null = null) => {
+    if (selectedBlog) {
+      setValues({
+        title: selectedBlog?.title,
+        category: selectedBlog?.category,
+      })
+      setEditorText(selectedBlog?.description)
+      setCoverUrl(selectedBlog?.coverImage)
+      setMetatags(selectedBlog?.metatags)
+    }
+    setEditingBlog(selectedBlog)
+    setShowEditBlogModal(!showEditBlogModal)
+  }
+
+  const handleEditBlog = async () => {
+    try {
+      startTransition(async () => {
+        const res = await updateBlogRequest({
+          ...editingBlog,
+          ...values,
+          description: editorText,
+          coverImage: coverUrl,
+          metatags,
+        })
+        const data = res?.data
+        if (data?.status === 200) {
+          await getAllBlogs()
+          setEditingBlog(null)
+          setCoverPhoto(null)
+          setCoverUrl(null)
+          setValues({ title: '', category: '' })
+          setMetatags([])
+          setEditorText('')
+          setAlertMsg({
+            type: 'success',
+            message: 'Blog updated successfully.',
+          })
+          handleShowEditBlogModal(null)
+        } else {
+          setAlertMsg({
+            type: 'error',
+            message: data?.message || 'An error occurred, please try again.',
+          })
+        }
+        setTimeout(() => {
+          setAlertMsg({ type: '', message: '' })
+        }, 3000)
+      })
+    } catch (error) {
+      console.error('Error updating blog:', error)
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occurred while updating the blog, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+    }
+  }
+
+  const submitData = async () => {
+    try {
+      startTransition(async () => {
+        const res = await addBlogRequest({
+          ...values,
+          description: editorText,
+          coverImage: coverUrl,
+          metatags,
+        })
+        const data = res?.data
+        if (data?.status === 201) {
+          getAllBlogs()
+          setCoverPhoto(null)
+          setValues({ title: '', category: '' })
+          setMetatags([])
+          setCoverUrl(null)
+          setEditorText('')
+          setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (error: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occurred while saving data, please try again.',
+      })
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+      console.log('error ', error)
+    }
+  }
+
+  const handleChangeTags = (tag: any) => {
+    setMetatags([...metatags, tag])
+  }
+
+  const removeTag = (ind: number) => {
+    setMetatags((prevMetatags) => prevMetatags.filter((_, i) => i !== ind))
+  }
 
   const getAllBlogs = async () => {
     try {
@@ -101,30 +213,25 @@ function AddBlog() {
     }
   }
 
-  // delete blog
   const deleteBlog = (id: string) => {
-    // eslint-disable-next-line no-alert
-    const sure = window.confirm('Are you sure to delete the blog?')
+    const sure = window.confirm('Are you sure to delete the Blog?')
     if (!sure) return
 
     try {
       startTransition(async () => {
-        const res = await deleteBlogRequest(id) // Adjusted request function name
+        const res = await deleteBlogRequest(id)
         const data = res?.data
-
         if (data?.status === 200) {
           await getAllBlogs()
           setAlertMsg({
             type: 'success',
             message: 'Blog deleted successfully.',
           })
-
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
         } else {
           setAlertMsg({ type: 'error', message: data?.message })
-
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
@@ -135,60 +242,11 @@ function AddBlog() {
         type: 'error',
         message: 'Error occurred while deleting the blog, please try again.',
       })
-
       setTimeout(() => {
         setAlertMsg({ type: '', message: '' })
       }, 3000)
-
       console.error('Error deleting blog:', err)
     }
-  }
-
-  const submitData = async () => {
-    try {
-      startTransition(async () => {
-        const res = await addBlogRequest({
-          ...values,
-          description: editorText,
-          coverImage: coverUrl,
-          metatags,
-        })
-        const data = res?.data
-        if (data?.status === 201) {
-          getAllBlogs()
-          setCoverPhoto(null)
-          setValues({ title: '', category: '' })
-          setMetatags([])
-          setAlertMsg({ type: 'success', message: 'Data saved successfully.' })
-          setTimeout(() => {
-            setAlertMsg({ type: '', message: '' })
-          }, 3000)
-        } else {
-          setAlertMsg({ type: 'error', message: data?.message })
-          setTimeout(() => {
-            setAlertMsg({ type: '', message: '' })
-          }, 3000)
-        }
-      })
-      // setDetectChange(false)
-    } catch (error: any) {
-      setAlertMsg({
-        type: 'error',
-        message: 'Error occured while saving data, please try again.',
-      })
-      setTimeout(() => {
-        setAlertMsg({ type: '', message: '' })
-      }, 3000)
-      console.log('error ', error)
-    }
-  }
-
-  const handleChangeTags = (tag: any) => {
-    setMetatags([...metatags, tag])
-  }
-
-  const removeTag = (ind: number) => {
-    setMetatags((prevMetatags) => prevMetatags.filter((_, i) => i !== ind))
   }
 
   useEffect(() => {
@@ -198,7 +256,6 @@ function AddBlog() {
   return (
     <>
       {blogs?.map((item: any) => {
-        console.log(item, 'items')
         return (
           <Head key={item.id}>
             <title>{item.title}</title>
@@ -221,7 +278,7 @@ function AddBlog() {
         <HeadingWraper
           title="Articles"
           detectChange={detectChange}
-          handleSave={submitData}
+          handleSave={editingBlog !== null ? handleEditBlog : submitData}
         />
         <Box sx={{ mt: 3, pb: 5 }}>
           <Stack
@@ -267,7 +324,6 @@ function AddBlog() {
             Metatags
           </CustomLabel>
           <TagsField
-            // label="Tags"
             placeholder="Enter Tags."
             tags={metatags}
             name="subTags"
@@ -379,7 +435,7 @@ function AddBlog() {
             mt: '60px',
           }}
         >
-          ALL Uploaded Artciles
+          ALL Uploaded Articles
         </Typography>
         <Box
           sx={{
@@ -414,12 +470,29 @@ function AddBlog() {
                   color: 'white',
                 }}
                 onClick={(e) => {
-                  e.preventDefault() // Prevent navigation
-                  e.stopPropagation() // Stop the click event from bubbling up
+                  e.preventDefault()
+                  e.stopPropagation()
                   deleteBlog(blogItem?.id)
                 }}
               >
                 <CloseIcon />
+              </Button>
+              <Button
+                sx={{
+                  position: 'absolute',
+                  top: '15px',
+                  left: '0',
+                  zIndex: '10000',
+                  color: 'white',
+                }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  handleShowEditBlogModal(blogItem)
+                }}
+              >
+                <EditIcon />
               </Button>
               <Box
                 sx={{
@@ -430,7 +503,7 @@ function AddBlog() {
                 }}
               >
                 <Image
-                  src={blogItem?.coverImage || blog}
+                  src={blogItem?.coverImage}
                   alt="blog"
                   width={200}
                   height={250}

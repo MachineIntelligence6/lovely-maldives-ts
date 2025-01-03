@@ -8,6 +8,7 @@ import Diversity2Icon from '@mui/icons-material/Diversity2'
 import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface RouteSegment {
   label: string | ReactNode
@@ -19,7 +20,16 @@ function generateRouteSegments(path: string): RouteSegment[] {
   const routeSegments: RouteSegment[] = []
 
   routeSegments.push({
-    label: <Diversity2Icon sx={{ fontSize: '30px', color: 'var(--brown)' }} />,
+    label: (
+      <Image
+        alt="breadCrumb_image"
+        // eslint-disable-next-line max-len
+        src="/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fde1fnstbu%2Fimage%2Fupload%2Fv1719318218%2Flovely-maldives%2Fdvssdcebff9n8sqhwe0z.png&w=64&q=75"
+        width={30}
+        height={30}
+        style={{ width: '30px', height: 'auto', color: 'var(--brown)' }}
+      />
+    ),
     path: '/',
   })
 

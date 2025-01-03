@@ -87,7 +87,7 @@ const menuItems = [
     icon: <BrandingWatermarkIcon sx={{ fontSize: '20px' }} />,
     children: [
       {
-        title: 'Add Hotels',
+        title: 'Add Hotel',
         path: 'admin/components/add-hotels',
       },
       {
@@ -113,6 +113,11 @@ const menuItems = [
         path: 'admin/user-management/user-roles',
       },
     ],
+  },
+  {
+    title: 'Hotel Booking',
+    icon: <GridViewIcon sx={{ fontSize: '20px' }} />,
+    path: 'admin/hotel-bookings',
   },
   {
     title: 'Help & Support',

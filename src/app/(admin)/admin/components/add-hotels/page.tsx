@@ -27,6 +27,7 @@ import ImagesUploader from '@/admin-components/common/ImagesUploader'
 import {
   AddHotelsRequest,
   getHotelsRequest,
+  updateHotelRequest,
 } from '@/utils/api-requests/addHotels.request'
 import AddFacts from '@/admin-components/pages/AddFacts'
 import CustomLoader from '@/admin-components/common/CustomLoader'
@@ -60,17 +61,41 @@ const typeOptions = [
   { label: 'Facts', value: 'facts' },
 ]
 
+interface AlertMessage {
+  type: string
+  message: string
+}
+
+interface Section {
+  type: string
+  ratings?: number
+  title?: string
+  description?: string
+  images?: string[]
+  facts?: any[]
+}
+
+interface Hotel {
+  id: string
+  title: string
+  ratings: number
+  metatags: string[]
+  sections: Section[]
+}
+
 const AddHotels = () => {
   const [isPending, startTransition] = useTransition()
   const [detectChange, setDetectChange] = useState(true)
   const [alertMsg, setAlertMsg] = React.useState({ type: '', message: '' })
   const [showModal, setShowModal] = useState(false)
+  const [showEditHotelModal, setShowEditHotelModal] = useState(false)
   const [title, setTitle] = useState('')
   const [ratings, setRatings] = useState(1)
   const [metatags, setMetatags] = useState([] as string[])
   const [sections, setSections] = useState([] as any)
   const [value, setValue] = useState('')
   const [hotels, setHotels] = useState([] as any)
+  const [editingHotel, setEditingHotel] = useState<any>(null)
   const [page, setPage] = useState(1)
   const [files, setFiles] = useState([] as any)
 
@@ -86,6 +111,18 @@ const AddHotels = () => {
   }
 
   const handleShowModal = () => setShowModal(!showModal)
+
+  const handleShowEditHotelModal = (hotel: Hotel | null = null) => {
+    setEditingHotel(hotel)
+    if (hotel) {
+      setTitle(hotel?.title)
+      setRatings(hotel?.ratings)
+      setMetatags(hotel?.metatags)
+      setSections(hotel?.sections)
+    }
+    setShowEditHotelModal(!showEditHotelModal)
+  }
+  console.log(editingHotel, 'editingHotel')
 
   // ADD SECTION TYPE (e.g. TEXT, TITLE, etc)
   const handleAddType = (type: string) => {
@@ -149,6 +186,63 @@ const AddHotels = () => {
       setSections(updatedSections)
     })
   }
+
+  // Edit A HOTEL
+  const handleEditHotel = async () => {
+    try {
+      // Wrap the API call in startTransition for better UI responsiveness (if using React concurrent mode)
+      startTransition(async () => {
+        // Make the API request to update the hotel
+        const res = await updateHotelRequest({
+          ...editingHotel,
+          title,
+          ratings,
+          metatags,
+          sections,
+        })
+        const data = res?.data
+        console.log(res, 'resresres')
+        if (data.status === 200) {
+          await getHotels() // Assuming getHotels fetches the list of hotels
+          getHotels()
+          setSections([])
+          setTitle('')
+          setRatings(1)
+          setMetatags([])
+          setAlertMsg({
+            type: 'success',
+            message: 'Hotel updated successfully.',
+          })
+          // Close the modal after a successful update
+          handleShowEditHotelModal(null)
+        } else {
+          // Handle the case when the API returns an error message
+          setAlertMsg({
+            type: 'error',
+            message: data?.message || 'An error occurred, please try again.',
+          })
+        }
+
+        // Reset the alert message after 3 seconds
+        setTimeout(() => {
+          setAlertMsg({ type: '', message: '' })
+        }, 3000)
+      })
+    } catch (error) {
+      // Handle any unexpected errors during the API call
+      console.error('Error updating hotel:', error)
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occurred while updating the hotel, please try again.',
+      })
+
+      // Reset the alert message after 3 seconds
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+    }
+  }
+
   // DELETE A FILE
   const handleDeleteFile = (index: number, subIndex: number) => {
     const updatedSections = sections.map((sec: any, ind: number) => {
@@ -317,9 +411,9 @@ const AddHotels = () => {
           </Alert>
         )}
         <HeadingWraper
-          title="Add Hotels"
+          title="Add Hotel"
           detectChange={detectChange}
-          handleSave={submitData}
+          handleSave={editingHotel !== null ? handleEditHotel : submitData}
         />
         <Box>
           <AddSectionType
@@ -365,7 +459,7 @@ const AddHotels = () => {
               removeTag={removeTag}
             />
             <Box sx={{ my: 2 }}>
-              {sections.map((section: any, index: number) => {
+              {sections?.map((section: any, index: number) => {
                 if (section?.type === 'title') {
                   return (
                     <Box
@@ -481,12 +575,12 @@ const AddHotels = () => {
                       title="Add Description"
                     />
                     {/* <ReactQuillEditor
-                      height="400px"
-                      handleEditorValue={(val: any) =>
-                        handleEditorValue(val, index)
-                      }
-                      value={value}
-                    /> */}
+      height="400px"
+      handleEditorValue={(val: any) =>
+        handleEditorValue(val, index)
+      }
+      value={value}
+    /> */}
                     <JoditTextEditor
                       handleEditorValue={(val: any) =>
                         handleEditorValue(val, index)
@@ -517,7 +611,11 @@ const AddHotels = () => {
         </Box>
       </CustomCard>
       <CustomCard sx={{ padding: '40px !important', mt: 2 }}>
-        <HotelsWraper hotels={hotels} deleteHotel={deleteHotel} />
+        <HotelsWraper
+          hotels={hotels}
+          deleteHotel={deleteHotel}
+          handleShowEditHotelModal={handleShowEditHotelModal}
+        />
       </CustomCard>
     </>
   )

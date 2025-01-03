@@ -17,6 +17,7 @@ import Link from 'next/link'
 import Close from '@mui/icons-material/Close'
 import DragHandle from '@mui/icons-material/DragHandle'
 
+import { useRouter, usePathname } from 'next/navigation'
 import useMediaQuery from '@mui/system/useMediaQuery'
 import { useMotionValueEvent, useScroll } from 'framer-motion'
 import { useMenuStore } from '@/providers/menu-store-provider'
@@ -25,11 +26,12 @@ import CustomLoader from '@/admin-components/common/CustomLoader'
 import MobileNav from './MobileNav'
 import SubNav from './SubNav'
 import SearchModal from './SearchModal'
-
 import profilePic from '../../public/Images/logo.svg'
 import profilePicCol from '../../public/Images/logo-colored.svg'
 
 function Header() {
+  const router = useRouter()
+  const pathname = usePathname()
   const lessThanMd = useMediaQuery((theme: any) => theme.breakpoints.down('md'))
   const isOpen = useMenuStore((state) => state.isOpen)
   const open = useMenuStore((state) => state.open)
@@ -56,7 +58,6 @@ function Header() {
 
   const getHeaderData = useCallback(async () => {
     if (isHeaderFetched) return // Check if header API has already been fetched
-
     try {
       setLoading(true)
       const res = await apiClient.get('/header')
@@ -265,26 +266,29 @@ function Header() {
                 </Button>
               </>
             ) : (
-              <Button
-                title="Enquire"
-                sx={{
-                  color: 'white',
-                  bgcolor: 'var(--brown)',
-                  px: 2.4,
-                  py: 0.9,
-                  visibility: isScrolled ? 'visible' : 'hidden',
-                  opacity: isScrolled ? '1' : '0',
-                  transition: isScrolled
-                    ? 'opacity .3s linear'
-                    : 'visibility 0s linear .3s, opacity .3s ease-in-out',
-                  '&:hover': {
-                    backgroundColor: 'var(--blue) !important',
-                  },
-                }}
-                aria-label="Enquire"
-              >
-                ENQUIRE
-              </Button>
+              pathname === '/' && (
+                <Button
+                  title="Enquire"
+                  sx={{
+                    color: 'white',
+                    bgcolor: 'var(--brown)',
+                    px: 2.4,
+                    py: 0.9,
+                    visibility: isScrolled ? 'visible' : 'hidden',
+                    opacity: isScrolled ? '1' : '0',
+                    transition: isScrolled
+                      ? 'opacity .3s linear'
+                      : 'visibility 0s linear .3s, opacity .3s ease-in-out',
+                    '&:hover': {
+                      backgroundColor: 'var(--blue) !important',
+                    },
+                  }}
+                  aria-label="Enquire"
+                  onClick={() => router.push('/hotel-booking')}
+                >
+                  ENQUIRE
+                </Button>
+              )
             )}
           </Box>
         </Toolbar>

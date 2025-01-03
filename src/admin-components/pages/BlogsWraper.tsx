@@ -1,15 +1,24 @@
 'use client'
 
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
+import CloseIcon from '@mui/icons-material/Close'
 import BlogSlider from '@/components/BlogSlider'
 import covImage from '../../../public/Images/collectionImg.jpg'
 
 const BlogsWraper = (props: any) => {
-  const { blogs, category, updateBlog, sectionId, deleteBlogSection } = props
+  const {
+    blogs,
+    category,
+    updateBlog,
+    sectionId,
+    deleteBlogSection,
+    deleteBlog,
+    // handleEditBlog,
+  } = props
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
       <Box>
@@ -80,6 +89,39 @@ const BlogsWraper = (props: any) => {
                 position: 'relative',
               }}
             >
+              <Button
+                sx={{
+                  position: 'absolute',
+                  top: '15px',
+                  right: '0',
+                  zIndex: '10000',
+                  color: 'white',
+                }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  deleteBlog(blog?.id)
+                }}
+              >
+                <CloseIcon />
+              </Button>
+              {/* <Button
+                sx={{
+                  position: 'absolute',
+                  top: '15px',
+                  left: '0',
+                  zIndex: '10000',
+                  color: 'white',
+                }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  handleEditBlog(index, blog)
+                }}
+              >
+                <EditIcon />
+              </Button> */}
               <Box
                 sx={{
                   width: '100%',
@@ -108,13 +150,11 @@ const BlogsWraper = (props: any) => {
                   bgcolor: 'rgba(150,127,93,0.5)',
                   position: 'absolute',
                   top: '0',
-                  // left: { xs: '0', md: '240.5px' },
                   borderRadius: '20px 20px 0 0',
                 }}
               />
               <Box
                 sx={{
-                  // mt: '20px',
                   color: 'white',
                   bgcolor: 'var(--brown)',
                   pb: '20px',
@@ -125,9 +165,6 @@ const BlogsWraper = (props: any) => {
                 <Typography sx={{ fontSize: '20px', mt: '20px' }}>
                   {blog.title}
                 </Typography>
-                {/* <Typography sx={{ fontSize: '24px', mt: '20px' }}>
-                  {blog.description}
-                </Typography> */}
                 <Typography sx={{ fontSize: '14px', mt: '20px' }}>
                   {blog.date}
                 </Typography>

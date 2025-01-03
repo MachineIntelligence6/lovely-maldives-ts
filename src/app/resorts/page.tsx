@@ -141,7 +141,7 @@ export default function ResortsPage() {
       <Container
         sx={{
           maxWidth: '100% !important',
-          px: { xs: '0px', md: '120px' },
+          px: { xs: '30px', md: '120px' },
         }}
       >
         {sections?.map((sec: any, index: number) => {
