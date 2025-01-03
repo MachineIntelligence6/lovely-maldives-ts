@@ -1,9 +1,7 @@
-import { startTransition, useState } from 'react'
 import { Box, Container } from '@mui/material'
 import BookingForm from '@/components/Booking-form'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import { createHotelBookingRequst } from '@/services/hotel-booking'
 
 export default function Page() {
   return (

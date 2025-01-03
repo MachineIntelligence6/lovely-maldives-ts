@@ -12,6 +12,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.4.2",
@@ -29,6 +30,7 @@
     "crypto": "^1.0.1",
     "date-fns": "^2.29.3",
     "dompurify": "^3.1.5",
+    "emailjs-com": "^3.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-react": "^7.34.0",
     "framer-motion": "^11.0.13",

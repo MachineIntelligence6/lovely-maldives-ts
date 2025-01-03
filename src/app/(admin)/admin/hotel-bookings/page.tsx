@@ -8,7 +8,10 @@ import CustomSearchField from '@/admin-components/items/CustomSearchField'
 import { CustomCard } from '@/admin-components/styled/CustomCard'
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import BookingsTable from '@/admin-components/tables/BookingsTable'
-import { getHotelBookingsRequest } from '@/services/hotel-booking'
+import {
+  deleteHotelBookingRequest,
+  getHotelBookingsRequest,
+} from '@/services/hotel-booking'
 
 const options = [{ label: 'Approved' }, { label: 'Not Approved' }]
 
@@ -17,10 +20,10 @@ const headOptions = [
   'Customer Name',
   'Email',
   'Phone',
-  'Check In Date',
-  'Check Out Date',
   'Total Guest',
   'Total Rooms',
+  'Check In Date',
+  'Check Out Date',
 ]
 
 const Page = () => {
@@ -28,12 +31,7 @@ const Page = () => {
   const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
   const [bookings, setBookings] = useState([] as any)
   const page: number = 1
-  const limit: number = 10
-
-  const handleDeleteBooking = (id: number) => {
-    console.log(`Delete booking with ID: ${id}`)
-  }
-  console.log(bookings, 'bookings')
+  const limit: number = 100
 
   const handleChangeStatus = (id: number, newStatus: string) => {
     console.log(`Change status for booking ID: ${id} to ${newStatus}`)
@@ -65,6 +63,47 @@ const Page = () => {
     }
   }
 
+  const handleDeleteBooking = (id: string) => {
+    const sure = window.confirm('Are you sure to cancel booking?')
+    if (!sure) return
+
+    try {
+      startTransition(async () => {
+        const res = await deleteHotelBookingRequest(id)
+        const data = res?.data
+
+        if (data?.status === 200) {
+          await getHotelBookings()
+          setAlertMsg({
+            type: 'success',
+            message: 'booking deleted successfully.',
+          })
+
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        } else {
+          setAlertMsg({ type: 'error', message: data?.message })
+
+          setTimeout(() => {
+            setAlertMsg({ type: '', message: '' })
+          }, 3000)
+        }
+      })
+    } catch (err: any) {
+      setAlertMsg({
+        type: 'error',
+        message: 'Error occurred while deleting the booking, please try again.',
+      })
+
+      setTimeout(() => {
+        setAlertMsg({ type: '', message: '' })
+      }, 3000)
+
+      console.error('Error deleting booking:', err)
+    }
+  }
+
   useEffect(() => {
     getHotelBookings()
   }, [])
@@ -77,7 +116,7 @@ const Page = () => {
           {alertMsg.message}
         </Alert>
       )}
-      <Stack
+      {/* <Stack
         direction="row"
         alignItems="center"
         justifyContent="space-between"
@@ -88,13 +127,13 @@ const Page = () => {
           placeholder="Search"
           //   onChange={searchcategories}
         />
-        {/* <CustomDropdown
+        <CustomDropdown
           label="Property Types"
           options={options}
           //   handleFilterChange={handleFilterChange}
           //   filter={filter}
-        /> */}
-      </Stack>
+        />
+      </Stack> */}
       <Box sx={{ width: '100%', overflow: 'auto' }}>
         <BookingsTable
           dataArray={bookings}

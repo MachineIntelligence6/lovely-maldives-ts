@@ -44,6 +44,13 @@ const BookingsTable = (props: any) => {
               </CustomTableLabel>
             </TableCell>
           ))}
+          <TableCell
+            sx={{
+              '&:last-child': {
+                textAlign: 'right',
+              },
+            }}
+          />
         </TableRow>
       </TableHead>
       <TableBody>
@@ -158,7 +165,7 @@ const BookingsTable = (props: any) => {
                 Confirmed
               </Box>
             </TableCell> */}
-            {/* <TableCell sx={{ pr: 4 }}>
+            <TableCell sx={{ pr: 4 }}>
               <Stack
                 direction="row"
                 gap="16px"
@@ -174,7 +181,7 @@ const BookingsTable = (props: any) => {
                   onClick={() => deleteBooking(value?.id)}
                 />
               </Stack>
-            </TableCell> */}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
