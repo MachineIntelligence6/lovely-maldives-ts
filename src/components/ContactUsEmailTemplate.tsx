@@ -1,167 +1,129 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/no-danger */
 import React from 'react'
 
-const ContactUsEmailTemplate: React.FC = () => {
+interface EmailTemplateProps {
+  name: string
+  email: string
+  number: string
+  message: string
+}
+
+const ContactUsEmailTemplate: React.FC<EmailTemplateProps> = ({
+  name,
+  email,
+  number,
+  message,
+}) => {
+  const emailTemplate = `
+    <body style="background-color: #F3F3F3; font-family: 'Tajawal', serif; margin: 0; padding: 0;">
+        <table 
+          role="presentation" 
+          width="100%" 
+          style="max-width: 600px; margin: auto; background-color: #FFFFFF;"
+        >
+            <!-- Header Section -->
+            <tr>
+                <td 
+                  style="
+                    background-color: #967f5d; 
+                    text-align: center; 
+                    padding: 40px 20px; 
+                    height: 180px;
+                  "
+                >
+                    <img src="https://res.cloudinary.com/de1fnstbu/image/upload/v1719308196/lovely-maldives/lj1wsr0t9zrufbl2tjox.png" alt="Logo" style="max-width: 100%; height: 100px;">
+                </td>
+            </tr>
+            <!-- Main Content Section -->
+            <tr>
+                <td style="padding: 26px; text-align: left;">
+                    <h2 style="font-size: 24px; color: #111111;">Contact Us Details</h2>
+                    <p 
+                      style="
+                        color: #111111cc; 
+                        font-size: 16px; 
+                        margin-bottom: 10px;
+                      "
+                    >
+                      <strong>Name:</strong>  ${name}
+                    </p>
+                    <p 
+                      style="
+                        color: #111111cc; 
+                        font-size: 16px; 
+                        margin-bottom: 10px;
+                      "
+                    >
+                      <strong>Email:</strong>  ${email}
+                    </p>
+                    <p 
+                      style="
+                        color: #111111cc; 
+                        font-size: 16px; 
+                        margin-bottom: 10px;
+                      "
+                    >
+                      <strong>Phone Number:</strong>  +${number}
+                    </p>
+                    <p 
+                      style="
+                        color: #111111cc; 
+                        font-size: 16px; 
+                        margin-bottom: 10px;
+                      "
+                    >
+                      <strong>Message:</strong>  ${message}
+                    </p>
+                </td>
+            </tr>
+            <!-- Footer Section -->
+            <tr>
+                <td style="background-color: #FFFFFF; padding: 26px; text-align: center;">
+                    <table role="presentation" style="width: 100%; max-width: 520px; margin: auto;">
+                        <tr>
+                            <td 
+                              style="
+                                text-align: center; 
+                                font-size: 12px; 
+                                color: #884875; 
+                                padding-bottom: 18px;
+                              "
+                            >
+                                <a 
+                                  href="#" 
+                                  style="text-decoration: none; color: #884875;"
+                                >
+                                  Unsubscribe
+                                </a> |
+                                <a 
+                                  href="#" 
+                                  style="text-decoration: none; color: #884875;"
+                                >
+                                  Update Email Preferences
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: 1px solid #1111111a; padding-top: 18px;">
+                                <p 
+                                  style="color: #111111cc; font-size: 12px;"
+                                >
+                                  P.O. Box 97727, Dubai, UAE
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+  `
+
   return (
-    <div
-      style={{
-        fontFamily: 'Arial, sans-serif',
-        maxWidth: '600px',
-        margin: '0 auto',
-        padding: '20px',
-        backgroundColor: '#f4f4f4',
-      }}
-    >
-      <img
-        src="/placeholder.svg?height=200&width=600"
-        alt="Contact Us Header"
-        style={{
-          width: '100%',
-          height: 'auto',
-          marginBottom: '20px',
-        }}
-      />
-      <table cellPadding="0" cellSpacing="0" style={{ width: '100%' }}>
-        <tr>
-          <td
-            style={{
-              backgroundColor: '#ffffff',
-              padding: '40px',
-              borderRadius: '4px',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-            }}
-          >
-            <h1
-              style={{
-                color: '#333333',
-                fontSize: '24px',
-                marginBottom: '20px',
-                textAlign: 'center',
-              }}
-            >
-              We&apos;re Here to Help
-            </h1>
-            <p
-              style={{
-                color: '#666666',
-                fontSize: '16px',
-                lineHeight: '1.5',
-                marginBottom: '20px',
-              }}
-            >
-              Dear Valued Customer,
-            </p>
-            <p
-              style={{
-                color: '#666666',
-                fontSize: '16px',
-                lineHeight: '1.5',
-                marginBottom: '20px',
-              }}
-            >
-              Thank you for your interest in contacting us. We&apos;re always
-              here to assist you with any questions, concerns, or feedback you
-              may have.
-            </p>
-            <p
-              style={{
-                color: '#666666',
-                fontSize: '16px',
-                lineHeight: '1.5',
-                marginBottom: '20px',
-              }}
-            >
-              Our dedicated support team is available Monday through Friday, 9
-              AM to 5 PM EST. We strive to respond to all inquiries within 24
-              hours.
-            </p>
-            <a
-              href="#"
-              style={{
-                display: 'inline-block',
-                backgroundColor: '#28a745',
-                color: '#ffffff',
-                textDecoration: 'none',
-                padding: '12px 20px',
-                borderRadius: '4px',
-                fontSize: '16px',
-                textAlign: 'center',
-              }}
-            >
-              Contact Us Now
-            </a>
-          </td>
-        </tr>
-      </table>
-      <table
-        cellPadding="0"
-        cellSpacing="0"
-        style={{ width: '100%', marginTop: '20px' }}
-      >
-        <tr>
-          <td
-            style={{
-              backgroundColor: '#ffffff',
-              padding: '20px',
-              borderRadius: '4px',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-            }}
-          >
-            <h2
-              style={{
-                color: '#333333',
-                fontSize: '18px',
-                marginBottom: '10px',
-                textAlign: 'center',
-              }}
-            >
-              Contact Information
-            </h2>
-            <p
-              style={{
-                color: '#666666',
-                fontSize: '14px',
-                lineHeight: '1.5',
-                marginBottom: '5px',
-                textAlign: 'center',
-              }}
-            >
-              Email: support@yourcompany.com
-            </p>
-            <p
-              style={{
-                color: '#666666',
-                fontSize: '14px',
-                lineHeight: '1.5',
-                marginBottom: '5px',
-                textAlign: 'center',
-              }}
-            >
-              Phone: (123) 456-7890
-            </p>
-            <p
-              style={{
-                color: '#666666',
-                fontSize: '14px',
-                lineHeight: '1.5',
-                textAlign: 'center',
-              }}
-            >
-              Address: 123 Main St, City, State 12345
-            </p>
-          </td>
-        </tr>
-      </table>
-      <p
-        style={{
-          color: '#999999',
-          fontSize: '14px',
-          marginTop: '20px',
-          textAlign: 'center',
-        }}
-      >
-        © 2023 Your Company. All rights reserved.
-      </p>
+    <div>
+      {/* You can display the template here, or send it somewhere */}
+      <h1>Contact Us Email Template</h1>
+      <div dangerouslySetInnerHTML={{ __html: emailTemplate }} />
     </div>
   )
 }
