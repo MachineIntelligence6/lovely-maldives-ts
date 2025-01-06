@@ -62,6 +62,8 @@ export async function POST(req: Request) {
       data: bodyData,
     })
 
+    console.log('hotel created:', result)
+
     return NextResponse.json(
       { message: 'Success', data: result, status: 201 },
       { status: 201 }
@@ -96,37 +98,53 @@ export async function PUT(req: Request) {
         message: 'Hotel not found, please send correct Hotel id to update.',
       })
 
-    console.log('bodyData ', bodyData)
+    const resort = await prisma.resorts.findFirst({
+      select: {
+        id: true,
+        resortSections: true,
+      },
+    })
 
-    const resort = await prisma.resorts.findFirst()
+    const imagesGallerySection = resort?.resortSections?.find(
+      (item) => item.type === 'images_gallery'
+    )
 
-    const updatedSec = [] as any
-    resort?.resortSections?.map((section) => {
-      const updatedHotels = [] as any
-      if (section?.type === 'images_gallery' && section.hotels?.length > 0) {
-        section?.hotels?.map((hotel) => {
-          if (hotel?.id === bodyData?.id) {
-            updatedHotels.push({
-              ...hotel,
-              title: bodyData.title,
-              ratings: bodyData?.ratings,
-            })
-          } else {
-            updatedHotels.push(hotel)
+    if (imagesGallerySection) {
+      const updatedResorts = imagesGallerySection.hotels?.map((hotel) => {
+        if (hotel?.id === bodyData.id) {
+          return {
+            ...hotel,
+            title: bodyData.title,
+            ratings: bodyData?.ratings,
+            sections: bodyData.sections,
           }
-        })
-      } else {
-        updatedSec.push({ ...section, hotels: updatedHotels })
-      }
-    })
+        }
+        return hotel
+      })
 
-    console.log('updatedSec ', updatedSec)
-    return NextResponse.json({
-      message: 'Hotel updated successfully',
-      data: updatedSec,
-      status: 200,
-    })
-    return
+      await prisma.resorts.update({
+        where: {
+          id: resort?.id,
+        },
+        data: {
+          resortSections: resort?.resortSections.map((section) => ({
+            type: section.type,
+            title: section.title || null,
+            description: section.description || null,
+            hotels:
+              section.type === 'images_gallery'
+                ? updatedResorts.map((hotel) => ({
+                    id: hotel.id,
+                    title: hotel.title,
+                    ratings: hotel.ratings || '',
+                    image: hotel.image || '',
+                  }))
+                : section.hotels,
+          })),
+        },
+      })
+    }
+
     const result = await prisma.hotels.update({
       where: {
         id: bodyData.id,
@@ -153,32 +171,41 @@ export async function PUT(req: Request) {
 
 export async function DELETE(req: Request) {
   const id = getIdParam(req.url)
-  if (!id)
-    return NextResponse.json({
-      message: 'Please send hotel id to delete.',
-      status: 422,
-    })
-  try {
-    await connectToDatabase()
+  // if (!id)
+  //   return NextResponse.json({
+  //     message: 'Please send hotel id to delete.',
+  //     status: 422,
+  //   })
+  // try {
+  //   await connectToDatabase()
 
-    const result = await prisma.hotels.delete({
-      where: {
-        id,
-      },
-    })
+  //   const resort = await prisma.resorts.findFirst({
+  //     select: {
+  //       id: true,
+  //       resortSections: true,
+  //     },
+  //   })
 
-    if (!result)
-      return NextResponse.json({
-        message:
-          'Hotel deletion failed, please send correct hotel id to delete.',
-        status: 404,
-      })
+  console.log('resort=======>', id)
 
-    return NextResponse.json({ message: 'Deleted Successfuly', status: 200 })
-  } catch (error) {
-    console.log('Error', error)
-    return NextResponse.json({ message: 'Error', data: error, status: 500 })
-  } finally {
-    await prisma.$disconnect()
-  }
+  // const result = await prisma.hotels.delete({
+  //   where: {
+  //     id,
+  //   },
+  // })
+
+  // if (!result)
+  //   return NextResponse.json({
+  //     message:
+  //       'Hotel deletion failed, please send correct hotel id to delete.',
+  //     status: 404,
+  //   })
+
+  //   return NextResponse.json({ message: 'Deleted Successfuly', status: 200 })
+  // } catch (error) {
+  //   console.log('Error', error)
+  //   return NextResponse.json({ message: 'Error', data: error, status: 500 })
+  // } finally {
+  //   await prisma.$disconnect()
+  // }
 }
