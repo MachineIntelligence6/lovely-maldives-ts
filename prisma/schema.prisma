@@ -324,7 +324,7 @@ model Theme {
   bgColor    String?
   gradient   String?
 }
-
+ 
 // TERMS OF USE
 model TermsOfUse {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId

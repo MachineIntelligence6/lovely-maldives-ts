@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
       user_id: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY, // Your public key
       accessToken: process.env.NEXT_PUBLIC_EMAILJS_PRIVATE_KEY, // Your private key (if required)
       template_params: {
-        to_email: 'ahmad.gurmani06@gmail.com', // Recipient email
+        to_email: 'muhammad.qasimb3@gmail.com', // Recipient email
         from_email: email,
         subject: 'Lovely Maldives',
         name,
