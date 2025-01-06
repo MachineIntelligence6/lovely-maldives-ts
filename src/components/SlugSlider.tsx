@@ -7,6 +7,7 @@ import { Box, Typography, Button, Container } from '@mui/material'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { useRouter } from 'next/navigation'
 
 import Image from 'next/image'
 import StarRateIcon from '@mui/icons-material/StarRate'
@@ -31,6 +32,7 @@ export default function OurCollection({
   bottomradius,
   recomendations,
 }: IOurCollectionProps) {
+  const router = useRouter()
   const settings = {
     dots: true,
     infinite: true,
@@ -103,8 +105,12 @@ export default function OurCollection({
                 position: 'relative',
                 borderRadius: `${radius}`,
                 margin: '0 auto',
+                cursor: 'pointer'
               }}
               key={index}
+              onClick={() => {
+                router.push(`/resorts/${encodeURIComponent(data?.title)}`)
+              }}
             >
               {/* <Box
                 component={Image}

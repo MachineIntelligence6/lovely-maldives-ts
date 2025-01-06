@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable array-callback-return */
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
 import { getAllParams, getIdParam } from '@/utils/getIdParam'
@@ -42,7 +44,8 @@ export async function POST(req: Request) {
     })
   try {
     await connectToDatabase()
-
+    console.log('bodyData ', bodyData)
+    // return
     const isExist = await prisma.hotels.findFirst({
       where: {
         title: bodyData.title,
@@ -74,10 +77,10 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   const bodyData = await req.json()
   if (!bodyData.id || !bodyData.title)
-    return NextResponse.json(
-      { message: 'Please send hotel id to update.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send hotel id to update.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
@@ -88,13 +91,42 @@ export async function PUT(req: Request) {
     })
 
     if (!isExist)
-      return NextResponse.json(
-        {
-          message: 'Hotel not found, please send correct Hotel id to update.',
-        },
-        { status: 404 }
-      )
+      return NextResponse.json({
+        status: 404,
+        message: 'Hotel not found, please send correct Hotel id to update.',
+      })
 
+    console.log('bodyData ', bodyData)
+
+    const resort = await prisma.resorts.findFirst()
+
+    const updatedSec = [] as any
+    resort?.resortSections?.map((section) => {
+      const updatedHotels = [] as any
+      if (section?.type === 'images_gallery' && section.hotels?.length > 0) {
+        section?.hotels?.map((hotel) => {
+          if (hotel?.id === bodyData?.id) {
+            updatedHotels.push({
+              ...hotel,
+              title: bodyData.title,
+              ratings: bodyData?.ratings,
+            })
+          } else {
+            updatedHotels.push(hotel)
+          }
+        })
+      } else {
+        updatedSec.push({ ...section, hotels: updatedHotels })
+      }
+    })
+
+    console.log('updatedSec ', updatedSec)
+    return NextResponse.json({
+      message: 'Hotel updated successfully',
+      data: updatedSec,
+      status: 200,
+    })
+    return
     const result = await prisma.hotels.update({
       where: {
         id: bodyData.id,
@@ -106,13 +138,14 @@ export async function PUT(req: Request) {
       },
     })
 
-    return NextResponse.json(
-      { message: 'Hotel updated successfully', data: result, status: 200 },
-      { status: 201 }
-    )
+    return NextResponse.json({
+      message: 'Hotel updated successfully',
+      data: result,
+      status: 200,
+    })
   } catch (error) {
     console.log('Error', error)
-    return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
+    return NextResponse.json({ message: 'Error', data: error, status: 500 })
   } finally {
     await prisma.$disconnect()
   }
@@ -121,10 +154,10 @@ export async function PUT(req: Request) {
 export async function DELETE(req: Request) {
   const id = getIdParam(req.url)
   if (!id)
-    return NextResponse.json(
-      { message: 'Please send hotel id to delete.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send hotel id to delete.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
@@ -135,21 +168,16 @@ export async function DELETE(req: Request) {
     })
 
     if (!result)
-      return NextResponse.json(
-        {
-          message:
-            'Hotel deletion failed, please send correct hotel id to delete.',
-        },
-        { status: 404 }
-      )
+      return NextResponse.json({
+        message:
+          'Hotel deletion failed, please send correct hotel id to delete.',
+        status: 404,
+      })
 
-    return NextResponse.json(
-      { message: 'Deleted Successfuly' },
-      { status: 201 }
-    )
+    return NextResponse.json({ message: 'Deleted Successfuly', status: 200 })
   } catch (error) {
     console.log('Error', error)
-    return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
+    return NextResponse.json({ message: 'Error', data: error, status: 500 })
   } finally {
     await prisma.$disconnect()
   }
