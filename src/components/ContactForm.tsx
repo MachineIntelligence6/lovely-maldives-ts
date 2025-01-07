@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   Container,
   Box,
@@ -24,6 +25,7 @@ export default function ContactForm() {
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>(
     'success'
   )
+  const router = useRouter()
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -55,6 +57,7 @@ export default function ContactForm() {
       if (res?.status === 200) {
         setSnackbarMessage('Email sent successfully!')
         setSnackbarSeverity('success')
+        router.push('/')
       } else {
         setSnackbarMessage('Failed to send email.')
         setSnackbarSeverity('error')

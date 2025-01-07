@@ -61,6 +61,7 @@ export default function Resort() {
         const data = res?.data
         if (data?.status === 200) {
           setHotel(data?.data?.[0])
+          localStorage.setItem('hotel', JSON.stringify(data?.data?.[0]))
         }
       })
     } catch (err: any) {
@@ -93,6 +94,7 @@ export default function Resort() {
     getOtherRecomendations()
     fetchData()
   }, [])
+
   return (
     <Box sx={{ pt: { xs: '120px', md: '190px' }, bgcolor: themeData?.bgColor }}>
       <Header />
@@ -138,7 +140,6 @@ export default function Resort() {
               <Paper elevation={0} sx={{ background: 'transparent' }}>
                 {hotel?.sections?.map((section: any, index: number) => {
                   if (section?.type === 'gallery_slider') {
-                    // Initialize unique refs and state for each gallery_slider section
                     return (
                       <GallerySlider
                         key={index}

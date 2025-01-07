@@ -43,46 +43,31 @@ export async function GET(req: Request) {
 
 // POST: Create a new booking
 export async function POST(req: Request) {
-  const bodyData = await req.json()
-
-  const requiredFields = [
-    'name',
-    'email',
-    'phone',
-    'checkInDate',
-    'checkOutDate',
-    'totalGuest',
-    'totalRooms',
-  ]
-  const missingFields = requiredFields.filter((field) => !bodyData[field])
-
-  if (missingFields.length > 0) {
-    return NextResponse.json({
-      message: `Missing fields: ${missingFields.join(', ')}`,
-      status: 422,
-    })
-  }
-
   try {
-    await connectToDatabase()
+    const bodyData = await req.json()
 
-    // Optional: Check for duplicate bookings
-    const isDuplicate = await prisma.hotelBookings.findFirst({
-      where: {
-        name: bodyData.name,
-        email: bodyData.email,
-        checkInDate: new Date(bodyData.checkInDate),
-        checkOutDate: new Date(bodyData.checkOutDate),
-      },
-    })
+    const requiredFields = [
+      'name',
+      'email',
+      'phone',
+      'checkInDate',
+      'checkOutDate',
+      'totalGuest',
+      'totalRooms',
+      'hotelId',
+    ]
+    const missingFields = requiredFields.filter((field) => !bodyData[field])
 
-    if (isDuplicate) {
+    if (missingFields.length > 0) {
       return NextResponse.json({
-        message: 'Duplicate booking found.',
-        status: 409,
+        message: `Missing fields: ${missingFields.join(', ')}`,
+        status: 422,
       })
     }
 
+    await connectToDatabase()
+
+    // Create the booking directly without checking ID
     const newBooking = await prisma.hotelBookings.create({
       data: {
         name: bodyData.name,
@@ -92,9 +77,11 @@ export async function POST(req: Request) {
         checkOutDate: new Date(bodyData.checkOutDate),
         totalGuest: parseInt(bodyData.totalGuest, 10),
         totalRooms: parseInt(bodyData.totalRooms, 10),
+        hotelId: bodyData.hotelId,
       },
     })
 
+    // Return the response immediately after creation
     return NextResponse.json({
       message: 'Booking created successfully.',
       data: newBooking,
@@ -104,7 +91,7 @@ export async function POST(req: Request) {
     console.error('Error creating booking:', error)
     return NextResponse.json({
       message: 'Error creating booking.',
-      data: error,
+      error: error instanceof Error ? error.message : 'Unknown error',
       status: 500,
     })
   } finally {
@@ -112,7 +99,6 @@ export async function POST(req: Request) {
   }
 }
 
-// DELETE: Delete a booking by ID
 export async function DELETE(req: Request) {
   const { searchParams } = new URL(req.url)
   const id = searchParams.get('id')
