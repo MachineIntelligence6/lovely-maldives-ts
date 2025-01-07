@@ -151,17 +151,43 @@ export async function DELETE(req: Request) {
   try {
     await connectToDatabase()
 
-    const result = await prisma.blogs.delete({
+    const blog = await prisma.blogs.findUnique({
+      where: { id },
+    })
+
+    if (!blog) {
+      return NextResponse.json({
+        message: 'Blog not found.',
+        status: 404,
+      })
+    }
+
+    const updatedCategoryBlogs = await prisma.categoryBlogs.updateMany({
       where: {
-        id,
+        ids: {
+          has: id,
+        },
+      },
+      data: {
+        ids: {
+          set: await prisma.categoryBlogs
+            .findFirst({
+              where: {
+                ids: {
+                  has: id,
+                },
+              },
+            })
+            .then((categoryBlog) => {
+              return categoryBlog?.ids.filter((blogId) => blogId !== id)
+            }),
+        },
       },
     })
 
-    if (!result)
-      return NextResponse.json({
-        message: 'Blog deletion failed, please send correct blog id to delete.',
-        status: 404,
-      })
+    const result = await prisma.blogs.delete({
+      where: { id },
+    })
 
     return NextResponse.json(
       { message: 'Success', data: result, status: 200 },
