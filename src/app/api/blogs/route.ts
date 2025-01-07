@@ -173,16 +173,14 @@ export async function DELETE(req: Request) {
           set: await prisma.categoryBlogs
             .findFirst({
               where: {
-                category: blog.category,
                 ids: {
                   has: id,
                 },
               },
             })
-            .then(
-              (categoryBlog) =>
-                categoryBlog?.ids.filter((blogId) => blogId !== id) || []
-            ),
+            .then((categoryBlog) => {
+              return categoryBlog?.ids.filter((blogId) => blogId !== id)
+            }),
         },
       },
     })
