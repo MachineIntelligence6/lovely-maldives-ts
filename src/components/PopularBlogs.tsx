@@ -40,6 +40,7 @@ export const popularBlogs = [
 ]
 export default function PopularBlogs(props: any) {
   const { blogs } = props
+
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
       <Box>

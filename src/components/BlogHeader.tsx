@@ -124,7 +124,10 @@ export default function BlogHeader() {
                   minWidth: '120px',
                   textAlign: 'center',
                 }}
-                href={`/blogs?category=${encodeURIComponent(category?.category?.replace(' ', '-')?.toLocaleLowerCase())}`}
+                href={`/blogs?category=
+                  ${encodeURIComponent(
+                    category?.category?.replace(' ', '-')?.toLocaleLowerCase()
+                  )}`}
               >
                 {category?.category}
               </Link>
