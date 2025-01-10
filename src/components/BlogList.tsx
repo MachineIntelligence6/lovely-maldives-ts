@@ -41,9 +41,9 @@ const BlogList = ({
 
         const data = res?.data
         if (data?.status === 200) {
-          let allBlogs = data?.data?.flatMap((item: any) => item?.blogs)
-          setAllBlogs(allBlogs || [])
-          setTotalBlogs(allBlogs?.length)
+          const allBlogsData = data?.data?.flatMap((item: any) => item?.blogs)
+          setAllBlogs(allBlogsData || [])
+          setTotalBlogs(allBlogsData?.length)
           data?.data?.map((da: any) => {
             if (da?.category?.toLowerCase() === 'latest blogs'.toLowerCase() || da?.category?.toLowerCase() === "Latest Articles".toLowerCase()) {
               setTotalBlogs(da?.blogs?.length)
