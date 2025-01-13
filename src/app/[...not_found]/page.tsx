@@ -1,13 +1,7 @@
-import React from 'react'
-import { Box } from '@mui/material'
-import PageNotFound from '../not-found'
+import { notFound } from 'next/navigation'
 
 const page = () => {
-  return (
-    <Box>
-      <PageNotFound />
-    </Box>
-  )
+  return notFound()
 }
 
 export default page

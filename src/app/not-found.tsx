@@ -4,7 +4,7 @@ import React from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import { useRouter } from 'next/navigation'
 
-const PageNotFound = () => {
+const NotFound = () => {
   const router = useRouter()
 
   const handle404Click = () => {
@@ -63,4 +63,4 @@ const PageNotFound = () => {
   )
 }
 
-export default PageNotFound
+export default NotFound
