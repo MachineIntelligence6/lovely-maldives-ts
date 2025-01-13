@@ -37,6 +37,7 @@ const BlogList = ({
       startTransition(async () => {
         const res = await getBlogsSectionRequest(category ?? '')
         const data = res?.data
+        console.log('data =>>> ', data)
         if (data?.status === 200) {
           setAllBlogs(data?.data)
           data?.data?.map((da: any) => {
