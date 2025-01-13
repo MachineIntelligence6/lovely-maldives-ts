@@ -206,6 +206,7 @@ model CategoryBlogs {
 model BlogCategories {
     id          String  @id @default(auto()) @map("_id") @db.ObjectId
     category    String
+    slug    String
 }
 
 

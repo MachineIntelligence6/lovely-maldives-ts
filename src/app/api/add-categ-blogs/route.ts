@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
 import prisma from '../../../../prisma'
+import { getAllParams } from '@/utils/getIdParam'
 
 export async function POST(req: Request) {
   const bodyData = await req.json()
@@ -63,9 +64,11 @@ export async function POST(req: Request) {
 }
 
 export async function GET(req: Request) {
+  const params = getAllParams(req.url)
+  const category = params.get('category')
   try {
     await connectToDatabase()
-
+    console.log('testing... ', category)
     const uniqueCategories = await prisma.blogs.findMany({
       select: {
         category: true,

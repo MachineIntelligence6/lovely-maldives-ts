@@ -29,10 +29,10 @@ export async function GET() {
 export async function POST(req: Request) {
   const bodyData = await req.json()
   if (!bodyData?.category)
-    return NextResponse.json(
-      { message: 'Please send blog category.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send blog category.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
@@ -52,10 +52,13 @@ export async function POST(req: Request) {
       data: bodyData,
     })
 
-    return NextResponse.json(
-      { message: 'Category added successfully.', data: result, status: 201 },
-      { status: 201 }
-    )
+    console.log('result =>>> ', result)
+
+    return NextResponse.json({
+      message: 'Category added successfully.',
+      data: result,
+      status: 201,
+    })
   } catch (error) {
     console.log('Error', error)
     return NextResponse.json({ message: 'Error', data: error }, { status: 500 })

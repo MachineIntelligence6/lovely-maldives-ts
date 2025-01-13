@@ -37,31 +37,11 @@ const BlogList = ({
   const getSections = () => {
     try {
       startTransition(async () => {
-        const res = await getBlogsSectionRequest(category?.trim() ?? '')
-
+        const res = await getBlogsSectionRequest(category ?? '')
         const data = res?.data
-        console.log('data =>>> ', data)
         if (data?.status === 200) {
-          const allBlogsData = data?.data?.flatMap((item: any) => item?.blogs)
-          setAllBlogs(allBlogsData || [])
-          setTotalBlogs(allBlogsData?.length)
-          data?.data?.map((da: any) => {
-            if (da?.category?.toLowerCase() === 'latest blogs'.toLowerCase() || da?.category?.toLowerCase() === "Latest Articles".toLowerCase()) {
-              setTotalBlogs(da?.blogs?.length)
-              if (da?.blogs?.length > 0) {
-                setLatestBlogs(da)
-              } else {
-                setLatestBlogs({ ...da, blogs: [] })
-              }
-            } else if (da?.category?.toLowerCase() === 'popular') {
-              setTotalBlogs(da?.blogs?.length)
-              if (da?.blogs?.length > 0) {
-                setPopularBlogs(da)
-              } else {
-                setPopularBlogs({ ...da, blogs: [] })
-              }
-            }
-          })
+          setAllBlogs(data?.data || [])
+          setTotalBlogs(data?.data?.length)
         }
       })
     } catch (err: any) {
@@ -93,9 +73,9 @@ const BlogList = ({
     getSections()
   }, [])
 
-  // useEffect(() => {
-  //   getAllBlogs()
-  // }, [pages?.page])
+  useEffect(() => {
+    getAllBlogs()
+  }, [pages?.page])
 
   return (
     <Container
@@ -109,7 +89,7 @@ const BlogList = ({
         },
       }}
     >
-      <Typography
+      {/* <Typography
         sx={{
           fontSize: '35px',
           textAlign: 'center',
@@ -118,201 +98,129 @@ const BlogList = ({
         }}
       >
         {formatCategory(category || '')}
-      </Typography>
-      {isPending ?
-        <CustomLoader /> :
-
-        <>
-
-
-          {latestBlogs?.blogs?.length > 0 && category === "latest-articles" && <PopularBlogs blogs={latestBlogs} />}
-          {popularBlogs?.blogs?.length > 0 && category === "popular" && (
+      </Typography> */}
+      {/* {latestBlogs?.blogs?.length > 0 && category === 'latest-articles' && (
+            <PopularBlogs blogs={latestBlogs} />
+          )}
+          {popularBlogs?.blogs?.length > 0 && category === 'popular' && (
             <PopularBlogs blogs={popularBlogs} />
-          )}
-          <Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                mt: { xs: '30px', md: '40px' },
-                gap: { xs: '10px', md: '20px' },
-                px: 2.5,
-              }}
-            >
-              {allBlogs?.length > 0 && (category === "all-articles" || !category) &&
-                allBlogs?.map((blogItem: any, index: number) => {
-                  return (
-                    <Box
-                      key={blogItem?.id}
-                      component={Link}
-                      href={`blogs/${blogItem.title}`}
-                      sx={{
-                        width: { xs: 'calc(100%)', md: 'calc(33.3% - 14px)' },
-                        borderRadius: '20px',
-                        bgcolor: 'var(--brown)',
-                        boxSizing: 'border-box',
-                        boxShadow: 'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
-                        textDecoration: 'none',
-                        position: 'relative',
-                      }}
-                    >
-                      <Box
+          )} */}
+      {isPending ? (
+        <CustomLoader />
+      ) : (
+        <>
+          <Box sx={{ mt: '5rem' }}>
+            {allBlogs?.length > 0 &&
+              allBlogs?.map((blogs: any, ind: number) => (
+                <div key={ind}>
+                  {blogs?.blogs?.length > 0 && (
+                    <>
+                      <Typography
                         sx={{
-                          width: '100%',
-                          borderRadius: '20px 20px 0 0px',
-                          height: '200px',
-                          objectFit: 'cover',
-                          overflow: 'hidden',
-                        }}
-                      >
-                        <Image
-                          src={blogItem?.coverImage}
-                          alt="blog"
-                          width={300}
-                          height={200}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                          }}
-                        />
-                      </Box>
-                      <Box
-                        sx={{
-                          width: '100%',
-                          height: '200px',
-                          bgcolor: 'rgba(150,127,93,0.5)',
-                          position: 'absolute',
-                          top: '0',
-                          // left: { xs: '0', md: '240.5px' },
-                          borderRadius: '20px 20px 0 0',
-                        }}
-                      />
-                      <Box
-                        sx={{
-                          // mt: '20px',
-                          color: 'white',
-                          bgcolor: 'var(--brown)',
-                          pb: '20px',
-                          px: { xs: '20px', md: '20px' },
-                          borderRadius: '0 0 20px 20px ',
-                        }}
-                      >
-                        <Typography sx={{ fontSize: '20px', mt: '20px' }}>
-                          {blogItem.title}
-                        </Typography>
-
-                        <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                          {blogItem.date || '12 February, 2024'}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  )
-                })}
-            </Box>
-
-          </Box>
-          {allBlogs?.[2] && (
-            <Box>
-              <Typography
-                sx={{
-                  fontSize: '35px',
-                  textAlign: 'center',
-                  color: 'var(--white)',
-                  mt: '60px',
-                }}
-              >
-                {allBlogs?.[2]?.category}
-              </Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  mt: { xs: '30px', md: '40px' },
-                  px: { xs: 2.5, md: 0 },
-                }}
-              >
-                {allBlogs?.[2]?.blogs?.map((blogItem: any, index: number) => (
-                  <Box
-                    key={blogItem?.id}
-                    sx={{
-                      width: { xs: '100%', md: '50%' },
-                      borderBottom: '1px solid lightgray',
-                      px: '0px',
-                      mb: 2,
-                      pb: 2,
-                    }}
-                  >
-                    <Box
-                      component={Link}
-                      href={`blogs/${encodeURIComponent(blogItem.title)}`}
-                      sx={{
-                        textDecoration: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        // position: 'relative',
-                      }}
-                    >
-                      <Box sx={{ position: 'relative', width: '200px' }}>
-                        <Box
-                          sx={{
-                            width: '100%',
-                            maxWidth: '200px',
-                            borderRadius: '20px',
-                            aspectRatio: '1.3',
-                            // height: { xs: '90px', md: '132px' },
-                            objectFit: 'cover',
-                            backgroundPosition: '100%',
-                            backgroundSize: 'cover',
-                            backgroundImage: `url(${blogItem?.coverImage})`,
-                          }}
-                        />
-                        <Box
-                          sx={{
-                            width: '100%',
-                            // height: { xs: '90px', md: '132px' },
-                            bgcolor: 'rgba(150,127,93,0.5)',
-                            position: 'absolute',
-                            top: { xs: '0', md: '0px' },
-                            left: 0,
-                            bottom: 0,
-                            borderRadius: '20px',
-                          }}
-                        />
-                      </Box>
-                      <Box
-                        sx={{
-                          mt: '20px',
+                          fontSize: '35px',
+                          textAlign: 'center',
                           color: 'var(--white)',
-                          pb: '20px',
-                          px: { xs: '20px', md: '20px' },
+                          mt: '60px',
                         }}
                       >
-                        <Box>
-                          <Typography
-                            sx={{
-                              fontSize: '16px',
-                              mt: '20px',
-                              fontWeight: 600,
-                            }}
-                          >
-                            {blogItem.title}
-                          </Typography>
+                        {blogs?.category}
+                      </Typography>
 
-                          <Typography sx={{ fontSize: '16px', mt: '20px' }}>
-                            {blogItem.date || '12 February, 2024'}
-                          </Typography>
-                        </Box>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexWrap: 'wrap',
+                          mt: { xs: '30px' },
+                          gap: { xs: '10px', md: '20px' },
+                          px: 2.5,
+                        }}
+                      >
+                        {blogs?.blogs?.length > 0 &&
+                          blogs?.blogs?.map((blogItem: any, index: number) => {
+                            return (
+                              <Box
+                                key={blogItem?.id}
+                                component={Link}
+                                href={`blogs/${blogItem.title}`}
+                                sx={{
+                                  width: {
+                                    xs: 'calc(100%)',
+                                    md: 'calc(33.3% - 14px)',
+                                  },
+                                  borderRadius: '20px',
+                                  bgcolor: 'var(--brown)',
+                                  boxSizing: 'border-box',
+                                  boxShadow:
+                                    'rgba(0, 0, 0, 0.05) 0px .5px 4px 0px',
+                                  textDecoration: 'none',
+                                  position: 'relative',
+                                }}
+                              >
+                                <Box
+                                  sx={{
+                                    width: '100%',
+                                    borderRadius: '20px 20px 0 0px',
+                                    height: '200px',
+                                    objectFit: 'cover',
+                                    overflow: 'hidden',
+                                  }}
+                                >
+                                  <Image
+                                    src={blogItem?.coverImage}
+                                    alt="blog"
+                                    width={300}
+                                    height={200}
+                                    style={{
+                                      width: '100%',
+                                      height: '100%',
+                                      objectFit: 'cover',
+                                    }}
+                                  />
+                                </Box>
+                                <Box
+                                  sx={{
+                                    width: '100%',
+                                    height: '200px',
+                                    bgcolor: 'rgba(150,127,93,0.5)',
+                                    position: 'absolute',
+                                    top: '0',
+                                    // left: { xs: '0', md: '240.5px' },
+                                    borderRadius: '20px 20px 0 0',
+                                  }}
+                                />
+                                <Box
+                                  sx={{
+                                    // mt: '20px',
+                                    color: 'white',
+                                    bgcolor: 'var(--brown)',
+                                    pb: '20px',
+                                    px: { xs: '20px', md: '20px' },
+                                    borderRadius: '0 0 20px 20px ',
+                                  }}
+                                >
+                                  <Typography
+                                    sx={{ fontSize: '20px', mt: '20px' }}
+                                  >
+                                    {blogItem.title}
+                                  </Typography>
+
+                                  <Typography
+                                    sx={{ fontSize: '16px', mt: '20px' }}
+                                  >
+                                    {blogItem.date || '12 February, 2024'}
+                                  </Typography>
+                                </Box>
+                              </Box>
+                            )
+                          })}
                       </Box>
-                    </Box>
-                  </Box>
-                ))}
-              </Box>
-            </Box>
-          )}
+                    </>
+                  )}
+                </div>
+              ))}
+          </Box>
 
-          {totalBlogs > 3 && (
+          {totalBlogs?.[1]?.length > 3 && (
             <Box sx={{ textAlign: 'center' }}>
               <Button
                 sx={{
@@ -336,7 +244,8 @@ const BlogList = ({
               </Button>
             </Box>
           )}
-        </>}
+        </>
+      )}
 
       <MailBox />
     </Container>
