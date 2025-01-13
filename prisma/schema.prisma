@@ -168,13 +168,13 @@ model Hotels {
 model HotelBookings {
    id          String  @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  email       String @unique
+  email       String 
   phone       String
   checkInDate DateTime
   checkOutDate DateTime
   totalGuest  Int
   totalRooms  Int
-  hotelId     String?
+  hotelId     String
 }
 
 
@@ -206,6 +206,7 @@ model CategoryBlogs {
 model BlogCategories {
     id          String  @id @default(auto()) @map("_id") @db.ObjectId
     category    String
+    slug    String
 }
 
 

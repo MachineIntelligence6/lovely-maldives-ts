@@ -43,6 +43,8 @@ function Header() {
   const [openSearchModal, setOpenSearchModal] = useState(false)
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isHeaderFetched, setIsHeaderFetched] = useState(false)
+  const isHotelDetails =
+    pathname?.split('/')?.[1] === 'resorts' && pathname?.split('/')?.length > 2
 
   const handleSearchModelOpen = () => setOpenSearchModal(!openSearchModal)
 
@@ -266,7 +268,7 @@ function Header() {
                 </Button>
               </>
             ) : (
-              pathname === '/' && (
+              isHotelDetails && (
                 <Button
                   title="Enquire"
                   sx={{

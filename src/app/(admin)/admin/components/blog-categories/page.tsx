@@ -51,7 +51,8 @@ const BlogCategories = () => {
   const handleAddCategory = (fil: any) => {
     try {
       startTransition(async () => {
-        const res = await createBlogCategory({ category: fil })
+        const res = await createBlogCategory(fil)
+        console.log('res =>>> ', res)
         const data = res?.data
         if (data?.status === 201) {
           fetchData()

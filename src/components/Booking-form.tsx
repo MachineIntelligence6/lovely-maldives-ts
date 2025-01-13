@@ -3,6 +3,7 @@
 import { useTransition, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import * as z from 'zod'
 import {
   Box,
@@ -60,6 +61,8 @@ export default function BookingForm() {
     message: '',
   })
 
+  const router = useRouter()
+
   const {
     control,
     handleSubmit,
@@ -96,6 +99,7 @@ export default function BookingForm() {
           }, 3000)
           return
         }
+        const { id, title } = JSON.parse(localStorage.getItem('hotel') as any)
 
         const res = await createHotelBookingRequst({
           name: payload.name,
@@ -105,6 +109,7 @@ export default function BookingForm() {
           checkOutDate: payload.checkOutDate,
           totalGuest: payload.totalGuest,
           totalRooms: payload.totalRooms,
+          hotelId: id,
         })
 
         // Handling the response
@@ -127,6 +132,10 @@ export default function BookingForm() {
             setAlertMsg({ type: '', message: '' })
           }, 3000)
         }
+        setTimeout(() => {
+          router.push(`/resorts/${title}`)
+          localStorage.removeItem('hotel')
+        }, 3000)
       })
     } catch (error: any) {
       // Error handling

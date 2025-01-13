@@ -69,7 +69,6 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    console.log('home data ', homeData)
     if (!homeData) {
       console.log('home data ')
       getHomeData()

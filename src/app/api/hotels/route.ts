@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable array-callback-return */
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/helpers/server-helpers'
 import { getAllParams, getIdParam } from '@/utils/getIdParam'
@@ -42,7 +44,8 @@ export async function POST(req: Request) {
     })
   try {
     await connectToDatabase()
-
+    console.log('bodyData ', bodyData)
+    // return
     const isExist = await prisma.hotels.findFirst({
       where: {
         title: bodyData.title,
@@ -59,6 +62,8 @@ export async function POST(req: Request) {
       data: bodyData,
     })
 
+    console.log('hotel created:', result)
+
     return NextResponse.json(
       { message: 'Success', data: result, status: 201 },
       { status: 201 }
@@ -74,10 +79,10 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   const bodyData = await req.json()
   if (!bodyData.id || !bodyData.title)
-    return NextResponse.json(
-      { message: 'Please send hotel id to update.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send hotel id to update.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
 
@@ -88,12 +93,57 @@ export async function PUT(req: Request) {
     })
 
     if (!isExist)
-      return NextResponse.json(
-        {
-          message: 'Hotel not found, please send correct Hotel id to update.',
+      return NextResponse.json({
+        status: 404,
+        message: 'Hotel not found, please send correct Hotel id to update.',
+      })
+
+    const resort = await prisma.resorts.findFirst({
+      select: {
+        id: true,
+        resortSections: true,
+      },
+    })
+
+    const imagesGallerySection = resort?.resortSections?.find(
+      (item) => item.type === 'images_gallery'
+    )
+
+    if (imagesGallerySection) {
+      const updatedResorts = imagesGallerySection.hotels?.map((hotel) => {
+        if (hotel?.id === bodyData.id) {
+          return {
+            ...hotel,
+            title: bodyData.title,
+            ratings: bodyData?.ratings,
+            sections: bodyData.sections,
+          }
+        }
+        return hotel
+      })
+
+      await prisma.resorts.update({
+        where: {
+          id: resort?.id,
         },
-        { status: 404 }
-      )
+        data: {
+          resortSections: resort?.resortSections.map((section) => ({
+            type: section.type,
+            title: section.title || null,
+            description: section.description || null,
+            hotels:
+              section.type === 'images_gallery'
+                ? updatedResorts.map((hotel) => ({
+                    id: hotel.id,
+                    title: hotel.title,
+                    ratings: hotel.ratings || '',
+                    image: hotel.image || '',
+                  }))
+                : section.hotels,
+          })),
+        },
+      })
+    }
 
     const result = await prisma.hotels.update({
       where: {
@@ -106,13 +156,14 @@ export async function PUT(req: Request) {
       },
     })
 
-    return NextResponse.json(
-      { message: 'Hotel updated successfully', data: result, status: 200 },
-      { status: 201 }
-    )
+    return NextResponse.json({
+      message: 'Hotel updated successfully',
+      data: result,
+      status: 200,
+    })
   } catch (error) {
     console.log('Error', error)
-    return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
+    return NextResponse.json({ message: 'Error', data: error, status: 500 })
   } finally {
     await prisma.$disconnect()
   }
@@ -121,12 +172,38 @@ export async function PUT(req: Request) {
 export async function DELETE(req: Request) {
   const id = getIdParam(req.url)
   if (!id)
-    return NextResponse.json(
-      { message: 'Please send hotel id to delete.' },
-      { status: 422 }
-    )
+    return NextResponse.json({
+      message: 'Please send hotel id to delete.',
+      status: 422,
+    })
   try {
     await connectToDatabase()
+
+    const resort = await prisma.resorts.findFirst({
+      select: {
+        id: true,
+        resortSections: true,
+      },
+    })
+
+    if (resort) {
+      const updatedResortSections = resort.resortSections.map((section) => ({
+        ...section,
+        hotels:
+          section.type === 'images_gallery'
+            ? section.hotels?.filter((hotel) => hotel.id !== id)
+            : section.hotels,
+      }))
+
+      await prisma.resorts.update({
+        where: {
+          id: resort.id,
+        },
+        data: {
+          resortSections: updatedResortSections,
+        },
+      })
+    }
 
     const result = await prisma.hotels.delete({
       where: {
@@ -135,21 +212,16 @@ export async function DELETE(req: Request) {
     })
 
     if (!result)
-      return NextResponse.json(
-        {
-          message:
-            'Hotel deletion failed, please send correct hotel id to delete.',
-        },
-        { status: 404 }
-      )
+      return NextResponse.json({
+        message:
+          'Hotel deletion failed, please send correct hotel id to delete.',
+        status: 404,
+      })
 
-    return NextResponse.json(
-      { message: 'Deleted Successfuly' },
-      { status: 201 }
-    )
+    return NextResponse.json({ message: 'Deleted Successfully', status: 200 })
   } catch (error) {
     console.log('Error', error)
-    return NextResponse.json({ message: 'Error', data: error }, { status: 500 })
+    return NextResponse.json({ message: 'Error', data: error, status: 500 })
   } finally {
     await prisma.$disconnect()
   }
