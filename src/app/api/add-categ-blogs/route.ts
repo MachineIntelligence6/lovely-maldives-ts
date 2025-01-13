@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import { NextResponse } from 'next/server'
-import { connectToDatabase } from '@/helpers/server-helpers'
 import { getAllParams } from '@/utils/getIdParam'
+import { connectToDatabase } from '@/helpers/server-helpers'
 import prisma from '../../../../prisma'
 
 export async function POST(req: Request) {
@@ -63,55 +63,66 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET(req: Request, res: Response) {
+export async function GET(req: Request) {
   const params = getAllParams(req.url)
-  const category = params.get('category')?.replace('-', ' ')
-  console.log('category ', category)
+  const category = params.get('category')
   try {
     await connectToDatabase()
+    console.log('testing... ', category)
+    const uniqueCategories = await prisma.blogs.findMany({
+      select: {
+        category: true,
+      },
+      distinct: ['category'],
+      where: {
+        AND: [
+          {
+            category: {
+              not: '',
+            },
+          },
+        ],
+      },
+    })
 
-    const blogData = [] as any
-    const result = await prisma.categoryBlogs.findMany()
+    const categoryBlogs = await prisma.categoryBlogs.findMany()
 
-    await Promise.all(
-      result.map(async (re, index) => {
-        if (re?.ids?.length > 0) {
-          let response
-          if (category && category !== 'all blogs') {
-            response = await prisma.blogs.findMany({
-              where: {
-                id: {
-                  in: re?.ids,
-                },
-                category: {
-                  contains: category,
-                  mode: 'insensitive',
-                },
-              },
-              take: 20,
-            })
-          } else {
-            response = await prisma.blogs.findMany({
-              where: {
-                id: {
-                  in: re?.ids,
-                },
-              },
-              take: 20,
-            })
+    const blogData = await Promise.all(
+      categoryBlogs.map(async (categ) => {
+        if (!categ.ids || categ.ids.length === 0) {
+          return {
+            category: categ.category,
+            blogs: [],
+            id: categ.id,
           }
+        }
 
-          // Push into blogData with the original index to maintain order
-          blogData[index] = {
-            category: re?.category,
-            blogs: response,
-            id: re?.id,
-          }
+        const blogs = await prisma.blogs.findMany({
+          where: {
+            id: {
+              in: categ.ids,
+            },
+          },
+
+          take: 20,
+        })
+
+        return {
+          category: categ.category,
+          blogs,
+          id: categ.id,
         }
       })
     )
 
-    return NextResponse.json({ data: blogData, status: 200 }, { status: 200 })
+    return NextResponse.json(
+      {
+        categories: uniqueCategories.map((item) => item.category),
+        data: blogData,
+        status: 200,
+      },
+      { status: 200 }
+    )
   } catch (error) {
     console.log('Error', error)
     return NextResponse.json({ message: 'Error', data: error }, { status: 500 })

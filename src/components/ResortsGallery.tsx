@@ -43,109 +43,115 @@ export default function ResortsGallery(props: any) {
           spacing={{ xs: 2, md: 4 }}
           sx={{ mt: { xs: '30px', md: '40px' } }}
         >
-          {resorts?.map((item: any, index: number) => (
-            <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
-              <Box
-                component={motion.div}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                sx={{ width: '100%', position: 'relative', cursor: 'pointer' }}
-                onClick={() =>
-                  router.push(`/resorts/${encodeURIComponent(item?.title)}`)
-                }
-              >
+          {resorts?.map((item: any, index: number) => {
+            return (
+              <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
                 <Box
-                  component={Link}
-                  href={`/resorts/${item.slug}`}
-                  sx={{ textDecoration: 'none', position: 'relative' }}
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  sx={{
+                    width: '100%',
+                    position: 'relative',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() =>
+                    router.push(`/resorts/${encodeURIComponent(item?.title)}`)
+                  }
                 >
                   <Box
-                    sx={{
-                      width: '100%',
-                      height: { xs: '250px', md: '300px' },
-                      objectFit: 'cover',
-                      overflow: 'hidden',
-                      borderRadius: {
-                        xs: '0px',
-                        md: `20px 20px 0px 0px`,
-                      },
-                    }}
-                  >
-                    <Image
-                      src={item?.image || collectionImg}
-                      alt="image"
-                      width={400}
-                      height={500}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  </Box>
-                  <Box
-                    sx={{
-                      width: { xs: '100%', md: '100%' },
-                      height: { xs: '250px', md: '300px' },
-                      bgcolor: 'rgba(150,127,93,0.5)',
-                      position: 'absolute',
-                      bottom: '110px',
-                      top: 0,
-                      right: 0,
-                      left: { xs: 0, md: '0px' },
-                      borderRadius: {
-                        xs: '0px',
-                        md: `20px 20px 0px 0px`,
-                      },
-                    }}
-                  />
-                  <Box
-                    component={motion.div}
-                    sx={{
-                      width: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      color: 'white',
-                      fontSize: '12px',
-                      fontWeight: '200',
-                      zIndex: '99',
-                      gap: 1,
-                      py: '24px',
-                      bgcolor: 'var(--darkBrown)',
-                      borderRadius: { xs: '0px', md: '0px 0px 20px 20px' },
-                      mt: '-10px',
-                    }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
+                    component={Link}
+                    href={`/resorts/${item.slug}`}
+                    sx={{ textDecoration: 'none', position: 'relative' }}
                   >
                     <Box
                       sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        height: 'auto',
-                        px: 4,
+                        width: '100%',
+                        height: { xs: '250px', md: '300px' },
+                        objectFit: 'cover',
+                        overflow: 'hidden',
+                        borderRadius: {
+                          xs: '0px',
+                          md: `20px 20px 0px 0px`,
+                        },
                       }}
                     >
-                      <Typography sx={{ fontSize: '20px', textWrap: 'wrap' }}>
-                        {item.title}
-                      </Typography>
-                      <BoltIcon sx={{ display: `flex` }} />
+                      <Image
+                        src={item?.image || collectionImg}
+                        alt="image"
+                        width={400}
+                        height={500}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                      />
                     </Box>
-                    <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
-                      {[...Array(parseInt(item?.ratings, 10))].map(
-                        (_: any, ind: number) => (
-                          <StarRateIcon key={`_${index}_${ind}`} />
-                        )
-                      )}
+                    <Box
+                      sx={{
+                        width: { xs: '100%', md: '100%' },
+                        height: { xs: '250px', md: '300px' },
+                        bgcolor: 'rgba(150,127,93,0.5)',
+                        position: 'absolute',
+                        bottom: '110px',
+                        top: 0,
+                        right: 0,
+                        left: { xs: 0, md: '0px' },
+                        borderRadius: {
+                          xs: '0px',
+                          md: `20px 20px 0px 0px`,
+                        },
+                      }}
+                    />
+                    <Box
+                      component={motion.div}
+                      sx={{
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        color: 'white',
+                        fontSize: '12px',
+                        fontWeight: '200',
+                        zIndex: '99',
+                        gap: 1,
+                        py: '24px',
+                        bgcolor: 'var(--darkBrown)',
+                        borderRadius: { xs: '0px', md: '0px 0px 20px 20px' },
+                        mt: '-10px',
+                      }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          height: 'auto',
+                          px: 4,
+                        }}
+                      >
+                        <Typography sx={{ fontSize: '20px', textWrap: 'wrap' }}>
+                          {item.title}
+                        </Typography>
+                        <BoltIcon sx={{ display: `flex` }} />
+                      </Box>
+                      <Box sx={{ textAlign: 'left', fontSize: '10px', px: 4 }}>
+                        {[...Array(parseInt(item?.ratings, 10))].map(
+                          (_: any, ind: number) => (
+                            <StarRateIcon key={`_${index}_${ind}`} />
+                          )
+                        )}
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
-              </Box>
-            </Grid>
-          ))}
+              </Grid>
+            )
+          })}
         </Grid>
       </Box>
       {pages?.totalGalleryImages > resorts?.length && (

@@ -10,6 +10,7 @@ import useCategoriesStore from '@/stores/blogCategoriesApiStore'
 
 interface CategoriesProps {
   category: string
+  slug: string
   id: string
 }
 
@@ -118,13 +119,14 @@ export default function BlogHeader() {
                 key={category.id}
                 sx={{
                   color: 'white',
+                  mt: { xs: 1, md: 0 },
                   py: 2,
                   textDecoration: 'none',
                   maxWidth: '300px',
                   minWidth: '120px',
                   textAlign: 'center',
                 }}
-                href={`/blogs?category=${encodeURIComponent(category?.category?.replace(' ', '-')?.toLocaleLowerCase())}`}
+                href={`/blogs?category=${category?.slug}`}
               >
                 {category?.category}
               </Link>

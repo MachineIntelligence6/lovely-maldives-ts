@@ -122,7 +122,6 @@ const AddHotels = () => {
     }
     setShowEditHotelModal(!showEditHotelModal)
   }
-  console.log(editingHotel, 'editingHotel')
 
   // ADD SECTION TYPE (e.g. TEXT, TITLE, etc)
   const handleAddType = (type: string) => {
@@ -193,27 +192,47 @@ const AddHotels = () => {
       // Wrap the API call in startTransition for better UI responsiveness (if using React concurrent mode)
       startTransition(async () => {
         // Make the API request to update the hotel
+
+        const filteredSections = sections?.map((sec: any) => {
+          let filteredSec
+          if (sec?.type === 'gallery_slider') {
+            filteredSec = {
+              type: sec.type,
+              images: sec?.images,
+            }
+          }
+          if (sec?.type === 'description') {
+            filteredSec = {
+              type: sec.type,
+              description: sec.description,
+            }
+          }
+          return filteredSec
+        })
+
         const res = await updateHotelRequest({
           ...editingHotel,
           title,
           ratings,
           metatags,
-          sections,
+          sections: filteredSections,
         })
+        // return
         const data = res?.data
-        console.log(res, 'resresres')
+
         if (data.status === 200) {
-          await getHotels() // Assuming getHotels fetches the list of hotels
-          getHotels()
+          // await getHotels()
           setSections([])
           setTitle('')
           setRatings(1)
           setMetatags([])
+
+
           setAlertMsg({
             type: 'success',
             message: 'Hotel updated successfully.',
           })
-          // Close the modal after a successful update
+
           handleShowEditHotelModal(null)
         } else {
           // Handle the case when the API returns an error message
@@ -585,7 +604,7 @@ const AddHotels = () => {
                       handleEditorValue={(val: any) =>
                         handleEditorValue(val, index)
                       }
-                      value={value}
+                      value={section?.description ?? ''}
                     />
                   </Box>
                 )

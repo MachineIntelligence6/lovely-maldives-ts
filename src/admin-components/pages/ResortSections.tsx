@@ -111,7 +111,7 @@ const ResortSections = () => {
           totalGalleryImages: data?.totalGalleryImages,
         })
 
-        const allHotels = []
+        const allHotels = [] as any
 
         const updatedSections = data?.data?.map((sec: any) => {
           if (sec?.type === 'text') {
@@ -143,13 +143,13 @@ const ResortSections = () => {
     if (!sure) return
 
     // Optimistic UI update
-    setHotelsData((prevHotels) =>
-      prevHotels.filter((hotel) => hotel.id !== hotelId)
+    setHotelsData((prevHotels: any) =>
+      prevHotels.filter((hotel: any) => hotel.id !== hotelId)
     )
-    setSections((prevSections) =>
-      prevSections.map((section) => ({
+    setSections((prevSections: any) =>
+      prevSections.map((section: any) => ({
         ...section,
-        hotels: section.hotels.filter((hotel) => hotel.id !== hotelId),
+        hotels: section.hotels.filter((hotel: any) => hotel.id !== hotelId),
       }))
     )
 

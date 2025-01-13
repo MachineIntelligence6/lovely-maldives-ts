@@ -61,6 +61,7 @@ export default function Resort() {
         const data = res?.data
         if (data?.status === 200) {
           setHotel(data?.data?.[0])
+          localStorage.setItem('hotel', JSON.stringify(data?.data?.[0]))
         }
       })
     } catch (err: any) {
@@ -93,191 +94,203 @@ export default function Resort() {
     getOtherRecomendations()
     fetchData()
   }, [])
+
   return (
-    <Box sx={{ pt: { xs: '120px', md: '190px' }, bgcolor: themeData?.bgColor }}>
+    <Box>
       <Header />
-      {isPending && <CustomLoader />}
-      <Container
+      <Box
         sx={{
-          maxWidth: '100% !important',
-          px: { xs: '24px', md: '120px' },
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          px: { xs: '32px' },
+          pt: { xs: '120px', md: '190px' },
+          bgcolor: themeData?.bgColor,
         }}
       >
-        <BreadCrumb />
-        <FilterTray />
-      </Container>
-      <Container
-        sx={{
-          minWidth: '100% !important',
-          px: { xs: '0px', md: '120px' },
-        }}
-      >
-        <Box
-          sx={{ minWidth: '100% !important', px: { xs: '0px', md: '120px' } }}
+        {isPending && <CustomLoader />}
+        <Container
+          sx={{
+            maxWidth: '100% !important',
+            px: { xs: '24px', md: '120px' },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <BreadCrumb />
+          <FilterTray />
+        </Container>
+        <Container
+          sx={{
+            minWidth: '100% !important',
+            px: { xs: '0px', md: '120px' },
+          }}
         >
           <Box
-            sx={{
-              display: 'flex',
-              justifyContent: { xs: 'center', md: 'start' },
-              mt: '2rem',
-            }}
+            sx={{ minWidth: '100% !important', px: { xs: '0px', md: '120px' } }}
           >
-            <Image
-              src="/Images/logo-colored.png"
-              alt="Resort Logo"
-              width={100}
-              height={60}
-            />
-          </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: { xs: 'center', md: 'start' },
+                mt: '2rem',
+              }}
+            >
+              <Image
+                src="/Images/logo-colored.png"
+                alt="Resort Logo"
+                width={100}
+                height={60}
+              />
+            </Box>
 
-          <Grid container justifyContent="center">
-            <Grid item xs={12}>
-              <Paper elevation={0} sx={{ background: 'transparent' }}>
-                {hotel?.sections?.map((section: any, index: number) => {
-                  if (section?.type === 'gallery_slider') {
-                    // Initialize unique refs and state for each gallery_slider section
-                    return (
-                      <GallerySlider
-                        key={index}
-                        index={index}
-                        section={section}
-                      />
-                    )
-                  }
-                  if (section?.type === 'description') {
-                    return (
-                      <Box
-                        className="jodit-editor-text-wraper"
-                        sx={{
-                          mt: 3,
-                          bgcolor: 'transparent',
-                          '& *': {
-                            bgcolor: 'transparent !important',
-                          },
-                        }}
-                        dangerouslySetInnerHTML={{
-                          __html: section.description,
-                        }}
-                      />
-                    )
-                  }
-                  if (section?.type === 'title') {
-                    return (
-                      <Box
-                        key={`title_${index}`}
-                        sx={{ px: { xs: '24px', md: '0px' } }}
-                      >
-                        <Typography
-                          variant="h2"
-                          sx={{
-                            m: 0,
-                            mt: 4,
-                            fontSize: { xs: '22px', md: '30px' },
-                            // color: 'var(--white)',
-                            textTransform: 'uppercase',
-                          }}
-                        >
-                          {section?.title}
-                        </Typography>
-                      </Box>
-                    )
-                  }
-                  if (section?.type === 'ratings') {
-                    return (
-                      <Box
-                        key={`ratings_${index}`}
-                        sx={{ px: { xs: '24px', md: '0px' } }}
-                      >
-                        <Rating
-                          name="size-medium"
-                          defaultValue={parseInt(section?.ratings)}
-                          precision={0.5}
-                          sx={{ display: 'flex', m: 0, mb: 2, mt: 2 }}
+            <Grid container justifyContent="center">
+              <Grid item xs={12}>
+                <Paper elevation={0} sx={{ background: 'transparent' }}>
+                  {hotel?.sections?.map((section: any, index: number) => {
+                    if (section?.type === 'gallery_slider') {
+                      return (
+                        <GallerySlider
+                          key={index}
+                          index={index}
+                          section={section}
                         />
-                      </Box>
-                    )
-                  }
-                  if (section?.type === 'facts') {
-                    return (
-                      <Grid key={`facts_${index}`} container spacing={2}>
-                        {section?.facts?.map((fact: any, ind: number) => (
-                          <Grid item xs={12} sm={6} key={ind}>
-                            <ListItem
-                              sx={{
-                                p: 0,
-                                display: 'flex',
-                                alignItems: 'start',
-                              }}
-                            >
-                              <ListItemIcon sx={{ minWidth: '30px', mt: 1.2 }}>
-                                {fact?.icon ? (
-                                  <Image
-                                    src={fact?.icon}
-                                    width={30}
-                                    height={30}
-                                    alt="fact-icon"
-                                    style={{
-                                      width: '24px',
-                                      height: '24px',
-                                      objectFit: 'contain',
-                                      marginRight: '8px',
-                                    }}
-                                  />
-                                ) : (
-                                  <ModeOfTravel />
-                                )}
-                              </ListItemIcon>
-                              <ListItemText
-                                primary={
-                                  <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
-                                    {fact?.title}
-                                  </Typography>
-                                }
-                                secondary={fact?.subTags?.map(
-                                  (tag: string, i: number) => (
-                                    <Typography
-                                      key={i}
-                                      paragraph
-                                      sx={{
-                                        fontSize: '0.875rem',
-                                        color: '#666',
-                                        mb: '2px',
+                      )
+                    }
+                    if (section?.type === 'description') {
+                      return (
+                        <Box
+                          className="jodit-editor-text-wraper"
+                          sx={{
+                            mt: 3,
+                            bgcolor: 'transparent',
+                            '& *': {
+                              bgcolor: 'transparent !important',
+                            },
+                          }}
+                          dangerouslySetInnerHTML={{
+                            __html: section.description,
+                          }}
+                        />
+                      )
+                    }
+                    if (section?.type === 'title') {
+                      return (
+                        <Box
+                          key={`title_${index}`}
+                          sx={{ px: { xs: '24px', md: '0px' } }}
+                        >
+                          <Typography
+                            variant="h2"
+                            sx={{
+                              m: 0,
+                              mt: 4,
+                              fontSize: { xs: '22px', md: '30px' },
+                              // color: 'var(--white)',
+                              textTransform: 'uppercase',
+                            }}
+                          >
+                            {section?.title}
+                          </Typography>
+                        </Box>
+                      )
+                    }
+                    if (section?.type === 'ratings') {
+                      return (
+                        <Box
+                          key={`ratings_${index}`}
+                          sx={{ px: { xs: '24px', md: '0px' } }}
+                        >
+                          <Rating
+                            name="size-medium"
+                            defaultValue={parseInt(section?.ratings)}
+                            precision={0.5}
+                            sx={{ display: 'flex', m: 0, mb: 2, mt: 2 }}
+                          />
+                        </Box>
+                      )
+                    }
+                    if (section?.type === 'facts') {
+                      return (
+                        <Grid key={`facts_${index}`} container spacing={2}>
+                          {section?.facts?.map((fact: any, ind: number) => (
+                            <Grid item xs={12} sm={6} key={ind}>
+                              <ListItem
+                                sx={{
+                                  p: 0,
+                                  display: 'flex',
+                                  alignItems: 'start',
+                                }}
+                              >
+                                <ListItemIcon
+                                  sx={{ minWidth: '30px', mt: 1.2 }}
+                                >
+                                  {fact?.icon ? (
+                                    <Image
+                                      src={fact?.icon}
+                                      width={30}
+                                      height={30}
+                                      alt="fact-icon"
+                                      style={{
+                                        width: '24px',
+                                        height: '24px',
+                                        objectFit: 'contain',
+                                        marginRight: '8px',
                                       }}
+                                    />
+                                  ) : (
+                                    <ModeOfTravel />
+                                  )}
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary={
+                                    <Typography
+                                      sx={{ fontWeight: 600, mb: 0.5 }}
                                     >
-                                      ({tag})
+                                      {fact?.title}
                                     </Typography>
-                                  )
-                                )}
-                              />
-                            </ListItem>
-                          </Grid>
-                        ))}
-                      </Grid>
-                    )
-                  }
-                  return null
-                })}
-              </Paper>
+                                  }
+                                  secondary={fact?.subTags?.map(
+                                    (tag: string, i: number) => (
+                                      <Typography
+                                        key={i}
+                                        paragraph
+                                        sx={{
+                                          fontSize: '0.875rem',
+                                          color: '#666',
+                                          mb: '2px',
+                                        }}
+                                      >
+                                        ({tag})
+                                      </Typography>
+                                    )
+                                  )}
+                                />
+                              </ListItem>
+                            </Grid>
+                          ))}
+                        </Grid>
+                      )
+                    }
+                    return null
+                  })}
+                </Paper>
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
-        {recomendations?.length > 0 && (
-          <Box sx={{ mb: '40px' }}>
-            <SlugSlider
-              heading="OTHER RECOMMENDATIONS"
-              button="none"
-              iconShow="flex"
-              radius="20px"
-              bottomradius="0 0 20px 20px"
-              recomendations={recomendations}
-            />
           </Box>
-        )}
-      </Container>
-      <Footer />
+          {recomendations?.length > 0 && (
+            <Box sx={{ mb: '40px' }}>
+              <SlugSlider
+                heading="OTHER RECOMMENDATIONS"
+                button="none"
+                iconShow="flex"
+                radius="20px"
+                bottomradius="0 0 20px 20px"
+                recomendations={recomendations}
+              />
+            </Box>
+          )}
+        </Container>
+        <Footer />
+      </Box>
     </Box>
   )
 }

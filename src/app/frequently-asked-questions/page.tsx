@@ -56,10 +56,14 @@ export default function Page() {
     fetchData()
   }, [])
   return (
-    <Box sx={{ pt: { md: '180px', xs: '100px' }, bgcolor: themeData?.bgColor }}>
+    <Box sx={{ pt: { md: '210px', xs: '130px' }, bgcolor: themeData?.bgColor }}>
       {isPending && <CustomLoader />}
       <Header />
-      <Container sx={{ maxWidth: { xs: '100%', md: '90%' } }}>
+      <Container
+        sx={{
+          maxWidth: { xs: '100%', md: '90%' },
+        }}
+      >
         <BreadCrumb />
       </Container>
       <Container

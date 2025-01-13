@@ -21,16 +21,17 @@ const style = {
 const AddCategory = (props: any) => {
   const { open, handleShowModal, handleAddCategory, edit, handleEditCategory } =
     props
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState({ category: '', slug: '' })
 
   const handleChange = (e: any) => {
-    const { value } = e.target
-    setCategory(value)
+    const { value, name } = e.target
+    setCategory({ ...category, [name]: value })
   }
 
   useEffect(() => {
     if (edit) {
-      setCategory(edit?.category)
+      console.log('edit ', edit)
+      setCategory({ category: edit?.category, slug: edit?.slug })
     }
   }, [edit])
   return (
@@ -60,8 +61,16 @@ const AddCategory = (props: any) => {
           <TextFieldWraper
             label="Blog Category"
             placeholder="Enter blog category."
-            value={category}
+            value={category?.category}
             name="category"
+            onChange={(e: any) => handleChange(e)}
+          />
+
+          <TextFieldWraper
+            label="Category Slug"
+            placeholder="Enter blog category slug."
+            value={category?.slug}
+            name="slug"
             onChange={(e: any) => handleChange(e)}
           />
 
@@ -98,7 +107,7 @@ const AddCategory = (props: any) => {
                 } else {
                   handleAddCategory(category)
                 }
-                setCategory('')
+                setCategory({ category: '', slug: '' })
                 handleShowModal()
               }}
             >

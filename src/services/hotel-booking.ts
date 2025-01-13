@@ -8,6 +8,7 @@ export type BookingData = {
   checkOutDate: Date
   totalGuest: number
   totalRooms: number
+  hotelId: string
 }
 
 export const getHotelBookingsRequest = async (page: number, limit: number) => {
@@ -26,6 +27,7 @@ export const createHotelBookingRequst = async (data: BookingData) => {
     checkOutDate: data.checkOutDate,
     totalGuest: data.totalGuest,
     totalRooms: data.totalRooms,
+    hotelId: data.hotelId,
   })
 }
 

@@ -30,17 +30,12 @@ import {
 import CustomLoader from '@/admin-components/common/CustomLoader'
 import TagsField from '@/admin-components/items/TagsField'
 import { uploadImgToCloudinary } from '@/utils/cloudinaryImgUpload'
+import useCategoriesStore from '@/stores/blogCategoriesApiStore'
 
 const JoditTextEditor = dynamic(
   () => import('@/admin-components/common/JoditTextEditor'),
   { ssr: false }
 )
-
-const options = [
-  { value: 'All Articles', label: 'All Articles' },
-  { value: 'Latest Articles', label: 'Latest Articles' },
-  { value: 'Popular Articles', label: 'Popular Articles' },
-]
 
 const CustomLabel = styled(InputLabel)(({ theme }) => ({
   fontSize: '16px',
@@ -62,6 +57,18 @@ function AddBlog() {
   const [coverUrl, setCoverUrl] = useState(null as any)
   const [editingBlog, setEditingBlog] = useState(null as any)
   const [showEditBlogModal, setShowEditBlogModal] = useState(false)
+  const { categories, fetchData } = useCategoriesStore((state: any) => ({
+    categories: state.categories,
+    error: state.error,
+    loading: state.loading,
+    fetchData: state.fetchData,
+  }))
+
+  const filteredCategs =
+    categories &&
+    categories?.map((categ: any) => {
+      return { value: categ?.category, label: categ?.category }
+    })
 
   const handleEditorValue = (val: any) => {
     setEditorText(val)
@@ -251,6 +258,7 @@ function AddBlog() {
 
   useEffect(() => {
     getAllBlogs()
+    fetchData()
   }, [])
 
   return (
@@ -309,7 +317,7 @@ function AddBlog() {
               <CustomSelect
                 placeholder="Enter blog category."
                 value={values?.category}
-                options={options}
+                options={filteredCategs}
                 name="category"
                 onChange={(e: any) =>
                   setValues({ ...values, category: e.target.value })
