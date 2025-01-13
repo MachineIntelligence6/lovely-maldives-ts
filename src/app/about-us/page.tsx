@@ -49,11 +49,15 @@ function AboutUsPage() {
         <meta name="description" content="Learn more about us on this page" />
       </Head>
       <Box
-        sx={{ pt: { xs: '100px', md: '200px' }, bgcolor: themeData?.bgColor }}
+        sx={{ pt: { xs: '130px', md: '210px' }, bgcolor: themeData?.bgColor }}
       >
         <Header />
         {/* <About /> */}
-        <Container sx={{ maxWidth: { xs: '100%', md: '90%' } }}>
+        <Container
+          sx={{
+            maxWidth: { xs: '100%', md: '90%' },
+          }}
+        >
           <BreadCrumb />
         </Container>
         <Container

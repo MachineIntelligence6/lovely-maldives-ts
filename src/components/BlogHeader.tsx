@@ -119,6 +119,7 @@ export default function BlogHeader() {
                 key={category.id}
                 sx={{
                   color: 'white',
+                  mt: { xs: 1, md: 0 },
                   py: 2,
                   textDecoration: 'none',
                   maxWidth: '300px',

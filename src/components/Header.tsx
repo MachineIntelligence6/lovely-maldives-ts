@@ -240,6 +240,30 @@ function Header() {
                     />
                   </IconButton>
                 )}
+                {isHotelDetails && isScrolled && (
+                  <Button
+                    title="Enquire"
+                    sx={{
+                      color: 'white',
+                      bgcolor: 'var(--brown)',
+                      px: { xs: 1.1, md: 2.4 },
+                      py: { xs: 0.5, md: 0.9 },
+                      visibility: isScrolled ? 'visible' : 'hidden',
+                      opacity: isScrolled ? '1' : '0',
+                      transition: isScrolled
+                        ? 'opacity .3s linear'
+                        : 'visibility 0s linear .3s, opacity .3s ease-in-out',
+                      '&:hover': {
+                        backgroundColor: 'var(--blue) !important',
+                      },
+                    }}
+                    aria-label="Enquire"
+                    onClick={() => router.push('/hotel-booking')}
+                  >
+                    ENQUIRE
+                  </Button>
+                )}
+
                 <Button
                   className="menuBtn"
                   disableRipple
