@@ -1,8 +1,8 @@
 /* eslint-disable array-callback-return */
 import { NextResponse } from 'next/server'
+import { getAllParams } from '@/utils/getIdParam'
 import { connectToDatabase } from '@/helpers/server-helpers'
 import prisma from '../../../../prisma'
-import { getAllParams } from '@/utils/getIdParam'
 
 export async function POST(req: Request) {
   const bodyData = await req.json()

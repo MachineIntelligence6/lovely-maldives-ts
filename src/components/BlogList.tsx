@@ -50,32 +50,32 @@ const BlogList = ({
     }
   }
 
-  const getAllBlogs = async () => {
-    try {
-      startTransition(async () => {
-        const res = await getBlogsRequest(pages, category ?? '')
+  // const getAllBlogs = async () => {
+  //   try {
+  //     startTransition(async () => {
+  //       const res = await getBlogsRequest(pages, category ?? '')
 
-        const data = res?.data
+  //       const data = res?.data
 
-        if (data?.status === 200) {
-          const newArticles = data?.data
-          setAllArticles([...allArticles, ...newArticles])
-          setTotalBlogs(data?.totalBlogs)
-        }
-      })
-    } catch (err: any) {
-      console.log('error ', err)
-      throw new Error(err)
-    }
-  }
+  //       if (data?.status === 200) {
+  //         const newArticles = data?.data
+  //         setAllArticles([...allArticles, ...newArticles])
+  //         setTotalBlogs(data?.totalBlogs)
+  //       }
+  //     })
+  //   } catch (err: any) {
+  //     console.log('error ', err)
+  //     throw new Error(err)
+  //   }
+  // }
 
   useEffect(() => {
     getSections()
   }, [])
 
-  useEffect(() => {
-    getAllBlogs()
-  }, [pages?.page])
+  // useEffect(() => {
+  //   getAllBlogs()
+  // }, [pages?.page])
 
   return (
     <Container
@@ -89,22 +89,6 @@ const BlogList = ({
         },
       }}
     >
-      {/* <Typography
-        sx={{
-          fontSize: '35px',
-          textAlign: 'center',
-          color: 'var(--white)',
-          mt: '60px',
-        }}
-      >
-        {formatCategory(category || '')}
-      </Typography> */}
-      {/* {latestBlogs?.blogs?.length > 0 && category === 'latest-articles' && (
-            <PopularBlogs blogs={latestBlogs} />
-          )}
-          {popularBlogs?.blogs?.length > 0 && category === 'popular' && (
-            <PopularBlogs blogs={popularBlogs} />
-          )} */}
       {isPending ? (
         <CustomLoader />
       ) : (
