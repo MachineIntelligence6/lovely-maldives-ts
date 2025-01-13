@@ -96,7 +96,13 @@ export default function Resort() {
   }, [])
 
   return (
-    <Box sx={{ pt: { xs: '120px', md: '190px' }, bgcolor: themeData?.bgColor }}>
+    <Box
+      sx={{
+        px: { xs: '32px' },
+        pt: { xs: '120px', md: '190px' },
+        bgcolor: themeData?.bgColor,
+      }}
+    >
       <Header />
       {isPending && <CustomLoader />}
       <Container

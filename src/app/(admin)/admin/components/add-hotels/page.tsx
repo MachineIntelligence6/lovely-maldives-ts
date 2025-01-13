@@ -221,17 +221,18 @@ const AddHotels = () => {
         const data = res?.data
 
         if (data.status === 200) {
-          await getHotels() // Assuming getHotels fetches the list of hotels
-          getHotels()
+          // await getHotels()
           setSections([])
           setTitle('')
           setRatings(1)
           setMetatags([])
+
+
           setAlertMsg({
             type: 'success',
             message: 'Hotel updated successfully.',
           })
-          // Close the modal after a successful update
+
           handleShowEditHotelModal(null)
         } else {
           // Handle the case when the API returns an error message

@@ -3,22 +3,77 @@ import { connectToDatabase } from '@/helpers/server-helpers'
 import { getAllParams, getIdParam } from '@/utils/getIdParam'
 import prisma from '../../../../prisma'
 
+// export async function GET(req: Request) {
+//   const params = getAllParams(req.url)
+//   const category = params.get('category')?.replace('-', ' ')
+//   const page = Number(params.get('page')) || 1
+//   const limit = Number(params.get('limit')) || 20
+//   const skip = (page - 1) * limit
+
+//   try {
+//     await connectToDatabase()
+
+//     let result
+//     if (category && category !== 'all-articles') {
+//       result = await prisma.blogs.findMany({
+//         where: {
+
+//           category: {
+//             contains: category,
+//             mode: 'insensitive',
+
+//           },
+//         },
+//         take: limit,
+//         skip,
+//       })
+//     } else {
+//       result = await prisma.blogs.findMany({ take: limit, skip })
+//     }
+//     const totalBlogs = await prisma.blogs.count()
+
+//     if (!result)
+//       return NextResponse.json({ message: 'No blogs data found.', status: 409 })
+
+//     return NextResponse.json(
+//       { message: 'Success', data: result, totalBlogs, status: 200 },
+//       { status: 200 }
+//     )
+//   } catch (error) {
+//     console.log('Error', error)
+//     return NextResponse.json(
+//       { message: 'Error', data: error, status: 500 },
+//       { status: 500 }
+//     )
+//   } finally {
+//     await prisma.$disconnect()
+//   }
+// }
+
 export async function GET(req: Request) {
   const params = getAllParams(req.url)
-  const category = params.get('category')?.replace('-', ' ')
+  const frontendCategory = params.get('category')?.toLowerCase() || ''
   const page = Number(params.get('page')) || 1
   const limit = Number(params.get('limit')) || 20
   const skip = (page - 1) * limit
+
+  const categoryMap: Record<string, string> = {
+    'all-articles': '',
+    'latest-articles': 'Latest Blogs',
+    popular: 'Popular Articles',
+  }
+
+  const category = categoryMap[frontendCategory] || ''
 
   try {
     await connectToDatabase()
 
     let result
-    if (category && category !== 'all blogs') {
+    if (category) {
       result = await prisma.blogs.findMany({
         where: {
           category: {
-            contains: category,
+            equals: category,
             mode: 'insensitive',
           },
         },
@@ -28,9 +83,10 @@ export async function GET(req: Request) {
     } else {
       result = await prisma.blogs.findMany({ take: limit, skip })
     }
+
     const totalBlogs = await prisma.blogs.count()
 
-    if (!result)
+    if (!result || result.length === 0)
       return NextResponse.json({ message: 'No blogs data found.', status: 409 })
 
     return NextResponse.json(

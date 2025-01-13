@@ -40,10 +40,11 @@ export const popularBlogs = [
 ]
 export default function PopularBlogs(props: any) {
   const { blogs } = props
+
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
       <Box>
-        <Typography
+        {/* <Typography
           sx={{
             fontSize: '35px',
             textAlign: 'center',
@@ -53,7 +54,7 @@ export default function PopularBlogs(props: any) {
           }}
         >
           {blogs?.category}
-        </Typography>
+        </Typography> */}
         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
           <BlogSlider />
         </Box>
