@@ -192,7 +192,9 @@ model Blogs {
     category     String
     description String
     coverImage  String
-     metatags String[]
+    metatags String[]
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
 }
 
 // ADD BLOG MODEL

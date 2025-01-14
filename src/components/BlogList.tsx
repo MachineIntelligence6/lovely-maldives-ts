@@ -14,6 +14,7 @@ import { getBlogsSectionRequest } from '@/utils/api-requests/blogcategs-request'
 import { getBlogsRequest } from '@/utils/api-requests/blogs.request'
 import { formatCategory } from '@/utils/common'
 import CustomLoader from '@/admin-components/common/CustomLoader'
+import { format } from 'date-fns'
 
 const BlogList = ({
   pages,
@@ -191,7 +192,7 @@ const BlogList = ({
                                   <Typography
                                     sx={{ fontSize: '16px', mt: '20px' }}
                                   >
-                                    {blogItem.date || '12 February, 2024'}
+                                    {format(new Date(blogItem?.createdAt), "dd MMM yyyy") || '12 February, 2024'}
                                   </Typography>
                                 </Box>
                               </Box>

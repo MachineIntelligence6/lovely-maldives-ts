@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import BlogSlider from '@/components/BlogSlider'
 import blog from '../../public/Images/landingTree.jpg'
+import { format } from 'date-fns'
 
 export const popularBlogs = [
   {
@@ -40,6 +41,8 @@ export const popularBlogs = [
 ]
 export default function PopularBlogs(props: any) {
   const { blogs } = props
+
+  
 
   return (
     <Box sx={{ pt: { md: '0px', xs: '0px' } }}>
@@ -132,7 +135,7 @@ export default function PopularBlogs(props: any) {
                   {popularBlog.description}
                 </Typography> */}
                 <Typography sx={{ fontSize: '14px', mt: '20px' }}>
-                  {popularBlog.date || '12 February, 2024'}
+                  {format(new Date(popularBlog.createdAt), "DD MM YYYY") || '12 February, 2024'}
                 </Typography>
               </Box>
             </Box>
