@@ -59,7 +59,7 @@ export default function TermsOfUsePage() {
       </Container>
       <Container
         sx={{
-          mt: { xs: '60px', md: '100px' },
+          mt: { xs: '60px', md: '52px' },
           maxWidth: '80%',
           px: 0,
           margin: 'auto',
@@ -68,8 +68,8 @@ export default function TermsOfUsePage() {
           },
         }}
       >
-        <Box sx={{ mt: 7, mb: 12 }}>
-          <Typography variant="h3" sx={{ textAlign: 'center', mb: 6 }}>
+        <Box sx={{ my: 7 }}>
+          <Typography variant="h3" sx={{ textAlign: 'center', }}>
             {terms?.title}
           </Typography>
           <Box

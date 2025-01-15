@@ -120,7 +120,7 @@ export default function BookingForm() {
           // Display a success message
           setAlertMsg({
             type: 'success',
-            message: 'Hotel booking created successfully.',
+            message: 'Hotel request is created successfully.',
           })
           setTimeout(() => {
             setAlertMsg({ type: '', message: '' })

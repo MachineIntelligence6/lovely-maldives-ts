@@ -63,7 +63,7 @@ export default function Page() {
             fontSize: { xs: '24px', md: '35px' },
             color: 'var(--white)',
             textAlign: 'center',
-            mt: '60px',
+            my: 3,
           }}
         >
           {title}

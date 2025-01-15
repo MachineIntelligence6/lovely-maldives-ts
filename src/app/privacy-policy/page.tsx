@@ -64,7 +64,7 @@ export default function PrivacyPolicyPage() {
       </Container>
       <Container
         sx={{
-          mt: { xs: '60px', md: '60px' },
+          mt: { xs: '0px', md: '60px' },
           maxWidth: '80%',
           px: '0 !important',
           margin: 'auto',
@@ -73,7 +73,19 @@ export default function PrivacyPolicyPage() {
           },
         }}
       >
-        <Box sx={{ mt: 7, mb: 12 }}>
+
+        <Box sx={{ mt: 0, mb: 12 }}>
+          <Typography
+            sx={{
+              fontSize: { xs: '24px', md: '35px' },
+              color: 'var(--white)',
+              textAlign: 'center',
+              fontWeight: 500,
+              my: 3,
+            }}
+          >
+            {title}
+          </Typography>
           {policies?.map((policy: any, index: number) => {
             return (
               <Accordion

@@ -246,7 +246,7 @@ function Header() {
                     sx={{
                       color: 'white',
                       bgcolor: 'var(--brown)',
-                      px: { xs: 1.1, md: 2.4 },
+                      px: { xs: 2, md: 2.4 },
                       py: { xs: 0.5, md: 0.9 },
                       visibility: isScrolled ? 'visible' : 'hidden',
                       opacity: isScrolled ? '1' : '0',
