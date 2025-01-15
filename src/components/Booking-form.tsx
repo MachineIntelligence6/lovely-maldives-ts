@@ -347,7 +347,7 @@ export default function BookingForm() {
                     },
                   }}
                 >
-                  {isSubmitting ? 'Booking...' : 'Booking Now'}
+                  {isSubmitting ? 'Sending...' : 'Send Request'}
                 </Button>
               </Grid>
             </Grid>

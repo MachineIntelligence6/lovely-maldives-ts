@@ -135,10 +135,18 @@ export default function Footer(props: any) {
             gap: '20px',
           }}
         >
-          <FacebookRoundedIcon />
-          <XIcon />
-          <InstagramIcon />
-          <WhatsAppIcon />
+          <Box component="a" sx={{ bgcolor: 'transparent' }} href='https://www.facebook.com/' target='_blank'>
+            <FacebookRoundedIcon sx={{ color: "white" }} />
+          </Box>
+          <Box component="a" href='https://x.com' target='_blank'>
+            <XIcon sx={{ color: "white" }} />
+          </Box>
+          <Box component="a" href='https://www.instagram.com/' target='_blank'>
+            <InstagramIcon sx={{ color: "white" }} />
+          </Box>
+          <Box component="a" href='https://wa.me/+9607694545' target='_blank'>
+            <WhatsAppIcon sx={{ color: "white" }} />
+          </Box>
         </Box>
       </Box>
       <Box

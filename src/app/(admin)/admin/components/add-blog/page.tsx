@@ -458,7 +458,7 @@ function AddBlog() {
             <Box
               key={index}
               component={Link}
-              href={`blogs/${encodeURIComponent(blogItem.title)}`}
+              href={`/blogs/${encodeURIComponent(blogItem.title)}`}
               sx={{
                 width: { xs: 'calc(100%)', md: 'calc(33.3% - 14px)' },
                 borderRadius: '20px',

@@ -76,6 +76,7 @@ function page() {
               fontSize: { xs: '24px', md: '35px' },
               textAlign: 'center',
               mt: '60px',
+
             }}
           >
             {title ?? 'CONTACT US'}

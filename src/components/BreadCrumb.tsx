@@ -59,6 +59,7 @@ export default function BreadCrumb() {
         sx={{
           '& .MuiBreadcrumbs-separator': {
             marginX: { xs: '0px', md: '10px' },
+            marginY: { xs: '16px', md: '0px' },
           },
         }}
       >
