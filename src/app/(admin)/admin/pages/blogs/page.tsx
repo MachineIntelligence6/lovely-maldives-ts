@@ -262,7 +262,6 @@ export default function Blogs() {
               category={values?.category}
               blogs={blogs}
               deleteBlog={deleteBlog}
-              // handleEditBlog={handleEditBlog}
             />
           )}
         </Box>
@@ -278,8 +277,8 @@ export default function Blogs() {
               sectionId={blogsData?.id}
               category={blogsData?.category}
               deleteBlogSection={deleteBlogSection}
-              // deleteBlog={deleteBlog}
-              // handleEditBlog={handleEditBlog}
+            // deleteBlog={deleteBlog}
+            // handleEditBlog={handleEditBlog}
             />
           ))}
         </CustomCard>

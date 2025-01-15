@@ -62,7 +62,7 @@ const BlogsWraper = (props: any) => {
           </Stack>
         </Stack>
         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-          <BlogSlider />
+          {/* <BlogSlider /> */}
         </Box>
         <Box
           sx={{
@@ -78,7 +78,7 @@ const BlogsWraper = (props: any) => {
             <Box
               key={index}
               component={Link}
-              href={`/blogs/${blog.slug}`}
+              href={`/blogs/${encodeURIComponent(blog?.title)}`}
               sx={{
                 width: { xs: 'calc(100%)', md: 'calc(33.3% - 14px)' },
                 borderRadius: '20px',
@@ -89,6 +89,7 @@ const BlogsWraper = (props: any) => {
                 position: 'relative',
               }}
             >
+
               <Button
                 sx={{
                   position: 'absolute',
