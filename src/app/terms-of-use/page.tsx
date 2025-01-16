@@ -8,14 +8,12 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import BreadCrumb from '@/components/BreadCrumb'
 import DropdownButton from '@/components/DropdownButton'
-import Markdown from '@/components/Markdown'
-import termsOfUse from '@/md/terms-of-use.md'
 import useApiStore from '@/stores/themeApiStore'
 import { getTermsRequest } from '@/utils/api-requests/term-os-use.request'
+import CustomLoader from '@/admin-components/common/CustomLoader'
 
 export default function TermsOfUsePage() {
   const [isPending, startTransition] = useTransition()
-  const [alertMsg, setAlertMsg] = useState({ type: '', message: '' })
   const [terms, setTerms] = useState('' as any)
 
   const { themeData, error, fetchData } = useApiStore((state: any) => ({
@@ -45,13 +43,16 @@ export default function TermsOfUsePage() {
   return (
     <Box sx={{ pt: { xs: '0px', md: '190px' }, bgcolor: themeData?.bgColor }}>
       <Header />
+      {isPending && <CustomLoader />}
       <Container
         sx={{
           maxWidth: '100% !important',
-          px: { xs: '24px', md: '120px' },
+          px: { xs: '24px', md: '96px' },
+          mt: { xs: "100px", md: "0px" },
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          zIndex: 999
         }}
       >
         <BreadCrumb />
@@ -59,7 +60,7 @@ export default function TermsOfUsePage() {
       </Container>
       <Container
         sx={{
-          mt: { xs: '60px', md: '52px' },
+          mt: { xs: '20px', md: '52px' },
           maxWidth: '80%',
           px: 0,
           margin: 'auto',
@@ -68,8 +69,9 @@ export default function TermsOfUsePage() {
           },
         }}
       >
-        <Box sx={{ my: 7 }}>
-          <Typography variant="h3" sx={{ textAlign: 'center', }}>
+
+        <Box sx={{ my: 3 }}>
+          <Typography variant="h3" sx={{ textAlign: 'center', fontSize: { xs: "2rem", md: "3rem", pb: 3 } }}>
             {terms?.title}
           </Typography>
           <Box

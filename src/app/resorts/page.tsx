@@ -145,6 +145,7 @@ export default function ResortsPage() {
         }}
       >
         {sections?.map((sec: any, index: number) => {
+
           if (sec?.type === 'text') {
             return (
               <Box

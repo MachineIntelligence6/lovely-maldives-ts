@@ -112,11 +112,12 @@ export default function SingleBlogPage() {
               sx={{
                 fontSize: { xs: '1.5rem', md: '2rem' },
                 m: 0,
-                mb: 4,
+                mb: 6,
                 color: '#666',
                 fontWeight: '700',
                 textTransform: 'capitalize',
                 px: { xs: '30px', md: '0px' },
+                textAlign: "center"
               }}
             >
               {blog?.title}

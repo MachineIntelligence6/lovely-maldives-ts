@@ -100,7 +100,7 @@ export default function Resort() {
       <Header />
       <Box
         sx={{
-          px: { xs: '32px' },
+          px: { xs: '22px' },
           pt: { xs: '120px', md: '190px' },
           bgcolor: themeData?.bgColor,
         }}
@@ -109,14 +109,16 @@ export default function Resort() {
         <Container
           sx={{
             maxWidth: '100% !important',
-            px: { xs: '24px', md: '120px' },
+            px: { xs: '0px', md: '120px' },
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
         >
           <BreadCrumb />
-          <FilterTray />
+          <Box sx={{ alignSelf: "flex-start", mt: { xs: 0.7, md: 0 } }}>
+            <FilterTray />
+          </Box>
         </Container>
         <Container
           sx={{
@@ -289,8 +291,8 @@ export default function Resort() {
             </Box>
           )}
         </Container>
-        <Footer />
       </Box>
+      <Footer />
     </Box>
   )
 }
